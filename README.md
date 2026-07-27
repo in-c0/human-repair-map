@@ -23,7 +23,13 @@ and auditable.
 
 ## What's in v0.1
 
-A standalone, no-backend prototype (`index.html`) demonstrating:
+**Live: [humanrepairmap.com](https://humanrepairmap.com)**
+
+A no-backend prototype (`index.html` + `content/`) demonstrating:
+
+- **The thesis** — the first-principles case that biological repair is possible
+  in principle, what the irreducible enabling capability is, and where
+  information loss makes repair impossible. Follows the project's founding draft.
 
 - **The five enabling capabilities** — sensing, target-state modelling,
   cell-specific delivery, cell-state editing, closed-loop verification — each with
@@ -47,8 +53,12 @@ delivering a drug through it to a clinical outcome is proven nowhere.
 
 ## Run it
 
-`index.html` is a single self-contained file. Open it directly
-in a browser — no build, no server, no account.
+Open `index.html` directly in a browser, keeping the `content/` folder beside it
+— no build, no server, no account.
+
+Pushes to `main` auto-deploy to Cloudflare Pages via
+`.github/workflows/deploy.yml` (requires the `CLOUDFLARE_API_TOKEN` and
+`CLOUDFLARE_ACCOUNT_ID` repository secrets).
 
 ## The one hard gate
 

@@ -6,6 +6,14 @@
   "observability": { "enabled": true },
   "routes": [
     { "pattern": "humanrepairmap.com/mcp", "zone_name": "humanrepairmap.com" },
-    { "pattern": "humanrepairmap.com/mcp/*", "zone_name": "humanrepairmap.com" }
+    { "pattern": "humanrepairmap.com/mcp/*", "zone_name": "humanrepairmap.com" },
+    { "pattern": "humanrepairmap.com/api/*", "zone_name": "humanrepairmap.com" }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "human-repair-map",
+      "database_id": "2e6104d4-8c7f-4fee-9ab1-65beb191aada"
+    }
   ]
 }

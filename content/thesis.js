@@ -72,13 +72,14 @@ window.HRM_THESIS = {
   question: "What if we tackled this as one — with every component's progress visible, the bottlenecks named, and the evidence behind each claim open to inspection?",
 
   conviction: {
-    lead: "Three explanations get offered for why this has not happened. Two are true. Only one is binding.",
+    lead: "Three explanations get offered for why this has not happened. The first two are certainly real. The third is a hypothesis — and it is the only one a map could do anything about, which is a reason to be suspicious of how attractive it looks from here.",
     items: [
-      { t: "The science isn't ready", s: "true", d: "We lack causal models good enough to move a cell from state X to state Y safely. Real — and no map creates that knowledge. Labs do." },
-      { t: "The rules are too slow", s: "true", d: "Approval pathways built for pills fit adaptive, multi-modality systems badly. Real — and no map accelerates a regulator." },
-      { t: "Nobody can see the whole board", s: "binding", d: "Every piece is being worked on by someone who can only see their piece. So no one can tell which constraint actually binds, and attention flows to whatever is <i>legible</i> — the striking mouse result, the cleared biomarker — rather than to whatever is blocking. This is the one a public map directly attacks." }
+      { t: "The science isn't ready", s: "almost certainly true", d: "We lack causal models good enough to move a cell from state X to state Y safely. No map creates that knowledge. Labs do, over decades. On the evidence, this is probably the dominant constraint." },
+      { t: "The rules are too slow", s: "partly true", d: "Approval pathways built for pills fit adaptive, multi-modality systems badly. But permissive jurisdictions have not produced faster repair — they have mostly produced unproven clinics, which suggests regulation is a rate limit on translation rather than the thing blocking capability." },
+      { t: "Nobody can see the whole board", s: "the hypothesis here", d: "Every piece is worked on by people who can mostly see their own piece, so it is hard for anyone to say which constraint currently binds, and attention may flow to whatever is <i>legible</i> — the striking mouse result, the cleared biomarker — rather than to whatever is blocking. If that is true, a shared public accounting should help at the margin. <b>It is a hypothesis, not a finding.</b>" }
     ],
-    close: "The field is not short of brilliance or effort. It is short of a shared, honest picture of where the edge actually is."
+    close: "This map does not claim the field is doing it wrong. Specialists know their subfields far better than any survey does, and the deep constraints are probably scientific rather than organisational. The narrower claim is only this: some things are hard to see from inside one subfield, the map is cheap to build, and it is falsifiable — if experts read these records and say the structure was already obvious to them, that is the answer.",
+    standing: "Written by an independent builder, not a neuroscientist or clinician. No lab, no funding, no position in the field. That is a real limitation on everything above, and it is why the records carry their sources and review states on their face: so you can check the map rather than trust it."
   },
 
   isnt: [

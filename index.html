@@ -35,8 +35,9 @@
       <li><a href="#/tasks" data-v="tasks"><span class="ix">06</span> Open tasks</a></li>
       <li><a href="#/collaboration" data-v="collaboration"><span class="ix">07</span> AI + human</a></li>
       <li><a href="#/governance" data-v="governance"><span class="ix">08</span> Governance</a></li>
-      <li><a href="#/methods" data-v="methods"><span class="ix">09</span> Methods</a></li>
-      <li><a href="#/corrections" data-v="corrections"><span class="ix">10</span> Corrections</a></li>
+      <li><a href="#/queue" data-v="queue"><span class="ix">09</span> Contribution queue</a></li>
+      <li><a href="#/methods" data-v="methods"><span class="ix">10</span> Methods</a></li>
+      <li><a href="#/corrections" data-v="corrections"><span class="ix">11</span> Corrections</a></li>
     </ul>
     <div class="side-foot"><b>Not a clinical tool.</b> No diagnosis, treatment selection, or patient-specific advice.<br><br>Records are graded openly and most are unreviewed. Corrections welcome.</div>
   </aside>
@@ -238,6 +239,7 @@ function vCap(id){
 }
 
 function vRoute(id){
+  setTimeout(wireChallenge,0);
   var r=ROUTES.filter(function(x){return x.id===id;})[0]; if(!r) return vNotFound();
   var b=band(r.score);
   var CIT=(window.HRM_CITATIONS||{}).map||{};
@@ -260,7 +262,7 @@ function vRoute(id){
       '<li>It measures <b>'+esc(r.measured)+'</b>'+(r.measured==="a biomarker"?" — a surrogate, not proven clinical benefit":r.measured==="nothing yet"?" — no clinical or surrogate benefit demonstrated":"")+'.</li>'+
       '<li>Replication: '+esc(r.repl)+'. Status: '+esc(r.status)+'.</li></ul>'+
       '<h2>Sources</h2><div class="ib-deps">'+cites+'</div>'+
-      '<p class="note" style="margin-top:16px">This record is <b style="color:var(--amber)">AI-proposed</b>. No human has yet opened these sources; it cannot reach "reviewed" until one does.</p>'+
+      '<p class="note" style="margin-top:16px">This record is <b>AI-proposed</b>. No human has yet opened these sources and confirmed they support the claim; it cannot reach “reviewed” until one does.</p>'+challengeForm(r.id)+
     '</div><aside class="infobox"><div class="ib-h">delivery route · record</div>'+
       '<div class="ib-row"><span class="ib-k">maturity</span><div class="ib-v">'+meter(r.score,null)+'</div></div>'+
       '<div class="ib-row"><span class="ib-k">evidence rung</span><div class="ib-v mono">'+r.rung+'</div></div>'+
@@ -442,7 +444,7 @@ function vThesis(){
     '<p class="lede-t">'+(T.lede||"")+'</p>'+
     '<div class="constraint">'+esc(T.constraint||"")+'</div>'+'<div class="masthead"><div class="mh-row">'+'<div class="mh-c"><div class="mh-k">version</div><div class="mh-v">v0.1 &middot; prototype</div></div>'+'<div class="mh-c"><div class="mh-k">last checked</div><div class="mh-v">27 July 2026</div></div>'+'<div class="mh-c"><div class="mh-k">records reviewed by a human</div><div class="mh-v">0 of 16</div></div>'+'<div class="mh-c"><div class="mh-k">methods</div><div class="mh-v"><a href="#/methods">how records are graded</a></div></div>'+'</div></div></div>'+
 
-    '<div class="sec-h"><span class="n">01</span> '+esc(T.primitive?T.primitive.title:"")+'</div>'+
+    '<div class="sec-h"><span class="n">01</span> Where the field actually is</div>'+vizQuadrant()+'<div class="sec-h"><span class="n">02</span> '+esc(T.primitive?T.primitive.title:"")+'</div>'+
     '<p class="lede-t">'+(T.primitive?T.primitive.body:"")+'</p>'+
     '<div class="loop-row">'+loop+'</div>'+
 
@@ -477,7 +479,7 @@ function vThesis(){
     '<div class="pull q">'+esc(T.question||"")+'</div>'+
     '<p class="lede-t">'+esc(T.conviction?T.conviction.lead:"")+'</p>'+
     '<div class="conv">'+cv+'</div>'+
-    '<div class="constraint" style="border-color:var(--teal-line)">'+esc(T.conviction?T.conviction.close:"")+'</div>'+
+    '<div class="constraint">'+esc(T.conviction?T.conviction.close:"")+'</div>'+'<div class="standing"><b>Who is making this claim</b>'+esc(T.conviction&&T.conviction.standing?T.conviction.standing:"")+'</div>'+
 
     '<div class="sec-h"><span class="n">07</span> What this is, and is not</div>'+
     '<div class="two"><div class="col no"><h4 style="color:var(--red)">It does not provide</h4><ul>'+isnt+'</ul></div>'+
@@ -547,6 +549,118 @@ function vCollab(){
     '<div class="sec-h"><span class="n">08</span> Build order</div>'+
     '<div class="ord">'+ord+'</div>'+
     '<p class="note" style="margin-top:14px">'+esc(CO.orderNote||"")+'</p>';
+}
+
+
+/* ---------- evidence landscape: the empty quadrant ---------- */
+function vizQuadrant(){
+  var rungs=["L5","L4","L2"];
+  var labels={L5:"proven independently in humans",L4:"shown in humans, one group",L2:"only in rodents"};
+  var cols=[{k:false,t:"Local",s:"bypasses the barrier with a needle"},{k:true,t:"Broad",s:"crosses the barrier, could reach the whole CNS"}];
+  var W=680,cw=248,ch=102,x0=176,y0=46,gap=12;
+  var cells="",heads="",rowlabs="";
+  cols.forEach(function(c,ci){
+    var x=x0+ci*(cw+gap);
+    heads+='<text x="'+(x+cw/2)+'" y="24" text-anchor="middle" class="qh">'+c.t+'</text>'+
+           '<text x="'+(x+cw/2)+'" y="38" text-anchor="middle" class="qs">'+c.s+'</text>';
+  });
+  rungs.forEach(function(r,ri){
+    var y=y0+ri*(ch+gap);
+    rowlabs+='<text x="164" y="'+(y+26)+'" text-anchor="end" class="qr">'+r+'</text>'+
+             '<text x="164" y="'+(y+42)+'" text-anchor="end" class="qrl">'+labels[r]+'</text>';
+    cols.forEach(function(c,ci){
+      var x=x0+ci*(cw+gap);
+      var items=ROUTES.filter(function(d){return d.rung===r && ((d.fam==="through barrier")===c.k);});
+      var empty=items.length===0;
+      var isThesis = empty && r==="L5" && c.k;
+      var names=items.map(function(d,i){
+        return '<text x="'+(x+13)+'" y="'+(y+42+i*15)+'" class="qn">'+esc(d.subj.length>31?d.subj.slice(0,30)+"…":d.subj)+'</text>';
+      }).join("");
+      var inner = isThesis
+        ? '<text x="'+(x+34)+'" y="'+(y+26)+'" class="qt">nothing is both</text>'+
+          '<text x="'+(x+13)+'" y="'+(y+56)+'" class="qt2">No route that crosses the barrier has</text>'+
+          '<text x="'+(x+13)+'" y="'+(y+72)+'" class="qt2">been independently proven in humans.</text>'
+        : names;
+      cells+='<g><rect x="'+x+'" y="'+y+'" width="'+cw+'" height="'+ch+'" rx="5" class="'+(isThesis?"qcell-thesis":(empty?"qcell-empty":"qcell"))+'"/>'+
+        '<text x="'+(x+13)+'" y="'+(y+26)+'" class="qc'+(isThesis?" qc-z":"")+'">'+items.length+'</text>'+inner+'</g>';
+    });
+  });
+  var H=y0+rungs.length*(ch+gap)+6;
+  return '<div class="viz-wrap"><svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Delivery routes arranged by evidence rung and reach. The cell for broad reach proven independently in humans is empty.">'+
+    heads+rowlabs+cells+'</svg></div>'+
+    '<p class="note" style="margin-top:10px">Each route placed by how far it has been proven (rows) against how much of the brain it could reach (columns). The top-right cell is the one that would matter, and it is empty.</p>';
+}
+
+/* ---------- contribution: propose a change to a record ---------- */
+var API="https://humanrepairmap.com/api";
+function challengeForm(recordId){
+  return '<div class="chal"><div class="chal-h">Propose a change to this record</div>'+
+    '<p class="chal-p">No account needed. What you submit is written to the public event log immediately and shown as <b>unreviewed</b> until a steward acts on it — it will not silently change the record, and it will not be quietly dropped.</p>'+
+    '<div class="chal-g">'+
+      '<label>What kind of change<select id="c-kind"><option value="correction">Correction — something here is wrong</option><option value="rung-challenge">Rung challenge — the evidence grade is wrong</option><option value="new-evidence">New evidence — a source this record is missing</option><option value="question">Question — something is unclear</option></select></label>'+
+      '<label>In one line, what is wrong<input id="c-summary" maxlength="300" placeholder="e.g. the replication claim does not hold"></label>'+
+      '<label>Why — reasoning a reviewer can check<textarea id="c-rationale" rows="4" maxlength="4000" placeholder="What does the source actually say, and how does it differ from this record?"></textarea></label>'+
+      '<label>Primary source URL (optional, strongly preferred)<input id="c-url" maxlength="500" placeholder="https://doi.org/..."></label>'+
+      '<div class="chal-2"><label>Your name (optional)<input id="c-name" maxlength="120" placeholder="anonymous"></label>'+
+      '<label>Affiliation (optional, never verified)<input id="c-affil" maxlength="200"></label></div>'+
+      '<input id="c-website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">'+
+    '</div>'+
+    '<div class="chal-a"><button class="btn-primary" id="c-send" data-record="'+esc(recordId)+'">Submit proposal</button>'+
+    '<span class="chal-s" id="c-status"></span></div></div>';
+}
+function val(id){var e=document.getElementById(id);return e?e.value:"";}
+function wireChallenge(){
+  var btn=document.getElementById("c-send"); if(!btn) return;
+  btn.addEventListener("click",function(){
+    var st=document.getElementById("c-status");
+    var body={record_id:btn.getAttribute("data-record"),kind:val("c-kind"),summary:val("c-summary"),
+      rationale:val("c-rationale"),source_url:val("c-url"),proposer:val("c-name"),affil:val("c-affil"),website:val("c-website")};
+    if(!body.summary||!body.rationale){st.textContent="A one-line summary and a rationale are both required.";st.className="chal-s err";return;}
+    st.textContent="Submitting…";st.className="chal-s";btn.disabled=true;
+    fetch(API+"/proposals",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d};});})
+      .then(function(res){
+        if(!res.ok){st.textContent=res.d.error||"Could not submit.";st.className="chal-s err";btn.disabled=false;return;}
+        st.innerHTML='Recorded as <b>'+esc(res.d.id)+'</b> in the public log — <a href="#/queue">see the queue</a>. It is unreviewed.';
+        st.className="chal-s ok";
+        ["c-summary","c-rationale","c-url"].forEach(function(i){var e=document.getElementById(i);if(e)e.value="";});
+      })
+      .catch(function(){st.textContent="Network error — not submitted.";st.className="chal-s err";btn.disabled=false;});
+  });
+}
+
+/* ---------- the public queue + chain ---------- */
+function vQueue(){
+  setTimeout(loadQueue,0);
+  return '<div class="crumbs">home / contribution queue</div>'+
+    '<h1 class="h-title">What people have proposed</h1>'+
+    '<p class="h-lede">Every proposal, from anyone, appears here the moment it is submitted — before any review, and whether or not it is eventually accepted. Nothing is filtered out of view.</p>'+
+    '<div id="chain-box" class="chain-box">Checking the event log…</div>'+
+    '<div class="sec-h"><span class="n">01</span> Proposals</div>'+
+    '<div id="q-list"><div class="empty">Loading…</div></div>'+
+    '<div class="sec-h"><span class="n">02</span> How a proposal becomes a change</div>'+
+    '<div class="flow"><span class="fstep">anyone proposes</span><span class="arr">→</span><span class="fstep">written to the public log</span><span class="arr">→</span><span class="fstep">adversarial review</span><span class="arr">→</span><span class="fstep">a human steward decides</span><span class="arr">→</span><span class="fstep">record amended, old version kept</span></div>'+
+    '<p class="note" style="margin-top:12px">The log is append-only and hash-chained: each entry stores the hash of the entry before it, so nothing can be altered or removed later without breaking the chain. Check it yourself at <a href="'+API+'/verify" target="_blank" rel="noopener">/api/verify</a>.</p>';
+}
+function loadQueue(){
+  var box=document.getElementById("chain-box"), list=document.getElementById("q-list");
+  fetch(API+"/verify").then(function(r){return r.json();}).then(function(v){
+    if(!box) return;
+    box.innerHTML='<span class="chain-dot '+(v.intact?"ok":"bad")+'"></span><b>'+(v.intact?"Event log intact":"CHAIN BROKEN at event "+v.brokenAt)+'</b> — '+v.events+' events verified, tip <span class="mono">'+esc(String(v.tip||"").slice(0,16))+'…</span>';
+  }).catch(function(){ if(box) box.textContent="Could not reach the event log."; });
+  fetch(API+"/proposals").then(function(r){return r.json();}).then(function(d){
+    if(!list) return;
+    if(!d.proposals||!d.proposals.length){list.innerHTML='<div class="empty">No proposals yet. The first one can be yours — open any record and use <b>Propose a change</b>.</div>';return;}
+    list.innerHTML=d.proposals.map(function(p){
+      return '<div class="qp"><div class="qp-h"><span class="pill rs-'+esc(p.state)+'">'+esc(p.state)+'</span>'+
+        '<span class="qp-k">'+esc(p.kind)+'</span><span class="qp-r">on <a href="#/route/'+esc(p.record_id)+'">'+esc(p.record_id)+'</a></span>'+
+        '<span class="qp-id mono">'+esc(p.id)+'</span></div>'+
+        '<div class="qp-s">'+esc(p.summary)+'</div>'+
+        '<div class="qp-b">'+esc(p.rationale)+'</div>'+
+        '<div class="qp-f">'+(p.source_url?'<a href="'+esc(p.source_url)+'" target="_blank" rel="noopener">source</a> · ':'')+
+        'proposed by '+esc(p.proposer||"anonymous")+(p.affil?' ('+esc(p.affil)+')':'')+' · '+esc(String(p.created).slice(0,10))+'</div></div>';
+    }).join("");
+  }).catch(function(){ if(list) list.innerHTML='<div class="empty">Could not load proposals.</div>'; });
 }
 
 function vMethods(){
@@ -623,9 +737,9 @@ function render(){
   else if(parts[0]==="route"&&parts[1]){view=vRoute(parts[1]);navKey="capabilities";}
   else if(parts[0]==="search"){view=vSearch(decodeURIComponent(parts.slice(1).join("/")||""));navKey="";}
   else{
-    view={thesis:vThesis,overview:vOverview,capabilities:vCapabilities,graph:vGraph,leverage:vLeverage,evidence:vEvidence,tasks:vTasks,collaboration:vCollab,governance:vGovernance,methods:vMethods,corrections:vCorrections}[parts[0]];
+    view={thesis:vThesis,overview:vOverview,capabilities:vCapabilities,graph:vGraph,leverage:vLeverage,evidence:vEvidence,tasks:vTasks,collaboration:vCollab,governance:vGovernance,methods:vMethods,corrections:vCorrections,queue:vQueue}[parts[0]];
     view=view?view():vThesis();
-    if(!({thesis:1,overview:1,capabilities:1,graph:1,leverage:1,evidence:1,tasks:1,collaboration:1,governance:1,methods:1,corrections:1})[parts[0]])navKey="thesis";
+    if(!({thesis:1,overview:1,capabilities:1,graph:1,leverage:1,evidence:1,tasks:1,collaboration:1,governance:1,methods:1,corrections:1,queue:1})[parts[0]])navKey="thesis";
   }
   el("view").innerHTML=view;
   el("view").parentNode.scrollTop=0; window.scrollTo(0,0);

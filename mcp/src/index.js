@@ -7,6 +7,7 @@
    caveats. An API that drops those is a different, worse product. */
 
 import { META, LADDER, GROUNDING, MEASURED, CAPABILITIES, ROUTES, HEADLINE } from "./data.js";
+import { handleApi } from "./api.js";
 
 const SUPPORTED = ["2025-11-25", "2025-06-18", "2025-03-26"];
 const LATEST = "2025-11-25";
@@ -371,8 +372,10 @@ a{color:#00E5CC}
 </main></body></html>`;
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (url.pathname.startsWith("/api")) return handleApi(request, env, url);
 
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
 

@@ -256,6 +256,53 @@ details.more .inner{padding:4px 18px 20px;border-top:1px solid var(--line);}
 .live-h{display:flex;align-items:center;gap:9px;font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
 .live-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 9px var(--teal);animation:pd 2.4s ease-in-out infinite;}
 pre.cmd{background:var(--navy-2);border:1px solid var(--line);border-radius:9px;padding:12px 14px;overflow-x:auto;font-family:var(--fm);font-size:12px;color:var(--bone);}
+
+/* LEVERAGE SIMULATOR */
+.sim-headline{background:var(--card);border:1px solid var(--line-2);border-left:3px solid var(--amber);border-radius:0 12px 12px 0;padding:16px 19px;margin:18px 0;transition:border-color .3s,background .3s;}
+.sim-headline.flipped{border-left-color:var(--teal);background:var(--teal-dim);}
+.sim-headline .sh-t{font-family:var(--fd);font-weight:600;font-size:17px;color:var(--amber);margin-bottom:5px;transition:color .3s;}
+.sim-headline.flipped .sh-t{color:var(--teal);}
+.sim-headline .sh-d{color:var(--bone-2);font-size:13.5px;}
+.sim-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px;}
+.sim-tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+.sim-tile .st-n{font-family:var(--fd);font-weight:700;font-size:29px;line-height:1;font-variant-numeric:tabular-nums;transition:color .3s;}
+.sim-tile .st-k{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--bone-3);margin-top:7px;}
+.sim-tile.key{border-color:var(--teal-line);}
+.sim-tile.key .st-n{color:var(--muted);}
+.sim-tile.key.on .st-n{color:var(--teal);}
+.sim-grid{display:grid;grid-template-columns:340px 1fr;gap:18px;align-items:start;}
+@media(max-width:900px){.sim-grid{grid-template-columns:1fr;}}
+.blk{width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin-bottom:9px;transition:border-color .15s,background .15s;display:block;}
+.blk:hover{border-color:var(--line-2);}
+.blk.on{border-color:var(--teal-line);background:var(--teal-dim);}
+.blk .bh{display:flex;align-items:center;gap:10px;}
+.blk .sw2{width:32px;height:18px;border-radius:100px;background:var(--faint);border:1px solid var(--line-2);position:relative;flex:none;transition:background .18s,border-color .18s;}
+.blk .sw2::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:var(--muted);transition:transform .18s,background .18s;}
+.blk.on .sw2{background:var(--teal-dim);border-color:var(--teal);}
+.blk.on .sw2::after{transform:translateX(14px);background:var(--teal);}
+.blk .bid{font-family:var(--fm);font-size:10px;color:var(--muted);}
+.blk .bn2{font-family:var(--fd);font-weight:600;font-size:13.5px;color:var(--bone);flex:1;}
+.blk .bd{color:var(--bone-3);font-size:12.5px;margin-top:7px;line-height:1.55;}
+.blk .bstat{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap;}
+.blk .bs{font-family:var(--fm);font-size:9.5px;letter-spacing:.04em;padding:3px 7px;border-radius:5px;background:var(--faint);color:var(--bone-3);border:1px solid var(--line);}
+.blk .bs.hot{color:var(--amber);border-color:var(--amber-dim);background:var(--amber-dim);}
+.rt{display:flex;align-items:center;gap:11px;padding:9px 12px;border-bottom:1px solid var(--line);transition:background .3s;}
+.rt:last-child{border-bottom:none;}
+.rt.moved{background:var(--teal-dim);}
+.rt .rr{font-family:var(--fm);font-size:11px;font-weight:500;width:58px;flex:none;display:flex;align-items:center;gap:4px;}
+.rt .rr .from{color:var(--muted);}
+.rt .rr .to{color:var(--teal);}
+.rt .rr .arw{color:var(--teal);font-size:9px;}
+.rt .rs2{font-size:13.5px;color:var(--bone-2);flex:1;min-width:0;}
+.rt.moved .rs2{color:var(--bone);}
+.rt .rb{font-family:var(--fm);font-size:9px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap;}
+.rb-broad{color:var(--teal);border:1px solid var(--teal-line);}
+.rb-local{color:var(--bone-3);border:1px solid var(--line-2);}
+.rt-wrap{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.rt-head{padding:11px 14px;background:var(--card-2);border-bottom:1px solid var(--line);font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--bone-3);display:flex;justify-content:space-between;}
+.sim-insight{background:var(--navy-2);border:1px solid var(--teal-line);border-radius:11px;padding:14px 17px;margin:16px 0;color:var(--bone-2);font-size:14px;}
+.sim-reset{font-family:var(--fm);font-size:11px;color:var(--bone-3);border:1px solid var(--line-2);border-radius:7px;padding:6px 12px;transition:color .14s,border-color .14s;}
+.sim-reset:hover{color:var(--teal);border-color:var(--teal-line);}
 </style>
 </head>
 <body>
@@ -267,10 +314,11 @@ pre.cmd{background:var(--navy-2);border:1px solid var(--line);border-radius:9px;
       <li><a href="#/overview" data-v="overview"><span class="ix">01</span> Overview</a></li>
       <li><a href="#/capabilities" data-v="capabilities"><span class="ix">02</span> Capability map</a></li>
       <li><a href="#/graph" data-v="graph"><span class="ix">03</span> Dependency graph</a></li>
-      <li><a href="#/evidence" data-v="evidence"><span class="ix">04</span> Evidence registry</a></li>
-      <li><a href="#/tasks" data-v="tasks"><span class="ix">05</span> Open tasks</a></li>
-      <li><a href="#/collaboration" data-v="collaboration"><span class="ix">06</span> AI + human</a></li>
-      <li><a href="#/governance" data-v="governance"><span class="ix">07</span> Governance</a></li>
+      <li><a href="#/leverage" data-v="leverage"><span class="ix">04</span> Leverage simulator</a></li>
+      <li><a href="#/evidence" data-v="evidence"><span class="ix">05</span> Evidence registry</a></li>
+      <li><a href="#/tasks" data-v="tasks"><span class="ix">06</span> Open tasks</a></li>
+      <li><a href="#/collaboration" data-v="collaboration"><span class="ix">07</span> AI + human</a></li>
+      <li><a href="#/governance" data-v="governance"><span class="ix">08</span> Governance</a></li>
     </ul>
     <div class="side-foot">Not a clinical tool.<br>No diagnosis, treatment,<br>or patient-specific advice.<br><br>Records are illustrative<br>and mostly AI-proposed,<br>awaiting human review.</div>
   </aside>
@@ -285,6 +333,7 @@ pre.cmd{background:var(--navy-2);border:1px solid var(--line);border-radius:9px;
 
 <script src="content/thesis.js"></script>
 <script src="content/collaboration.js"></script>
+<script src="content/leverage.js"></script>
 <script>
 (function(){
 "use strict";
@@ -545,6 +594,104 @@ function vSearch(q){
   return out;
 }
 
+/* ---------- leverage simulator ---------- */
+var LV = window.HRM_LEVERAGE || {};
+var simSolved = {};
+
+function simCompute(){
+  var routes=(LV.routes||[]).map(function(r){
+    var blocked=(r.blockers||[]).some(function(b){return !simSolved[b];});
+    return {r:r, unlocked:!blocked, rung: blocked?r.rung:r.to};
+  });
+  var atL5=routes.filter(function(x){return x.rung==="L5";}).length;
+  var broadProven=routes.filter(function(x){return x.r.broad && x.rung==="L5";}).length;
+  var moved=routes.filter(function(x){return x.unlocked && x.rung!==x.r.rung;}).length;
+  var cleared=Object.keys(simSolved).filter(function(k){return simSolved[k];}).length;
+  return {routes:routes, atL5:atL5, broadProven:broadProven, moved:moved, cleared:cleared};
+}
+
+function simMarginal(bid){
+  // how many additional routes advance if this blocker is cleared right now
+  var before=simCompute().routes.filter(function(x){return x.unlocked && x.rung!==x.r.rung;}).length;
+  var was=simSolved[bid]; simSolved[bid]=true;
+  var after=simCompute().routes.filter(function(x){return x.unlocked && x.rung!==x.r.rung;}).length;
+  simSolved[bid]=was;
+  return after-before;
+}
+
+function renderSim(){
+  var s=simCompute();
+  var host=document.getElementById("sim");
+  if(!host) return;
+
+  var flipped=s.broadProven>0;
+  var headline=flipped
+    ? {t:s.broadProven+" route"+(s.broadProven===1?"":"s")+" now both broad and proven in humans.", d:"In this hypothetical the map's central finding no longer holds — look at which blockers you had to clear to get here."}
+    : {t:"Nothing is both broad and proven in humans.", d:"Every proven route is anatomically local. Every potentially-broad route is unproven. This is the map's actual finding, today."};
+
+  var tiles='<div class="sim-tiles">'+
+    '<div class="sim-tile"><div class="st-n">'+s.atL5+'</div><div class="st-k">routes at L5</div></div>'+
+    '<div class="sim-tile key'+(flipped?' on':'')+'"><div class="st-n">'+s.broadProven+'</div><div class="st-k">broad AND proven</div></div>'+
+    '<div class="sim-tile"><div class="st-n">'+s.moved+'</div><div class="st-k">routes advanced</div></div>'+
+    '<div class="sim-tile"><div class="st-n">'+s.cleared+'<span style="font-size:15px;color:var(--muted)">/'+(LV.blockers||[]).length+'</span></div><div class="st-k">blockers cleared</div></div>'+
+  '</div>';
+
+  var blocks=(LV.blockers||[]).map(function(b){
+    var gates=(LV.routes||[]).filter(function(r){return (r.blockers||[]).indexOf(b.id)>=0;}).length;
+    var marg=simSolved[b.id]?0:simMarginal(b.id);
+    return '<button class="blk'+(simSolved[b.id]?" on":"")+'" data-blk="'+b.id+'" aria-pressed="'+(!!simSolved[b.id])+'">'+
+      '<div class="bh"><span class="sw2"></span><span class="bn2">'+esc(b.name)+'</span><span class="bid">'+b.id+'</span></div>'+
+      '<div class="bd">'+esc(b.desc)+'</div>'+
+      '<div class="bstat"><span class="bs">gates '+gates+' route'+(gates===1?"":"s")+'</span>'+
+      (simSolved[b.id]?'<span class="bs">cleared</span>':'<span class="bs'+(marg>0?' hot':'')+'">'+(marg>0?('would advance '+marg+' now'):'advances 0 alone')+'</span>')+
+      '</div></button>';
+  }).join("");
+
+  var order=LV.rungOrder||[];
+  var rows=s.routes.slice().sort(function(a,b){
+    var d=order.indexOf(b.rung)-order.indexOf(a.rung);
+    if(d) return d;
+    return (b.r.broad?1:0)-(a.r.broad?1:0);
+  }).map(function(x){
+    var didMove=x.unlocked && x.rung!==x.r.rung;
+    return '<div class="rt'+(didMove?" moved":"")+'">'+
+      '<span class="rr">'+(didMove?'<span class="from">'+x.r.rung+'</span><span class="arw">▸</span><span class="to">'+x.rung+'</span>':'<span class="from">'+x.rung+'</span>')+'</span>'+
+      '<span class="rs2">'+esc(x.r.subject)+'</span>'+
+      '<span class="rb '+(x.r.broad?"rb-broad":"rb-local")+'">'+(x.r.broad?"broad":"local")+'</span>'+
+    '</div>';
+  }).join("");
+
+  var ins=(LV.insights||[]).filter(function(i){try{return i.when(s);}catch(e){return false;}})[0];
+
+  host.innerHTML=
+    '<div class="sim-headline'+(flipped?" flipped":"")+'"><div class="sh-t">'+esc(headline.t)+'</div><div class="sh-d">'+esc(headline.d)+'</div></div>'+
+    tiles+
+    (ins?'<div class="sim-insight">'+ins.text+'</div>':'')+
+    '<div class="sim-grid"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span class="ctl-label">blockers — click to mark solved</span>'+
+      (s.cleared?'<button class="sim-reset" id="simreset">reset</button>':'')+'</div>'+blocks+'</div>'+
+    '<div class="rt-wrap"><div class="rt-head"><span>route</span><span>'+s.routes.length+' graded</span></div>'+rows+'</div></div>';
+
+  host.querySelectorAll("[data-blk]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var id=btn.getAttribute("data-blk");
+      simSolved[id]=!simSolved[id];
+      renderSim();
+    });
+  });
+  var rst=document.getElementById("simreset");
+  if(rst) rst.addEventListener("click",function(){simSolved={};renderSim();});
+}
+
+function vLeverage(){
+  setTimeout(renderSim,0);
+  return '<div class="crumbs">home / leverage simulator</div>'+
+    '<h1 class="h-title">Which blocker, solved, moves the most?</h1>'+
+    '<p class="h-lede">'+(LV.premise||"")+'</p>'+
+    '<div class="banner" style="margin-top:18px"><b>This is a model, not a measurement.</b> '+esc(LV.modelNote||"").replace("This is a model, not a measurement. ","")+'</div>'+
+    '<div id="sim"></div>'+
+    '<p class="note" style="margin-top:18px">A route advances only when <b>all</b> of its blockers are cleared — which is why clearing one rarely moves anything on its own, and why the ranking that matters is marginal, not total. Rungs and route properties come from the graded records; the blocker mappings are editorial.</p>';
+}
+
 function vThesis(){
   var capCards=CAPS.map(function(c){return '<button class="cap-card" onclick="location.hash=\'#/cap/'+c.id+'\'"><div class="top"><span class="cid">'+c.code+(c.deep?' · deep module':'')+'</span>'+reviewPill(c.review)+'</div><h3>'+esc(c.title)+'</h3><p>'+esc(c.summary)+'</p>'+meter(c.score,c.iv)+'</button>';}).join("");
   var lims=(T.infoLimits||[]).map(function(l){return '<div class="lim"><b>'+esc(l.t)+'</b><span>'+esc(l.d)+'</span></div>';}).join("");
@@ -684,9 +831,9 @@ function render(){
   else if(parts[0]==="route"&&parts[1]){view=vRoute(parts[1]);navKey="capabilities";}
   else if(parts[0]==="search"){view=vSearch(decodeURIComponent(parts.slice(1).join("/")||""));navKey="";}
   else{
-    view={thesis:vThesis,overview:vOverview,capabilities:vCapabilities,graph:vGraph,evidence:vEvidence,tasks:vTasks,collaboration:vCollab,governance:vGovernance}[parts[0]];
+    view={thesis:vThesis,overview:vOverview,capabilities:vCapabilities,graph:vGraph,leverage:vLeverage,evidence:vEvidence,tasks:vTasks,collaboration:vCollab,governance:vGovernance}[parts[0]];
     view=view?view():vThesis();
-    if(!({thesis:1,overview:1,capabilities:1,graph:1,evidence:1,tasks:1,collaboration:1,governance:1})[parts[0]])navKey="thesis";
+    if(!({thesis:1,overview:1,capabilities:1,graph:1,leverage:1,evidence:1,tasks:1,collaboration:1,governance:1})[parts[0]])navKey="thesis";
   }
   el("view").innerHTML=view;
   el("view").parentNode.scrollTop=0; window.scrollTo(0,0);

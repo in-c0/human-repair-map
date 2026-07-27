@@ -23,7 +23,7 @@ and auditable.
 
 ## What's in v0.1
 
-A standalone, no-backend prototype (`public/human-repair-map.html`) demonstrating:
+A standalone, no-backend prototype (`index.html`) demonstrating:
 
 - **The five enabling capabilities** — sensing, target-state modelling,
   cell-specific delivery, cell-state editing, closed-loop verification — each with
@@ -47,7 +47,7 @@ delivering a drug through it to a clinical outcome is proven nowhere.
 
 ## Run it
 
-`public/human-repair-map.html` is a single self-contained file. Open it directly
+`index.html` is a single self-contained file. Open it directly
 in a browser — no build, no server, no account.
 
 ## The one hard gate

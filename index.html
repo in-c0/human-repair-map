@@ -1,0 +1,1291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Human Repair Map — a public, evidence-linked roadmap of humanity's progress toward biological repair.">
+  <title>Human Repair Map — Public knowledge map</title>
+  <style>
+    :root {
+      --ink: #18211e;
+      --muted: #62706a;
+      --faint: #89938f;
+      --line: #d9dfdb;
+      --line-dark: #c3ccc7;
+      --paper: #ffffff;
+      --wash: #f5f7f4;
+      --wash-2: #eef3ef;
+      --forest: #143c32;
+      --forest-2: #1f5748;
+      --mint: #c9f2d6;
+      --lime: #dff3a8;
+      --blue: #2e6da4;
+      --blue-wash: #edf5fb;
+      --orange: #a65b18;
+      --orange-wash: #fff4e6;
+      --red: #a44343;
+      --red-wash: #fff0ef;
+      --purple: #68588d;
+      --purple-wash: #f3effa;
+      --shadow: 0 16px 45px rgba(20, 60, 50, .11);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--wash);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.58;
+    }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: var(--forest-2); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: #0b2e25; }
+    button { color: inherit; }
+    .hidden { display: none !important; }
+
+    .prototype-bar {
+      background: var(--forest);
+      color: #eefaf4;
+      padding: 8px 24px;
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: .015em;
+    }
+    .prototype-bar strong { color: var(--lime); }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255, 255, 255, .97);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+    .header-inner {
+      min-height: 70px;
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: grid;
+      grid-template-columns: 270px minmax(280px, 620px) 1fr;
+      align-items: center;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--forest);
+      text-decoration: none;
+      min-width: 0;
+    }
+    .brand-mark {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      border: 1px solid #8ca89e;
+      border-radius: 50%;
+      background: #f4faf6;
+      flex: 0 0 auto;
+    }
+    .brand-mark span {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--forest-2);
+    }
+    .brand-mark span:nth-child(1) { top: 5px; left: 15px; }
+    .brand-mark span:nth-child(2) { top: 13px; right: 5px; }
+    .brand-mark span:nth-child(3) { bottom: 5px; right: 10px; }
+    .brand-mark span:nth-child(4) { bottom: 5px; left: 10px; }
+    .brand-mark span:nth-child(5) { top: 13px; left: 5px; }
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border: 1px solid #6a9182;
+      border-radius: 50%;
+    }
+    .brand-name { display: block; font-family: var(--serif); font-weight: 700; font-size: 18px; line-height: 1.05; }
+    .brand-tag { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; letter-spacing: .035em; }
+
+    .search-wrap { position: relative; }
+    .search {
+      width: 100%;
+      height: 42px;
+      border: 1px solid var(--line-dark);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      padding: 0 54px 0 42px;
+      outline: none;
+      transition: box-shadow .15s, border-color .15s;
+    }
+    .search:focus { border-color: #5a8978; box-shadow: 0 0 0 3px rgba(72, 132, 109, .15); }
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 12px;
+      width: 16px;
+      height: 16px;
+      border: 1.8px solid var(--muted);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .search-icon::after {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 2px;
+      background: var(--muted);
+      right: -5px;
+      bottom: -2px;
+      transform: rotate(45deg);
+    }
+    .shortcut {
+      position: absolute;
+      right: 10px;
+      top: 9px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 7px;
+      color: var(--faint);
+      background: var(--wash);
+      font-size: 11px;
+    }
+    .search-results {
+      display: none;
+      position: absolute;
+      top: 47px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--line-dark);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 8px;
+      max-height: 360px;
+      overflow: auto;
+    }
+    .search-results.open { display: block; }
+    .search-result {
+      width: 100%;
+      border: 0;
+      border-radius: 5px;
+      padding: 10px 11px;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 8px;
+    }
+    .search-result:hover, .search-result:focus { background: var(--wash-2); outline: none; }
+    .result-type { color: var(--forest-2); text-transform: uppercase; font-size: 10px; letter-spacing: .09em; }
+    .result-copy strong { display: block; font-size: 13px; }
+    .result-copy small { color: var(--muted); }
+
+    .top-nav { display: flex; justify-content: flex-end; gap: 7px; align-items: center; }
+    .top-nav button {
+      border: 0;
+      background: transparent;
+      border-radius: 5px;
+      padding: 8px 10px;
+      color: #405049;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .top-nav button:hover { background: var(--wash-2); color: var(--forest); }
+    .contribute-top { border: 1px solid var(--forest) !important; color: var(--forest) !important; font-weight: 650; }
+
+    .layout {
+      width: min(1500px, 100%);
+      margin: 0 auto;
+      padding: 30px 28px 80px;
+      display: grid;
+      grid-template-columns: 215px minmax(0, 850px) 265px;
+      gap: 34px;
+      align-items: start;
+    }
+    .sidebar, .right-rail { position: sticky; top: 106px; }
+    .side-group { margin-bottom: 25px; }
+    .side-heading {
+      margin: 0 0 8px;
+      color: var(--faint);
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .side-nav { display: grid; gap: 2px; }
+    .side-link {
+      width: 100%;
+      border: 0;
+      border-left: 3px solid transparent;
+      background: transparent;
+      border-radius: 0 4px 4px 0;
+      padding: 7px 9px;
+      color: #495750;
+      text-align: left;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .side-link:hover { background: #edf1ee; }
+    .side-link.active { border-left-color: var(--forest-2); background: #e6eee9; color: var(--forest); font-weight: 700; }
+    .side-link .count { float: right; color: var(--faint); font-size: 11px; }
+    .side-note {
+      border-top: 1px solid var(--line);
+      padding-top: 15px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .article {
+      min-width: 0;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      box-shadow: 0 3px 12px rgba(30, 48, 41, .035);
+    }
+    .article-head { padding: 35px 42px 0; }
+    .breadcrumbs { color: var(--muted); font-size: 12px; margin-bottom: 15px; }
+    .breadcrumbs span { color: var(--line-dark); margin: 0 7px; }
+    .title-row { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; }
+    h1 {
+      margin: 0;
+      color: #12261f;
+      font-family: var(--serif);
+      font-size: clamp(34px, 5vw, 50px);
+      font-weight: 500;
+      letter-spacing: -.035em;
+      line-height: 1.05;
+    }
+    .version {
+      flex: 0 0 auto;
+      border: 1px solid #b9d0c5;
+      border-radius: 999px;
+      background: #eff7f2;
+      color: var(--forest-2);
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .dek {
+      max-width: 720px;
+      margin: 15px 0 19px;
+      color: #3d4c46;
+      font-family: var(--serif);
+      font-size: 19px;
+      line-height: 1.55;
+    }
+    .page-meta { display: flex; flex-wrap: wrap; gap: 15px; padding-bottom: 20px; color: var(--muted); font-size: 11px; }
+    .page-meta strong { color: #394a43; }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 0 42px;
+      overflow-x: auto;
+    }
+    .tab {
+      border: 0;
+      border-bottom: 3px solid transparent;
+      background: transparent;
+      padding: 13px 12px 11px;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .tab:hover { color: var(--forest); }
+    .tab.active { color: var(--forest); border-bottom-color: var(--forest-2); font-weight: 700; }
+
+    .panel { padding: 31px 42px 45px; }
+    .lead {
+      margin: 0 0 26px;
+      color: #293832;
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .lead::first-letter {
+      float: left;
+      margin: 8px 8px 0 0;
+      color: var(--forest);
+      font-size: 48px;
+      line-height: .75;
+    }
+    .notice {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 12px;
+      margin: 0 0 30px;
+      border: 1px solid #d4e2da;
+      border-left: 4px solid var(--forest-2);
+      background: #f2f8f4;
+      padding: 15px 17px;
+      color: #355047;
+      font-size: 13px;
+    }
+    .notice-mark {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: #fff;
+      font-family: var(--serif);
+      font-weight: 700;
+    }
+
+    h2 {
+      margin: 37px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      color: #183128;
+      font-family: var(--serif);
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: -.02em;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 { margin: 0; color: #1d3029; font-size: 15px; }
+    .section-intro { margin: 0 0 20px; color: var(--muted); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 21px 0 29px;
+    }
+    .stat { padding: 15px 16px; border-right: 1px solid var(--line); background: #fbfcfb; }
+    .stat:last-child { border-right: 0; }
+    .stat strong { display: block; color: var(--forest); font-family: var(--serif); font-size: 25px; font-weight: 500; line-height: 1.1; }
+    .stat span { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+
+    .capability-list { display: grid; border-top: 1px solid var(--line); }
+    .capability {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) 118px 62px;
+      align-items: center;
+      gap: 14px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      padding: 16px 4px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .capability:hover { background: #f8faf8; }
+    .cap-num {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid #b6ccc2;
+      border-radius: 50%;
+      color: var(--forest-2);
+      font-family: var(--serif);
+      font-size: 17px;
+    }
+    .capability p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+    .maturity-bar { height: 6px; border-radius: 999px; background: #e7ebe8; overflow: hidden; }
+    .maturity-bar span { display: block; height: 100%; border-radius: inherit; background: var(--forest-2); }
+    .score { color: var(--forest-2); font-size: 12px; font-weight: 700; text-align: right; }
+
+    .pathway {
+      margin: 18px 0 3px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fafbf9;
+    }
+    .path-row { display: flex; align-items: stretch; gap: 5px; overflow-x: auto; padding-bottom: 5px; }
+    .path-node {
+      min-width: 102px;
+      flex: 1;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      padding: 10px;
+      color: #30423b;
+      font-size: 11px;
+      line-height: 1.35;
+      cursor: pointer;
+    }
+    .path-node:hover { border-color: #6d9c8a; background: #f0f7f3; }
+    .arrow { align-self: center; color: #9ba7a1; font-size: 15px; }
+    .path-note { margin: 10px 0 0; color: var(--muted); font-size: 11px; }
+
+    .map-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    .map-table th {
+      padding: 9px 9px;
+      border-bottom: 1px solid var(--line-dark);
+      color: var(--faint);
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .map-table td { padding: 13px 9px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .map-table tr[data-record] { cursor: pointer; }
+    .map-table tr[data-record]:hover td { background: #f7faf8; }
+    .record-title { display: block; color: #173c31; font-weight: 700; }
+    .record-sub { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 999px;
+      padding: 3px 7px;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .tag::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+    .tag.blocked { color: var(--red); background: var(--red-wash); }
+    .tag.active { color: var(--blue); background: var(--blue-wash); }
+    .tag.emerging { color: var(--purple); background: var(--purple-wash); }
+    .tag.reviewed { color: var(--forest-2); background: #edf7f1; }
+    .tag.unreviewed { color: var(--orange); background: var(--orange-wash); }
+
+    .change-list { display: grid; }
+    .change {
+      display: grid;
+      grid-template-columns: 94px 1fr;
+      gap: 15px;
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
+    }
+    .change time { color: var(--faint); font-size: 11px; }
+    .change p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+
+    .evidence-grid, .task-grid { display: grid; gap: 12px; }
+    .evidence-card, .task-card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 16px 17px;
+      background: #fff;
+    }
+    .card-top { display: flex; justify-content: space-between; gap: 15px; align-items: flex-start; }
+    .evidence-card p, .task-card p { margin: 7px 0 0; color: var(--muted); font-size: 12px; }
+    .card-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; color: var(--faint); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; }
+    .task-card { display: grid; grid-template-columns: 1fr auto; gap: 15px; align-items: center; }
+    .task-action {
+      border: 1px solid #9eb9ae;
+      border-radius: 4px;
+      background: #f4faf6;
+      color: var(--forest);
+      padding: 7px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .task-action:hover { background: #e5f1ea; }
+
+    .graph-shell {
+      min-height: 480px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background-color: #f8faf8;
+      background-image: radial-gradient(#d6ddd8 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .graph-line {
+      position: absolute;
+      height: 1px;
+      background: #9eb0a8;
+      transform-origin: left center;
+      z-index: 1;
+    }
+    .graph-node {
+      position: absolute;
+      z-index: 2;
+      width: 125px;
+      min-height: 56px;
+      border: 1px solid #a9beb5;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(25, 57, 47, .08);
+      padding: 10px;
+      color: #24453a;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+    }
+    .graph-node small { display: block; margin-top: 3px; color: var(--muted); font-weight: 400; }
+    .graph-node.core { background: var(--forest); border-color: var(--forest); color: #fff; }
+    .graph-node.core small { color: #cde1d9; }
+    .graph-node.risk { border-color: #d5a2a2; background: #fff7f6; color: #7c3636; }
+    .graph-node:hover { transform: translateY(-2px); box-shadow: 0 7px 18px rgba(25, 57, 47, .14); }
+
+    .rail-card {
+      margin-bottom: 16px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      padding: 17px;
+    }
+    .rail-card h3 { margin-bottom: 9px; font-family: var(--serif); font-size: 16px; font-weight: 600; }
+    .rail-card p { margin: 0; color: var(--muted); font-size: 12px; }
+    .rail-card.cta { background: var(--forest); border-color: var(--forest); color: #fff; }
+    .rail-card.cta h3 { color: #fff; }
+    .rail-card.cta p { color: #cfe0d9; }
+    .primary-button {
+      width: 100%;
+      margin-top: 13px;
+      border: 0;
+      border-radius: 4px;
+      background: var(--lime);
+      color: #173a2f;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .primary-button:hover { background: #e9fabd; }
+    .legend { display: grid; gap: 11px; }
+    .legend-row { display: grid; grid-template-columns: 53px 1fr; gap: 8px; align-items: center; }
+    .legend-score { color: var(--forest); font-size: 11px; font-weight: 750; }
+    .legend-row span:last-child { color: var(--muted); font-size: 11px; }
+    .health {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 9px;
+      align-items: start;
+      margin-top: 10px;
+    }
+    .health-icon { width: 18px; height: 18px; border-radius: 50%; background: #e7f4eb; color: var(--forest-2); text-align: center; line-height: 18px; font-size: 10px; font-weight: 800; }
+    .health strong { display: block; font-size: 12px; }
+    .health small { color: var(--muted); }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      z-index: 80;
+      inset: 0;
+      background: rgba(9, 27, 22, .48);
+      padding: 24px;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      position: relative;
+      width: min(650px, 100%);
+      max-height: min(780px, calc(100vh - 48px));
+      overflow: auto;
+      border: 1px solid #9ab2a8;
+      border-radius: 9px;
+      background: #fff;
+      box-shadow: 0 28px 80px rgba(4, 21, 16, .26);
+      padding: 30px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .modal .eyebrow { margin: 0 0 7px; color: var(--forest-2); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 800; }
+    .modal h2 { margin: 0 45px 9px 0; border: 0; padding: 0; font-size: 30px; }
+    .modal-summary { color: var(--muted); }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+    .detail {
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 12px;
+      background: #fafbf9;
+    }
+    .detail small { display: block; color: var(--faint); font-size: 9px; letter-spacing: .09em; text-transform: uppercase; }
+    .detail strong { display: block; margin-top: 3px; color: #233a32; font-size: 13px; }
+    .modal h3 { margin: 21px 0 7px; font-family: var(--serif); font-size: 18px; }
+    .modal ul { margin: 7px 0 0; padding-left: 20px; color: #405049; }
+    .modal li { margin: 5px 0; }
+    .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 19px; }
+    .choice {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      padding: 14px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .choice:hover { border-color: #6d9c8a; background: #f3f8f5; }
+    .choice strong { display: block; color: var(--forest); }
+    .choice span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .modal-footer { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 15px; color: var(--faint); font-size: 11px; }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      background: #fff;
+      padding: 26px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
+    }
+
+    @media (max-width: 1180px) {
+      .header-inner { grid-template-columns: 220px 1fr auto; }
+      .top-nav button:not(.contribute-top) { display: none; }
+      .layout { grid-template-columns: 180px minmax(0, 1fr); }
+      .right-rail { position: static; grid-column: 2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .rail-card { margin: 0; }
+    }
+    @media (max-width: 820px) {
+      .prototype-bar { padding-inline: 12px; }
+      .header-inner { min-height: 114px; grid-template-columns: 1fr auto; gap: 10px; padding: 12px 16px; }
+      .search-wrap { grid-column: 1 / -1; grid-row: 2; }
+      .layout { display: block; padding: 18px 12px 55px; }
+      .sidebar { display: none; }
+      .right-rail { display: grid; grid-template-columns: 1fr; margin-top: 14px; }
+      .article-head, .panel { padding-left: 20px; padding-right: 20px; }
+      .tabs { padding: 0 14px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .capability { grid-template-columns: 38px 1fr 52px; }
+      .capability .maturity-bar { display: none; }
+      .map-table th:nth-child(3), .map-table td:nth-child(3) { display: none; }
+      .graph-shell { min-height: 650px; }
+      .graph-node { width: 115px; }
+      .task-card { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .brand-tag { display: none; }
+      .brand-mark { width: 32px; height: 32px; }
+      .contribute-top { font-size: 0 !important; padding: 8px !important; }
+      .contribute-top::after { content: "+"; font-size: 17px; }
+      .title-row { display: block; }
+      .version { display: inline-block; margin-top: 12px; }
+      .dek { font-size: 17px; }
+      .change { grid-template-columns: 1fr; gap: 3px; }
+      .detail-grid, .choice-grid { grid-template-columns: 1fr; }
+      .modal { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="prototype-bar">
+    <strong>Reconstructed prototype · v0.1</strong> — illustrative records, not medical advice or a clinical decision tool.
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#" aria-label="Human Repair Map home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+        <span>
+          <span class="brand-name">Human Repair Map</span>
+          <span class="brand-tag">The open roadmap for biological repair</span>
+        </span>
+      </a>
+
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input id="search" class="search" type="search" placeholder="Search capabilities, evidence, bottlenecks…" autocomplete="off" aria-label="Search the Human Repair Map" aria-expanded="false">
+        <span class="shortcut">/</span>
+        <div id="searchResults" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+
+      <nav class="top-nav" aria-label="Primary">
+        <button data-tab-target="map">Browse map</button>
+        <button data-tab-target="evidence">Evidence</button>
+        <button data-tab-target="tasks">Open tasks</button>
+        <button class="contribute-top" data-contribute>Contribute</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Map navigation">
+      <div class="side-group">
+        <h2 class="side-heading">Explore</h2>
+        <nav class="side-nav">
+          <button class="side-link active" data-tab-target="overview">Overview</button>
+          <button class="side-link" data-tab-target="map">Capability map <span class="count">78</span></button>
+          <button class="side-link" data-tab-target="evidence">Evidence registry <span class="count">342</span></button>
+          <button class="side-link" data-tab-target="tasks">Open tasks <span class="count">24</span></button>
+        </nav>
+      </div>
+      <div class="side-group">
+        <h2 class="side-heading">Five capabilities</h2>
+        <nav class="side-nav">
+          <button class="side-link" data-record="sensing">Biological sensing</button>
+          <button class="side-link" data-record="target">Target-state models</button>
+          <button class="side-link" data-record="delivery">Cellular access</button>
+          <button class="side-link" data-record="editing">Cell-state editing</button>
+          <button class="side-link" data-record="verification">Closed-loop verification</button>
+        </nav>
+      </div>
+      <div class="side-group">
+        <h2 class="side-heading">Deep modules</h2>
+        <nav class="side-nav">
+          <button class="side-link" data-record="delivery">Cell-specific delivery</button>
+          <button class="side-link" data-record="aging">Ageing damage</button>
+          <button class="side-link" data-record="neural">Neural repair</button>
+          <button class="side-link" data-record="organ">Organ regeneration</button>
+        </nav>
+      </div>
+      <p class="side-note">
+        Every accepted change carries sources, review state, confidence, conflicts of interest, and public history.
+      </p>
+    </aside>
+
+    <main class="article">
+      <header class="article-head">
+        <div class="breadcrumbs">Open roadmap <span>›</span> Biological repair <span>›</span> Overview</div>
+        <div class="title-row">
+          <h1>Human Repair Roadmap</h1>
+          <span class="version">Map v0.1</span>
+        </div>
+        <p class="dek">A public, AI-assisted map of humanity’s progress toward preventing, treating, repairing, and eventually reversing major forms of biological damage.</p>
+        <div class="page-meta">
+          <span><strong>Public-interest knowledge commons</strong></span>
+          <span>Snapshot: 11 June 2026</span>
+          <span>All changes auditable</span>
+        </div>
+      </header>
+
+      <nav class="tabs" aria-label="Article views">
+        <button class="tab active" data-tab="overview">Overview</button>
+        <button class="tab" data-tab="map">Capability map</button>
+        <button class="tab" data-tab="evidence">Evidence</button>
+        <button class="tab" data-tab="tasks">Open tasks</button>
+      </nav>
+
+      <section id="panel-overview" class="panel">
+        <p class="lead">Human repair is not one cure. It is a coordinated set of capabilities for reading biological state, defining a safe target, reaching the right cells, changing their state, and verifying that repair worked. This map makes those dependencies visible—and gives researchers, funders, patients, engineers, and citizens a shared place to improve the evidence.</p>
+
+        <div class="notice">
+          <span class="notice-mark">i</span>
+          <span><strong>Scope:</strong> scientific capability mapping, evidence summaries, uncertainty, bottlenecks, and research coordination. This project does not diagnose, recommend treatments, or forecast a “universal cure date.”</span>
+        </div>
+
+        <div class="stats-grid" aria-label="Map statistics">
+          <div class="stat"><strong>78</strong><span>Capabilities mapped</span></div>
+          <div class="stat"><strong>342</strong><span>Evidence records</span></div>
+          <div class="stat"><strong>31</strong><span>Active bottlenecks</span></div>
+          <div class="stat"><strong>24</strong><span>Open tasks</span></div>
+        </div>
+
+        <h2 id="five-capabilities">Five capabilities required for repair</h2>
+        <p class="section-intro">The map follows a closed loop. Progress in one area only matters when the other four can support it safely.</p>
+
+        <div class="capability-list">
+          <button class="capability" data-record="sensing">
+            <span class="cap-num">1</span>
+            <span><h3>Sufficient biological sensing</h3><p>Measure the living system at the resolution required for safe intervention.</p></span>
+            <span class="maturity-bar" aria-label="Maturity 54 out of 100"><span style="width:54%"></span></span>
+            <span class="score">54 / 100</span>
+          </button>
+          <button class="capability" data-record="target">
+            <span class="cap-num">2</span>
+            <span><h3>Personal target-state modelling</h3><p>Define what to repair, what to preserve, and what “better” means.</p></span>
+            <span class="maturity-bar" aria-label="Maturity 27 out of 100"><span style="width:27%"></span></span>
+            <span class="score">27 / 100</span>
+          </button>
+          <button class="capability" data-record="delivery">
+            <span class="cap-num">3</span>
+            <span><h3>Cell-specific access and delivery</h3><p>Reach the right cell, compartment, place, dose, and time.</p></span>
+            <span class="maturity-bar" aria-label="Maturity 36 out of 100"><span style="width:36%"></span></span>
+            <span class="score">36 / 100</span>
+          </button>
+          <button class="capability" data-record="editing">
+            <span class="cap-num">4</span>
+            <span><h3>Programmable cell-state editing</h3><p>Repair, replace, reprogram, destroy, regenerate, or recalibrate cells.</p></span>
+            <span class="maturity-bar" aria-label="Maturity 43 out of 100"><span style="width:43%"></span></span>
+            <span class="score">43 / 100</span>
+          </button>
+          <button class="capability" data-record="verification">
+            <span class="cap-num">5</span>
+            <span><h3>Closed-loop verification</h3><p>Observe outcomes, detect adaptation, correct errors, and maintain repair.</p></span>
+            <span class="maturity-bar" aria-label="Maturity 31 out of 100"><span style="width:31%"></span></span>
+            <span class="score">31 / 100</span>
+          </button>
+        </div>
+
+        <h2>Most realistic path</h2>
+        <p class="section-intro">A staged path from understanding biological states to orchestrating reliable repair across the body.</p>
+        <div class="pathway">
+          <div class="path-row">
+            <button class="path-node" data-record="sensing">Cell atlases</button><span class="arrow">→</span>
+            <button class="path-node" data-record="virtual">Virtual cells &amp; tissues</button><span class="arrow">→</span>
+            <button class="path-node" data-record="perturbation">Perturbation datasets</button><span class="arrow">→</span>
+            <button class="path-node" data-record="delivery">Safer delivery</button><span class="arrow">→</span>
+            <button class="path-node" data-record="verification">Closed-loop repair</button>
+          </div>
+          <p class="path-note">The arrows express capability dependency, not a promise of chronological or inevitable progress.</p>
+        </div>
+
+        <h2>Highest-leverage bottlenecks</h2>
+        <table class="map-table">
+          <thead><tr><th>Bottleneck</th><th>State</th><th>Blocks</th><th>Confidence</th></tr></thead>
+          <tbody>
+            <tr data-record="causal"><td><span class="record-title">Causal biological models</span><span class="record-sub">Predicting safe state transitions, not only correlations</span></td><td><span class="tag blocked">Critical</span></td><td>Editing, target models</td><td>High</td></tr>
+            <tr data-record="delivery"><td><span class="record-title">Cell-specific delivery</span><span class="record-sub">Repeated, precise access across difficult tissues</span></td><td><span class="tag active">Active</span></td><td>All interventions</td><td>High</td></tr>
+            <tr data-record="safety"><td><span class="record-title">Long-horizon safety control</span><span class="record-sub">Cancer, immune, fibrosis and off-target surveillance</span></td><td><span class="tag blocked">Critical</span></td><td>Regeneration, rejuvenation</td><td>High</td></tr>
+            <tr data-record="identity"><td><span class="record-title">Identity-preserving neural repair</span><span class="record-sub">Repairing function while preserving memory and agency</span></td><td><span class="tag emerging">Early</span></td><td>Brain repair</td><td>Medium</td></tr>
+          </tbody>
+        </table>
+
+        <h2>What changed?</h2>
+        <div class="change-list">
+          <article class="change"><time>11 Jun 2026</time><div><h3>Delivery maturity split by tissue class</h3><p>One aggregate score became separate records for liver, blood, eye, CNS, solid tumour, and fibrotic tissue delivery.</p></div></article>
+          <article class="change"><time>09 Jun 2026</time><div><h3>Target-state ethics added as a first-class dependency</h3><p>Consent, identity preservation, disability perspectives, and reversible interventions now affect maturity scoring.</p></div></article>
+          <article class="change"><time>06 Jun 2026</time><div><h3>AI proposal awaits review</h3><p>A proposed link between perturbation benchmarks and delivery predictability is visible but not accepted into the map.</p></div></article>
+        </div>
+      </section>
+
+      <section id="panel-map" class="panel hidden">
+        <h2>Capability dependency map</h2>
+        <p class="section-intro">Select a node to inspect its evidence, maturity rationale, dependencies, and unresolved questions. This view represents an illustrative v0.1 dataset.</p>
+        <div class="graph-shell" aria-label="Interactive capability dependency graph">
+          <div class="graph-line" style="left:18%;top:19%;width:29%;transform:rotate(26deg)"></div>
+          <div class="graph-line" style="left:20%;top:72%;width:27%;transform:rotate(-27deg)"></div>
+          <div class="graph-line" style="left:43%;top:48%;width:31%;transform:rotate(-30deg)"></div>
+          <div class="graph-line" style="left:43%;top:48%;width:31%;transform:rotate(31deg)"></div>
+          <div class="graph-line" style="left:47%;top:49%;width:26%;transform:rotate(0deg)"></div>
+          <div class="graph-line" style="left:72%;top:24%;width:18%;transform:rotate(70deg)"></div>
+          <button class="graph-node" data-record="sensing" style="left:5%;top:10%">Biological sensing<small>54 · translational</small></button>
+          <button class="graph-node" data-record="target" style="left:6%;top:67%">Target-state models<small>27 · emerging</small></button>
+          <button class="graph-node core" data-record="causal" style="left:38%;top:41%">Causal models<small>central bottleneck</small></button>
+          <button class="graph-node risk" data-record="safety" style="left:69%;top:13%">Safety control<small>critical constraint</small></button>
+          <button class="graph-node" data-record="delivery" style="left:70%;top:42%">Cell-specific delivery<small>36 · preclinical</small></button>
+          <button class="graph-node" data-record="editing" style="left:70%;top:72%">Cell-state editing<small>43 · translational</small></button>
+          <button class="graph-node" data-record="verification" style="left:39%;top:75%">Closed-loop verification<small>31 · early clinical</small></button>
+        </div>
+
+        <h2>Capability records</h2>
+        <table class="map-table">
+          <thead><tr><th>Capability</th><th>Maturity</th><th>Review</th><th>Primary dependency</th></tr></thead>
+          <tbody>
+            <tr data-record="atlas"><td><span class="record-title">Human cell reference atlases</span><span class="record-sub">Sensing / reference state</span></td><td>66 / 100</td><td><span class="tag reviewed">Reviewed</span></td><td>Representative sampling</td></tr>
+            <tr data-record="virtual"><td><span class="record-title">Virtual cell response models</span><span class="record-sub">Modelling / prediction</span></td><td>29 / 100</td><td><span class="tag active">In review</span></td><td>Perturbation data</td></tr>
+            <tr data-record="delivery"><td><span class="record-title">Cell-specific in-vivo delivery</span><span class="record-sub">Access / intervention</span></td><td>36 / 100</td><td><span class="tag reviewed">Reviewed</span></td><td>Tissue navigation</td></tr>
+            <tr data-record="reprogramming"><td><span class="record-title">Partial epigenetic reprogramming</span><span class="record-sub">Editing / rejuvenation</span></td><td>25 / 100</td><td><span class="tag unreviewed">AI proposal</span></td><td>Safety control</td></tr>
+            <tr data-record="neural"><td><span class="record-title">Identity-preserving neural repair</span><span class="record-sub">Editing / verification</span></td><td>12 / 100</td><td><span class="tag active">Needs review</span></td><td>Neural state sensing</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="panel-evidence" class="panel hidden">
+        <h2>Public evidence registry</h2>
+        <p class="section-intro">Claims are separated from sources. Every record carries provenance, evidence type, limitations, review state, and dispute history.</p>
+
+        <div class="notice">
+          <span class="notice-mark">✓</span>
+          <span><strong>Acceptance rule:</strong> AI may draft or connect evidence, but only reviewed claims affect maturity scores. Conflicting evidence remains visible.</span>
+        </div>
+
+        <div class="evidence-grid">
+          <article class="evidence-card">
+            <div class="card-top"><h3>Reference cell atlases can establish reusable baseline states across tissues</h3><span class="tag reviewed">Reviewed</span></div>
+            <p>Evidence group: large-scale reference mapping. Limitations include sampling bias, batch effects, tissue accessibility, and incomplete representation of dynamic living states.</p>
+            <div class="card-meta"><span>Evidence · E-0142</span><span>Confidence · High</span><span>3 reviewers</span></div>
+          </article>
+          <article class="evidence-card">
+            <div class="card-top"><h3>Current delivery performance does not generalise uniformly across tissue classes</h3><span class="tag reviewed">Reviewed</span></div>
+            <p>Success in blood, liver, eye, or locally injected tissue is insufficient evidence of universal access. The map therefore scores each tissue route separately.</p>
+            <div class="card-meta"><span>Evidence · E-0197</span><span>Confidence · High</span><span>5 reviewers</span></div>
+          </article>
+          <article class="evidence-card">
+            <div class="card-top"><h3>Perturbation-scale may be a leading indicator for virtual-cell generalisation</h3><span class="tag unreviewed">AI proposal</span></div>
+            <p>Automatically proposed connection. It is public for critique but excluded from current scoring until the cited benchmarks and causal interpretation are reviewed.</p>
+            <div class="card-meta"><span>Proposal · P-0041</span><span>Confidence · Unset</span><span>0 reviewers</span></div>
+          </article>
+          <article class="evidence-card">
+            <div class="card-top"><h3>Closed-loop control is necessary where biological systems adapt or evolve</h3><span class="tag active">In review</span></div>
+            <p>Applies strongly to tumour escape, immune adaptation, regeneration control, and long-term surveillance. Reviewers disagree on how to measure capability maturity across timescales.</p>
+            <div class="card-meta"><span>Claim · C-0088</span><span>Confidence · Medium</span><span>2 reviewers</span></div>
+          </article>
+        </div>
+
+        <h2>Review state</h2>
+        <table class="map-table">
+          <thead><tr><th>State</th><th>Meaning</th><th>Can affect scores?</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag unreviewed">AI proposal</span></td><td>Machine-generated, visible with provenance, not yet assessed</td><td>No</td></tr>
+            <tr><td><span class="tag active">In review</span></td><td>At least one qualified reviewer is assessing evidence and limitations</td><td>Provisional only</td></tr>
+            <tr><td><span class="tag reviewed">Reviewed</span></td><td>Accepted under the current protocol; challenges remain open</td><td>Yes</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="panel-tasks" class="panel hidden">
+        <h2>Open contributor tasks</h2>
+        <p class="section-intro">Small, reviewable contributions that improve the public map. No institution or specialist status is required for source-finding and data-quality work.</p>
+
+        <div class="task-grid">
+          <article class="task-card">
+            <div><div class="card-top"><h3>Split CNS delivery evidence by route and cell class</h3><span class="tag blocked">High priority</span></div><p>Separate systemic, intrathecal, local, vector, nanoparticle, and cell-mediated approaches. Add failure modes and repeated-dosing evidence.</p><div class="card-meta"><span>Evidence synthesis</span><span>6–10 hours</span><span>Needs domain review</span></div></div>
+            <button class="task-action" data-task="CNS delivery evidence">Inspect task</button>
+          </article>
+          <article class="task-card">
+            <div><div class="card-top"><h3>Audit 22 ageing claims for proxy-outcome inflation</h3><span class="tag active">Open</span></div><p>Flag records where biomarker change is being treated as evidence of restored function, healthspan, or long-term safety.</p><div class="card-meta"><span>Claim audit</span><span>3–5 hours</span><span>Public worksheet</span></div></div>
+            <button class="task-action" data-task="Ageing claim audit">Inspect task</button>
+          </article>
+          <article class="task-card">
+            <div><div class="card-top"><h3>Translate the maturity rubric into Korean</h3><span class="tag emerging">Good first task</span></div><p>Translate definitions while preserving evidence-strength and uncertainty terms. Independent bilingual review required.</p><div class="card-meta"><span>Translation</span><span>2–4 hours</span><span>No domain credential</span></div></div>
+            <button class="task-action" data-task="Korean rubric translation">Inspect task</button>
+          </article>
+          <article class="task-card">
+            <div><div class="card-top"><h3>Challenge the causal-model maturity score</h3><span class="tag active">Open debate</span></div><p>Submit a sourced argument for raising or lowering the current score. State the benchmark and domain boundary you believe should control the rating.</p><div class="card-meta"><span>Scientific review</span><span>Open-ended</span><span>Conflict disclosure</span></div></div>
+            <button class="task-action" data-task="Causal model score challenge">Inspect task</button>
+          </article>
+        </div>
+
+        <h2>How contribution works</h2>
+        <div class="pathway">
+          <div class="path-row">
+            <div class="path-node">1. Propose a claim, source, edit, or task</div><span class="arrow">→</span>
+            <div class="path-node">2. Automated checks attach provenance</div><span class="arrow">→</span>
+            <div class="path-node">3. Human review records disagreement</div><span class="arrow">→</span>
+            <div class="path-node">4. Accepted change enters public history</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="right-rail" aria-label="Map information">
+      <section class="rail-card cta">
+        <h3>Help improve the map</h3>
+        <p>Add a source, challenge a score, review a claim, translate a page, or take an open task.</p>
+        <button class="primary-button" data-contribute>Choose a contribution</button>
+      </section>
+
+      <section class="rail-card">
+        <h3>Maturity scale</h3>
+        <div class="legend">
+          <div class="legend-row"><span class="legend-score">0–20</span><span>Conceptual or foundational</span></div>
+          <div class="legend-row"><span class="legend-score">21–40</span><span>Emerging / preclinical</span></div>
+          <div class="legend-row"><span class="legend-score">41–60</span><span>Translational</span></div>
+          <div class="legend-row"><span class="legend-score">61–80</span><span>Validated in bounded use</span></div>
+          <div class="legend-row"><span class="legend-score">81–100</span><span>Reliable, scalable, integrated</span></div>
+        </div>
+      </section>
+
+      <section class="rail-card">
+        <h3>Evidence health</h3>
+        <div class="health"><span class="health-icon">✓</span><div><strong>89% provenance complete</strong><small>Sources and extraction trail attached</small></div></div>
+        <div class="health"><span class="health-icon">↻</span><div><strong>17 records need review</strong><small>7 are AI-generated proposals</small></div></div>
+        <div class="health"><span class="health-icon">!</span><div><strong>5 active disputes</strong><small>Visible in score history</small></div></div>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    Human Repair Map is a public-interest knowledge project. Its content is educational and non-clinical. Prototype records are illustrative.
+  </footer>
+
+  <div id="modalBackdrop" class="modal-backdrop" role="presentation">
+    <section id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" aria-label="Close dialog">×</button>
+      <div id="modalContent"></div>
+    </section>
+  </div>
+
+  <script>
+    const records = {
+      sensing: {
+        type: "Capability · Sensing",
+        title: "Sufficient biological sensing",
+        summary: "Measure a living biological system at enough spatial, molecular, temporal, and functional resolution to decide and verify a safe intervention.",
+        score: "54 / 100", state: "Translational", confidence: "Medium–high", review: "Reviewed · 4 reviewers",
+        why: ["Reference atlases and multi-omics now describe many cell types and states.", "Living, repeated, minimally invasive whole-body observation remains incomplete.", "The brain, rare cells, and dynamic microenvironments are major blind spots."],
+        blockers: ["Longitudinal sampling", "Cross-modal alignment", "Representative global data", "Identity-relevant neural state"]
+      },
+      target: {
+        type: "Capability · Modelling",
+        title: "Personal target-state modelling",
+        summary: "Define what should change, what must be preserved, and what outcome counts as safe, healthy, restored, or chosen by the person.",
+        score: "27 / 100", state: "Emerging", confidence: "Medium", review: "In review · 2 reviewers",
+        why: ["Many narrow diseases have relatively clear functional targets.", "Ageing, pain, neural repair, disability, and enhancement require value-sensitive decisions.", "Consent and reversibility must be part of the technical architecture."],
+        blockers: ["Causal models", "Personal agency", "Outcome measurement", "Identity preservation"]
+      },
+      delivery: {
+        type: "Deep module · Universal access",
+        title: "Cell-specific delivery",
+        summary: "Get the right intervention to the right cell class, tissue, compartment, dose, and time—ideally repeatedly and without harmful immune or off-target effects.",
+        score: "36 / 100", state: "Preclinical → bounded clinical", confidence: "High", review: "Reviewed · 5 reviewers",
+        why: ["Strong bounded routes exist for blood, liver, eye, skin, and local administration.", "Performance does not generalise to CNS, dense tumours, fibrotic tissue, or rare dispersed cells.", "Repeat dosing and intracellular delivery remain cross-cutting constraints."],
+        blockers: ["Blood–brain barrier", "Immune clearance", "Tissue penetration", "Cell-state recognition", "Repeated dosing"]
+      },
+      editing: {
+        type: "Capability · Intervention",
+        title: "Programmable cell-state editing",
+        summary: "Repair, reprogram, replace, destroy, regenerate, reconnect, or recalibrate biological state under explicit safety constraints.",
+        score: "43 / 100", state: "Translational", confidence: "Medium–high", review: "Reviewed · 3 reviewers",
+        why: ["Gene and cell therapies prove that programmable biological repair is real.", "Many diseases depend on epigenetic, tissue, immune, spatial, or neural state—not DNA alone.", "Powerful regenerative control can converge on cancer-like failure modes."],
+        blockers: ["Precise delivery", "Causal models", "Off-target measurement", "Growth control"]
+      },
+      verification: {
+        type: "Capability · Control",
+        title: "Closed-loop verification",
+        summary: "Observe response, detect escape or overcorrection, adapt the intervention, and verify both local repair and long-term whole-body stability.",
+        score: "31 / 100", state: "Early clinical patterns", confidence: "High", review: "Reviewed · 3 reviewers",
+        why: ["Bounded closed-loop systems exist in diabetes, cardiac pacing, and neurostimulation.", "Repair requires verification across molecule, cell, tissue, organ, behaviour, and time.", "Cancer, immune systems, pathogens, and tissue remodelling can adapt."],
+        blockers: ["Long-horizon sensing", "Multiscale control", "Stable feedback", "Cancer surveillance"]
+      },
+      causal: {
+        type: "Bottleneck · Critical",
+        title: "Causal biological models",
+        summary: "Move from recognising biological states to predicting how an intervention will safely move state X toward state Y.",
+        score: "22 / 100", state: "Foundational → emerging", confidence: "High", review: "Reviewed · disputed scope",
+        why: ["Association is not enough for safe state control.", "Models must generalise beyond training distributions and report uncertainty.", "Interventions create feedback, adaptation, and context-dependent outcomes."],
+        blockers: ["Perturbation coverage", "Benchmark quality", "Mechanistic validation", "Out-of-distribution detection"]
+      },
+      safety: {
+        type: "Bottleneck · Safety",
+        title: "Long-horizon safety control",
+        summary: "Prevent and detect cancer, immune collapse, fibrosis, mispatterning, off-target editing, and delayed instability.",
+        score: "30 / 100", state: "Domain-specific", confidence: "High", review: "Reviewed · 4 reviewers",
+        why: ["Every repair primitive changes a complex adaptive system.", "Short-term molecular success can coexist with long-term organism-level harm.", "Rejuvenation and regeneration touch programs also exploited by cancer."],
+        blockers: ["Long trials", "Surrogate endpoints", "Rare adverse events", "Cross-system effects"]
+      },
+      identity: {
+        type: "Bottleneck · Ethics & science",
+        title: "Identity-preserving neural repair",
+        summary: "Restore or support neural function while preserving memory, personality, learned ability, relationships, agency, and the person’s chosen identity.",
+        score: "12 / 100", state: "Foundational", confidence: "Medium", review: "Needs interdisciplinary review",
+        why: ["Neural tissue carries information that can define continuity of the person.", "The desired target cannot be inferred from biology alone.", "Irreversible changes require stronger evidence and consent safeguards."],
+        blockers: ["Neural state sensing", "Functional readouts", "Reversibility", "Consent models"]
+      },
+      virtual: {
+        type: "Capability · Models",
+        title: "Virtual cells and tissues",
+        summary: "Models that predict cellular or tissue response to perturbation before an intervention is attempted in a living person.",
+        score: "29 / 100", state: "Emerging", confidence: "Medium", review: "In review",
+        why: ["Large datasets and foundation models are improving representations.", "Benchmark performance does not yet establish causal or clinical reliability.", "Generalisation across people, tissues, states, and interventions is unresolved."],
+        blockers: ["Perturbation data", "Causal validation", "Uncertainty", "Reproducibility"]
+      },
+      perturbation: {
+        type: "Capability · Data",
+        title: "Perturbation datasets",
+        summary: "Structured observations of what changes after a biological system is deliberately perturbed.",
+        score: "41 / 100", state: "Translational infrastructure", confidence: "Medium", review: "Reviewed",
+        why: ["Perturbations are essential for causal learning.", "Coverage is uneven across cell types, genetic backgrounds, combinations, doses, and time.", "Standardisation and negative-result publication remain weak."],
+        blockers: ["Coverage", "Metadata quality", "Longitudinal data", "Negative results"]
+      },
+      atlas: {
+        type: "Capability record · Sensing",
+        title: "Human cell reference atlases",
+        summary: "Shared maps of human cell types, states, spatial organisation, and variation used as reference coordinates for disease and repair.",
+        score: "66 / 100", state: "Validated in bounded use", confidence: "High", review: "Reviewed",
+        why: ["Large collaborative atlases provide strong foundations.", "Reference maps remain incomplete and uneven across ancestry, age, geography, and disease.", "Destructive sampling cannot directly provide continuous living state."],
+        blockers: ["Representation", "Spatial coverage", "Living measurement", "Standard alignment"]
+      },
+      reprogramming: {
+        type: "Capability record · AI proposal",
+        title: "Partial epigenetic reprogramming",
+        summary: "Attempt to shift age-associated cell state while retaining cell identity and avoiding uncontrolled growth.",
+        score: "25 / 100", state: "Preclinical", confidence: "Unset pending review", review: "AI proposal · unreviewed",
+        why: ["The record is visible so contributors can inspect the proposed evidence chain.", "No proposed change affects the public maturity score until human review.", "Biomarker movement must not be conflated with durable health or function."],
+        blockers: ["Tumour risk", "Cell identity", "Delivery", "Long-term functional evidence"]
+      },
+      neural: {
+        type: "Domain module",
+        title: "Neural repair",
+        summary: "Repairing neural tissue and function while preserving identity-relevant information and supporting rehabilitation.",
+        score: "18 / 100", state: "Foundational → emerging", confidence: "Medium", review: "Needs review",
+        why: ["Neural repair combines regeneration, reconnection, functional training, sensing, and ethics.", "Destroyed information cannot be assumed recoverable.", "Functional outcomes must include the person’s own priorities."],
+        blockers: ["Axon guidance", "Circuit verification", "Scarring", "Identity preservation"]
+      },
+      aging: {
+        type: "Domain module",
+        title: "Ageing damage",
+        summary: "Map the interacting molecular, cellular, tissue, immune, metabolic, and systemic changes associated with declining function over time.",
+        score: "32 / 100", state: "Emerging", confidence: "Medium", review: "In review",
+        why: ["Ageing is not one pathway or single damage class.", "Biomarker improvements require functional and long-horizon validation.", "Interventions may trade one risk for another."],
+        blockers: ["Causal prioritisation", "Combination effects", "Long-term safety", "Outcome definition"]
+      },
+      organ: {
+        type: "Domain module",
+        title: "Organ regeneration",
+        summary: "Restore organ architecture, vascularisation, innervation, mechanical function, and integration with the body.",
+        score: "38 / 100", state: "Preclinical → bounded clinical", confidence: "Medium", review: "In review",
+        why: ["Organoids, scaffolds, transplantation, and regenerative cues show complementary paths.", "A functional organ is spatial and systemic—not only a collection of correct cell types.", "Scale, vascularisation, innervation, and immune integration remain limiting."],
+        blockers: ["Vascularisation", "Innervation", "Patterning", "Immune compatibility"]
+      }
+    };
+
+    const searchable = [
+      ...Object.entries(records).map(([id, r]) => ({id, type: r.type.split(" · ")[0], title: r.title, desc: r.summary})),
+      {id:"task:cns", type:"Open task", title:"Split CNS delivery evidence", desc:"Separate routes, cell classes, repeat dosing, and failure modes."},
+      {id:"task:aging", type:"Open task", title:"Audit ageing claims", desc:"Check for proxy-outcome inflation across 22 records."},
+      {id:"evidence:atlas", type:"Evidence", title:"Reference cell atlases", desc:"Evidence group for reusable baseline cell states."}
+    ];
+
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const modalContent = document.getElementById("modalContent");
+    const modalClose = document.querySelector(".modal-close");
+    let lastFocus = null;
+
+    function recordMarkup(record) {
+      return `
+        <p class="eyebrow">${record.type}</p>
+        <h2 id="modalTitle">${record.title}</h2>
+        <p class="modal-summary">${record.summary}</p>
+        <div class="detail-grid">
+          <div class="detail"><small>Maturity</small><strong>${record.score}</strong></div>
+          <div class="detail"><small>State</small><strong>${record.state}</strong></div>
+          <div class="detail"><small>Confidence</small><strong>${record.confidence}</strong></div>
+          <div class="detail"><small>Review</small><strong>${record.review}</strong></div>
+        </div>
+        <h3>Why the map scores it this way</h3>
+        <ul>${record.why.map(x => `<li>${x}</li>`).join("")}</ul>
+        <h3>Blocking capabilities</h3>
+        <p>${record.blockers.map(x => `<span class="tag active" style="margin:3px">${x}</span>`).join("")}</p>
+        <div class="modal-footer">Prototype record · Every production score would include cited evidence, reviewer identities or credentials, conflicts, confidence intervals, and change history.</div>
+      `;
+    }
+
+    function openRecord(id, trigger) {
+      const record = records[id];
+      if (!record) return;
+      lastFocus = trigger || document.activeElement;
+      modalContent.innerHTML = recordMarkup(record);
+      modalBackdrop.classList.add("open");
+      document.body.style.overflow = "hidden";
+      modalClose.focus();
+    }
+
+    function openContribution(trigger) {
+      lastFocus = trigger || document.activeElement;
+      modalContent.innerHTML = `
+        <p class="eyebrow">Contribute to the commons</p>
+        <h2 id="modalTitle">How would you like to help?</h2>
+        <p class="modal-summary">Choose a small, auditable contribution. The reconstructed prototype does not submit data, but shows the intended workflow.</p>
+        <div class="choice-grid">
+          <button class="choice"><strong>Add a source</strong><span>Link evidence to an existing claim.</span></button>
+          <button class="choice"><strong>Challenge a score</strong><span>Make a sourced case and disclose conflicts.</span></button>
+          <button class="choice"><strong>Review a claim</strong><span>Assess evidence, limitations, and domain fit.</span></button>
+          <button class="choice"><strong>Take an open task</strong><span>Complete a bounded synthesis, audit, or translation.</span></button>
+        </div>
+        <div class="modal-footer">AI suggestions stay visibly unreviewed until accepted by a human review process. All accepted changes keep public provenance and history.</div>
+      `;
+      modalBackdrop.classList.add("open");
+      document.body.style.overflow = "hidden";
+      modalClose.focus();
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove("open");
+      document.body.style.overflow = "";
+      if (lastFocus) lastFocus.focus();
+    }
+
+    document.querySelectorAll("[data-record]").forEach(el => {
+      el.addEventListener("click", () => openRecord(el.dataset.record, el));
+    });
+    document.querySelectorAll("[data-contribute]").forEach(el => {
+      el.addEventListener("click", () => openContribution(el));
+    });
+    document.querySelectorAll("[data-task]").forEach(el => {
+      el.addEventListener("click", () => {
+        lastFocus = el;
+        modalContent.innerHTML = `
+          <p class="eyebrow">Open contributor task</p>
+          <h2 id="modalTitle">${el.dataset.task}</h2>
+          <p class="modal-summary">This reconstructed interface demonstrates the task hand-off. A live version would show the protocol, evidence bundle, discussion, assignee, review requirements, and public change history.</p>
+          <div class="detail-grid">
+            <div class="detail"><small>Status</small><strong>Open</strong></div>
+            <div class="detail"><small>Output</small><strong>Public evidence contribution</strong></div>
+          </div>
+          <div class="modal-footer">No account or submission backend is connected in this v0.1 reconstruction.</div>`;
+        modalBackdrop.classList.add("open");
+        document.body.style.overflow = "hidden";
+        modalClose.focus();
+      });
+    });
+    modalClose.addEventListener("click", closeModal);
+    modalBackdrop.addEventListener("click", e => { if (e.target === modalBackdrop) closeModal(); });
+
+    const tabs = [...document.querySelectorAll(".tab")];
+    const panels = ["overview", "map", "evidence", "tasks"];
+    function showTab(name) {
+      if (!panels.includes(name)) return;
+      panels.forEach(id => document.getElementById(`panel-${id}`).classList.toggle("hidden", id !== name));
+      tabs.forEach(tab => tab.classList.toggle("active", tab.dataset.tab === name));
+      document.querySelectorAll(".side-link[data-tab-target]").forEach(link => link.classList.toggle("active", link.dataset.tabTarget === name));
+      history.replaceState(null, "", name === "overview" ? "#" : `#${name}`);
+      document.querySelector(".article").scrollIntoView({behavior:"smooth", block:"start"});
+    }
+    document.querySelectorAll("[data-tab], [data-tab-target]").forEach(el => {
+      el.addEventListener("click", () => showTab(el.dataset.tab || el.dataset.tabTarget));
+    });
+
+    const search = document.getElementById("search");
+    const searchResults = document.getElementById("searchResults");
+    function renderResults(query) {
+      const q = query.trim().toLowerCase();
+      if (!q) {
+        searchResults.classList.remove("open");
+        search.setAttribute("aria-expanded", "false");
+        return;
+      }
+      const results = searchable.filter(x => `${x.title} ${x.type} ${x.desc}`.toLowerCase().includes(q)).slice(0, 8);
+      searchResults.innerHTML = results.length ? results.map(x => `
+        <button class="search-result" role="option" data-search-id="${x.id}">
+          <span class="result-type">${x.type}</span>
+          <span class="result-copy"><strong>${x.title}</strong><small>${x.desc}</small></span>
+        </button>`).join("") : `<div style="padding:16px;color:var(--muted);font-size:12px">No matching map records.</div>`;
+      searchResults.classList.add("open");
+      search.setAttribute("aria-expanded", "true");
+      searchResults.querySelectorAll("[data-search-id]").forEach(el => {
+        el.addEventListener("click", () => {
+          const id = el.dataset.searchId;
+          searchResults.classList.remove("open");
+          if (id.startsWith("task:")) showTab("tasks");
+          else if (id.startsWith("evidence:")) showTab("evidence");
+          else openRecord(id, search);
+        });
+      });
+    }
+    search.addEventListener("input", e => renderResults(e.target.value));
+    search.addEventListener("focus", e => renderResults(e.target.value));
+    document.addEventListener("click", e => {
+      if (!e.target.closest(".search-wrap")) searchResults.classList.remove("open");
+    });
+    document.addEventListener("keydown", e => {
+      if (e.key === "/" && document.activeElement !== search && !document.activeElement.matches("input, textarea")) {
+        e.preventDefault();
+        search.focus();
+      }
+      if (e.key === "Escape") {
+        if (modalBackdrop.classList.contains("open")) closeModal();
+        else {
+          searchResults.classList.remove("open");
+          search.value = "";
+          search.blur();
+        }
+      }
+    });
+
+    const initialTab = location.hash.replace("#", "");
+    if (panels.includes(initialTab)) showTab(initialTab);
+  </script>
+</body>
+</html>

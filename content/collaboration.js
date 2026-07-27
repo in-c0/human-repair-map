@@ -105,7 +105,14 @@ window.HRM_COLLAB = {
   adoption: {
     lead: "An evidence commons dies if it is a website people are supposed to visit. It lives if it becomes infrastructure other systems reach for.",
     body: "The concrete move: expose the map as a <b>tool other agents call</b> — a stable machine-readable interface answering <i>what is the evidence state of X</i>, <i>what supports this claim and who disputes it</i>, and <i>what would move this rung</i>.",
-    close: "Then any agent answering a question about biological repair can check the commons instead of guessing, and file a proposal back. The map becomes what an AI reaches for when it needs to know whether something is <i>actually proven</i> — precisely the question models are worst at and most confident about. It is also the answer to \"why would anyone contribute?\" They contribute because they are already querying it."
+    close: "Then any agent answering a question about biological repair can check the commons instead of guessing, and file a proposal back. The map becomes what an AI reaches for when it needs to know whether something is <i>actually proven</i> — precisely the question models are worst at and most confident about. It is also the answer to \"why would anyone contribute?\" They contribute because they are already querying it.",
+    live: {
+      label: "live now",
+      body: "This is built, not planned. The map is queryable over the Model Context Protocol — read-only, public, no auth. Add it to Claude or any MCP client:",
+      cmd: "claude mcp add --transport http human-repair-map https://humanrepairmap.com/mcp",
+      tools: ["evidence_state", "how_to_read", "list_routes", "get_route", "list_capabilities", "get_capability", "what_would_move_this", "search"],
+      note: "Every response carries the record's review state and grounding class, and repeats the unverified and non-clinical caveats. An API that drops those is a different, worse product."
+    }
   },
 
   order: [

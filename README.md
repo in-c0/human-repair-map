@@ -23,7 +23,24 @@ and auditable.
 
 ## What's in v0.1
 
-**Live: [humanrepairmap.com](https://humanrepairmap.com)**
+**Live: [humanrepairmap.com](https://humanrepairmap.com)** · **MCP endpoint: [humanrepairmap.com/mcp](https://humanrepairmap.com/mcp)**
+
+## Query it from your AI
+
+The map is exposed over the [Model Context Protocol](https://modelcontextprotocol.io)
+— read-only, public, no auth — so any agent can check the evidence state instead
+of guessing:
+
+```bash
+claude mcp add --transport http human-repair-map https://humanrepairmap.com/mcp
+```
+
+Eight tools: `evidence_state`, `how_to_read`, `list_routes`, `get_route`,
+`list_capabilities`, `get_capability`, `what_would_move_this`, `search`.
+Every response carries the record's review state and grounding class and repeats
+the unverified + non-clinical caveats — an API that drops those is a different,
+worse product. Source in [`mcp/`](mcp/) (Cloudflare Worker, zero dependencies,
+spec 2025-11-25 Streamable HTTP).
 
 A no-backend prototype (`index.html` + `content/`) demonstrating:
 

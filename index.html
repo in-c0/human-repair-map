@@ -252,6 +252,10 @@ details.more .inner{padding:4px 18px 20px;border-top:1px solid var(--line);}
 .os-then{color:var(--bone-3);border:1px solid var(--line-2);}
 .os-later{color:var(--muted);border:1px solid var(--line);}
 .ord-i .ot{font-size:13.5px;color:var(--bone-2);padding-top:2px;}
+.live-box{margin-top:16px;background:var(--card);border:1px solid var(--teal-line);border-radius:14px;padding:18px;}
+.live-h{display:flex;align-items:center;gap:9px;font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 9px var(--teal);animation:pd 2.4s ease-in-out infinite;}
+pre.cmd{background:var(--navy-2);border:1px solid var(--line);border-radius:9px;padding:12px 14px;overflow-x:auto;font-family:var(--fm);font-size:12px;color:var(--bone);}
 </style>
 </head>
 <body>
@@ -656,6 +660,13 @@ function vCollab(){
     '<p class="lede-t">'+esc(CO.adoption?CO.adoption.lead:"")+'</p>'+
     '<p class="lede-t">'+(CO.adoption?CO.adoption.body:"")+'</p>'+
     '<div class="constraint">'+(CO.adoption?CO.adoption.close:"")+'</div>'+
+    (CO.adoption&&CO.adoption.live?(
+      '<div class="live-box"><div class="live-h"><span class="live-dot"></span>'+esc(CO.adoption.live.label)+'</div>'+
+      '<p style="color:var(--bone-2);font-size:14px;margin-bottom:10px">'+esc(CO.adoption.live.body)+'</p>'+
+      '<pre class="cmd">'+esc(CO.adoption.live.cmd)+'</pre>'+
+      '<div class="pkt" style="margin-top:10px">'+CO.adoption.live.tools.map(function(t){return '<span class="pi">'+esc(t)+'</span>';}).join("")+'</div>'+
+      '<p class="note" style="margin-top:12px">'+esc(CO.adoption.live.note)+' <a href="https://humanrepairmap.com/mcp">endpoint docs →</a></p></div>'
+    ):"")+
 
     '<div class="sec-h"><span class="n">08</span> Build order</div>'+
     '<div class="ord">'+ord+'</div>'+

@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "human-repair-map-mcp",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-01",
+  "observability": { "enabled": true },
+  "routes": [
+    { "pattern": "humanrepairmap.com/mcp", "zone_name": "humanrepairmap.com" },
+    { "pattern": "humanrepairmap.com/mcp/*", "zone_name": "humanrepairmap.com" }
+  ]
+}

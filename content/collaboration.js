@@ -3,9 +3,25 @@
    Full reasoning in ai-collaboration.md. */
 window.HRM_COLLAB = {
   bet: {
-    pull: "AI makes claims cheap. It does not make trust cheap.",
-    body: "Every increment of AI capability increases the volume of scientific claims, syntheses, and confident-sounding summaries in the world. None of it increases the supply of <b>verified, attributed, disputable</b> knowledge. As generation gets cheaper, provenance becomes the scarce good — knowing which claim someone staked their name on, against which source, and who disagreed.",
-    close: "So this commons becomes <i>more</i> valuable as AI improves, not less. The flood is the reason for the levee — and a commons earns authority through track record, which takes years to accumulate. That is the argument for starting now."
+    pull: "Verification is becoming cheap. Judgment is not.",
+    body: "An earlier version of this page argued that AI makes claims cheap but not trust. That was wrong, and the correction is worth showing rather than hiding. Advancing computer vision and instrument integration — satellite imagery, lab output, capture-time signed footage, registry pipelines — genuinely does make trustworthy knowledge scalable. A sequencer writing straight into a signed record needs nobody's word. Trust there stops being a human bottleneck and becomes infrastructure.",
+    close: "What instrument grounding collapses is the cost of establishing <b>what happened</b>. It does not touch the cost of deciding <b>what it means</b> — and the records here are mostly the second kind. The Capsida case is the clean test: the trial was registered, the patient instrumented, the autopsy performed. Every measurement existed. What was contested was whether the edema was <i>attributable</i> to the capsid, and which body imposed the hold. Sensors do not adjudicate causal attribution."
+  },
+
+  grounding: {
+    lead: "If instrument grounding is what collapses review cost, the map has to record it. Every record carries a <b>grounding class</b> alongside its evidence rung — orthogonal axes that together decide how much human attention it needs.",
+    rows: [
+      ["G0", "Assertion", "Someone said it; no source attached", "Cannot enter the map"],
+      ["G1", "Cited text", "A paper or report says it", "Full Verification Packet + human"],
+      ["G2", "Structured record", "Registry entry, regulatory filing, trial record", "Automated cross-check; human spot-audit"],
+      ["G3", "Primary data", "Deposited dataset that can be re-analysed", "Automated re-analysis; human reviews method"],
+      ["G4", "Instrument-signed", "Signed at capture, provenance chain intact", "None for the fact; human only for the inference"]
+    ],
+    notes: [
+      { t: "The Verification Packet is transitional", d: "It is the right tool for G1, where nearly all of today's biomedical evidence sits. As the corpus migrates to G3–G4 the packet becomes unnecessary for those records. A mechanism that knows its own expiry date is more honest than one that assumes permanence." },
+      { t: "Judgment does not migrate", d: "A maturity score sits on top of any grounding class. Even fully instrument-wired, someone decides the rubric, what counts as a demonstration, and whether primate evidence transfers. G4 makes the base of the pyramid nearly free; it does not touch the apex." },
+      { t: "The capture risk this creates", d: "Once trust rests on instrument pipelines, whoever controls the instruments and the signing keys controls the substrate — and government or platform integration sharpens that rather than softening it. Countermeasure: multiple independent grounding sources for any high-stakes record, and a dispute path that needs no permission from the party holding the keys.", warn: true }
+    ]
   },
 
   today: {

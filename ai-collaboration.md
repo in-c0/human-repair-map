@@ -14,29 +14,93 @@ not *when it will arrive*.
 The obvious worry: "if AI gets good enough, why would anyone need a map — won't
 you just ask a model?"
 
-The answer is the inverse, and it is the whole reason to build this now:
+An earlier draft of this document answered with a neat line: *AI makes claims
+cheap, it does not make trust cheap.* That is **wrong as stated**, and the
+correction matters enough to record.
 
-> **AI makes claims cheap. It does not make trust cheap.**
+**The challenge (raised by the project owner, 2026-07-27):** advancing computer
+vision, AR, and government/institutional AI integration will wire real-world
+instruments directly into the record — GPS, satellite imagery, lab output,
+camera footage. That *does* make trustworthy knowledge scalable. Trust stops
+being a human bottleneck and becomes infrastructure.
 
-Every increment of AI capability increases the *volume* of scientific claims,
-syntheses, and confident-sounding summaries in the world. None of it increases
-the supply of *verified, attributed, disputable* knowledge. As generation gets
-cheaper, the scarce good becomes provenance — knowing which claim someone staked
-their name on, against which source, and who disagreed.
+That is right, and it is the larger half of the picture. A satellite image with
+capture-time signing, a sequencer writing straight into a registry, an
+instrument chain that never passes through a person's summary — none of these
+need anyone's word. Capture-time content credentials already ship. Image
+forensics already catch duplicated figures at a scale no reviewer could match.
+All of that is AI making trust *cheaper*.
 
-So the observatory's value **rises** with AI capability. The flood is the reason
-for the levee. And the levee has to be built before the flood, because a commons
-earns authority through track record, which takes years to accumulate.
+**The refined claim, which survives the challenge:**
 
-A second, sharper bet: **review capacity is the binding constraint of any
-evidence commons, and AI is the only thing that can attack it** — not by doing
-the reviewing (that stays human) but by making each review cheap. Compressing a
-forty-minute paper read into a sixty-second verdict is a ~40× throughput gain on
-the exact bottleneck that kills projects like this.
+> **Verification is becoming cheap. Judgment is not.**
+
+Instrument grounding collapses the cost of establishing *what happened*. It does
+not touch the cost of deciding *what it means*. The records on this map are
+mostly the second kind: does a 91% drop in a CSF biomarker predict cognitive
+benefit; does a rodent result transfer to a primate; is a route ready for a
+human. The Capsida case is the clean test — the trial was registered, the
+patient instrumented, the autopsy performed. Every measurement existed. What was
+contested was whether the cerebral edema was *attributable* to the capsid, and
+which body imposed the hold. Sensors do not adjudicate causal attribution or
+institutional fact.
+
+Two caveats worth stating rather than arguing: spoofing follows value, so
+synthetic imagery makes camera evidence an arms race that capture-time signing
+must keep winning; and instrument/government integration is jurisdictionally
+uneven, so a *global* map that leans on state data channels imports their
+politics along with their data.
+
+**Why this strengthens the design rather than undermining it.** The owner's
+mechanism is not a refutation of the bottleneck — it is the path by which the
+bottleneck actually breaks. Review load per record should fall as grounding
+rises. So the map must be built to *consume* grounding, which means recording it
+explicitly (§2), and the commons ends up with fewer humans reviewing
+higher-level things across vastly more records.
+
+A second bet, unchanged: **review capacity is the binding constraint of any
+evidence commons.** AI attacks it from two sides — by making each remaining
+human review cheap (the Verification Packet, §4), and by removing the need for
+review entirely wherever grounding is high enough.
 
 ---
 
-## 2. What is actually true today (2026)
+## 2. The grounding ladder
+
+If instrument grounding is what collapses review cost, the map has to record it.
+So every record carries a **grounding class** alongside its evidence rung — they
+are orthogonal, and together they determine how much human attention a record
+needs.
+
+| | Grounding | What it means | Human review needed |
+|---|---|---|---|
+| **G0** | Assertion | Someone said it; no source attached | Cannot enter the map |
+| **G1** | Cited text | A paper or report says it | Full Verification Packet + human |
+| **G2** | Structured record | Registry entry, regulatory filing, trial record | Automated cross-check; human spot-audit |
+| **G3** | Primary data | Deposited dataset that can be re-analysed | Automated re-analysis; human reviews method choice |
+| **G4** | Instrument-signed | Data signed at capture, provenance chain intact | None for the *fact*; human only for the inference |
+
+Two consequences worth stating plainly:
+
+- **The Verification Packet is transitional.** It is the right tool for G1, which
+  is where nearly all of today's biomedical evidence sits. As the corpus migrates
+  to G3–G4, the packet becomes unnecessary for those records. A mechanism that
+  knows its own expiry date is more honest than one that assumes permanence.
+- **Judgment does not migrate.** A maturity score sits on top of any grounding
+  class. Even in a fully instrument-wired world, someone decides the rubric, what
+  counts as a demonstration, and whether primate evidence transfers. G4 makes the
+  *base* of the pyramid nearly free; it does not touch the apex.
+
+**The capture risk this creates.** Once trust rests on instrument pipelines,
+whoever controls the instruments and the signing keys controls the substrate.
+Government and platform integration sharpens this rather than softening it. The
+countermeasure is the same one that governs the rest of the commons — multiple
+independent grounding sources for any high-stakes record, and a public dispute
+path that does not require permission from the party holding the keys.
+
+---
+
+## 3. What is actually true today (2026)
 
 Stated plainly, because the phases only make sense against a real baseline.
 

@@ -627,30 +627,37 @@ function vCollab(){
     '<p class="lede-t">'+(CO.bet?CO.bet.body:"")+'</p>'+
     '<div class="constraint" style="border-color:var(--teal-line)">'+(CO.bet?CO.bet.close:"")+'</div>'+
 
-    '<div class="sec-h"><span class="n">02</span> What is actually true today</div>'+
+    '<div class="sec-h"><span class="n">02</span> The grounding ladder</div>'+
+    '<p class="lede-t">'+(CO.grounding?CO.grounding.lead:"")+'</p>'+
+    '<div class="tbl-wrap"><table><thead><tr><th></th><th>grounding</th><th>what it means</th><th>human review needed</th></tr></thead><tbody>'+
+      ((CO.grounding&&CO.grounding.rows||[]).map(function(r){return '<tr><td class="num" style="color:var(--teal)">'+esc(r[0])+'</td><td><span class="subj">'+esc(r[1])+'</span></td><td>'+esc(r[2])+'</td><td>'+esc(r[3])+'</td></tr>';}).join(""))+
+    '</tbody></table></div>'+
+    '<div style="margin-top:14px">'+((CO.grounding&&CO.grounding.notes||[]).map(function(n){return '<div class="unl'+(n.warn?' warn':'')+'"><b>'+esc(n.t)+'</b><span>'+esc(n.d)+'</span></div>';}).join(""))+'</div>'+
+
+    '<div class="sec-h"><span class="n">03</span> What is actually true today</div>'+
     '<div class="two"><div class="col auto"><h4 style="color:var(--teal)">Agents can, right now</h4><ul>'+can+'</ul></div>'+
     '<div class="col gate"><h4 style="color:var(--amber)">Agents cannot</h4><ul>'+cannot+'</ul></div></div>'+
     '<div class="constraint" style="margin-top:14px">'+(CO.today?CO.today.proof:"")+'</div>'+
 
-    '<div class="sec-h"><span class="n">03</span> Capability phases, and what each unlocks</div>'+
+    '<div class="sec-h"><span class="n">04</span> Capability phases, and what each unlocks</div>'+
     '<p class="note" style="margin-bottom:14px">Ordered by dependency, not by date — each phase is described by what becomes possible, not when it arrives.</p>'+
     phases+
 
-    '<div class="sec-h"><span class="n">04</span> The division of labour</div>'+
+    '<div class="sec-h"><span class="n">05</span> The division of labour</div>'+
     '<div class="two"><div class="col auto"><h4 style="color:var(--teal)">Fully automatable</h4><ul>'+auto+'</ul></div>'+
     '<div class="col gate"><h4 style="color:var(--amber)">Human-gated, permanently</h4><ul>'+hum+'</ul></div></div>'+
     '<div class="constraint" style="margin-top:14px">'+(CO.labour?CO.labour.why:"")+'</div>'+
 
-    '<div class="sec-h"><span class="n">05</span> How it breaks</div>'+
+    '<div class="sec-h"><span class="n">06</span> How it breaks</div>'+
     '<p class="note" style="margin-bottom:10px">Named up front, because a governance model that only describes success is decoration.</p>'+
     '<div style="border:1px solid var(--line);border-radius:12px;padding:4px 16px;background:var(--card)">'+fails+'</div>'+
 
-    '<div class="sec-h"><span class="n">06</span> The adoption path</div>'+
+    '<div class="sec-h"><span class="n">07</span> The adoption path</div>'+
     '<p class="lede-t">'+esc(CO.adoption?CO.adoption.lead:"")+'</p>'+
     '<p class="lede-t">'+(CO.adoption?CO.adoption.body:"")+'</p>'+
     '<div class="constraint">'+(CO.adoption?CO.adoption.close:"")+'</div>'+
 
-    '<div class="sec-h"><span class="n">07</span> Build order</div>'+
+    '<div class="sec-h"><span class="n">08</span> Build order</div>'+
     '<div class="ord">'+ord+'</div>'+
     '<p class="note" style="margin-top:14px">'+esc(CO.orderNote||"")+'</p>';
 }

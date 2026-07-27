@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Repair Map — a public map of progress toward biological repair</title>
+<meta name="description" content="A public, AI-assisted knowledge commons mapping the capabilities required for biological repair — what works, what is blocked, what evidence supports each claim, graded openly with review states.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#050D1A; --navy-2:#0A1628; --card:#0C1D33; --card-2:#0F2440; --raise:#12294a;
+  --teal:#00E5CC; --teal-2:#5af3e3; --teal-dim:rgba(0,229,204,.10); --teal-line:rgba(0,229,204,.20);
+  --amber:#E8A042; --amber-dim:rgba(232,160,66,.13);
+  --red:#F0637A; --red-dim:rgba(240,99,122,.13);
+  --green:#3FD08A; --green-dim:rgba(63,208,138,.13);
+  --bone:#F0EDE6; --bone-2:rgba(240,237,230,.72); --bone-3:rgba(240,237,230,.46); --muted:rgba(240,237,230,.34);
+  --line:rgba(120,190,200,.14); --line-2:rgba(120,190,200,.22); --grid:rgba(0,229,204,.04);
+  --fd:'Space Grotesk',-apple-system,'Segoe UI',system-ui,sans-serif;
+  --fb:'Inter',-apple-system,'Segoe UI',system-ui,sans-serif;
+  --fm:'JetBrains Mono',ui-monospace,'SF Mono',Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--bone);font-family:var(--fb);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:46px 46px;pointer-events:none;z-index:0;}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:600;line-height:1.15;letter-spacing:-.01em;}
+a{color:var(--teal);text-decoration:none;}
+.mono{font-family:var(--fm);}
+button{font-family:inherit;color:inherit;cursor:pointer;background:none;border:none;}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+
+/* SHELL */
+.app{position:relative;z-index:1;display:grid;grid-template-columns:248px 1fr;min-height:100vh;}
+.side{border-right:1px solid var(--line);background:rgba(5,13,26,.72);backdrop-filter:blur(8px);position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 0;}
+.brand{display:flex;align-items:center;gap:11px;padding:2px 22px 18px;}
+.bdot{width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal);flex:none;animation:pd 2.6s ease-in-out infinite;}
+@keyframes pd{0%,100%{opacity:1;}50%{opacity:.35;}}
+.brand b{font-family:var(--fd);font-weight:600;font-size:15px;letter-spacing:.01em;display:block;}
+.brand span{font-family:var(--fm);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--bone-3);}
+.nav{list-style:none;padding:6px 12px;display:flex;flex-direction:column;gap:2px;}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:var(--bone-2);font-size:13.5px;transition:background .14s,color .14s;}
+.nav a .ix{font-family:var(--fm);font-size:10px;color:var(--muted);width:16px;}
+.nav a:hover{background:var(--teal-dim);color:var(--bone);}
+.nav a.on{background:var(--teal-dim);color:var(--teal);box-shadow:inset 2px 0 0 var(--teal);}
+.side-foot{padding:16px 22px;margin-top:8px;border-top:1px solid var(--line);font-family:var(--fm);font-size:10px;color:var(--muted);line-height:1.7;}
+
+.main{min-width:0;}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:14px 34px;background:rgba(5,13,26,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.search{flex:1;max-width:440px;position:relative;}
+.search input{width:100%;background:var(--card);border:1px solid var(--line-2);border-radius:9px;padding:9px 13px 9px 34px;color:var(--bone);font-family:var(--fm);font-size:12.5px;}
+.search input::placeholder{color:var(--muted);}
+.search input:focus{border-color:var(--teal-line);outline:none;}
+.search .si{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-family:var(--fm);font-size:12px;}
+.gate-pill{margin-left:auto;font-family:var(--fm);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);border:1px solid var(--amber-dim);background:var(--amber-dim);padding:5px 11px;border-radius:100px;white-space:nowrap;}
+.view{padding:30px 34px 80px;max-width:1120px;}
+
+/* generic */
+.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.eyebrow::after{content:'';flex:1;height:1px;background:var(--line);}
+.h-title{font-size:clamp(26px,4vw,40px);font-weight:700;letter-spacing:-.02em;}
+.h-lede{color:var(--bone-2);max-width:60ch;margin-top:12px;font-size:16px;}
+.crumbs{font-family:var(--fm);font-size:11px;color:var(--muted);margin-bottom:14px;letter-spacing:.04em;}
+.crumbs a{color:var(--bone-3);}
+.sec-h{font-family:var(--fd);font-weight:600;font-size:18px;margin:34px 0 14px;display:flex;align-items:center;gap:10px;}
+.sec-h .n{font-family:var(--fm);font-size:11px;color:var(--teal);border:1px solid var(--teal-line);border-radius:5px;padding:2px 7px;}
+
+/* pills */
+.pill{font-family:var(--fm);font-size:10px;letter-spacing:.04em;padding:3px 9px;border-radius:100px;border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;}
+.pill::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;}
+.rs-ai{color:var(--amber);background:var(--amber-dim);border-color:var(--amber-dim);}
+.rs-submitted{color:var(--bone-3);background:var(--faint);border-color:var(--line);}
+.rs-in-review{color:var(--teal);background:var(--teal-dim);border-color:var(--teal-line);}
+.rs-reviewed{color:var(--green);background:var(--green-dim);border-color:var(--green-dim);}
+.rs-disputed{color:var(--red);background:var(--red-dim);border-color:var(--red-dim);}
+.rs-superseded{color:var(--muted);background:var(--faint);border-color:var(--line);}
+
+/* capability cards */
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
+.cap-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:left;width:100%;transition:border-color .15s,transform .15s,background .15s;display:block;}
+.cap-card:hover{border-color:var(--teal-line);background:var(--card-2);transform:translateY(-2px);}
+.cap-card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:4px;}
+.cap-card .cid{font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:.05em;}
+.cap-card h3{font-size:16.5px;margin:6px 0 8px;}
+.cap-card p{color:var(--bone-2);font-size:13.5px;line-height:1.55;}
+.meter{margin-top:14px;}
+.meter-top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--fm);font-size:10.5px;color:var(--bone-3);margin-bottom:6px;letter-spacing:.04em;}
+.meter-top b{font-size:15px;color:var(--bone);font-weight:500;}
+.meter-bar{height:6px;border-radius:100px;background:var(--faint);overflow:hidden;position:relative;}
+.meter-fill{height:100%;border-radius:100px;}
+.meter-iv{font-family:var(--fm);font-size:9.5px;color:var(--muted);margin-top:5px;}
+.mb-conceptual{background:var(--muted);} .mb-emerging{background:var(--amber);}
+.mb-translational{background:var(--teal);} .mb-validated{background:var(--green);} .mb-reliable{background:var(--teal-2);}
+.mt-conceptual{color:var(--muted);} .mt-emerging{color:var(--amber);}
+.mt-translational{color:var(--teal);} .mt-validated{color:var(--green);} .mt-reliable{color:var(--teal-2);}
+
+/* infobox + article */
+.record{display:grid;grid-template-columns:1fr 300px;gap:30px;align-items:start;}
+@media(max-width:840px){.record{grid-template-columns:1fr;}.side{display:none;}.app{grid-template-columns:1fr;}}
+.article h2{font-size:20px;margin:26px 0 10px;}
+.article p{color:var(--bone-2);margin-bottom:12px;max-width:66ch;}
+.article ul{margin:0 0 14px 2px;list-style:none;display:flex;flex-direction:column;gap:7px;}
+.article ul li{padding-left:20px;position:relative;color:var(--bone-2);font-size:14px;}
+.article ul li::before{content:'▸';position:absolute;left:0;color:var(--teal);font-size:11px;top:3px;}
+.infobox{background:var(--card);border:1px solid var(--line-2);border-radius:14px;overflow:hidden;position:sticky;top:78px;}
+.infobox .ib-h{padding:14px 16px;background:var(--card-2);border-bottom:1px solid var(--line);font-family:var(--fd);font-weight:600;font-size:13px;letter-spacing:.02em;}
+.ib-row{padding:11px 16px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:5px;}
+.ib-row:last-child{border-bottom:none;}
+.ib-k{font-family:var(--fm);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+.ib-v{font-size:13.5px;color:var(--bone);}
+.ib-deps{display:flex;flex-wrap:wrap;gap:6px;}
+.dep-chip{font-family:var(--fm);font-size:10.5px;color:var(--teal);border:1px solid var(--teal-line);background:var(--teal-dim);border-radius:6px;padding:3px 8px;}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px;}
+thead th{font-family:var(--fm);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:11px 14px;border-bottom:1px solid var(--line-2);background:var(--card-2);position:sticky;top:0;}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--bone-2);vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr{transition:background .12s;}
+tbody tr:hover{background:var(--teal-dim);}
+td .subj{color:var(--bone);font-weight:500;}
+td.num{font-family:var(--fm);font-variant-numeric:tabular-nums;color:var(--bone);}
+.route-btn{text-align:left;width:100%;}
+
+/* bottleneck list */
+.bn-list{display:flex;flex-direction:column;gap:8px;}
+.bn{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 16px;transition:border-color .14s;}
+.bn:hover{border-color:var(--teal-line);}
+.bn .rank{font-family:var(--fd);font-weight:700;font-size:19px;color:var(--teal);width:26px;flex:none;font-variant-numeric:tabular-nums;}
+.bn .bnt{font-weight:500;color:var(--bone);font-size:14px;}
+.bn .bnd{color:var(--bone-3);font-size:12.5px;}
+.bn .sev{margin-left:auto;font-family:var(--fm);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;white-space:nowrap;}
+.sev-hi{color:var(--red);background:var(--red-dim);} .sev-md{color:var(--amber);background:var(--amber-dim);}
+
+/* path */
+.path{display:flex;flex-direction:column;gap:0;position:relative;padding-left:8px;}
+.pstep{display:flex;gap:14px;padding:9px 0;position:relative;}
+.pstep .pn{font-family:var(--fm);font-size:11px;color:var(--navy);background:var(--teal);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;font-weight:500;z-index:1;}
+.pstep:not(:last-child)::before{content:'';position:absolute;left:11px;top:26px;bottom:-4px;width:1px;background:var(--teal-line);}
+.pstep .pt{color:var(--bone-2);font-size:14px;padding-top:1px;}
+
+/* tasks */
+.task{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;display:flex;flex-direction:column;gap:9px;transition:border-color .14s;}
+.task:hover{border-color:var(--teal-line);}
+.task .tt{font-weight:500;color:var(--bone);font-size:14.5px;font-family:var(--fd);}
+.task .td{color:var(--bone-3);font-size:13px;}
+.task .meta{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.tag{font-family:var(--fm);font-size:10px;color:var(--bone-3);border:1px solid var(--line-2);border-radius:5px;padding:3px 8px;letter-spacing:.03em;}
+
+/* what changed */
+.feed{display:flex;flex-direction:column;gap:2px;}
+.fitem{display:flex;gap:13px;padding:10px 0;border-bottom:1px solid var(--line);}
+.fitem .fd{font-family:var(--fm);font-size:10.5px;color:var(--muted);white-space:nowrap;padding-top:2px;width:74px;flex:none;}
+.fitem .ft{font-size:13.5px;color:var(--bone-2);}
+.fitem .ft b{color:var(--bone);font-weight:500;}
+
+/* graph */
+.graph-wrap{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:6px;overflow-x:auto;}
+.gnode{cursor:pointer;}
+.gnode:hover .gn-rect{stroke:var(--teal);}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;font-family:var(--fm);font-size:11px;color:var(--bone-3);}
+.legend span{display:inline-flex;align-items:center;gap:7px;}
+.lw{width:11px;height:11px;border-radius:3px;}
+
+/* banner */
+.banner{background:var(--amber-dim);border:1px solid var(--amber-dim);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;padding:13px 17px;margin-bottom:24px;font-size:13px;color:var(--bone-2);}
+.banner b{color:var(--amber);font-weight:500;}
+.empty{color:var(--muted);font-style:italic;padding:40px;text-align:center;}
+.note{color:var(--bone-3);font-size:12.5px;border-left:2px solid var(--line-2);padding-left:11px;margin-top:8px;}
+.gov-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.gov-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;}
+.gov-card h4{font-size:14px;margin-bottom:9px;color:var(--bone);}
+.gov-card p,.gov-card li{color:var(--bone-3);font-size:12.5px;}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 4px;}
+.flow .fstep{font-family:var(--fm);font-size:11px;color:var(--bone-2);background:var(--card-2);border:1px solid var(--line);border-radius:6px;padding:6px 10px;}
+.flow .arr{color:var(--teal);font-family:var(--fm);}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><span class="bdot"></span><div><b>Human Repair Map</b><span>evidence commons · v0.1</span></div></div>
+    <ul class="nav" id="nav">
+      <li><a href="#/overview" data-v="overview"><span class="ix">00</span> Overview</a></li>
+      <li><a href="#/capabilities" data-v="capabilities"><span class="ix">01</span> Capability map</a></li>
+      <li><a href="#/graph" data-v="graph"><span class="ix">02</span> Dependency graph</a></li>
+      <li><a href="#/evidence" data-v="evidence"><span class="ix">03</span> Evidence registry</a></li>
+      <li><a href="#/tasks" data-v="tasks"><span class="ix">04</span> Open tasks</a></li>
+      <li><a href="#/governance" data-v="governance"><span class="ix">05</span> Governance</a></li>
+    </ul>
+    <div class="side-foot">Not a clinical tool.<br>No diagnosis, treatment,<br>or patient-specific advice.<br><br>Records are illustrative<br>and mostly AI-proposed,<br>awaiting human review.</div>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div class="search"><span class="si">⌕</span><input id="q" type="search" placeholder="search capabilities, evidence, tasks…" aria-label="search"></div>
+      <span class="gate-pill">contribution gate · closed</span>
+    </div>
+    <div class="view" id="view"></div>
+  </main>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- DATA ---------- */
+var CAPS = [
+  {id:"sensing", code:"CAP-01", title:"Sufficient biological sensing",
+   summary:"Measure the living system at the resolution needed to decide and verify a safe intervention — genome, cell state, spatial organisation, immune, metabolic, neural.",
+   score:34, iv:[27,42], review:"in-review", deps:[], blocks:["target-state","delivery","verification"],
+   why:"The goal is not atom-level observation. It is sufficient observation to know what must be preserved, changed, removed, or rebuilt.",
+   points:["Cell atlases and virtual-cell models are maturing fast, but coverage is uneven.","Living, longitudinal, minimally invasive whole-body sensing is the missing piece.","The brain is the hardest target — identity-relevant information must be read without damage."],
+   evidence:["ev-hca","ev-virtualcell"]},
+  {id:"target-state", code:"CAP-02", title:"Personal target-state modelling",
+   summary:"Define what should change, what must be preserved, and what outcome counts as safe, restored, or chosen — combining causal biology with the person's own goals and consent.",
+   score:22, iv:[15,31], review:"in-review", deps:["sensing"], blocks:["editing"],
+   why:"\"Better\" cannot be inferred from biology alone. Pathology must be distinguished from identity, damage from adaptation, disability from difference.",
+   points:["The least technically mature capability, and the most ethically loaded.","Requires causal models plus individual goals, reversibility, and explicit safety constraints.","Identity and memory preservation is a hard constraint, not an appendix."],
+   evidence:[]},
+  {id:"delivery", code:"CAP-03", title:"Cell-specific access & delivery",
+   summary:"Reach the right cell class, tissue, compartment, dose, and time — ideally repeatably and without harmful immune or off-target effects. The v0.1 deep module.",
+   score:31, iv:[24,41], review:"in-review", deps:["sensing"], blocks:["editing"], deep:true,
+   why:"Barriers include the blood-brain barrier, dense tumours, fibrotic tissue, rare cells, and intracellular delivery. This is one of the top three bottlenecks.",
+   points:["This module is seeded with 16 real CNS-delivery routes, graded openly below.","Nothing on the map is both broad and proven in humans.","Opening the blood-brain barrier is independently proven; delivering through it to a clinical outcome is proven nowhere."],
+   evidence:["ev-lipsman","ev-monje","ev-ramos","ev-brineura","ev-hordeaux","ev-capsida","ev-craft"]},
+  {id:"editing", code:"CAP-04", title:"Programmable cell-state editing",
+   summary:"Perform constrained repair operations on a cell — repair, reprogram, replace, destroy, regenerate, reconnect, recalibrate — safely and reversibly.",
+   score:28, iv:[20,38], review:"submitted", deps:["target-state","delivery"], blocks:["verification"],
+   why:"Powerful editing must be paired with delivery, safety control, and verification. Regeneration without growth control becomes cancer.",
+   points:["Development, regeneration in some animals, and immune adaptation prove cell states are programmable.","Cancer proves cell states can be changed catastrophically.","Safe, constrained editing — not raw editing power — is the frontier."],
+   evidence:[]},
+  {id:"verification", code:"CAP-05", title:"Closed-loop verification",
+   summary:"Observe outcomes, detect escape or overcorrection, adapt the intervention, and verify both local repair and long-term whole-body stability.",
+   score:26, iv:[18,36], review:"submitted", deps:["editing","sensing"], blocks:["sensing"],
+   why:"Biology is dynamic: sense → intervene → sense again → adapt → verify → maintain. Verification may span molecule to behaviour to time.",
+   points:["Simple closed loops exist today — insulin pumps, pacemakers, neurostimulation.","Multiscale verification (molecule → organ → behaviour → decades) does not.","Avoiding oscillation and overcorrection across coupled feedback loops is unsolved."],
+   evidence:[]}
+];
+
+/* delivery deep-module records: the 16 CNS routes, graded */
+var ROUTES = [
+  {id:"cart",subj:"Locoregional CAR-T",fam:"around barrier",rung:"L5",score:62,band:"validated",measured:"a life",repl:"independent",status:"in trials",review:"ai",note:"Strongest functional responses on the map (ventricle/cavity delivery); IV dosing caused the toxicity, not the responses.",cites:["Monje 2025","Brown 2024"]},
+  {id:"fus",subj:"Focused ultrasound + microbubbles",fam:"around barrier",rung:"L5",score:56,band:"translational",measured:"barrier opened",repl:"independent",status:"in trials",review:"ai",note:"Opening the barrier is proven by six groups. Whether a drug through it helps is not — the outcome trial reports ~end-2026.",cites:["Lipsman 2018"]},
+  {id:"nusinersen",subj:"Intrathecal ASO (nusinersen)",fam:"around barrier",rung:"L5",score:70,band:"validated",measured:"a life",repl:"independent",status:"approved",review:"ai",note:"Real, replicated benefit — but for a spinal-cord disease; drug pools low, little reaches the cortex.",cites:["Ramos 2019"]},
+  {id:"brineura",subj:"ICV enzyme replacement (Brineura)",fam:"around barrier",rung:"L5",score:66,band:"validated",measured:"a life",repl:"independent",status:"approved",review:"ai",note:"Slows the brain disease while the retinas degenerate untouched — the cleanest proof of incomplete reach.",cites:["Brineura 2023"]},
+  {id:"tofersen",subj:"Intrathecal ASO (tofersen)",fam:"around barrier",rung:"L4",score:44,band:"translational",measured:"a biomarker",repl:"single group",status:"approved",review:"ai",note:"Approved on a biomarker; the Phase 3 trial missed its clinical endpoint.",cites:["Tofersen 2023"]},
+  {id:"kebilidi",subj:"Direct intraparenchymal gene therapy",fam:"around barrier",rung:"L4",score:50,band:"translational",measured:"a life",repl:"route only",status:"approved",review:"ai",note:"First gene therapy injected straight into the brain — one nucleus, one shot, no distal spread.",cites:["Tai 2022"]},
+  {id:"aav9",subj:"Systemic AAV9 (Zolgensma)",fam:"through barrier",rung:"L4",score:52,band:"translational",measured:"a life",repl:"single group",status:"approved",review:"ai",note:"Human CNS transduction rests on a single n=2 autopsy; liver uptake 300–1000x the brain.",cites:["Thomsen 2021"]},
+  {id:"denali",subj:"TfR transcytosis (tividenofusp)",fam:"through barrier",rung:"L4",score:48,band:"translational",measured:"a biomarker",repl:"single group",status:"approved",review:"ai",note:"First BBB-crossing biologic approved (Mar 2026) — on a CSF-sugar surrogate; cognitive trial still running.",cites:["FDA 2026"]},
+  {id:"jcr",subj:"TfR fusion (pabinafusp)",fam:"through barrier",rung:"L4",score:42,band:"translational",measured:"a biomarker",repl:"single group",status:"approved (Japan)",review:"ai",note:"n=28, biomarker co-primary; cognitive claim is a post-hoc open-label subgroup.",cites:["Okuyama 2021"]},
+  {id:"roche",subj:"Brainshuttle antibody (trontinemab)",fam:"through barrier",rung:"L4",score:40,band:"emerging",measured:"a biomarker",repl:"single group",status:"in trials",review:"ai",note:"Clears plaque on PET; no evidence yet it slows decline. The 10–50x figure is a mouse/NHP number.",cites:["Klein 2025"]},
+  {id:"intranasal",subj:"Intranasal / nose-to-brain",fam:"through barrier",rung:"L4",score:30,band:"emerging",measured:"a biomarker",repl:"contested",status:"in trials",review:"ai",note:"The large human functional test (insulin for Alzheimer's) was null (P=.98). Esketamine is systemic, not nose-to-brain.",cites:["Craft 2020"]},
+  {id:"capsid",subj:"Engineered AAV capsid, IV (PHP.B)",fam:"through barrier",rung:"L2",score:18,band:"conceptual",measured:"nothing yet",repl:"independent (in mice)",status:"terminated",review:"disputed",note:"~10,000x mouse delivery via a receptor humans lack; failed every independent primate test; one human dosed, who died.",cites:["Hordeaux 2019","Capsida 2026"]},
+  {id:"bihtfr1",subj:"Human-TfR capsid (BI-hTFR1)",fam:"through barrier",rung:"L2",score:16,band:"conceptual",measured:"nothing yet",repl:"none",status:"preclinical",review:"ai",note:"Works in humanized mice; no independent human data.",cites:["Huang 2024"]},
+  {id:"lnp",subj:"Lipid nanoparticles, systemic",fam:"through barrier",rung:"L2",score:20,band:"conceptual",measured:"nothing yet",repl:"rodent",status:"preclinical",review:"ai",note:"Superb for liver; to brain from the bloodstream it is rodent-only, no human data.",cites:["Wang 2025"]},
+  {id:"exosomes",subj:"Engineered exosomes / EVs",fam:"through barrier",rung:"L2",score:14,band:"conceptual",measured:"nothing yet",repl:"none (NHP negative)",status:"preclinical",review:"ai",note:"Rodent evidence, a negative primate result, no approvals. Presented as clinical-stage; on the evidence, preclinical.",cites:["Driedonks 2022"]},
+  {id:"ced",subj:"Convection-enhanced delivery",fam:"around barrier",rung:"L4",score:24,band:"emerging",measured:"nothing yet",repl:"failed twice",status:"trials failed",review:"disputed",note:"Both powered trials failed; ~half the catheters in one were misplaced. Bypass is real; verified coverage is not.",cites:["Kunwar 2010","Whone 2019"]}
+];
+
+var BOTTLENECKS = [
+  {t:"Causal biological models",d:"Predicting how to move state X safely toward state Y — not merely recognising correlations.",sev:"hi"},
+  {t:"Cell-specific delivery",d:"Reaching exact targets at the right dose and time without affecting other cells.",sev:"hi"},
+  {t:"Long-horizon safety control",d:"Cancer, immune collapse, fibrosis, mispatterning, off-target effects, delayed instability.",sev:"hi"},
+  {t:"Living whole-body sensing",d:"Repeated, minimally invasive, multiscale measurement of the living system.",sev:"md"},
+  {t:"Target-state definition",d:"Deciding what \"fixed\", \"healthy\", \"better\", and \"still me\" mean.",sev:"md"},
+  {t:"Brain & identity preservation",d:"Repairing neural function without erasing memory, personality, agency, or learned ability.",sev:"hi"},
+  {t:"Manufacturing & cost",d:"Turning bespoke, specialist interventions into reliable, accessible infrastructure.",sev:"md"},
+  {t:"Regulatory pathways",d:"Evaluating systems that combine drugs, biologics, cells, devices, AI, and adaptive control.",sev:"md"}
+];
+
+var PATH = ["More complete, representative cell atlases","Virtual cell and tissue models","Larger, cleaner perturbation datasets","Disease-specific state interventions","Safer cell- and tissue-specific delivery","Regenerative control in selected tissues","Closed-loop monitoring and adaptive treatment","Multi-disease repair platforms","Whole-body repair orchestration"];
+
+var EVIDENCE = [
+  {id:"ev-lipsman",cite:"Lipsman et al., Nat Commun, 2018",type:"clinical trial",supports:"Focused ultrasound opens the human BBB reversibly and safely",review:"ai",note:"First non-invasive transcranial BBB opening; replicated by ≥6 groups."},
+  {id:"ev-monje",cite:"Monje et al., Nature, 2025",type:"clinical trial",supports:"Locoregional CAR-T produces functional responses in CNS tumours",review:"ai",note:"GD2 CAR-T, intraventricular; independent centres corroborate the route."},
+  {id:"ev-ramos",cite:"Ramos et al., J Clin Invest, 2019",type:"autopsy series",supports:"Intrathecal ASO forms a steep caudo-rostral gradient",review:"ai",note:"Human tissue: plenty in lumbar spine, little by the cortex."},
+  {id:"ev-brineura",cite:"Cerliponase alfa, Lancet Neurol, 2023",type:"trial + real-world",supports:"ICV enzyme slows the brain disease but not the retina",review:"ai",note:"Retinal degeneration continues — proof of incomplete distribution."},
+  {id:"ev-hordeaux",cite:"Hordeaux et al., Mol Ther, 2018/2019",type:"animal studies",supports:"PHP.B works via LY6A and fails in primates",review:"ai",note:"LY6A has no human ortholog; three independent NHP failures."},
+  {id:"ev-capsida",cite:"Capsida community letter, 2026",type:"trial record",supports:"One human IV-dosed an engineered BBB capsid and died",review:"disputed",note:"Trial terminated; the FDA-hold origin is not publicly established."},
+  {id:"ev-craft",cite:"Craft et al. (SNIFF), JAMA Neurol, 2020",type:"clinical trial",supports:"Intranasal insulin gave no cognitive benefit (n=289, P=.98)",review:"ai",note:"The main human functional test of nose-to-brain delivery was null."},
+  {id:"ev-hca",cite:"Human Cell Atlas / BICAN",type:"reference atlas",supports:"Comprehensive human cell reference maps are being built",review:"submitted",note:"Foundational sensing substrate; still incomplete."},
+  {id:"ev-virtualcell",cite:"Arc Institute / CZI virtual cell",type:"AI model + dataset",supports:"Virtual-cell models predict perturbation responses",review:"submitted",note:"Data heterogeneity and reproducibility remain bottlenecks."}
+];
+
+var TASKS = [
+  {t:"Split CNS delivery evidence by route and cell class",type:"evidence-synthesis",priority:"high",effort:"6–10 h",review:"domain"},
+  {t:"Hand-verify every citation in the delivery module",type:"claim-audit",priority:"high",effort:"4–8 h",review:"domain",note:"All 16 routes are AI-proposed; no record can reach \"reviewed\" until a human opens the source."},
+  {t:"Publish the formal maturity-scoring rubric",type:"governance",priority:"high",effort:"3–5 h",review:"steward"},
+  {t:"Draft capability records for target-state modelling",type:"evidence-synthesis",priority:"medium",effort:"6–12 h",review:"domain"},
+  {t:"Add reviewer identity + conflict-of-interest records",type:"data-quality",priority:"medium",effort:"2–4 h",review:"steward"},
+  {t:"Translate the overview into a second language",type:"translation",priority:"low",effort:"3–6 h",review:"community"}
+];
+
+var CHANGES = [
+  {d:"today",t:"Seeded the <b>cell-specific delivery</b> deep module with 16 graded routes."},
+  {d:"today",t:"All delivery records enter as <b>AI-proposed</b>, awaiting human review."},
+  {d:"today",t:"Marked <b>PHP.B capsid</b> and <b>CED</b> as disputed — a death and two failed trials."},
+  {d:"today",t:"Flagged the headline finding: nothing is both <b>broad and proven in humans</b>."},
+  {d:"pending",t:"Formal maturity rubric and citation hand-verification are open tasks."}
+];
+
+var REVIEW_LABEL={ai:"AI proposal",submitted:"submitted","in-review":"in review",reviewed:"reviewed",disputed:"disputed",superseded:"superseded"};
+
+/* ---------- HELPERS ---------- */
+function el(id){return document.getElementById(id);}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function capById(id){for(var i=0;i<CAPS.length;i++)if(CAPS[i].id===id)return CAPS[i];return null;}
+function band(score){return score<=20?"conceptual":score<=40?"emerging":score<=60?"translational":score<=80?"validated":"reliable";}
+function reviewPill(r){var cls={ai:"rs-ai",submitted:"rs-submitted","in-review":"rs-in-review",reviewed:"rs-reviewed",disputed:"rs-disputed",superseded:"rs-superseded"}[r]||"rs-submitted";return '<span class="pill '+cls+'">'+esc(REVIEW_LABEL[r]||r)+'</span>';}
+function meter(score,iv){var b=band(score);return '<div class="meter"><div class="meter-top"><span>maturity</span><b class="mt-'+b+'">'+score+' <span style="font-size:10px;color:var(--muted)">/100 · '+b+'</span></b></div><div class="meter-bar"><div class="meter-fill mb-'+b+'" style="width:'+score+'%"></div></div>'+(iv?'<div class="meter-iv">interval '+iv[0]+'–'+iv[1]+' · rubric v0.1</div>':'')+'</div>';}
+
+/* ---------- VIEWS ---------- */
+function vOverview(){
+  var caps=CAPS.map(function(c){
+    return '<button class="cap-card" onclick="location.hash=\'#/cap/'+c.id+'\'">'+
+      '<div class="top"><span class="cid">'+c.code+(c.deep?' · deep module':'')+'</span>'+reviewPill(c.review)+'</div>'+
+      '<h3>'+esc(c.title)+'</h3><p>'+esc(c.summary)+'</p>'+meter(c.score,c.iv)+'</button>';
+  }).join("");
+  var bn=BOTTLENECKS.map(function(b,i){return '<div class="bn"><span class="rank">'+(i+1)+'</span><div><div class="bnt">'+esc(b.t)+'</div><div class="bnd">'+esc(b.d)+'</div></div><span class="sev sev-'+b.sev+'">'+(b.sev==="hi"?"binding":"high")+'</span></div>';}).join("");
+  var path=PATH.map(function(s,i){return '<div class="pstep"><span class="pn">'+(i+1)+'</span><span class="pt">'+esc(s)+'</span></div>';}).join("");
+  var feed=CHANGES.map(function(f){return '<div class="fitem"><span class="fd">'+esc(f.d)+'</span><span class="ft">'+f.t+'</span></div>';}).join("");
+  return '<div class="eyebrow">the commons</div>'+
+    '<h1 class="h-title">A map of what it takes to repair a human</h1>'+
+    '<p class="h-lede">Medicine advances through thousands of separate projects. This is the top-down question: one visible map of the capabilities repair requires — what works, what is blocked, what evidence supports each claim, and every judgment graded openly with its review state.</p>'+
+    '<div class="banner"><b>Prototype.</b> Records, scores, and counts are illustrative and mostly AI-proposed, awaiting human review. This maps research state — not clinical care. It does not diagnose, recommend treatments, or give patient-specific advice.</div>'+
+    '<div class="sec-h"><span class="n">01</span> The five enabling capabilities</div>'+
+    '<div class="cap-grid">'+caps+'</div>'+
+    '<div class="sec-h"><span class="n">02</span> Highest-leverage bottlenecks</div>'+
+    '<div class="bn-list">'+bn+'</div>'+
+    '<div class="sec-h"><span class="n">03</span> Most realistic capability path</div>'+
+    '<p class="note" style="margin-bottom:14px">A dependency path — not a prediction of inevitable progress or a "universal cure" date.</p>'+
+    '<div class="path">'+path+'</div>'+
+    '<div class="sec-h"><span class="n">04</span> What changed</div>'+
+    '<div class="feed">'+feed+'</div>';
+}
+
+function vCapabilities(){
+  var caps=CAPS.map(function(c){
+    return '<button class="cap-card" onclick="location.hash=\'#/cap/'+c.id+'\'">'+
+      '<div class="top"><span class="cid">'+c.code+(c.deep?' · deep module':'')+'</span>'+reviewPill(c.review)+'</div>'+
+      '<h3>'+esc(c.title)+'</h3><p>'+esc(c.summary)+'</p>'+meter(c.score,c.iv)+
+      '<div style="margin-top:12px;font-family:var(--fm);font-size:10.5px;color:var(--muted)">depends on: '+(c.deps.length?c.deps.map(function(d){return capById(d).title.split(" ")[0];}).join(", "):"—")+'</div></button>';
+  }).join("");
+  return '<div class="crumbs">home / capability map</div><h1 class="h-title">Capability map</h1><p class="h-lede">Five capabilities a general repair system requires. Each carries a maturity score with its uncertainty interval and review state. Open one for its record.</p><div class="sec-h" style="margin-top:26px"></div><div class="cap-grid">'+caps+'</div>';
+}
+
+function vCap(id){
+  var c=capById(id); if(!c) return vNotFound();
+  var blocks=c.blocks.map(function(b){var t=capById(b);return t?'<button class="dep-chip" onclick="location.hash=\'#/cap/'+b+'\'">'+esc(t.title.split(" ").slice(0,2).join(" "))+'</button>':'';}).join("");
+  var deps=c.deps.length?c.deps.map(function(d){return '<button class="dep-chip" onclick="location.hash=\'#/cap/'+d+'\'">'+esc(capById(d).title.split(" ").slice(0,2).join(" "))+'</button>';}).join(""):'<span class="ib-v" style="color:var(--muted)">none — foundational</span>';
+  var evRows=(c.evidence||[]).map(function(eid){var e=EVIDENCE.filter(function(x){return x.id===eid;})[0];return e?'<li>'+esc(e.cite)+' — '+esc(e.supports)+'</li>':'';}).join("");
+  var pts=c.points.map(function(p){return '<li>'+esc(p)+'</li>';}).join("");
+  var deep="";
+  if(c.deep){
+    var rows=ROUTES.map(function(r){
+      var b=band(r.score);
+      return '<tr><td><button class="route-btn" onclick="location.hash=\'#/route/'+r.id+'\'"><span class="subj">'+esc(r.subj)+'</span><div style="font-family:var(--fm);font-size:10px;color:var(--muted);margin-top:2px">'+esc(r.fam)+'</div></button></td>'+
+        '<td class="num">'+r.rung+'</td>'+
+        '<td class="num" style="color:var(--'+(b==='conceptual'?'muted':b==='emerging'?'amber':b==='translational'?'teal':'green')+')">'+r.score+'</td>'+
+        '<td>'+esc(r.measured)+'</td>'+
+        '<td>'+reviewPill(r.review)+'</td></tr>';
+    }).join("");
+    deep='<div class="sec-h" style="margin-top:30px"><span class="n">▾</span> Deep module · 16 delivery routes</div>'+
+      '<p class="note" style="margin-bottom:14px">Every route below is <b style="color:var(--amber)">AI-proposed and unreviewed</b> — sourced by search agents, not yet hand-checked. This is the review state working as designed. Rung: L2 rodent · L4 human once · L5 human, independently.</p>'+
+      '<div class="tbl-wrap"><table><thead><tr><th>route</th><th>rung</th><th>maturity</th><th>measures</th><th>review state</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  }
+  return '<div class="crumbs"><a href="#/capabilities">capability map</a> / '+esc(c.code)+'</div>'+
+    '<h1 class="h-title">'+esc(c.title)+'</h1>'+
+    '<div class="record" style="margin-top:22px"><div class="article">'+
+      '<p style="font-size:16px;color:var(--bone)">'+esc(c.summary)+'</p>'+
+      '<h2>Why it matters</h2><p>'+esc(c.why)+'</p>'+
+      '<h2>State of the capability</h2><ul>'+pts+'</ul>'+
+      (evRows?'<h2>Linked evidence</h2><ul>'+evRows+'</ul>':'')+
+      deep+
+    '</div><aside class="infobox"><div class="ib-h">'+esc(c.code)+' · capability record</div>'+
+      '<div class="ib-row"><span class="ib-k">maturity</span><div class="ib-v">'+meter(c.score,c.iv)+'</div></div>'+
+      '<div class="ib-row"><span class="ib-k">review state</span><div>'+reviewPill(c.review)+'</div></div>'+
+      '<div class="ib-row"><span class="ib-k">depends on</span><div class="ib-deps">'+deps+'</div></div>'+
+      '<div class="ib-row"><span class="ib-k">blocks</span><div class="ib-deps">'+(blocks||'<span class="ib-v" style="color:var(--muted)">—</span>')+'</div></div>'+
+      '<div class="ib-row"><span class="ib-k">evidence links</span><div class="ib-v">'+(c.evidence?c.evidence.length:0)+' record'+((c.evidence&&c.evidence.length===1)?'':'s')+'</div></div>'+
+      '<div class="ib-row"><span class="ib-k">rubric</span><div class="ib-v mono" style="font-size:12px">v0.1 · updated today</div></div>'+
+    '</aside></div>';
+}
+
+function vRoute(id){
+  var r=ROUTES.filter(function(x){return x.id===id;})[0]; if(!r) return vNotFound();
+  var b=band(r.score);
+  var cites=r.cites.map(function(c){return '<span class="dep-chip" style="color:var(--bone-3);border-color:var(--line-2);background:var(--faint)">'+esc(c)+'</span>';}).join("");
+  return '<div class="crumbs"><a href="#/cap/delivery">cell-specific access &amp; delivery</a> / route</div>'+
+    '<h1 class="h-title" style="font-size:clamp(22px,3vw,30px)">'+esc(r.subj)+'</h1>'+
+    '<div class="record" style="margin-top:22px"><div class="article">'+
+      '<p style="font-size:16px;color:var(--bone)">'+esc(r.note)+'</p>'+
+      '<h2>How to read this</h2>'+
+      '<ul><li>Rung <b>'+r.rung+'</b> — '+(r.rung==="L5"?"reproduced in humans by an unaffiliated group":r.rung==="L4"?"shown in humans by a single group":"shown in a living rodent, not yet a primate")+'.</li>'+
+      '<li>It measures <b>'+esc(r.measured)+'</b>'+(r.measured==="a biomarker"?" — a surrogate, not proven clinical benefit":r.measured==="nothing yet"?" — no clinical or surrogate benefit demonstrated":"")+'.</li>'+
+      '<li>Replication: '+esc(r.repl)+'. Status: '+esc(r.status)+'.</li></ul>'+
+      '<h2>Sources</h2><div class="ib-deps">'+cites+'</div>'+
+      '<p class="note" style="margin-top:16px">This record is <b style="color:var(--amber)">AI-proposed</b>. No human has yet opened these sources; it cannot reach "reviewed" until one does.</p>'+
+    '</div><aside class="infobox"><div class="ib-h">delivery route · record</div>'+
+      '<div class="ib-row"><span class="ib-k">maturity</span><div class="ib-v">'+meter(r.score,null)+'</div></div>'+
+      '<div class="ib-row"><span class="ib-k">evidence rung</span><div class="ib-v mono">'+r.rung+'</div></div>'+
+      '<div class="ib-row"><span class="ib-k">measures</span><div class="ib-v">'+esc(r.measured)+'</div></div>'+
+      '<div class="ib-row"><span class="ib-k">family</span><div class="ib-v">'+esc(r.fam)+'</div></div>'+
+      '<div class="ib-row"><span class="ib-k">status</span><div class="ib-v">'+esc(r.status)+'</div></div>'+
+      '<div class="ib-row"><span class="ib-k">review state</span><div>'+reviewPill(r.review)+'</div></div>'+
+    '</aside></div>';
+}
+
+function vEvidence(){
+  var rows=EVIDENCE.map(function(e){return '<tr><td><span class="subj">'+esc(e.cite)+'</span><div style="color:var(--bone-3);font-size:12px;margin-top:3px">'+esc(e.note)+'</div></td><td>'+esc(e.type)+'</td><td>'+esc(e.supports)+'</td><td>'+reviewPill(e.review)+'</td></tr>';}).join("");
+  return '<div class="crumbs">home / evidence registry</div><h1 class="h-title">Evidence registry</h1><p class="h-lede">Every claim links to a source, its type, and its review state. A score never appears without the evidence behind it. Disputed evidence stays visible.</p><div style="height:22px"></div><div class="tbl-wrap"><table><thead><tr><th>source</th><th>type</th><th>supports the claim that…</th><th>review</th></tr></thead><tbody>'+rows+'</tbody></table></div><p class="note" style="margin-top:16px">Illustrative registry. Most entries are AI-proposed or submitted; none should be treated as validated until independently reviewed.</p>';
+}
+
+function vTasks(){
+  var rows=TASKS.map(function(t){return '<div class="task"><div class="tt">'+esc(t.t)+'</div>'+(t.note?'<div class="td">'+esc(t.note)+'</div>':'')+'<div class="meta"><span class="tag" style="color:var(--teal)">'+esc(t.type)+'</span><span class="tag">priority: '+esc(t.priority)+'</span><span class="tag">~'+esc(t.effort)+'</span><span class="tag">review: '+esc(t.review)+'</span></div></div>';}).join("");
+  return '<div class="crumbs">home / open tasks</div><h1 class="h-title">Open tasks</h1><p class="h-lede">The map grows through defined, reviewable work. Anyone — human or governed agent — can pick one up; nothing they produce is accepted without review.</p><div style="height:22px"></div><div class="cap-grid">'+rows+'</div>';
+}
+
+function vGraph(){
+  var W=760,H=430,cx=W/2,cy=H/2,R=150;
+  var pos={sensing:[cx,cy-R],"target-state":[cx+R*0.95,cy-R*0.32],delivery:[cx+R*0.6,cy+R*0.85],editing:[cx-R*0.6,cy+R*0.85],verification:[cx-R*0.95,cy-R*0.32]};
+  var edges=[["sensing","target-state"],["sensing","delivery"],["target-state","editing"],["delivery","editing"],["editing","verification"],["verification","sensing"]];
+  var lines=edges.map(function(e){var a=pos[e[0]],b=pos[e[1]];var mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2;return '<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="rgba(0,229,204,.28)" stroke-width="1.5" marker-end="url(#ah)"/>';}).join("");
+  var nodes=CAPS.map(function(c){var p=pos[c.id];var b=band(c.score);var col=b==='conceptual'?'#6b7d8a':b==='emerging'?'#E8A042':b==='translational'?'#00E5CC':'#3FD08A';var w=140,h=52;return '<g class="gnode" onclick="location.hash=\'#/cap/'+c.id+'\'"><rect class="gn-rect" x="'+(p[0]-w/2)+'" y="'+(p[1]-h/2)+'" width="'+w+'" height="'+h+'" rx="10" fill="#0C1D33" stroke="rgba(120,190,200,.3)" stroke-width="1.5"/><circle cx="'+(p[0]-w/2+16)+'" cy="'+(p[1]-h/2+16)+'" r="4" fill="'+col+'"/><text x="'+p[0]+'" y="'+(p[1]-2)+'" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="12.5" font-weight="600" fill="#F0EDE6">'+esc(c.title.split(" ")[0])+(c.title.split(" ")[1]?' '+esc(c.title.split(" ")[1].replace("-"," ").split(" ")[0]):'')+'</text><text x="'+p[0]+'" y="'+(p[1]+14)+'" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9.5" fill="'+col+'">'+c.code+' · '+c.score+'/100</text></g>';}).join("");
+  return '<div class="crumbs">home / dependency graph</div><h1 class="h-title">Dependency graph</h1><p class="h-lede">The repair loop as a system: sense → model a target → reach the cells → edit their state → verify → and feed back. An arrow means the source capability gates the target. Click any node.</p><div style="height:20px"></div>'+
+    '<div class="graph-wrap"><svg width="100%" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Dependency graph of the five repair capabilities"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10" fill="none" stroke="rgba(0,229,204,.5)" stroke-width="1.5"/></marker></defs>'+lines+nodes+'</svg></div>'+
+    '<div class="legend"><span><span class="lw" style="background:#6b7d8a"></span>conceptual</span><span><span class="lw" style="background:#E8A042"></span>emerging</span><span><span class="lw" style="background:#00E5CC"></span>translational</span><span><span class="lw" style="background:#3FD08A"></span>validated</span></div>'+
+    '<p class="note" style="margin-top:14px">The cycle closes: verification feeds back into sensing — the "sense → intervene → sense again → adapt" loop that every real repair follows.</p>';
+}
+
+function vGovernance(){
+  var states=[["AI proposal","Machine-generated, visible with provenance, unassessed","no"],["Submitted","Human or agent contribution awaiting checks","no"],["In review","At least one qualified reviewer is assessing","provisional"],["Reviewed","Accepted under the current protocol","yes"],["Disputed","A material sourced disagreement is unresolved","yes, flagged"],["Superseded","Preserved in history, replaced by a newer record","no"]];
+  var rows=states.map(function(s){return '<tr><td><span class="subj">'+esc(s[0])+'</span></td><td>'+esc(s[1])+'</td><td class="mono" style="font-size:12px">'+esc(s[2])+'</td></tr>';}).join("");
+  return '<div class="crumbs">home / governance</div><h1 class="h-title">Governance</h1><p class="h-lede">The map is a knowledge commons: humans and AI agents may propose, but accepted knowledge stays evidence-linked, attributable, disputable, and auditable. No hidden deletion of conflicting evidence.</p>'+
+    '<div class="sec-h"><span class="n">01</span> Review states — can they affect a score?</div>'+
+    '<div class="tbl-wrap"><table><thead><tr><th>state</th><th>meaning</th><th>affects scores?</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+    '<div class="sec-h"><span class="n">02</span> Contribution workflow</div>'+
+    '<div class="flow"><span class="fstep">Propose</span><span class="arr">→</span><span class="fstep">Provenance &amp; schema checks</span><span class="arr">→</span><span class="fstep">Public unreviewed record</span><span class="arr">→</span><span class="fstep">Human review + conflict disclosure</span><span class="arr">→</span><span class="fstep">Accept / dispute / supersede</span><span class="arr">→</span><span class="fstep">Versioned public map</span></div>'+
+    '<div class="sec-h"><span class="n">03</span> What agents may and may not do</div>'+
+    '<div class="gov-grid"><div class="gov-card"><h4 style="color:var(--teal)">AI agents may</h4><ul><li>discover candidate sources;</li><li>extract structured claims with provenance;</li><li>propose links and contradictions;</li><li>draft score changes and open tasks.</li></ul></div>'+
+    '<div class="gov-card"><h4 style="color:var(--red)">AI agents may not silently</h4><ul><li>accept their own proposals;</li><li>alter official maturity scores;</li><li>erase conflicting evidence;</li><li>infer clinical advice, or turn forecasts into certainty.</li></ul></div></div>'+
+    '<div class="sec-h"><span class="n">04</span> Explicit exclusions</div>'+
+    '<div class="banner" style="border-left-color:var(--red);background:var(--red-dim);border-color:var(--red-dim)"><b style="color:var(--red)">This is not a clinical tool.</b> No diagnosis, prognosis, treatment selection, patient-specific recommendations, trial-eligibility certainty, or a date for "universal repair." Identity, consent, and reversibility are system requirements — not an ethics appendix.</div>';
+}
+
+function vSearch(q){
+  q=q.toLowerCase();
+  var cr=CAPS.filter(function(c){return (c.title+c.summary+c.why).toLowerCase().indexOf(q)>=0;}).map(function(c){return '<button class="cap-card" onclick="location.hash=\'#/cap/'+c.id+'\'"><div class="top"><span class="cid">'+c.code+'</span>'+reviewPill(c.review)+'</div><h3>'+esc(c.title)+'</h3><p>'+esc(c.summary)+'</p></button>';});
+  var rr=ROUTES.filter(function(r){return (r.subj+r.note+r.measured).toLowerCase().indexOf(q)>=0;}).map(function(r){return '<button class="cap-card" onclick="location.hash=\'#/route/'+r.id+'\'"><div class="top"><span class="cid">delivery route · '+r.rung+'</span>'+reviewPill(r.review)+'</div><h3 style="font-size:15px">'+esc(r.subj)+'</h3><p>'+esc(r.note)+'</p></button>';});
+  var er=EVIDENCE.filter(function(e){return (e.cite+e.supports+e.note).toLowerCase().indexOf(q)>=0;}).map(function(e){return '<div class="task"><div class="tt" style="font-size:13.5px">'+esc(e.cite)+'</div><div class="td">'+esc(e.supports)+'</div><div class="meta">'+reviewPill(e.review)+'<span class="tag">'+esc(e.type)+'</span></div></div>';});
+  var tr=TASKS.filter(function(t){return (t.t+t.type).toLowerCase().indexOf(q)>=0;}).map(function(t){return '<div class="task"><div class="tt" style="font-size:13.5px">'+esc(t.t)+'</div><div class="meta"><span class="tag" style="color:var(--teal)">'+esc(t.type)+'</span><span class="tag">'+esc(t.priority)+'</span></div></div>';});
+  var total=cr.length+rr.length+er.length+tr.length;
+  var out='<div class="crumbs">search</div><h1 class="h-title">“'+esc(q)+'”</h1><p class="h-lede">'+total+' result'+(total===1?'':'s')+' across capabilities, delivery routes, evidence, and tasks.</p>';
+  if(!total) return out+'<div class="empty">Nothing matched. Try "delivery", "barrier", "capsid", "biomarker", or "review".</div>';
+  if(cr.length||rr.length){out+='<div class="sec-h">Capabilities &amp; routes</div><div class="cap-grid">'+cr.join("")+rr.join("")+'</div>';}
+  if(er.length){out+='<div class="sec-h">Evidence</div><div class="cap-grid">'+er.join("")+'</div>';}
+  if(tr.length){out+='<div class="sec-h">Tasks</div><div class="cap-grid">'+tr.join("")+'</div>';}
+  return out;
+}
+
+function vNotFound(){return '<div class="empty">Record not found. <a href="#/overview">Return to the overview.</a></div>';}
+
+/* ---------- ROUTER ---------- */
+function render(){
+  var h=location.hash.replace(/^#\/?/,"")||"overview";
+  var parts=h.split("/");
+  var view; var navKey=parts[0];
+  if(parts[0]==="cap"&&parts[1]){view=vCap(parts[1]);navKey="capabilities";}
+  else if(parts[0]==="route"&&parts[1]){view=vRoute(parts[1]);navKey="capabilities";}
+  else if(parts[0]==="search"){view=vSearch(decodeURIComponent(parts.slice(1).join("/")||""));navKey="";}
+  else{
+    view={overview:vOverview,capabilities:vCapabilities,graph:vGraph,evidence:vEvidence,tasks:vTasks,governance:vGovernance}[parts[0]];
+    view=view?view():vOverview();
+    if(!({overview:1,capabilities:1,graph:1,evidence:1,tasks:1,governance:1})[parts[0]])navKey="overview";
+  }
+  el("view").innerHTML=view;
+  el("view").parentNode.scrollTop=0; window.scrollTo(0,0);
+  var links=document.querySelectorAll("#nav a");
+  for(var i=0;i<links.length;i++){links[i].classList.toggle("on",links[i].getAttribute("data-v")===navKey);}
+}
+window.addEventListener("hashchange",render);
+
+var qbox=el("q");var qt;
+qbox.addEventListener("input",function(){clearTimeout(qt);var v=qbox.value.trim();qt=setTimeout(function(){if(v.length>=2)location.hash="#/search/"+encodeURIComponent(v);else if(location.hash.indexOf("#/search")===0)location.hash="#/overview";},220);});
+
+render();
+})();
+</script>
+</body>
+</html>

@@ -21,7 +21,8 @@ jobs:
           mkdir -p _site
           cp index.html _site/index.html
           mkdir -p _site/content
-          cp content/*.js _site/content/
+          cp content/*.js content/*.css _site/content/
+          cp og.svg _site/og.svg
           mkdir -p _site/reconstruction
           cp reconstruction/index.html _site/reconstruction/index.html
           mkdir -p _site/data

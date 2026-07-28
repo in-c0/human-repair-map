@@ -1,0 +1,33 @@
+name: Validate records
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+
+      # Fails on any invalid record: bad rung, missing citation, id/filename
+      # mismatch, or a record marked "reviewed" without a named human reviewer.
+      - name: Validate and rebuild
+        run: node scripts/build.mjs
+
+      # The guard that closes the drift class: if the committed generated files
+      # differ from what the records produce, the site or the API is serving
+      # something the data does not say.
+      - name: Fail if generated files are stale
+        run: |
+          if ! git diff --quiet -- content/records.js mcp/src/generated.js; then
+            echo "::error::Generated files are out of date with records/."
+            echo "Run 'node scripts/build.mjs' and commit the result."
+            git --no-pager diff --stat -- content/records.js mcp/src/generated.js
+            exit 1
+          fi
+          echo "Generated files match records/."

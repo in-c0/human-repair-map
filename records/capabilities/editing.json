@@ -1,0 +1,19 @@
+{
+  "id": "editing",
+  "code": "CAP-04",
+  "title": "Programmable cell-state editing",
+  "score": 28,
+  "interval": [
+    20,
+    38
+  ],
+  "review": "submitted",
+  "summary": "Repair, reprogram, replace, destroy, regenerate, reconnect or recalibrate a cell — safely and reversibly.",
+  "depends": [
+    "target-state",
+    "delivery"
+  ],
+  "blocks": [
+    "verification"
+  ]
+}

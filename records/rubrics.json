@@ -1,0 +1,72 @@
+{
+  "ladder": [
+    {
+      "id": "L0",
+      "label": "proposed",
+      "blurb": "an idea or mechanism on paper; nothing built"
+    },
+    {
+      "id": "L1",
+      "label": "in a dish",
+      "blurb": "works in cultured cells or an organoid"
+    },
+    {
+      "id": "L2",
+      "label": "in a rodent",
+      "blurb": "works in a living mouse or rat"
+    },
+    {
+      "id": "L3",
+      "label": "in a large animal",
+      "blurb": "works in a non-human primate or comparable model"
+    },
+    {
+      "id": "L4",
+      "label": "in humans, once",
+      "blurb": "shown in people by a single group, usually the originator"
+    },
+    {
+      "id": "L5",
+      "label": "in humans, independently",
+      "blurb": "reproduced in people by a group with no stake in the claim"
+    }
+  ],
+  "grounding": [
+    {
+      "id": "G0",
+      "label": "assertion",
+      "blurb": "someone said it; no source attached",
+      "review": "cannot enter the map"
+    },
+    {
+      "id": "G1",
+      "label": "cited text",
+      "blurb": "a paper or report says it",
+      "review": "full verification packet + human"
+    },
+    {
+      "id": "G2",
+      "label": "structured record",
+      "blurb": "registry entry, regulatory filing, trial record",
+      "review": "automated cross-check; human spot-audit"
+    },
+    {
+      "id": "G3",
+      "label": "primary data",
+      "blurb": "deposited dataset that can be re-analysed",
+      "review": "automated re-analysis; human reviews method"
+    },
+    {
+      "id": "G4",
+      "label": "instrument-signed",
+      "blurb": "signed at capture, provenance chain intact",
+      "review": "none for the fact; human only for the inference"
+    }
+  ],
+  "measured": {
+    "function": "changed a person's life (motor milestones, survival, tumour response)",
+    "biomarker": "moved a surrogate number without proven clinical benefit",
+    "opening": "demonstrated the barrier opens, not that a delivered drug helped",
+    "none": "no clinical or surrogate benefit demonstrated"
+  }
+}

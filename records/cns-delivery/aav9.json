@@ -1,0 +1,18 @@
+{
+  "id": "aav9",
+  "subject": "Systemic AAV9, IV (onasemnogene abeparvovec / Zolgensma)",
+  "family": "through barrier",
+  "rung": "L4",
+  "grounding": "G1",
+  "measured": "function",
+  "score": 52,
+  "replication": "none for CNS transduction — single sponsor-affiliated n=2 autopsy",
+  "status": "approved 2019 (FDA)",
+  "review": "ai-proposed",
+  "note": "Clinical benefit in SMA is real and replicated. Direct human CNS transduction rests on two deceased infants, with liver vector 300–1000x higher than CNS.",
+  "drift": "\"Proves IV AAV9 transduces human CNS\" rests on two autopsies; clinical benefit is offered as transduction evidence, but it is not.",
+  "citations": [
+    "Thomsen et al., Nat Med, 2021"
+  ],
+  "wouldMove": "An independent human biodistribution study with single-cell quantification of the transduced neuronal fraction."
+}

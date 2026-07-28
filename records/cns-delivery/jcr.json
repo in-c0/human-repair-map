@@ -1,0 +1,18 @@
+{
+  "id": "jcr",
+  "subject": "TfR fusion (pabinafusp alfa / Izcargo)",
+  "family": "through barrier",
+  "rung": "L4",
+  "grounding": "G2",
+  "measured": "biomarker",
+  "score": 42,
+  "replication": "none",
+  "status": "approved 2021 (Japan only)",
+  "review": "ai-proposed",
+  "note": "n=28, CSF heparan sulfate reduction. Cognitive improvement is claimed only in a post-hoc, open-label subgroup treated before significant neuronopathy.",
+  "drift": "An approval on a priority pathway with n=28 and a biomarker co-primary, read as proof that RMT delivers to human brain.",
+  "citations": [
+    "Okuyama et al., Mol Ther, 2021"
+  ],
+  "wouldMove": "A randomised controlled trial with a functional endpoint, and approval outside Japan."
+}

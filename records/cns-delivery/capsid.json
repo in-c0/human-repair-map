@@ -1,0 +1,22 @@
+{
+  "id": "capsid",
+  "subject": "Engineered AAV capsid, IV (PHP.B family)",
+  "family": "through barrier",
+  "rung": "L2",
+  "grounding": "G1",
+  "measured": "none",
+  "score": 18,
+  "replication": "independent in mice; independently FAILED in primates (three unaffiliated groups)",
+  "status": "terminated",
+  "review": "disputed",
+  "note": "~10,000x better mouse-brain delivery than AAV9 — through the LY6A receptor, which humans do not have. Failed primate IV transduction in three independent studies; next-generation capsids failed an independent 2025 marmoset re-test. Exactly one human was ever IV-dosed an engineered BBB capsid (Capsida CAP-002); that patient died, the trial was terminated, and the sister programme was withdrawn without dosing.",
+  "drift": "\"A virus that crosses the blood-brain barrier\" — via a receptor humans lack, failed in every independent primate test, with one human exposure that ended in death.",
+  "citations": [
+    "Deverman et al., Nat Biotechnol, 2016",
+    "Hordeaux et al., Mol Ther, 2018/2019",
+    "Liguore et al., Mol Ther, 2019",
+    "Capsida community letter, 2026"
+  ],
+  "wouldMove": "A human-compatible receptor mechanism demonstrated in primates by an unaffiliated group.",
+  "precision": "The Capsida trial pause was the company's own. No public document establishes the later regulatory hold as FDA-imposed; do not state that it was."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "target-state",
+  "code": "CAP-02",
+  "title": "Personal target-state modelling",
+  "score": 22,
+  "interval": [
+    15,
+    31
+  ],
+  "review": "in-review",
+  "summary": "Define what should change, what must be preserved, and what outcome counts as safe or chosen.",
+  "depends": [
+    "sensing"
+  ],
+  "blocks": [
+    "editing"
+  ]
+}

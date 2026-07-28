@@ -1,0 +1,18 @@
+{
+  "id": "bihtfr1",
+  "subject": "Human-TfR-targeted capsid (BI-hTFR1)",
+  "family": "through barrier",
+  "rung": "L2",
+  "grounding": "G1",
+  "measured": "none",
+  "score": 16,
+  "replication": "none located",
+  "status": "preclinical",
+  "review": "ai-proposed",
+  "note": "Works in humanised-TfR knock-in mice and human brain endothelial cells. Cannot be tested in wild-type primates.",
+  "drift": "A promising engineering answer to the LY6A problem, with zero human data.",
+  "citations": [
+    "Huang et al., Science, 2024"
+  ],
+  "wouldMove": "Any first-in-human dosing with biodistribution data; or independent replication in a humanised primate model."
+}

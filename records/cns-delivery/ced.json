@@ -1,0 +1,20 @@
+{
+  "id": "ced",
+  "subject": "Convection-enhanced delivery (catheter under pressure)",
+  "family": "around barrier",
+  "rung": "L4",
+  "grounding": "G2",
+  "measured": "none",
+  "score": 24,
+  "replication": "no replicated positive outcome; two powered trials negative",
+  "status": "trials failed",
+  "review": "disputed",
+  "note": "Decades of human use. The powered brain-cancer trial (PRECISE) and the powered Parkinson's GDNF trial both missed their endpoints. A blinded audit found roughly half the PRECISE catheters misplaced — the study may have tested a drug it never delivered.",
+  "drift": "\"CED bypasses the BBB and delivers to the target\" — bypass is real; verified coverage is the unsolved problem.",
+  "citations": [
+    "Kunwar et al. (PRECISE), Neuro-Oncology, 2010",
+    "Whone et al., Brain, 2019",
+    "Sampson et al., J Neurosurg, 2010"
+  ],
+  "wouldMove": "A trial with real-time imaging confirmation of target coverage that then meets a clinical endpoint."
+}

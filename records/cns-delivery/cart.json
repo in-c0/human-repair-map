@@ -1,0 +1,20 @@
+{
+  "id": "cart",
+  "subject": "Locoregional CAR-T (intraventricular / intracavitary)",
+  "family": "around barrier",
+  "rung": "L5",
+  "grounding": "G1",
+  "measured": "function",
+  "score": 62,
+  "replication": "independent — four unaffiliated centres",
+  "status": "in trials",
+  "review": "ai-proposed",
+  "note": "The strongest functional responses on the map, for childhood brainstem tumours and glioblastoma, delivered into the ventricles or tumour cavity.",
+  "drift": "\"CAR-T reaches brain tumours\" omits that every responding programme injects into the ventricle or cavity; IV dosing produced the dose-limiting toxicity, not the responses.",
+  "citations": [
+    "Monje et al., Nature, 2025",
+    "Brown et al., Nat Med, 2024",
+    "Vitanza et al., Nat Med, 2025"
+  ],
+  "wouldMove": "An independent group replicating target-specific efficacy (not just the route) would move this from route-replicated to efficacy-replicated."
+}

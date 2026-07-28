@@ -1,0 +1,19 @@
+{
+  "id": "verification",
+  "code": "CAP-05",
+  "title": "Closed-loop verification",
+  "score": 26,
+  "interval": [
+    18,
+    36
+  ],
+  "review": "submitted",
+  "summary": "Observe outcomes, detect escape or overcorrection, adapt, and verify long-term whole-body stability.",
+  "depends": [
+    "editing",
+    "sensing"
+  ],
+  "blocks": [
+    "sensing"
+  ]
+}

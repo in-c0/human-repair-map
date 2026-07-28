@@ -6,15 +6,40 @@
     "lastChecked": "2026-07-27",
     "verification": "Every record was sourced by web-search agents against primary sources and has NOT yet been hand-checked by a human. Treat as a well-sourced draft, not a finished record.",
     "engine": "claim-evidence-grading v0 (shared with ssmt, gomin) — a claim graded on an evidence ladder + what was measured + independent replication + drift",
-    "notMedicalAdvice": true
+    "notMedicalAdvice": true,
+    "corrections": "See https://humanrepairmap.com/#/corrections"
   },
   "ladder": [
-    { "id": "L0", "label": "proposed", "blurb": "an idea or mechanism on paper; nothing built" },
-    { "id": "L1", "label": "in a dish", "blurb": "works in cultured cells or an organoid" },
-    { "id": "L2", "label": "in a rodent", "blurb": "works in a living mouse or rat" },
-    { "id": "L3", "label": "in a large animal", "blurb": "works in a non-human primate or comparable model" },
-    { "id": "L4", "label": "in humans, once", "blurb": "shown in people by a single group, usually the originator" },
-    { "id": "L5", "label": "in humans, independently", "blurb": "reproduced in people by a group with no stake in the claim" }
+    {
+      "id": "L0",
+      "label": "proposed",
+      "blurb": "an idea or mechanism on paper; nothing built"
+    },
+    {
+      "id": "L1",
+      "label": "in a dish",
+      "blurb": "works in cultured cells or an organoid"
+    },
+    {
+      "id": "L2",
+      "label": "in a rodent",
+      "blurb": "works in a living mouse or rat"
+    },
+    {
+      "id": "L3",
+      "label": "in a large animal",
+      "blurb": "works in a non-human primate or comparable model"
+    },
+    {
+      "id": "L4",
+      "label": "in humans, once",
+      "blurb": "shown in people by a single group, usually the originator"
+    },
+    {
+      "id": "L5",
+      "label": "in humans, independently",
+      "blurb": "reproduced in people by a group with no stake in the claim"
+    }
   ],
   "measuredLegend": {
     "function": "changed a person's life (motor milestones, survival, tumour response)",
@@ -43,12 +68,36 @@
       "keyEvidence": "~10,000x better mouse-brain delivery than AAV9; mechanism runs through the LY6A receptor, which humans do not have; failed primate IV transduction in 3 independent NHP studies; next-gen CAP-B10/B22 failed an independent 2025 marmoset re-test. Exactly one human ever IV-dosed an engineered BBB capsid (Capsida CAP-002); that child died, trial terminated, sister program withdrawn.",
       "drift": "'a virus that crosses the blood-brain barrier' — via a receptor humans lack, failed in every independent primate test, with one human exposure that ended in death",
       "citations": [
-        { "ref": "Deverman et al.", "venue": "Nat Biotechnol", "year": 2016 },
-        { "ref": "Chan et al.", "venue": "Nat Neurosci", "year": 2017 },
-        { "ref": "Hordeaux et al. (strain limit)", "venue": "Mol Ther", "year": 2018 },
-        { "ref": "Hordeaux et al. (LY6A)", "venue": "Mol Ther", "year": 2019 },
-        { "ref": "Liguore et al. (macaque IT vs IV)", "venue": "Mol Ther", "year": 2019 },
-        { "ref": "Capsida STXBP1 community letter", "venue": "capsida.com", "year": 2026 }
+        {
+          "ref": "Deverman et al.",
+          "venue": "Nat Biotechnol",
+          "year": 2016
+        },
+        {
+          "ref": "Chan et al.",
+          "venue": "Nat Neurosci",
+          "year": 2017
+        },
+        {
+          "ref": "Hordeaux et al. (strain limit)",
+          "venue": "Mol Ther",
+          "year": 2018
+        },
+        {
+          "ref": "Hordeaux et al. (LY6A)",
+          "venue": "Mol Ther",
+          "year": 2019
+        },
+        {
+          "ref": "Liguore et al. (macaque IT vs IV)",
+          "venue": "Mol Ther",
+          "year": 2019
+        },
+        {
+          "ref": "Capsida STXBP1 community letter",
+          "venue": "capsida.com",
+          "year": 2026
+        }
       ],
       "precision": "The Capsida trial pause was the company's own; no public document establishes the later regulatory hold as FDA-imposed — do not claim it was."
     },
@@ -63,7 +112,13 @@
       "status": "preclinical",
       "keyEvidence": "works in humanized-TfR knock-in mice (L2) and human brain endothelial cells (L1); cannot be tested in wild-type NHP; no independent replication located.",
       "drift": "promising engineering answer to the LY6A problem, with zero human data",
-      "citations": [ { "ref": "Huang et al.", "venue": "Science", "year": 2024 } ]
+      "citations": [
+        {
+          "ref": "Huang et al.",
+          "venue": "Science",
+          "year": 2024
+        }
+      ]
     },
     {
       "id": "aav9-iv-zolgensma",
@@ -76,13 +131,30 @@
       "measured": "function",
       "status": "approved",
       "approvals": [
-        { "agency": "FDA", "date": "2019-05-24", "indication": "spinal muscular atrophy" },
-        { "agency": "Japan MHLW", "date": "2020-03-19" },
-        { "agency": "EU", "date": "2020-05-18", "note": "conditional; full 2022-05-17" }
+        {
+          "agency": "FDA",
+          "date": "2019-05-24",
+          "indication": "spinal muscular atrophy"
+        },
+        {
+          "agency": "Japan MHLW",
+          "date": "2020-03-19"
+        },
+        {
+          "agency": "EU",
+          "date": "2020-05-18",
+          "note": "conditional; full 2022-05-17"
+        }
       ],
       "keyEvidence": "clinical benefit in SMA is real and replicated; but direct human CNS transduction rests on 2 deceased infants, with liver vector 300-1000x higher than CNS.",
       "drift": "'proves IV AAV9 transduces human CNS' rests on two autopsies; clinical benefit is offered as transduction evidence but is not",
-      "citations": [ { "ref": "Thomsen et al.", "venue": "Nat Med", "year": 2021 } ]
+      "citations": [
+        {
+          "ref": "Thomsen et al.",
+          "venue": "Nat Med",
+          "year": 2021
+        }
+      ]
     },
     {
       "id": "rmt-tfr-denali",
@@ -94,10 +166,28 @@
       "replicationNote": "concept cross-confirmed by JCR's independent TfR construct",
       "measured": "biomarker",
       "status": "approved",
-      "approvals": [ { "agency": "FDA", "date": "2026-03-25", "indication": "neuronopathic MPS II", "note": "accelerated; first BBB-crossing biologic approved" } ],
+      "approvals": [
+        {
+          "agency": "FDA",
+          "date": "2026-03-25",
+          "indication": "neuronopathic MPS II",
+          "note": "accelerated; first BBB-crossing biologic approved"
+        }
+      ],
       "keyEvidence": "approval rests on a 91% drop in CSF heparan sulfate (a surrogate); the confirmatory trial for cognitive benefit (COMPASS) is still running; no human measurement of enzyme in brain parenchyma.",
       "drift": "'a drug that crosses the BBB and treats neurologic Hunter' — what was shown is a CSF sugar falling, with no proven cognitive benefit",
-      "citations": [ { "ref": "FDA approval", "venue": "fda.gov", "year": 2026 }, { "ref": "Phase 1/2", "venue": "NEJM", "year": 2026 } ]
+      "citations": [
+        {
+          "ref": "FDA approval",
+          "venue": "fda.gov",
+          "year": 2026
+        },
+        {
+          "ref": "Phase 1/2",
+          "venue": "NEJM",
+          "year": 2026
+        }
+      ]
     },
     {
       "id": "rmt-tfr-jcr",
@@ -108,10 +198,22 @@
       "independentReplication": "no",
       "measured": "biomarker",
       "status": "approved",
-      "approvals": [ { "agency": "Japan MHLW", "date": "2021-03", "note": "Japan only; not US/EU" } ],
+      "approvals": [
+        {
+          "agency": "Japan MHLW",
+          "date": "2021-03",
+          "note": "Japan only; not US/EU"
+        }
+      ],
       "keyEvidence": "n=28, CSF heparan sulfate reduction; cognitive improvement claimed only in a post-hoc, open-label subgroup treated before significant neuronopathy.",
       "drift": "an approval on a Japanese priority pathway with n=28 and a biomarker co-primary, read as proof RMT delivers to human brain",
-      "citations": [ { "ref": "Okuyama et al.", "venue": "Mol Ther", "year": 2021 } ]
+      "citations": [
+        {
+          "ref": "Okuyama et al.",
+          "venue": "Mol Ther",
+          "year": 2021
+        }
+      ]
     },
     {
       "id": "brainshuttle-roche",
@@ -124,7 +226,18 @@
       "status": "trial",
       "keyEvidence": "Phase 3, not approved; clears amyloid plaque on PET (-107 centiloids at wk 28) at low ARIA; only direct human exposure number is CSF:plasma 0.8%; no evidence yet it slows cognitive decline.",
       "drift": "'Brainshuttle validated' — the 10-50x brain-uptake figure is a mouse/NHP number; the human data are one CSF ratio and a plaque-clearance PD response",
-      "citations": [ { "ref": "Klein et al.", "venue": "Alzheimers Dement", "year": 2025 }, { "ref": "Grimm et al.", "venue": "mAbs", "year": 2023 } ]
+      "citations": [
+        {
+          "ref": "Klein et al.",
+          "venue": "Alzheimers Dement",
+          "year": 2025
+        },
+        {
+          "ref": "Grimm et al.",
+          "venue": "mAbs",
+          "year": 2023
+        }
+      ]
     },
     {
       "id": "lnp-systemic",
@@ -138,7 +251,18 @@
       "status": "preclinical",
       "keyEvidence": "rodent only; no human data and no registered human trial for brain delivery; the one human GBM LNP trial (n=3) works via peripheral immune signalling, not BBB crossing.",
       "drift": "'LNPs can now cross the BBB' describes reporter mRNA in mouse brain",
-      "citations": [ { "ref": "Wang et al.", "venue": "Nat Mater", "year": 2025 }, { "ref": "Sayour et al.", "venue": "Cell", "year": 2024 } ]
+      "citations": [
+        {
+          "ref": "Wang et al.",
+          "venue": "Nat Mater",
+          "year": 2025
+        },
+        {
+          "ref": "Sayour et al.",
+          "venue": "Cell",
+          "year": 2024
+        }
+      ]
     },
     {
       "id": "intranasal",
@@ -153,7 +277,18 @@
       "status": "trial",
       "keyEvidence": "theory is mostly rodent-inferred; the large human functional test (intranasal insulin for Alzheimer's, SNIFF, n=289) was null (P=.98); esketamine works by ordinary systemic absorption and is not nose-to-brain evidence.",
       "drift": "'bypasses the BBB via olfactory pathways' — human data support only trace, highly variable CSF appearance, not meaningful parenchymal concentration",
-      "citations": [ { "ref": "Craft et al. (SNIFF)", "venue": "JAMA Neurol", "year": 2020 }, { "ref": "Winterdahl et al.", "venue": "EJNMMI Res", "year": 2025 } ]
+      "citations": [
+        {
+          "ref": "Craft et al. (SNIFF)",
+          "venue": "JAMA Neurol",
+          "year": 2020
+        },
+        {
+          "ref": "Winterdahl et al.",
+          "venue": "EJNMMI Res",
+          "year": 2025
+        }
+      ]
     },
     {
       "id": "exosomes",
@@ -162,12 +297,23 @@
       "family": "through",
       "rung": "L2",
       "independentReplication": "no",
-      "replicationNote": "NHP biodistribution attempt was negative",
+      "replicationNote": "Primate study found EVs in CSF at 30-60 min post-IV but minimal brain parenchymal accumulation.",
       "measured": "none",
       "status": "preclinical",
       "keyEvidence": "rodent evidence; negative primate result; no approvals; registry-only clinical footprint; FDA safety notice on unapproved exosome products.",
       "drift": "a preclinical platform presented as clinical-stage",
-      "citations": [ { "ref": "Alvarez-Erviti et al.", "venue": "Nat Biotechnol", "year": 2011 }, { "ref": "Driedonks et al.", "venue": "J Extracell Biol", "year": 2022 } ]
+      "citations": [
+        {
+          "ref": "Alvarez-Erviti et al.",
+          "venue": "Nat Biotechnol",
+          "year": 2011
+        },
+        {
+          "ref": "Driedonks et al.",
+          "venue": "J Extracell Biol",
+          "year": 2022
+        }
+      ]
     },
     {
       "id": "intrathecal-nusinersen",
@@ -179,10 +325,22 @@
       "independentReplication": "yes",
       "measured": "function",
       "status": "approved",
-      "approvals": [ { "agency": "FDA", "date": "2016-12-23", "indication": "spinal muscular atrophy" } ],
+      "approvals": [
+        {
+          "agency": "FDA",
+          "date": "2016-12-23",
+          "indication": "spinal muscular atrophy"
+        }
+      ],
       "keyEvidence": "real, independently replicated improvement in children's motor milestones; but human autopsy shows a steep caudo-rostral gradient — plenty in the lumbar spine, little by the cortex.",
       "drift": "cited as proof of 'CNS-wide ASO delivery'; human tissue shows a spinal-cord-weighted gradient",
-      "citations": [ { "ref": "Ramos et al. (autopsy)", "venue": "J Clin Invest", "year": 2019 } ]
+      "citations": [
+        {
+          "ref": "Ramos et al. (autopsy)",
+          "venue": "J Clin Invest",
+          "year": 2019
+        }
+      ]
     },
     {
       "id": "intrathecal-tofersen",
@@ -193,24 +351,56 @@
       "independentReplication": "no",
       "measured": "biomarker",
       "status": "approved",
-      "approvals": [ { "agency": "FDA", "date": "2023-04-25", "indication": "SOD1-ALS", "note": "accelerated, on plasma NfL surrogate" } ],
+      "approvals": [
+        {
+          "agency": "FDA",
+          "date": "2023-04-25",
+          "indication": "SOD1-ALS",
+          "note": "accelerated, on plasma NfL surrogate"
+        }
+      ],
       "keyEvidence": "approved on a nerve-damage biomarker; the Phase 3 VALOR trial missed its clinical endpoint.",
       "drift": "'ASOs work in ALS' — what was shown is biomarker engagement without a met clinical endpoint",
-      "citations": [ { "ref": "Biogen/FDA", "venue": "fda.gov", "year": 2023 } ]
+      "citations": [
+        {
+          "ref": "Biogen/FDA",
+          "venue": "fda.gov",
+          "year": 2023
+        }
+      ]
     },
     {
       "id": "icv-brineura",
       "subject": "ICV enzyme replacement (cerliponase alfa / Brineura)",
       "claim": "enzyme delivered into the brain's ventricles distributes through the brain",
       "family": "around",
-      "rung": "L5",
-      "independentReplication": "yes",
+      "rung": "L4",
+      "independentReplication": "no",
       "measured": "function",
       "status": "approved",
-      "approvals": [ { "agency": "FDA", "date": "2017-04-27", "indication": "CLN2 Batten disease" } ],
+      "approvals": [
+        {
+          "agency": "FDA",
+          "date": "2017-04-27",
+          "indication": "CLN2 Batten disease"
+        }
+      ],
       "keyEvidence": "independently shown to slow the brain disease; but the children's retinas degenerate on schedule, untouched — the enzyme poured into the centre of the brain never reaches them.",
       "drift": "'ICV distributes enzyme through the brain' — the retinal finding is the cleanest human proof of incomplete reach",
-      "citations": [ { "ref": "open-label extension", "venue": "Lancet Neurol", "year": 2023 }, { "ref": "real-world cohort", "venue": "Front Neurol", "year": 2025 } ]
+      "citations": [
+        {
+          "ref": "open-label extension",
+          "venue": "Lancet Neurol",
+          "year": 2023
+        },
+        {
+          "ref": "real-world cohort",
+          "venue": "Front Neurol",
+          "year": 2025
+        }
+      ],
+      "replicationNote": "Both supporting studies share a senior author and group (Schulz, Hamburg) — not an independent replication. Rung lowered 2026-07-27.",
+      "reviewState": "disputed"
     },
     {
       "id": "intraparenchymal-kebilidi",
@@ -223,12 +413,31 @@
       "measured": "function",
       "status": "approved",
       "approvals": [
-        { "agency": "EU", "date": "2022-07", "indication": "AADC deficiency" },
-        { "agency": "FDA", "date": "2024-11-13", "note": "first gene therapy administered directly to the brain in the US" }
+        {
+          "agency": "EU",
+          "date": "2022-07",
+          "indication": "AADC deficiency"
+        },
+        {
+          "agency": "FDA",
+          "date": "2024-11-13",
+          "note": "first gene therapy administered directly to the brain in the US"
+        }
       ],
       "keyEvidence": "a virus infused into one deep structure (the putamen); precise, single-shot, never repeated; covers one nucleus plus projections, essentially zero distal distribution.",
       "drift": "usable only for the rare diseases whose whole problem sits in one anatomically defined place",
-      "citations": [ { "ref": "Tai et al.", "venue": "Mol Ther", "year": 2022 }, { "ref": "Pearson/Bankiewicz et al.", "venue": "Nat Commun", "year": 2021 } ]
+      "citations": [
+        {
+          "ref": "Tai et al.",
+          "venue": "Mol Ther",
+          "year": 2022
+        },
+        {
+          "ref": "Pearson/Bankiewicz et al.",
+          "venue": "Nat Commun",
+          "year": 2021
+        }
+      ]
     },
     {
       "id": "fus-bbb-opening",
@@ -243,7 +452,18 @@
       "status": "trial",
       "keyEvidence": "reversible, repeatable, safe BBB opening is proven in humans; whether a drug pushed through the opening improves an outcome has NOT been shown in a randomized trial (SONOBIRD, n=560, reports ~end-2026).",
       "drift": "'FUS delivers drugs and extends survival' — the opening is proven; the outcome RCT does not yet exist",
-      "citations": [ { "ref": "Lipsman et al.", "venue": "Nat Commun", "year": 2018 }, { "ref": "Woodworth/Lipsman et al.", "venue": "Lancet Oncol", "year": 2025 } ]
+      "citations": [
+        {
+          "ref": "Lipsman et al.",
+          "venue": "Nat Commun",
+          "year": 2018
+        },
+        {
+          "ref": "Woodworth/Lipsman et al.",
+          "venue": "Lancet Oncol",
+          "year": 2025
+        }
+      ]
     },
     {
       "id": "ced",
@@ -258,7 +478,23 @@
       "status": "trial",
       "keyEvidence": "decades of human use; the powered brain-cancer trial (PRECISE) and the powered Parkinson's GDNF trial both missed their endpoints; a blinded audit found ~half the PRECISE catheters misplaced — the study may have tested a drug it never delivered.",
       "drift": "'CED bypasses the BBB and delivers to the target' — bypass is real; verified coverage is the unsolved problem",
-      "citations": [ { "ref": "Kunwar et al. (PRECISE)", "venue": "Neuro-Oncology", "year": 2010 }, { "ref": "Whone et al. (GDNF)", "venue": "Brain", "year": 2019 }, { "ref": "Sampson et al. (catheter audit)", "venue": "J Neurosurg", "year": 2010 } ]
+      "citations": [
+        {
+          "ref": "Kunwar et al. (PRECISE)",
+          "venue": "Neuro-Oncology",
+          "year": 2010
+        },
+        {
+          "ref": "Whone et al. (GDNF)",
+          "venue": "Brain",
+          "year": 2019
+        },
+        {
+          "ref": "Sampson et al. (catheter audit)",
+          "venue": "J Neurosurg",
+          "year": 2010
+        }
+      ]
     },
     {
       "id": "cart-locoregional",
@@ -273,7 +509,23 @@
       "status": "trial",
       "keyEvidence": "the strongest functional responses on the map — tumour shrinkage and neurological improvement — for childhood brainstem tumours and glioblastoma, delivered directly into the ventricles or cavity; the one IV trial with tissue data showed cells trafficked into the brain but produced no responses and the worst toxicity.",
       "drift": "'CAR-T reaches brain tumours' omits that every responding programme injects into the ventricle/cavity; IV dosing caused the DLTs, not the responses",
-      "citations": [ { "ref": "Monje et al. (GD2/DMG)", "venue": "Nature", "year": 2025 }, { "ref": "Brown et al. (IL13Ra2/GBM)", "venue": "Nat Med", "year": 2024 }, { "ref": "Vitanza et al. (B7-H3/DMG)", "venue": "Nat Med", "year": 2025 } ]
+      "citations": [
+        {
+          "ref": "Monje et al. (GD2/DMG)",
+          "venue": "Nature",
+          "year": 2025
+        },
+        {
+          "ref": "Brown et al. (IL13Ra2/GBM)",
+          "venue": "Nat Med",
+          "year": 2024
+        },
+        {
+          "ref": "Vitanza et al. (B7-H3/DMG)",
+          "venue": "Nat Med",
+          "year": 2025
+        }
+      ]
     }
   ]
 }

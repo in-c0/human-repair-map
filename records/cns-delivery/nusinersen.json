@@ -1,0 +1,18 @@
+{
+  "id": "nusinersen",
+  "subject": "Intrathecal ASO (nusinersen / Spinraza)",
+  "family": "around barrier",
+  "rung": "L5",
+  "grounding": "G2",
+  "measured": "function",
+  "score": 70,
+  "replication": "independent",
+  "status": "approved 2016 (FDA)",
+  "review": "ai-proposed",
+  "note": "Real, independently replicated improvement in children's motor milestones. Human autopsy shows a steep caudo-rostral gradient: plenty in the lumbar spine, little by the cortex.",
+  "drift": "Cited as proof of CNS-wide ASO delivery; the disease treated sits in the spinal cord, and human tissue shows a spinal-weighted gradient.",
+  "citations": [
+    "Ramos et al., J Clin Invest, 2019 (autopsy)"
+  ],
+  "wouldMove": "Human evidence of therapeutic concentration in deep brain nuclei would extend this claim from spinal cord to brain."
+}

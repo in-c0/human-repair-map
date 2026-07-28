@@ -1,0 +1,19 @@
+{
+  "id": "delivery",
+  "code": "CAP-03",
+  "title": "Cell-specific access and delivery",
+  "score": 31,
+  "interval": [
+    24,
+    41
+  ],
+  "review": "in-review",
+  "deepModule": true,
+  "summary": "Reach the right cell class, tissue, compartment, dose and time, repeatably and without off-target harm.",
+  "depends": [
+    "sensing"
+  ],
+  "blocks": [
+    "editing"
+  ]
+}

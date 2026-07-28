@@ -1,0 +1,19 @@
+{
+  "id": "fus",
+  "subject": "Focused ultrasound + microbubbles (BBB opening)",
+  "family": "around barrier",
+  "rung": "L5",
+  "grounding": "G1",
+  "measured": "opening",
+  "score": 56,
+  "replication": "independent — at least six unaffiliated groups",
+  "status": "in trials",
+  "review": "ai-proposed",
+  "note": "Reversible, repeatable, safe BBB opening is proven in humans. Whether a drug pushed through the opening improves an outcome has not been shown in a randomised trial.",
+  "drift": "\"FUS delivers drugs and extends survival\" — the opening is proven; the outcome trial does not yet exist.",
+  "citations": [
+    "Lipsman et al., Nat Commun, 2018",
+    "Woodworth/Lipsman et al., Lancet Oncol, 2025"
+  ],
+  "wouldMove": "A positive randomised outcome trial (SONOBIRD, n=560, reports ~end-2026) would convert this from proven-opening to proven-delivery."
+}

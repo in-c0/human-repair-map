@@ -1,0 +1,18 @@
+{
+  "id": "tofersen",
+  "subject": "Intrathecal ASO (tofersen / Qalsody)",
+  "family": "around barrier",
+  "rung": "L4",
+  "grounding": "G2",
+  "measured": "biomarker",
+  "score": 44,
+  "replication": "none",
+  "status": "approved 2023 (FDA, accelerated)",
+  "review": "ai-proposed",
+  "note": "Approved on plasma neurofilament light, a surrogate. The Phase 3 VALOR trial missed its clinical endpoint.",
+  "drift": "\"ASOs work in ALS\" — what was shown is biomarker engagement without a met clinical endpoint.",
+  "citations": [
+    "Biogen/FDA, 2023"
+  ],
+  "wouldMove": "The confirmatory ATLAS trial showing a functional benefit would convert a surrogate approval into demonstrated function."
+}

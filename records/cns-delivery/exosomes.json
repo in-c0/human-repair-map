@@ -1,0 +1,19 @@
+{
+  "id": "exosomes",
+  "subject": "Engineered exosomes / extracellular vesicles",
+  "family": "through barrier",
+  "rung": "L2",
+  "grounding": "G1",
+  "measured": "none",
+  "score": 14,
+  "replication": "none — primate study found EVs in CSF but minimal brain parenchymal accumulation",
+  "status": "preclinical",
+  "review": "ai-proposed",
+  "note": "Rodent evidence, a negative primate result, no approvals, and a registry-only clinical footprint. FDA has issued a safety notification on unapproved exosome products.",
+  "drift": "A preclinical platform presented as clinical-stage.",
+  "citations": [
+    "Alvarez-Erviti et al., Nat Biotechnol, 2011",
+    "Driedonks et al., J Extracell Biol, 2022"
+  ],
+  "wouldMove": "A positive, independently replicated primate biodistribution study."
+}

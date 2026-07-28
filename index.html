@@ -50,6 +50,7 @@
   </main>
 </div>
 
+<script src="content/records.js"></script>
 <script src="content/thesis.js"></script>
 <script src="content/collaboration.js"></script>
 <script src="content/leverage.js"></script>
@@ -60,58 +61,14 @@
 var T=window.HRM_THESIS||{}, CO=window.HRM_COLLAB||{};
 
 /* ---------- DATA ---------- */
-var CAPS = [
-  {id:"sensing", code:"CAP-01", title:"Sufficient biological sensing",
-   summary:"Measure the living system at the resolution needed to decide and verify a safe intervention — genome, cell state, spatial organisation, immune, metabolic, neural.",
-   score:34, iv:[27,42], review:"in-review", deps:[], blocks:["target-state","delivery","verification"],
-   why:"The goal is not atom-level observation. It is sufficient observation to know what must be preserved, changed, removed, or rebuilt.",
-   points:["Cell atlases and virtual-cell models are maturing fast, but coverage is uneven.","Living, longitudinal, minimally invasive whole-body sensing is the missing piece.","The brain is the hardest target — identity-relevant information must be read without damage."],
-   evidence:["ev-hca","ev-virtualcell"]},
-  {id:"target-state", code:"CAP-02", title:"Personal target-state modelling",
-   summary:"Define what should change, what must be preserved, and what outcome counts as safe, restored, or chosen — combining causal biology with the person's own goals and consent.",
-   score:22, iv:[15,31], review:"in-review", deps:["sensing"], blocks:["editing"],
-   why:"\"Better\" cannot be inferred from biology alone. Pathology must be distinguished from identity, damage from adaptation, disability from difference.",
-   points:["The least technically mature capability, and the most ethically loaded.","Requires causal models plus individual goals, reversibility, and explicit safety constraints.","Identity and memory preservation is a hard constraint, not an appendix."],
-   evidence:[]},
-  {id:"delivery", code:"CAP-03", title:"Cell-specific access & delivery",
-   summary:"Reach the right cell class, tissue, compartment, dose, and time — ideally repeatably and without harmful immune or off-target effects. The v0.1 deep module.",
-   score:31, iv:[24,41], review:"in-review", deps:["sensing"], blocks:["editing"], deep:true,
-   why:"Barriers include the blood-brain barrier, dense tumours, fibrotic tissue, rare cells, and intracellular delivery. This is one of the top three bottlenecks.",
-   points:["This module is seeded with 16 real CNS-delivery routes, graded openly below.","Nothing on the map is both broad and proven in humans.","Opening the blood-brain barrier is independently proven; delivering through it to a clinical outcome is proven nowhere."],
-   evidence:["ev-lipsman","ev-monje","ev-ramos","ev-brineura","ev-hordeaux","ev-capsida","ev-craft"]},
-  {id:"editing", code:"CAP-04", title:"Programmable cell-state editing",
-   summary:"Perform constrained repair operations on a cell — repair, reprogram, replace, destroy, regenerate, reconnect, recalibrate — safely and reversibly.",
-   score:28, iv:[20,38], review:"submitted", deps:["target-state","delivery"], blocks:["verification"],
-   why:"Powerful editing must be paired with delivery, safety control, and verification. Regeneration without growth control becomes cancer.",
-   points:["Development, regeneration in some animals, and immune adaptation prove cell states are programmable.","Cancer proves cell states can be changed catastrophically.","Safe, constrained editing — not raw editing power — is the frontier."],
-   evidence:[]},
-  {id:"verification", code:"CAP-05", title:"Closed-loop verification",
-   summary:"Observe outcomes, detect escape or overcorrection, adapt the intervention, and verify both local repair and long-term whole-body stability.",
-   score:26, iv:[18,36], review:"submitted", deps:["editing","sensing"], blocks:["sensing"],
-   why:"Biology is dynamic: sense → intervene → sense again → adapt → verify → maintain. Verification may span molecule to behaviour to time.",
-   points:["Simple closed loops exist today — insulin pumps, pacemakers, neurostimulation.","Multiscale verification (molecule → organ → behaviour → decades) does not.","Avoiding oscillation and overcorrection across coupled feedback loops is unsolved."],
-   evidence:[]}
-];
+var HR=(window.HRM_RECORDS||{rubrics:{},capabilities:[],routes:[]});
+var MEASURED_PHRASE={function:"a life",biomarker:"a biomarker",opening:"barrier opened",none:"nothing yet",transduction:"cells reached",access:"reached tissue"};
+var CAPS = HR.capabilities.map(function(c){return {id:c.id,code:c.code,title:c.title,summary:c.summary,score:c.score,iv:c.interval,review:c.review,deps:c.depends||[],blocks:c.blocks||[],deep:!!c.deepModule,why:c.why||"",points:c.points||[],evidence:c.evidence||[]};});
+var ROUTES = HR.routes.map(function(r){return {id:r.id,subj:r.subject,fam:r.family,rung:r.rung,score:r.score,band:(r.score<=20?"conceptual":r.score<=40?"emerging":r.score<=60?"translational":"validated"),measured:MEASURED_PHRASE[r.measured]||r.measured,repl:r.replication,status:r.status,review:(r.review==="ai-proposed"?"ai":r.review),note:r.note,drift:r.drift,cites:r.citations||[],grounding:r.grounding,wouldMove:r.wouldMove,precision:r.precision};});
+
 
 /* delivery deep-module records: the 16 CNS routes, graded */
-var ROUTES = [
-  {id:"cart",subj:"Locoregional CAR-T",fam:"around barrier",rung:"L5",score:62,band:"validated",measured:"a life",repl:"independent",status:"in trials",review:"ai",note:"Strongest functional responses on the map (ventricle/cavity delivery); IV dosing caused the toxicity, not the responses.",cites:["Monje 2025","Brown 2024"]},
-  {id:"fus",subj:"Focused ultrasound + microbubbles",fam:"around barrier",rung:"L5",score:56,band:"translational",measured:"barrier opened",repl:"independent",status:"in trials",review:"ai",note:"Opening the barrier is proven by six groups. Whether a drug through it helps is not — the outcome trial reports ~end-2026.",cites:["Lipsman 2018"]},
-  {id:"nusinersen",subj:"Intrathecal ASO (nusinersen)",fam:"around barrier",rung:"L5",score:70,band:"validated",measured:"a life",repl:"independent",status:"approved",review:"ai",note:"Real, replicated benefit — but for a spinal-cord disease; drug pools low, little reaches the cortex.",cites:["Ramos 2019"]},
-  {id:"brineura",subj:"ICV enzyme replacement (Brineura)",fam:"around barrier",rung:"L4",score:58,band:"translational",measured:"a life",repl:"same group (Schulz, Hamburg) — NOT independent",status:"approved",review:"disputed",note:"Slows the brain disease while the retinas degenerate untouched — the cleanest proof of incomplete reach. Rung lowered 2026-07-27: both supporting studies share a senior author, so the replication claim does not hold.",cites:["Brineura 2023","Front Neurol, 2025 (real-world)"]},
-  {id:"tofersen",subj:"Intrathecal ASO (tofersen)",fam:"around barrier",rung:"L4",score:44,band:"translational",measured:"a biomarker",repl:"single group",status:"approved",review:"ai",note:"Approved on a biomarker; the Phase 3 trial missed its clinical endpoint.",cites:["Tofersen 2023"]},
-  {id:"kebilidi",subj:"Direct intraparenchymal gene therapy",fam:"around barrier",rung:"L4",score:50,band:"translational",measured:"a life",repl:"route only",status:"approved",review:"ai",note:"First gene therapy injected straight into the brain — one nucleus, one shot, no distal spread.",cites:["Tai 2022"]},
-  {id:"aav9",subj:"Systemic AAV9 (Zolgensma)",fam:"through barrier",rung:"L4",score:52,band:"translational",measured:"a life",repl:"single group",status:"approved",review:"ai",note:"Human CNS transduction rests on a single n=2 autopsy; liver uptake 300–1000x the brain.",cites:["Thomsen 2021"]},
-  {id:"denali",subj:"TfR transcytosis (tividenofusp)",fam:"through barrier",rung:"L4",score:48,band:"translational",measured:"a biomarker",repl:"single group",status:"approved",review:"ai",note:"First BBB-crossing biologic approved (Mar 2026) — on a CSF-sugar surrogate; cognitive trial still running.",cites:["FDA 2026"]},
-  {id:"jcr",subj:"TfR fusion (pabinafusp)",fam:"through barrier",rung:"L4",score:42,band:"translational",measured:"a biomarker",repl:"single group",status:"approved (Japan)",review:"ai",note:"n=28, biomarker co-primary; cognitive claim is a post-hoc open-label subgroup.",cites:["Okuyama 2021"]},
-  {id:"roche",subj:"Brainshuttle antibody (trontinemab)",fam:"through barrier",rung:"L4",score:40,band:"emerging",measured:"a biomarker",repl:"single group",status:"in trials",review:"ai",note:"Clears plaque on PET; no evidence yet it slows decline. The 10–50x figure is a mouse/NHP number.",cites:["Klein 2025"]},
-  {id:"intranasal",subj:"Intranasal / nose-to-brain",fam:"through barrier",rung:"L4",score:30,band:"emerging",measured:"a biomarker",repl:"contested",status:"in trials",review:"ai",note:"The large human functional test (insulin for Alzheimer's) was null (P=.98). Esketamine is systemic, not nose-to-brain.",cites:["Craft 2020"]},
-  {id:"capsid",subj:"Engineered AAV capsid, IV (PHP.B)",fam:"through barrier",rung:"L2",score:18,band:"conceptual",measured:"nothing yet",repl:"independent (in mice)",status:"terminated",review:"disputed",note:"~10,000x mouse delivery via a receptor humans lack; failed every independent primate test; one human dosed, who died.",cites:["Hordeaux 2019","Capsida 2026"]},
-  {id:"bihtfr1",subj:"Human-TfR capsid (BI-hTFR1)",fam:"through barrier",rung:"L2",score:16,band:"conceptual",measured:"nothing yet",repl:"none",status:"preclinical",review:"ai",note:"Works in humanized mice; no independent human data.",cites:["Huang 2024"]},
-  {id:"lnp",subj:"Lipid nanoparticles, systemic",fam:"through barrier",rung:"L2",score:20,band:"conceptual",measured:"nothing yet",repl:"rodent",status:"preclinical",review:"ai",note:"Superb for liver; to brain from the bloodstream it is rodent-only, no human data.",cites:["Wang 2025"]},
-  {id:"exosomes",subj:"Engineered exosomes / EVs",fam:"through barrier",rung:"L2",score:14,band:"conceptual",measured:"nothing yet",repl:"none — primate study showed minimal parenchymal uptake",status:"preclinical",review:"ai",note:"Rodent evidence; the primate study found EVs in CSF but minimal brain parenchymal accumulation. No approvals. Presented as clinical-stage; on the evidence, preclinical.",cites:["Driedonks 2022"]},
-  {id:"ced",subj:"Convection-enhanced delivery",fam:"around barrier",rung:"L4",score:24,band:"emerging",measured:"nothing yet",repl:"failed twice",status:"trials failed",review:"disputed",note:"Both powered trials failed; ~half the catheters in one were misplaced. Bypass is real; verified coverage is not.",cites:["Kunwar 2010","Whone 2019"]}
-];
+
 
 var BOTTLENECKS = [
   {t:"Causal biological models",d:"Predicting how to move state X safely toward state Y — not merely recognising correlations.",sev:"hi"},

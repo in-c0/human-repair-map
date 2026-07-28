@@ -1,0 +1,19 @@
+{
+  "id": "intranasal",
+  "subject": "Intranasal / nose-to-brain",
+  "family": "through barrier",
+  "rung": "L4",
+  "grounding": "G1",
+  "measured": "biomarker",
+  "score": 30,
+  "replication": "contested — strongest independent human attempt was negative",
+  "status": "in trials",
+  "review": "ai-proposed",
+  "note": "The theory is mostly rodent-inferred. The large human functional test — intranasal insulin for Alzheimer's (SNIFF, n=289) — was null (P=.98). Esketamine works by ordinary systemic absorption and is not nose-to-brain evidence.",
+  "drift": "\"Bypasses the BBB via olfactory pathways\" — human data support only trace, highly variable CSF appearance, not meaningful parenchymal concentration.",
+  "citations": [
+    "Craft et al. (SNIFF), JAMA Neurol, 2020",
+    "Winterdahl et al., EJNMMI Res, 2025"
+  ],
+  "wouldMove": "Quantitative human evidence of therapeutic parenchymal concentration, plus a positive functional trial."
+}

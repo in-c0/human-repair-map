@@ -1,0 +1,19 @@
+{
+  "id": "brineura",
+  "subject": "ICV enzyme replacement (cerliponase alfa / Brineura)",
+  "family": "around barrier",
+  "rung": "L4",
+  "grounding": "G2",
+  "measured": "function",
+  "score": 58,
+  "replication": "NOT independent — both studies share a senior author (Schulz, Hamburg)",
+  "status": "approved 2017 (FDA)",
+  "review": "disputed",
+  "note": "Shown to slow the brain disease. Rung lowered 2026-07-27: the two supporting studies share a senior author, so the independent-replication claim does not hold. The children's retinas degenerate on schedule, untouched — the enzyme poured into the centre of the brain never reaches them.",
+  "drift": "\"ICV distributes enzyme through the brain\" — the retinal finding is the cleanest human proof of incomplete reach.",
+  "citations": [
+    "Lancet Neurol, 2023 (open-label extension)",
+    "Front Neurol, 2025 (real-world)"
+  ],
+  "wouldMove": "Evidence of enzyme reaching distal/ocular compartments would extend the distribution claim."
+}

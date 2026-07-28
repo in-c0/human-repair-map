@@ -1,0 +1,19 @@
+{
+  "id": "denali",
+  "subject": "TfR receptor-mediated transcytosis (tividenofusp alfa)",
+  "family": "through barrier",
+  "rung": "L4",
+  "grounding": "G2",
+  "measured": "biomarker",
+  "score": 48,
+  "replication": "none (concept cross-confirmed by an unaffiliated TfR construct)",
+  "status": "approved 2026-03-25 (FDA, accelerated)",
+  "review": "ai-proposed",
+  "note": "First BBB-crossing biologic approved. Rests on a 91% drop in CSF heparan sulfate, a surrogate. The confirmatory cognitive trial (COMPASS) is still running. No human measurement of enzyme in brain parenchyma.",
+  "drift": "\"A drug that crosses the BBB and treats neurologic Hunter syndrome\" — what was shown is a CSF sugar falling, with no proven cognitive benefit.",
+  "citations": [
+    "FDA approval, 2026",
+    "Phase 1/2, NEJM, 2026"
+  ],
+  "wouldMove": "COMPASS reading out a cognitive/functional benefit would convert the surrogate into demonstrated function."
+}

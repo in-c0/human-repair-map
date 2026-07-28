@@ -1,0 +1,19 @@
+{
+  "id": "kebilidi",
+  "subject": "Direct intraparenchymal gene therapy (eladocagene / Kebilidi / Upstaza)",
+  "family": "around barrier",
+  "rung": "L4",
+  "grounding": "G2",
+  "measured": "function",
+  "score": 50,
+  "replication": "route replicated (different product, unaffiliated group)",
+  "status": "approved EU 2022 / FDA 2024",
+  "review": "ai-proposed",
+  "note": "First gene therapy administered directly into brain tissue in the US. A virus infused into one deep structure, the putamen: precise, single-shot, essentially zero distal distribution.",
+  "drift": "Viable only for rare diseases whose whole problem sits in one anatomically defined place.",
+  "citations": [
+    "Tai et al., Mol Ther, 2022",
+    "Pearson/Bankiewicz et al., Nat Commun, 2021"
+  ],
+  "wouldMove": "An unaffiliated group replicating this product's outcome would lift it from single-group to independent."
+}

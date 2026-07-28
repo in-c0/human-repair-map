@@ -1,0 +1,19 @@
+{
+  "id": "lnp",
+  "subject": "Lipid nanoparticles to brain, systemic",
+  "family": "through barrier",
+  "rung": "L2",
+  "grounding": "G1",
+  "measured": "none",
+  "score": 20,
+  "replication": "independent (rodent only)",
+  "status": "preclinical",
+  "review": "ai-proposed",
+  "note": "Rodent only. No human data and no registered human trial for brain delivery. The one human GBM LNP trial (n=3) works via peripheral immune signalling, not BBB crossing.",
+  "drift": "\"LNPs can now cross the BBB\" describes reporter mRNA in mouse brain.",
+  "citations": [
+    "Wang et al., Nat Mater, 2025",
+    "Sayour et al., Cell, 2024"
+  ],
+  "wouldMove": "A non-human-primate systemic study showing brain parenchymal delivery, then first-in-human."
+}

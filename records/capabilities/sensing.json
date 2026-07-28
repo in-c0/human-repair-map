@@ -1,0 +1,18 @@
+{
+  "id": "sensing",
+  "code": "CAP-01",
+  "title": "Sufficient biological sensing",
+  "score": 34,
+  "interval": [
+    27,
+    42
+  ],
+  "review": "in-review",
+  "summary": "Measure the living system at the resolution needed to decide and verify a safe intervention.",
+  "depends": [],
+  "blocks": [
+    "target-state",
+    "delivery",
+    "verification"
+  ]
+}

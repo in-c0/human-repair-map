@@ -1,0 +1,19 @@
+{
+  "id": "roche",
+  "subject": "Brainshuttle antibody (trontinemab)",
+  "family": "through barrier",
+  "rung": "L4",
+  "grounding": "G1",
+  "measured": "biomarker",
+  "score": 40,
+  "replication": "none — all sponsor-generated",
+  "status": "Phase 3, not approved",
+  "review": "ai-proposed",
+  "note": "Clears amyloid plaque on PET at low ARIA. The only direct human exposure number is a CSF:plasma ratio of 0.8%, and CSF is a poor proxy for parenchyma.",
+  "drift": "\"Brainshuttle validated\" — the 10–50x brain-uptake figure is a mouse/NHP number; the human data are one CSF ratio and a plaque-clearance response.",
+  "citations": [
+    "Klein et al., Alzheimers Dement, 2025",
+    "Grimm et al., mAbs, 2023"
+  ],
+  "wouldMove": "TRONTIER Phase 3 showing slowed cognitive decline; or direct human parenchymal measurement (PET/autopsy)."
+}

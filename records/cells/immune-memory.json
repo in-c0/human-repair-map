@@ -1,0 +1,41 @@
+{
+  "id": "immune-memory",
+  "name": "Immune memory",
+  "system": "Blood & immune",
+  "kind": "non-cell",
+  "renewal": "dynamic",
+  "failures": "Autoimmune memory that will not forget, allergic sensitisation, immunosenescence, vaccine non-response with age.",
+  "capabilities": {
+    "see": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Repertoire sequencing reads the whole memory from a blood draw — unusually good visibility."
+    },
+    "model": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "No specification of a healthy repertoire beyond statistical description."
+    },
+    "reach": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Distributed across the body with no single location to target."
+    },
+    "edit": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Allergen immunotherapy retrains it slowly. Autoimmune tolerance induction remains unreliable."
+    },
+    "verify": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Repertoire shifts measurable; clinical meaning uncertain."
+    }
+  },
+  "anchors": [
+    "Oral immunotherapy for peanut allergy, FDA 2020 — partial, slow, reversible"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 0
+}

@@ -1,0 +1,41 @@
+{
+  "id": "glia",
+  "name": "Glia (astrocyte, oligodendrocyte, microglia)",
+  "system": "Nervous system",
+  "kind": "cell",
+  "renewal": "limited",
+  "failures": "Reactive gliosis forming the scar that blocks CNS repair, demyelination, chronic neuroinflammation.",
+  "capabilities": {
+    "see": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "PET ligands report microglial activation coarsely; astrocyte state is inaccessible."
+    },
+    "model": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Reactive gliosis is protective and obstructive at once. No agreed healthy target."
+    },
+    "reach": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Same barrier problem as neurons, with less cell-type specificity."
+    },
+    "edit": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Remyelination remains unachieved in humans despite decades of trials."
+    },
+    "verify": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Imaging proxies only."
+    }
+  },
+  "anchors": [
+    "Zebrafish Müller glia regenerate retina; human glia do not"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 1
+}

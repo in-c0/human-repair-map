@@ -1,0 +1,42 @@
+{
+  "id": "cardiomyocyte",
+  "name": "Cardiomyocyte",
+  "system": "Cardiovascular",
+  "kind": "cell",
+  "renewal": "post-mitotic",
+  "failures": "Ischaemic death replaced by scar, hypertrophy, inherited cardiomyopathy. Essentially no human renewal.",
+  "capabilities": {
+    "see": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Echo and MRI measure function; troponin reports death. Cell state is invisible in vivo."
+    },
+    "model": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Zebrafish and neonatal mice regenerate heart muscle, so a target state exists — not in adult humans."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "AAV9 has useful cardiac tropism; trials in Danon disease and cardiomyopathy are running."
+    },
+    "edit": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "No approved cardiomyocyte-directed therapy. Scar replaces muscle faster than regeneration."
+    },
+    "verify": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Ejection fraction and imaging; no cell-level confirmation."
+    }
+  },
+  "anchors": [
+    "RP-A501 for Danon disease, Phase 1",
+    "Zebrafish cardiac regeneration literature"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 3
+}

@@ -1,0 +1,42 @@
+{
+  "id": "bone-cell",
+  "name": "Osteoblast / osteoclast",
+  "system": "Musculoskeletal",
+  "kind": "cell",
+  "renewal": "self-renewing",
+  "failures": "Osteoporotic imbalance, non-union fracture, osteogenesis imperfecta.",
+  "capabilities": {
+    "see": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "DEXA measures density, not cell activity; turnover markers are indirect."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Bone remodelling balance is well understood."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Bisphosphonates and denosumab reach and modulate these cells effectively."
+    },
+    "edit": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Pharmacological modulation, not cell repair or replacement."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "DEXA and fracture incidence are solid endpoints."
+    }
+  },
+  "anchors": [
+    "Denosumab, FDA 2010",
+    "Bone is one of few tissues that truly self-repairs"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 6
+}

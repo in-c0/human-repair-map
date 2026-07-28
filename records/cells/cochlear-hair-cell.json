@@ -1,0 +1,42 @@
+{
+  "id": "cochlear-hair-cell",
+  "name": "Cochlear hair cell",
+  "system": "Sensory",
+  "kind": "cell",
+  "renewal": "post-mitotic",
+  "failures": "Noise, ototoxic and age-related loss. Birds regenerate these; mammals do not.",
+  "capabilities": {
+    "see": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Audiometry measures function, not cells. No way to image hair cells in a living human."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Avian regeneration shows the target state exists biologically."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Intracochlear injection works but the cochlea is small, fluid-filled and easily damaged."
+    },
+    "edit": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "OTOF gene therapy restored hearing in congenitally deaf children, 2024 trials. One genotype."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Audiometry is precise and repeatable."
+    }
+  },
+  "anchors": [
+    "OTOF gene therapy trials, 2024",
+    "Avian hair-cell regeneration literature"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 2
+}

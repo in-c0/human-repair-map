@@ -475,3 +475,1288 @@ export const ROUTES = [
     "wouldMove": "The confirmatory ATLAS trial showing a functional benefit would convert a surrogate approval into demonstrated function."
   }
 ];
+
+export const CELLS = [
+  {
+    "id": "adipocyte",
+    "name": "Adipocyte",
+    "system": "Endocrine & metabolic",
+    "kind": "cell",
+    "renewal": "limited",
+    "failures": "Hypertrophic dysfunction, ectopic deposition, lipodystrophy, inflammatory secretion.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "MRI and DEXA quantify fat depots precisely and non-invasively."
+      },
+      "model": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Healthy adiposity varies enormously between individuals."
+      },
+      "reach": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Accessible by volume but not specifically targetable."
+      },
+      "edit": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Incretin drugs change mass by changing behaviour and metabolism, not by editing cells."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Mass and distribution are easy to measure."
+      }
+    },
+    "anchors": [
+      "GLP-1 agonists act systemically, not on the adipocyte directly"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 5
+  },
+  {
+    "id": "alveolar-epithelium",
+    "name": "Alveolar epithelium",
+    "system": "Organ epithelia",
+    "kind": "cell",
+    "renewal": "limited",
+    "failures": "Fibrosis, emphysematous destruction, cystic fibrosis channel defects, acute injury.",
+    "capabilities": {
+      "see": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "CT shows architecture; bronchoscopy samples focally. No cell-state map."
+      },
+      "model": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Alveolar architecture, once destroyed, is not re-formed."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Inhalation delivers to airway surface; alveolar and basal cell targeting is inefficient."
+      },
+      "edit": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Inhaled mRNA and gene editing for CF are in early trials. Modulators treat protein, not cells."
+      },
+      "verify": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Spirometry is a good functional readout."
+      }
+    },
+    "anchors": [
+      "Inhaled CF gene-editing programmes, early Phase"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 4
+  },
+  {
+    "id": "beta-cell",
+    "name": "Pancreatic islet β-cell",
+    "system": "Endocrine & metabolic",
+    "kind": "cell",
+    "renewal": "minimal",
+    "failures": "Autoimmune destruction in type 1, exhaustion in type 2. Silent until most mass is already gone.",
+    "capabilities": {
+      "see": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "THE binding gap: there is no clinical way to measure β-cell mass in a living person."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Glucose control gives a clear functional target."
+      },
+      "reach": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Pancreas is deep, diffuse and enzymatically hostile; islets are a tiny fraction of tissue."
+      },
+      "edit": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Stem-cell-derived islets produced insulin independence in early trials, but require immunosuppression."
+      },
+      "verify": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "C-peptide and continuous glucose monitoring are good functional readouts."
+      }
+    },
+    "anchors": [
+      "VX-880 stem-cell-derived islets, Phase 1/2",
+      "Autoimmunity persists as the chronic driver"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 5
+  },
+  {
+    "id": "bone-cell",
+    "name": "Osteoblast / osteoclast",
+    "system": "Musculoskeletal",
+    "kind": "cell",
+    "renewal": "self-renewing",
+    "failures": "Osteoporotic imbalance, non-union fracture, osteogenesis imperfecta.",
+    "capabilities": {
+      "see": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "DEXA measures density, not cell activity; turnover markers are indirect."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Bone remodelling balance is well understood."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Bisphosphonates and denosumab reach and modulate these cells effectively."
+      },
+      "edit": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Pharmacological modulation, not cell repair or replacement."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "DEXA and fracture incidence are solid endpoints."
+      }
+    },
+    "anchors": [
+      "Denosumab, FDA 2010",
+      "Bone is one of few tissues that truly self-repairs"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 6
+  },
+  {
+    "id": "cardiomyocyte",
+    "name": "Cardiomyocyte",
+    "system": "Cardiovascular",
+    "kind": "cell",
+    "renewal": "post-mitotic",
+    "failures": "Ischaemic death replaced by scar, hypertrophy, inherited cardiomyopathy. Essentially no human renewal.",
+    "capabilities": {
+      "see": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Echo and MRI measure function; troponin reports death. Cell state is invisible in vivo."
+      },
+      "model": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Zebrafish and neonatal mice regenerate heart muscle, so a target state exists — not in adult humans."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "AAV9 has useful cardiac tropism; trials in Danon disease and cardiomyopathy are running."
+      },
+      "edit": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "No approved cardiomyocyte-directed therapy. Scar replaces muscle faster than regeneration."
+      },
+      "verify": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Ejection fraction and imaging; no cell-level confirmation."
+      }
+    },
+    "anchors": [
+      "RP-A501 for Danon disease, Phase 1",
+      "Zebrafish cardiac regeneration literature"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 3
+  },
+  {
+    "id": "chondrocyte",
+    "name": "Chondrocyte (articular cartilage)",
+    "system": "Musculoskeletal",
+    "kind": "cell",
+    "renewal": "none",
+    "failures": "Focal defects and diffuse osteoarthritic loss. Avascular, so no repair signal reaches it.",
+    "capabilities": {
+      "see": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "MRI images cartilage thickness and defects well."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Hyaline cartilage is a clear target that repair never produces."
+      },
+      "reach": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Avascular: no blood supply to deliver through. Intra-articular injection is the only route."
+      },
+      "edit": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "MACI is approved but yields mechanically inferior fibrocartilage, not hyaline."
+      },
+      "verify": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "MRI and function scores."
+      }
+    },
+    "anchors": [
+      "MACI, FDA 2016",
+      "Avascularity is the mechanistic blocker"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 6
+  },
+  {
+    "id": "cns-neuron",
+    "name": "Central neuron",
+    "system": "Nervous system",
+    "kind": "cell",
+    "renewal": "post-mitotic",
+    "failures": "Neurodegeneration, stroke infarction, trauma. Glial scar blocks regrowth; no meaningful replacement.",
+    "capabilities": {
+      "see": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Imaging and CSF markers are indirect. No single-cell state in a living brain."
+      },
+      "model": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "The substrate is identity — a healthy target state cannot be specified without specifying the person."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Intrathecal delivery reaches spinal cord; nothing reaches brain broadly. See the CNS delivery module."
+      },
+      "edit": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Nusinersen treats a spinal motor-neuron disease. No neuron has been replaced in a human."
+      },
+      "verify": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Clinical scores and biomarkers; no direct confirmation of cell-level change."
+      }
+    },
+    "anchors": [
+      "Nusinersen (Spinraza), FDA 2016",
+      "CNS delivery module, this map"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 1
+  },
+  {
+    "id": "cochlear-hair-cell",
+    "name": "Cochlear hair cell",
+    "system": "Sensory",
+    "kind": "cell",
+    "renewal": "post-mitotic",
+    "failures": "Noise, ototoxic and age-related loss. Birds regenerate these; mammals do not.",
+    "capabilities": {
+      "see": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Audiometry measures function, not cells. No way to image hair cells in a living human."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Avian regeneration shows the target state exists biologically."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Intracochlear injection works but the cochlea is small, fluid-filled and easily damaged."
+      },
+      "edit": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "OTOF gene therapy restored hearing in congenitally deaf children, 2024 trials. One genotype."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Audiometry is precise and repeatable."
+      }
+    },
+    "anchors": [
+      "OTOF gene therapy trials, 2024",
+      "Avian hair-cell regeneration literature"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 2
+  },
+  {
+    "id": "corneal-epithelium",
+    "name": "Corneal epithelium / limbal stem cell",
+    "system": "Sensory",
+    "kind": "cell",
+    "renewal": "self-renewing",
+    "failures": "Limbal stem cell deficiency after chemical burns, scarring, dystrophies.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Slit lamp and OCT image it directly and non-invasively."
+      },
+      "model": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "A clear cornea is an unambiguous target state."
+      },
+      "reach": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Surgically accessible; grafts placed directly."
+      },
+      "edit": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Holoclar, autologous limbal stem cells, EU 2015 — genuine tissue restoration."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Corneal clarity and visual acuity."
+      }
+    },
+    "anchors": [
+      "Holoclar, EMA 2015"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 2
+  },
+  {
+    "id": "endocrine-cell",
+    "name": "Thyroid / adrenal endocrine cell",
+    "system": "Endocrine & metabolic",
+    "kind": "cell",
+    "renewal": "minimal",
+    "failures": "Autoimmune destruction, nodular disease, adrenal insufficiency.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Circulating hormone levels are near-ideal functional proxies."
+      },
+      "model": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Target hormone ranges are well established."
+      },
+      "reach": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Small, deep, diffuse. Not specifically reachable."
+      },
+      "edit": {
+        "grade": "L1",
+        "blocked": "science",
+        "note": "Nobody repairs these cells. Hormone replacement substitutes the output — permanently."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Hormone assays are precise and cheap."
+      }
+    },
+    "anchors": [
+      "Levothyroxine substitutes function without touching the gland"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 5
+  },
+  {
+    "id": "endothelium",
+    "name": "Vascular endothelium",
+    "system": "Cardiovascular",
+    "kind": "cell",
+    "renewal": "limited",
+    "failures": "Dysfunction preceding atherosclerosis, barrier breakdown, capillary rarefaction with age.",
+    "capabilities": {
+      "see": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Function assessed indirectly by flow-mediated dilation; cell state inaccessible."
+      },
+      "model": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Healthy endothelial phenotype is defined by behaviour, not a measurable set-point."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "The first cells anything intravenous touches."
+      },
+      "edit": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "No endothelium-directed cell therapy. Risk factors are managed instead."
+      },
+      "verify": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Functional proxies only."
+      }
+    },
+    "anchors": [
+      "Endothelial dysfunction precedes visible atherosclerosis by decades"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 3
+  },
+  {
+    "id": "extracellular-matrix",
+    "name": "Extracellular matrix",
+    "system": "Structural & connective",
+    "kind": "non-cell",
+    "renewal": "slow turnover",
+    "failures": "Collagen crosslinking with age, basement membrane failure, scar deposition, elastin loss that never regenerates.",
+    "capabilities": {
+      "see": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Histology on biopsy; almost nothing in a living person."
+      },
+      "model": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "No specification exists for healthy matrix composition by tissue and age."
+      },
+      "reach": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Acellular and secreted — there is no cell to target for most of it."
+      },
+      "edit": {
+        "grade": "L1",
+        "blocked": "science",
+        "note": "Crosslink breakers have repeatedly failed. Elastin is not replaced after development."
+      },
+      "verify": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Barely measurable in vivo."
+      }
+    },
+    "anchors": [
+      "Elastin synthesis largely ceases after adolescence"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 8
+  },
+  {
+    "id": "fibroblast",
+    "name": "Fibroblast",
+    "system": "Structural & connective",
+    "kind": "cell",
+    "renewal": "self-renewing",
+    "failures": "Fibrosis — the scar response that outcompetes regeneration across heart, lung, liver, kidney and CNS.",
+    "capabilities": {
+      "see": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Activated states identifiable in biopsy; no in vivo readout."
+      },
+      "model": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "The gap: nobody can specify a healthy fibroblast set-point, only pathological activation."
+      },
+      "reach": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Ubiquitous and non-specific, which makes selective targeting hard."
+      },
+      "edit": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Two antifibrotics slow lung fibrosis. No therapy reverses established scar in any organ."
+      },
+      "verify": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Fibrosis regression is barely measurable in vivo."
+      }
+    },
+    "anchors": [
+      "Nintedanib and pirfenidone slow, never reverse, pulmonary fibrosis"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 8
+  },
+  {
+    "id": "germline",
+    "name": "Germline (oocyte / spermatogonium)",
+    "system": "Reproductive",
+    "kind": "cell",
+    "renewal": "sperm only",
+    "failures": "Age-related oocyte aneuploidy, heritable mutation, infertility.",
+    "capabilities": {
+      "see": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Accessible and assessable through assisted reproduction."
+      },
+      "model": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Euploidy is a clear target; the oocyte ageing mechanism is not solved."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Ex vivo access is routine in IVF."
+      },
+      "edit": {
+        "grade": "L1",
+        "blocked": "framework",
+        "note": "Technically demonstrated. Heritable human editing is prohibited nearly everywhere — the clearest framework-blocked row on this map."
+      },
+      "verify": {
+        "grade": "L2",
+        "blocked": "framework",
+        "note": "Verification would require following a person across a lifetime, which the prohibition forecloses."
+      }
+    },
+    "anchors": [
+      "Heritable genome editing prohibited across most jurisdictions since 2015 consensus"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 9
+  },
+  {
+    "id": "glia",
+    "name": "Glia (astrocyte, oligodendrocyte, microglia)",
+    "system": "Nervous system",
+    "kind": "cell",
+    "renewal": "limited",
+    "failures": "Reactive gliosis forming the scar that blocks CNS repair, demyelination, chronic neuroinflammation.",
+    "capabilities": {
+      "see": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "PET ligands report microglial activation coarsely; astrocyte state is inaccessible."
+      },
+      "model": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Reactive gliosis is protective and obstructive at once. No agreed healthy target."
+      },
+      "reach": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Same barrier problem as neurons, with less cell-type specificity."
+      },
+      "edit": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Remyelination remains unachieved in humans despite decades of trials."
+      },
+      "verify": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Imaging proxies only."
+      }
+    },
+    "anchors": [
+      "Zebrafish Müller glia regenerate retina; human glia do not"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 1
+  },
+  {
+    "id": "gut-epithelium",
+    "name": "Intestinal epithelium",
+    "system": "Organ epithelia",
+    "kind": "cell",
+    "renewal": "self-renewing",
+    "failures": "Barrier failure, inflammatory destruction, malignant transformation. Renews every few days.",
+    "capabilities": {
+      "see": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Endoscopy and biopsy are routine and direct."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Continuous renewal from a defined stem compartment."
+      },
+      "reach": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Oral delivery reaches the lumen; targeting epithelial cells specifically is unsolved."
+      },
+      "edit": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "No approved cell-directed therapy; immunosuppression treats the driver instead."
+      },
+      "verify": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Endoscopic healing is a validated endpoint."
+      }
+    },
+    "anchors": [
+      "Crypt stem cell renewal is among the fastest in the body"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 4
+  },
+  {
+    "id": "hepatocyte",
+    "name": "Hepatocyte",
+    "system": "Organ epithelia",
+    "kind": "cell",
+    "renewal": "regenerative",
+    "failures": "Steatosis, fibrosis to cirrhosis, metabolic enzyme deficiency, drug injury. The liver regrows mass readily but scars irreversibly.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Biopsy, elastography and serum enzymes are routine clinical practice."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Regeneration is well characterised; the healthy set-point for a diseased liver is less clear."
+      },
+      "reach": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "The solved delivery problem. Lipid nanoparticles land in liver by default — patisiran approved 2018."
+      },
+      "edit": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "In vivo CRISPR: NTLA-2001 for ATTR amyloidosis; base editing for PCSK9 in trials."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Circulating protein levels give a direct, repeatable readout."
+      }
+    },
+    "anchors": [
+      "Patisiran (Onpattro), FDA 2018",
+      "NTLA-2001 in vivo CRISPR, NEJM 2021"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 4
+  },
+  {
+    "id": "hsc",
+    "name": "Haematopoietic stem cell",
+    "system": "Blood & immune",
+    "kind": "cell",
+    "renewal": "self-renewing",
+    "failures": "Inherited haemoglobin and immune defects, clonal expansion to leukaemia, age-related clonal haematopoiesis.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Marrow aspirate and flow cytometry are standard."
+      },
+      "model": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Lineage output is well defined and measurable."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Ex vivo only: harvest, edit outside the body, reinfuse. In vivo HSC targeting is unsolved."
+      },
+      "edit": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Casgevy, ex vivo CRISPR for sickle cell disease, FDA 2023."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Chimerism and haemoglobin fractions are directly measurable."
+      }
+    },
+    "anchors": [
+      "Casgevy (exagamglogene autotemcel), FDA 2023",
+      "Lyfgenia, FDA 2023"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 0
+  },
+  {
+    "id": "immune-memory",
+    "name": "Immune memory",
+    "system": "Blood & immune",
+    "kind": "non-cell",
+    "renewal": "dynamic",
+    "failures": "Autoimmune memory that will not forget, allergic sensitisation, immunosenescence, vaccine non-response with age.",
+    "capabilities": {
+      "see": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Repertoire sequencing reads the whole memory from a blood draw — unusually good visibility."
+      },
+      "model": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "No specification of a healthy repertoire beyond statistical description."
+      },
+      "reach": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Distributed across the body with no single location to target."
+      },
+      "edit": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Allergen immunotherapy retrains it slowly. Autoimmune tolerance induction remains unreliable."
+      },
+      "verify": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Repertoire shifts measurable; clinical meaning uncertain."
+      }
+    },
+    "anchors": [
+      "Oral immunotherapy for peanut allergy, FDA 2020 — partial, slow, reversible"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 0
+  },
+  {
+    "id": "keratinocyte",
+    "name": "Keratinocyte",
+    "system": "Skin",
+    "kind": "cell",
+    "renewal": "self-renewing",
+    "failures": "Blistering from structural gene defects, impaired wound healing, malignant transformation.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Directly visible and biopsy is trivial."
+      },
+      "model": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Healthy epidermis is unambiguous and continuously renewed."
+      },
+      "reach": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Topical. Vyjuvek is a gel applied to the wound."
+      },
+      "edit": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Vyjuvek, topical HSV-1 vector for dystrophic epidermolysis bullosa, FDA 2023."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Wound closure is observed by eye."
+      }
+    },
+    "anchors": [
+      "Vyjuvek (beremagene geperpavec), FDA 2023"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 7
+  },
+  {
+    "id": "melanocyte",
+    "name": "Melanocyte",
+    "system": "Skin",
+    "kind": "cell",
+    "renewal": "limited",
+    "failures": "Autoimmune loss in vitiligo, malignant transformation to melanoma.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Directly visible; dermoscopy and biopsy are routine."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Repigmentation is an unambiguous target."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Topical and intralesional access is straightforward."
+      },
+      "edit": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "JAK inhibitors modulate the autoimmune driver; melanocytes are not repaired or replaced."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Repigmentation is visible and photographable."
+      }
+    },
+    "anchors": [
+      "Ruxolitinib cream for vitiligo, FDA 2022 — treats the driver, not the cell"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 7
+  },
+  {
+    "id": "microbiome",
+    "name": "Microbiome",
+    "system": "Cross-cutting",
+    "kind": "non-cell",
+    "renewal": "self-renewing",
+    "failures": "Dysbiosis after antibiotics, loss of diversity, C. difficile overgrowth. Not human cells at all.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Metagenomic sequencing of stool is cheap and comprehensive."
+      },
+      "model": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Nobody can specify a healthy microbiome; it varies enormously between healthy people."
+      },
+      "reach": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Oral and rectal routes reach it directly."
+      },
+      "edit": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Faecal transplant products approved 2022–23 for recurrent C. difficile. Crude but effective."
+      },
+      "verify": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Engraftment measurable by sequencing; clinical endpoints clear for C. diff."
+      }
+    },
+    "anchors": [
+      "Rebyota, FDA 2022",
+      "Vowst, FDA 2023"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 10
+  },
+  {
+    "id": "mineralised-structure",
+    "name": "Mineralised structure",
+    "system": "Musculoskeletal",
+    "kind": "non-cell",
+    "renewal": "bone only",
+    "failures": "Osteoporotic loss, enamel erosion that never regenerates, non-union fractures.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "DEXA and CT quantify mineral directly."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Density and microarchitecture targets are established."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Bone-seeking agents localise well."
+      },
+      "edit": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Bone remodels and can be pharmacologically shifted. Enamel is never regenerated once lost."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "DEXA and fracture rates."
+      }
+    },
+    "anchors": [
+      "Enamel is acellular and has no regenerative capacity in humans"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 6
+  },
+  {
+    "id": "nephron-epithelium",
+    "name": "Nephron epithelium",
+    "system": "Organ epithelia",
+    "kind": "cell",
+    "renewal": "minimal",
+    "failures": "Progressive fibrosis, tubular injury, glomerular loss. Nephrons are never rebuilt after birth.",
+    "capabilities": {
+      "see": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "eGFR reports whole-organ function; biopsy is invasive and focal."
+      },
+      "model": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Nephron architecture is a 3-D pattern cells do not re-derive."
+      },
+      "reach": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Filtration means most agents pass through rather than into tubular cells."
+      },
+      "edit": {
+        "grade": "L1",
+        "blocked": "science",
+        "note": "No approved therapy repairs or replaces nephron cells. Dialysis substitutes function."
+      },
+      "verify": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "eGFR and proteinuria are reliable functional measures."
+      }
+    },
+    "anchors": [
+      "Nephron endowment is fixed at birth in humans"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 4
+  },
+  {
+    "id": "neural-connectivity",
+    "name": "Neural connectivity",
+    "system": "Nervous system",
+    "kind": "non-cell",
+    "renewal": "plasticity only",
+    "failures": "Disconnection from stroke and trauma, synaptic loss in dementia, maladaptive rewiring in chronic pain.",
+    "capabilities": {
+      "see": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Full connectomes exist only post-mortem. Living imaging is orders of magnitude too coarse."
+      },
+      "model": {
+        "grade": "L1",
+        "blocked": "science",
+        "note": "The hardest cell on this grid: a healthy connectome is the person, so the target state is the identity."
+      },
+      "reach": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Deep brain stimulation modulates activity; it does not rewire."
+      },
+      "edit": {
+        "grade": "L1",
+        "blocked": "science",
+        "note": "No human wiring has been deliberately restored. Rehabilitation exploits existing plasticity."
+      },
+      "verify": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Behaviour is the only readout, and it is confounded."
+      }
+    },
+    "anchors": [
+      "Deep brain stimulation modulates circuits without rewiring them"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 1
+  },
+  {
+    "id": "peripheral-neuron",
+    "name": "Peripheral neuron",
+    "system": "Nervous system",
+    "kind": "cell",
+    "renewal": "regenerative axon",
+    "failures": "Transection, diabetic and chemotherapy neuropathy, compression. Axons regrow, slowly and imperfectly.",
+    "capabilities": {
+      "see": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Nerve conduction studies and EMG are routine."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Reinnervation of a known target is a clear goal."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Surgically accessible at specific sites; diffuse neuropathy is not addressable."
+      },
+      "edit": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Surgical repair and conduits assist regrowth; no cell-level therapy."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Conduction and function are directly measurable."
+      }
+    },
+    "anchors": [
+      "Peripheral nerve regeneration is a genuine biological capability humans retain"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 1
+  },
+  {
+    "id": "photoreceptor-rpe",
+    "name": "Photoreceptor / retinal pigment epithelium",
+    "system": "Sensory",
+    "kind": "cell",
+    "renewal": "post-mitotic",
+    "failures": "Inherited retinal dystrophy, macular degeneration, photoreceptor death. No human regeneration.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Adaptive-optics imaging resolves individual cones in a living eye."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Structure is well mapped; restoring degenerated architecture is not solved."
+      },
+      "reach": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Subretinal injection into a small, immune-privileged, enclosed compartment."
+      },
+      "edit": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Luxturna corrects RPE65 in one genotype; broader photoreceptor rescue remains unproven."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Visual function and OCT structure both measurable."
+      }
+    },
+    "anchors": [
+      "Luxturna (voretigene neparvovec), FDA 2017"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 2
+  },
+  {
+    "id": "skeletal-muscle",
+    "name": "Skeletal muscle fibre / satellite cell",
+    "system": "Musculoskeletal",
+    "kind": "cell",
+    "renewal": "regenerative",
+    "failures": "Dystrophies, sarcopenia with age, denervation atrophy, cachexia.",
+    "capabilities": {
+      "see": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Biopsy and MRI work; whole-body fibre-level state does not exist."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Healthy muscle is well characterised; the ageing set-point is contested."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Systemic AAV reaches muscle but total body mass makes dose the binding limit."
+      },
+      "edit": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Elevidys for Duchenne, FDA 2023 — accelerated, and the benefit remains debated."
+      },
+      "verify": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Function tests and dystrophin expression; long-term durability unproven."
+      }
+    },
+    "anchors": [
+      "Elevidys (delandistrogene moxeparvovec), FDA 2023"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 6
+  },
+  {
+    "id": "smooth-muscle",
+    "name": "Smooth muscle cell",
+    "system": "Cardiovascular",
+    "kind": "cell",
+    "renewal": "limited",
+    "failures": "Phenotype switching in atherosclerosis, airway remodelling, aneurysm wall failure.",
+    "capabilities": {
+      "see": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Imaging shows vessel structure, not cell phenotype."
+      },
+      "model": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Contractile versus synthetic phenotype is a spectrum with no clear set-point."
+      },
+      "reach": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Reachable in vessel walls but not selectively."
+      },
+      "edit": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "No cell-directed therapy; stents and drugs address consequences."
+      },
+      "verify": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Structural imaging only."
+      }
+    },
+    "anchors": [
+      "Smooth muscle phenotype switching drives plaque instability"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 3
+  },
+  {
+    "id": "t-lymphocyte",
+    "name": "T lymphocyte",
+    "system": "Blood & immune",
+    "kind": "cell",
+    "renewal": "self-renewing",
+    "failures": "Exhaustion, autoreactivity, immunodeficiency, malignancy, age-related repertoire narrowing.",
+    "capabilities": {
+      "see": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Flow cytometry and repertoire sequencing from a blood draw."
+      },
+      "model": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "A healthy repertoire is describable statistically, not specified precisely."
+      },
+      "reach": {
+        "grade": "L4",
+        "blocked": "science",
+        "note": "Ex vivo engineering is routine; in vivo CAR generation is early-stage."
+      },
+      "edit": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Six approved CAR-T products since 2017."
+      },
+      "verify": {
+        "grade": "L5",
+        "blocked": "none",
+        "note": "Persistence and expansion tracked directly in blood."
+      }
+    },
+    "anchors": [
+      "Kymriah, FDA 2017",
+      "In vivo CAR-T programmes, preclinical to Phase 1"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 0
+  },
+  {
+    "id": "tissue-architecture",
+    "name": "Tissue architecture",
+    "system": "Structural & connective",
+    "kind": "non-cell",
+    "renewal": "none",
+    "failures": "Alveolar destruction, nephron loss, cortical disorganisation. A 3-D pattern that cells do not re-derive alone.",
+    "capabilities": {
+      "see": {
+        "grade": "L4",
+        "blocked": "none",
+        "note": "Imaging shows architecture well — this is what CT and MRI are for."
+      },
+      "model": {
+        "grade": "L2",
+        "blocked": "science",
+        "note": "Positional information is the thing an axolotl has and we lack."
+      },
+      "reach": {
+        "grade": "L1",
+        "blocked": "science",
+        "note": "You cannot deliver to a pattern."
+      },
+      "edit": {
+        "grade": "L1",
+        "blocked": "science",
+        "note": "Organoids self-organise in vitro at millimetre scale. Nothing rebuilds architecture in a human."
+      },
+      "verify": {
+        "grade": "L3",
+        "blocked": "science",
+        "note": "Imaging can confirm structure if it were ever restored."
+      }
+    },
+    "anchors": [
+      "Organoid self-organisation, in vitro only",
+      "Axolotl positional memory literature"
+    ],
+    "review": "ai-proposed",
+    "lastChecked": "2026-07-28",
+    "order": 8
+  }
+];

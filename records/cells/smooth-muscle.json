@@ -1,0 +1,41 @@
+{
+  "id": "smooth-muscle",
+  "name": "Smooth muscle cell",
+  "system": "Cardiovascular",
+  "kind": "cell",
+  "renewal": "limited",
+  "failures": "Phenotype switching in atherosclerosis, airway remodelling, aneurysm wall failure.",
+  "capabilities": {
+    "see": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Imaging shows vessel structure, not cell phenotype."
+    },
+    "model": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Contractile versus synthetic phenotype is a spectrum with no clear set-point."
+    },
+    "reach": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Reachable in vessel walls but not selectively."
+    },
+    "edit": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "No cell-directed therapy; stents and drugs address consequences."
+    },
+    "verify": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Structural imaging only."
+    }
+  },
+  "anchors": [
+    "Smooth muscle phenotype switching drives plaque instability"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 3
+}

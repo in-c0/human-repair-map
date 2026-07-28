@@ -26,18 +26,19 @@
   <aside class="side">
     <div class="brand"><b>Human Repair Map</b><span>evidence commons · v0.1</span></div>
     <ul class="nav" id="nav">
-      <li><a href="#/thesis" data-v="thesis"><span class="ix">00</span> The thesis</a></li>
-      <li><a href="#/overview" data-v="overview"><span class="ix">01</span> Overview</a></li>
-      <li><a href="#/capabilities" data-v="capabilities"><span class="ix">02</span> Capability map</a></li>
-      <li><a href="#/graph" data-v="graph"><span class="ix">03</span> Dependency graph</a></li>
-      <li><a href="#/leverage" data-v="leverage"><span class="ix">04</span> Leverage simulator</a></li>
-      <li><a href="#/evidence" data-v="evidence"><span class="ix">05</span> Evidence registry</a></li>
-      <li><a href="#/tasks" data-v="tasks"><span class="ix">06</span> Open tasks</a></li>
-      <li><a href="#/collaboration" data-v="collaboration"><span class="ix">07</span> AI + human</a></li>
-      <li><a href="#/governance" data-v="governance"><span class="ix">08</span> Governance</a></li>
-      <li><a href="#/queue" data-v="queue"><span class="ix">09</span> Contribution queue</a></li>
-      <li><a href="#/methods" data-v="methods"><span class="ix">10</span> Methods</a></li>
-      <li><a href="#/corrections" data-v="corrections"><span class="ix">11</span> Corrections</a></li>
+      <li><a href="#/grid" data-v="grid"><span class="ix">00</span> The grid</a></li>
+      <li><a href="#/thesis" data-v="thesis"><span class="ix">01</span> The thesis</a></li>
+      <li><a href="#/overview" data-v="overview"><span class="ix">02</span> Overview</a></li>
+      <li><a href="#/capabilities" data-v="capabilities"><span class="ix">03</span> Capability map</a></li>
+      <li><a href="#/graph" data-v="graph"><span class="ix">04</span> Dependency graph</a></li>
+      <li><a href="#/leverage" data-v="leverage"><span class="ix">05</span> Leverage simulator</a></li>
+      <li><a href="#/evidence" data-v="evidence"><span class="ix">06</span> Evidence registry</a></li>
+      <li><a href="#/tasks" data-v="tasks"><span class="ix">07</span> Open tasks</a></li>
+      <li><a href="#/collaboration" data-v="collaboration"><span class="ix">08</span> AI + human</a></li>
+      <li><a href="#/governance" data-v="governance"><span class="ix">09</span> Governance</a></li>
+      <li><a href="#/queue" data-v="queue"><span class="ix">10</span> Contribution queue</a></li>
+      <li><a href="#/methods" data-v="methods"><span class="ix">11</span> Methods</a></li>
+      <li><a href="#/corrections" data-v="corrections"><span class="ix">12</span> Corrections</a></li>
     </ul>
     <div class="side-foot"><b>Not a clinical tool.</b> No diagnosis, treatment selection, or patient-specific advice.<br><br>Records are graded openly and most are unreviewed. Corrections welcome.</div>
   </aside>
@@ -620,6 +621,121 @@ function loadQueue(){
   }).catch(function(){ if(list) list.innerHTML='<div class="empty">Could not load proposals.</div>'; });
 }
 
+
+/* ---------- THE GRID — v0.2 repairability atlas ---------- */
+var CELLS = (HR.cells || []);
+var GCOLS = [
+  {k:"see",    t:"See",    q:"Can we measure this in a living person?"},
+  {k:"model",  t:"Model",  q:"Do we know what a healthy target state is?"},
+  {k:"reach",  t:"Reach",  q:"Can we deliver something to it, specifically?"},
+  {k:"edit",   t:"Edit",   q:"Can we repair, replace or reprogram it?"},
+  {k:"verify", t:"Verify", q:"Can we confirm it worked, and stayed working?"}
+];
+var gSel = null;
+
+function gnum(g){ return parseInt(String(g).slice(1),10) || 0; }
+function colMean(k){
+  if(!CELLS.length) return 0;
+  var t=0; CELLS.forEach(function(c){ t+=gnum(c.capabilities[k].grade); });
+  return t/CELLS.length;
+}
+function vGrid(){
+  setTimeout(renderGrid,0);
+  return '<div class="eyebrow">repairability atlas &middot; v0.2 &middot; checked 28 July 2026</div>'+
+    '<h1 class="h-title">What can we actually repair in a human?</h1>'+
+    '<p class="h-lede">Every cell type in the body, and the six things that aren\'t cells, graded on five questions. '+
+    'The grid is complete: every node has a grade in every column, or says plainly that no evidence was found.</p>'+
+    '<div id="gridhost"></div>';
+}
+function renderGrid(){
+  var host=document.getElementById("gridhost"); if(!host) return;
+  var means=GCOLS.map(function(c){return {t:c.t,k:c.k,m:colMean(c.k)};});
+  var worst=means.slice().sort(function(a,b){return a.m-b.m;})[0];
+  var best=means.slice().sort(function(a,b){return b.m-a.m;})[0];
+  var nFw=0,nSci=0,nOk=0;
+  CELLS.forEach(function(c){GCOLS.forEach(function(g){
+    var b=c.capabilities[g.k].blocked;
+    if(b==="framework")nFw++; else if(b==="science")nSci++; else nOk++;
+  });});
+
+  var finding='<div class="finding"><div class="f-t">We can watch the body fail in high resolution, and do almost nothing about it.</div>'+
+    '<div class="f-d">Across all '+CELLS.length+' nodes, <b>'+best.t.toLowerCase()+'</b> averages '+best.m.toFixed(1)+
+    ' on the evidence ladder and <b>'+worst.t.toLowerCase()+'</b> averages '+worst.m.toFixed(1)+
+    '. Seeing and verifying are largely solved. Changing anything is not.</div></div>';
+
+  var tiles='<div class="sim-tiles">'+
+    '<div class="sim-tile"><div class="st-n">'+CELLS.length+'</div><div class="st-k">nodes, whole body</div></div>'+
+    '<div class="sim-tile"><div class="st-n">'+(CELLS.length*GCOLS.length)+'</div><div class="st-k">graded claims</div></div>'+
+    '<div class="sim-tile"><div class="st-n">'+nSci+'</div><div class="st-k">blocked by science</div></div>'+
+    '<div class="sim-tile"><div class="st-n">'+nFw+'</div><div class="st-k">blocked by framework</div></div>'+
+    '<div class="sim-tile key"><div class="st-n">0<span style="font-size:15px;color:var(--muted)">/'+(CELLS.length*GCOLS.length)+'</span></div><div class="st-k">human-reviewed</div></div>'+
+  '</div>';
+
+  var head='<div class="gr gr-head"><div class="gc-name"></div>'+
+    GCOLS.map(function(c){return '<div class="gc" title="'+esc(c.q)+'"><span class="gc-t">'+c.t+'</span><span class="gc-m">'+colMean(c.k).toFixed(1)+'</span></div>';}).join("")+
+    '</div>';
+
+  var bySys={},order=[];
+  CELLS.slice().sort(function(a,b){return (a.order||0)-(b.order||0);}).forEach(function(c){
+    if(!bySys[c.system]){bySys[c.system]=[];order.push(c.system);} bySys[c.system].push(c); });
+
+  var body=order.map(function(sys){
+    var rows=bySys[sys].map(function(c){
+      var cells=GCOLS.map(function(g){
+        var v=c.capabilities[g.k];
+        var n=gnum(v.grade);
+        var cls='gv g'+n+(v.blocked==="framework"?" fw":"");
+        return '<button class="'+cls+'" data-cell="'+esc(c.id)+'" data-cap="'+g.k+'" aria-label="'+esc(c.name+' '+g.t+' '+v.grade)+'">'+v.grade+'</button>';
+      }).join("");
+      return '<div class="gr"><div class="gc-name"><span class="gn-t">'+esc(c.name)+'</span>'+
+        (c.kind==="non-cell"?'<span class="gn-k">not a cell</span>':'')+'</div>'+cells+'</div>';
+    }).join("");
+    return '<div class="gsys">'+esc(sys)+'</div>'+rows;
+  }).join("");
+
+  var legend='<div class="glegend">'+
+    '<span class="lg"><b>grade</b> '+[1,2,3,4,5].map(function(n){return '<i class="gv g'+n+'" style="cursor:default">L'+n+'</i>';}).join("")+'</span>'+
+    '<span class="lg"><i class="gv g2 fw" style="cursor:default">L2</i> a hatched cell is blocked by <b>framework</b>, not science</span>'+
+    '</div>';
+
+  var dense=(localStorage.getItem('hrm-dense')!=='0');
+  host.innerHTML=finding+tiles+
+    '<div class="gtoolbar"><span class="ctl-label">the whole body, five questions, '+(CELLS.length*GCOLS.length)+' graded claims</span>'+
+    '<button class="sim-reset" id="gdense">'+(dense?'expand rows':'fit to one screen')+'</button></div>'+
+    '<div class="gwrap'+(dense?' compact':'')+'">'+head+body+'</div>'+legend+
+    '<div id="gdetail" class="gdetail-empty">Select any cell in the grid to see the graded claim and its source.</div>'+
+    '<p class="note" style="margin-top:18px">Rows imported from standard cell-type references; the column grades are the original contribution and are <b>AI-proposed and unreviewed</b> — no human has yet checked them. Grades are on the same L0&ndash;L5 ladder used throughout this map.</p>';
+
+  var dn=document.getElementById("gdense");
+  if(dn) dn.addEventListener("click",function(){
+    localStorage.setItem('hrm-dense', dense?'0':'1'); renderGrid();
+  });
+  host.querySelectorAll("[data-cell]").forEach(function(b){
+    b.addEventListener("click",function(){
+      gSel={id:b.getAttribute("data-cell"),cap:b.getAttribute("data-cap")};
+      host.querySelectorAll("[data-cell]").forEach(function(x){x.classList.remove("on");});
+      b.classList.add("on");
+      showGridDetail();
+    });
+  });
+}
+function showGridDetail(){
+  var d=document.getElementById("gdetail"); if(!d||!gSel) return;
+  var c=CELLS.filter(function(x){return x.id===gSel.id;})[0]; if(!c) return;
+  var g=GCOLS.filter(function(x){return x.k===gSel.cap;})[0];
+  var v=c.capabilities[gSel.cap];
+  var rung=((HR.rubrics&&HR.rubrics.ladder)||[]).filter(function(l){return l.id===v.grade;})[0];
+  d.className="gdetail";
+  d.innerHTML='<div class="gd-h"><span class="gd-cell">'+esc(c.name)+'</span><span class="gd-sep">&rarr;</span><span class="gd-cap">'+esc(g.t)+'</span>'+
+    '<span class="pill '+(v.blocked==="framework"?"rs-disputed":v.blocked==="science"?"rs-ai":"rs-reviewed")+'">'+
+    (v.blocked==="none"?"works":"blocked: "+esc(v.blocked))+'</span></div>'+
+    '<div class="gd-q">'+esc(g.q)+'</div>'+
+    '<div class="gd-grade"><b>'+esc(v.grade)+'</b> &mdash; '+esc(rung?rung.blurb:"")+'</div>'+
+    '<p class="gd-n">'+esc(v.note)+'</p>'+
+    '<div class="gd-meta"><span><b>renewal</b> '+esc(c.renewal)+'</span><span><b>fails by</b> '+esc(c.failures)+'</span></div>'+
+    '<div class="gd-anchors">'+c.anchors.map(function(a){return '<span class="tag">'+esc(a)+'</span>';}).join("")+'</div>';
+}
+
 function vMethods(){
   var C=window.HRM_CITATIONS||{};
   var G=(CO.grounding&&CO.grounding.rows)||[];
@@ -687,16 +803,16 @@ function vNotFound(){return '<div class="empty">Record not found. <a href="#/ove
 
 /* ---------- ROUTER ---------- */
 function render(){
-  var h=location.hash.replace(/^#\/?/,"")||"thesis";
+  var h=location.hash.replace(/^#\/?/,"")||"grid";
   var parts=h.split("/");
   var view; var navKey=parts[0];
   if(parts[0]==="cap"&&parts[1]){view=vCap(parts[1]);navKey="capabilities";}
   else if(parts[0]==="route"&&parts[1]){view=vRoute(parts[1]);navKey="capabilities";}
   else if(parts[0]==="search"){view=vSearch(decodeURIComponent(parts.slice(1).join("/")||""));navKey="";}
   else{
-    view={thesis:vThesis,overview:vOverview,capabilities:vCapabilities,graph:vGraph,leverage:vLeverage,evidence:vEvidence,tasks:vTasks,collaboration:vCollab,governance:vGovernance,methods:vMethods,corrections:vCorrections,queue:vQueue}[parts[0]];
-    view=view?view():vThesis();
-    if(!({thesis:1,overview:1,capabilities:1,graph:1,leverage:1,evidence:1,tasks:1,collaboration:1,governance:1,methods:1,corrections:1,queue:1})[parts[0]])navKey="thesis";
+    view={grid:vGrid,thesis:vThesis,overview:vOverview,capabilities:vCapabilities,graph:vGraph,leverage:vLeverage,evidence:vEvidence,tasks:vTasks,collaboration:vCollab,governance:vGovernance,methods:vMethods,corrections:vCorrections,queue:vQueue}[parts[0]];
+    view=view?view():vGrid();
+    if(!({grid:1,thesis:1,overview:1,capabilities:1,graph:1,leverage:1,evidence:1,tasks:1,collaboration:1,governance:1,methods:1,corrections:1,queue:1})[parts[0]])navKey="grid";
   }
   el("view").innerHTML=view;
   el("view").parentNode.scrollTop=0; window.scrollTo(0,0);

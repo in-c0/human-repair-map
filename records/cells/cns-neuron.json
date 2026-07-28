@@ -1,0 +1,42 @@
+{
+  "id": "cns-neuron",
+  "name": "Central neuron",
+  "system": "Nervous system",
+  "kind": "cell",
+  "renewal": "post-mitotic",
+  "failures": "Neurodegeneration, stroke infarction, trauma. Glial scar blocks regrowth; no meaningful replacement.",
+  "capabilities": {
+    "see": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Imaging and CSF markers are indirect. No single-cell state in a living brain."
+    },
+    "model": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "The substrate is identity — a healthy target state cannot be specified without specifying the person."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Intrathecal delivery reaches spinal cord; nothing reaches brain broadly. See the CNS delivery module."
+    },
+    "edit": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Nusinersen treats a spinal motor-neuron disease. No neuron has been replaced in a human."
+    },
+    "verify": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Clinical scores and biomarkers; no direct confirmation of cell-level change."
+    }
+  },
+  "anchors": [
+    "Nusinersen (Spinraza), FDA 2016",
+    "CNS delivery module, this map"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 1
+}

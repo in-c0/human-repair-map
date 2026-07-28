@@ -1,0 +1,42 @@
+{
+  "id": "tissue-architecture",
+  "name": "Tissue architecture",
+  "system": "Structural & connective",
+  "kind": "non-cell",
+  "renewal": "none",
+  "failures": "Alveolar destruction, nephron loss, cortical disorganisation. A 3-D pattern that cells do not re-derive alone.",
+  "capabilities": {
+    "see": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Imaging shows architecture well — this is what CT and MRI are for."
+    },
+    "model": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Positional information is the thing an axolotl has and we lack."
+    },
+    "reach": {
+      "grade": "L1",
+      "blocked": "science",
+      "note": "You cannot deliver to a pattern."
+    },
+    "edit": {
+      "grade": "L1",
+      "blocked": "science",
+      "note": "Organoids self-organise in vitro at millimetre scale. Nothing rebuilds architecture in a human."
+    },
+    "verify": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Imaging can confirm structure if it were ever restored."
+    }
+  },
+  "anchors": [
+    "Organoid self-organisation, in vitro only",
+    "Axolotl positional memory literature"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 8
+}

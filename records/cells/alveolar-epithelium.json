@@ -1,0 +1,41 @@
+{
+  "id": "alveolar-epithelium",
+  "name": "Alveolar epithelium",
+  "system": "Organ epithelia",
+  "kind": "cell",
+  "renewal": "limited",
+  "failures": "Fibrosis, emphysematous destruction, cystic fibrosis channel defects, acute injury.",
+  "capabilities": {
+    "see": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "CT shows architecture; bronchoscopy samples focally. No cell-state map."
+    },
+    "model": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Alveolar architecture, once destroyed, is not re-formed."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Inhalation delivers to airway surface; alveolar and basal cell targeting is inefficient."
+    },
+    "edit": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Inhaled mRNA and gene editing for CF are in early trials. Modulators treat protein, not cells."
+    },
+    "verify": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Spirometry is a good functional readout."
+    }
+  },
+  "anchors": [
+    "Inhaled CF gene-editing programmes, early Phase"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 4
+}

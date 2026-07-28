@@ -1,0 +1,41 @@
+{
+  "id": "melanocyte",
+  "name": "Melanocyte",
+  "system": "Skin",
+  "kind": "cell",
+  "renewal": "limited",
+  "failures": "Autoimmune loss in vitiligo, malignant transformation to melanoma.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Directly visible; dermoscopy and biopsy are routine."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Repigmentation is an unambiguous target."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Topical and intralesional access is straightforward."
+    },
+    "edit": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "JAK inhibitors modulate the autoimmune driver; melanocytes are not repaired or replaced."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Repigmentation is visible and photographable."
+    }
+  },
+  "anchors": [
+    "Ruxolitinib cream for vitiligo, FDA 2022 — treats the driver, not the cell"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 7
+}

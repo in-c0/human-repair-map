@@ -1,0 +1,41 @@
+{
+  "id": "fibroblast",
+  "name": "Fibroblast",
+  "system": "Structural & connective",
+  "kind": "cell",
+  "renewal": "self-renewing",
+  "failures": "Fibrosis — the scar response that outcompetes regeneration across heart, lung, liver, kidney and CNS.",
+  "capabilities": {
+    "see": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Activated states identifiable in biopsy; no in vivo readout."
+    },
+    "model": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "The gap: nobody can specify a healthy fibroblast set-point, only pathological activation."
+    },
+    "reach": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Ubiquitous and non-specific, which makes selective targeting hard."
+    },
+    "edit": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Two antifibrotics slow lung fibrosis. No therapy reverses established scar in any organ."
+    },
+    "verify": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Fibrosis regression is barely measurable in vivo."
+    }
+  },
+  "anchors": [
+    "Nintedanib and pirfenidone slow, never reverse, pulmonary fibrosis"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 8
+}

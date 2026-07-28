@@ -41,7 +41,7 @@ export const MEASURED = {
 };
 
 
-export { CAPABILITIES, ROUTES } from "./generated.js";
+export { CAPABILITIES, ROUTES, CELLS } from "./generated.js";
 
 export const HEADLINE = {
   finding: "Nothing on this map is both broad and proven in humans.",

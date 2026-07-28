@@ -1,0 +1,42 @@
+{
+  "id": "beta-cell",
+  "name": "Pancreatic islet β-cell",
+  "system": "Endocrine & metabolic",
+  "kind": "cell",
+  "renewal": "minimal",
+  "failures": "Autoimmune destruction in type 1, exhaustion in type 2. Silent until most mass is already gone.",
+  "capabilities": {
+    "see": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "THE binding gap: there is no clinical way to measure β-cell mass in a living person."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Glucose control gives a clear functional target."
+    },
+    "reach": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Pancreas is deep, diffuse and enzymatically hostile; islets are a tiny fraction of tissue."
+    },
+    "edit": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Stem-cell-derived islets produced insulin independence in early trials, but require immunosuppression."
+    },
+    "verify": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "C-peptide and continuous glucose monitoring are good functional readouts."
+    }
+  },
+  "anchors": [
+    "VX-880 stem-cell-derived islets, Phase 1/2",
+    "Autoimmunity persists as the chronic driver"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 5
+}

@@ -1,0 +1,41 @@
+{
+  "id": "nephron-epithelium",
+  "name": "Nephron epithelium",
+  "system": "Organ epithelia",
+  "kind": "cell",
+  "renewal": "minimal",
+  "failures": "Progressive fibrosis, tubular injury, glomerular loss. Nephrons are never rebuilt after birth.",
+  "capabilities": {
+    "see": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "eGFR reports whole-organ function; biopsy is invasive and focal."
+    },
+    "model": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Nephron architecture is a 3-D pattern cells do not re-derive."
+    },
+    "reach": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Filtration means most agents pass through rather than into tubular cells."
+    },
+    "edit": {
+      "grade": "L1",
+      "blocked": "science",
+      "note": "No approved therapy repairs or replaces nephron cells. Dialysis substitutes function."
+    },
+    "verify": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "eGFR and proteinuria are reliable functional measures."
+    }
+  },
+  "anchors": [
+    "Nephron endowment is fixed at birth in humans"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 4
+}

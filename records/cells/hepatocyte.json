@@ -1,0 +1,42 @@
+{
+  "id": "hepatocyte",
+  "name": "Hepatocyte",
+  "system": "Organ epithelia",
+  "kind": "cell",
+  "renewal": "regenerative",
+  "failures": "Steatosis, fibrosis to cirrhosis, metabolic enzyme deficiency, drug injury. The liver regrows mass readily but scars irreversibly.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Biopsy, elastography and serum enzymes are routine clinical practice."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Regeneration is well characterised; the healthy set-point for a diseased liver is less clear."
+    },
+    "reach": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "The solved delivery problem. Lipid nanoparticles land in liver by default — patisiran approved 2018."
+    },
+    "edit": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "In vivo CRISPR: NTLA-2001 for ATTR amyloidosis; base editing for PCSK9 in trials."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Circulating protein levels give a direct, repeatable readout."
+    }
+  },
+  "anchors": [
+    "Patisiran (Onpattro), FDA 2018",
+    "NTLA-2001 in vivo CRISPR, NEJM 2021"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 4
+}

@@ -1,0 +1,41 @@
+{
+  "id": "skeletal-muscle",
+  "name": "Skeletal muscle fibre / satellite cell",
+  "system": "Musculoskeletal",
+  "kind": "cell",
+  "renewal": "regenerative",
+  "failures": "Dystrophies, sarcopenia with age, denervation atrophy, cachexia.",
+  "capabilities": {
+    "see": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Biopsy and MRI work; whole-body fibre-level state does not exist."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Healthy muscle is well characterised; the ageing set-point is contested."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Systemic AAV reaches muscle but total body mass makes dose the binding limit."
+    },
+    "edit": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Elevidys for Duchenne, FDA 2023 — accelerated, and the benefit remains debated."
+    },
+    "verify": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Function tests and dystrophin expression; long-term durability unproven."
+    }
+  },
+  "anchors": [
+    "Elevidys (delandistrogene moxeparvovec), FDA 2023"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 6
+}

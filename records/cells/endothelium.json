@@ -1,0 +1,41 @@
+{
+  "id": "endothelium",
+  "name": "Vascular endothelium",
+  "system": "Cardiovascular",
+  "kind": "cell",
+  "renewal": "limited",
+  "failures": "Dysfunction preceding atherosclerosis, barrier breakdown, capillary rarefaction with age.",
+  "capabilities": {
+    "see": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Function assessed indirectly by flow-mediated dilation; cell state inaccessible."
+    },
+    "model": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Healthy endothelial phenotype is defined by behaviour, not a measurable set-point."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "The first cells anything intravenous touches."
+    },
+    "edit": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "No endothelium-directed cell therapy. Risk factors are managed instead."
+    },
+    "verify": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Functional proxies only."
+    }
+  },
+  "anchors": [
+    "Endothelial dysfunction precedes visible atherosclerosis by decades"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 3
+}

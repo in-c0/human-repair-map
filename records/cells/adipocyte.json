@@ -1,0 +1,41 @@
+{
+  "id": "adipocyte",
+  "name": "Adipocyte",
+  "system": "Endocrine & metabolic",
+  "kind": "cell",
+  "renewal": "limited",
+  "failures": "Hypertrophic dysfunction, ectopic deposition, lipodystrophy, inflammatory secretion.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "MRI and DEXA quantify fat depots precisely and non-invasively."
+    },
+    "model": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Healthy adiposity varies enormously between individuals."
+    },
+    "reach": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Accessible by volume but not specifically targetable."
+    },
+    "edit": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Incretin drugs change mass by changing behaviour and metabolism, not by editing cells."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Mass and distribution are easy to measure."
+    }
+  },
+  "anchors": [
+    "GLP-1 agonists act systemically, not on the adipocyte directly"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 5
+}

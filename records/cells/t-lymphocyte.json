@@ -1,0 +1,42 @@
+{
+  "id": "t-lymphocyte",
+  "name": "T lymphocyte",
+  "system": "Blood & immune",
+  "kind": "cell",
+  "renewal": "self-renewing",
+  "failures": "Exhaustion, autoreactivity, immunodeficiency, malignancy, age-related repertoire narrowing.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Flow cytometry and repertoire sequencing from a blood draw."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "A healthy repertoire is describable statistically, not specified precisely."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Ex vivo engineering is routine; in vivo CAR generation is early-stage."
+    },
+    "edit": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Six approved CAR-T products since 2017."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Persistence and expansion tracked directly in blood."
+    }
+  },
+  "anchors": [
+    "Kymriah, FDA 2017",
+    "In vivo CAR-T programmes, preclinical to Phase 1"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 0
+}

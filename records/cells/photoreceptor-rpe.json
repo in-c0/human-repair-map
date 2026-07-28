@@ -1,0 +1,41 @@
+{
+  "id": "photoreceptor-rpe",
+  "name": "Photoreceptor / retinal pigment epithelium",
+  "system": "Sensory",
+  "kind": "cell",
+  "renewal": "post-mitotic",
+  "failures": "Inherited retinal dystrophy, macular degeneration, photoreceptor death. No human regeneration.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Adaptive-optics imaging resolves individual cones in a living eye."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Structure is well mapped; restoring degenerated architecture is not solved."
+    },
+    "reach": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Subretinal injection into a small, immune-privileged, enclosed compartment."
+    },
+    "edit": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Luxturna corrects RPE65 in one genotype; broader photoreceptor rescue remains unproven."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Visual function and OCT structure both measurable."
+    }
+  },
+  "anchors": [
+    "Luxturna (voretigene neparvovec), FDA 2017"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 2
+}

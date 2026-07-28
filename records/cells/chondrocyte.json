@@ -1,0 +1,42 @@
+{
+  "id": "chondrocyte",
+  "name": "Chondrocyte (articular cartilage)",
+  "system": "Musculoskeletal",
+  "kind": "cell",
+  "renewal": "none",
+  "failures": "Focal defects and diffuse osteoarthritic loss. Avascular, so no repair signal reaches it.",
+  "capabilities": {
+    "see": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "MRI images cartilage thickness and defects well."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Hyaline cartilage is a clear target that repair never produces."
+    },
+    "reach": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Avascular: no blood supply to deliver through. Intra-articular injection is the only route."
+    },
+    "edit": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "MACI is approved but yields mechanically inferior fibrocartilage, not hyaline."
+    },
+    "verify": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "MRI and function scores."
+    }
+  },
+  "anchors": [
+    "MACI, FDA 2016",
+    "Avascularity is the mechanistic blocker"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 6
+}

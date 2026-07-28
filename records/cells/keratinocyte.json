@@ -1,0 +1,41 @@
+{
+  "id": "keratinocyte",
+  "name": "Keratinocyte",
+  "system": "Skin",
+  "kind": "cell",
+  "renewal": "self-renewing",
+  "failures": "Blistering from structural gene defects, impaired wound healing, malignant transformation.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Directly visible and biopsy is trivial."
+    },
+    "model": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Healthy epidermis is unambiguous and continuously renewed."
+    },
+    "reach": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Topical. Vyjuvek is a gel applied to the wound."
+    },
+    "edit": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Vyjuvek, topical HSV-1 vector for dystrophic epidermolysis bullosa, FDA 2023."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Wound closure is observed by eye."
+    }
+  },
+  "anchors": [
+    "Vyjuvek (beremagene geperpavec), FDA 2023"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 7
+}

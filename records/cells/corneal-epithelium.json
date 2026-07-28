@@ -1,0 +1,41 @@
+{
+  "id": "corneal-epithelium",
+  "name": "Corneal epithelium / limbal stem cell",
+  "system": "Sensory",
+  "kind": "cell",
+  "renewal": "self-renewing",
+  "failures": "Limbal stem cell deficiency after chemical burns, scarring, dystrophies.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Slit lamp and OCT image it directly and non-invasively."
+    },
+    "model": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "A clear cornea is an unambiguous target state."
+    },
+    "reach": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Surgically accessible; grafts placed directly."
+    },
+    "edit": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Holoclar, autologous limbal stem cells, EU 2015 — genuine tissue restoration."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Corneal clarity and visual acuity."
+    }
+  },
+  "anchors": [
+    "Holoclar, EMA 2015"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 2
+}

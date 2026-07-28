@@ -6,7 +6,7 @@
    and grounding class, and every payload repeats the unverified + non-clinical
    caveats. An API that drops those is a different, worse product. */
 
-import { META, LADDER, GROUNDING, MEASURED, CAPABILITIES, ROUTES, HEADLINE } from "./data.js";
+import { META, LADDER, GROUNDING, MEASURED, CAPABILITIES, ROUTES, CELLS, HEADLINE } from "./data.js";
 import { handleApi } from "./api.js";
 
 const SUPPORTED = ["2025-11-25", "2025-06-18", "2025-03-26"];
@@ -35,6 +35,31 @@ const TOOLS = [
     description:
       "The headline state of CNS drug delivery: how many routes sit at each evidence rung, what is actually proven in humans, and the central contrast. Start here.",
     inputSchema: { type: "object", properties: {}, additionalProperties: false }
+  },
+  {
+    name: "repair_grid",
+    title: "The repairability grid",
+    description:
+      "The v0.2 atlas: every human cell type plus the six non-cellular things, graded on five questions (can we see it, model a healthy target, reach it, edit it, verify the result). Returns the whole grid with column averages. This is the map's central artifact.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        system: { type: "string", description: "optional: filter to one system, e.g. 'Nervous system'" },
+        blocked: { type: "string", enum: ["science", "framework", "none"], description: "optional: only claims blocked this way" }
+      },
+      additionalProperties: false
+    }
+  },
+  {
+    name: "get_cell",
+    title: "Get one grid node",
+    description: "Full record for one cell type or non-cellular node: how it fails, all five capability grades with reasons, and its named anchors.",
+    inputSchema: {
+      type: "object",
+      properties: { id: { type: "string", description: "node id, e.g. 'cardiomyocyte', 'fibroblast', 'germline'" } },
+      required: ["id"],
+      additionalProperties: false
+    }
   },
   {
     name: "how_to_read",
@@ -182,6 +207,61 @@ function callTool(name, args) {
         ...dist,
         ``,
         `Use \`list_routes\` to filter, \`get_route\` for a full record, \`how_to_read\` for the rubrics.`
+      ].join("\n");
+    }
+    case "repair_grid": {
+      var GC = ["see", "model", "reach", "edit", "verify"];
+      var rows = CELLS.slice();
+      if (args.system) rows = rows.filter((c) => c.system.toLowerCase() === String(args.system).toLowerCase());
+      if (!rows.length) return `No nodes match. Systems: ${[...new Set(CELLS.map((c) => c.system))].join(", ")}`;
+      const mean = (k) => (rows.reduce((t, c) => t + parseInt(c.capabilities[k].grade.slice(1), 10), 0) / rows.length).toFixed(2);
+      const lines = rows.map((c) => {
+        const g = GC.map((k) => {
+          const v = c.capabilities[k];
+          if (args.blocked && v.blocked !== args.blocked) return "  ·";
+          return v.grade + (v.blocked === "framework" ? "*" : "");
+        }).join(" ");
+        return `${(c.name + (c.kind === "non-cell" ? " (not a cell)" : "")).padEnd(46).slice(0, 46)} ${g}`;
+      });
+      return [
+        `# The repairability grid — ${rows.length} node(s)`,
+        ``,
+        `**We can watch the body fail in high resolution, and do almost nothing about it.**`,
+        ``,
+        "```",
+        `${"node".padEnd(46)} see model reach edit verify`,
+        ...lines,
+        "```",
+        `* = blocked by framework rather than science`,
+        ``,
+        `Column averages on the L0–L5 ladder: ` + GC.map((k) => `${k} ${mean(k)}`).join(" · "),
+        ``,
+        `Seeing and verifying are largely solved. Changing anything is not. Use get_cell for any node's full record and reasons.`
+      ].join("\n");
+    }
+    case "get_cell": {
+      const c = CELLS.filter((x) => x.id === args.id)[0];
+      if (!c) return `No node with id "${args.id}". Available: ${CELLS.map((x) => x.id).join(", ")}`;
+      const GC2 = ["see", "model", "reach", "edit", "verify"];
+      return [
+        `# ${c.name}`,
+        ``,
+        `- **System:** ${c.system}`,
+        `- **Kind:** ${c.kind === "non-cell" ? "not a cell" : "cell type"}`,
+        `- **Renewal:** ${c.renewal}`,
+        `- **Review state:** ${c.review}`,
+        ``,
+        `## How it fails`,
+        c.failures,
+        ``,
+        `## The five capabilities`,
+        ...GC2.map((k) => {
+          const v = c.capabilities[k];
+          return `- **${k}** — ${v.grade}${v.blocked === "none" ? "" : ` (blocked by ${v.blocked})`}: ${v.note}`;
+        }),
+        ``,
+        `## Anchors`,
+        ...c.anchors.map((a) => `- ${a}`)
       ].join("\n");
     }
     case "how_to_read": {

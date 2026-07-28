@@ -1,0 +1,41 @@
+{
+  "id": "endocrine-cell",
+  "name": "Thyroid / adrenal endocrine cell",
+  "system": "Endocrine & metabolic",
+  "kind": "cell",
+  "renewal": "minimal",
+  "failures": "Autoimmune destruction, nodular disease, adrenal insufficiency.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Circulating hormone levels are near-ideal functional proxies."
+    },
+    "model": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Target hormone ranges are well established."
+    },
+    "reach": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Small, deep, diffuse. Not specifically reachable."
+    },
+    "edit": {
+      "grade": "L1",
+      "blocked": "science",
+      "note": "Nobody repairs these cells. Hormone replacement substitutes the output — permanently."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Hormone assays are precise and cheap."
+    }
+  },
+  "anchors": [
+    "Levothyroxine substitutes function without touching the gland"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 5
+}

@@ -1,0 +1,41 @@
+{
+  "id": "extracellular-matrix",
+  "name": "Extracellular matrix",
+  "system": "Structural & connective",
+  "kind": "non-cell",
+  "renewal": "slow turnover",
+  "failures": "Collagen crosslinking with age, basement membrane failure, scar deposition, elastin loss that never regenerates.",
+  "capabilities": {
+    "see": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Histology on biopsy; almost nothing in a living person."
+    },
+    "model": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "No specification exists for healthy matrix composition by tissue and age."
+    },
+    "reach": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Acellular and secreted — there is no cell to target for most of it."
+    },
+    "edit": {
+      "grade": "L1",
+      "blocked": "science",
+      "note": "Crosslink breakers have repeatedly failed. Elastin is not replaced after development."
+    },
+    "verify": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Barely measurable in vivo."
+    }
+  },
+  "anchors": [
+    "Elastin synthesis largely ceases after adolescence"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 8
+}

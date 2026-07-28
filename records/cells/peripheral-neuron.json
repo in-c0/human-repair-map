@@ -1,0 +1,41 @@
+{
+  "id": "peripheral-neuron",
+  "name": "Peripheral neuron",
+  "system": "Nervous system",
+  "kind": "cell",
+  "renewal": "regenerative axon",
+  "failures": "Transection, diabetic and chemotherapy neuropathy, compression. Axons regrow, slowly and imperfectly.",
+  "capabilities": {
+    "see": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Nerve conduction studies and EMG are routine."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Reinnervation of a known target is a clear goal."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Surgically accessible at specific sites; diffuse neuropathy is not addressable."
+    },
+    "edit": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Surgical repair and conduits assist regrowth; no cell-level therapy."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Conduction and function are directly measurable."
+    }
+  },
+  "anchors": [
+    "Peripheral nerve regeneration is a genuine biological capability humans retain"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 1
+}

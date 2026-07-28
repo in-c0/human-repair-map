@@ -1,0 +1,41 @@
+{
+  "id": "germline",
+  "name": "Germline (oocyte / spermatogonium)",
+  "system": "Reproductive",
+  "kind": "cell",
+  "renewal": "sperm only",
+  "failures": "Age-related oocyte aneuploidy, heritable mutation, infertility.",
+  "capabilities": {
+    "see": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Accessible and assessable through assisted reproduction."
+    },
+    "model": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Euploidy is a clear target; the oocyte ageing mechanism is not solved."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Ex vivo access is routine in IVF."
+    },
+    "edit": {
+      "grade": "L1",
+      "blocked": "framework",
+      "note": "Technically demonstrated. Heritable human editing is prohibited nearly everywhere — the clearest framework-blocked row on this map."
+    },
+    "verify": {
+      "grade": "L2",
+      "blocked": "framework",
+      "note": "Verification would require following a person across a lifetime, which the prohibition forecloses."
+    }
+  },
+  "anchors": [
+    "Heritable genome editing prohibited across most jurisdictions since 2015 consensus"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 9
+}

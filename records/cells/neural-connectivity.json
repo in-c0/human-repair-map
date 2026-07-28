@@ -1,0 +1,41 @@
+{
+  "id": "neural-connectivity",
+  "name": "Neural connectivity",
+  "system": "Nervous system",
+  "kind": "non-cell",
+  "renewal": "plasticity only",
+  "failures": "Disconnection from stroke and trauma, synaptic loss in dementia, maladaptive rewiring in chronic pain.",
+  "capabilities": {
+    "see": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Full connectomes exist only post-mortem. Living imaging is orders of magnitude too coarse."
+    },
+    "model": {
+      "grade": "L1",
+      "blocked": "science",
+      "note": "The hardest cell on this grid: a healthy connectome is the person, so the target state is the identity."
+    },
+    "reach": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Deep brain stimulation modulates activity; it does not rewire."
+    },
+    "edit": {
+      "grade": "L1",
+      "blocked": "science",
+      "note": "No human wiring has been deliberately restored. Rehabilitation exploits existing plasticity."
+    },
+    "verify": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Behaviour is the only readout, and it is confounded."
+    }
+  },
+  "anchors": [
+    "Deep brain stimulation modulates circuits without rewiring them"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 1
+}

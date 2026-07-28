@@ -1,0 +1,41 @@
+{
+  "id": "gut-epithelium",
+  "name": "Intestinal epithelium",
+  "system": "Organ epithelia",
+  "kind": "cell",
+  "renewal": "self-renewing",
+  "failures": "Barrier failure, inflammatory destruction, malignant transformation. Renews every few days.",
+  "capabilities": {
+    "see": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Endoscopy and biopsy are routine and direct."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Continuous renewal from a defined stem compartment."
+    },
+    "reach": {
+      "grade": "L3",
+      "blocked": "science",
+      "note": "Oral delivery reaches the lumen; targeting epithelial cells specifically is unsolved."
+    },
+    "edit": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "No approved cell-directed therapy; immunosuppression treats the driver instead."
+    },
+    "verify": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Endoscopic healing is a validated endpoint."
+    }
+  },
+  "anchors": [
+    "Crypt stem cell renewal is among the fastest in the body"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 4
+}

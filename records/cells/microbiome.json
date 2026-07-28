@@ -1,0 +1,42 @@
+{
+  "id": "microbiome",
+  "name": "Microbiome",
+  "system": "Cross-cutting",
+  "kind": "non-cell",
+  "renewal": "self-renewing",
+  "failures": "Dysbiosis after antibiotics, loss of diversity, C. difficile overgrowth. Not human cells at all.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Metagenomic sequencing of stool is cheap and comprehensive."
+    },
+    "model": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Nobody can specify a healthy microbiome; it varies enormously between healthy people."
+    },
+    "reach": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Oral and rectal routes reach it directly."
+    },
+    "edit": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Faecal transplant products approved 2022–23 for recurrent C. difficile. Crude but effective."
+    },
+    "verify": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Engraftment measurable by sequencing; clinical endpoints clear for C. diff."
+    }
+  },
+  "anchors": [
+    "Rebyota, FDA 2022",
+    "Vowst, FDA 2023"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 10
+}

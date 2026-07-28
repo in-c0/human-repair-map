@@ -1,0 +1,41 @@
+{
+  "id": "mineralised-structure",
+  "name": "Mineralised structure",
+  "system": "Musculoskeletal",
+  "kind": "non-cell",
+  "renewal": "bone only",
+  "failures": "Osteoporotic loss, enamel erosion that never regenerates, non-union fractures.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "DEXA and CT quantify mineral directly."
+    },
+    "model": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Density and microarchitecture targets are established."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "none",
+      "note": "Bone-seeking agents localise well."
+    },
+    "edit": {
+      "grade": "L2",
+      "blocked": "science",
+      "note": "Bone remodels and can be pharmacologically shifted. Enamel is never regenerated once lost."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "DEXA and fracture rates."
+    }
+  },
+  "anchors": [
+    "Enamel is acellular and has no regenerative capacity in humans"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 6
+}

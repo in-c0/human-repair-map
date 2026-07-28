@@ -1,0 +1,42 @@
+{
+  "id": "hsc",
+  "name": "Haematopoietic stem cell",
+  "system": "Blood & immune",
+  "kind": "cell",
+  "renewal": "self-renewing",
+  "failures": "Inherited haemoglobin and immune defects, clonal expansion to leukaemia, age-related clonal haematopoiesis.",
+  "capabilities": {
+    "see": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Marrow aspirate and flow cytometry are standard."
+    },
+    "model": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Lineage output is well defined and measurable."
+    },
+    "reach": {
+      "grade": "L4",
+      "blocked": "science",
+      "note": "Ex vivo only: harvest, edit outside the body, reinfuse. In vivo HSC targeting is unsolved."
+    },
+    "edit": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Casgevy, ex vivo CRISPR for sickle cell disease, FDA 2023."
+    },
+    "verify": {
+      "grade": "L5",
+      "blocked": "none",
+      "note": "Chimerism and haemoglobin fractions are directly measurable."
+    }
+  },
+  "anchors": [
+    "Casgevy (exagamglogene autotemcel), FDA 2023",
+    "Lyfgenia, FDA 2023"
+  ],
+  "review": "ai-proposed",
+  "lastChecked": "2026-07-28",
+  "order": 0
+}

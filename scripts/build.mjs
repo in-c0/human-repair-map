@@ -388,7 +388,7 @@ const manifest = {
   caveat: "Every record carries its own review state. Unless it says reviewed with a named human, no human has opened its sources. This is a map of research state, not clinical advice."
 };
 
-const bundle = { manifest, ontology, rubrics, nodes: all, analysis };
+const bundle = { manifest, ontology, rubrics, schemas, nodes: all, analysis };
 
 fs.mkdirSync(R("public", "graph", "schema"), { recursive: true });
 fs.writeFileSync(R("public", "graph", "graph.json"), JSON.stringify(bundle, null, 1) + "\n");

@@ -4,10 +4,12 @@
 works, what is blocked, what evidence supports each claim, graded openly with its
 review state.**
 
-> **Prototype (v0.1).** Records, scores, and counts are illustrative and mostly
-> AI-proposed, awaiting human review. This maps *research state*, not clinical
-> care. It does **not** diagnose, recommend treatments, select therapies, predict
-> individual outcomes, or give patient-specific medical advice.
+> **Prototype (v0.3).** Every record on this map carries its own review state. As of
+> 2026-09-11, **0 of 326 records have been reviewed by a human**: the sources were
+> located and their metadata machine-verified, and nothing more. This maps
+> *research state*, not clinical care. It does **not** diagnose, recommend
+> treatments, select therapies, predict individual outcomes, or give
+> patient-specific medical advice.
 
 ## The idea
 
@@ -25,22 +27,54 @@ and auditable.
 
 **Live: [humanrepairmap.com](https://humanrepairmap.com)** · **MCP endpoint: [humanrepairmap.com/mcp](https://humanrepairmap.com/mcp)**
 
-## Query it from your AI
+## What's in v0.3 — the Human Repair Graph
 
-The map is exposed over the [Model Context Protocol](https://modelcontextprotocol.io)
-— read-only, public, no auth — so any agent can check the evidence state instead
-of guessing:
+The map is now **one graph with two public projections** — *Universal Repair*
+(trauma, infection, cancer, organ failure) and *Rejuvenation* (aging) — built so
+that a model, an agent or an institution can inspect, reason over, challenge,
+extend and act through it without scraping a page. Six record types:
+
+| type | what it is | count |
+|---|---|---|
+| **goal** | a repair outcome from the person's side, decomposed with AND/OR requirement groups | 10 |
+| **capability** | something humanity must be able to DO to a target, graded L0–L5 on demonstrated evidence, with what blocks the next rung | 30 hand-authored + 155 derived from the v0.2 cell grid |
+| **question** | an unresolved uncertainty whose answer moves a grade or a dependency — the unit of research prioritisation | 20 |
+| **claim** | one statement + context + measurement + evidence + provenance; the unit of knowledge is not the paper | 24 |
+| **experiment** | a candidate or running study that tests a question | 6 |
+| **source** | where evidence lives, with a machine `resolution` record kept separate from whether a human has opened it | 34 |
+
+First proving ground: **scarless functional repair of adult human skin** — it
+sits across both maps. The 16 CNS-delivery routes and the 31-node repairability
+grid from earlier versions are nodes in the same graph, not a separate dataset.
+
+The build derives every inverse relation (a relation is stored once), rejects
+dangling references and dependency cycles, and computes a **structural
+analysis**: for each goal the binding constraints (AND-required capabilities at
+the lowest rung), and open questions ranked by how much sits downstream of what
+they block. No probabilities, costs or dates are invented anywhere.
+
+### Use it from a model
 
 ```bash
 claude mcp add --transport http human-repair-map https://humanrepairmap.com/mcp
 ```
 
-Eight tools: `evidence_state`, `how_to_read`, `list_routes`, `get_route`,
-`list_capabilities`, `get_capability`, `what_would_move_this`, `search`.
-Every response carries the record's review state and grounding class and repeats
-the unverified + non-clinical caveats — an API that drops those is a different,
-worse product. Source in [`mcp/`](mcp/) (Cloudflare Worker, zero dependencies,
-spec 2025-11-25 Streamable HTTP).
+22 tools. Orientation: `graph_manifest`, `how_to_read`. Retrieval: `get_node`,
+`list_nodes`, `search`, `get_subgraph`. Reasoning: `trace_dependency` (a goal's
+critical path), `find_blockers`, `rank_research_questions`, `get_primary_evidence`,
+`find_contradictions`, `what_would_move_this`. Action: `propose_change` (files a
+correction into the public hash-chained log) and `register_prediction` (locks a
+forecast against the graph snapshot you saw, resolved later against reality —
+the map as a prospective, contamination-free benchmark). Every result carries
+`structuredContent` and the review state of what it returned.
+
+### Use it without MCP
+
+- **REST** — [`/api`](https://humanrepairmap.com/api) · [`/api/openapi.json`](https://humanrepairmap.com/api/openapi.json). Every node is a URL: `/api/goals/scarless-skin-repair/critical-path`, `/api/questions/ranked`, `/api/claims/<slug>/evidence`.
+- **Bulk** — [`/graph/graph.json`](https://humanrepairmap.com/graph/graph.json) · `graph.jsonl` · `graph.jsonld` · `manifest.json` (content hash; immutable per hash) · `schema/` (the JSON Schemas every record is validated against).
+- **Source** — [`records/graph/`](records/graph/) is the only source of truth; [`schema/`](schema/) and [`ontology/`](ontology/) define it; [`scripts/build.mjs`](scripts/build.mjs) is the only writer of everything generated.
+
+Design record: [`brief-2026-09-11-map-cure-machine-progress.md`](brief-2026-09-11-map-cure-machine-progress.md) (the owner's words verbatim and the thread that reopened the project).
 
 A no-backend prototype (`index.html` + `content/`) demonstrating:
 

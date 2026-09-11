@@ -2383,6 +2383,1331 @@ export const GRAPH = {
    "none": "no clinical or surrogate benefit demonstrated"
   }
  },
+ "schemas": {
+  "capability.schema.json": {
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://humanrepairmap.com/schema/capability.schema.json",
+   "title": "Capability",
+   "description": "Something humanity must be able to DO to a target for repair to happen, graded on how far it has actually been demonstrated and what blocks the next rung. One file per capability under records/capabilities-graph/. The 155 grid capabilities (cell type × class) are DERIVED by the build from records/cells and are not stored as files.",
+   "type": "object",
+   "required": [
+    "id",
+    "type",
+    "name",
+    "class",
+    "description",
+    "projections",
+    "grade",
+    "provenance",
+    "review"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+     "const": "capability"
+    },
+    "name": {
+     "type": "string",
+     "minLength": 3,
+     "maxLength": 160
+    },
+    "class": {
+     "$ref": "common.schema.json#/$defs/capabilityClass"
+    },
+    "primitive": {
+     "$ref": "common.schema.json#/$defs/primitive"
+    },
+    "description": {
+     "type": "string",
+     "minLength": 20,
+     "description": "What 'having this capability' concretely means — phrased so that a demonstration either meets it or does not."
+    },
+    "target": {
+     "type": "object",
+     "properties": {
+      "node": {
+       "$ref": "common.schema.json#/$defs/id",
+       "description": "The grid node (hrm:cell/...) this acts on, if specific."
+      },
+      "tissue": {
+       "type": "string",
+       "description": "UBERON id or label"
+      },
+      "cellType": {
+       "type": "string",
+       "description": "CL id or label"
+      },
+      "species": {
+       "type": "string",
+       "description": "NCBITaxon id of the target organism the grade refers to. Default human (9606)."
+      }
+     }
+    },
+    "projections": {
+     "type": "array",
+     "items": {
+      "$ref": "common.schema.json#/$defs/projection"
+     },
+     "minItems": 1,
+     "uniqueItems": true
+    },
+    "grade": {
+     "type": "object",
+     "required": [
+      "basis",
+      "note"
+     ],
+     "additionalProperties": false,
+     "properties": {
+      "basis": {
+       "type": "string",
+       "enum": [
+        "claims",
+        "standard-of-care",
+        "no-evidence-located",
+        "ungraded"
+       ],
+       "description": "claims: the grade is traceable to at least one claim that supports or contradicts this capability (the build enforces it). standard-of-care: routine clinical practice; the note must say what practice. no-evidence-located: a search was made and nothing was found; rung is L0. ungraded: the node exists so the gap is visible, but nobody has graded it yet; rung is absent."
+      },
+      "rung": {
+       "$ref": "common.schema.json#/$defs/rung"
+      },
+      "measured": {
+       "$ref": "common.schema.json#/$defs/measured"
+      },
+      "blocked": {
+       "$ref": "common.schema.json#/$defs/blocked"
+      },
+      "note": {
+       "type": "string",
+       "minLength": 20,
+       "description": "Why it sits at this rung — a grade without a reason cannot be checked."
+      },
+      "drift": {
+       "type": "string",
+       "description": "The distance between what was demonstrated and what is commonly claimed."
+      },
+      "searchedOn": {
+       "$ref": "common.schema.json#/$defs/date",
+       "description": "For no-evidence-located: when the search was made."
+      }
+     },
+     "allOf": [
+      {
+       "if": {
+        "properties": {
+         "basis": {
+          "enum": [
+           "claims",
+           "standard-of-care"
+          ]
+         }
+        }
+       },
+       "then": {
+        "required": [
+         "rung",
+         "measured",
+         "blocked"
+        ]
+       }
+      },
+      {
+       "if": {
+        "properties": {
+         "basis": {
+          "const": "no-evidence-located"
+         }
+        }
+       },
+       "then": {
+        "required": [
+         "rung",
+         "searchedOn"
+        ],
+        "properties": {
+         "rung": {
+          "const": "L0"
+         }
+        }
+       }
+      },
+      {
+       "if": {
+        "properties": {
+         "basis": {
+          "const": "ungraded"
+         }
+        }
+       },
+       "then": {
+        "not": {
+         "required": [
+          "rung"
+         ]
+        }
+       }
+      }
+     ]
+    },
+    "requires": {
+     "type": "array",
+     "items": {
+      "$ref": "common.schema.json#/$defs/requirementGroup"
+     }
+    },
+    "blockedBy": {
+     "$ref": "common.schema.json#/$defs/idList",
+     "description": "Question ids that gate the next rung."
+    },
+    "informationLimited": {
+     "type": "boolean",
+     "description": "True when the target state cannot be inferred from surviving information (see ontology/repair-primitives.json boundary)."
+    },
+    "wouldMove": {
+     "type": "string",
+     "description": "The specific missing demonstration that would raise the rung."
+    },
+    "aliases": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "provenance": {
+     "$ref": "common.schema.json#/$defs/provenance"
+    },
+    "review": {
+     "$ref": "common.schema.json#/$defs/review"
+    },
+    "derived": {
+     "type": "boolean",
+     "description": "True for the grid capabilities the build derives from records/cells (one per node x class). Never stored as a file."
+    }
+   }
+  },
+  "claim.schema.json": {
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://humanrepairmap.com/schema/claim.schema.json",
+   "title": "Claim",
+   "description": "The unit of knowledge: one statement, the context it was shown in, what was measured, the evidence it rests on, and where every piece came from. A paper is not a claim; a paper is where claims live. Observation (measurement) and interpretation (statement, supports) are separate fields so the observation survives a later change of interpretation.",
+   "type": "object",
+   "required": [
+    "id",
+    "type",
+    "statement",
+    "context",
+    "measurement",
+    "evidence",
+    "rung",
+    "grounding",
+    "provenance",
+    "review"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+     "const": "claim"
+    },
+    "statement": {
+     "type": "string",
+     "minLength": 20,
+     "maxLength": 400,
+     "description": "One sentence. Grade claims, never groups or companies. Absence is 'no independent evidence located as of <date>', never 'false'."
+    },
+    "triple": {
+     "type": "object",
+     "description": "Optional structured form: subject–predicate–object with external ids where they exist.",
+     "properties": {
+      "subject": {
+       "type": "string"
+      },
+      "predicate": {
+       "type": "string"
+      },
+      "object": {
+       "type": "string"
+      }
+     }
+    },
+    "context": {
+     "type": "object",
+     "required": [
+      "species"
+     ],
+     "properties": {
+      "species": {
+       "type": "string",
+       "description": "NCBITaxon id or 'human'/'mouse'/... ; 'multiple' when the claim spans species and the evidence items say which."
+      },
+      "strain": {
+       "type": "string"
+      },
+      "sex": {
+       "type": "string"
+      },
+      "age": {
+       "type": "string"
+      },
+      "model": {
+       "type": "string",
+       "description": "Injury or disease model: full-thickness excisional wound, diabetic foot ulcer, ..."
+      },
+      "tissue": {
+       "type": "string"
+      },
+      "cellType": {
+       "type": "string"
+      },
+      "intervention": {
+       "type": "string"
+      },
+      "dose": {
+       "type": "string"
+      },
+      "route": {
+       "type": "string"
+      },
+      "timing": {
+       "type": "string"
+      },
+      "comparator": {
+       "type": "string"
+      }
+     }
+    },
+    "measurement": {
+     "type": "object",
+     "required": [
+      "measured",
+      "endpoint"
+     ],
+     "properties": {
+      "measured": {
+       "$ref": "common.schema.json#/$defs/measured"
+      },
+      "assay": {
+       "type": "string"
+      },
+      "endpoint": {
+       "type": "string"
+      },
+      "effect": {
+       "type": "string",
+       "description": "Direction and magnitude as reported, with units. Never a number the source does not state."
+      },
+      "uncertainty": {
+       "type": "string"
+      },
+      "followUp": {
+       "type": "string"
+      }
+     }
+    },
+    "evidence": {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "type": "object",
+      "required": [
+       "source",
+       "design"
+      ],
+      "additionalProperties": false,
+      "properties": {
+       "source": {
+        "$ref": "common.schema.json#/$defs/id"
+       },
+       "locator": {
+        "type": "string",
+        "description": "Figure, table, page or section. Required before a record can be reviewed."
+       },
+       "quote": {
+        "type": "string",
+        "description": "Exact passage, when available. A quote a human can check in ten seconds is the whole point of the verification packet."
+       },
+       "design": {
+        "type": "string",
+        "enum": [
+         "rct",
+         "controlled-trial",
+         "cohort",
+         "case-series",
+         "case-report",
+         "meta-analysis",
+         "animal-controlled",
+         "animal-observational",
+         "in-vitro",
+         "observational-human",
+         "regulatory-decision",
+         "registry-entry",
+         "review",
+         "abstract"
+        ]
+       },
+       "n": {
+        "type": "string"
+       },
+       "controls": {
+        "type": "string"
+       },
+       "blinding": {
+        "type": "string"
+       },
+       "randomisation": {
+        "type": "string"
+       },
+       "note": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "rung": {
+     "$ref": "common.schema.json#/$defs/rung"
+    },
+    "grounding": {
+     "$ref": "common.schema.json#/$defs/grounding"
+    },
+    "replication": {
+     "type": "object",
+     "properties": {
+      "independentGroups": {
+       "type": "integer",
+       "minimum": 0
+      },
+      "note": {
+       "type": "string",
+       "description": "Must say plainly when replication does NOT hold."
+      }
+     }
+    },
+    "status": {
+     "type": "object",
+     "properties": {
+      "peerReviewed": {
+       "type": "boolean"
+      },
+      "preprint": {
+       "type": "boolean"
+      },
+      "retracted": {
+       "type": "boolean"
+      },
+      "contradicted": {
+       "type": "boolean"
+      }
+     }
+    },
+    "supports": {
+     "$ref": "common.schema.json#/$defs/idList",
+     "description": "Capabilities or goals this claim is evidence FOR."
+    },
+    "contradicts": {
+     "$ref": "common.schema.json#/$defs/idList",
+     "description": "Claims or capabilities this claim is evidence AGAINST (including null results)."
+    },
+    "replicates": {
+     "$ref": "common.schema.json#/$defs/idList"
+    },
+    "drift": {
+     "type": "string",
+     "description": "Demonstrated vs commonly claimed."
+    },
+    "wouldMove": {
+     "type": "string"
+    },
+    "limitations": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "provenance": {
+     "$ref": "common.schema.json#/$defs/provenance"
+    },
+    "review": {
+     "$ref": "common.schema.json#/$defs/review"
+    }
+   }
+  },
+  "common.schema.json": {
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://humanrepairmap.com/schema/common.schema.json",
+   "title": "Human Repair Graph — shared definitions",
+   "description": "Definitions every record type reuses: identifiers, the evidence ladder, provenance and review. Records are validated by scripts/build.mjs against these schemas; the schemas are also served at /api/schema so a client can validate what it is about to propose.",
+   "$defs": {
+    "id": {
+     "type": "string",
+     "pattern": "^hrm:(goal|capability|question|claim|experiment|source|cell|route|prediction)/[a-z0-9]+(-[a-z0-9]+)*(--[a-z0-9]+(-[a-z0-9]+)*)?$",
+     "description": "hrm:<type>/<slug>. Never renamed; see ontology/mappings.json."
+    },
+    "idList": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/id"
+     },
+     "uniqueItems": true
+    },
+    "rung": {
+     "type": "string",
+     "enum": [
+      "L0",
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+     ],
+     "description": "L0 proposed · L1 in a dish · L2 in a rodent · L3 in a large animal · L4 in humans, once · L5 in humans, independently. See records/rubrics.json."
+    },
+    "grounding": {
+     "type": "string",
+     "enum": [
+      "G0",
+      "G1",
+      "G2",
+      "G3",
+      "G4"
+     ],
+     "description": "G0 assertion (cannot enter the map) · G1 cited text · G2 structured record · G3 primary data · G4 instrument-signed."
+    },
+    "measured": {
+     "type": "string",
+     "enum": [
+      "function",
+      "biomarker",
+      "opening",
+      "transduction",
+      "access",
+      "structure",
+      "none",
+      "unspecified"
+     ],
+     "description": "What actually changed: a life (function), a surrogate number (biomarker), a barrier opened, cells transduced, a compartment accessed, an anatomical structure formed, or nothing demonstrated. unspecified is reserved for grid capabilities derived from v0.2 cell records, which did not record it."
+    },
+    "blocked": {
+     "type": "string",
+     "enum": [
+      "science",
+      "framework",
+      "none"
+     ]
+    },
+    "capabilityClass": {
+     "type": "string",
+     "enum": [
+      "see",
+      "model",
+      "reach",
+      "edit",
+      "verify",
+      "control"
+     ]
+    },
+    "primitive": {
+     "type": "string",
+     "enum": [
+      "stop",
+      "remove",
+      "repair",
+      "replace",
+      "regenerate",
+      "reconnect",
+      "recalibrate",
+      "preserve"
+     ]
+    },
+    "projection": {
+     "type": "string",
+     "enum": [
+      "universal-repair",
+      "rejuvenation"
+     ]
+    },
+    "date": {
+     "type": "string",
+     "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "requirementGroup": {
+     "type": "object",
+     "description": "Exactly one of all/any. {all:[...]} = every member needed; {any:[...]} = one suffices. Groups on a record are ANDed.",
+     "oneOf": [
+      {
+       "required": [
+        "all"
+       ],
+       "properties": {
+        "all": {
+         "$ref": "#/$defs/idList",
+         "minItems": 1
+        },
+        "note": {
+         "type": "string"
+        }
+       },
+       "additionalProperties": false
+      },
+      {
+       "required": [
+        "any"
+       ],
+       "properties": {
+        "any": {
+         "$ref": "#/$defs/idList",
+         "minItems": 2
+        },
+        "note": {
+         "type": "string"
+        }
+       },
+       "additionalProperties": false
+      }
+     ]
+    },
+    "actor": {
+     "type": "object",
+     "required": [
+      "type",
+      "name"
+     ],
+     "properties": {
+      "type": {
+       "type": "string",
+       "enum": [
+        "human",
+        "ai",
+        "import"
+       ]
+      },
+      "name": {
+       "type": "string",
+       "minLength": 1
+      },
+      "model": {
+       "type": "string",
+       "description": "Required when type is ai: the model id, e.g. claude-fable-5-1."
+      },
+      "version": {
+       "type": "string"
+      },
+      "orcid": {
+       "type": "string",
+       "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$"
+      },
+      "session": {
+       "type": "string",
+       "description": "Session or run identifier so a batch of proposals can be traced and, if needed, withdrawn together."
+      }
+     },
+     "if": {
+      "properties": {
+       "type": {
+        "const": "ai"
+       }
+      }
+     },
+     "then": {
+      "required": [
+       "model"
+      ]
+     }
+    },
+    "provenance": {
+     "type": "object",
+     "required": [
+      "proposedBy",
+      "method",
+      "date"
+     ],
+     "properties": {
+      "proposedBy": {
+       "$ref": "#/$defs/actor"
+      },
+      "method": {
+       "type": "string",
+       "description": "How it was produced: 'manual reasoning from the cited sources', 'derived from records/cells by build.mjs', 'extracted by <model> from <source> with schema v0.3', ..."
+      },
+      "date": {
+       "$ref": "#/$defs/date"
+      },
+      "evidenceAccessed": {
+       "$ref": "#/$defs/idList",
+       "description": "Source ids the proposer actually consulted."
+      },
+      "extraction": {
+       "type": "object",
+       "description": "Present when a model extracted the record from a document.",
+       "properties": {
+        "model": {
+         "type": "string"
+        },
+        "schemaVersion": {
+         "type": "string"
+        },
+        "prompt": {
+         "type": "string"
+        },
+        "timestamp": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    },
+    "review": {
+     "type": "object",
+     "required": [
+      "state"
+     ],
+     "properties": {
+      "state": {
+       "type": "string",
+       "enum": [
+        "ai-proposed",
+        "submitted",
+        "in-review",
+        "reviewed",
+        "disputed",
+        "superseded"
+       ]
+      },
+      "reviewedBy": {
+       "type": "string",
+       "description": "A named human. Required when state is reviewed."
+      },
+      "date": {
+       "$ref": "#/$defs/date"
+      },
+      "checks": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "required": [
+         "id",
+         "by",
+         "date"
+        ],
+        "properties": {
+         "id": {
+          "type": "string",
+          "enum": [
+           "source-resolved",
+           "cross-checked",
+           "human-opened-source",
+           "independently-replicated"
+          ]
+         },
+         "by": {
+          "type": "string"
+         },
+         "date": {
+          "$ref": "#/$defs/date"
+         },
+         "note": {
+          "type": "string"
+         }
+        }
+       }
+      },
+      "history": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "required": [
+         "from",
+         "to",
+         "by",
+         "date"
+        ],
+        "properties": {
+         "from": {
+          "type": "string"
+         },
+         "to": {
+          "type": "string"
+         },
+         "by": {
+          "type": "string"
+         },
+         "date": {
+          "$ref": "#/$defs/date"
+         },
+         "note": {
+          "type": "string"
+         }
+        }
+       }
+      },
+      "supersededBy": {
+       "$ref": "#/$defs/id"
+      }
+     },
+     "if": {
+      "properties": {
+       "state": {
+        "const": "reviewed"
+       }
+      }
+     },
+     "then": {
+      "required": [
+       "reviewedBy"
+      ]
+     }
+    }
+   }
+  },
+  "experiment.schema.json": {
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://humanrepairmap.com/schema/experiment.schema.json",
+   "title": "Experiment",
+   "description": "A candidate or completed study that TESTS one or more questions. Feasibility is expressed in classes (low/medium/high; weeks/months/years) because a dollar figure the map cannot source would be exactly the kind of confident number it refuses to print elsewhere.",
+   "type": "object",
+   "required": [
+    "id",
+    "type",
+    "name",
+    "tests",
+    "design",
+    "status",
+    "provenance",
+    "review"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+     "const": "experiment"
+    },
+    "name": {
+     "type": "string",
+     "minLength": 5,
+     "maxLength": 200
+    },
+    "tests": {
+     "$ref": "common.schema.json#/$defs/idList",
+     "description": "Question ids. At least one."
+    },
+    "design": {
+     "type": "object",
+     "required": [
+      "species",
+      "intervention",
+      "readout"
+     ],
+     "properties": {
+      "species": {
+       "type": "string"
+      },
+      "model": {
+       "type": "string"
+      },
+      "intervention": {
+       "type": "string"
+      },
+      "comparator": {
+       "type": "string"
+      },
+      "readout": {
+       "type": "string",
+       "description": "The measurement that discriminates the hypotheses."
+      },
+      "duration": {
+       "type": "string"
+      },
+      "n": {
+       "type": "string"
+      }
+     }
+    },
+    "discriminates": {
+     "type": "string",
+     "description": "Which hypothesis each outcome would favour. An experiment whose every outcome is compatible with every hypothesis is not one."
+    },
+    "feasibility": {
+     "type": "object",
+     "properties": {
+      "costClass": {
+       "type": "string",
+       "enum": [
+        "low",
+        "medium",
+        "high"
+       ]
+      },
+      "durationClass": {
+       "type": "string",
+       "enum": [
+        "weeks",
+        "months",
+        "years"
+       ]
+      },
+      "requires": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       },
+       "description": "Capabilities, models, equipment or approvals needed."
+      },
+      "ethics": {
+       "type": "string"
+      }
+     }
+    },
+    "status": {
+     "type": "string",
+     "enum": [
+      "proposed",
+      "registered",
+      "running",
+      "completed",
+      "abandoned"
+     ]
+    },
+    "registration": {
+     "type": "string",
+     "description": "NCT id, protocols.io DOI, preregistration URL."
+    },
+    "results": {
+     "$ref": "common.schema.json#/$defs/idList",
+     "description": "Claim ids produced by this experiment, including null results."
+    },
+    "provenance": {
+     "$ref": "common.schema.json#/$defs/provenance"
+    },
+    "review": {
+     "$ref": "common.schema.json#/$defs/review"
+    }
+   }
+  },
+  "goal.schema.json": {
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://humanrepairmap.com/schema/goal.schema.json",
+   "title": "Goal",
+   "description": "A repair outcome stated from the person's side: 'scarless functional repair of adult skin after full-thickness injury'. Goals decompose (requires) into sub-goals and capabilities with AND/OR groups. The two public maps are projections of the goal tree; a goal may sit in both.",
+   "type": "object",
+   "required": [
+    "id",
+    "type",
+    "name",
+    "description",
+    "projections",
+    "provenance",
+    "review"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+     "const": "goal"
+    },
+    "name": {
+     "type": "string",
+     "minLength": 3,
+     "maxLength": 160
+    },
+    "description": {
+     "type": "string",
+     "minLength": 20
+    },
+    "projections": {
+     "type": "array",
+     "items": {
+      "$ref": "common.schema.json#/$defs/projection"
+     },
+     "minItems": 1,
+     "uniqueItems": true
+    },
+    "parent": {
+     "$ref": "common.schema.json#/$defs/id",
+     "description": "The goal this one is part of, for tree rendering. Dependency is carried by requires, not by parent."
+    },
+    "requires": {
+     "type": "array",
+     "items": {
+      "$ref": "common.schema.json#/$defs/requirementGroup"
+     }
+    },
+    "blockedBy": {
+     "$ref": "common.schema.json#/$defs/idList"
+    },
+    "testSuite": {
+     "type": "array",
+     "description": "Concrete scenarios a general capability must pass to count as general for this goal ('small skin wound', 'compound fracture', ...). A checklist, not a grade.",
+     "items": {
+      "type": "object",
+      "required": [
+       "scenario"
+      ],
+      "properties": {
+       "scenario": {
+        "type": "string"
+       },
+       "state": {
+        "type": "string",
+        "enum": [
+         "routine",
+         "partial",
+         "unsolved"
+        ]
+       },
+       "note": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "existenceProof": {
+     "type": "string",
+     "description": "Where nature or a narrow clinical case already does this (fetal skin, spiny mouse, oral mucosa) — the reason the goal is not known to be impossible."
+    },
+    "informationLimited": {
+     "type": "boolean"
+    },
+    "provenance": {
+     "$ref": "common.schema.json#/$defs/provenance"
+    },
+    "review": {
+     "$ref": "common.schema.json#/$defs/review"
+    }
+   }
+  },
+  "prediction.schema.json": {
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://humanrepairmap.com/schema/prediction.schema.json",
+   "title": "Prediction",
+   "description": "A locked forecast about a question, claim or capability, made by a named human or a named model version BEFORE the outcome is known, and resolved later against reality. This is how the map becomes a prospective, contamination-free benchmark for scientific reasoning: the world produces the test set. Registered through POST /api/predictions or the MCP tool register_prediction; the registration is hash-chained in the public event log and cannot be edited afterwards.",
+   "type": "object",
+   "required": [
+    "subject",
+    "statement",
+    "probability",
+    "resolutionCriteria",
+    "horizon",
+    "predictor"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+     "const": "prediction"
+    },
+    "subject": {
+     "$ref": "common.schema.json#/$defs/id",
+     "description": "The question, claim or capability the forecast is about."
+    },
+    "statement": {
+     "type": "string",
+     "minLength": 15,
+     "maxLength": 600,
+     "description": "What will be observed, stated so that a stranger can later say yes or no."
+    },
+    "probability": {
+     "type": "number",
+     "minimum": 0,
+     "maximum": 1
+    },
+    "resolutionCriteria": {
+     "type": "string",
+     "minLength": 15,
+     "description": "Exactly what evidence counts as resolving it true or false. Vague criteria make the prediction void, not right."
+    },
+    "horizon": {
+     "$ref": "common.schema.json#/$defs/date",
+     "description": "Date by which it should be resolvable."
+    },
+    "predictor": {
+     "$ref": "common.schema.json#/$defs/actor"
+    },
+    "evidenceAccessed": {
+     "$ref": "common.schema.json#/$defs/idList",
+     "description": "What the predictor consulted. A model should list the node ids it read."
+    },
+    "reasoning": {
+     "type": "string",
+     "maxLength": 4000,
+     "description": "Structured reasoning, kept with the prediction so that calibration can later be studied per method, not just per model."
+    },
+    "graphSnapshot": {
+     "type": "string",
+     "description": "The snapshot version the predictor saw (from /api/graph/manifest). Filled by the server."
+    },
+    "registeredAt": {
+     "type": "string",
+     "description": "Server-assigned ISO timestamp."
+    },
+    "state": {
+     "type": "string",
+     "enum": [
+      "open",
+      "resolved-true",
+      "resolved-false",
+      "void"
+     ]
+    },
+    "resolution": {
+     "type": "object",
+     "properties": {
+      "by": {
+       "type": "string"
+      },
+      "date": {
+       "$ref": "common.schema.json#/$defs/date"
+      },
+      "outcomeSource": {
+       "$ref": "common.schema.json#/$defs/id"
+      },
+      "note": {
+       "type": "string"
+      }
+     },
+     "description": "Only a steward may write this, and only by appending an event."
+    }
+   }
+  },
+  "question.schema.json": {
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://humanrepairmap.com/schema/question.schema.json",
+   "title": "Question",
+   "description": "An unresolved uncertainty whose answer would change a grade or a dependency. The unit of research prioritisation: every '?' in the map is one of these, and the ranking the API returns is computed from what a question blocks, never from an invented probability.",
+   "type": "object",
+   "required": [
+    "id",
+    "type",
+    "question",
+    "why",
+    "blocks",
+    "state",
+    "provenance",
+    "review"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+     "const": "question"
+    },
+    "question": {
+     "type": "string",
+     "minLength": 15,
+     "maxLength": 400
+    },
+    "why": {
+     "type": "string",
+     "minLength": 20,
+     "description": "What changes if it is answered — which grade moves, which dependency resolves."
+    },
+    "blocks": {
+     "$ref": "common.schema.json#/$defs/idList",
+     "description": "Capabilities or goals gated by this question. Drives the ranking."
+    },
+    "hypotheses": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "description": "The live competing answers, so an experiment can be judged on whether it discriminates between them."
+    },
+    "knownUnknowns": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "whatWouldResolve": {
+     "type": "string",
+     "description": "The observation that would settle it — stated so a reader can recognise it when it appears."
+    },
+    "state": {
+     "type": "string",
+     "enum": [
+      "open",
+      "resolved",
+      "superseded"
+     ]
+    },
+    "resolvedBy": {
+     "$ref": "common.schema.json#/$defs/idList",
+     "description": "Claim ids. Non-empty only when state is resolved."
+    },
+    "projections": {
+     "type": "array",
+     "items": {
+      "$ref": "common.schema.json#/$defs/projection"
+     },
+     "uniqueItems": true
+    },
+    "provenance": {
+     "$ref": "common.schema.json#/$defs/provenance"
+    },
+    "review": {
+     "$ref": "common.schema.json#/$defs/review"
+    }
+   }
+  },
+  "source.schema.json": {
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://humanrepairmap.com/schema/source.schema.json",
+   "title": "Source",
+   "description": "Where a claim's evidence lives. Two separate facts are recorded and must never be conflated: resolution (a machine confirmed the source exists and its metadata matches — scripts/resolve-sources.mjs) and humanOpened (a named person read it). Resolved is not reviewed.",
+   "type": "object",
+   "required": [
+    "id",
+    "type",
+    "citation",
+    "kind",
+    "year",
+    "resolution",
+    "provenance"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+     "const": "source"
+    },
+    "citation": {
+     "type": "string",
+     "minLength": 10,
+     "description": "Human-readable: first author et al., journal, year."
+    },
+    "title": {
+     "type": "string"
+    },
+    "authors": {
+     "type": "string"
+    },
+    "venue": {
+     "type": "string"
+    },
+    "year": {
+     "type": "integer",
+     "minimum": 1800,
+     "maximum": 2100
+    },
+    "kind": {
+     "type": "string",
+     "enum": [
+      "article",
+      "preprint",
+      "abstract",
+      "regulatory",
+      "registry",
+      "dataset",
+      "protocol",
+      "book",
+      "letter",
+      "report",
+      "web"
+     ]
+    },
+    "doi": {
+     "type": "string",
+     "pattern": "^10\\.\\d{4,9}/\\S+$"
+    },
+    "pmid": {
+     "type": "string",
+     "pattern": "^\\d{1,9}$"
+    },
+    "pmcid": {
+     "type": "string",
+     "pattern": "^PMC\\d+$"
+    },
+    "nct": {
+     "type": "string",
+     "pattern": "^NCT\\d{8}$"
+    },
+    "url": {
+     "type": "string",
+     "pattern": "^https?://"
+    },
+    "license": {
+     "type": "string"
+    },
+    "openAccess": {
+     "type": "boolean"
+    },
+    "resolution": {
+     "type": "object",
+     "required": [
+      "resolved"
+     ],
+     "additionalProperties": false,
+     "properties": {
+      "resolved": {
+       "type": "boolean",
+       "description": "A machine located the record and its metadata matched (title/venue/year). False until scripts/resolve-sources.mjs has run for it."
+      },
+      "checkedOn": {
+       "$ref": "common.schema.json#/$defs/date"
+      },
+      "via": {
+       "type": "string",
+       "enum": [
+        "crossref",
+        "pubmed",
+        "clinicaltrials",
+        "manual",
+        "none"
+       ]
+      },
+      "metadataMatches": {
+       "type": "boolean"
+      },
+      "resolvedTitle": {
+       "type": "string"
+      },
+      "note": {
+       "type": "string"
+      }
+     }
+    },
+    "humanOpened": {
+     "type": "object",
+     "required": [
+      "by",
+      "date"
+     ],
+     "properties": {
+      "by": {
+       "type": "string"
+      },
+      "date": {
+       "$ref": "common.schema.json#/$defs/date"
+      },
+      "note": {
+       "type": "string"
+      }
+     },
+     "description": "Only a named human may write this."
+    },
+    "note": {
+     "type": "string"
+    },
+    "provenance": {
+     "$ref": "common.schema.json#/$defs/provenance"
+    }
+   }
+  }
+ },
  "nodes": [
   {
    "type": "capability",

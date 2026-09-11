@@ -1,167 +1,104 @@
-/* Contribution pipeline API.
+/* REST API — the same graph the MCP tools see, addressable by URL.
+   Read routes are pure; write routes go through store.js. */
 
-   The chain: every event stores the hash of the event before it. Editing or
-   deleting any row after the fact breaks every hash downstream, and /api/verify
-   walks the chain and reports the first break. That is the whole guarantee —
-   not that nobody can change the database, but that nobody can change it
-   silently.
+import * as G from "./graph.js";
+import { createStore } from "./store.js";
+import { GRAPH } from "./generated.js";
+import { openapi } from "./openapi.js";
 
-   Writes are public and unauthenticated by design (a commons nobody can
-   contribute to is a publication). Nothing submitted is ever displayed as fact:
-   proposals enter as `submitted` and only a steward can move them. */
-
-const LIMITS = { summary: 300, rationale: 4000, url: 500, name: 120, affil: 200, perPage: 100 };
-
-const J = (obj, status = 200, extra = {}) =>
-  new Response(JSON.stringify(obj, null, 2), {
-    status,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-      ...extra
-    }
-  });
-
-async function sha256(text) {
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-
-/* Append one event, chained to the current tip. */
-async function appendEvent(db, { type, record_id, actor, payload }) {
-  const tip = await db.prepare("SELECT hash FROM events ORDER BY seq DESC LIMIT 1").first();
-  const prev_hash = tip ? tip.hash : "genesis";
-  const ts = new Date().toISOString();
-  const body = JSON.stringify(payload);
-  const seqRow = await db.prepare("SELECT COALESCE(MAX(seq),0)+1 AS next FROM events").first();
-  const seq = seqRow.next;
-  const hash = await sha256([seq, ts, type, record_id, actor, body, prev_hash].join("|"));
-  await db
-    .prepare("INSERT INTO events (seq, ts, type, record_id, actor, payload, prev_hash, hash) VALUES (?,?,?,?,?,?,?,?)")
-    .bind(seq, ts, type, record_id, actor, body, prev_hash, hash)
-    .run();
-  return { seq, ts, hash, prev_hash };
-}
-
-function clean(v, max) {
-  if (typeof v !== "string") return "";
-  return v.trim().slice(0, max);
-}
-
-const CORS_HEADERS = {
+const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Max-Age": "86400"
 };
+const J = (obj, status = 200, extra = {}) =>
+  new Response(JSON.stringify(obj, null, 2), { status, headers: { "Content-Type": "application/json; charset=utf-8", ...CORS, ...extra } });
+const CACHE = { "Cache-Control": "public, max-age=300" };
+const withCaveat = (obj, nodes) => ({ ...obj, caveat: G.caveatFor(nodes || []) });
+
+export const ENDPOINTS = [
+  "GET  /api                                — this index",
+  "GET  /api/openapi.json                   — OpenAPI 3.1 description",
+  "GET  /api/graph                          — the whole bundle (manifest, ontology, rubrics, nodes, analysis)",
+  "GET  /api/graph/manifest                 — version, snapshot, content hash, counts",
+  "GET  /api/graph/analysis                 — ranked questions, critical paths, contradictions, grade summary",
+  "GET  /api/schema                         — list of JSON Schemas; GET /api/schema/{name}",
+  "GET  /api/nodes?type=&projection=&class=&rung=&basis=&blocked=&state=&review=&derived=&q=&limit=",
+  "GET  /api/nodes/{hrm-id}                 — any node; also /api/{goals|capabilities|questions|claims|experiments|sources|cells|routes}/{slug}",
+  "GET  /api/goals/{slug}/critical-path     — binding constraints, AND/OR requirements, open questions",
+  "GET  /api/{type}s/{slug}/dependencies    — requires/enables (direct and transitive), blockers, evidence links",
+  "GET  /api/{type}s/{slug}/evidence        — claims and sources with resolution and human-opened state",
+  "GET  /api/{type}s/{slug}/blockers        — open questions gating it",
+  "GET  /api/{type}s/{slug}/subgraph?depth=2&relations=requires,enables",
+  "GET  /api/{type}s/{slug}/would-move      — the missing demonstration",
+  "GET  /api/{type}s/{slug}/predictions     — locked predictions on it",
+  "GET  /api/questions/ranked?projection=&limit=",
+  "GET  /api/contradictions[?id=]",
+  "GET  /api/search?q=&limit=",
+  "POST /api/predictions                    — lock a prediction (schema: /api/schema/prediction.schema.json)",
+  "GET  /api/predictions[?subject=]",
+  "POST /api/proposals                      — propose a change; GET /api/proposals[?record=]",
+  "GET  /api/events[?record=]               — the append-only hash-chained log",
+  "GET  /api/verify                         — walk the chain",
+  "GET  /api/stats"
+];
 
 export async function handleApi(request, env, url) {
-  // A 204 must not carry a body — returning one breaks the preflight.
-  if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS_HEADERS });
-  const db = env.DB;
-  if (!db) return J({ error: "database not bound" }, 500);
-  const path = url.pathname.replace(/^\/api\/?/, "");
+  if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
+  const store = createStore(env && env.DB);
+  const path = url.pathname.replace(/^\/api\/?/, "").replace(/\/+$/, "");
+  const parts = path ? path.split("/").map((p) => decodeURIComponent(p)) : [];
+  const q = Object.fromEntries(url.searchParams.entries());
+  const GET = request.method === "GET";
+  const POST = request.method === "POST";
+  const body = async () => { try { return await request.json(); } catch { return null; } };
+  const needDb = () => J({ error: "database not bound" }, 500);
 
-  /* ---- POST /api/proposals — anyone may propose a change ---- */
-  if (path === "proposals" && request.method === "POST") {
-    let b;
-    try { b = await request.json(); } catch { return J({ error: "invalid JSON" }, 400); }
+  if (!path && GET) return J({ name: "Human Repair Graph API", version: G.MANIFEST.version, snapshot: G.MANIFEST.snapshot, contentHash: G.MANIFEST.contentHash, endpoints: ENDPOINTS, openapi: "/api/openapi.json", mcp: "https://humanrepairmap.com/mcp", bulk: G.MANIFEST.formats, caveat: G.MANIFEST.caveat }, 200, CACHE);
+  if (path === "openapi.json" && GET) return J(openapi(), 200, CACHE);
+  if (path === "graph" && GET) return J(GRAPH, 200, CACHE);
+  if (path === "graph/manifest" && GET) return J(G.MANIFEST, 200, CACHE);
+  if (path === "graph/analysis" && GET) return J(G.ANALYSIS, 200, CACHE);
+  if (path === "schema" && GET) return J({ schemas: Object.keys(GRAPH.schemas || {}).map((n) => `/api/schema/${n}`) }, 200, CACHE);
+  if (parts[0] === "schema" && parts[1] && GET) { const s = (GRAPH.schemas || {})[parts[1]]; return s ? J(s, 200, CACHE) : J({ error: "no such schema", available: Object.keys(GRAPH.schemas || {}) }, 404); }
+  if (path === "search" && GET) return J(withCaveat({ query: q.q, results: G.search(q.q, Math.min(parseInt(q.limit || 20, 10) || 20, 100)) }, []), 200, CACHE);
+  if (path === "contradictions" && GET) { const rows = G.contradictions(q.id ? G.normaliseId(q.id) : null); return J(withCaveat({ count: rows.length, contradictions: rows }, rows.map((c) => G.NODES.get(c.claim))), 200, CACHE); }
+  if (path === "questions/ranked" && GET) return J({ method: G.ANALYSIS.method, projection: q.projection || "all", questions: G.rankedQuestions(q.projection, q.limit || 20) }, 200, CACHE);
+  if (path === "nodes" && GET) { const rows = G.listNodes(q); return J(withCaveat({ count: rows.length, filter: q, nodes: rows }, rows.map((r) => G.NODES.get(r.id))), 200, CACHE); }
 
-    const record_id = clean(b.record_id, 80);
-    const kind = clean(b.kind, 40);
-    const summary = clean(b.summary, LIMITS.summary);
-    const rationale = clean(b.rationale, LIMITS.rationale);
-    const source_url = clean(b.source_url, LIMITS.url);
-    const proposer = clean(b.proposer, LIMITS.name) || "anonymous";
-    const affil = clean(b.affil, LIMITS.affil);
-
-    if (!record_id) return J({ error: "record_id is required" }, 400);
-    if (!summary) return J({ error: "summary is required — say what is wrong in one line" }, 400);
-    if (!rationale) return J({ error: "rationale is required — a claim without reasoning cannot be reviewed" }, 400);
-    if (!["correction", "rung-challenge", "new-evidence", "question"].includes(kind))
-      return J({ error: "kind must be correction, rung-challenge, new-evidence or question" }, 400);
-    if (source_url && !/^https?:\/\//i.test(source_url)) return J({ error: "source_url must be http(s)" }, 400);
-    if (b.website) return J({ ok: true, id: "p_ignored" }); // honeypot
-
-    const ev = await appendEvent(db, {
-      type: "proposal.submitted",
-      record_id,
-      actor: "human:" + proposer,
-      payload: { kind, summary, rationale, source_url, affil }
-    });
-    const id = "p_" + ev.hash.slice(0, 10);
-    await db
-      .prepare(
-        "INSERT INTO proposals (id, created, record_id, kind, summary, rationale, source_url, proposer, affil, state, verdicts, event_hash) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
-      )
-      .bind(id, ev.ts, record_id, kind, summary, rationale, source_url, proposer, affil, "submitted", "[]", ev.hash)
-      .run();
-
-    return J({
-      ok: true,
-      id,
-      state: "submitted",
-      event: ev,
-      note: "Recorded in the public event log. It will not change any record until a steward reviews it, and the map will show it as unreviewed until then."
-    }, 201);
+  // node-addressed routes: /api/nodes/hrm:type/slug/... or /api/<plural>/<slug>/...
+  let node = null, rest = [];
+  if (parts[0] === "nodes" && parts[1]) {
+    if (parts[1].startsWith("hrm:") && parts[2]) { node = G.getNode(parts[1] + "/" + parts[2]); rest = parts.slice(3); }
+    else { node = G.getNode(parts[1]); rest = parts.slice(2); }
+  } else {
+    const type = Object.keys(G.PLURAL).find((t) => G.PLURAL[t] === parts[0]);
+    if (type && parts[1]) { node = G.getNode(parts[1], type); rest = parts.slice(2); }
   }
-
-  /* ---- GET /api/proposals[?record=id] ---- */
-  if (path === "proposals" && request.method === "GET") {
-    const rec = url.searchParams.get("record");
-    const q = rec
-      ? db.prepare("SELECT * FROM proposals WHERE record_id = ? ORDER BY created DESC LIMIT ?").bind(rec, LIMITS.perPage)
-      : db.prepare("SELECT * FROM proposals ORDER BY created DESC LIMIT ?").bind(LIMITS.perPage);
-    const { results } = await q.all();
-    return J({
-      count: results.length,
-      proposals: results.map((p) => ({ ...p, verdicts: JSON.parse(p.verdicts || "[]") }))
-    });
+  if (node) {
+    const sub = rest[0] || "";
+    if (!GET) return J({ error: "method not allowed" }, 405);
+    if (!sub) return J(withCaveat({ node }, [node]), 200, CACHE);
+    if (sub === "critical-path") { const t = G.tracePath(node.id); return t ? J(t, 200, CACHE) : J({ error: "critical-path is defined for goals only" }, 400); }
+    if (sub === "dependencies") return J(withCaveat(G.dependencies(node.id), [node]), 200, CACHE);
+    if (sub === "evidence") return J(G.evidenceFor(node.id), 200, CACHE);
+    if (sub === "blockers") return J(G.blockersOf(node.id), 200, CACHE);
+    if (sub === "subgraph") return J(G.subgraph(node.id, Math.min(parseInt(q.depth || 2, 10) || 2, 4), q.relations ? q.relations.split(",") : undefined), 200, CACHE);
+    if (sub === "would-move") return J(G.whatWouldMove(node.id), 200, CACHE);
+    if (sub === "predictions") { if (!store) return needDb(); return J(await store.listPredictions(node.id, 100)); }
+    return J({ error: "unknown sub-resource", available: ["critical-path", "dependencies", "evidence", "blockers", "subgraph", "would-move", "predictions"] }, 404);
   }
+  if ((parts[0] === "nodes" || Object.values(G.PLURAL).includes(parts[0])) && parts[1] && GET) return J({ error: "not found", id: parts.slice(1).join("/") }, 404);
 
-  /* ---- GET /api/events[?record=id] — the append-only log ---- */
-  if (path === "events" && request.method === "GET") {
-    const rec = url.searchParams.get("record");
-    const q = rec
-      ? db.prepare("SELECT * FROM events WHERE record_id = ? ORDER BY seq ASC LIMIT ?").bind(rec, LIMITS.perPage)
-      : db.prepare("SELECT * FROM events ORDER BY seq ASC LIMIT ?").bind(LIMITS.perPage);
-    const { results } = await q.all();
-    return J({
-      count: results.length,
-      events: results.map((e) => ({ ...e, payload: JSON.parse(e.payload) }))
-    });
-  }
+  // write side
+  if (path === "predictions" && POST) { if (!store) return needDb(); const b = await body(); if (!b) return J({ error: "invalid JSON" }, 400); const r = await store.registerPrediction({ ...b, subject: G.normaliseId(b.subject) }); return r.error ? J(r, 400) : J(r, 201); }
+  if (path === "predictions" && GET) { if (!store) return needDb(); return J(await store.listPredictions(q.subject ? G.normaliseId(q.subject) : null, Math.min(parseInt(q.limit || 100, 10) || 100, 200))); }
+  if (path === "proposals" && POST) { if (!store) return needDb(); const b = await body(); if (!b) return J({ error: "invalid JSON" }, 400); const r = await store.submitProposal({ ...b, record_id: G.normaliseId(b.record_id) }); return r.error ? J(r, 400) : J(r, 201); }
+  if (path === "proposals" && GET) { if (!store) return needDb(); return J(await store.listProposals(q.record ? G.normaliseId(q.record) : null)); }
+  if (path === "events" && GET) { if (!store) return needDb(); return J(await store.events(q.record ? G.normaliseId(q.record) : null)); }
+  if (path === "verify" && GET) { if (!store) return needDb(); return J(await store.verify()); }
+  if (path === "stats" && GET) { if (!store) return needDb(); return J(await store.stats()); }
 
-  /* ---- GET /api/verify — walk the chain and prove it is intact ---- */
-  if (path === "verify" && request.method === "GET") {
-    const { results } = await db.prepare("SELECT * FROM events ORDER BY seq ASC").all();
-    let prev = "genesis";
-    for (const e of results) {
-      const expect = await sha256([e.seq, e.ts, e.type, e.record_id, e.actor, e.payload, e.prev_hash].join("|"));
-      if (e.prev_hash !== prev)
-        return J({ intact: false, brokenAt: e.seq, reason: "prev_hash does not match the preceding event", checked: results.length });
-      if (e.hash !== expect)
-        return J({ intact: false, brokenAt: e.seq, reason: "content does not match its own hash — this row was altered", checked: results.length });
-      prev = e.hash;
-    }
-    return J({
-      intact: true,
-      events: results.length,
-      tip: prev,
-      note: "Every event hashes its own contents plus the hash of the event before it. Altering or deleting any row would break this walk."
-    });
-  }
-
-  /* ---- GET /api/stats ---- */
-  if (path === "stats" && request.method === "GET") {
-    const ev = await db.prepare("SELECT COUNT(*) AS n FROM events").first();
-    const pr = await db.prepare("SELECT state, COUNT(*) AS n FROM proposals GROUP BY state").all();
-    const byState = {};
-    (pr.results || []).forEach((r) => { byState[r.state] = r.n; });
-    return J({ events: ev.n, proposals: byState, humanReviewed: 0, records: 16 });
-  }
-
-  return J({ error: "not found", endpoints: ["POST /api/proposals", "GET /api/proposals", "GET /api/events", "GET /api/verify", "GET /api/stats"] }, 404);
+  return J({ error: "not found", endpoints: ENDPOINTS }, 404);
 }

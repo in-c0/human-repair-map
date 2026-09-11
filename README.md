@@ -4,12 +4,13 @@
 works, what is blocked, what evidence supports each claim, graded openly with its
 review state.**
 
-> **Prototype (v0.3).** Every record on this map carries its own review state. As of
-> 2026-09-11, **0 of 326 records have been reviewed by a human**: the sources were
-> located and their metadata machine-verified, and nothing more. This maps
-> *research state*, not clinical care. It does **not** diagnose, recommend
-> treatments, select therapies, predict individual outcomes, or give
-> patient-specific medical advice.
+> **Prototype (v0.3 → v0.4 validation).** Every record carries its own review
+> state. As of 2026-09-11, **0 of 326 records have been reviewed by a human**:
+> sources were located and their metadata machine-verified, and nothing more.
+> v0.4 therefore prioritises **expert falsification and researcher utility** over
+> adding more diseases or more nodes. This maps *research state*, not clinical
+> care. It does **not** diagnose, recommend treatments, select therapies, predict
+> individual outcomes, or give patient-specific medical advice.
 
 ## The idea
 
@@ -23,13 +24,35 @@ Closer to Wikipedia and GitHub than a biotech landing page. Humans and AI agents
 may propose; accepted knowledge stays evidence-linked, attributable, disputable,
 and auditable.
 
-## What's in v0.1
-
 **Live: [humanrepairmap.com](https://humanrepairmap.com)** · **MCP endpoint: [humanrepairmap.com/mcp](https://humanrepairmap.com/mcp)**
 
-## What's in v0.3 — the Human Repair Graph
+## v0.4 — prove that the map helps researchers
 
-The map is now **one graph with two public projections** — *Universal Repair*
+The immediate milestone is deliberately not broader coverage.
+
+Human Repair Map must first answer a harder question:
+
+> **Can a domain researcher use this graph to reach a defensible view of the
+> evidence, blockers and next questions faster — without increasing scientific
+> error — and does it ever change what they would investigate next?**
+
+The first proving ground remains **scarless functional repair of adult human
+skin**. The v0.4 pilot compares a researcher's normal literature workflow with
+HRM on matched questions, measuring time-to-defensible-research-state, factual
+errors, missed contradictions, decision changes and graph falsification yield.
+
+- **Contribute / review:** [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- **Researcher pilot protocol:** [`docs/researcher-pilot-v0.4.md`](docs/researcher-pilot-v0.4.md)
+- **Structured scientific challenge:** open a *Scientific review / challenge* issue
+
+Do not turn hundreds of records green for appearance. Review the highest-leverage
+branch first: claims that determine capability rungs, binding constraints,
+contradictory/replication evidence, top-ranked questions, and experiments attached
+to those questions.
+
+## v0.3 — the Human Repair Graph
+
+The map is **one graph with two public projections** — *Universal Repair*
 (trauma, infection, cancer, organ failure) and *Rejuvenation* (aging) — built so
 that a model, an agent or an institution can inspect, reason over, challenge,
 extend and act through it without scraping a page. Six record types:
@@ -43,15 +66,15 @@ extend and act through it without scraping a page. Six record types:
 | **experiment** | a candidate or running study that tests a question | 6 |
 | **source** | where evidence lives, with a machine `resolution` record kept separate from whether a human has opened it | 34 |
 
-First proving ground: **scarless functional repair of adult human skin** — it
-sits across both maps. The 16 CNS-delivery routes and the 31-node repairability
-grid from earlier versions are nodes in the same graph, not a separate dataset.
+The scarless-skin proving ground sits across both maps. The 16 CNS-delivery routes
+and the 31-node repairability grid from earlier versions are nodes in the same
+graph, not separate knowledge silos.
 
 The build derives every inverse relation (a relation is stored once), rejects
-dangling references and dependency cycles, and computes a **structural
-analysis**: for each goal the binding constraints (AND-required capabilities at
-the lowest rung), and open questions ranked by how much sits downstream of what
-they block. No probabilities, costs or dates are invented anywhere.
+dangling references and dependency cycles, and computes a **structural analysis**:
+for each goal the binding constraints (AND-required capabilities at the lowest
+rung), and open questions ranked by how much sits downstream of what they block.
+No probabilities, costs or dates are invented anywhere.
 
 ### Use it from a model
 
@@ -65,7 +88,7 @@ critical path), `find_blockers`, `rank_research_questions`, `get_primary_evidenc
 `find_contradictions`, `what_would_move_this`. Action: `propose_change` (files a
 correction into the public hash-chained log) and `register_prediction` (locks a
 forecast against the graph snapshot you saw, resolved later against reality —
-the map as a prospective, contamination-free benchmark). Every result carries
+the map as a prospective, contamination-resistant benchmark). Every result carries
 `structuredContent` and the review state of what it returned.
 
 ### Use it without MCP
@@ -74,54 +97,60 @@ the map as a prospective, contamination-free benchmark). Every result carries
 - **Bulk** — [`/graph/graph.json`](https://humanrepairmap.com/graph/graph.json) · `graph.jsonl` · `graph.jsonld` · `manifest.json` (content hash; immutable per hash) · `schema/` (the JSON Schemas every record is validated against).
 - **Source** — [`records/graph/`](records/graph/) is the only source of truth; [`schema/`](schema/) and [`ontology/`](ontology/) define it; [`scripts/build.mjs`](scripts/build.mjs) is the only writer of everything generated.
 
-Design record: [`brief-2026-09-11-map-cure-machine-progress.md`](brief-2026-09-11-map-cure-machine-progress.md) (the owner's words verbatim and the thread that reopened the project).
+Design record: [`brief-2026-09-11-map-cure-machine-progress.md`](brief-2026-09-11-map-cure-machine-progress.md) records the thread that reopened the project and the design decisions behind this graph.
 
-A no-backend prototype (`index.html` + `content/`) demonstrating:
+## Earlier prototypes retained in the graph
 
-- **The thesis** — the first-principles case that biological repair is possible
-  in principle, what the irreducible enabling capability is, and where
-  information loss makes repair impossible. Follows the project's founding draft.
+The project began as a no-backend prototype (`index.html` + `content/`) with:
 
-- **The five enabling capabilities** — sensing, target-state modelling,
-  cell-specific delivery, cell-state editing, closed-loop verification — each with
-  a maturity score, uncertainty interval, and review state.
-- **A dependency graph** of the repair loop (sense → target → deliver → edit →
-  verify → adapt).
-- **The deep module: cell-specific delivery**, seeded with **16 real CNS-delivery
-  routes** graded on an evidence ladder (L2 rodent → L4 human, once → L5 human,
-  independently), with what each route actually *measured* (a life vs a biomarker)
-  and its drift. Data: [`data/cns-delivery.json`](data/cns-delivery.json).
-- **An evidence registry, open-task interface, and governance model** with the
-  full review-state ladder (AI proposal → submitted → in review → reviewed →
-  disputed → superseded).
-- **Full-text search** across capabilities, routes, evidence, and tasks.
+- the first-principles repair thesis;
+- five enabling capabilities — sensing, target-state modelling, cell-specific
+  delivery, cell-state editing, closed-loop verification;
+- a dependency graph of the repair loop;
+- a deep module grading 16 real CNS-delivery routes;
+- an evidence registry, open-task interface and review-state ladder;
+- a 31-node cell/tissue repairability grid.
 
-Every delivery record enters as **AI-proposed and unreviewed** — sourced by search
-agents, not yet hand-checked. That is the review-state system working as designed,
-not a defect. The headline finding it surfaces: *nothing is both broad and proven
-in humans* — opening the blood-brain barrier is independently proven, while
-delivering a drug through it to a clinical outcome is proven nowhere.
+These are retained as graph nodes and data rather than maintained as separate
+sources of truth.
 
-## Run it
+## Canonical data and validation
 
-Open `index.html` directly in a browser, keeping the `content/` folder beside it
-— no build, no server, no account.
+`records/graph/` is canonical. A relation is stored once; inverse relations are
+derived. Generated website/API/export files must not be edited independently.
 
-Pushes to `main` auto-deploy to Cloudflare Pages via
-`.github/workflows/deploy.yml` (requires the `CLOUDFLARE_API_TOKEN` and
-`CLOUDFLARE_ACCOUNT_ID` repository secrets).
+After changing records:
+
+```bash
+node scripts/build.mjs
+node mcp/test.mjs
+```
+
+CI validates schemas, references, dependency cycles, grade evidence and the human
+review gate, and fails if generated exports drift from canonical records.
+
+## Deployment
+
+Pushes to `main` assemble and deploy the static site to Cloudflare Pages via
+`.github/workflows/deploy.yml`. Deployment requires repository secrets
+`CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+
+The machine API/MCP worker has its own deployment/runtime configuration under
+`mcp/`.
 
 ## The one hard gate
 
-The commons' credibility rests on one line: **a record cannot reach the "reviewed"
-state until a human opens its cited sources.** The v0.1 delivery module is entirely
-AI-proposed; hand-verifying its citations is the first open task. See
-[`design.md`](design.md) for the full design and the two-faces model (capability
-map × damage atlas).
+The commons' credibility rests on one line:
+
+> **A record cannot reach `reviewed` until a named human opens its cited primary
+> sources and verifies that they support the attached scientific claim.**
+
+Machine source-resolution and cross-model agreement are recorded separately. They
+never masquerade as human review.
 
 ## Not a clinical tool
 
 No diagnosis, prognosis, treatment selection, patient-specific recommendations,
-trial-eligibility certainty, or a date for "universal repair." Pathology is
+trial-eligibility certainty, or date for "universal repair." Pathology is
 distinguished from identity, damage from adaptation, disability from difference.
 Consent, agency, and reversibility are system requirements, not an appendix.

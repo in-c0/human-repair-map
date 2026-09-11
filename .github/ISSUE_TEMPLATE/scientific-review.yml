@@ -1,0 +1,121 @@
+name: Scientific review / challenge
+description: Review, correct, or challenge a Human Repair Graph record
+title: "[review] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping audit Human Repair Map. Please review the narrowest scientific object possible. A source existing is not enough: distinguish source fidelity, scientific interpretation, and capability implication.
+
+  - type: input
+    id: record
+    attributes:
+      label: Record ID
+      description: Canonical HRM record, e.g. hrm:claim/... or hrm:capability/...
+      placeholder: hrm:claim/...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: review_kind
+    attributes:
+      label: Review type
+      options:
+        - Source fidelity
+        - Scientific interpretation
+        - Capability grade / implication
+        - Dependency / blocker
+        - Contradiction or replication
+        - Missing evidence
+        - Question prioritisation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources_opened
+    attributes:
+      label: Primary sources opened
+      description: List the sources you personally opened, including DOI/PMID/URL and figure/table/section when relevant.
+      placeholder: |
+        - DOI: ... — Figure 3B
+        - PMID: ... — Results, paragraph ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: source_fidelity
+    attributes:
+      label: Source fidelity verdict
+      description: Does the cited evidence support the attached claim as written?
+      options:
+        - Supports as written
+        - Supports with narrower wording/context
+        - Does not support as written
+        - Mixed / unresolved
+        - Not applicable
+    validations:
+      required: true
+
+  - type: textarea
+    id: scientific_interpretation
+    attributes:
+      label: Scientific interpretation
+      description: Is the inference warranted under the actual model, population, intervention, endpoint, and follow-up?
+      placeholder: State what is justified, what is not, and any important context omitted by the record.
+    validations:
+      required: true
+
+  - type: textarea
+    id: capability_implication
+    attributes:
+      label: Capability / dependency implication
+      description: Does this evidence justify the current rung, blocker, dependency, or question ranking?
+      placeholder: Explain whether the graph-level implication should stay, narrow, strengthen, weaken, or be removed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: missing_evidence
+    attributes:
+      label: Missing contradictory, null, or replication evidence
+      description: Include evidence that could materially change the record even if it weakens the current narrative.
+      placeholder: Cite primary sources where possible.
+
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed change
+      description: Give the smallest concrete correction you recommend.
+      placeholder: Change claim wording..., downgrade L4→L3..., add BLOCKED_BY..., add contradiction...
+    validations:
+      required: true
+
+  - type: input
+    id: identity
+    attributes:
+      label: Reviewer identity / ORCID (optional)
+      description: A stable public identity is preferred for reviews that may later be promoted to reviewed state.
+      placeholder: Name — https://orcid.org/...
+
+  - type: textarea
+    id: conflicts
+    attributes:
+      label: Relevant conflicts of interest
+      description: State any relationship to the work, lab, sponsor, employer, company, patent, or intervention being reviewed. Write "none" if none known.
+      placeholder: none
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: attestations
+    attributes:
+      label: Review attestations
+      options:
+        - label: I opened the primary sources I listed above rather than relying only on abstracts, summaries, or AI output.
+          required: true
+        - label: I have separated what the experiment observed from my interpretation of what it implies.
+          required: true
+        - label: This review is about research-state mapping, not patient-specific medical advice.
+          required: true

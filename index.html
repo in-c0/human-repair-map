@@ -99,7 +99,7 @@ function paintManifest(){
   var m=GRAPH.manifest;
   var b=document.getElementById("brand-v"); if(b) b.textContent="graph v"+m.version+" · "+m.snapshot;
   var total=GRAPH.nodes.length;
-  var p=document.getElementById("review-pill"); if(p) p.textContent="UNREVIEWED · HUMAN REVIEW: "+((m.humanReviewed||0)===0?"NONE":(m.humanReviewed||0)+" of "+total);
+  var p=document.getElementById("review-pill"); if(p) p.textContent="UNREVIEWED · HUMAN REVIEW: NONE · "+(m.humanReviewed||0)+" of "+total;
 }
 function node(id){return BYID[id]||null;}
 function slug(id){return String(id).replace(/^hrm:/,"");}
@@ -172,7 +172,7 @@ function startStats(){
   var total=GRAPH.nodes.length;
   var eb=document.getElementById("start-eyebrow"); if(eb) eb.textContent="Human Repair Map · graph v"+m.version+" · snapshot "+m.snapshot;
   return '<div class="sim-tiles">'+tile(c.goal,"goals")+tile(c.capability,"capabilities with rungs")+tile(open,"open questions")+tile(c.claim,"claims")+tile(c.source,"sources, metadata checked")+tile((m.humanReviewed||0)+'<span style="font-size:15px;color:var(--muted)">/'+total+'</span>',"human-reviewed","key")+'</div>'+
-    '<p class="note"><b>UNREVIEWED · HUMAN REVIEW: '+((m.humanReviewed||0)===0?'NONE':esc(m.humanReviewed||0))+'</b>. '+(m.humanReviewed||0)+' of '+total+' records are human-reviewed as of '+esc(m.snapshot)+'. Machine-checked sources do not count as human review.</p>';
+    '<p class="note"><b>UNREVIEWED · HUMAN REVIEW: NONE.</b> '+(m.humanReviewed||0)+' of '+total+' records are human-reviewed as of '+esc(m.snapshot)+'. Machine-checked sources do not count as human review.</p>';
 }
 
 /* ================================================================
@@ -644,7 +644,7 @@ function vCorrections(){
   return '<div class="crumbs"><a href="#/contribute">contribute</a> / corrections</div>'+
     '<h1 class="h-title">Corrections</h1>'+
     '<p class="h-lede">This page records errors found during source resolution and later review. Each correction is dated, and the earlier record remains in history.</p>'+
-    (material?'<div class="banner" style="margin-top:20px"><b>'+material+' correction'+(material===1?'':'s')+' changed a rung or weakened a record.</b> The remaining entries correct citations or metadata.</div>':'')+
+    (material?'<div class="banner" style="margin-top:20px"><b>Material corrections: '+material+'.</b> The remaining entries correct citations or metadata.</div>':'')+
     '<div style="border:1px solid var(--rule);border-radius:6px;background:var(--surface);padding:4px 16px">'+(rows||'<div class="empty">No corrections yet.</div>')+'</div>'+
     '<div class="sec-h"><span class="n">·</span> Report a problem</div>'+
     '<p class="lede-t">Use <i>Propose a change</i> on the relevant record, or open an issue on <a href="https://github.com/in-c0/human-repair-map" target="_blank" rel="noopener">the repository</a>. Include the narrowest claim or dependency you can identify and a primary source when available.</p>';

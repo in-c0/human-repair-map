@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://humanrepairmap.com/schema/question.schema.json",
+  "title": "Question",
+  "description": "An unresolved uncertainty whose answer would change a grade or a dependency. The unit of research prioritisation: every '?' in the map is one of these, and the ranking the API returns is computed from what a question blocks, never from an invented probability.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "question",
+    "why",
+    "blocks",
+    "state",
+    "provenance",
+    "review"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+      "const": "question"
+    },
+    "question": {
+      "type": "string",
+      "minLength": 15,
+      "maxLength": 400
+    },
+    "why": {
+      "type": "string",
+      "minLength": 20,
+      "description": "What changes if it is answered — which grade moves, which dependency resolves."
+    },
+    "blocks": {
+      "$ref": "common.schema.json#/$defs/idList",
+      "description": "Capabilities or goals gated by this question. Drives the ranking."
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The live competing answers, so an experiment can be judged on whether it discriminates between them."
+    },
+    "knownUnknowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "whatWouldResolve": {
+      "type": "string",
+      "description": "The observation that would settle it — stated so a reader can recognise it when it appears."
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "open",
+        "resolved",
+        "superseded"
+      ]
+    },
+    "resolvedBy": {
+      "$ref": "common.schema.json#/$defs/idList",
+      "description": "Claim ids. Non-empty only when state is resolved."
+    },
+    "projections": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/projection"
+      },
+      "uniqueItems": true
+    },
+    "provenance": {
+      "$ref": "common.schema.json#/$defs/provenance"
+    },
+    "review": {
+      "$ref": "common.schema.json#/$defs/review"
+    }
+  }
+}

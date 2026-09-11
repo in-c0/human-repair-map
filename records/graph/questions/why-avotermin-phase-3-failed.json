@@ -1,0 +1,37 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/why-avotermin-phase-3-failed",
+  "projections": [
+    "universal-repair"
+  ],
+  "question": "Why did avotermin (TGF-β3) fail in phase 3 after positive double-blind phase I/II and phase II results — and where are the phase 3 data?",
+  "why": "It is the best-documented human anti-scarring effect ever published and it did not survive its confirmatory trial. Until the failure is understood, every pharmacological scar-reduction claim inherits the uncertainty.",
+  "blocks": [
+    "hrm:capability/pharmacological-scar-reduction-in-humans"
+  ],
+  "hypotheses": [
+    "The phase I/II effect was real but small and endpoint-sensitive; phase 3 used a different scar-assessment endpoint.",
+    "Dose or timing differed between phases.",
+    "The earlier effect was partly an artefact of within-participant design."
+  ],
+  "knownUnknowns": [
+    "the phase 3 protocol and endpoints",
+    "whether the data were ever released"
+  ],
+  "whatWouldResolve": "Publication or release of the phase 3 dataset (registered trials: NCT00847925, NCT00847795, NCT00629811 were the phase I/II).",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

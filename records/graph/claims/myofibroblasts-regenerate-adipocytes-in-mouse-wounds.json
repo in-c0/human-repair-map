@@ -1,0 +1,53 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/myofibroblasts-regenerate-adipocytes-in-mouse-wounds",
+  "statement": "During wound-induced hair neogenesis in mice, scar-forming myofibroblasts convert into adipocytes, dependent on BMP signalling from the new hair follicles.",
+  "context": {
+    "species": "mouse (NCBITaxon:10090)",
+    "model": "large full-thickness wounds with hair neogenesis",
+    "cellType": "myofibroblast"
+  },
+  "measurement": {
+    "measured": "structure",
+    "assay": "lineage tracing; BMP pathway manipulation",
+    "endpoint": "adipocyte regeneration from myofibroblast lineage",
+    "effect": "myofibroblasts adopt adipocyte fate in regenerating wounds"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/plikus-2017-science",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 0,
+    "note": "One collaboration (Plikus/Cotsarelis). No independent replication cited."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/dermal-adipocyte-regeneration",
+    "hrm:capability/hair-follicle-neogenesis-after-wounding"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/plikus-2017-science"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

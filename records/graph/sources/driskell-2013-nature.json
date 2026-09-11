@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/driskell-2013-nature",
+  "type": "source",
+  "citation": "Driskell et al., Nature, 2013",
+  "title": "Distinct fibroblast lineages determine dermal architecture in skin development and repair",
+  "authors": "Driskell Ryan R.; Lichtenberger Beate M.; Hoste Esther; Kretzschmar Kai; Simons Ben D.; Charalambous Marika; Ferron Sacri R.; Herault Yann; Pavlovic Guillaume; Ferguson-Smith Anne C.; Watt Fiona M.",
+  "venue": "Nature",
+  "year": 2013,
+  "kind": "article",
+  "doi": "10.1038/nature12783",
+  "pmid": "24336287",
+  "url": "https://doi.org/10.1038/nature12783",
+  "license": "http://www.springer.com/tdm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Distinct fibroblast lineages determine dermal architecture in skin development and repair",
+    "note": "Crossref record found; PubMed id 24336287 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

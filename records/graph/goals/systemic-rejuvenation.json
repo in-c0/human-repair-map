@@ -1,0 +1,48 @@
+{
+  "type": "goal",
+  "id": "hrm:goal/systemic-rejuvenation",
+  "name": "Systemic rejuvenation",
+  "parent": "hrm:goal/rejuvenation",
+  "description": "Rejuvenate many tissues of one person at once, safely and durably. Decomposes, per the owner's brief, into a safe rejuvenation mechanism AND multi-tissue delivery AND cancer control — with the delivery leg satisfiable by more than one route.",
+  "projections": [
+    "rejuvenation"
+  ],
+  "requires": [
+    {
+      "all": [
+        "hrm:capability/safe-partial-epigenetic-reprogramming-in-vivo",
+        "hrm:capability/cell-identity-retention-under-partial-reprogramming",
+        "hrm:capability/cancer-risk-control-under-rejuvenation",
+        "hrm:capability/rejuvenated-state-persistence"
+      ]
+    },
+    {
+      "any": [
+        "hrm:capability/systemic-cell-type-specific-delivery",
+        "hrm:capability/cns-neuron--reach"
+      ],
+      "note": "OR-group: one delivery route sufficing for the tissue in question; nobody knows which will succeed. cns-neuron--reach is the v0.2 grid cell backed by the 16 CNS routes."
+    }
+  ],
+  "blockedBy": [
+    "hrm:question/partial-reprogramming-human-safety",
+    "hrm:question/rejuvenation-reach-beyond-eye-and-liver",
+    "hrm:question/rejuvenated-state-persistence-and-redosing",
+    "hrm:question/cancer-risk-of-repeated-partial-reprogramming",
+    "hrm:question/healthy-target-state-for-aged-tissue"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

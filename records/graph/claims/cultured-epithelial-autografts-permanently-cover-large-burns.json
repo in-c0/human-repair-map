@@ -1,0 +1,72 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/cultured-epithelial-autografts-permanently-cover-large-burns",
+  "statement": "Sheets of cultured autologous keratinocytes permanently cover large full-thickness burn wounds, and have been used and followed long-term at unaffiliated centres since the first report.",
+  "context": {
+    "species": "human",
+    "model": "large full-thickness burns",
+    "intervention": "cultured epithelial autograft"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "clinical follow-up",
+    "endpoint": "permanent wound coverage",
+    "effect": "permanent take of cultured epithelium on extensive burns (first report, two patients); long-term coverage in later series"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/gallico-1984-nejm",
+      "design": "case-series",
+      "locator": "abstract",
+      "n": "2",
+      "note": "originating report (Green laboratory)"
+    },
+    {
+      "source": "hrm:source/sood-2000-jbcr",
+      "design": "case-series",
+      "locator": "abstract",
+      "note": "long-term follow-up at a separate centre"
+    },
+    {
+      "source": "hrm:source/sun-2014-science",
+      "design": "review",
+      "locator": "abstract",
+      "note": "surveys clinical use of cultured epithelium"
+    }
+  ],
+  "rung": "L5",
+  "replication": {
+    "independentGroups": 2,
+    "note": "Founding report plus a separate centre's series and a review; fragility and absence of dermis are consistent across them."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/epidermis-replacement-cultured-autograft"
+  ],
+  "limitations": [
+    "epidermis only; no dermis, appendages or normal sensation",
+    "fragile skin prone to blistering"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/gallico-1984-nejm",
+      "hrm:source/sood-2000-jbcr",
+      "hrm:source/sun-2014-science"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

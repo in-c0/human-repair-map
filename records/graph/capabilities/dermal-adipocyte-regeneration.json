@@ -1,0 +1,42 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/dermal-adipocyte-regeneration",
+  "name": "Regenerate dermal adipocytes in a healing wound",
+  "class": "edit",
+  "primitive": "regenerate",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Restore the dermal fat layer in a healed wound, including by converting scar-forming myofibroblasts back into adipocytes.",
+  "target": {
+    "node": "hrm:cell/adipocyte"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Myofibroblasts convert to adipocytes during wound-induced hair neogenesis in mice, dependent on follicle-derived BMP signalling (Plikus 2017). One group, mouse."
+  },
+  "blockedBy": [
+    "hrm:question/dermal-adipocyte-regeneration-in-human-wounds"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/plikus-2017-science"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

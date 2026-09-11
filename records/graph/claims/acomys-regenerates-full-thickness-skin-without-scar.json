@@ -1,0 +1,76 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/acomys-regenerates-full-thickness-skin-without-scar",
+  "statement": "Adult African spiny mice (Acomys) regenerate full-thickness dorsal skin wounds and ear punches with hair follicles, sebaceous glands, dermis and cartilage, where laboratory mice heal the same wounds by fibrotic scar.",
+  "context": {
+    "species": "Acomys (NCBITaxon:10068 and relatives)",
+    "model": "skin autotomy wounds; 4 mm ear punch",
+    "comparator": "Mus musculus C57BL/6"
+  },
+  "measurement": {
+    "measured": "structure",
+    "assay": "histology; mechanical testing",
+    "endpoint": "appendage and dermal regeneration in the wound",
+    "effect": "complete regeneration of follicles, glands, dermis and cartilage in ear punches; hair follicle regeneration in dorsal wounds"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/seifert-2012-nature",
+      "design": "animal-observational",
+      "locator": "abstract"
+    },
+    {
+      "source": "hrm:source/brant-2016-wrr",
+      "design": "animal-observational",
+      "locator": "abstract"
+    },
+    {
+      "source": "hrm:source/maden-2018-burns",
+      "design": "animal-controlled",
+      "locator": "abstract",
+      "note": "extends to full-thickness thermal burns"
+    },
+    {
+      "source": "hrm:source/gawriluk-2016-natcommun",
+      "design": "animal-controlled",
+      "locator": "abstract",
+      "note": "ear-hole closure as a discrete trait across species"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 1,
+    "note": "The four sources share authorship (Seifert, Maden, Brant). Independent replication is the Matias Santos claim below, which is why this claim's replication count is 1 and not 4."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/mammalian-scar-free-regeneration-target-state"
+  ],
+  "limitations": [
+    "a rodent, so L2 by the ladder even though the finding is a species trait rather than an intervention",
+    "mechanism not established by these papers"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/seifert-2012-nature",
+      "hrm:source/brant-2016-wrr",
+      "hrm:source/maden-2018-burns",
+      "hrm:source/gawriluk-2016-natcommun"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

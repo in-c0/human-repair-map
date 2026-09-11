@@ -1,0 +1,52 @@
+{
+  "type": "claim",
+  "grounding": "G2",
+  "id": "hrm:claim/fda-approved-b-vec-2023",
+  "statement": "The U.S. FDA approved beremagene geperpavec (Vyjuvek) on 19 May 2023 for wounds in patients six months and older with dystrophic epidermolysis bullosa, citing 65% versus 26% complete wound closure at 24 weeks in a 31-patient randomised placebo-controlled trial.",
+  "context": {
+    "species": "human",
+    "model": "dystrophic epidermolysis bullosa",
+    "intervention": "topical B-VEC"
+  },
+  "measurement": {
+    "measured": "function",
+    "endpoint": "complete wound closure at 24 weeks (FDA summary)",
+    "effect": "65% vs 26% (FDA summary; the NEJM primary analysis reports 67% vs 22% at 6 months — different analysis, same trial)"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/fda-2023-vyjuvek",
+      "design": "regulatory-decision",
+      "locator": "press announcement, efficacy paragraph",
+      "quote": "Sixty-five percent of the Vyjuvek-treated wounds completely closed while only 26% of the placebo-treated wound completely closed"
+    }
+  ],
+  "rung": "L4",
+  "replication": {
+    "independentGroups": 0,
+    "note": "A regulatory decision on the sponsor's trial; not a replication."
+  },
+  "status": {
+    "peerReviewed": false
+  },
+  "supports": [
+    "hrm:capability/keratinocyte-in-vivo-topical-gene-delivery"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/fda-2023-vyjuvek"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "type": "goal",
+  "id": "hrm:goal/scarless-skin-repair",
+  "name": "Scarless functional repair of adult human skin",
+  "parent": "hrm:goal/universal-repair",
+  "description": "After a full-thickness skin injury in an adult human, restore the skin to its uninjured architecture and function: epidermis, dermis with native extracellular-matrix organisation, microvasculature, sensory innervation, hair follicles and glands, pigmentation, elasticity and barrier — without a persistent fibrotic scar. The first proving ground: it sits across both maps (wounds, burns and surgery above; fibrosis, matrix aging and immune aging below).",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "existenceProof": "Early-gestation fetal skin heals without scar (Larson 2010); adult spiny mice (Acomys) regenerate full-thickness skin with follicles and no scar (Seifert 2012; Matias Santos 2016, independent group); adult laboratory mice regenerate follicles in large wounds (Ito 2007) and, with mechanotransduction blocked, regenerate dermis with appendages and native ultrastructure (Mascharak 2021).",
+  "requires": [
+    {
+      "all": [
+        "hrm:goal/skin-immediate-stabilisation",
+        "hrm:goal/skin-contamination-control",
+        "hrm:goal/skin-structural-reconstruction",
+        "hrm:goal/skin-biological-control",
+        "hrm:goal/skin-functional-restoration"
+      ]
+    }
+  ],
+  "testSuite": [
+    {
+      "scenario": "small acute wound closes",
+      "state": "routine"
+    },
+    {
+      "scenario": "chronic ulcer closes",
+      "state": "partial",
+      "note": "bioengineered skin substitutes raise closure rates (Veves 2001; Marston 2003) but do not regenerate appendages"
+    },
+    {
+      "scenario": "large burn covered permanently",
+      "state": "partial",
+      "note": "cultured epithelial autografts since 1984; dermis, appendages and sensation not restored"
+    },
+    {
+      "scenario": "inherited skin disease corrected in situ",
+      "state": "partial",
+      "note": "one approved topical gene therapy (B-VEC, 2023); one group's transgenic stem-cell grafts (n=2)"
+    },
+    {
+      "scenario": "full-thickness wound regenerates with follicles, glands, nerves and native matrix, no scar",
+      "state": "unsolved",
+      "note": "shown in mouse (Mascharak 2021) and spiny mouse; no human or large-animal evidence located"
+    }
+  ],
+  "blockedBy": [
+    "hrm:question/en1-inhibition-translates-to-human-skin",
+    "hrm:question/what-limits-regeneration-in-mus-and-human"
+  ],
+  "informationLimited": false,
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

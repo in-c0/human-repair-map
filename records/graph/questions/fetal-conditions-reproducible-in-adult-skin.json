@@ -1,0 +1,29 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/fetal-conditions-reproducible-in-adult-skin",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "question": "Which features of early-gestation fetal wound healing are causal for scarlessness, and can they be reproduced in adult skin?",
+  "why": "The fetal state is the only human state known to heal without scar. If its causal features can be imposed on adult wounds, scarless repair becomes an adult capability.",
+  "blocks": [
+    "hrm:capability/fetal-scarless-healing-target-state"
+  ],
+  "whatWouldResolve": "An adult-skin wound that heals without scar after imposing a defined subset of fetal conditions (inflammation, growth-factor profile, matrix).",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

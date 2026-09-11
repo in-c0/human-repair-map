@@ -1,0 +1,57 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/cyclic-partial-reprogramming-ameliorates-aging-in-mice",
+  "statement": "Short-term cyclic expression of OSKM in vivo ameliorated cellular and physiological hallmarks of aging and prolonged lifespan in a progeroid mouse model, and improved recovery from metabolic disease and muscle injury in aged wild-type mice, without teratoma formation.",
+  "context": {
+    "species": "mouse (NCBITaxon:10090)",
+    "model": "LAKI progeria model; aged wild-type mice",
+    "intervention": "cyclic doxycycline-induced OSKM"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "aging hallmarks; lifespan; injury recovery",
+    "endpoint": "lifespan and recovery",
+    "effect": "prolonged lifespan in progeroid mice; improved recovery in aged mice"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/ocampo-2016-cell",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 0,
+    "note": "One group (Izpisua Belmonte). Later partial-reprogramming studies by other groups exist but are not cited here."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/safe-partial-epigenetic-reprogramming-in-vivo",
+    "hrm:capability/cell-identity-retention-under-partial-reprogramming"
+  ],
+  "limitations": [
+    "progeroid model for the lifespan result",
+    "safe expression window narrow; continuous expression is lethal in the same system"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/ocampo-2016-cell"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

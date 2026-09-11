@@ -1,0 +1,35 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/chronic-wound-biofilm-eradication",
+  "name": "Eradicate established biofilm in a chronic wound",
+  "class": "control",
+  "primitive": "remove",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Reliably clear a mature polymicrobial biofilm from a chronic wound bed so that a stalled wound can progress to closure.",
+  "target": {
+    "node": "hrm:cell/microbiome"
+  },
+  "grade": {
+    "basis": "ungraded",
+    "note": "Placed so the gap is visible. The literature on biofilm-directed therapy in chronic wounds was not searched in this seed; grading it is the first open task on this node."
+  },
+  "blockedBy": [
+    "hrm:question/reliable-biofilm-eradication-in-chronic-wounds"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

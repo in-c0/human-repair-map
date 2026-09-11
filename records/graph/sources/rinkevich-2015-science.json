@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/rinkevich-2015-science",
+  "type": "source",
+  "citation": "Rinkevich et al., Science, 2015",
+  "title": "Identification and isolation of a dermal lineage with intrinsic fibrogenic potential",
+  "authors": "Rinkevich Yuval; Walmsley Graham G.; Hu Michael S.; Maan Zeshaan N.; Newman Aaron M.; Drukker Micha; Januszyk Michael; Krampitz Geoffrey W.; Gurtner Geoffrey C.; Lorenz H. Peter; Weissman Irving L.; Longaker Michael T.",
+  "venue": "Science",
+  "year": 2015,
+  "kind": "article",
+  "doi": "10.1126/science.aaa2151",
+  "pmid": "25883361",
+  "url": "https://doi.org/10.1126/science.aaa2151",
+  "license": "http://www.sciencemag.org/about/science-licenses-journal-article-reuse",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Identification and isolation of a dermal lineage with intrinsic fibrogenic potential",
+    "note": "Crossref record found; PubMed id 25883361 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

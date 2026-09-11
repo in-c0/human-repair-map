@@ -1,0 +1,16 @@
+name: Re-verify sources
+
+on:
+  schedule:
+    - cron: "0 20 * * 0"   # Mondays 06:00 Sydney (AEST) — weekly
+  workflow_dispatch:
+
+jobs:
+  sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - name: Re-verify every source against Crossref / PubMed / ClinicalTrials.gov
+        run: node scripts/resolve-sources.mjs --check

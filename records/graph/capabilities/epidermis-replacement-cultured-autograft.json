@@ -1,0 +1,42 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/epidermis-replacement-cultured-autograft",
+  "name": "Replace lost epidermis with cultured autologous keratinocytes",
+  "class": "edit",
+  "primitive": "replace",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Grow a patient's own keratinocytes into sheets and use them to permanently cover a large full-thickness skin loss.",
+  "target": {
+    "node": "hrm:cell/keratinocyte"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "function",
+    "blocked": "none",
+    "note": "Permanent coverage of large burns with cultured epithelial autografts was reported in 1984 (Gallico) and has since been used and followed long-term at unaffiliated centres (Sood 2000; reviewed in Sun 2014). The graft is epidermis only: no dermis, appendages or normal sensation, and the result is fragile skin.",
+    "drift": "'Lab-grown skin' in headlines; what is grown is a thin epidermal sheet."
+  },
+  "wouldMove": "This capability is at the top rung for what it does; the missing capabilities are the dermal ones below it.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/gallico-1984-nejm",
+      "hrm:source/sood-2000-jbcr",
+      "hrm:source/sun-2014-science"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

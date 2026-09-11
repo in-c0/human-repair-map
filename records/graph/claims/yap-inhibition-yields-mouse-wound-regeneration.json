@@ -1,0 +1,57 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/yap-inhibition-yields-mouse-wound-regeneration",
+  "statement": "Blocking mechanotransduction with verteporfin (a YAP inhibitor) or fibroblast-specific YAP knockout prevents Engrailed-1 activation in mouse wounds and produces regeneration with recovery of skin appendages, matrix ultrastructure and mechanical strength.",
+  "context": {
+    "species": "mouse (NCBITaxon:10090)",
+    "model": "full-thickness dorsal excisional wounds",
+    "intervention": "local verteporfin; fibroblast-specific YAP knockout",
+    "comparator": "vehicle; wild type"
+  },
+  "measurement": {
+    "measured": "structure",
+    "assay": "histology; electron microscopy; tensile testing; lineage tracing",
+    "endpoint": "appendage recovery, ultrastructure, mechanical strength",
+    "effect": "regenerative rather than fibrotic outcome in treated wounds"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/mascharak-2021-science",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 0,
+    "note": "One group (Longaker, Stanford). No independent replication located as of 2026-09-11."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/dermal-architecture-regeneration-without-scar",
+    "hrm:capability/native-ecm-organisation-reconstruction",
+    "hrm:capability/fibrogenic-fibroblast-lineage-control"
+  ],
+  "drift": "'A drug that heals wounds without scars' — in mice, splinted, one laboratory; verteporfin's human anti-scarring effect is untested.",
+  "wouldMove": "Replication by an unaffiliated group, then a large-animal model.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/mascharak-2021-science"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

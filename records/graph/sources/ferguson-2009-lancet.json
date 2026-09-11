@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/ferguson-2009-lancet",
+  "type": "source",
+  "citation": "Ferguson et al., The Lancet, 2009",
+  "title": "Prophylactic administration of avotermin for improvement of skin scarring: three double-blind, placebo-controlled, phase I/II studies",
+  "authors": "Ferguson Mark WJ; Duncan Jonathan; Bond Jeremy; Bush James; Durani Piyush; So Karen; Taylor Lisa; Chantrey Jonquille; Mason Tracey; James Gaynor; Laverty Hugh; Occleston Nick L; Sattar Abdul; Ludlow Anna; O'Kane Sharon",
+  "venue": "The Lancet",
+  "year": 2009,
+  "kind": "article",
+  "doi": "10.1016/s0140-6736(09)60322-6",
+  "pmid": "19362676",
+  "url": "https://doi.org/10.1016/s0140-6736(09)60322-6",
+  "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Prophylactic administration of avotermin for improvement of skin scarring: three double-blind, placebo-controlled, phase I/II studies",
+    "note": "Crossref record found; PubMed id 19362676 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

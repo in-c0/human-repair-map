@@ -1,0 +1,32 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/cancer-risk-control-under-rejuvenation",
+  "name": "Keep cancer risk acceptable while rejuvenating tissue",
+  "class": "control",
+  "primitive": "preserve",
+  "projections": [
+    "rejuvenation"
+  ],
+  "description": "Rejuvenation makes cells more plastic and proliferative — the territory cancer exploits. Bound that risk in aged humans, over repeated treatment, with a stopping rule.",
+  "grade": {
+    "basis": "ungraded",
+    "note": "No grade: the human evidence does not exist and the seed did not grade the mouse tumorigenicity literature. The node exists because the goal cannot be reached without it."
+  },
+  "blockedBy": [
+    "hrm:question/cancer-risk-of-repeated-partial-reprogramming"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/mammalian-scar-free-regeneration-target-state",
+  "name": "An adult mammal that regenerates skin without scar (existence proof)",
+  "class": "model",
+  "primitive": "regenerate",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Know that scar-free regeneration of adult mammalian skin, with follicles, glands, dermis, nerves and vessels, is biologically possible — and have a living model in which to find out how.",
+  "target": {
+    "node": "hrm:cell/tissue-architecture"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "African spiny mice (Acomys) regenerate full-thickness dorsal skin and 4 mm ear punches with hair follicles, sebaceous glands, dermis, cartilage, muscle and nerve, where C57BL/6 mice scar (Seifert 2012; Brant 2016; Maden 2018; Gawriluk 2016 — overlapping authorship — and Matias Santos 2016, an unaffiliated group). Acomys is a rodent, so this is L2 by the ladder's letter; it is an existence proof, not an intervention."
+  },
+  "blockedBy": [
+    "hrm:question/what-limits-regeneration-in-mus-and-human"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/seifert-2012-nature",
+      "hrm:source/brant-2016-wrr",
+      "hrm:source/maden-2018-burns",
+      "hrm:source/gawriluk-2016-natcommun",
+      "hrm:source/matias-santos-2016-regeneration"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

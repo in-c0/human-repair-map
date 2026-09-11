@@ -34,3 +34,30 @@ CREATE TABLE IF NOT EXISTS proposals (
 
 CREATE INDEX IF NOT EXISTS idx_proposals_record ON proposals(record_id);
 CREATE INDEX IF NOT EXISTS idx_proposals_state  ON proposals(state);
+
+-- v0.3: locked predictions. A view over events (type prediction.registered);
+-- the event log remains the source of truth. State moves only by a steward
+-- appending a prediction.resolved event and updating this row.
+CREATE TABLE IF NOT EXISTS predictions (
+  id                  TEXT PRIMARY KEY,           -- pr_<hash prefix>
+  created             TEXT NOT NULL,
+  subject             TEXT NOT NULL,              -- hrm: node id
+  statement           TEXT NOT NULL,
+  probability         REAL NOT NULL,
+  resolution_criteria TEXT NOT NULL,
+  horizon             TEXT NOT NULL,              -- YYYY-MM-DD
+  predictor_type      TEXT NOT NULL,              -- human | ai
+  predictor_name      TEXT NOT NULL,
+  predictor_model     TEXT,
+  evidence_accessed   TEXT NOT NULL DEFAULT '[]', -- JSON array of node ids
+  reasoning           TEXT,
+  graph_snapshot      TEXT NOT NULL,              -- version@hash the predictor saw
+  state               TEXT NOT NULL DEFAULT 'open', -- open | resolved-true | resolved-false | void
+  resolved_at         TEXT,
+  resolved_by         TEXT,
+  resolution_note     TEXT,
+  event_hash          TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_predictions_subject ON predictions(subject);
+CREATE INDEX IF NOT EXISTS idx_predictions_state   ON predictions(state);

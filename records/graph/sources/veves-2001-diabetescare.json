@@ -1,0 +1,31 @@
+{
+  "id": "hrm:source/veves-2001-diabetescare",
+  "type": "source",
+  "citation": "Veves et al., Diabetes Care, 2001",
+  "title": "Graftskin, a Human Skin Equivalent, Is Effective in the Management of Noninfected Neuropathic Diabetic Foot Ulcers",
+  "authors": "Veves Aristidis; Falanga Vincent; Armstrong David G.; Sabolinski Michael L.; ",
+  "venue": "Diabetes Care",
+  "year": 2001,
+  "kind": "article",
+  "doi": "10.2337/diacare.24.2.290",
+  "pmid": "11213881",
+  "url": "https://doi.org/10.2337/diacare.24.2.290",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Graftskin, a Human Skin Equivalent, Is Effective in the Management of Noninfected Neuropathic Diabetic Foot Ulcers",
+    "note": "Crossref record found; PubMed id 11213881 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/hair-follicle-neogenesis-after-wounding",
+  "name": "Regenerate new hair follicles in a healed wound",
+  "class": "edit",
+  "primitive": "regenerate",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "After a large full-thickness wound, new hair follicles form de novo in the healed skin, as in embryonic development.",
+  "target": {
+    "node": "hrm:cell/keratinocyte"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Wound-induced hair neogenesis occurs in adult mice after large excisional wounds and is Wnt-dependent (Ito 2007); the neogenic follicles then drive myofibroblast-to-adipocyte conversion (Plikus 2017). No report of de novo follicle neogenesis in adult human wounds located.",
+    "drift": "'Mice regrow hair after wounding' is often generalised to humans; the human observation is absent."
+  },
+  "blockedBy": [
+    "hrm:question/wound-induced-hair-neogenesis-in-human-skin"
+  ],
+  "wouldMove": "Documented follicle neogenesis (not follicle survival) in an adult human wound, by any group.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/ito-2007-nature",
+      "hrm:source/plikus-2017-science"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

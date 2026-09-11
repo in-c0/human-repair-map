@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://humanrepairmap.com/schema/prediction.schema.json",
+  "title": "Prediction",
+  "description": "A locked forecast about a question, claim or capability, made by a named human or a named model version BEFORE the outcome is known, and resolved later against reality. This is how the map becomes a prospective, contamination-free benchmark for scientific reasoning: the world produces the test set. Registered through POST /api/predictions or the MCP tool register_prediction; the registration is hash-chained in the public event log and cannot be edited afterwards.",
+  "type": "object",
+  "required": [
+    "subject",
+    "statement",
+    "probability",
+    "resolutionCriteria",
+    "horizon",
+    "predictor"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+      "const": "prediction"
+    },
+    "subject": {
+      "$ref": "common.schema.json#/$defs/id",
+      "description": "The question, claim or capability the forecast is about."
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 15,
+      "maxLength": 600,
+      "description": "What will be observed, stated so that a stranger can later say yes or no."
+    },
+    "probability": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "resolutionCriteria": {
+      "type": "string",
+      "minLength": 15,
+      "description": "Exactly what evidence counts as resolving it true or false. Vague criteria make the prediction void, not right."
+    },
+    "horizon": {
+      "$ref": "common.schema.json#/$defs/date",
+      "description": "Date by which it should be resolvable."
+    },
+    "predictor": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "evidenceAccessed": {
+      "$ref": "common.schema.json#/$defs/idList",
+      "description": "What the predictor consulted. A model should list the node ids it read."
+    },
+    "reasoning": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Structured reasoning, kept with the prediction so that calibration can later be studied per method, not just per model."
+    },
+    "graphSnapshot": {
+      "type": "string",
+      "description": "The snapshot version the predictor saw (from /api/graph/manifest). Filled by the server."
+    },
+    "registeredAt": {
+      "type": "string",
+      "description": "Server-assigned ISO timestamp."
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "open",
+        "resolved-true",
+        "resolved-false",
+        "void"
+      ]
+    },
+    "resolution": {
+      "type": "object",
+      "properties": {
+        "by": {
+          "type": "string"
+        },
+        "date": {
+          "$ref": "common.schema.json#/$defs/date"
+        },
+        "outcomeSource": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "description": "Only a steward may write this, and only by appending an event."
+    }
+  }
+}

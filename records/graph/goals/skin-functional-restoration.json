@@ -1,0 +1,34 @@
+{
+  "type": "goal",
+  "id": "hrm:goal/skin-functional-restoration",
+  "name": "Functional restoration and verification",
+  "parent": "hrm:goal/scarless-skin-repair",
+  "description": "Confirm that regenerated skin has sensation, elasticity, pigmentation and barrier function, and that no fibrotic scar persists. (Remodelling a scar that already exists is a separate goal: established-scar-repair.)",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "requires": [
+    {
+      "all": [
+        "hrm:capability/wound-bed-assessment-in-vivo",
+        "hrm:capability/fibroblast-state-sensing-in-living-wound",
+        "hrm:capability/regeneration-verification-histology-and-scar-scales"
+      ]
+    }
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

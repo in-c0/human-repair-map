@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://humanrepairmap.com/schema/experiment.schema.json",
+  "title": "Experiment",
+  "description": "A candidate or completed study that TESTS one or more questions. Feasibility is expressed in classes (low/medium/high; weeks/months/years) because a dollar figure the map cannot source would be exactly the kind of confident number it refuses to print elsewhere.",
+  "type": "object",
+  "required": ["id", "type", "name", "tests", "design", "status", "provenance", "review"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "type": { "const": "experiment" },
+    "name": { "type": "string", "minLength": 5, "maxLength": 200 },
+    "tests": { "$ref": "common.schema.json#/$defs/idList", "description": "Question ids. At least one." },
+    "design": {
+      "type": "object",
+      "required": ["species", "intervention", "readout"],
+      "properties": {
+        "species": { "type": "string" },
+        "model": { "type": "string" },
+        "intervention": { "type": "string" },
+        "comparator": { "type": "string" },
+        "readout": { "type": "string", "description": "The measurement that discriminates the hypotheses." },
+        "duration": { "type": "string" },
+        "n": { "type": "string" }
+      }
+    },
+    "discriminates": { "type": "string", "description": "Which hypothesis each outcome would favour. An experiment whose every outcome is compatible with every hypothesis is not one." },
+    "feasibility": {
+      "type": "object",
+      "properties": {
+        "costClass": { "type": "string", "enum": ["low", "medium", "high"] },
+        "durationClass": { "type": "string", "enum": ["weeks", "months", "years"] },
+        "requires": { "type": "array", "items": { "type": "string" }, "description": "Capabilities, models, equipment or approvals needed." },
+        "ethics": { "type": "string" }
+      }
+    },
+    "status": { "type": "string", "enum": ["proposed", "registered", "running", "completed", "abandoned"] },
+    "registration": { "type": "string", "description": "NCT id, protocols.io DOI, preregistration URL." },
+    "results": { "$ref": "common.schema.json#/$defs/idList", "description": "Claim ids produced by this experiment, including null results." },
+    "provenance": { "$ref": "common.schema.json#/$defs/provenance" },
+    "review": { "$ref": "common.schema.json#/$defs/review" }
+  }
+}

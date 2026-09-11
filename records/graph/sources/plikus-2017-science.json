@@ -1,0 +1,31 @@
+{
+  "id": "hrm:source/plikus-2017-science",
+  "type": "source",
+  "citation": "Plikus et al., Science, 2017",
+  "title": "Regeneration of fat cells from myofibroblasts during wound healing",
+  "authors": "Plikus Maksim V.; Guerrero-Juarez Christian F.; Ito Mayumi; Li Yun Rose; Dedhia Priya H.; Zheng Ying; Shao Mengle; Gay Denise L.; Ramos Raul; Hsi Tsai-Ching; Oh Ji Won; Wang Xiaojie; Ramirez Amanda; Konopelski Sara E.; Elzein Arijh; Wang Anne; Supapannachart Rarinthip June; Lee Hye-Lim; Lim Chae Ho; Nace Arben; Guo Amy; Treffeisen Elsa; Andl Thomas; Ramirez Ricardo N.; Murad Rabi; Offermanns Stefan; Metzger Daniel; Chambon Pierre; Widgerow Alan D.; Tuan Tai-Lan; Mortazavi Ali; Gupta Rana K.; Hamilton Bruce A.; Millar Sarah E.; Seale Patrick; Pear Warren S.; Lazar Mitchell A.; Cotsarelis George",
+  "venue": "Science",
+  "year": 2017,
+  "kind": "article",
+  "doi": "10.1126/science.aai8792",
+  "pmid": "28059714",
+  "url": "https://doi.org/10.1126/science.aai8792",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Regeneration of fat cells from myofibroblasts during wound healing",
+    "note": "Crossref record found; PubMed id 28059714 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

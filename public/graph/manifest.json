@@ -1,0 +1,50 @@
+{
+  "name": "Human Repair Graph",
+  "version": "0.3.0",
+  "snapshot": "2026-09-11",
+  "contentHash": "6c6db5f42d339ed08f70417b3e05726bb9e911aa69645fd82bcc7c4808a02187",
+  "counts": {
+    "capability": 185,
+    "cell": 31,
+    "claim": 24,
+    "experiment": 6,
+    "goal": 10,
+    "question": 20,
+    "route": 16,
+    "source": 34
+  },
+  "reviewStates": {
+    "ai-proposed": 289,
+    "disputed": 3,
+    "n/a": 34
+  },
+  "humanReviewed": 0,
+  "projections": [
+    {
+      "id": "universal-repair",
+      "name": "Universal Repair",
+      "tagline": "From trauma and infection to cancer and organ failure."
+    },
+    {
+      "id": "rejuvenation",
+      "name": "Rejuvenation",
+      "tagline": "From biological aging to restored youthful function."
+    },
+    {
+      "id": "full-graph",
+      "name": "Full Research Graph",
+      "tagline": "Capabilities, dependencies, evidence, blockers, and next experiments.",
+      "note": "Not a tag — the union. Every node is in the full graph."
+    }
+  ],
+  "formats": {
+    "json": "/graph/graph.json",
+    "jsonl": "/graph/graph.jsonl",
+    "jsonld": "/graph/graph.jsonld",
+    "schemas": "/graph/schema/",
+    "api": "/api/graph",
+    "mcp": "/mcp"
+  },
+  "license": "CC BY 4.0 for graph data; sources remain under their publishers' terms",
+  "caveat": "Every record carries its own review state. Unless it says reviewed with a named human, no human has opened its sources. This is a map of research state, not clinical advice."
+}

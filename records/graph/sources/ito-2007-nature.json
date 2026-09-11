@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/ito-2007-nature",
+  "type": "source",
+  "citation": "Ito et al., Nature, 2007",
+  "title": "Wnt-dependent de novo hair follicle regeneration in adult mouse skin after wounding",
+  "authors": "Ito Mayumi; Yang Zaixin; Andl Thomas; Cui Chunhua; Kim Noori; Millar Sarah E.; Cotsarelis George",
+  "venue": "Nature",
+  "year": 2007,
+  "kind": "article",
+  "doi": "10.1038/nature05766",
+  "pmid": "17507982",
+  "url": "https://doi.org/10.1038/nature05766",
+  "license": "http://www.springer.com/tdm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Wnt-dependent de novo hair follicle regeneration in adult mouse skin after wounding",
+    "note": "Crossref record found; PubMed id 17507982 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

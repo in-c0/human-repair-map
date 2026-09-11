@@ -1,0 +1,43 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/dermal-substitute-for-chronic-wound-closure",
+  "name": "Close a chronic wound with a bioengineered skin substitute",
+  "class": "edit",
+  "primitive": "replace",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Apply a living, cell-containing bioengineered construct to a chronic ulcer and raise the rate of complete closure over standard care.",
+  "target": {
+    "node": "hrm:cell/fibroblast"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "function",
+    "blocked": "none",
+    "note": "Two different living constructs from two unaffiliated sponsors each raised complete closure of diabetic foot ulcers at 12 weeks in randomised multicentre trials: Graftskin 56% vs 38% (n=208, Veves 2001) and Dermagraft 30% vs 18% (n=314, Marston 2003). The constructs act as temporary biologic dressings that stimulate closure; they do not persist as the patient's dermis and regenerate no appendages.",
+    "drift": "Marketed as 'skin equivalents'; what is proven is faster closure of ulcers, not equivalent skin."
+  },
+  "blockedBy": [
+    "hrm:question/skin-substitutes-improve-scar-quality-not-just-closure"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/veves-2001-diabetescare",
+      "hrm:source/marston-2003-diabetescare"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

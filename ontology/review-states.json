@@ -1,0 +1,36 @@
+{
+  "$comment": "Human Repair Graph — review states and machine checks. The states are unchanged from v0.1 so that no existing record breaks. Machine checks are recorded separately from the state because a source existing is not the same as a human having read it — conflating the two is the failure this map exists to avoid.",
+  "version": "0.3.0",
+  "states": [
+    { "id": "ai-proposed",  "who": "an AI agent or an import script", "meaning": "Proposed with sources attached; no human has opened them. This is the default and it is shown on the record's face." },
+    { "id": "submitted",    "who": "a human contributor", "meaning": "A named human proposed or endorsed it, but has not been reviewed by a steward." },
+    { "id": "in-review",    "who": "a steward", "meaning": "A steward has taken it up. Verdicts accumulate in the event log." },
+    { "id": "reviewed",     "who": "a named human reviewer ONLY", "meaning": "A human opened every cited source and confirmed each supports the claim it is attached to. reviewedBy is required; the build refuses a 'reviewed' record without it." },
+    { "id": "disputed",     "who": "anyone, via a challenge", "meaning": "An open, public challenge exists. The record stays visible with the dispute attached; it is never silently edited." },
+    { "id": "superseded",   "who": "a steward", "meaning": "Replaced by a newer record. The old record and its history remain addressable forever." }
+  ],
+  "transitions": {
+    "ai-proposed":  ["submitted", "in-review", "disputed", "superseded"],
+    "submitted":    ["in-review", "disputed", "superseded"],
+    "in-review":    ["reviewed", "disputed", "submitted", "superseded"],
+    "reviewed":     ["disputed", "superseded"],
+    "disputed":     ["in-review", "reviewed", "superseded"],
+    "superseded":   []
+  },
+  "humanGated": {
+    "$comment": "From ai-collaboration.md §4 — the right-hand column that never moves.",
+    "onlyHumansMay": [
+      "set review.state to 'reviewed'",
+      "set or change a capability grade on a reviewed record",
+      "resolve a dispute",
+      "author target-state / ethics content",
+      "accept a safety claim"
+    ]
+  },
+  "checks": [
+    { "id": "source-resolved",        "by": "machine", "meaning": "The cited source exists and its metadata (title, venue, year, DOI/PMID) matches the record. Says nothing about whether it supports the claim." },
+    { "id": "cross-checked",          "by": "machine", "meaning": "A second, different model independently re-extracted the claim from the same source and agreed. Single-model consensus counts as one vote." },
+    { "id": "human-opened-source",    "by": "human",   "meaning": "A named person opened the source at the locator and read the passage. The only check that can precede 'reviewed'." },
+    { "id": "independently-replicated","by": "human",  "meaning": "A steward confirmed the REPLICATES edge is between groups sharing no senior author or sponsor." }
+  ]
+}

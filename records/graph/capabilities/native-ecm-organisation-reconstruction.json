@@ -1,0 +1,42 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/native-ecm-organisation-reconstruction",
+  "name": "Reconstruct native extracellular-matrix organisation",
+  "class": "edit",
+  "primitive": "regenerate",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Lay down dermal collagen and elastin in the basket-weave organisation of uninjured skin rather than the parallel bundles of scar.",
+  "target": {
+    "node": "hrm:cell/extracellular-matrix"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Mouse only: regeneration of dermal ultrastructure accompanied Engrailed-1 blockade (Mascharak 2021). No independent replication located; no human evidence."
+  },
+  "blockedBy": [
+    "hrm:question/en1-inhibition-translates-to-human-skin"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/mascharak-2021-science"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

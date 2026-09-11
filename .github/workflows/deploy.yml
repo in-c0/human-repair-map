@@ -27,6 +27,9 @@ jobs:
           cp reconstruction/index.html _site/reconstruction/index.html
           mkdir -p _site/data
           cp data/cns-delivery.json _site/data/cns-delivery.json
+          # The machine-readable graph: bulk exports and the JSON Schemas.
+          mkdir -p _site/graph
+          cp -r public/graph/. _site/graph/
           echo "Assembled:"; find _site -type f
 
       - name: Deploy

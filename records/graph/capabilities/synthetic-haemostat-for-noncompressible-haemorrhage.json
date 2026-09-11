@@ -1,0 +1,37 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/synthetic-haemostat-for-noncompressible-haemorrhage",
+  "name": "Induce haemostasis with a synthetic injectable agent",
+  "class": "control",
+  "primitive": "stop",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Stop bleeding that cannot be compressed (internal, solid-organ) with an injectable synthetic agent rather than surgery or donor blood products.",
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "function",
+    "blocked": "science",
+    "note": "A synthetic fibrin-cross-linking polymer improved haemostasis in rodent trauma models (Chan 2015). No human data cited here; large-animal translation and immunogenicity unknown.",
+    "drift": "Often described as 'a synthetic blood-clotting drug'; the evidence is rodent survival and blood-loss endpoints."
+  },
+  "wouldMove": "A large-animal (porcine) non-compressible haemorrhage study by an independent group, then a first-in-human safety study.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/chan-2015-scitranslmed"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

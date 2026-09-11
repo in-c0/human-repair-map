@@ -7,6 +7,7 @@
   "routes": [
     { "pattern": "humanrepairmap.com/mcp", "zone_name": "humanrepairmap.com" },
     { "pattern": "humanrepairmap.com/mcp/*", "zone_name": "humanrepairmap.com" },
+    { "pattern": "humanrepairmap.com/api", "zone_name": "humanrepairmap.com" },
     { "pattern": "humanrepairmap.com/api/*", "zone_name": "humanrepairmap.com" }
   ],
   "d1_databases": [

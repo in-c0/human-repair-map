@@ -1,156 +1,154 @@
 # Human Repair Map
 
-**A public, AI-assisted map of the capabilities required to repair a human — what
-works, what is blocked, what evidence supports each claim, graded openly with its
-review state.**
+**A public, machine-readable map of the capabilities needed to repair a human body:
+what has been shown to work, in whom, what blocks the next step, and whether a human
+has checked the sources.**
 
-> **Prototype (v0.3 → v0.4 validation).** Every record carries its own review
-> state. As of 2026-09-11, **0 of 326 records have been reviewed by a human**:
-> sources were located and their metadata machine-verified, and nothing more.
-> v0.4 therefore prioritises **expert falsification and researcher utility** over
-> adding more diseases or more nodes. This maps *research state*, not clinical
-> care. It does **not** diagnose, recommend treatments, select therapies, predict
-> individual outcomes, or give patient-specific medical advice.
+Live: [humanrepairmap.com](https://humanrepairmap.com) · MCP: [humanrepairmap.com/mcp](https://humanrepairmap.com/mcp) · API: [humanrepairmap.com/api](https://humanrepairmap.com/api)
+
+> **Prototype (graph v0.3, snapshot 2026-09-11).** Every record carries its own review
+> state. Unless a record says *reviewed* with a named human, no human has opened its
+> sources. As of the snapshot that is **0 of 326 records**: the sources were located and
+> their metadata machine-checked, and nothing more. This maps research state, not
+> clinical care. It does not diagnose, recommend treatments, or give advice about any
+> person's illness.
 
 ## The idea
 
-Medicine advances through thousands of separate projects — cell atlases, virtual
-cells, gene editing, cell therapy, regenerative medicine, targeted delivery,
-closed-loop devices. Human Repair Map asks the top-down question: *what if there
-were one visible map of the capabilities repair requires, and every judgment on it
-were graded openly with its evidence and its review state?*
+Medicine advances through thousands of separate projects: cell atlases, gene editing,
+cell therapy, regenerative medicine, targeted delivery, closed-loop devices. Each group
+can mostly see its own piece. This map asks the top-down question. If the goal is to
+repair a person, what has to be true, what is true today, and which unanswered question
+is holding up the most?
 
-Closer to Wikipedia and GitHub than a biotech landing page. Humans and AI agents
-may propose; accepted knowledge stays evidence-linked, attributable, disputable,
-and auditable.
+The internal north star is a universal repair machine: anyone, in whatever state, to
+their healthiest attainable, identity-preserving state. The map does not promise that.
+It tracks how far each capability such a machine would need has actually been
+demonstrated, and what would move it.
 
-**Live: [humanrepairmap.com](https://humanrepairmap.com)** · **MCP endpoint: [humanrepairmap.com/mcp](https://humanrepairmap.com/mcp)**
+## Two maps, one graph
 
-## v0.4 — prove that the map helps researchers
+The website opens with a choice:
 
-The immediate milestone is deliberately not broader coverage.
+- **Universal Repair** — from trauma and infection to cancer and organ failure.
+- **Rejuvenation** — from biological aging to restored youthful function.
+- **Full research graph** — everything, for readers and models that want it all.
 
-Human Repair Map must first answer a harder question:
+Rejuvenation is a branch of universal repair, not a separate field. Both maps are
+projections of one evidence graph; a capability that matters to both appears in both,
+with one grade. The first goal worked through in detail is **scarless functional repair
+of adult human skin**, chosen because it sits across both maps and decomposes into
+capabilities other repair problems also need.
 
-> **Can a domain researcher use this graph to reach a defensible view of the
-> evidence, blockers and next questions faster — without increasing scientific
-> error — and does it ever change what they would investigate next?**
+## v0.4: does the map help a researcher?
 
-The first proving ground remains **scarless functional repair of adult human
-skin**. The v0.4 pilot compares a researcher's normal literature workflow with
-HRM on matched questions, measuring time-to-defensible-research-state, factual
-errors, missed contradictions, decision changes and graph falsification yield.
+The next milestone is deliberately not more coverage. Before adding diseases or nodes,
+the graph has to pass one test with a domain researcher: can they reach a defensible
+view of the evidence, the blockers and the next questions faster than with their usual
+literature workflow, without more scientific error, and does it ever change what they
+would investigate next?
 
-- **Contribute / review:** [`CONTRIBUTING.md`](CONTRIBUTING.md)
-- **Researcher pilot protocol:** [`docs/researcher-pilot-v0.4.md`](docs/researcher-pilot-v0.4.md)
-- **Structured scientific challenge:** open a *Scientific review / challenge* issue
+The pilot compares a researcher's normal workflow with the map on matched questions
+about scarless skin repair, and measures time to a defensible research state, factual
+errors, missed contradictions, decision changes, and how many errors the researcher
+finds in the map itself.
 
-Do not turn hundreds of records green for appearance. Review the highest-leverage
-branch first: claims that determine capability rungs, binding constraints,
-contradictory/replication evidence, top-ranked questions, and experiments attached
-to those questions.
+- How to contribute or review: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- Pilot protocol: [`docs/researcher-pilot-v0.4.md`](docs/researcher-pilot-v0.4.md)
+- Brief for reviewers: [`docs/reviewer-brief-v0.4.md`](docs/reviewer-brief-v0.4.md)
+- To challenge a record formally, open a *Scientific review / challenge* issue on GitHub
 
-## v0.3 — the Human Repair Graph
+Review the highest-leverage records first: the claims that set capability rungs, the
+binding constraints, contradicting and replicating evidence, the top-ranked questions,
+and the experiments attached to them. Turning many records green for appearance would
+defeat the purpose.
 
-The map is **one graph with two public projections** — *Universal Repair*
-(trauma, infection, cancer, organ failure) and *Rejuvenation* (aging) — built so
-that a model, an agent or an institution can inspect, reason over, challenge,
-extend and act through it without scraping a page. Six record types:
+## What is in the graph
+
+Six record types, plus the earlier cell-grid and delivery-route records projected in:
 
 | type | what it is | count |
 |---|---|---|
 | **goal** | a repair outcome from the person's side, decomposed with AND/OR requirement groups | 10 |
-| **capability** | something humanity must be able to DO to a target, graded L0–L5 on demonstrated evidence, with what blocks the next rung | 30 hand-authored + 155 derived from the v0.2 cell grid |
-| **question** | an unresolved uncertainty whose answer moves a grade or a dependency — the unit of research prioritisation | 20 |
-| **claim** | one statement + context + measurement + evidence + provenance; the unit of knowledge is not the paper | 24 |
+| **capability** | something humanity must be able to do to a target, graded L0–L5 on demonstrated evidence, with what blocks the next rung and what would move it | 30 hand-authored + 155 from the body grid |
+| **question** | an unresolved uncertainty whose answer moves a grade or a dependency; the unit of research prioritisation | 20 |
+| **claim** | one statement with context, measurement, evidence and provenance; the unit of knowledge is the claim, not the paper | 24 |
 | **experiment** | a candidate or running study that tests a question | 6 |
 | **source** | where evidence lives, with a machine `resolution` record kept separate from whether a human has opened it | 34 |
+| cell, route | the v0.2 body grid (31 nodes) and the v0.1 CNS delivery routes (16) | 47 |
 
-The scarless-skin proving ground sits across both maps. The 16 CNS-delivery routes
-and the 31-node repairability grid from earlier versions are nodes in the same
-graph, not separate knowledge silos.
+The build derives every inverse relation (a relation is stored once), rejects dangling
+references and dependency cycles, and computes a **structural analysis**: for each goal
+the binding constraints (AND-required capabilities at the lowest rung), and open
+questions ranked by how much sits downstream of what they block. No probabilities,
+costs or dates are invented anywhere.
 
-The build derives every inverse relation (a relation is stored once), rejects
-dangling references and dependency cycles, and computes a **structural analysis**:
-for each goal the binding constraints (AND-required capabilities at the lowest
-rung), and open questions ranked by how much sits downstream of what they block.
-No probabilities, costs or dates are invented anywhere.
+### Grading vocabulary
 
-### Use it from a model
+- **Rung, L0–L5** — how far it has been shown. L2: works in a mouse. L4: one group showed it in people. L5: a group with no stake in the claim saw the same thing.
+- **Measured** — what the evidence changed: a person's function, a biomarker, tissue structure, or nothing yet.
+- **Blocked by** — science (nobody knows how yet) or framework (approval, ethics, manufacturing, cost).
+- **Review state** — ai-proposed · submitted · in review · reviewed · disputed · superseded. Only a named human can set *reviewed*.
+
+## Use it from a model
 
 ```bash
 claude mcp add --transport http human-repair-map https://humanrepairmap.com/mcp
 ```
 
-22 tools. Orientation: `graph_manifest`, `how_to_read`. Retrieval: `get_node`,
-`list_nodes`, `search`, `get_subgraph`. Reasoning: `trace_dependency` (a goal's
-critical path), `find_blockers`, `rank_research_questions`, `get_primary_evidence`,
-`find_contradictions`, `what_would_move_this`. Action: `propose_change` (files a
-correction into the public hash-chained log) and `register_prediction` (locks a
-forecast against the graph snapshot you saw, resolved later against reality —
-the map as a prospective, contamination-resistant benchmark). Every result carries
-`structuredContent` and the review state of what it returned.
+Tools: `graph_manifest`, `how_to_read`, `get_node`, `list_nodes`, `search`,
+`get_subgraph`, `trace_dependency` (a goal's critical path), `find_blockers`,
+`rank_research_questions`, `get_primary_evidence`, `find_contradictions`,
+`what_would_move_this`, `propose_change` (files a correction into the public
+hash-chained log) and `register_prediction` (locks a forecast against the snapshot you
+saw, scored later against what happened). Every result carries `structuredContent` and
+the review state of what it returned.
 
 ### Use it without MCP
 
-- **REST** — [`/api`](https://humanrepairmap.com/api) · [`/api/openapi.json`](https://humanrepairmap.com/api/openapi.json). Every node is a URL: `/api/goals/scarless-skin-repair/critical-path`, `/api/questions/ranked`, `/api/claims/<slug>/evidence`.
+- **REST** — [`/api`](https://humanrepairmap.com/api) · [`/api/openapi.json`](https://humanrepairmap.com/api/openapi.json). Every node is a URL: `/api/goals/scarless-skin-repair/critical-path`, `/api/questions/ranked?projection=rejuvenation`, `/api/claims/<slug>/evidence`.
 - **Bulk** — [`/graph/graph.json`](https://humanrepairmap.com/graph/graph.json) · `graph.jsonl` · `graph.jsonld` · `manifest.json` (content hash; immutable per hash) · `schema/` (the JSON Schemas every record is validated against).
-- **Source** — [`records/graph/`](records/graph/) is the only source of truth; [`schema/`](schema/) and [`ontology/`](ontology/) define it; [`scripts/build.mjs`](scripts/build.mjs) is the only writer of everything generated.
+- **Source** — [`records/`](records/) is the only source of truth; [`schema/`](schema/) and [`ontology/`](ontology/) define it; [`scripts/build.mjs`](scripts/build.mjs) is the only writer of everything generated.
 
-Design record: [`brief-2026-09-11-map-cure-machine-progress.md`](brief-2026-09-11-map-cure-machine-progress.md) records the thread that reopened the project and the design decisions behind this graph.
+The test applied to every design decision: could a model we have not built yet use this
+dataset and this interface substantially better than we can?
 
-## Earlier prototypes retained in the graph
+## What is still missing
 
-The project began as a no-backend prototype (`index.html` + `content/`) with:
+Said plainly so that nobody plugs in expecting more than is there.
 
-- the first-principles repair thesis;
-- five enabling capabilities — sensing, target-state modelling, cell-specific
-  delivery, cell-state editing, closed-loop verification;
-- a dependency graph of the repair loop;
-- a deep module grading 16 real CNS-delivery routes;
-- an evidence registry, open-task interface and review-state ladder;
-- a 31-node cell/tissue repairability grid.
+- Ingestion is not automated. Every record so far was reasoned by one AI session from abstracts and registry metadata.
+- Few negative results are recorded, though the schema treats them as first-class.
+- No record has been reviewed by a human. The first human review of one record in one field is the next milestone.
+- No researcher has yet said the graph changed what they would read or run next. That is the test for whether it is useful.
+- No federation. The formats are chosen so that institutions could run a node beside private data; none does.
 
-These are retained as graph nodes and data rather than maintained as separate
-sources of truth.
+## Run it
 
-## Canonical data and validation
+Open `index.html` in a browser with `content/` and `public/graph/` beside it. No build,
+no server, no account. (The site fetches `graph/graph.json`, falling back to
+`public/graph/graph.json` when opened from the repository.)
 
-`records/graph/` is canonical. A relation is stored once; inverse relations are
-derived. Generated website/API/export files must not be edited independently.
+Pushes to `main` deploy to Cloudflare Pages via `.github/workflows/deploy.yml`
+(requires the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` repository secrets).
+The worker in [`mcp/`](mcp/) serves `/mcp` and `/api`.
 
-After changing records:
+## Writing
 
-```bash
-node scripts/build.mjs
-node mcp/test.mjs
-```
+Site copy, docs and this README follow the writing rulebook at
+[in-c0/writing-skill](https://github.com/in-c0/writing-skill). The review that produced
+the current copy is in [`writing-review-2026-09-11.md`](writing-review-2026-09-11.md).
 
-CI validates schemas, references, dependency cycles, grade evidence and the human
-review gate, and fails if generated exports drift from canonical records.
+## Design record
 
-## Deployment
-
-Pushes to `main` assemble and deploy the static site to Cloudflare Pages via
-`.github/workflows/deploy.yml`. Deployment requires repository secrets
-`CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
-
-The machine API/MCP worker has its own deployment/runtime configuration under
-`mcp/`.
-
-## The one hard gate
-
-The commons' credibility rests on one line:
-
-> **A record cannot reach `reviewed` until a named human opens its cited primary
-> sources and verifies that they support the attached scientific claim.**
-
-Machine source-resolution and cross-model agreement are recorded separately. They
-never masquerade as human review.
+[`brief-2026-09-11-map-cure-machine-progress.md`](brief-2026-09-11-map-cure-machine-progress.md)
+holds the owner's words verbatim and the thread that reopened the project.
+[`vision-core-2026-07-28.md`](vision-core-2026-07-28.md) and
+[`design.md`](design.md) are the earlier design records.
 
 ## Not a clinical tool
 
-No diagnosis, prognosis, treatment selection, patient-specific recommendations,
-trial-eligibility certainty, or date for "universal repair." Pathology is
-distinguished from identity, damage from adaptation, disability from difference.
-Consent, agency, and reversibility are system requirements, not an appendix.
+This maps research state, not clinical care. It does not diagnose, recommend treatments,
+or give advice about any person's illness. No prognosis, trial-eligibility certainty,
+individual genomic interpretation, or a date for universal repair. Identity, consent and
+reversibility are requirements on the system being mapped, not an ethics appendix.

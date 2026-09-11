@@ -6,8 +6,8 @@
    Toggling one asserts a hypothetical. Every number the simulator shows is
    computed from the mapping below, not from sourced data — and the UI says so. */
 window.HRM_LEVERAGE = {
-  premise: "Every route below is stuck for specific, nameable reasons. Clear a route's blockers and it advances. The question the map exists to answer is which blocker, cleared, moves the most — and what it would take before anything is <b>both broad and proven in humans</b>.",
-  modelNote: "This is a model, not a measurement. The blockers and their mappings are editorial judgments derived from the graded records; the arithmetic is exact but the inputs are reasoned, not sourced. It is here to make the structure arguable, not to predict.",
+  premise: "Every route below is stuck for specific, nameable reasons. Clear a route's blockers and it advances. The question this page asks is which blocker, cleared, moves the most, and what it would take before anything is <b>both broad and proven in humans</b>.",
+  modelNote: "This is a model, not a measurement. The blockers and which routes they gate are editorial judgements derived from the graded records. The arithmetic is exact; the inputs are reasoned, not sourced. It is here so the structure can be argued with, not to predict anything.",
 
   blockers: [
     { id: "B1", name: "A targeting mechanism humans have", short: "human receptor",
@@ -52,12 +52,12 @@ window.HRM_LEVERAGE = {
 
   insights: [
     { when: (s) => s.broadProven === 0 && s.cleared === 0,
-      text: "Start here. <b>Zero</b> routes are both broad and proven in humans — every proven route is anatomically local, and every potentially-broad route is unproven. That is the whole finding, and it is what the toggles let you attack." },
+      text: "<b>Zero</b> routes are both broad and proven in humans. Every proven route is anatomically local, and every potentially broad route is unproven. Mark blockers as solved to see what it would take to change that." },
     { when: (s) => s.cleared > 0 && s.broadProven === 0,
-      text: "Still zero broad-and-proven. Clearing one blocker rarely unlocks a route on its own — most routes are gated by <b>two or three</b> at once. Leverage is not the same as blocker count." },
+      text: "Still zero broad and proven. Clearing one blocker rarely unlocks a route on its own, because most routes are gated by <b>two or three</b> at once. The number of routes a blocker gates is not the same as how much clearing it would move." },
     { when: (s) => s.broadProven > 0 && s.broadProven < 3,
-      text: "The headline just flipped. Note what it took: a route that crosses the barrier needed both <b>parenchymal measurement</b> and a <b>surrogate that predicts benefit</b> — the two things nobody currently has for any approved brain drug." },
+      text: "The headline changed. A route that crosses the barrier needed both <b>parenchymal measurement</b> and a <b>surrogate that predicts benefit</b>, which are the two things nobody currently has for any approved brain drug." },
     { when: (s) => s.broadProven >= 3,
-      text: "This is the world the map is arguing for. Notice it was never reached by solving delivery alone — it required proving that what you delivered <b>changed a life</b>, not just a number." }
+      text: "Solving delivery alone never got here. It also took proof that what was delivered <b>changed a person's function</b> rather than a number." }
   ]
 };

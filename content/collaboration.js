@@ -1,62 +1,70 @@
-/* Collaboration-view content — the AI-capability projection and the mechanisms
-   that keep an AI-assisted commons trustworthy as capability grows.
-   Full reasoning in ai-collaboration.md. */
+/* "For models and agents" — content. What the machine interface is today, how AI
+   and humans divide the work, and how it breaks. Rewritten 2026-09-11 against the
+   writing rulebook. Full reasoning in ai-collaboration.md. */
 window.HRM_COLLAB = {
-  bet: {
-    pull: "Verification is becoming cheap. Judgment is not.",
-    body: "An earlier version of this page argued that AI makes claims cheap but not trust. That was wrong, and the correction is worth showing rather than hiding. Advancing computer vision and instrument integration — satellite imagery, lab output, capture-time signed footage, registry pipelines — genuinely does make trustworthy knowledge scalable. A sequencer writing straight into a signed record needs nobody's word. Trust there stops being a human bottleneck and becomes infrastructure.",
-    close: "What instrument grounding collapses is the cost of establishing <b>what happened</b>. It does not touch the cost of deciding <b>what it means</b> — and the records here are mostly the second kind. The Capsida case is the clean test: the trial was registered, the patient instrumented, the autopsy performed. Every measurement existed. What was contested was whether the edema was <i>attributable</i> to the capsid, and which body imposed the hold. Sensors do not adjudicate causal attribution."
+  live: {
+    tools: [
+      ["graph_manifest", "what this graph is right now: version, snapshot, content hash, counts"],
+      ["how_to_read", "the rung, measured, blocked and review vocabularies"],
+      ["get_node", "any record by id, with its derived relations"],
+      ["list_nodes", "filter by type, projection, class, rung, blocker, review state"],
+      ["search", "free-text search over names, statements and descriptions"],
+      ["get_subgraph", "the neighbourhood of a node to a given depth"],
+      ["trace_dependency", "a goal's critical path: binding constraints and AND/OR requirements"],
+      ["find_blockers", "the open questions gating a node"],
+      ["rank_research_questions", "open questions ranked by what they block, per projection"],
+      ["get_primary_evidence", "the claims and sources behind a capability, with resolution state"],
+      ["find_contradictions", "claims that cut against a grade"],
+      ["what_would_move_this", "the missing demonstration for a node"],
+      ["propose_change", "file a correction, rung challenge, new evidence or question"],
+      ["register_prediction", "lock a forecast against the snapshot hash you saw"],
+      ["list_predictions", "predictions locked on a node"]
+    ]
   },
 
   grounding: {
-    lead: "If instrument grounding is what collapses review cost, the map has to record it. Every record carries a <b>grounding class</b> alongside its evidence rung — orthogonal axes that together decide how much human attention it needs.",
     rows: [
       ["G0", "Assertion", "Someone said it; no source attached", "Cannot enter the map"],
-      ["G1", "Cited text", "A paper or report says it", "Full Verification Packet + human"],
+      ["G1", "Cited text", "A paper or report says it", "Full verification packet + human"],
       ["G2", "Structured record", "Registry entry, regulatory filing, trial record", "Automated cross-check; human spot-audit"],
       ["G3", "Primary data", "Deposited dataset that can be re-analysed", "Automated re-analysis; human reviews method"],
       ["G4", "Instrument-signed", "Signed at capture, provenance chain intact", "None for the fact; human only for the inference"]
-    ],
-    notes: [
-      { t: "The Verification Packet is transitional", d: "It is the right tool for G1, where nearly all of today's biomedical evidence sits. As the corpus migrates to G3–G4 the packet becomes unnecessary for those records. A mechanism that knows its own expiry date is more honest than one that assumes permanence." },
-      { t: "Judgment does not migrate", d: "A maturity score sits on top of any grounding class. Even fully instrument-wired, someone decides the rubric, what counts as a demonstration, and whether primate evidence transfers. G4 makes the base of the pyramid nearly free; it does not touch the apex." },
-      { t: "The capture risk this creates", d: "Once trust rests on instrument pipelines, whoever controls the instruments and the signing keys controls the substrate — and government or platform integration sharpens that rather than softening it. Countermeasure: multiple independent grounding sources for any high-stakes record, and a dispute path that needs no permission from the party holding the keys.", warn: true }
     ]
   },
 
   today: {
     can: [
-      "Search broadly and in parallel across literature, trial registries, and regulatory records",
+      "Search broadly and in parallel across literature, trial registries and regulatory records",
       "Extract structured claims into a fixed schema, reliably enough to be useful",
       "Attack the same claim from independent angles and surface different failure modes",
       "Hold a multi-step research task together over tens of minutes"
     ],
     cannot: [
-      "Be trusted on a citation no human has opened — confident paraphrase of a source that says something subtly different is the dominant failure mode",
+      "Be trusted on a citation no human has opened. Confident paraphrase of a source that says something subtly different is the dominant failure mode",
       "Judge whether a surrogate endpoint means anything clinically",
       "Decide what matters"
     ],
-    proof: "Demonstrated in this project: six agents in parallel graded the sixteen delivery routes below, and — the important part — <b>corrected each other</b>. One agent's claim of a regulatory clinical hold was reduced by a second sweep to \"the pause was voluntary; the hold's origin is not publicly established.\" That correction is the system working, and it is why every AI record here enters as a proposal that cannot promote itself."
+    proof: "An example from this project. Six agents in parallel graded the sixteen brain-delivery routes, and they corrected each other. One agent's claim of a regulatory clinical hold was reduced by a second sweep to \"the pause was voluntary; the hold's origin is not publicly established.\" That correction is the reason every AI record here enters as a proposal that cannot promote itself."
   },
 
   phases: [
     {
       k: "A",
       name: "Standing attention",
-      cap: "Agents that run unsupervised for hours to days · grounded citation with verifiable spans · schema-enforced output · reliable parsing of figures, tables and supplementary data rather than abstracts.",
+      cap: "Agents that run unsupervised for hours to days · citations with verifiable quoted spans · schema-enforced output · reliable parsing of figures, tables and supplementary data rather than abstracts.",
       unlocks: [
-        { t: "Continuous monitoring, not episodic scans", d: "A standing agent per capability watches sources and files change-proposals — never edits. The \"what changed\" report becomes auto-drafted and human-signed." },
-        { t: "The Verification Packet", d: "The single most important mechanism here. The reviewer's job stops being \"read this paper\" and becomes \"does this quote support this claim — yes, no, or dispute.\" That is roughly a 40× throughput gain on the binding constraint.", packet: true }
+        { t: "Continuous monitoring instead of one-off scans", d: "A standing agent per capability watches sources and files change proposals. It never edits. The \"what changed\" report is drafted by the agent and signed by a human." },
+        { t: "The verification packet", d: "The reviewer's job changes from \"read this paper\" to \"does this quote support this claim: yes, no, or dispute\". For a G1 record that is most of the review cost. The packet stops being needed as records move to G3 and G4.", packet: true }
       ]
     },
     {
       k: "B",
       name: "Adversarial and reproducible",
-      cap: "Agents that re-run analyses and statistics from deposited data · corpus-wide contradiction detection · persistent agent identity, so a proposer accrues a track record.",
+      cap: "Agents that re-run analyses from deposited data · contradiction detection across the whole corpus · persistent agent identity, so a proposer builds a track record.",
       unlocks: [
-        { t: "Reproducibility as a routine check", d: "\"Does the reported effect survive re-analysis of the deposited data?\" becomes a standing automatable question — and a rung on the ladder in its own right." },
-        { t: "Conflicts populate themselves", d: "Corpus-wide contradiction detection surfaces disagreements no individual reviewer would have noticed." },
-        { t: "Calibration ledgers", d: "Every proposer — agent or human — carries a public record of proposals accepted, overturned, and disputed. This buys <b>routing, not authority</b>: better track record means a faster lane, never the right to skip human acceptance." }
+        { t: "Reproducibility as a routine check", d: "\"Does the reported effect survive re-analysis of the deposited data?\" becomes a standing question, and a rung of its own." },
+        { t: "Contradictions found automatically", d: "Disagreements no single reviewer would have noticed get surfaced across the corpus." },
+        { t: "Calibration ledgers", d: "Every proposer, agent or human, carries a public record of proposals accepted, overturned and disputed. A better record buys a faster lane, never the right to skip human acceptance." }
       ]
     },
     {
@@ -64,64 +72,52 @@ window.HRM_COLLAB = {
       name: "Closed loops",
       cap: "Domain models that predict perturbation outcomes well enough to be scored · automated labs that can run a cheap experiment end to end · systems proposing and executing their own studies.",
       unlocks: [
-        { t: "A prediction registry that resolves", d: "Conditional forecasts in the only durable form — \"X requires Y; Y is unproven beyond rodent; therefore X is at minimum one demonstration away\" — with explicit resolution criteria. The map accumulates public calibration for itself. A map that has been publicly right is the only kind worth consulting." },
-        { t: "Commissioning, not just observing", d: "Once the graph knows which gate blocks the most downstream capability, the highest-value output stops being a report and becomes a specification for the cheapest experiment that would move a rung." },
-        { t: "The claim explosion", d: "This is where the danger peaks: AI-generated claims citing AI-generated claims, at a volume no human corpus can absorb. A commons with years of provenance is the navigational instrument. One without it is noise.", warn: true }
+        { t: "A prediction registry that resolves", d: "Forecasts in the form \"X requires Y; Y is unproven beyond rodent; so X is at least one demonstration away\", with explicit resolution criteria. The map accumulates a public record of when it was right." },
+        { t: "Specifying experiments, not only describing them", d: "Once the graph knows which question blocks the most downstream capability, its most useful output is a specification for the cheapest experiment that would move a rung." },
+        { t: "The claim explosion", d: "This is where the risk peaks: AI-generated claims citing AI-generated claims at a volume no human corpus can absorb. A graph with years of provenance can be navigated; one without it cannot.", warn: true }
       ]
     }
   ],
 
-  packet: ["claim", "exact quote", "locator — page, figure, table", "population & N", "comparator", "what was measured — function vs surrogate", "stated limitations", "contradicting sources found", "confidence, and why"],
+  packet: ["claim", "exact quote", "locator: page, figure, table", "population and N", "comparator", "what was measured: function or surrogate", "stated limitations", "contradicting sources found", "confidence, and why"],
 
   labour: {
     auto: [
-      "Source discovery and deduplication",
+      "Source discovery and de-duplication",
       "Structured extraction into schema",
       "Translation and normalisation",
-      "Staleness flagging, dead-link repair",
-      "Link and contradiction proposals",
-      "Draft \"what changed\" reports"
+      "Staleness flagging and dead-link repair",
+      "Proposed links and contradictions",
+      "Drafting \"what changed\" reports",
+      "Registering and scoring predictions"
     ],
     human: [
       "Accepting any record as <b>reviewed</b>",
-      "Setting or changing a <b>maturity score</b>",
-      "<b>Target-state and ethics</b> content — what counts as repair versus difference",
+      "Setting or changing a <b>rung</b>",
+      "<b>Target-state and ethics</b> content: what counts as repair versus difference",
       "<b>Dispute resolution</b>",
       "Anything touching <b>safety claims</b>",
       "Deciding <b>what matters</b>"
     ],
-    why: "Each item on the right is a value judgment or an accountability act. A maturity score is a claim about what humanity knows; it needs a human who can be <i>wrong in public</i>. Automate it and you remove the person who can be held to it — and an evidence commons with nobody accountable is just a confident website."
+    why: "Each item on the right is a value judgement or an act someone has to answer for. A rung is a claim about what humanity knows, and it needs a person who can be wrong in public. Automate that and there is nobody left to hold to it. The division is versioned and changes only by a public amendment to the protocol."
   },
 
   failures: [
-    ["Model monoculture", "Every agent shares a base model, so errors correlate and adversarial review rubber-stamps itself.", "Refutation must use diverse models; log which model produced each verdict; single-model consensus counts as one vote."],
-    ["Citation laundering", "AI cites AI citing AI, and provenance quietly dissolves.", "Every record requires a primary-source locator; secondary sources are labelled and cannot alone support a rung change."],
-    ["Review theatre", "Humans rubber-stamp packets to clear the queue.", "Sample-audit the reviewers; publish per-reviewer overturn rates; treat disputes as a health metric."],
-    ["Proposal flooding", "Agents outproduce review capacity and the backlog becomes the map.", "Keep the reviewed core deliberately small; make unreviewed visually dominant; publish the ratio."],
-    ["Capture", "A funder or lab shapes the scores.", "No funding from any party with a product, trial, or clinic in the map; per-reviewer conflict disclosure; disputes public."],
-    ["Automation drift", "The human-gated column quietly shrinks under load.", "The division of labour is versioned and changes only by public protocol amendment."]
+    ["Model monoculture", "Every agent shares a base model, so errors correlate and adversarial review agrees with itself.", "Refutation uses diverse models; the model behind each verdict is logged; single-model consensus counts as one vote."],
+    ["Citation laundering", "AI cites AI citing AI, and provenance dissolves.", "Every record needs a primary-source locator; secondary sources are labelled and cannot alone support a rung change."],
+    ["Review theatre", "Humans approve packets to clear the queue.", "Reviewers are sample-audited; per-reviewer overturn rates are published; disputes are treated as a health metric."],
+    ["Proposal flooding", "Agents outproduce review capacity and the backlog becomes the map.", "The reviewed core is kept deliberately small; unreviewed is visually dominant; the ratio is published."],
+    ["Capture", "A funder or lab shapes the grades.", "No funding from any party with a product, trial or clinic on the map; per-reviewer conflict disclosure; disputes public."],
+    ["Automation drift", "The human-gated column shrinks under load.", "The division of labour is versioned and changes only by public protocol amendment."]
   ],
 
-  adoption: {
-    lead: "An evidence commons dies if it is a website people are supposed to visit. It lives if it becomes infrastructure other systems reach for.",
-    body: "The concrete move: expose the map as a <b>tool other agents call</b> — a stable machine-readable interface answering <i>what is the evidence state of X</i>, <i>what supports this claim and who disputes it</i>, and <i>what would move this rung</i>.",
-    close: "Then any agent answering a question about biological repair can check the commons instead of guessing, and file a proposal back. The map becomes what an AI reaches for when it needs to know whether something is <i>actually proven</i> — precisely the question models are worst at and most confident about. It is also the answer to \"why would anyone contribute?\" They contribute because they are already querying it.",
-    live: {
-      label: "live now",
-      body: "This is built, not planned. The map is queryable over the Model Context Protocol — read-only, public, no auth. Add it to Claude or any MCP client:",
-      cmd: "claude mcp add --transport http human-repair-map https://humanrepairmap.com/mcp",
-      tools: ["evidence_state", "how_to_read", "list_routes", "get_route", "list_capabilities", "get_capability", "what_would_move_this", "search"],
-      note: "Every response carries the record's review state and grounding class, and repeats the unverified and non-clinical caveats. An API that drops those is a different, worse product."
-    }
-  },
-
-  order: [
-    { s: "done", t: "Provenance envelope + review states on every record", n: "v0.1" },
-    { s: "next", t: "The Verification Packet format — and hand-verify the delivery module to prove the human lane works at all", n: "next" },
-    { s: "then", t: "Adversarial pre-review: N diverse refuters before anything reaches the human queue", n: "" },
-    { s: "then", t: "Calibration ledger for proposers; standing monitors per capability", n: "" },
-    { s: "later", t: "Machine interface (MCP/API); prediction registry with resolution", n: "" },
-    { s: "later", t: "Commissioning — the map specifying the cheapest decisive experiment", n: "" }
+  missing: [
+    ["Ingestion is not automated", "Every record so far was reasoned by one AI session from abstracts and registry metadata. There is no pipeline from OpenAlex, PubMed or ClinicalTrials.gov yet. When there is, it will produce proposals, not records."],
+    ["Few negative results", "Claims can record a null or negative result, and the schema treats them as first-class. Almost none are recorded yet."],
+    ["No human reviewer", "Zero records have been reviewed. The first human review of even one record in one field is the next milestone, and it will show whether the review lane works at all."],
+    ["No researcher has yet said it changed their next step", "The test for the graph is whether a domain researcher finds it more useful than their own literature search: whether it surfaced a missed paper, exposed an unsupported assumption, or changed which experiment they would run. That has not been tested."],
+    ["No federation", "Institutions cannot yet run a node of their own beside private data. The formats (JSON-LD, JSON Schema, a content-hashed manifest) are chosen so that they could."]
   ],
-  orderNote: "Steps 1–3 are buildable with today's capability. Nothing here requires a breakthrough to start — it requires the discipline to keep the right-hand column human while everything left of it accelerates."
+
+  test: "The question asked of every design decision here: could a model we have not built yet use this dataset and this interface substantially better than we can? If the answer is no, the decision is probably wrong."
 };

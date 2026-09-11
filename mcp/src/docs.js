@@ -28,8 +28,8 @@ a{color:#00E5CC}
 .warn{border-left:3px solid #E8A042;background:rgba(232,160,66,.10);padding:12px 15px;border-radius:0 9px 9px 0;margin:22px 0;font-size:13.5px}
 </style></head><body><main>
 <div class="e">Human Repair Map · MCP endpoint · graph v${esc(MANIFEST.version)} · snapshot ${esc(MANIFEST.snapshot)}</div>
-<h1>A research graph your AI can inspect, challenge and act on</h1>
-<p>This is a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> server over the Human Repair Graph: what humanity can and cannot yet do to repair a human body, as goals → capabilities graded on demonstrated evidence → open questions → claims → sources. Two public maps (universal repair, rejuvenation) are projections of one graph. ${esc(counts)}. Content hash <code>${esc(MANIFEST.contentHash.slice(0, 12))}</code>.</p>
+<h1>A research graph your model can inspect, challenge and act on</h1>
+<p>This is a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> server over the Human Repair Graph: what humanity can and cannot yet do to repair a human body, as goals, the capabilities they require, open questions, claims and sources. Every capability is graded L0 to L5 on demonstrated evidence and says what would move it. Two public maps, <code>universal-repair</code> and <code>rejuvenation</code>, are projections of the one graph; pass either as <code>projection</code> to any listing tool. ${esc(counts)}. Content hash <code>${esc(MANIFEST.contentHash.slice(0, 12))}</code>.</p>
 <p>Add it to any MCP client (Claude Desktop, Claude Code, or your own agent):</p>
 <pre>claude mcp add --transport http human-repair-map https://humanrepairmap.com/mcp</pre>
 <p>Or in a client config:</p>
@@ -38,18 +38,19 @@ a{color:#00E5CC}
     "human-repair-map": { "type": "http", "url": "https://humanrepairmap.com/mcp" }
   }
 }</pre>
+<p>A useful first call is <code>how_to_read</code>, which returns the rung, measured, blocked and review vocabularies. Then <code>trace_dependency</code> on a goal, or <code>rank_research_questions</code> for a projection.</p>
 <h2>Tools</h2>
 <ul>
 ${tools}
 </ul>
-<p>Every tool returns <code>structuredContent</code> (JSON to reason over) alongside a text rendering, and every payload carries the review state of what it returned.</p>
+<p>Every tool returns <code>structuredContent</code> (JSON to reason over) alongside a text rendering, and every payload carries the review state and provenance of what it returned.</p>
 <h2>Without MCP</h2>
 <ul>
-<li><b>REST</b> — <a href="/api">/api</a> (index) · <a href="/api/openapi.json">/api/openapi.json</a>. Every node is a URL: <code>/api/nodes/hrm:goal/scarless-skin-repair</code>, <code>/api/goals/scarless-skin-repair/critical-path</code>, <code>/api/questions/ranked</code>.</li>
+<li><b>REST</b> — <a href="/api">/api</a> (index) · <a href="/api/openapi.json">/api/openapi.json</a>. Every node is a URL: <code>/api/nodes/hrm:goal/scarless-skin-repair</code>, <code>/api/goals/scarless-skin-repair/critical-path</code>, <code>/api/questions/ranked?projection=rejuvenation</code>.</li>
 <li><b>Bulk</b> — <a href="/graph/graph.json">/graph/graph.json</a> · <a href="/graph/graph.jsonl">graph.jsonl</a> · <a href="/graph/graph.jsonld">graph.jsonld</a> · <a href="/graph/manifest.json">manifest.json</a> · <a href="/graph/schema/">JSON Schemas</a>. Immutable per content hash.</li>
-<li><b>Act</b> — <code>POST /api/proposals</code> files a correction; <code>POST /api/predictions</code> locks a forecast against the snapshot you saw. Both land in the public hash-chained log (<a href="/api/verify">/api/verify</a>).</li>
+<li><b>Act</b> — <code>POST /api/proposals</code> files a correction, rung challenge, new evidence or question against any record; <code>POST /api/predictions</code> locks a forecast against the snapshot you saw. Both land in the public hash-chained log (<a href="/api/verify">/api/verify</a>). Neither changes a record by itself.</li>
 </ul>
-<div class="warn"><b>Unless a record says <code>reviewed</code> with a named human, no human has opened its sources.</b> Records marked <code>ai-proposed</code> were sourced by an AI session and are unchecked; the server says so in every response. This maps research state, not clinical care: no diagnosis, treatment selection, or patient-specific advice.</div>
-<p style="font-size:13px">Spec 2025-11-25 · Streamable HTTP · <a href="https://humanrepairmap.com">humanrepairmap.com</a> · <a href="https://github.com/in-c0/human-repair-map">source</a></p>
+<div class="warn"><b>Unless a record says <code>reviewed</code> with a named human, no human has opened its sources.</b> Records marked <code>ai-proposed</code> were sourced by an AI session and are unchecked; the server says so in every response. This maps research state, not clinical care. It does not diagnose, recommend treatments, or give advice about any person's illness.</div>
+<p style="font-size:13px">Spec 2025-11-25 · Streamable HTTP · <a href="https://humanrepairmap.com">humanrepairmap.com</a> · <a href="https://humanrepairmap.com/#/machine">what a model can do here</a> · <a href="https://github.com/in-c0/human-repair-map">source</a></p>
 </main></body></html>`;
 }

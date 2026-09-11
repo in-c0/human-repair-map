@@ -1,0 +1,324 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ground: #e9edee; --surface: #f6f8f9; --surface-2: #ffffff;
+    --ink: #17222b; --ink-2: #45586a; --ink-3: #79899a;
+    --line: #d3dbdf; --line-2: #c0cace;
+    --s-rodent: #5c7488; --s-human: #b0771e; --s-proven: #147a67; --s-fail: #a5412f;
+    --s-rodent-bg: #e2e8ec; --s-human-bg: #f4ead6; --s-proven-bg: #d9ece7; --s-fail-bg: #f2e0da;
+    --accent: #147a67;
+    --font-display: 'Archivo', -apple-system, 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0c1114; --surface: #131a1f; --surface-2: #182229;
+      --ink: #e7edf1; --ink-2: #9fb0bd; --ink-3: #6a7c89;
+      --line: #253039; --line-2: #33414b;
+      --s-rodent: #859bb0; --s-human: #d59a41; --s-proven: #33b89d; --s-fail: #d0654f;
+      --s-rodent-bg: #1c262e; --s-human-bg: #2b2318; --s-proven-bg: #142a27; --s-fail-bg: #2c1c18;
+      --accent: #33b89d;
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #e9edee; --surface: #f6f8f9; --surface-2: #ffffff;
+    --ink: #17222b; --ink-2: #45586a; --ink-3: #79899a;
+    --line: #d3dbdf; --line-2: #c0cace;
+    --s-rodent: #5c7488; --s-human: #b0771e; --s-proven: #147a67; --s-fail: #a5412f;
+    --s-rodent-bg: #e2e8ec; --s-human-bg: #f4ead6; --s-proven-bg: #d9ece7; --s-fail-bg: #f2e0da;
+    --accent: #147a67;
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1114; --surface: #131a1f; --surface-2: #182229;
+    --ink: #e7edf1; --ink-2: #9fb0bd; --ink-3: #6a7c89;
+    --line: #253039; --line-2: #33414b;
+    --s-rodent: #859bb0; --s-human: #d59a41; --s-proven: #33b89d; --s-fail: #d0654f;
+    --s-rodent-bg: #1c262e; --s-human-bg: #2b2318; --s-proven-bg: #142a27; --s-fail-bg: #2c1c18;
+    --accent: #33b89d;
+  }
+
+  * { box-sizing: border-box; }
+  .hrm { background: var(--ground); color: var(--ink); font-family: var(--font-body);
+    font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; padding: clamp(18px, 4vw, 44px) clamp(14px, 4vw, 40px) 60px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  .hrm h1, .hrm h2, .hrm h3 { font-family: var(--font-display); font-weight: 600; margin: 0; text-wrap: balance; line-height: 1.12; letter-spacing: -0.01em; }
+  .mono { font-family: var(--font-mono); }
+
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-3); display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  h1.title { font-size: clamp(30px, 6vw, 52px); font-weight: 700; letter-spacing: -0.025em; }
+  .lede { font-size: clamp(18px, 2.4vw, 22px); color: var(--ink-2); max-width: 30em; margin-top: 16px; font-style: italic; }
+
+  .statbar { display: flex; flex-wrap: wrap; gap: 0; margin: 30px 0 4px; border: 1px solid var(--line);
+    border-radius: 12px; overflow: hidden; background: var(--surface); }
+  .stat { flex: 1 1 130px; padding: 16px 18px; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .stat .n { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .stat .k { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); margin-top: 8px; }
+  .stat.accent .n { color: var(--accent); }
+  .stat.warn .n { color: var(--s-fail); }
+
+  .contrast { margin: 26px 0 34px; padding: 22px 24px; border-radius: 12px;
+    background: var(--surface-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); }
+  .contrast p { margin: 0; font-size: 18px; }
+  .contrast strong { font-weight: 500; color: var(--ink); font-style: normal; }
+  .contrast .split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 4px; }
+  .contrast .half b { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  .contrast .half.solved b { color: var(--s-proven); }
+  .contrast .half.open b { color: var(--s-fail); }
+  .contrast .half p { font-size: 15.5px; color: var(--ink-2); }
+  @media (max-width: 620px) { .contrast .split { grid-template-columns: 1fr; } }
+
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 26px; margin-bottom: 8px;
+    padding-bottom: 18px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--ground); z-index: 5; padding-top: 12px; }
+  .ctl-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .ctl-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--ink-3); }
+  .chip { font-family: var(--font-mono); font-size: 12.5px; padding: 6px 12px; border-radius: 100px;
+    border: 1px solid var(--line-2); background: var(--surface); color: var(--ink-2); cursor: pointer; transition: all .14s ease; }
+  .chip:hover { border-color: var(--ink-3); color: var(--ink); }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+  .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .band { margin-top: 30px; }
+  .band-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+  .rung-tag { font-family: var(--font-mono); font-weight: 500; font-size: 13px; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.04em; }
+  .band-title { font-family: var(--font-display); font-weight: 600; font-size: 19px; }
+  .band-blurb { color: var(--ink-3); font-size: 14.5px; font-style: italic; }
+  .rung-L5 .rung-tag { background: var(--s-proven-bg); color: var(--s-proven); }
+  .rung-L4 .rung-tag { background: var(--s-human-bg); color: var(--s-human); }
+  .rung-L2 .rung-tag { background: var(--s-rodent-bg); color: var(--s-rodent); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+    transition: opacity .2s ease, border-color .14s ease, transform .14s ease; }
+  .card.dim { opacity: 0.28; }
+  .card-btn { width: 100%; text-align: left; background: none; border: none; padding: 15px 16px; cursor: pointer;
+    color: inherit; font-family: inherit; display: block; border-left: 3px solid var(--tone, var(--line-2)); }
+  .card-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .card.family-through { --tone: var(--s-rodent); }
+  .card.rung-c-L5 { --tone: var(--s-proven); }
+  .card.rung-c-L4 { --tone: var(--s-human); }
+  .card.rung-c-L2 { --tone: var(--s-rodent); }
+  .card.terminated { --tone: var(--s-fail); }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .card-subj { font-family: var(--font-display); font-weight: 600; font-size: 15.5px; line-height: 1.25; letter-spacing: -0.005em; }
+  .fam { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); white-space: nowrap; margin-top: 3px; }
+  .card-line { font-size: 14.5px; color: var(--ink-2); margin-top: 9px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .badge { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.03em; padding: 3px 8px; border-radius: 5px;
+    border: 1px solid transparent; text-transform: lowercase; }
+  .b-measured { background: var(--surface-2); border-color: var(--line-2); color: var(--ink-2); }
+  .b-function { background: var(--s-proven-bg); color: var(--s-proven); }
+  .b-biomarker { background: var(--s-human-bg); color: var(--s-human); }
+  .b-status-terminated, .b-status-negative { background: var(--s-fail-bg); color: var(--s-fail); }
+  .b-repl-yes { background: var(--s-proven-bg); color: var(--s-proven); }
+  .chev { font-family: var(--font-mono); color: var(--ink-3); font-size: 13px; transition: transform .18s ease; }
+  .card[open] .chev { transform: rotate(90deg); }
+
+  .detail { padding: 0 16px 16px; border-top: 1px solid var(--line); display: none; }
+  .card[open] .detail { display: block; animation: reveal .22s ease; }
+  @keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
+  .detail dl { margin: 14px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; }
+  .detail dt { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-3); padding-top: 3px; }
+  .detail dd { margin: 0 0 8px; font-size: 15px; color: var(--ink); }
+  .detail dd.claim { font-style: italic; color: var(--ink-2); }
+  .drift-box { margin-top: 8px; padding: 11px 13px; border-radius: 8px; background: var(--s-fail-bg); font-size: 14.5px; color: var(--ink); }
+  .drift-box b { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--s-fail); display: block; margin-bottom: 3px; font-weight: 500; }
+  .cites { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .cite { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); background: var(--surface-2); border: 1px solid var(--line); padding: 3px 8px; border-radius: 5px; }
+  .precision { margin-top: 10px; font-size: 13.5px; color: var(--ink-3); border-left: 2px solid var(--line-2); padding-left: 10px; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 14px 0 4px; font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-3); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 11px; height: 11px; border-radius: 3px; }
+  .empty { text-align: center; color: var(--ink-3); font-style: italic; padding: 30px; }
+
+  footer.foot { margin-top: 46px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 13.5px; }
+  footer.foot p { margin: 0 0 10px; max-width: 62ch; }
+  footer.foot strong { color: var(--ink-2); font-weight: 500; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="hrm">
+<div class="wrap">
+  <h2 class="sr-only">An interactive evidence map grading every route past the blood-brain barrier by how far it has actually been shown to work in humans.</h2>
+
+  <div class="eyebrow">Human Repair Map · evidence layer · checked Jul 2026</div>
+  <h1 class="title">Getting a drug into the brain</h1>
+  <p class="lede">For every route past the blood-brain barrier: how far has it actually been shown to work, and in whom?</p>
+
+  <div class="statbar">
+    <div class="stat"><div class="n" id="s-total">16</div><div class="k">routes graded</div></div>
+    <div class="stat accent"><div class="n">2</div><div class="k">reach human, independent</div></div>
+    <div class="stat warn"><div class="n">0</div><div class="k">both broad &amp; proven</div></div>
+    <div class="stat"><div class="n">6</div><div class="k">unproven beyond rodent</div></div>
+  </div>
+
+  <div class="contrast">
+    <div class="split">
+      <div class="half solved"><b>Solved · L5, six groups</b><p>Opening the barrier — reversibly, safely, repeatably — is proven in humans.</p></div>
+      <div class="half open"><b>Proven nowhere</b><p>Delivering a drug through the opening and changing an outcome has not been shown in any randomized trial.</p></div>
+    </div>
+    <p style="margin-top:16px"><strong>Same physical event — the barrier opens, the drug goes in — split at the exact rung where proof begins.</strong> The routes with the loudest headlines sit lowest; the best-proven routes are the narrowest.</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctl-group"><span class="ctl-label">route</span>
+      <button class="chip" data-f="family" data-v="all" aria-pressed="true">all</button>
+      <button class="chip" data-f="family" data-v="through" aria-pressed="false">through the barrier</button>
+      <button class="chip" data-f="family" data-v="around" aria-pressed="false">around it</button>
+    </div>
+    <div class="ctl-group"><span class="ctl-label">what was measured</span>
+      <button class="chip" data-f="measured" data-v="all" aria-pressed="true">all</button>
+      <button class="chip" data-f="measured" data-v="function" aria-pressed="false">a life</button>
+      <button class="chip" data-f="measured" data-v="biomarker" aria-pressed="false">a biomarker</button>
+      <button class="chip" data-f="measured" data-v="unproven" aria-pressed="false">nothing yet</button>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><span class="sw" style="background:var(--s-proven)"></span>independently proven in humans (L5)</span>
+    <span><span class="sw" style="background:var(--s-human)"></span>in humans, once (L4)</span>
+    <span><span class="sw" style="background:var(--s-rodent)"></span>rodent only (L2)</span>
+    <span><span class="sw" style="background:var(--s-fail)"></span>failed or terminated</span>
+  </div>
+
+  <div id="ladder"></div>
+
+  <footer class="foot">
+    <p><strong>Not medical advice.</strong> This maps research state, not care. It does not recommend treatments, rank clinics, or tell any person what to do about their own illness.</p>
+    <p><strong>Sources not yet hand-checked.</strong> Every record was gathered by web-search agents against primary sources and dated to July 2026. Treat it as a well-sourced draft, not a finished record — by this map's own standard, each citation needs a human to open it before it is final.</p>
+    <p><strong>Measured, not claimed — and correctable in public.</strong> A rung is a claim about evidence, not a verdict on a company. Where no evidence was found, the record says so. If you work in one of these areas and a rung is wrong, it is meant to be corrected, with the old version kept visible.</p>
+  </footer>
+</div>
+</div>
+
+<script>
+(function () {
+  var DATA = [
+    {id:"cart",subj:"Locoregional CAR-T",fam:"around",rung:"L5",note:"L5 for the route; efficacy per target not yet independent",repl:"yes",measured:"function",status:"trial",claim:"engineered immune cells reach and treat brain tumours",ev:"The strongest functional responses on the map — tumour shrinkage, neurological improvement — for childhood brainstem tumours and glioblastoma, delivered into the ventricles or tumour cavity. Replicated across four unaffiliated centres. The one IV trial with tissue data: cells trafficked in but produced no responses and the worst toxicity.",drift:"'CAR-T reaches brain tumours' omits that every responding programme injects into the ventricle or cavity; IV dosing caused the dose-limiting toxicity, not the responses.",cites:["Monje · Nature · 2025","Brown · Nat Med · 2024","Vitanza · Nat Med · 2025"]},
+    {id:"fus",subj:"Focused ultrasound + microbubbles",fam:"around",rung:"L5",note:"L5 for OPENING the barrier — not for any delivery outcome",repl:"yes",measured:"opening",status:"trial",claim:"focused ultrasound gets drugs into the brain and extends survival",ev:"Reversible, repeatable, safe BBB opening is proven in humans by at least six unaffiliated groups. Whether a drug pushed through the opening improves an outcome has not been shown in a randomized trial (SONOBIRD, n=560, reports ~end-2026).",drift:"'FUS delivers drugs and extends survival' — the opening is proven; the outcome trial does not yet exist.",cites:["Lipsman · Nat Commun · 2018","Woodworth/Lipsman · Lancet Oncol · 2025"]},
+    {id:"nusinersen",subj:"Intrathecal ASO (nusinersen)",fam:"around",rung:"L5",note:"L5 for real function — but the disease sits in the spinal cord",repl:"yes",measured:"function",status:"approved",claim:"an antisense oligonucleotide in the spinal fluid treats a CNS disease",ev:"Real, independently replicated improvement in children's motor milestones (SMA, approved 2016). But human autopsy shows a steep caudo-rostral gradient — plenty in the lumbar spine, little by the cortex.",drift:"Cited as proof of 'CNS-wide ASO delivery'; human tissue shows a spinal-cord-weighted gradient.",cites:["Ramos · J Clin Invest · 2019"]},
+    {id:"brineura",subj:"ICV enzyme replacement (Brineura)",fam:"around",rung:"L5",note:"",repl:"yes",measured:"function",status:"approved",claim:"enzyme delivered into the brain's ventricles distributes through the brain",ev:"Independently shown to slow the brain disease (CLN2 Batten, approved 2017). But the children's retinas degenerate on schedule, untouched — the enzyme poured into the centre of the brain never reaches them.",drift:"'ICV distributes enzyme through the brain' — the retinal finding is the cleanest human proof of incomplete reach.",cites:["Lancet Neurol · 2023","Front Neurol · 2025"]},
+    {id:"tofersen",subj:"Intrathecal ASO (tofersen)",fam:"around",rung:"L4",note:"",repl:"no",measured:"biomarker",status:"approved",claim:"an intrathecal ASO treats genetic ALS",ev:"Approved 2023 on a nerve-damage biomarker (plasma NfL). The Phase 3 VALOR trial missed its clinical endpoint.",drift:"'ASOs work in ALS' — what was shown is biomarker engagement without a met clinical endpoint.",cites:["Biogen/FDA · 2023"]},
+    {id:"kebilidi",subj:"Direct intraparenchymal gene therapy",fam:"around",rung:"L4",note:"",repl:"route only",measured:"function",status:"approved",claim:"a gene therapy injected straight into brain tissue works",ev:"Eladocagene / Kebilidi for AADC deficiency (EU 2022, FDA 2024 — first gene therapy given directly to the brain in the US). A virus infused into one deep structure, the putamen: precise, single-shot, essentially zero distal distribution.",drift:"Usable only for the rare diseases whose whole problem sits in one anatomically defined place.",cites:["Tai · Mol Ther · 2022","Bankiewicz · Nat Commun · 2021"]},
+    {id:"aav9",subj:"Systemic AAV9, IV (Zolgensma)",fam:"through",rung:"L4",note:"",repl:"no",measured:"function",status:"approved",claim:"IV AAV9 transduces human CNS neurons",ev:"Clinical benefit in SMA (approved 2019) is real and replicated. But direct human CNS transduction rests on a single sponsor-affiliated n=2 autopsy, with liver vector 300–1000x higher than CNS.",drift:"'Proves IV AAV9 transduces human CNS' rests on two deceased infants; clinical benefit is offered as transduction evidence, but it is not.",cites:["Thomsen · Nat Med · 2021"]},
+    {id:"denali",subj:"TfR transcytosis (tividenofusp)",fam:"through",rung:"L4",note:"",repl:"no",measured:"biomarker",status:"approved",claim:"an enzyme ferried across the BBB on the transferrin receptor treats neurologic Hunter syndrome",ev:"FDA accelerated approval Mar 2026 — the first BBB-crossing biologic approved. Rests on a 91% drop in CSF heparan sulfate (a surrogate); the confirmatory cognitive trial (COMPASS) is still running; no human measurement of enzyme in brain parenchyma.",drift:"'A drug that crosses the BBB and treats neurologic Hunter' — what was shown is a CSF sugar falling, with no proven cognitive benefit.",cites:["FDA · 2026","NEJM · 2026"]},
+    {id:"jcr",subj:"TfR fusion (pabinafusp)",fam:"through",rung:"L4",note:"",repl:"no",measured:"biomarker",status:"approved",claim:"an anti-TfR antibody-enzyme fusion crosses the BBB for MPS II",ev:"Approved Japan only (2021). n=28, CSF heparan sulfate reduction; cognitive improvement claimed only in a post-hoc, open-label subgroup treated before significant neuronopathy.",drift:"An approval on a priority pathway with n=28 and a biomarker co-primary, read as proof RMT delivers to human brain.",cites:["Okuyama · Mol Ther · 2021"]},
+    {id:"roche",subj:"Brainshuttle antibody (trontinemab)",fam:"through",rung:"L4",note:"",repl:"no",measured:"biomarker",status:"trial",claim:"a shuttle antibody delivers 10–50x more antibody into the human brain",ev:"Phase 3, not approved. Clears amyloid plaque on PET at low ARIA; the only direct human exposure number is CSF:plasma 0.8%; no evidence yet it slows cognitive decline.",drift:"'Brainshuttle validated' — the 10–50x brain-uptake figure is a mouse/NHP number; the human data are one CSF ratio and a plaque-clearance response.",cites:["Klein · Alzheimers Dement · 2025","Grimm · mAbs · 2023"]},
+    {id:"intranasal",subj:"Intranasal / nose-to-brain",fam:"through",rung:"L4",note:"L4 for trace, variable access; no functional benefit",repl:"contested",measured:"biomarker",status:"trial",claim:"a drug sniffed in travels up the olfactory nerves straight to the brain",ev:"Theory is mostly rodent-inferred. The large human functional test — intranasal insulin for Alzheimer's (SNIFF, n=289) — was null (P=.98). Esketamine works by ordinary systemic absorption and is not nose-to-brain evidence.",drift:"'Bypasses the BBB via olfactory pathways' — human data support only trace, highly variable CSF appearance, not meaningful parenchymal concentration.",cites:["Craft/SNIFF · JAMA Neurol · 2020","Winterdahl · EJNMMI Res · 2025"]},
+    {id:"capsid",subj:"Engineered AAV capsid, IV (PHP.B)",fam:"through",rung:"L2",note:"L2 for the capability everyone cites; an L3 record of FAILURE sits above it",repl:"yes",measured:"unproven",status:"terminated",claim:"an engineered virus injected into a vein crosses the BBB and broadly transduces the brain",ev:"~10,000x better mouse-brain delivery than AAV9 — through the LY6A receptor, which humans do not have. Failed primate IV transduction in three independent NHP studies; next-gen capsids failed an independent 2025 marmoset re-test. Exactly one human was ever IV-dosed an engineered BBB capsid (Capsida CAP-002); that child died, the trial was terminated, the sister program withdrawn.",drift:"'A virus that crosses the blood-brain barrier' — via a receptor humans lack, failed in every independent primate test, with one human exposure that ended in death.",cites:["Deverman · Nat Biotechnol · 2016","Hordeaux · Mol Ther · 2019","Liguore · Mol Ther · 2019","Capsida letter · 2026"],precision:"The Capsida trial pause was the company's own; no public document establishes the later regulatory hold as FDA-imposed."},
+    {id:"bihtfr1",subj:"Human-TfR-targeted capsid (BI-hTFR1)",fam:"through",rung:"L2",note:"",repl:"no",measured:"unproven",status:"preclinical",claim:"a capsid aimed at a receptor humans DO have crosses the human BBB",ev:"Works in humanized-TfR knock-in mice and human brain endothelial cells; cannot be tested in wild-type primates; no independent replication located.",drift:"A promising engineering answer to the LY6A problem, with zero human data.",cites:["Huang · Science · 2024"]},
+    {id:"lnp",subj:"Lipid nanoparticles, systemic",fam:"through",rung:"L2",note:"",repl:"yes",measured:"unproven",status:"preclinical",claim:"LNPs injected into the bloodstream deliver to the brain",ev:"Rodent only; no human data and no registered human trial for brain delivery. The one human GBM LNP trial (n=3) works via peripheral immune signalling, not BBB crossing.",drift:"'LNPs can now cross the BBB' describes reporter mRNA in mouse brain.",cites:["Wang · Nat Mater · 2025","Sayour · Cell · 2024"]},
+    {id:"exosomes",subj:"Engineered exosomes / EVs",fam:"through",rung:"L2",note:"",repl:"no",measured:"unproven",status:"preclinical",claim:"exosomes are a natural vehicle that carries cargo into the brain",ev:"Rodent evidence; a negative primate result; no approvals; a registry-only clinical footprint. FDA has issued a safety notice on unapproved exosome products.",drift:"A preclinical platform presented as clinical-stage.",cites:["Alvarez-Erviti · Nat Biotechnol · 2011","Driedonks · J Extracell Biol · 2022"]},
+    {id:"ced",subj:"Convection-enhanced delivery",fam:"around",rung:"L4",note:"L4/L5 with a NEGATIVE outcome — both powered trials failed",repl:"no",measured:"unproven",status:"negative",claim:"a pressurized catheter delivers drug through the tissue to the target",ev:"Decades of human use. The powered brain-cancer trial (PRECISE) and the powered Parkinson's GDNF trial both missed their endpoints; a blinded audit found ~half the PRECISE catheters misplaced — the study may have tested a drug it never delivered.",drift:"'CED bypasses the BBB and delivers to the target' — bypass is real; verified coverage is the unsolved problem.",cites:["Kunwar/PRECISE · Neuro-Oncol · 2010","Whone · Brain · 2019","Sampson · J Neurosurg · 2010"]}
+  ];
+
+  var RUNGS = {
+    L5: {label:"in humans, independently", blurb:"reproduced in people by a group with no stake in the claim"},
+    L4: {label:"in humans, once", blurb:"shown in people by a single group, usually the originator"},
+    L2: {label:"in a rodent", blurb:"works in a living mouse or rat — not yet a primate, let alone a person"}
+  };
+  var MEAS = {function:"a life", biomarker:"a biomarker", opening:"barrier opened", unproven:"nothing yet"};
+  var FAM = {through:"through the barrier", around:"around the barrier"};
+
+  var filters = {family:"all", measured:"all"};
+  var ladder = document.getElementById("ladder");
+
+  function matchMeasured(d) {
+    if (filters.measured === "all") return true;
+    if (filters.measured === "unproven") return d.measured === "unproven" || d.status === "negative";
+    if (filters.measured === "function") return d.measured === "function";
+    if (filters.measured === "biomarker") return d.measured === "biomarker";
+    return true;
+  }
+  function matches(d) {
+    return (filters.family === "all" || d.fam === filters.family) && matchMeasured(d);
+  }
+
+  function badge(cls, txt) { return '<span class="badge ' + cls + '">' + txt + '</span>'; }
+
+  function cardHTML(d) {
+    var toneClass = d.status === "terminated" || d.status === "negative" ? "terminated" : ("rung-c-" + d.rung);
+    var famClass = d.fam === "through" ? "family-through" : "";
+    var badges = "";
+    badges += badge("b-measured b-" + d.measured, "measures: " + (MEAS[d.measured] || d.measured));
+    if (d.status === "approved") badges += badge("b-measured", "approved");
+    if (d.status === "terminated") badges += badge("b-status-terminated", "terminated");
+    if (d.status === "negative") badges += badge("b-status-negative", "trials failed");
+    if (d.status === "preclinical") badges += badge("b-measured", "preclinical");
+    if (d.repl === "yes") badges += badge("b-repl-yes", "independently replicated");
+    else if (d.repl === "route only") badges += badge("b-measured", "route replicated");
+    else if (d.repl === "contested") badges += badge("b-measured", "replication contested");
+
+    var cites = d.cites.map(function (c) { return '<span class="cite">' + c + '</span>'; }).join("");
+    var precision = d.precision ? '<p class="precision">' + d.precision + '</p>' : "";
+    var noteLine = d.note ? '<div class="card-line">' + d.note + '</div>' : '<div class="card-line">' + d.drift + '</div>';
+
+    return '<div class="card ' + toneClass + ' ' + famClass + '" data-id="' + d.id + '">' +
+      '<button class="card-btn" aria-expanded="false">' +
+        '<div class="card-top"><div><div class="card-subj">' + d.subj + '</div>' +
+          '<div class="fam">' + FAM[d.fam] + '</div></div><span class="chev">›</span></div>' +
+        noteLine +
+        '<div class="badges">' + badges + '</div>' +
+      '</button>' +
+      '<div class="detail">' +
+        '<dl>' +
+          '<dt>claim</dt><dd class="claim">"' + d.claim + '"</dd>' +
+          '<dt>evidence</dt><dd>' + d.ev + '</dd>' +
+        '</dl>' +
+        '<div class="drift-box"><b>drift — demonstrated vs claimed</b>' + d.drift + '</div>' +
+        precision +
+        '<div class="cites">' + cites + '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function render() {
+    var order = ["L5", "L4", "L2"];
+    var shown = 0;
+    var html = order.map(function (r) {
+      var items = DATA.filter(function (d) { return d.rung === r && matches(d); });
+      shown += items.length;
+      if (!items.length) return "";
+      var cards = items.map(cardHTML).join("");
+      return '<div class="band rung-' + r + '">' +
+        '<div class="band-head"><span class="rung-tag">' + r + '</span>' +
+        '<span class="band-title">' + RUNGS[r].label + '</span>' +
+        '<span class="band-blurb">' + RUNGS[r].blurb + '</span></div>' +
+        '<div class="cards">' + cards + '</div></div>';
+    }).join("");
+    ladder.innerHTML = html || '<div class="empty">No routes match these filters.</div>';
+    wireCards();
+  }
+
+  function wireCards() {
+    ladder.querySelectorAll(".card-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var card = btn.closest(".card");
+        var open = card.hasAttribute("open");
+        if (open) { card.removeAttribute("open"); btn.setAttribute("aria-expanded", "false"); }
+        else { card.setAttribute("open", ""); btn.setAttribute("aria-expanded", "true"); }
+      });
+    });
+  }
+
+  document.querySelectorAll(".chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var f = chip.dataset.f, v = chip.dataset.v;
+      filters[f] = v;
+      document.querySelectorAll('.chip[data-f="' + f + '"]').forEach(function (c) {
+        c.setAttribute("aria-pressed", c.dataset.v === v ? "true" : "false");
+      });
+      render();
+    });
+  });
+
+  render();
+})();
+</script>

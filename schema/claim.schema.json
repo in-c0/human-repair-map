@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://humanrepairmap.com/schema/claim.schema.json",
+  "title": "Claim",
+  "description": "The unit of knowledge: one statement, the context it was shown in, what was measured, the evidence it rests on, and where every piece came from. A paper is not a claim; a paper is where claims live. Observation (measurement) and interpretation (statement, supports) are separate fields so the observation survives a later change of interpretation.",
+  "type": "object",
+  "required": ["id", "type", "statement", "context", "measurement", "evidence", "rung", "grounding", "provenance", "review"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "type": { "const": "claim" },
+    "statement": { "type": "string", "minLength": 20, "maxLength": 400, "description": "One sentence. Grade claims, never groups or companies. Absence is 'no independent evidence located as of <date>', never 'false'." },
+    "triple": {
+      "type": "object",
+      "description": "Optional structured form: subject–predicate–object with external ids where they exist.",
+      "properties": { "subject": { "type": "string" }, "predicate": { "type": "string" }, "object": { "type": "string" } }
+    },
+    "context": {
+      "type": "object",
+      "required": ["species"],
+      "properties": {
+        "species": { "type": "string", "description": "NCBITaxon id or 'human'/'mouse'/... ; 'multiple' when the claim spans species and the evidence items say which." },
+        "strain": { "type": "string" },
+        "sex": { "type": "string" },
+        "age": { "type": "string" },
+        "model": { "type": "string", "description": "Injury or disease model: full-thickness excisional wound, diabetic foot ulcer, ..." },
+        "tissue": { "type": "string" },
+        "cellType": { "type": "string" },
+        "intervention": { "type": "string" },
+        "dose": { "type": "string" },
+        "route": { "type": "string" },
+        "timing": { "type": "string" },
+        "comparator": { "type": "string" }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "required": ["measured", "endpoint"],
+      "properties": {
+        "measured": { "$ref": "common.schema.json#/$defs/measured" },
+        "assay": { "type": "string" },
+        "endpoint": { "type": "string" },
+        "effect": { "type": "string", "description": "Direction and magnitude as reported, with units. Never a number the source does not state." },
+        "uncertainty": { "type": "string" },
+        "followUp": { "type": "string" }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["source", "design"],
+        "additionalProperties": false,
+        "properties": {
+          "source": { "$ref": "common.schema.json#/$defs/id" },
+          "locator": { "type": "string", "description": "Figure, table, page or section. Required before a record can be reviewed." },
+          "quote": { "type": "string", "description": "Exact passage, when available. A quote a human can check in ten seconds is the whole point of the verification packet." },
+          "design": { "type": "string", "enum": ["rct", "controlled-trial", "cohort", "case-series", "case-report", "meta-analysis", "animal-controlled", "animal-observational", "in-vitro", "observational-human", "regulatory-decision", "registry-entry", "review", "abstract"] },
+          "n": { "type": "string" },
+          "controls": { "type": "string" },
+          "blinding": { "type": "string" },
+          "randomisation": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "rung": { "$ref": "common.schema.json#/$defs/rung" },
+    "grounding": { "$ref": "common.schema.json#/$defs/grounding" },
+    "replication": {
+      "type": "object",
+      "properties": {
+        "independentGroups": { "type": "integer", "minimum": 0 },
+        "note": { "type": "string", "description": "Must say plainly when replication does NOT hold." }
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "peerReviewed": { "type": "boolean" },
+        "preprint": { "type": "boolean" },
+        "retracted": { "type": "boolean" },
+        "contradicted": { "type": "boolean" }
+      }
+    },
+    "supports": { "$ref": "common.schema.json#/$defs/idList", "description": "Capabilities or goals this claim is evidence FOR." },
+    "contradicts": { "$ref": "common.schema.json#/$defs/idList", "description": "Claims or capabilities this claim is evidence AGAINST (including null results)." },
+    "replicates": { "$ref": "common.schema.json#/$defs/idList" },
+    "drift": { "type": "string", "description": "Demonstrated vs commonly claimed." },
+    "wouldMove": { "type": "string" },
+    "limitations": { "type": "array", "items": { "type": "string" } },
+    "provenance": { "$ref": "common.schema.json#/$defs/provenance" },
+    "review": { "$ref": "common.schema.json#/$defs/review" }
+  }
+}

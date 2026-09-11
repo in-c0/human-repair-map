@@ -1,0 +1,66 @@
+{
+  "$comment": "Human Repair Graph — how our identifiers and terms line up with the standards that already exist. We do not redefine gene, protein, disease, phenotype, cell, anatomy, chemical or organism; we point at the vocabularies that do. Only the repair-specific concepts are ours.",
+  "version": "0.3.0",
+  "idScheme": {
+    "pattern": "hrm:<type>/<slug>",
+    "types": ["goal", "capability", "question", "claim", "experiment", "source", "cell", "route", "prediction"],
+    "slug": "^[a-z0-9]+(-[a-z0-9]+)*(--[a-z0-9]+(-[a-z0-9]+)*)?$",
+    "rules": [
+      "An id is never renamed. A wrong id is superseded by a new record and the old one keeps resolving.",
+      "The double dash joins a target and a class in DERIVED grid capabilities only: hrm:capability/cardiomyocyte--reach.",
+      "IRIs: prefix hrm: expands to https://humanrepairmap.com/graph/ so every id is also a resolvable URL."
+    ]
+  },
+  "prefixes": {
+    "hrm": "https://humanrepairmap.com/graph/",
+    "NCBITaxon": "http://purl.obolibrary.org/obo/NCBITaxon_",
+    "CL": "http://purl.obolibrary.org/obo/CL_",
+    "UBERON": "http://purl.obolibrary.org/obo/UBERON_",
+    "MONDO": "http://purl.obolibrary.org/obo/MONDO_",
+    "HP": "http://purl.obolibrary.org/obo/HP_",
+    "GO": "http://purl.obolibrary.org/obo/GO_",
+    "CHEBI": "http://purl.obolibrary.org/obo/CHEBI_",
+    "DOID": "http://purl.obolibrary.org/obo/DOID_",
+    "EFO": "http://www.ebi.ac.uk/efo/EFO_",
+    "NCIT": "http://purl.obolibrary.org/obo/NCIT_",
+    "doi": "https://doi.org/",
+    "pmid": "https://pubmed.ncbi.nlm.nih.gov/",
+    "pmcid": "https://www.ncbi.nlm.nih.gov/pmc/articles/",
+    "nct": "https://clinicaltrials.gov/study/",
+    "orcid": "https://orcid.org/",
+    "ror": "https://ror.org/",
+    "biolink": "https://w3id.org/biolink/vocab/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "externalVocabularies": {
+    "species": "NCBITaxon (human 9606, mouse 10090, rat 10116, pig 9823, rhesus 9544, Acomys cahirinus 10068)",
+    "cellType": "CL (Cell Ontology)",
+    "tissue": "UBERON",
+    "disease": "MONDO (DOID acceptable)",
+    "phenotype": "HP",
+    "process": "GO biological process",
+    "chemical": "CHEBI",
+    "trial": "ClinicalTrials.gov NCT id",
+    "person": "ORCID",
+    "institution": "ROR",
+    "publication": "DOI, then PMID; PMCID when open"
+  },
+  "ourConcepts": {
+    "$comment": "The genuinely new terms. Each says what it is closest to in Biolink/PROV so a graph tool can at least approximate it.",
+    "Goal":              { "closest": "biolink:NamedThing",   "note": "A repair outcome stated from the person's side (scarless functional skin repair). Not a disease." },
+    "Capability":        { "closest": "biolink:NamedThing",   "note": "Something humanity must be able to DO to a target, graded L0–L5 on demonstrated evidence, with what blocks it." },
+    "Question":          { "closest": "schema:Question",      "note": "An unresolved uncertainty whose answer changes a grade or a dependency. The unit of research prioritisation." },
+    "Claim":             { "closest": "biolink:Association",  "note": "subject–predicate–object with explicit context, measurement, evidence and provenance. The unit of knowledge is not the paper." },
+    "Experiment":        { "closest": "schema:Action",        "note": "A candidate or completed study that TESTS a question. Cost and duration are classes, never invented numbers." },
+    "Source":            { "closest": "biolink:Publication / schema:CreativeWork", "note": "Where a claim's evidence lives, with a machine resolution record separate from human reading." },
+    "Prediction":        { "closest": "prov:Entity",          "note": "A locked forecast about a question or claim by a named human or a named model version, resolved later against reality." },
+    "requires (all/any)":{ "closest": "none",                 "note": "AND/OR requirement groups. No standard biomedical vocabulary carries research dependency; this is the map's own contribution." }
+  },
+  "provenanceAlignment": {
+    "provenance.proposedBy": "prov:wasAttributedTo",
+    "provenance.method":     "prov:wasGeneratedBy (an Activity)",
+    "provenance.evidenceAccessed": "prov:used",
+    "review.history[]":      "prov:wasRevisionOf chain, one entry per state change"
+  }
+}

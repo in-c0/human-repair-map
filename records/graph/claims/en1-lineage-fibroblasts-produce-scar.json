@@ -1,0 +1,59 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/en1-lineage-fibroblasts-produce-scar",
+  "statement": "A distinct dermal fibroblast lineage marked by Engrailed-1 expression carries intrinsic fibrogenic potential and is responsible for the bulk of scar formation in mouse skin wounds.",
+  "context": {
+    "species": "mouse (NCBITaxon:10090)",
+    "model": "dorsal skin wounds; lineage tracing and transplantation",
+    "cellType": "dermal fibroblast"
+  },
+  "measurement": {
+    "measured": "structure",
+    "assay": "lineage tracing; transplantation; ablation",
+    "endpoint": "contribution of the lineage to scar matrix",
+    "effect": "the Engrailed-1 lineage produces the majority of connective tissue in scar; its ablation reduces scarring"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/rinkevich-2015-science",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    },
+    {
+      "source": "hrm:source/driskell-2013-nature",
+      "design": "animal-controlled",
+      "locator": "abstract",
+      "note": "establishes distinct fibroblast lineages determining dermal architecture"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 2,
+    "note": "Two groups (Longaker/Weissman; Watt) describing lineage heterogeneity with different markers; the Engrailed-1 result itself is one group."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/fibrogenic-fibroblast-lineage-control"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/rinkevich-2015-science",
+      "hrm:source/driskell-2013-nature"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

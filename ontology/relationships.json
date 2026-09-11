@@ -1,0 +1,105 @@
+{
+  "$comment": "Human Repair Graph — relationship vocabulary (v0.3). Deliberately small. Every relation says where it is STORED (one place only; the inverse is derived by the build, never hand-written, so the two can never disagree).",
+  "version": "0.3.0",
+  "relations": [
+    {
+      "name": "REQUIRES",
+      "storedOn": "goal.requires | capability.requires",
+      "shape": "array of groups: {\"all\": [ids]} means every member is needed (AND); {\"any\": [ids]} means one member suffices (OR). Groups are ANDed together.",
+      "domain": ["goal", "capability"],
+      "range": ["goal", "capability"],
+      "inverse": "ENABLES (derived)",
+      "semantics": "The dependent cannot be achieved without the requirement. An OR group records that nobody yet knows which alternative will succeed — that uncertainty is data, not a modelling shortcut.",
+      "note": "ALTERNATIVE_TO is not a separate relation: two capabilities in the same {any} group are alternatives for that requirement."
+    },
+    {
+      "name": "ENABLES",
+      "storedOn": "(derived)",
+      "domain": ["capability", "goal"],
+      "range": ["capability", "goal"],
+      "inverse": "REQUIRES",
+      "semantics": "X enables Y iff Y requires X. Computed at build time; a hand-written enables list would be a second copy of the same fact."
+    },
+    {
+      "name": "BLOCKED_BY",
+      "storedOn": "capability.blockedBy | goal.blockedBy",
+      "domain": ["capability", "goal"],
+      "range": ["question"],
+      "inverse": "BLOCKS (derived)",
+      "semantics": "An open question whose answer gates progress on this capability. The capability's grade.blocked field says which KIND of thing blocks it (science vs framework); this relation says WHICH unresolved question."
+    },
+    {
+      "name": "SUPPORTS",
+      "storedOn": "claim.supports",
+      "domain": ["claim", "route"],
+      "range": ["capability", "goal"],
+      "inverse": "SUPPORTED_BY (derived)",
+      "semantics": "The claim, if true, is evidence that the capability has been demonstrated at (at least) the claim's rung. A capability's grade must be traceable to at least one supporting claim or an explicit 'no evidence located'."
+    },
+    {
+      "name": "CONTRADICTS",
+      "storedOn": "claim.contradicts",
+      "domain": ["claim"],
+      "range": ["claim", "capability"],
+      "inverse": "CONTRADICTED_BY (derived)",
+      "semantics": "Direct tension: the two cannot both be true as stated, or the claim is a null/negative result against the capability. Never resolved by deletion — both stay, and a question should exist that would discriminate."
+    },
+    {
+      "name": "REPLICATES",
+      "storedOn": "claim.replicates",
+      "domain": ["claim"],
+      "range": ["claim"],
+      "inverse": "REPLICATED_BY (derived)",
+      "semantics": "Same finding, different group. Only counts as independent when the groups share no senior author and no sponsor — the L5 rung rests on this word, and the map has already had to demote one record for misusing it (Brineura, 2026-07-27)."
+    },
+    {
+      "name": "TESTS",
+      "storedOn": "experiment.tests",
+      "domain": ["experiment"],
+      "range": ["question"],
+      "inverse": "TESTED_BY (derived)",
+      "semantics": "Running this experiment would produce an observation that discriminates between the question's live hypotheses."
+    },
+    {
+      "name": "RESOLVES",
+      "storedOn": "question.resolvedBy",
+      "domain": ["question"],
+      "range": ["claim"],
+      "inverse": "RESOLVES (as seen from the claim)",
+      "semantics": "A claim whose acceptance closed (or would close) the question. A question with a non-empty resolvedBy and state 'open' is a contradiction the build rejects."
+    },
+    {
+      "name": "MEASURES",
+      "storedOn": "claim.measurement",
+      "domain": ["claim"],
+      "range": ["measurement object"],
+      "semantics": "What was actually observed, separate from what was concluded. The observation survives even if every interpretation of it is later overturned."
+    },
+    {
+      "name": "CITES",
+      "storedOn": "claim.evidence[].source",
+      "domain": ["claim", "route"],
+      "range": ["source"],
+      "semantics": "Every evidence item points at exactly one source record with a locator (figure, table, page, section). A claim with no evidence cannot enter the map."
+    },
+    {
+      "name": "TARGETS",
+      "storedOn": "capability.target.node",
+      "domain": ["capability"],
+      "range": ["cell"],
+      "semantics": "The grid node (cell type or non-cellular structure) this capability acts on. Derived grid capabilities (one per cell × class) always carry it; hand-authored capabilities carry it when they are specific to a node."
+    },
+    {
+      "name": "PROJECTS_TO",
+      "storedOn": "goal.projections | capability.projections",
+      "domain": ["goal", "capability", "question"],
+      "range": ["projection id"],
+      "semantics": "Which public map(s) show this node: universal-repair, rejuvenation, or both. Projections are views over ONE graph; a node never exists twice."
+    }
+  ],
+  "projections": [
+    { "id": "universal-repair", "name": "Universal Repair", "tagline": "From trauma and infection to cancer and organ failure." },
+    { "id": "rejuvenation", "name": "Rejuvenation", "tagline": "From biological aging to restored youthful function." },
+    { "id": "full-graph", "name": "Full Research Graph", "tagline": "Capabilities, dependencies, evidence, blockers, and next experiments.", "note": "Not a tag — the union. Every node is in the full graph." }
+  ]
+}

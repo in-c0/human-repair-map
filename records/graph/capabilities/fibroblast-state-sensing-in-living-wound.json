@@ -1,0 +1,35 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/fibroblast-state-sensing-in-living-wound",
+  "name": "Measure fibroblast state in a living human wound",
+  "class": "see",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Read, non-destructively and repeatedly, whether the fibroblasts in a human wound are on a fibrotic or regenerative trajectory, early enough to intervene.",
+  "target": {
+    "node": "hrm:cell/fibroblast"
+  },
+  "grade": {
+    "basis": "ungraded",
+    "note": "Lineage tracing answers this in mice by construction (Rinkevich 2015; Mascharak 2021); nothing equivalent exists for a living human wound short of biopsy. Not graded because the seed did not search intravital or liquid-biopsy approaches."
+  },
+  "blockedBy": [
+    "hrm:question/nondestructive-fibroblast-state-readout-in-human-wounds"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

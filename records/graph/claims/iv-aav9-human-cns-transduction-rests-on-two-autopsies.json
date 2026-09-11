@@ -1,0 +1,55 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/iv-aav9-human-cns-transduction-rests-on-two-autopsies",
+  "statement": "Direct evidence that intravenous AAV9 (onasemnogene abeparvovec) transduces the human central nervous system rests on post-mortem tissue from two treated infants, with vector genomes in liver hundreds-fold higher than in CNS.",
+  "context": {
+    "species": "human",
+    "model": "spinal muscular atrophy, infants",
+    "intervention": "single intravenous AAV9 dose",
+    "route": "intravenous"
+  },
+  "measurement": {
+    "measured": "transduction",
+    "assay": "vector DNA, mRNA and SMN protein in post-mortem tissue",
+    "endpoint": "CNS biodistribution",
+    "effect": "vector detected in CNS at levels far below liver; n=2"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/thomsen-2021-natmed",
+      "design": "case-series",
+      "locator": "abstract",
+      "n": "2"
+    }
+  ],
+  "rung": "L4",
+  "replication": {
+    "independentGroups": 0,
+    "note": "Sponsor-affiliated analysis; clinical benefit in SMA is replicated, CNS transduction evidence is not."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/systemic-cell-type-specific-delivery"
+  ],
+  "drift": "'Proves IV AAV9 transduces human CNS' — two autopsies; clinical benefit is offered as transduction evidence, but it is not.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/thomsen-2021-natmed"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

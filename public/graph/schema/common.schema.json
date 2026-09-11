@@ -1,0 +1,327 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://humanrepairmap.com/schema/common.schema.json",
+  "title": "Human Repair Graph — shared definitions",
+  "description": "Definitions every record type reuses: identifiers, the evidence ladder, provenance and review. Records are validated by scripts/build.mjs against these schemas; the schemas are also served at /api/schema so a client can validate what it is about to propose.",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^hrm:(goal|capability|question|claim|experiment|source|cell|route|prediction)/[a-z0-9]+(-[a-z0-9]+)*(--[a-z0-9]+(-[a-z0-9]+)*)?$",
+      "description": "hrm:<type>/<slug>. Never renamed; see ontology/mappings.json."
+    },
+    "idList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "rung": {
+      "type": "string",
+      "enum": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5"
+      ],
+      "description": "L0 proposed · L1 in a dish · L2 in a rodent · L3 in a large animal · L4 in humans, once · L5 in humans, independently. See records/rubrics.json."
+    },
+    "grounding": {
+      "type": "string",
+      "enum": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "G4"
+      ],
+      "description": "G0 assertion (cannot enter the map) · G1 cited text · G2 structured record · G3 primary data · G4 instrument-signed."
+    },
+    "measured": {
+      "type": "string",
+      "enum": [
+        "function",
+        "biomarker",
+        "opening",
+        "transduction",
+        "access",
+        "structure",
+        "none",
+        "unspecified"
+      ],
+      "description": "What actually changed: a life (function), a surrogate number (biomarker), a barrier opened, cells transduced, a compartment accessed, an anatomical structure formed, or nothing demonstrated. unspecified is reserved for grid capabilities derived from v0.2 cell records, which did not record it."
+    },
+    "blocked": {
+      "type": "string",
+      "enum": [
+        "science",
+        "framework",
+        "none"
+      ]
+    },
+    "capabilityClass": {
+      "type": "string",
+      "enum": [
+        "see",
+        "model",
+        "reach",
+        "edit",
+        "verify",
+        "control"
+      ]
+    },
+    "primitive": {
+      "type": "string",
+      "enum": [
+        "stop",
+        "remove",
+        "repair",
+        "replace",
+        "regenerate",
+        "reconnect",
+        "recalibrate",
+        "preserve"
+      ]
+    },
+    "projection": {
+      "type": "string",
+      "enum": [
+        "universal-repair",
+        "rejuvenation"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "requirementGroup": {
+      "type": "object",
+      "description": "Exactly one of all/any. {all:[...]} = every member needed; {any:[...]} = one suffices. Groups on a record are ANDed.",
+      "oneOf": [
+        {
+          "required": [
+            "all"
+          ],
+          "properties": {
+            "all": {
+              "$ref": "#/$defs/idList",
+              "minItems": 1
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": [
+            "any"
+          ],
+          "properties": {
+            "any": {
+              "$ref": "#/$defs/idList",
+              "minItems": 2
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "actor": {
+      "type": "object",
+      "required": [
+        "type",
+        "name"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "human",
+            "ai",
+            "import"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "description": "Required when type is ai: the model id, e.g. claude-fable-5-1."
+        },
+        "version": {
+          "type": "string"
+        },
+        "orcid": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$"
+        },
+        "session": {
+          "type": "string",
+          "description": "Session or run identifier so a batch of proposals can be traced and, if needed, withdrawn together."
+        }
+      },
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ai"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "model"
+        ]
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "proposedBy",
+        "method",
+        "date"
+      ],
+      "properties": {
+        "proposedBy": {
+          "$ref": "#/$defs/actor"
+        },
+        "method": {
+          "type": "string",
+          "description": "How it was produced: 'manual reasoning from the cited sources', 'derived from records/cells by build.mjs', 'extracted by <model> from <source> with schema v0.3', ..."
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "evidenceAccessed": {
+          "$ref": "#/$defs/idList",
+          "description": "Source ids the proposer actually consulted."
+        },
+        "extraction": {
+          "type": "object",
+          "description": "Present when a model extracted the record from a document.",
+          "properties": {
+            "model": {
+              "type": "string"
+            },
+            "schemaVersion": {
+              "type": "string"
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "timestamp": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "ai-proposed",
+            "submitted",
+            "in-review",
+            "reviewed",
+            "disputed",
+            "superseded"
+          ]
+        },
+        "reviewedBy": {
+          "type": "string",
+          "description": "A named human. Required when state is reviewed."
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "by",
+              "date"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "enum": [
+                  "source-resolved",
+                  "cross-checked",
+                  "human-opened-source",
+                  "independently-replicated"
+                ]
+              },
+              "by": {
+                "type": "string"
+              },
+              "date": {
+                "$ref": "#/$defs/date"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "from",
+              "to",
+              "by",
+              "date"
+            ],
+            "properties": {
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              },
+              "by": {
+                "type": "string"
+              },
+              "date": {
+                "$ref": "#/$defs/date"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "supersededBy": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "if": {
+        "properties": {
+          "state": {
+            "const": "reviewed"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "reviewedBy"
+        ]
+      }
+    }
+  }
+}

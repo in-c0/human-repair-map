@@ -1,0 +1,29 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/nondestructive-fibroblast-state-readout-in-human-wounds",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "question": "Can fibroblast state (fibrotic versus regenerative trajectory) be read non-destructively in a living human wound early enough to intervene?",
+  "why": "Without a readout there is no closed loop: every anti-fibrotic intervention is dosed blind and verified only by the scar.",
+  "blocks": [
+    "hrm:capability/fibroblast-state-sensing-in-living-wound"
+  ],
+  "whatWouldResolve": "A non-invasive measurement in human wounds that predicts scar outcome at 12 months.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

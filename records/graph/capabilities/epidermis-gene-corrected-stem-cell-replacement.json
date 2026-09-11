@@ -1,0 +1,44 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/epidermis-gene-corrected-stem-cell-replacement",
+  "name": "Regenerate an entire epidermis from gene-corrected autologous stem cells",
+  "class": "edit",
+  "primitive": "repair",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Correct a causal mutation in a patient's epidermal stem cells ex vivo and regenerate a durable, self-renewing, functional epidermis from them.",
+  "target": {
+    "node": "hrm:cell/keratinocyte"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "framework",
+    "note": "Two patients with junctional epidermolysis bullosa (an adult, Mavilio 2006; a child with ~80% body surface regenerated, Hirsch 2017), both treated by the same group (De Luca, Modena). The biology has worked twice in one group; the rung stays L4 because no unaffiliated group has reproduced it. What stands between it and patients is manufacturing, regulatory path and disease rarity, with long-term integration-site safety an open scientific question.",
+    "drift": "Reported as 'entire skin regenerated'; the regenerated organ is the epidermis, on a patient whose dermis was intact."
+  },
+  "blockedBy": [
+    "hrm:question/gene-corrected-epidermal-graft-long-term-safety"
+  ],
+  "wouldMove": "An independent centre reproducing durable engraftment in a second inherited skin disease, with integration-site surveillance beyond five years.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/mavilio-2006-natmed",
+      "hrm:source/hirsch-2017-nature"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

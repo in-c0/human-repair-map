@@ -1,0 +1,42 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/en1-inhibition-translates-to-human-skin",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "question": "Does blocking Engrailed-1 activation (mechanotransduction/YAP inhibition) produce regeneration with appendages and native matrix in porcine or human skin, as it does in mouse?",
+  "why": "It is the only demonstrated route to scarless full-thickness regeneration in an adult mammal that is also a drug (verteporfin is approved for another use). If it translates, four capabilities move from L2 toward L3/L4 at once; if it does not, the mouse result is a mechanism, not a therapy.",
+  "blocks": [
+    "hrm:capability/dermal-architecture-regeneration-without-scar",
+    "hrm:capability/native-ecm-organisation-reconstruction",
+    "hrm:capability/fibrogenic-fibroblast-lineage-control",
+    "hrm:goal/scarless-skin-repair"
+  ],
+  "hypotheses": [
+    "The mechanism is conserved and translates with dose adjustment.",
+    "Human skin's tension, thickness and slower healing make the fibrotic lineage dominant regardless of YAP inhibition.",
+    "Regeneration occurs but appendage neogenesis does not, because human wounds lack the Wnt context of mouse large wounds."
+  ],
+  "knownUnknowns": [
+    "dose and timing window in thick skin",
+    "whether human fibroblast subpopulations map onto the mouse Engrailed-1 lineage",
+    "effect on wound closure speed and tensile strength"
+  ],
+  "whatWouldResolve": "A splinted full-thickness wound study in pig skin, or a human scar-revision trial, with appendage counts and matrix ultrastructure as endpoints, from a group unaffiliated with the original.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

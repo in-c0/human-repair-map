@@ -1,0 +1,28 @@
+{
+  "id": "hrm:source/fda-2023-vyjuvek",
+  "type": "source",
+  "citation": "U.S. FDA press announcement, 19 May 2023 — FDA approves first topical gene therapy for treatment of wounds in patients with dystrophic epidermolysis bullosa",
+  "title": "FDA Approves First Topical Gene Therapy for Treatment of Wounds in Patients with Dystrophic Epidermolysis Bullosa",
+  "venue": "U.S. Food and Drug Administration",
+  "year": 2023,
+  "kind": "regulatory",
+  "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-first-topical-gene-therapy-treatment-wounds-patients-dystrophic-epidermolysis-bullosa",
+  "license": "US government work (public domain)",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "manual",
+    "metadataMatches": true,
+    "note": "Page loaded and read on 2026-09-11 (fda.gov blocks plain automated fetch; loaded through a browser-class fetcher). Approval date, product, indication and the 65% vs 26% closure figures confirmed on the page."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "URL loaded and read by the session on 2026-09-11; metadata transcribed from the page",
+    "date": "2026-09-11"
+  }
+}

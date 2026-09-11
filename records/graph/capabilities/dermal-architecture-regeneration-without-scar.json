@@ -1,0 +1,46 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/dermal-architecture-regeneration-without-scar",
+  "name": "Regenerate dermis with appendages and no scar after full-thickness injury",
+  "class": "edit",
+  "primitive": "regenerate",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "After a full-thickness wound, produce new dermis whose collagen organisation, appendages and mechanical strength match uninjured skin, instead of a fibrotic scar.",
+  "target": {
+    "node": "hrm:cell/fibroblast"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "In mice, blocking mechanotransduction (verteporfin, a YAP inhibitor, or fibroblast-specific YAP knockout) prevented Engrailed-1 activation and yielded wound regeneration with recovery of appendages, ultrastructure and mechanical strength (Mascharak 2021; one group). The default adult outcome in humans is scar (Gurtner 2008; Eming 2014). No large-animal or human evidence located.",
+    "drift": "Covered as 'scarless healing drug found'; the demonstration is mouse dorsal skin, splinted, one laboratory."
+  },
+  "blockedBy": [
+    "hrm:question/en1-inhibition-translates-to-human-skin"
+  ],
+  "wouldMove": "The same regenerative outcome (appendages plus native ultrastructure) in porcine or human skin, from an unaffiliated group.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/mascharak-2021-science",
+      "hrm:source/gurtner-2008-nature",
+      "hrm:source/eming-2014-scitranslmed"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

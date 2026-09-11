@@ -1,0 +1,52 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/wound-induced-hair-neogenesis-in-adult-mice",
+  "statement": "Adult mice regenerate new hair follicles de novo in the centre of large full-thickness wounds through a Wnt-dependent process resembling embryonic follicle development.",
+  "context": {
+    "species": "mouse (NCBITaxon:10090)",
+    "model": "large (>1 cm) full-thickness excisional wounds",
+    "comparator": "small wounds; Wnt inhibition"
+  },
+  "measurement": {
+    "measured": "structure",
+    "assay": "histology; lineage tracing; Wnt reporter",
+    "endpoint": "de novo follicle formation in healed wound",
+    "effect": "new follicles form in large wounds; blocked by Wnt inhibition, enhanced by Wnt"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/ito-2007-nature",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 1,
+    "note": "Widely reproduced in mice since (not cited here); no human report located."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/hair-follicle-neogenesis-after-wounding"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/ito-2007-nature"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

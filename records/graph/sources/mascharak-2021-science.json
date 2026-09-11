@@ -1,0 +1,31 @@
+{
+  "id": "hrm:source/mascharak-2021-science",
+  "type": "source",
+  "citation": "Mascharak et al., Science, 2021",
+  "title": "Preventing Engrailed-1 activation in fibroblasts yields wound regeneration without scarring",
+  "authors": "Mascharak Shamik; desJardins-Park Heather E.; Davitt Michael F.; Griffin Michelle; Borrelli Mimi R.; Moore Alessandra L.; Chen Kellen; Duoto Bryan; Chinta Malini; Foster Deshka S.; Shen Abra H.; Januszyk Michael; Kwon Sun Hyung; Wernig Gerlinde; Wan Derrick C.; Lorenz H. Peter; Gurtner Geoffrey C.; Longaker Michael T.",
+  "venue": "Science",
+  "year": 2021,
+  "kind": "article",
+  "doi": "10.1126/science.aba2374",
+  "pmid": "33888614",
+  "url": "https://doi.org/10.1126/science.aba2374",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Preventing Engrailed-1 activation in fibroblasts yields wound regeneration without scarring",
+    "note": "Crossref record found; PubMed id 33888614 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "hrm:source/sood-2000-jbcr",
+  "type": "source",
+  "citation": "Sood et al., Journal of Burn Care &amp; Rehabilitation, 2000",
+  "title": "Long Term Follow-up of Cultured Epithelial Autograft for Coverage of Large Burn Wounds",
+  "authors": "Sood R.; Zeiger M.; Knipe C.; Coleman J. J.",
+  "venue": "Journal of Burn Care &amp; Rehabilitation",
+  "year": 2000,
+  "kind": "article",
+  "doi": "10.1097/00004630-200001001-00061",
+  "url": "https://doi.org/10.1097/00004630-200001001-00061",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Long Term Follow-up of Cultured Epithelial Autograft for Coverage of Large Burn Wounds",
+    "note": "Crossref record found; no PubMed id located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

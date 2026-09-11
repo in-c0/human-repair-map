@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/chan-2015-scitranslmed",
+  "type": "source",
+  "citation": "Chan et al., Science Translational Medicine, 2015",
+  "title": "A synthetic fibrin cross-linking polymer for modulating clot properties and inducing hemostasis",
+  "authors": "Chan Leslie W.; Wang Xu; Wei Hua; Pozzo Lilo D.; White Nathan J.; Pun Suzie H.",
+  "venue": "Science Translational Medicine",
+  "year": 2015,
+  "kind": "article",
+  "doi": "10.1126/scitranslmed.3010383",
+  "pmid": "25739763",
+  "url": "https://doi.org/10.1126/scitranslmed.3010383",
+  "license": "http://www.sciencemag.org/about/science-licenses-journal-article-reuse",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "A synthetic fibrin cross-linking polymer for modulating clot properties and inducing hemostasis",
+    "note": "Crossref record found; PubMed id 25739763 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

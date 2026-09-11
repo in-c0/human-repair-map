@@ -1,0 +1,54 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/osk-reprogramming-restores-vision-in-mice",
+  "statement": "Ectopic expression of Oct4, Sox2 and Klf4 in mouse retinal ganglion cells restored youthful DNA-methylation patterns and transcriptomes, promoted axon regeneration after injury, and reversed vision loss in a glaucoma model and in aged mice, dependent on TET1/TET2.",
+  "context": {
+    "species": "mouse (NCBITaxon:10090)",
+    "model": "optic nerve crush; glaucoma model; aged mice",
+    "cellType": "retinal ganglion cell",
+    "intervention": "AAV-delivered inducible OSK"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "DNA methylation age; transcriptomics; axon regeneration; visual acuity",
+    "endpoint": "vision restoration",
+    "effect": "reversal of vision loss in glaucoma and aged mice"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/lu-2020-nature",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 0,
+    "note": "One group (Sinclair). Independent replication not cited here."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/safe-partial-epigenetic-reprogramming-in-vivo",
+    "hrm:capability/cell-identity-retention-under-partial-reprogramming"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/lu-2020-nature"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

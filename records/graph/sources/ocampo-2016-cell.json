@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/ocampo-2016-cell",
+  "type": "source",
+  "citation": "Ocampo et al., Cell, 2016",
+  "title": "In Vivo Amelioration of Age-Associated Hallmarks by Partial Reprogramming",
+  "authors": "Ocampo Alejandro; Reddy Pradeep; Martinez-Redondo Paloma; Platero-Luengo Aida; Hatanaka Fumiyuki; Hishida Tomoaki; Li Mo; Lam David; Kurita Masakazu; Beyret Ergin; Araoka Toshikazu; Vazquez-Ferrer Eric; Donoso David; Roman Jose Luis; Xu Jinna; Rodriguez Esteban Concepcion; Nuñez Gabriel; Nuñez Delicado Estrella; Campistol Josep M.; Guillen Isabel; Guillen Pedro; Izpisua Belmonte Juan Carlos",
+  "venue": "Cell",
+  "year": 2016,
+  "kind": "article",
+  "doi": "10.1016/j.cell.2016.11.052",
+  "pmid": "27984723",
+  "url": "https://doi.org/10.1016/j.cell.2016.11.052",
+  "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "In Vivo Amelioration of Age-Associated Hallmarks by Partial Reprogramming",
+    "note": "Crossref record found; PubMed id 27984723 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

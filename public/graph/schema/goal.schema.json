@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://humanrepairmap.com/schema/goal.schema.json",
+  "title": "Goal",
+  "description": "A repair outcome stated from the person's side: 'scarless functional repair of adult skin after full-thickness injury'. Goals decompose (requires) into sub-goals and capabilities with AND/OR groups. The two public maps are projections of the goal tree; a goal may sit in both.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "name",
+    "description",
+    "projections",
+    "provenance",
+    "review"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+      "const": "goal"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20
+    },
+    "projections": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/projection"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "parent": {
+      "$ref": "common.schema.json#/$defs/id",
+      "description": "The goal this one is part of, for tree rendering. Dependency is carried by requires, not by parent."
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/requirementGroup"
+      }
+    },
+    "blockedBy": {
+      "$ref": "common.schema.json#/$defs/idList"
+    },
+    "testSuite": {
+      "type": "array",
+      "description": "Concrete scenarios a general capability must pass to count as general for this goal ('small skin wound', 'compound fracture', ...). A checklist, not a grade.",
+      "items": {
+        "type": "object",
+        "required": [
+          "scenario"
+        ],
+        "properties": {
+          "scenario": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "routine",
+              "partial",
+              "unsolved"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "existenceProof": {
+      "type": "string",
+      "description": "Where nature or a narrow clinical case already does this (fetal skin, spiny mouse, oral mucosa) — the reason the goal is not known to be impossible."
+    },
+    "informationLimited": {
+      "type": "boolean"
+    },
+    "provenance": {
+      "$ref": "common.schema.json#/$defs/provenance"
+    },
+    "review": {
+      "$ref": "common.schema.json#/$defs/review"
+    }
+  }
+}

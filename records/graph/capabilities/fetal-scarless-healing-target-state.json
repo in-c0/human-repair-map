@@ -1,0 +1,42 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/fetal-scarless-healing-target-state",
+  "name": "Human skin that heals without scar exists (early-gestation fetus)",
+  "class": "model",
+  "primitive": "regenerate",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Know a human skin state in which full-thickness wounds heal by regeneration rather than scar, and what distinguishes it from adult skin.",
+  "target": {
+    "node": "hrm:cell/fibroblast"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Early-gestation fetal skin, human and animal, heals full-thickness wounds without scar; the transition to scarring healing occurs in late gestation, and the differences in inflammation, growth-factor profile and matrix are catalogued (Larson 2010, review). Review-level citation: primary human fetal-surgery series are not attached here. This is an observation about a state, not an intervention in adults."
+  },
+  "blockedBy": [
+    "hrm:question/fetal-conditions-reproducible-in-adult-skin"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/larson-2010-prs"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

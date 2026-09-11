@@ -1,0 +1,31 @@
+{
+  "type": "goal",
+  "id": "hrm:goal/rejuvenation",
+  "name": "Rejuvenation",
+  "description": "Return an aged person toward their healthiest attainable youthful physiology — function, resilience and regenerative capacity — while preserving identity, memory, learned ability and agency. Not 'the youngest possible state': a constrained optimisation whose target is a body that has never existed before (young molecular state, your memories).",
+  "projections": [
+    "rejuvenation"
+  ],
+  "requires": [
+    {
+      "all": [
+        "hrm:goal/systemic-rejuvenation"
+      ]
+    }
+  ],
+  "informationLimited": false,
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

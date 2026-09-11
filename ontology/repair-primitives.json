@@ -1,0 +1,36 @@
+{
+  "$comment": "Human Repair Graph — the two vocabularies every capability is classified by. Both come from the owner's founding draft (owner-draft-2026-07-26.md): the five pillars became the five grid columns in v0.2; the action primitives are her 'useful hierarchy'. Neither list is open-ended: adding a member is an explicit, logged decision.",
+  "version": "0.3.0",
+  "classes": [
+    { "id": "see",    "name": "Sense",       "question": "Can we measure the state of this target in a living person?", "pillar": "CAP-01 sufficient biological sensing" },
+    { "id": "model",  "name": "Model",       "question": "Do we know what a healthy target state for it is, and can we predict the effect of an intervention?", "pillar": "CAP-02 target-state model" },
+    { "id": "reach",  "name": "Reach",       "question": "Can we deliver something to it, specifically and repeatedly?", "pillar": "CAP-03 cell-specific access and delivery" },
+    { "id": "edit",   "name": "Edit",        "question": "Can we repair, replace, reprogram, regenerate or clear it?", "pillar": "CAP-04 cell-state editing" },
+    { "id": "verify", "name": "Verify",      "question": "Can we confirm afterwards that it worked, and stayed working?", "pillar": "CAP-05 closed-loop verification" },
+    { "id": "control","name": "Control",     "question": "Can we time, dose, localise and stop the intervention safely while it runs?", "pillar": "cross-cutting: safety, feedback, stopping rule", "note": "Added in v0.3 for the survival-phase capabilities (haemostasis, perfusion, stabilisation) that are neither an edit nor a measurement. The only class added since v0.2; logged here." }
+  ],
+  "primitives": [
+    { "id": "stop",        "name": "Stop what is destroying",         "definition": "Halt a catastrophic process before it destroys something that cannot be recovered: bleeding, hypoxia, arrhythmia, shock, seizure, toxin, uncontained infection.", "phase": "seconds–minutes" },
+    { "id": "remove",      "name": "Remove what should not be there",  "definition": "Pathogens, toxins, cancer cells, senescent cells, scar tissue, misfolded aggregates.", "phase": "minutes–days" },
+    { "id": "repair",      "name": "Repair what can be repaired",      "definition": "DNA, mitochondria, proteins, membranes, epigenetic state — in place, in the existing cell.", "phase": "hours–weeks" },
+    { "id": "replace",     "name": "Replace what cannot be repaired",  "definition": "Cells, tissues, organs, microbial communities.", "phase": "days–months" },
+    { "id": "regenerate",  "name": "Regenerate what is missing",       "definition": "Limbs, nerves, cartilage, muscle, vasculature, appendages — new structure with correct architecture.", "phase": "weeks–months" },
+    { "id": "reconnect",   "name": "Reconnect what must communicate",  "definition": "Neural circuits, immune regulation, endocrine loops, vascular continuity.", "phase": "weeks–months" },
+    { "id": "recalibrate", "name": "Recalibrate control loops",        "definition": "Immune, endocrine and metabolic signalling set-points.", "phase": "ongoing" },
+    { "id": "preserve",    "name": "Preserve what defines the person", "definition": "Memories, identity, learned abilities, preferences, agency, consent. Not an appendix: a system requirement every other primitive is constrained by.", "phase": "always" }
+  ],
+  "boundary": {
+    "statement": "Repair is possible when the relevant information still exists, can be inferred, or has been backed up.",
+    "source": "owner-draft-2026-07-26.md",
+    "consequence": "Nodes whose target state cannot be inferred from surviving information (destroyed identity-bearing neural structure without a backup) are marked informationLimited: true and are never graded above L0 for 'restore the original', only for 'reconstruct a new one'."
+  },
+  "gradeLadder": {
+    "$comment": "Unchanged from v0.1 (records/rubrics.json). Anchored on observables; independent replication is the anchor a lab cannot award itself.",
+    "rungs": ["L0", "L1", "L2", "L3", "L4", "L5"]
+  },
+  "blockedKinds": [
+    { "id": "science",   "definition": "We do not know how. The binding constraint is knowledge or capability." },
+    { "id": "framework", "definition": "We know how, and it is not reaching people: approvals, ethics, economics, access, manufacturing." },
+    { "id": "none",      "definition": "Not blocked at the current rung; the next rung is a matter of running the demonstration." }
+  ]
+}

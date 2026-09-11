@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://humanrepairmap.com/schema/source.schema.json",
+  "title": "Source",
+  "description": "Where a claim's evidence lives. Two separate facts are recorded and must never be conflated: resolution (a machine confirmed the source exists and its metadata matches — scripts/resolve-sources.mjs) and humanOpened (a named person read it). Resolved is not reviewed.",
+  "type": "object",
+  "required": ["id", "type", "citation", "kind", "year", "resolution", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "type": { "const": "source" },
+    "citation": { "type": "string", "minLength": 10, "description": "Human-readable: first author et al., journal, year." },
+    "title": { "type": "string" },
+    "authors": { "type": "string" },
+    "venue": { "type": "string" },
+    "year": { "type": "integer", "minimum": 1800, "maximum": 2100 },
+    "kind": { "type": "string", "enum": ["article", "preprint", "abstract", "regulatory", "registry", "dataset", "protocol", "book", "letter", "report", "web"] },
+    "doi": { "type": "string", "pattern": "^10\\.\\d{4,9}/\\S+$" },
+    "pmid": { "type": "string", "pattern": "^\\d{1,9}$" },
+    "pmcid": { "type": "string", "pattern": "^PMC\\d+$" },
+    "nct": { "type": "string", "pattern": "^NCT\\d{8}$" },
+    "url": { "type": "string", "pattern": "^https?://" },
+    "license": { "type": "string" },
+    "openAccess": { "type": "boolean" },
+    "resolution": {
+      "type": "object",
+      "required": ["resolved"],
+      "additionalProperties": false,
+      "properties": {
+        "resolved": { "type": "boolean", "description": "A machine located the record and its metadata matched (title/venue/year). False until scripts/resolve-sources.mjs has run for it." },
+        "checkedOn": { "$ref": "common.schema.json#/$defs/date" },
+        "via": { "type": "string", "enum": ["crossref", "pubmed", "clinicaltrials", "manual", "none"] },
+        "metadataMatches": { "type": "boolean" },
+        "resolvedTitle": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "humanOpened": {
+      "type": "object",
+      "required": ["by", "date"],
+      "properties": { "by": { "type": "string" }, "date": { "$ref": "common.schema.json#/$defs/date" }, "note": { "type": "string" } },
+      "description": "Only a named human may write this."
+    },
+    "note": { "type": "string" },
+    "provenance": { "$ref": "common.schema.json#/$defs/provenance" }
+  }
+}

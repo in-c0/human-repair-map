@@ -1,0 +1,29 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/dermal-adipocyte-regeneration-in-human-wounds",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "question": "Can dermal adipocyte regeneration from myofibroblasts be induced in human wounds?",
+  "why": "Loss of the dermal fat layer is part of what makes scar stiff and depressed; mouse shows it can be regenerated.",
+  "blocks": [
+    "hrm:capability/dermal-adipocyte-regeneration"
+  ],
+  "whatWouldResolve": "Adipocyte lineage conversion demonstrated in human wound tissue or xenograft.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

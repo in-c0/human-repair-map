@@ -1,0 +1,42 @@
+{
+  "type": "experiment",
+  "id": "hrm:experiment/er-100-phase-1-optic-neuropathies",
+  "name": "ER-100 (OSK partial epigenetic reprogramming) Phase 1 in open-angle glaucoma and NAION",
+  "tests": [
+    "hrm:question/partial-reprogramming-human-safety"
+  ],
+  "status": "running",
+  "registration": "NCT07290244",
+  "design": {
+    "species": "human",
+    "model": "open-angle glaucoma; non-arteritic anterior ischaemic optic neuropathy",
+    "intervention": "ER-100: controlled expression of OCT4, SOX2, KLF4 in one eye",
+    "comparator": "not stated in the sponsor announcement",
+    "readout": "safety and tolerability (primary); visual function (secondary)",
+    "duration": "not stated",
+    "n": "not stated"
+  },
+  "discriminates": "A safety signal or a visual-function change in the treated eye is the first human data point for the rejuvenation map; absence of harm alone does not demonstrate rejuvenation.",
+  "feasibility": {
+    "costClass": "high",
+    "durationClass": "years",
+    "requires": [
+      "sponsor-run trial"
+    ],
+    "ethics": "IND cleared (sponsor statement)"
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

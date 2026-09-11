@@ -1,0 +1,44 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/organised-microvascular-network-in-regenerated-dermis",
+  "name": "Grow an organised, perfused microvascular network in thick regenerated tissue",
+  "class": "edit",
+  "primitive": "regenerate",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Induce a hierarchical, perfused capillary network throughout a regenerated or engineered dermis thicker than the diffusion limit, connected to the host circulation with normal geometry and long-term stability.",
+  "target": {
+    "node": "hrm:cell/endothelium"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Reviews of vascularisation in tissue engineering describe the problem as unsolved beyond roughly the diffusion distance: prevascularisation and angiogenic strategies yield networks in rodents but not organised, stable, clinically usable vasculature in thick constructs (Rouwkema 2016; Laschke 2016). Thin split-thickness grafts revascularise routinely by inosculation; that is a different, solved capability and is what makes skin grafting work at all.",
+    "drift": "'Vascularised engineered tissue' usually means capillary sprouting in a small rodent construct."
+  },
+  "blockedBy": [
+    "hrm:question/organised-microvasculature-in-thick-regenerated-tissue"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/rouwkema-2016-trendsbiotech",
+      "hrm:source/laschke-2016-biotechadv"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

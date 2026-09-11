@@ -1,0 +1,62 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/b-vec-topical-gene-therapy-closes-deb-wounds",
+  "statement": "Weekly topical beremagene geperpavec (HSV-1 vector delivering COL7A1) achieved complete healing in 67% of treated versus 22% of placebo wounds at six months in a 31-patient, double-blind, intrapatient-randomised phase 3 in dystrophic epidermolysis bullosa.",
+  "context": {
+    "species": "human",
+    "model": "dystrophic epidermolysis bullosa (COL7A1 mutations)",
+    "intervention": "topical B-VEC, weekly for 26 weeks",
+    "comparator": "placebo, matched wound in the same patient",
+    "age": "6 months and older"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "clinical wound assessment",
+    "endpoint": "complete wound healing at 6 months (primary)",
+    "effect": "67% vs 22%, difference 46 percentage points (95% CI 24–68), P = 0.002",
+    "uncertainty": "95% CI 24 to 68 percentage points"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/guide-2022-nejm",
+      "design": "rct",
+      "locator": "abstract",
+      "n": "31 patients, primary wound pairs",
+      "blinding": "double-blind",
+      "randomisation": "intrapatient 1:1"
+    }
+  ],
+  "rung": "L4",
+  "replication": {
+    "independentGroups": 0,
+    "note": "Single sponsor (Krystal Biotech), multi-site. No unaffiliated trial."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/keratinocyte-in-vivo-topical-gene-delivery"
+  ],
+  "limitations": [
+    "vector does not persist; dosing is repeated",
+    "one gene, one rare disease"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/guide-2022-nejm"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

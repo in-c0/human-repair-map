@@ -1,0 +1,32 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/regeneration-verification-histology-and-scar-scales",
+  "name": "Verify a repair outcome by histology and validated scar scales",
+  "class": "verify",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Confirm after repair whether native architecture was restored, using biopsy histology and validated observer or patient scar scales, and detect late failure.",
+  "grade": {
+    "basis": "standard-of-care",
+    "rung": "L5",
+    "measured": "structure",
+    "blocked": "none",
+    "note": "Biopsy histology and validated scar scales (POSAS, Vancouver) are the accepted endpoints of the trials cited on this map (Ferguson 2009; McCollum 2011). Verification is destructive or observational and does not confirm cell-level state."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

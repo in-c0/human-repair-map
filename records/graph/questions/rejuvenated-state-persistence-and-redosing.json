@@ -1,0 +1,29 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/rejuvenated-state-persistence-and-redosing",
+  "projections": [
+    "rejuvenation"
+  ],
+  "question": "Does a rejuvenated state persist after treatment stops, and can treatment be repeated without cumulative harm?",
+  "why": "A rejuvenation that lasts a month is a treatment; one that lasts a decade is the goal. The verification to tell them apart does not yet exist in humans.",
+  "blocks": [
+    "hrm:capability/rejuvenated-state-persistence",
+    "hrm:goal/systemic-rejuvenation"
+  ],
+  "whatWouldResolve": "Longitudinal epigenetic-age and functional measurement in a treated human tissue over years, with and without re-dosing.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

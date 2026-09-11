@@ -1,0 +1,59 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/adult-mammalian-wounds-heal-by-scar",
+  "statement": "Adult mammalian and human skin wounds heal by a fibrotic scar that lacks the appendages and matrix organisation of uninjured skin; this is the default outcome of adult repair.",
+  "context": {
+    "species": "human and mammals generally",
+    "model": "full-thickness cutaneous wounds"
+  },
+  "measurement": {
+    "measured": "structure",
+    "endpoint": "histological outcome of healed adult wounds",
+    "effect": "scar, not regeneration"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/gurtner-2008-nature",
+      "design": "review",
+      "locator": "abstract"
+    },
+    {
+      "source": "hrm:source/eming-2014-scitranslmed",
+      "design": "review",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L5",
+  "replication": {
+    "independentGroups": 2,
+    "note": "Review-level statement of a universal clinical observation."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "contradicts": [
+    "hrm:capability/dermal-architecture-regeneration-without-scar"
+  ],
+  "limitations": [
+    "a statement of the problem, cited so that the default outcome is in the graph rather than assumed"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/gurtner-2008-nature",
+      "hrm:source/eming-2014-scitranslmed"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

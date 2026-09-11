@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/blais-2013-tissueeng",
+  "type": "source",
+  "citation": "Blais et al., Tissue Engineering Part A, 2013",
+  "title": "Nerve Growth Factor, Brain-Derived Neurotrophic Factor, Neurotrophin-3 and Glial-Derived Neurotrophic Factor Enhance Angiogenesis in a Tissue-Engineered In Vitro Model",
+  "authors": "Blais Mathieu; Lévesque Philippe; Bellenfant Sabrina; Berthod François",
+  "venue": "Tissue Engineering Part A",
+  "year": 2013,
+  "kind": "article",
+  "doi": "10.1089/ten.tea.2012.0745",
+  "pmid": "23530859",
+  "url": "https://doi.org/10.1089/ten.tea.2012.0745",
+  "license": "https://www.liebertpub.com/nv/resources-tools/text-and-data-mining-policy/121/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-11",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Nerve Growth Factor, Brain-Derived Neurotrophic Factor, Neurotrophin-3 and Glial-Derived Neurotrophic Factor Enhance Angiogenesis in a Tissue-Engineered In Vitro Model",
+    "note": "Crossref record found; PubMed id 23530859 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-11-scarless-skin.mjs)",
+    "date": "2026-09-11"
+  }
+}

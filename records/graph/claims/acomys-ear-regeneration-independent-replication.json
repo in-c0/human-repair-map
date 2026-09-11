@@ -1,0 +1,55 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/acomys-ear-regeneration-independent-replication",
+  "statement": "In an unaffiliated laboratory, Acomys cahirinus closed 4 mm ear punches completely within two months in 100% of wounds, regenerating cartilage, adipose, dermis, epidermis, hair follicles, vessels, muscle and nerve, while C57BL/6 mice scarred.",
+  "context": {
+    "species": "Acomys cahirinus (NCBITaxon:10068)",
+    "model": "4 mm full-thickness ear punch",
+    "comparator": "C57BL/6 mice"
+  },
+  "measurement": {
+    "measured": "structure",
+    "assay": "histology",
+    "endpoint": "complete ear-punch closure with tissue regeneration",
+    "effect": "100% of punches closed by 2 months with regenerated tissues including muscle and nerve"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/matias-santos-2016-regeneration",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L2",
+  "replicates": [
+    "hrm:claim/acomys-regenerates-full-thickness-skin-without-scar"
+  ],
+  "replication": {
+    "independentGroups": 1,
+    "note": "Independent of the Seifert/Maden groups; confirms the ear-punch phenotype. Dorsal skin regeneration was not the readout here."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/mammalian-scar-free-regeneration-target-state"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session e7dc5601 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "date": "2026-09-11",
+    "evidenceAccessed": [
+      "hrm:source/matias-santos-2016-regeneration"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-11"
+  }
+}

@@ -7,7 +7,7 @@
 <meta name="description" content="A public evidence graph of the capabilities required for human repair: what has been demonstrated, what remains blocked, and whether the evidence has been human-reviewed.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;1,400&family=Work+Sans:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="content/app.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230F4C5C'/%3E%3Cg stroke='%23FCFBF9' stroke-width='2.2' fill='none' stroke-linecap='round'%3E%3Cpath d='M9 23V9'/%3E%3Cpath d='M23 23V15'/%3E%3Cpath d='M16 23v-5'/%3E%3C/g%3E%3C/svg%3E">
 <meta property="og:type" content="website">
@@ -22,30 +22,28 @@
 <meta name="twitter:image" content="https://humanrepairmap.com/og.svg">
 </head>
 <body>
-<div class="app">
-  <aside class="side">
-    <div class="brand"><b>Human Repair Map</b><span id="brand-v">graph v0.3</span></div>
-    <ul class="nav" id="nav">
-      <li><a href="#/start" data-v="start"><span class="ix">00</span> Start</a></li>
-      <li><a href="#/map/universal-repair" data-v="map-universal-repair"><span class="ix">01</span> Universal Repair</a></li>
-      <li><a href="#/map/rejuvenation" data-v="map-rejuvenation"><span class="ix">02</span> Rejuvenation</a></li>
-      <li><a href="#/map/full-graph" data-v="map-full-graph"><span class="ix">03</span> Full research graph</a></li>
-      <li><a href="#/thesis" data-v="thesis"><span class="ix">04</span> Why this map</a></li>
-      <li><a href="#/grid" data-v="grid"><span class="ix">05</span> The body grid</a></li>
-      <li><a href="#/cns" data-v="cns"><span class="ix">06</span> Case study: the brain</a></li>
-      <li><a href="#/machine" data-v="machine"><span class="ix">07</span> For models &amp; agents</a></li>
-      <li><a href="#/methods" data-v="methods"><span class="ix">08</span> Methods &amp; governance</a></li>
-      <li><a href="#/contribute" data-v="contribute"><span class="ix">09</span> Contribute</a></li>
-    </ul>
-    <div class="side-foot"><b>UNREVIEWED · HUMAN REVIEW: NONE.</b> Machine-checked sources do not count as human review.<br><br>Research state only. Not a clinical tool. It does not diagnose, recommend treatments, or give advice about any person's illness.</div>
-  </aside>
-  <main class="main">
-    <div class="topbar">
-      <div class="search"><span class="si">⌕</span><input id="q" type="search" placeholder="search goals, capabilities, questions, claims, sources…" aria-label="search"></div>
-      <span class="gate-pill" id="review-pill">UNREVIEWED · HUMAN REVIEW: NONE</span>
-    </div>
-    <div class="view" id="view"></div>
-  </main>
+<svg class="hatch-def" aria-hidden="true"><defs><pattern id="hrm-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="4" stroke="currentColor" stroke-width="1" style="stroke:var(--ink);opacity:.18"/></pattern></defs></svg>
+<div class="sheet">
+  <header class="register">
+    <div><div class="site"><a href="#/start">Human Repair Map</a></div><div class="snap" id="brand-v">graph v0.3</div></div>
+    <div class="reviewed"><div class="k">Human-reviewed</div><div class="n" id="rev-n">0 / 326</div><div class="s">Machine-checked sources do not count as human review.</div></div>
+  </header>
+  <nav class="index" id="nav" aria-label="plate index">
+    <a href="#/start" data-v="start">Start</a>
+    <a href="#/map/universal-repair" data-v="map-universal-repair">Universal Repair</a>
+    <a href="#/map/rejuvenation" data-v="map-rejuvenation">Rejuvenation</a>
+    <a href="#/map/full-graph" data-v="map-full-graph">Full research graph</a>
+    <a href="#/thesis" data-v="thesis">Why this map</a>
+    <a href="#/grid" data-v="grid">Body grid</a>
+    <a href="#/cns" data-v="cns">Case study: the brain</a>
+    <a href="#/machine" data-v="machine">Models &amp; agents</a>
+    <a href="#/methods" data-v="methods">Methods &amp; governance</a>
+    <a href="#/contribute" data-v="contribute">Contribute</a>
+    <span class="sp"></span>
+    <span class="q"><input id="q" type="search" placeholder="search goals, capabilities, questions, claims, sources…" aria-label="search"></span>
+  </nav>
+  <main class="view" id="view"></main>
+  <footer class="authority"><span>Research state only. Not a clinical tool. It does not diagnose, recommend treatments, or give advice about any person's illness.</span><span class="m"><a href="https://humanrepairmap.com/api">API</a> · <a href="https://humanrepairmap.com/mcp">MCP</a> · <a href="graph/graph.json">GRAPH.JSON</a> · <a href="https://humanrepairmap.com/api/openapi.json">OPENAPI</a></span></footer>
 </div>
 
 <script src="content/records.js"></script>
@@ -97,9 +95,9 @@ function loadGraph(){
 function paintManifest(){
   if(!GRAPH) return;
   var m=GRAPH.manifest;
-  var b=document.getElementById("brand-v"); if(b) b.textContent="graph v"+m.version+" · "+m.snapshot;
+  var b=document.getElementById("brand-v"); if(b) b.textContent="graph v"+m.version+" · snapshot "+m.snapshot;
   var total=GRAPH.nodes.length;
-  var p=document.getElementById("review-pill"); if(p) p.textContent="UNREVIEWED · HUMAN REVIEW: NONE · "+(m.humanReviewed||0)+" of "+total;
+  var p=document.getElementById("rev-n"); if(p) p.textContent=(m.humanReviewed||0)+" / "+total;
 }
 function node(id){return BYID[id]||null;}
 function slug(id){return String(id).replace(/^hrm:/,"");}
@@ -110,7 +108,69 @@ function ladder(){var L=(GRAPH&&GRAPH.rubrics&&GRAPH.rubrics.ladder)||null;if(L)
 function rungMeaning(r){var x=ladder().filter(function(l){return l.id===r;})[0];return x?(x.label+": "+x.blurb):"";}
 function measuredMeaning(m){var M=(GRAPH&&GRAPH.rubrics&&GRAPH.rubrics.measured)||{};return M[m]||({structure:"changed tissue structure on histology or imaging; function was not established",function:"changed a person's function",biomarker:"changed a surrogate measurement without established clinical benefit",opening:"the barrier opened; benefit from a delivered treatment was not established",none:"no clinical or surrogate benefit demonstrated"})[m]||m;}
 function reviewMeaning(s){var R=(GRAPH&&GRAPH.ontology&&GRAPH.ontology.reviewStates&&GRAPH.ontology.reviewStates.states)||[];var x=R.filter(function(r){return r.id===s;})[0];return x?x.meaning:"";}
-function rungPill(r){if(!r)return '<span class="pill rs-submitted">ungraded</span>';var n=parseInt(String(r).slice(1),10);var cls=n>=5?"rs-reviewed":n>=4?"rs-in-review":n>=2?"rs-submitted":"rs-ai";return '<span class="pill '+cls+'" title="'+esc(rungMeaning(r))+'">'+esc(r)+'</span>';}
+/* ---------- GLYPHS (design/DESIGN.md) ---------- */
+var RUNGS=["L0","L1","L2","L3","L4","L5"];
+function rungIndex(r){var i=RUNGS.indexOf(String(r||"").toUpperCase());return i;}
+function normState(st){st=String(st||"ai-proposed");if(st==="ai")st="ai-proposed";return {"ai-proposed":"unreviewed",submitted:"submitted","in-review":"inreview",reviewed:"reviewed",disputed:"disputed",superseded:"superseded"}[st]||"unreviewed";}
+/* ruler(rung, reviewState, {pitch, labels, hatch}) — rung is position; review is the mark */
+function ruler(rung, st, o){
+  o=o||{}; var pitch=o.pitch||14, labels=!!o.labels, hatch=!!o.hatch;
+  var W=pitch*5+16, H=labels?26:12, y=labels?8:6, x0=8;
+  var k=normState(st), ri=rungIndex(rung);
+  var out='<svg class="ruler" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" aria-hidden="true">';
+  if(hatch) out+='<rect x="0" y="0" width="'+W+'" height="'+(labels?18:12)+'" class="hatch"/>';
+  out+='<line class="base" x1="'+x0+'" y1="'+y+'" x2="'+(x0+pitch*5)+'" y2="'+y+'"/>';
+  for(var t=0;t<6;t++){var x=x0+t*pitch;out+='<line class="tick" x1="'+x+'" y1="'+(y-3)+'" x2="'+x+'" y2="'+(y+3)+'"/>';if(labels)out+='<text class="lbl" x="'+x+'" y="'+(y+14)+'" text-anchor="middle">L'+t+'</text>';}
+  if(ri<0){ out+='<line class="dash" x1="'+(x0-8)+'" y1="'+y+'" x2="'+(x0+2)+'" y2="'+y+'"/>'; }
+  else{
+    var cx=x0+ri*pitch;
+    if(k==="superseded") out+='<line class="x" x1="'+(cx-4)+'" y1="'+(y-4)+'" x2="'+(cx+4)+'" y2="'+(y+4)+'"/><line class="x" x1="'+(cx-4)+'" y1="'+(y+4)+'" x2="'+(cx+4)+'" y2="'+(y-4)+'"/>';
+    else{
+      out+='<circle class="mark '+k+'" cx="'+cx+'" cy="'+y+'" r="4" style="fill:var(--paper)'+(k==="reviewed"?";fill:var(--green)":"")+'"/>';
+      if(k==="submitted") out+='<line class="notch" x1="'+cx+'" y1="'+(y-4)+'" x2="'+cx+'" y2="'+(y-6)+'"/>';
+      if(k==="inreview") out+='<path class="half" d="M'+cx+' '+(y-4)+' A4 4 0 0 1 '+cx+' '+(y+4)+' Z"/>';
+      if(k==="disputed") out+='<line class="slash" x1="'+(cx-6)+'" y1="'+(y+6)+'" x2="'+(cx+6)+'" y2="'+(y-6)+'"/>';
+    }
+  }
+  return out+'</svg>';
+}
+function rungPill(r,st){return ruler(r,st||"ai-proposed")+' <span class="rungword">'+esc(r||"ungraded")+'</span>';}
+/* review furniture: —— AI-PROPOSED · HUMAN REVIEW: NONE */
+function furn(st, who, date, sm){
+  var k=normState(st), cls=k==="reviewed"?"reviewed":k==="disputed"?"disputed":k==="superseded"?"neutral":"unreviewed";
+  var txt=k==="reviewed"?("HUMAN-REVIEWED"+(who?" · "+who:"")+(date?" · "+date:"")):k==="disputed"?"DISPUTED · HUMAN REVIEW: OPEN CHALLENGE":k==="superseded"?"SUPERSEDED · SEE REPLACEMENT":k==="submitted"?"SUBMITTED · UNREVIEWED · HUMAN REVIEW: NONE":k==="inreview"?"IN REVIEW · UNREVIEWED · HUMAN REVIEW: NONE":"AI-PROPOSED · UNREVIEWED · HUMAN REVIEW: NONE";
+  return '<span class="furn '+cls+(sm?' sm':'')+'">'+esc(txt)+'</span>';
+}
+function reviewPill(r){return furn(r,null,null,true);}
+function tile(n,k,cls){return '<div class="sim-tile'+(cls?" "+cls:"")+'"><span class="st-n">'+n+'</span><span class="st-k">'+esc(k)+'</span></div>';}
+/* junction gates */
+function junction(kind){
+  if(kind==="any") return '<svg width="16" height="14" viewBox="0 0 16 14" aria-hidden="true"><path d="M8 0v3M2 3h12v6M2 3v6M2 9v5M14 9v5" fill="none" stroke="var(--line)" stroke-width="1"/></svg>';
+  return '<svg width="16" height="14" viewBox="0 0 16 14" aria-hidden="true"><path d="M8 0v6M2 6h12M2 6v8M8 6v8M14 6v8" fill="none" stroke="var(--line)" stroke-width="1"/></svg>';
+}
+/* the blocking-question gap: ────┤ ? ├──── */
+function gapGlyph(){
+  return '<svg width="56" height="14" viewBox="0 0 56 14" aria-hidden="true"><line x1="0" y1="7" x2="16" y2="7"/><line class="cap-l" x1="16" y1="3" x2="16" y2="11"/><text x="28" y="10.5" text-anchor="middle">?</text><line class="cap-l" x1="40" y1="3" x2="40" y2="11"/><line x1="40" y1="7" x2="56" y2="7"/></svg>';
+}
+/* coordinate line: BODY / SKIN / DERMIS / ECM ORGANISATION */
+function coordOf(n){
+  if(!n) return '';
+  var parts=[];
+  if(n.type==="capability"){
+    var t=n.target&&n.target.node?node(n.target.node):null;
+    if(t&&t.type==="cell"){parts=["BODY",t.system||"",t.name||""];}
+    else if(n.id.indexOf("--")>0){var c=node("hrm:cell/"+n.id.replace(/^hrm:capability\//,"").split("--")[0]);parts=["BODY",c?c.system:"",c?c.name:""];}
+    else {var cls=CLASSES.filter(function(x){return x.id===n.class;})[0];parts=(n.primitive==="preserve"||n.class==="control")?["CROSS-BODY",cls?cls.name:""]:["SYSTEM",cls?cls.name:(n.class||"")];}
+    parts.push(n.primitive||"");
+  } else if(n.type==="goal"){parts=["GOAL",n.parent?nodeName(node(n.parent)):""];}
+  else if(n.type==="question"){var rq=(GRAPH.analysis.rankedQuestions||[]).filter(function(q){return q.id===n.id;})[0];parts=["QUESTION",rq?("RANK "+rq.rank):"",n.state||""];}
+  else if(n.type==="claim"){parts=["CLAIM",(n.context&&n.context.species)||"",n.rung||""];}
+  else if(n.type==="source"){parts=["SOURCE",n.kind||"",String(n.year||"")];}
+  else if(n.type==="experiment"){parts=["EXPERIMENT",n.status||""];}
+  else if(n.type==="cell"){parts=["BODY",n.system||"",n.name||""];}
+  else if(n.type==="route"){parts=["BODY","NERVOUS SYSTEM","BRAIN","DELIVERY ROUTE"];}
+  return '<div class="coord">'+parts.filter(function(x){return x;}).map(esc).join(' / ')+'</div>';
+}
 function nodeLink(id,cls){var n=node(id);return '<a class="'+(cls||"")+'" href="'+nodeHref(id)+'">'+esc(n?nodeName(n):slug(id))+'</a>';}
 function loading(){return '<div class="empty">Loading the graph…</div>';}
 function withGraph(id,fn){loadGraph().then(function(){var host=document.getElementById(id);if(host)host.innerHTML=fn();}).catch(function(){var host=document.getElementById(id);if(host)host.innerHTML='<div class="empty">Could not load the graph. The same data is available at <a href="graph/graph.json">graph/graph.json</a>.</div>';});}
@@ -119,7 +179,6 @@ function withGraph(id,fn){loadGraph().then(function(){var host=document.getEleme
 function el(id){return document.getElementById(id);}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function capById(id){for(var i=0;i<CAPS.length;i++)if(CAPS[i].id===id)return CAPS[i];return null;}
-function reviewPill(r){var cls={ai:"rs-ai","ai-proposed":"rs-ai",submitted:"rs-submitted","in-review":"rs-in-review",reviewed:"rs-reviewed",disputed:"rs-disputed",superseded:"rs-superseded"}[r]||"rs-submitted";return '<span class="pill '+cls+'">'+esc(REVIEW_LABEL[r]||r)+'</span>';}
 function tile(n,k,cls){return '<div class="sim-tile'+(cls?" "+cls:"")+'"><div class="st-n">'+n+'</div><div class="st-k">'+esc(k)+'</div></div>';}
 function howToRead(extra){
   return '<details class="more"><summary>How to read a record</summary><div class="inner">'+
@@ -136,42 +195,89 @@ function howToRead(extra){
    START — the entrance
    ================================================================ */
 function vStart(){
-  setTimeout(function(){withGraph("start-stats",startStats);},0);
-  return '<div class="eyebrow" id="start-eyebrow">Human Repair Map · a public evidence graph</div>'+
-    '<h1 class="h-title">What would it take to repair a human body?</h1>'+
-    '<p class="h-lede">Choose a map. Both are views of the same evidence graph.</p>'+
-    '<p class="lede-t">Each map shows what has been demonstrated, what is still required, and which open questions currently block the most downstream progress.</p>'+
-
-    '<div class="entr">'+
-      '<a class="entr-card" href="#/map/universal-repair"><span class="entr-k">01</span><h2>Universal Repair</h2><p>Trauma · infection · cancer · organ failure · neurological damage</p><span class="entr-go">Open Universal Repair →</span></a>'+
-      '<a class="entr-card" href="#/map/rejuvenation"><span class="entr-k">02</span><h2>Rejuvenation</h2><p>Biological aging · regenerative capacity · youthful function</p><span class="entr-go">Open Rejuvenation →</span></a>'+
+  setTimeout(function(){withGraph("survey-host",surveyBody);},0);
+  return '<div class="orient">'+
+    '<h1 class="q46">What would it take to repair a human body?</h1>'+
+    '<p class="s17">Choose a map. Both are views of the same evidence graph.</p>'+
+    '<p class="s15">Each map shows what has been demonstrated, what is still required, and which open questions currently block the most downstream progress.</p>'+
     '</div>'+
-    '<a class="entr-full" href="#/map/full-graph"><b>View the full research graph</b> · 326 records · both projections · all dependencies →</a>'+
-
-    '<div class="sec-h"><span class="n">01</span> How the two maps relate</div>'+
+    '<div id="survey-host">'+loading()+'</div>'+
+    '<div class="sec-h" style="margin-top:34px"><span class="n">01</span> How the two maps relate</div>'+
     '<p class="lede-t">The two projections share one set of canonical records. For example, an organised blood supply matters when repairing a wound and when restoring aged tissue. That capability keeps the same rung, measured endpoint, blocker, review state, and sources whichever projection you enter from.</p>'+
-
     '<div class="sec-h"><span class="n">02</span> Where the graph stands</div>'+
-    '<div id="start-stats">'+loading()+'</div>'+
+    '<div id="start-stats"></div>'+
     howToRead()+
-
     '<div class="sec-h"><span class="n">03</span> Why this exists</div>'+
     '<p class="lede-t">Human repair depends on work spread across cell atlases, gene and cell editing, regenerative medicine, targeted delivery, immune control, and closed-loop devices. The graph records how those capabilities depend on one another and where the evidence currently stops.</p>'+
     '<p class="lede-t">The first goal worked through in detail is scarless functional repair of adult human skin. It connects injury repair with regeneration and depends on capabilities that recur elsewhere in the graph. <a href="#/thesis">Read the scope and assumptions →</a></p>'+
-
     '<div class="sec-h"><span class="n">04</span> Machine access</div>'+
     '<p class="lede-t">Models and agents can fetch the same records through MCP, REST, or bulk graph files. They can trace dependencies, inspect primary evidence, rank open questions, and submit proposals or predictions. Review state and provenance travel with the returned records.</p>'+
     '<pre class="cmd">claude mcp add --transport http human-repair-map https://humanrepairmap.com/mcp</pre>'+
-    '<p class="note" style="margin-top:8px"><a href="#/machine">For models and agents →</a> · <a href="graph/manifest.json">manifest.json</a> · <a href="https://humanrepairmap.com/api">/api</a></p>'+
-
-    '<div class="banner" style="margin-top:30px">'+CAVEAT+'</div>';
+    '<p class="note" style="margin-top:8px"><a href="#/machine">For models and agents →</a> · <a href="graph/manifest.json">manifest.json</a> · <a href="https://humanrepairmap.com/api">/api</a></p>';
 }
+function projStats(proj){
+  var N=GRAPH.nodes.filter(function(n){return inProj(n,proj);});
+  var goals=N.filter(function(n){return n.type==="goal";}).length;
+  var cps=(GRAPH.analysis.criticalPaths||[]).filter(function(cp){var g=node(cp.goal);return g&&inProj(g,proj);});
+  var bind={}; cps.forEach(function(cp){(cp.bindingConstraints||[]).forEach(function(b){bind[b.id]=true;});});
+  var qs=(GRAPH.analysis.rankedQuestions||[]).filter(function(q){return (q.projections||[]).indexOf(proj)>=0;});
+  var own=qs.filter(function(q){return (q.projections||[]).length===1;});
+  return {goals:goals, binds:Object.keys(bind).length, qs:qs.length, top:(proj==="rejuvenation"&&own[0])?own[0]:(qs[0]||null)};
+}
+function surveyBody(){
+  var m=GRAPH.manifest, total=GRAPH.nodes.length;
+  var st=document.getElementById("start-stats"); if(st) st.innerHTML=startStats();
+  var U=projStats("universal-repair"), R=projStats("rejuvenation");
+  function tv(id,name,scope,S){
+    return '<a class="tv" id="tv-'+id+'" href="#/map/'+id+'" data-tv="'+id+'">'+
+      '<div><div class="t34">'+esc(name)+'</div><div class="scope">'+esc(scope)+'</div>'+
+      '<div class="counts">'+S.goals+' goals · '+S.binds+' binding constraints · '+S.qs+' open questions</div></div>'+
+      '<div class="hq">'+(S.top?'<div class="m9">Highest-ranked open question</div><div class="qq">'+esc(S.top.question)+'</div>':'')+'</div></a>';
+  }
+  setTimeout(drawSurvey,0);
+  return '<div class="survey" id="survey">'+
+    '<svg class="lines" id="survey-lines" aria-hidden="true"></svg>'+
+    '<div class="origin"><div class="lab">Human<br>Repair</div></div>'+
+    '<div class="tvs">'+
+      tv("universal-repair","Universal Repair",PROJ["universal-repair"].tag,U)+
+      tv("rejuvenation","Rejuvenation",PROJ["rejuvenation"].tag,R)+
+      '<a class="fullg" id="tv-full" href="#/map/full-graph">View the full research graph<div class="m10">'+total+' records · both projections · all dependencies</div></a>'+
+    '</div></div>';
+}
+/* draws the trunk, the two traversals, the full-graph return, and the leaders — measured from the DOM, orthogonal, 6px elbows */
+function drawSurvey(){
+  var host=document.getElementById("survey"), svg=document.getElementById("survey-lines"); if(!host||!svg) return;
+  var hb=host.getBoundingClientRect();
+  function rel(el){var r=el.getBoundingClientRect();return {x:r.left-hb.left,y:r.top-hb.top,w:r.width,h:r.height};}
+  var org=rel(host.querySelector(".origin .lab"));
+  var x0=org.x+org.w+12, y0=org.y+org.h/2, xt=x0+34;
+  var paths=[];
+  ["universal-repair","rejuvenation"].forEach(function(id){
+    var a=document.getElementById("tv-"+id); if(!a) return;
+    var t=rel(a.querySelector(".t34")); var hq=a.querySelector(".hq .qq");
+    var yb=t.y+t.h-4, xe=t.x-14;
+    var d="M"+x0+" "+y0+" H"+(xt-6)+" a6 6 0 0 1 6 6 V"+(yb-6)+" a6 6 0 0 0 6 6 H"+xe;
+    paths.push('<path data-tv="'+id+'" d="'+d+'"/>');
+    for(var k=1;k<=3;k++){var tx=xt+6+((xe-xt-6)*k/4);paths.push('<line class="tick" data-tv="'+id+'" x1="'+tx+'" y1="'+(yb-4)+'" x2="'+tx+'" y2="'+(yb+4)+'"/>');}
+    if(hq){var q=rel(hq); var t2=rel(a.querySelector(".t34")); var xs=t2.x+t2.w+16, xq=q.x-12; var ym=t2.y+t2.h-4;
+      paths.push('<path data-tv="'+id+'" d="M'+xs+' '+ym+' H'+(xq-6)+' a6 6 0 0 1 6 -6 V'+(q.y+8)+'"/>');}
+  });
+  var f=document.getElementById("tv-full"); if(f){var fr=rel(f); var yf=fr.y+8; paths.push('<path d="M'+xt+' '+(y0+6)+' V'+(yf-6)+' a6 6 0 0 0 6 6 H'+(fr.x-10)+'"/>');}
+  svg.setAttribute("viewBox","0 0 "+hb.width+" "+hb.height); svg.innerHTML=paths.join("");
+  host.querySelectorAll(".tv").forEach(function(a){
+    function on(){var id=a.getAttribute("data-tv");host.querySelectorAll(".tv").forEach(function(b){b.classList.toggle("off",b!==a);b.classList.toggle("on",b===a);});svg.querySelectorAll("[data-tv]").forEach(function(p){p.classList.toggle("on",p.getAttribute("data-tv")===id);});}
+    function off(){host.querySelectorAll(".tv").forEach(function(b){b.classList.remove("off","on");});svg.querySelectorAll("[data-tv]").forEach(function(p){p.classList.remove("on");});}
+    a.addEventListener("mouseenter",on); a.addEventListener("focus",on); a.addEventListener("mouseleave",off); a.addEventListener("blur",off);
+  });
+}
+window.addEventListener("resize",function(){if(document.getElementById("survey"))drawSurvey();});
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){if(document.getElementById("survey"))drawSurvey();});}
 function startStats(){
   var m=GRAPH.manifest, c=m.counts;
   var open=GRAPH.nodes.filter(function(n){return n.type==="question"&&n.state==="open";}).length;
   var total=GRAPH.nodes.length;
-  var eb=document.getElementById("start-eyebrow"); if(eb) eb.textContent="Human Repair Map · graph v"+m.version+" · snapshot "+m.snapshot;
-  return '<div class="sim-tiles">'+tile(c.goal,"goals")+tile(c.capability,"capabilities with rungs")+tile(open,"open questions")+tile(c.claim,"claims")+tile(c.source,"sources, metadata checked")+tile((m.humanReviewed||0)+'<span style="font-size:15px;color:var(--muted)">/'+total+'</span>',"human-reviewed","key")+'</div>'+
+  return '<div class="stand">'+
+    '<div class="st"><b>'+c.goal+'</b><span>goals</span></div><div class="st"><b>'+c.capability+'</b><span>capabilities with rungs</span></div><div class="st"><b>'+open+'</b><span>open questions</span></div><div class="st"><b>'+c.claim+'</b><span>claims</span></div><div class="st"><b>'+c.source+'</b><span>sources, metadata checked</span></div><div class="st key"><b>'+(m.humanReviewed||0)+' / '+total+'</b><span>human-reviewed</span></div></div>'+
     '<p class="note"><b>UNREVIEWED · HUMAN REVIEW: NONE.</b> '+(m.humanReviewed||0)+' of '+total+' records are human-reviewed as of '+esc(m.snapshot)+'. Machine-checked sources do not count as human review.</p>';
 }
 
@@ -186,13 +292,16 @@ function vMap(proj){
     "rejuvenation":"Rejuvenation uses the same canonical capabilities where they affect biological aging or the restoration of youthful function. The projection includes reprogramming, senescent-cell clearance, regenerative capacity, delivery, verification, and cancer-control dependencies where those records apply.",
     "full-graph":"This view includes the hand-authored goals and capabilities, the 155 body-grid capability records, the 16 CNS-delivery routes, and every claim, source, question, and experiment in the current bundle."
   }[proj];
-  return '<div class="crumbs"><a href="#/start">start</a> / '+esc(P.name.toLowerCase())+'</div>'+
-    '<h1 class="h-title">'+esc(P.name)+'</h1>'+
+  var sw=['universal-repair','rejuvenation','full-graph'].map(function(k){return '<a href="#/map/'+k+'" class="'+(k===proj?'on':'')+'" data-switch="'+k+'">'+esc(PROJ[k].name)+'</a>';}).join("");
+  return '<div class="coord">Map / '+esc(P.name)+'</div>'+
+    '<h1 class="h-title" style="margin-top:8px">'+esc(P.name)+'</h1>'+
     '<p class="h-lede">'+esc(P.tag)+'</p>'+
     '<p class="lede-t" style="margin-top:14px">'+esc(intro)+'</p>'+
-    (proj!=="full-graph"?'<p class="note">Other projection: <a href="#/map/'+(proj==="rejuvenation"?"universal-repair":"rejuvenation")+'">'+(proj==="rejuvenation"?"Universal Repair":"Rejuvenation")+'</a> · <a href="#/map/full-graph">Full research graph</a></p>':'')+
+    '<div class="switch" id="switch">'+sw+'</div>'+
     '<div id="map-body">'+loading()+'</div>';
 }
+var MAP_OPEN={}; /* which blocking questions are open, by capability id */
+var MAP_BAND={}; /* which body-target bands are expanded, by goal id */
 function mapBody(proj){
   var N=GRAPH.nodes.filter(function(n){return inProj(n,proj);});
   var goals=N.filter(function(n){return n.type==="goal";});
@@ -200,7 +309,6 @@ function mapBody(proj){
   var hand=caps.filter(function(c){return c.id.indexOf("--")<0;});
   var derived=caps.filter(function(c){return c.id.indexOf("--")>=0;});
   var qs=(GRAPH.analysis.rankedQuestions||[]).filter(function(q){return proj==="full-graph"||(q.projections||[]).indexOf(proj)>=0;});
-  /* claims and sources carry no projection tag; count them through what they support or contradict */
   var inSet={}; N.forEach(function(n){inSet[n.id]=true;});
   var claimNodes=GRAPH.nodes.filter(function(n){return n.type==="claim"&&(proj==="full-graph"||(n.supports||[]).concat(n.contradicts||[]).some(function(id){return inSet[id];}));});
   var srcSet={}; claimNodes.forEach(function(c){(c.evidence||[]).forEach(function(e){if(e.source)srcSet[e.source]=true;});});
@@ -208,69 +316,132 @@ function mapBody(proj){
   var sources=proj==="full-graph"?GRAPH.manifest.counts.source:Object.keys(srcSet).length;
   var reviewedTotal=N.length+(proj==="full-graph"?0:claims+sources);
   var cps={}; (GRAPH.analysis.criticalPaths||[]).forEach(function(cp){cps[cp.goal]=cp;});
+  var qById={}; qs.forEach(function(q){qById[q.id]=q;});
 
-  var stats='<div class="sim-tiles">'+tile(goals.length,"goals")+tile(caps.length,"capabilities with rungs")+tile(qs.length,"open questions")+tile(claims,"claims")+tile(sources,"sources")+tile('0<span style="font-size:15px;color:var(--muted)">/'+reviewedTotal+'</span>',"human-reviewed","key")+'</div>';
+  var stand='<div class="stand">'+
+    '<div class="st"><b>'+goals.length+'</b><span>goals</span></div><div class="st"><b>'+caps.length+'</b><span>capabilities with rungs</span></div><div class="st"><b>'+qs.length+'</b><span>open questions</span></div><div class="st"><b>'+claims+'</b><span>claims</span></div><div class="st"><b>'+sources+'</b><span>sources</span></div><div class="st key"><b>0 / '+reviewedTotal+'</b><span>human-reviewed</span></div></div>';
 
-  /* goals: top-level first (no parent), then children */
+  /* one capability row: name · ruler · meta · gap (if a ranked question blocks it) */
+  function capRow(id, extra){
+    var c=node(id); if(!c) return '';
+    var g=c.grade||{}, st=c.review?c.review.state:"ai-proposed";
+    var blockers=(c.derivedRelations&&c.derivedRelations.blockedBy||[]).filter(function(q){return node(q);});
+    var open=MAP_OPEN[c.id];
+    var shared=(c.projections||[]).length>1;
+    var row='<li class="cap'+(open?' blocked-open':'')+'" role="treeitem" tabindex="-1" data-id="'+esc(c.id)+'" data-shared="'+(shared?1:0)+'">'+
+      '<span class="nm"><a href="'+nodeHref(c.id)+'">'+esc(c.name)+'</a></span>'+
+      (blockers.length?'<button class="gap" data-gap="'+esc(c.id)+'" aria-expanded="'+(open?'true':'false')+'" aria-label="open the blocking question">'+gapGlyph()+'</button>':'')+
+      ruler(g.rung, st)+
+      '<span class="meta">'+esc(g.rung||"ungraded")+(g.measured?' · measured: '+esc(MEASURED_PHRASE[g.measured]||g.measured):'')+(g.blocked&&g.blocked!=="none"?' · blocked by '+esc(g.blocked):'')+(extra||'')+'</span>'+
+      (open?blockOpen(c, blockers):'')+
+    '</li>';
+    return row;
+  }
+  function blockOpen(c, blockers){
+    return blockers.map(function(qid){
+      var q=node(qid), rq=qById[qid]||(GRAPH.analysis.rankedQuestions||[]).filter(function(x){return x.id===qid;})[0];
+      var n=rq?rq.downstreamTotal:((q.blocks||[]).length);
+      return '<div class="qopen"><span class="caps">┤</span><div>'+
+        '<div class="qt"><a href="'+nodeHref(qid)+'">'+esc(q.question)+'</a></div>'+
+        '<div class="qm">'+(rq?'Q-'+String(rq.rank).padStart(4,"0")+' · ':'')+'blocks '+n+' record'+(n===1?'':'s')+(rq&&rq.testedBy&&rq.testedBy.length?' · experiment proposed':' · no experiment attached')+'</div>'+
+        '<div class="qann"><span><b>what is unknown</b>'+esc((q.knownUnknowns||[]).slice(0,2).join("; ")||q.why||"")+'</span><span><b>what it blocks</b>'+(q.blocks||[]).slice(0,3).map(function(b){return esc(nodeName(node(b)));}).join("; ")+'</span><span><b>what would close it</b>'+esc(q.whatWouldResolve||"")+'</span></div>'+
+      '</div></div>';
+    }).join("");
+  }
+  function group(g, req, label){
+    var kind=req.all?"all":"any";
+    var ids=(req.all||req.any||[]).filter(function(id){var n=node(id);return n&&inProj(n,proj);});
+    if(!ids.length) return '';
+    var rows=ids.map(function(id){var n=node(id);if(n.type==="goal")return '<li class="cap" role="treeitem" tabindex="-1" data-id="'+esc(id)+'"><span class="nm"><a href="'+nodeHref(id)+'">'+esc(n.name)+'</a></span><span class="meta">sub-goal · '+(cps[id]&&cps[id].bindingConstraints&&cps[id].bindingConstraints[0]?'binds at '+esc(cps[id].bindingConstraints[0].rung):'see record')+'</span></li>';return capRow(id);}).join("");
+    return '<div class="jn"><div class="jlab">'+junction(kind)+(kind==="all"?"AND":"OR")+(req.note?'<span class="jnote">'+esc(req.note)+'</span>':'')+'</div><ul role="group">'+rows+'</ul></div>';
+  }
   var ordered=goals.slice().sort(function(a,b){return (a.parent?1:0)-(b.parent?1:0);});
-  var goalCards=ordered.map(function(g){
-    var cp=cps[g.id];
-    var binds=cp&&cp.bindingConstraints&&cp.bindingConstraints.length?cp.bindingConstraints.map(function(b){return '<li>'+rungPill(b.rung)+' '+nodeLink(b.id)+(b.blocked?' <span class="tag">blocked by '+esc(b.blocked)+'</span>':'')+'</li>';}).join(""):'';
-    var ors=cp&&cp.orGroups&&cp.orGroups.length?cp.orGroups.filter(function(o){return !o.via||o.via===g.id;}).map(function(o){return '<li><span class="tag">either</span> '+o.members.map(function(m){return rungPill(m.rung)+' '+nodeLink(m.id);}).join(' <span class="note">or</span> ')+(o.note?'<div class="note">'+esc(o.note)+'</div>':'')+'</li>';}).join(""):'';
-    var sub=goals.filter(function(x){return x.parent===g.id;});
-    return '<div class="goal-card">'+
-      '<div class="top"><span class="cid">goal'+(g.parent?' · part of '+esc(nodeName(node(g.parent))):'')+'</span>'+reviewPill(g.review?g.review.state:"ai-proposed")+'</div>'+
-      '<h3><a href="'+nodeHref(g.id)+'">'+esc(g.name)+'</a></h3>'+
-      '<p>'+esc(g.description)+'</p>'+
-      (binds?'<div class="mini-h">Binding constraints</div><ul class="bind">'+binds+'</ul>':'')+
-      (ors?'<ul class="bind">'+ors+'</ul>':'')+
-      (!binds&&!ors&&cp?'<p class="note">No AND-required capability has a rung yet. Open the goal record for its current requirements.</p>':'')+
-      (sub.length?'<p class="note" style="margin-top:8px">Sub-goals: '+sub.map(function(s){return nodeLink(s.id);}).join(" · ")+'</p>':'')+
-    '</div>';
+  var drawing=ordered.map(function(g){
+    var cp=cps[g.id]; var st=g.review?g.review.state:"ai-proposed";
+    var groups=(g.requires||[]).map(function(r){return group(g,r);}).join("");
+    var bands='';
+    var band=derived.filter(function(c){return true;});
+    if(!g.parent&&band.length&&proj!=="full-graph"){
+      var openB=MAP_BAND[g.id];
+      bands='<div class="jn"><div class="jlab">'+junction("all")+'AND</div><ul role="group"><li class="band">Body target capabilities · '+band.length+' records'+
+        '<div class="m10">31 targets × 5 repair questions, from the body grid. <button data-band="'+esc(g.id)+'">'+(openB?'collapse':'expand by question')+'</button> · <a href="#/grid">open the plate</a></div>'+
+        (openB?'<ul role="group" style="margin-top:8px">'+CLASSES.slice(0,5).map(function(k){var items=band.filter(function(c){return c.class===k.id;});var lows=items.filter(function(c){return rungIndex(c.grade&&c.grade.rung)<=2;}).length;return '<li class="cap" role="treeitem" tabindex="-1" data-id="'+esc(k.id)+'"><span class="nm">'+esc(k.name)+'</span><span class="meta">'+items.length+' targets · '+lows+' at L2 or below · '+esc(k.q)+'</span></li>';}).join("")+'</ul>':'')+
+      '</li></ul></div>';
+    }
+    var binds=cp&&cp.bindingConstraints&&cp.bindingConstraints.length?'<div class="m10" style="margin-top:8px">binding constraint: '+cp.bindingConstraints.map(function(b){return '<a href="'+nodeHref(b.id)+'">'+esc(b.name||nodeName(node(b.id)))+'</a> at '+esc(b.rung);}).join(" · ")+'</div>':'';
+    return '<li class="goal" role="treeitem" tabindex="-1" data-id="'+esc(g.id)+'" aria-expanded="true"><div class="gh"><div>'+
+      (g.parent?'<div class="gsub">part of '+esc(nodeName(node(g.parent)))+'</div>':'<div class="gsub">goal</div>')+
+      '<div class="gname"><a href="'+nodeHref(g.id)+'">'+esc(g.name)+'</a></div>'+furn(st,null,null,true)+binds+
+      '</div><div><div class="gdesc">'+esc(g.description)+'</div>'+(groups||bands?'':'<div class="m10">No requirement groups recorded.</div>')+groups+bands+'</div></div></li>';
   }).join("");
 
-  var qRows=qs.slice(0,proj==="full-graph"?40:20).map(function(q){
-    return '<div class="qrow"><span class="qrank">'+q.rank+'</span><div class="qbody">'+
-      '<a href="'+nodeHref(q.id)+'">'+esc(q.question)+'</a>'+
-      '<div class="qmeta"><span class="tag">'+q.downstreamTotal+' downstream</span>'+
-      (q.directlyBlockedRungs||[]).slice(0,3).map(function(r){return '<span class="tag">'+esc(r.rung)+' '+esc(nodeName(node(r.id))).slice(0,48)+'</span>';}).join("")+
-      (q.testedBy&&q.testedBy.length?'<span class="tag" style="color:var(--ok);border-color:var(--ok)">experiment proposed</span>':'<span class="tag">no experiment attached</span>')+
-      '</div></div></div>';
+  var margin=qs.slice(0,proj==="full-graph"?40:20).map(function(q){
+    return '<div class="mq"><span class="rk">'+q.rank+'</span><div><div class="qt"><a href="'+nodeHref(q.id)+'">'+esc(q.question)+'</a></div>'+
+      '<div class="qm"><span>'+q.downstreamTotal+' downstream</span>'+(q.directlyBlockedRungs||[]).slice(0,3).map(function(r){return '<span>'+esc(r.rung)+' '+esc(nodeName(node(r.id))).slice(0,48)+'</span>';}).join("")+'<span>'+(q.testedBy&&q.testedBy.length?'experiment proposed':'no experiment attached')+'</span></div></div></div>';
   }).join("");
 
   var byClass=CLASSES.map(function(k){
     var items=hand.filter(function(c){return c.class===k.id;});
     if(!items.length) return '';
-    return '<div class="mini-h">'+esc(k.name)+' <span class="note" style="font-weight:400">· '+esc(k.q)+'</span></div>'+
-      '<div class="caplist">'+items.map(function(c){
-        var g=c.grade||{};
-        return '<div class="caprow">'+rungPill(g.rung)+'<a href="'+nodeHref(c.id)+'">'+esc(c.name)+'</a>'+
-          (g.blocked&&g.blocked!=="none"?'<span class="tag">blocked by: '+esc(g.blocked)+'</span>':'')+
-          (g.measured?'<span class="tag">measured: '+esc(MEASURED_PHRASE[g.measured]||g.measured)+'</span>':'')+
-        '</div>';
-      }).join("")+'</div>';
+    return '<div class="mini-h">'+esc(k.name)+' <span style="text-transform:none;letter-spacing:0">· '+esc(k.q)+'</span></div><div class="caprows">'+items.map(function(c){
+      var g=c.grade||{};
+      return '<div class="caprow"><div><div class="nm"><a href="'+nodeHref(c.id)+'">'+esc(c.name)+'</a></div><div class="meta">'+esc(g.rung||"ungraded")+(g.measured?' · measured: '+esc(MEASURED_PHRASE[g.measured]||g.measured):'')+(g.blocked&&g.blocked!=="none"?' · blocked by '+esc(g.blocked):'')+' · '+esc(REVIEW_LABEL[c.review?c.review.state:"ai-proposed"]||"")+'</div></div>'+ruler(g.rung,c.review?c.review.state:"ai-proposed",{labels:true,pitch:16})+'</div>';
+    }).join("")+'</div>';
   }).join("");
-
-  var derivedBox=derived.length?'<details class="more"><summary>'+derived.length+' body-grid capabilities</summary><div class="inner"><p class="note" style="margin:10px 0">These records apply the five repair questions to targets in the body grid. The matrix is the compact view of all of them.</p><p><a href="#/grid">Open the body grid →</a></p></div></details>':'';
 
   var contras=(GRAPH.analysis.contradictions||[]).filter(function(c){return (c.contradicts||[]).some(function(id){var n=node(id);return n&&inProj(n,proj);});});
   var contraRows=contras.map(function(c){return '<div class="unl"><b>'+esc(c.statement)+'</b><span>contradicts: '+(c.contradicts||[]).map(function(id){return nodeLink(id);}).join(", ")+' · <a href="'+nodeHref(c.claim)+'">claim record</a></span></div>';}).join("");
-
   var apiQ=proj==="full-graph"?"":"?projection="+proj;
-  return stats+
-    '<div class="sec-h"><span class="n">01</span> Goals</div>'+ 
-    '<p class="note" style="margin-bottom:14px">For each goal, binding constraints are the AND-required capabilities currently at the lowest rung. An “either” group records alternatives where one member can satisfy that requirement.</p>'+
-    '<div class="goal-grid">'+goalCards+'</div>'+
+  setTimeout(wireMap,0);
+  return stand+
+    '<div class="sec-h"><span class="n">01</span> Dependency drawing</div>'+
+    '<p class="note" style="margin-bottom:14px">For each goal, binding constraints are the AND-required capabilities currently at the lowest rung. An OR gate records alternatives where one member can satisfy that requirement. A break in a line (┤ ? ├) is an open question that blocks that capability; open it in place.</p>'+
+    '<ul class="dep" role="tree" id="dep" aria-label="dependency drawing">'+drawing+'</ul>'+
     '<div class="sec-h"><span class="n">02</span> Open questions, ranked</div>'+
-    '<p class="note" style="margin-bottom:14px">The structural ranking counts how much graph structure sits downstream of what each question blocks. It does not estimate probability, cost, or time. A question with a candidate experiment attached is marked.</p>'+
-    '<div class="qlist">'+(qRows||'<div class="empty">No open questions in this projection yet.</div>')+'</div>'+
+    '<p class="note" style="margin-bottom:6px">The structural ranking counts how much graph structure sits downstream of what each question blocks. It does not estimate probability, cost, or time. A question with a candidate experiment attached is marked.</p>'+
+    '<div class="margin-qs">'+(margin||'<div class="empty">No open questions in this projection yet.</div>')+'</div>'+
     '<div class="sec-h"><span class="n">03</span> Capabilities, grouped by repair question</div>'+
-    '<p class="note" style="margin-bottom:14px">Each capability records a rung from L0 to L5, what was measured, what blocks the next rung, and its review state.</p>'+
-    byClass+derivedBox+
-    (contraRows?'<div class="sec-h"><span class="n">04</span> Contradictions</div><p class="note" style="margin-bottom:12px">These claims are recorded as contradicting a capability or its current rung. Open either record to inspect the evidence and provenance.</p><div class="constraint">'+contraRows+'</div>':'')+
+    '<p class="note" style="margin-bottom:4px">Each capability records a rung from L0 to L5, what was measured, what blocks the next rung, and its review state.</p>'+
+    byClass+
+    (derived.length?'<p class="note" style="margin-top:14px">'+derived.length+' body-grid capabilities apply the five repair questions to targets in the body. <a href="#/grid">The body grid is the compact view of all of them →</a></p>':'')+
+    (contraRows?'<div class="sec-h"><span class="n">04</span> Contradictions</div><p class="note" style="margin-bottom:12px">These claims are recorded as contradicting a capability or its current rung. Open either record to inspect the evidence and provenance.</p>'+contraRows:'')+
     '<div class="sec-h"><span class="n">·</span> The same projection as data</div>'+
     '<pre class="cmd">GET https://humanrepairmap.com/api/nodes'+esc(apiQ)+'\nGET https://humanrepairmap.com/api/questions/ranked'+esc(apiQ)+'\nMCP: list_nodes '+(proj==="full-graph"?'{}':'{ "projection": "'+esc(proj)+'" }')+'</pre>'+
     '<p class="note" style="margin-top:10px">'+REVIEW_CAVEAT+' '+CAVEAT+'</p>';
+}
+/* gap toggles, band toggles, keyboard tree, and the map switch */
+function wireMap(){
+  var dep=document.getElementById("dep"); if(!dep) return;
+  var proj=(location.hash.split("/")[2]||"universal-repair");
+  dep.querySelectorAll("[data-gap]").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();var id=b.getAttribute("data-gap");MAP_OPEN[id]=!MAP_OPEN[id];rerenderMap(proj);});});
+  dep.querySelectorAll("[data-band]").forEach(function(b){b.addEventListener("click",function(){var id=b.getAttribute("data-band");MAP_BAND[id]=!MAP_BAND[id];rerenderMap(proj);});});
+  var items=dep.querySelectorAll('[role="treeitem"]'); if(items.length) items[0].tabIndex=0;
+  dep.addEventListener("keydown",function(e){
+    var cur=document.activeElement; if(!cur||cur.getAttribute("role")!=="treeitem") return;
+    var all=[].slice.call(dep.querySelectorAll('[role="treeitem"]')); var i=all.indexOf(cur);
+    function go(el){if(!el)return;cur.tabIndex=-1;el.tabIndex=0;el.focus();}
+    if(e.key==="ArrowDown"){e.preventDefault();go(all[i+1]);}
+    else if(e.key==="ArrowUp"){e.preventDefault();go(all[i-1]);}
+    else if(e.key==="ArrowRight"){e.preventDefault();var g=cur.querySelector("[data-gap]");if(g&&g.getAttribute("aria-expanded")!=="true"){g.click();}else{var c=cur.querySelector('[role="treeitem"]');go(c);}}
+    else if(e.key==="ArrowLeft"){e.preventDefault();var g2=cur.querySelector("[data-gap]");if(g2&&g2.getAttribute("aria-expanded")==="true"){g2.click();}else{var p=cur.parentElement.closest('[role="treeitem"]');go(p);}}
+    else if(e.key==="Enter"){var a=cur.querySelector(".nm a, .gname a");if(a)location.hash=a.getAttribute("href");}
+    else if(e.key==="Home"){e.preventDefault();go(all[0]);}
+    else if(e.key==="End"){e.preventDefault();go(all[all.length-1]);}
+  });
+  var sw=document.getElementById("switch"); if(sw&&!sw.getAttribute("data-wired")){sw.setAttribute("data-wired","1");
+    sw.querySelectorAll("[data-switch]").forEach(function(a){a.addEventListener("click",function(e){
+      var to=a.getAttribute("data-switch"); if(to===proj) return; e.preventDefault();
+      /* the map switch: projection-specific rows withdraw; shared rows keep their place; then the route changes */
+      dep.querySelectorAll('.cap[data-shared="0"]').forEach(function(r){r.classList.add("leaving");});
+      setTimeout(function(){location.hash="#/map/"+to;},220);
+    });});
+  }
+}
+function rerenderMap(proj){
+  var host=document.getElementById("map-body"); if(!host) return;
+  var focusId=document.activeElement&&document.activeElement.getAttribute&&document.activeElement.getAttribute("data-id");
+  host.innerHTML=mapBody(proj);
+  if(focusId){var el=host.querySelector('[data-id="'+focusId+'"]');if(el){el.tabIndex=0;el.focus();}}
 }
 
 /* ================================================================
@@ -300,9 +471,9 @@ function nodeBody(id){
 
   if(n.type==="capability"){
     var g=n.grade||{};
-    body='<p style="font-size:16px">'+esc(n.description)+'</p>'+
+    body='<p class="lede">'+esc(n.description)+'</p>'+
       (g.note?'<h2>What the evidence shows</h2><p>'+esc(g.note)+'</p>':'')+
-      (g.drift?'<div class="drift-box"><b>Demonstrated vs claimed</b>'+esc(g.drift)+'</div>':'')+
+      (g.drift?'<div class="drift"><b>Demonstrated vs claimed</b><p>'+esc(g.drift)+'</p></div>':'')+
       (n.wouldMove?'<h2>What would move this rung</h2><p>'+esc(n.wouldMove)+'</p>':'')+
       (d.blockedBy&&d.blockedBy.length?'<h2>Open questions blocking it</h2>'+list(d.blockedBy):'')+
       (d.enables&&d.enables.length?'<h2>Needed for</h2>'+list(d.enables):'')+
@@ -322,7 +493,7 @@ function nodeBody(id){
   }
   else if(n.type==="goal"){
     var cp=(GRAPH.analysis.criticalPaths||[]).filter(function(c){return c.goal===id;})[0];
-    body='<p style="font-size:16px">'+esc(n.description)+'</p>'+
+    body='<p class="lede">'+esc(n.description)+'</p>'+
       (n.existenceProof?'<h2>Evidence that informs feasibility</h2><p>'+esc(n.existenceProof)+'</p>':'')+
       (n.requires&&n.requires.length?'<h2>Requires</h2>'+reqGroups(n.requires):'')+
       (cp&&cp.bindingConstraints&&cp.bindingConstraints.length?'<h2>Binding constraints</h2><p class="note">These are the AND-required capabilities currently at the lowest rung for this goal.</p><ul>'+cp.bindingConstraints.map(function(b){return '<li>'+rungPill(b.rung)+' '+nodeLink(b.id)+(b.blocked?' <span class="tag">blocked by: '+esc(b.blocked)+'</span>':'')+'</li>';}).join("")+'</ul>':'')+
@@ -332,7 +503,7 @@ function nodeBody(id){
     side=kv("parent goal",n.parent?nodeLink(n.parent):'')+kv("information-limited",n.informationLimited?"yes":"no");
   }
   else if(n.type==="question"){
-    body='<p style="font-size:16px">'+esc(n.why||"")+'</p>'+
+    body='<p class="lede">'+esc(n.why||"")+'</p>'+
       (n.blocks&&n.blocks.length?'<h2>What it blocks</h2>'+list(n.blocks):'')+
       (n.knownUnknowns&&n.knownUnknowns.length?'<h2>What is unknown</h2><ul>'+n.knownUnknowns.map(function(k){return '<li>'+esc(k)+'</li>';}).join("")+'</ul>':'')+
       (n.whatWouldResolve?'<h2>What would close it</h2><p>'+esc(n.whatWouldResolve)+'</p>':'')+
@@ -342,7 +513,7 @@ function nodeBody(id){
   }
   else if(n.type==="claim"){
     var ctx=n.context||{}, me=n.measurement||{};
-    body='<p style="font-size:16px">'+esc(n.statement)+'</p>'+
+    body='<p class="lede">'+esc(n.statement)+'</p>'+
       '<h2>Context</h2><div class="tbl-wrap"><table><tbody>'+Object.keys(ctx).map(function(k){return '<tr><td class="num">'+esc(k)+'</td><td>'+esc(ctx[k])+'</td></tr>';}).join("")+'</tbody></table></div>'+
       (Object.keys(me).length?'<h2>Measurement</h2><div class="tbl-wrap"><table><tbody>'+Object.keys(me).map(function(k){return '<tr><td class="num">'+esc(k)+'</td><td>'+esc(me[k])+'</td></tr>';}).join("")+'</tbody></table></div>':'')+
       (n.evidence&&n.evidence.length?'<h2>Sources</h2><ul>'+n.evidence.map(function(e){return '<li>'+nodeLink(e.source)+(e.design?' <span class="tag">'+esc(e.design)+'</span>':'')+(e.locator?' <span class="tag">'+esc(e.locator)+'</span>':'')+'</li>';}).join("")+'</ul>':'')+
@@ -355,7 +526,7 @@ function nodeBody(id){
   }
   else if(n.type==="source"){
     var r=n.resolution||{};
-    body=(n.title?'<p style="font-size:16px">'+esc(n.title)+'</p>':'')+
+    body=(n.title?'<p class="lede">'+esc(n.title)+'</p>':'')+
       '<p>'+esc(n.authors||"")+(n.venue?' · '+esc(n.venue):'')+(n.year?' · '+esc(n.year):'')+'</p>'+
       '<p>'+(n.doi?'<a href="https://doi.org/'+esc(n.doi)+'" target="_blank" rel="noopener">doi:'+esc(n.doi)+'</a> ':'')+(n.pmid?'· <a href="https://pubmed.ncbi.nlm.nih.gov/'+esc(n.pmid)+'/" target="_blank" rel="noopener">PMID '+esc(n.pmid)+'</a> ':'')+(!n.doi&&n.url?'<a href="'+esc(n.url)+'" target="_blank" rel="noopener">source</a>':'')+'</p>'+
       '<h2>Resolved is not reviewed</h2><p>'+(r.resolved?'This source was located on '+esc(r.checkedOn||"")+' via '+esc(r.via||"")+(r.metadataMatches?' and its metadata matches the citation.':' and its metadata does not fully match the citation.'):'This source has not been resolved against a registry.')+(r.note?' '+esc(r.note):'')+' <b>Machine-checked sources do not count as human review.</b> Human review is recorded on the claims that cite the source.</p>'+
@@ -364,7 +535,7 @@ function nodeBody(id){
   }
   else if(n.type==="experiment"){
     var ds=n.design||{}, f=n.feasibility||{};
-    body=(n.discriminates?'<p style="font-size:16px">'+esc(n.discriminates)+'</p>':'')+
+    body=(n.discriminates?'<p class="lede">'+esc(n.discriminates)+'</p>':'')+
       '<h2>Design</h2><div class="tbl-wrap"><table><tbody>'+Object.keys(ds).map(function(k){return '<tr><td class="num">'+esc(k)+'</td><td>'+esc(ds[k])+'</td></tr>';}).join("")+'</tbody></table></div>'+
       (Object.keys(f).length?'<h2>Feasibility</h2><div class="tbl-wrap"><table><tbody>'+Object.keys(f).map(function(k){return '<tr><td class="num">'+esc(k)+'</td><td>'+esc(Array.isArray(f[k])?f[k].join(", "):f[k])+'</td></tr>';}).join("")+'</tbody></table></div>':'')+
       (n.tests&&n.tests.length?'<h2>Tests</h2>'+list(n.tests):'');
@@ -373,7 +544,7 @@ function nodeBody(id){
   }
   else if(n.type==="cell"){
     var grades=(n.capabilities||[]).map(function(cid){var c=node(cid);var g=c&&c.grade||{};var k=cid.split("--")[1];return '<tr><td>'+esc(CLASSES.filter(function(x){return x.id===k;})[0]?CLASSES.filter(function(x){return x.id===k;})[0].name:k)+'</td><td>'+rungPill(g.rung)+'</td><td>'+esc(g.blocked||"")+'</td><td>'+esc(g.note||"")+'</td></tr>';}).join("");
-    body='<p style="font-size:16px">'+esc(n.system||"")+(n.kind==="non-cell"?' · non-cell target':'')+'</p>'+
+    body='<p class="lede">'+esc(n.system||"")+(n.kind==="non-cell"?' · non-cell target':'')+'</p>'+
       kvp("Renewal",n.renewal)+kvp("Fails by",n.failures)+
       '<h2>Rungs across the five repair questions</h2><div class="tbl-wrap"><table><thead><tr><th>question</th><th>rung</th><th>blocked by</th><th>note</th></tr></thead><tbody>'+grades+'</tbody></table></div>'+
       (n.anchors&&n.anchors.length?'<h2>Anchors</h2><ul>'+n.anchors.map(function(a){return '<li>'+esc(a)+'</li>';}).join("")+'</ul>':'')+
@@ -384,20 +555,38 @@ function nodeBody(id){
   else { body='<pre class="cmd">'+esc(JSON.stringify(n,null,1))+'</pre>'; }
 
   var apiPath="https://humanrepairmap.com/api/nodes/"+id;
-  return '<div class="crumbs"><a href="#/start">start</a> / '+(n.projections&&n.projections[0]?'<a href="#/map/'+esc(n.projections[0])+'">'+esc(PROJ[n.projections[0]]?PROJ[n.projections[0]].name.toLowerCase():n.projections[0])+'</a> / ':'')+esc(n.type)+'</div>'+
-    '<h1 class="h-title" style="font-size:clamp(22px,3vw,30px)">'+esc(title)+'</h1>'+
-    '<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="pill rs-submitted">'+esc(n.type)+'</span>'+reviewPill(rs)+' '+projTags+'</div>'+
-    '<div class="record" style="margin-top:22px"><div class="article">'+
+  var g=n.grade||{};
+  /* left: the dependency trace; right: the provenance trace */
+  var up=[]; if(n.parent) up.push(n.parent); (d.enables||[]).slice(0,2).forEach(function(x){if(up.indexOf(x)<0)up.push(x);});
+  var down=(d.blockedBy||[]).slice(0,2).concat((n.blocks||[]).slice(0,2));
+  var ltrace='<div class="m9">Dependency trace</div>'+up.map(function(x){return '<div class="tr"><a href="'+nodeHref(x)+'">'+esc(nodeName(node(x)))+'</a></div>';}).join("")+'<div class="tr here">'+esc(title).slice(0,80)+'</div>'+down.map(function(x){var nn=node(x);return nn?'<div class="tr"><a href="'+nodeHref(x)+'">'+esc(nodeName(nn)).slice(0,90)+'</a></div>':'';}).join("");
+  var p=n.provenance||{}, who=p.proposedBy||{};
+  var firstClaim=(d.supportedBy||[])[0]||(n.type==="claim"?n.id:null);
+  var firstExp=(d.testedBy||[])[0]||null;
+  var firstSrc=(n.evidence&&n.evidence[0]&&n.evidence[0].source)||(p.evidenceAccessed&&p.evidenceAccessed[0])||null;
+  var rtrace='<div class="m9">Provenance trace</div>'+
+    '<div class="pt">grade<span class="v">'+esc(g.rung||n.rung||"—")+(g.basis?' · basis: '+esc(g.basis):'')+'</span></div>'+
+    '<div class="pt">claim<span class="v">'+(firstClaim?'<a href="'+nodeHref(firstClaim)+'">'+esc(nodeName(node(firstClaim))).slice(0,70)+'</a>':'—')+'</span></div>'+
+    '<div class="pt">experiment<span class="v">'+(firstExp?'<a href="'+nodeHref(firstExp)+'">'+esc(nodeName(node(firstExp))).slice(0,70)+'</a>':'—')+'</span></div>'+
+    '<div class="pt">source<span class="v">'+(firstSrc?'<a href="'+nodeHref(firstSrc)+'">'+esc(nodeName(node(firstSrc))).slice(0,70)+'</a>':'—')+'</span></div>'+
+    '<div class="pt">proposed by<span class="v">'+esc(who.type||"")+(who.model?' · '+esc(who.model):'')+(p.date?' · '+esc(p.date):'')+'</span></div>'+
+    '<div class="pt">snapshot hash<span class="v">'+esc(GRAPH.manifest.contentHash.slice(0,12))+' · v'+esc(GRAPH.manifest.version)+'</span></div>'+
+    '<div class="pt">as data<span class="v"><a href="'+esc(apiPath)+'">/api/nodes/'+esc(slug(id))+'</a><br>MCP get_node</span></div>';
+  var rulerRow=(n.type==="capability"||n.type==="claim")?'<div class="ruler-row">'+ruler(g.rung||n.rung, rs, {labels:true,pitch:40})+
+      (g.measured?'<span class="kv">measured <b>'+esc(MEASURED_PHRASE[g.measured]||g.measured)+'</b></span>':'')+
+      (g.blocked?'<span class="kv">blocked by <b>'+esc(g.blocked)+'</b></span>':'')+
+      (n.grounding?'<span class="kv">grounding <b>'+esc(n.grounding)+'</b></span>':'')+
+      (n.class?'<span class="kv">question <b>'+esc((CLASSES.filter(function(c){return c.id===n.class;})[0]||{}).name||n.class)+'</b></span>':'')+
+    '</div>':'';
+  return coordOf(n)+furn(rs, n.review&&n.review.reviewedBy, n.review&&n.review.date)+
+    '<div class="rec"><aside class="ltrace">'+ltrace+'</aside><div class="body">'+
+      '<h1 class="t28">'+esc(title)+'</h1>'+rulerRow+
       body+
       '<h2>How to read this</h2>'+read+
       '<div class="unl"><b>Review state: '+esc(REVIEW_LABEL[rs]||rs)+'</b><span>'+esc(reviewMeaning(rs)||(rs==="n/a"?"Source resolution is a machine check. Human review is recorded on the claims that cite the source.":""))+'</span></div>'+
       prov(n)+
       (n.type!=="source"?challengeForm(id):'')+
-    '</div><aside class="infobox"><div class="ib-h">'+esc(n.type)+' · record</div>'+
-      side+
-      kv("id",'<span class="mono" style="font-size:11px;word-break:break-all">'+esc(id)+'</span>')+
-      kv("as data",'<a class="mono" style="font-size:11px;word-break:break-all" href="'+esc(apiPath)+'">/api/nodes/'+esc(slug(id))+'</a><div class="note" style="margin-top:4px">MCP: get_node { "id": "'+esc(id)+'" }</div>')+
-    '</aside></div>';
+    '</div><aside class="rtrace">'+rtrace+'</aside></div>';
 }
 function kvp(k,v){return v?'<p><b>'+esc(k)+'.</b> '+esc(v)+'</p>':'';}
 function reqGroups(groups){
@@ -480,13 +669,13 @@ function vMachine(){
     return '<div class="phase"><div class="ph"><span class="pk">'+esc(ph.k)+'</span><span class="pn">'+esc(ph.name)+'</span></div><div class="pc">'+esc(ph.cap)+'</div>'+u+'</div>';
   }).join("");
 
-  return '<div class="crumbs"><a href="#/start">start</a> / for models and agents</div>'+
+  return '<div class="coord"><a href="#/start">start</a> / for models and agents</div>'+
     '<h1 class="h-title">For models and agents</h1>'+
     '<p class="h-lede">The machine interface exposes the same graph the website reads: records, dependencies, evidence, provenance, review state, and graph history. This page lists the current interfaces and the limits that matter when a model uses them.</p>'+
 
     '<div class="sec-h"><span class="n">01</span> What exists today</div>'+
     '<div class="live-box"><div class="live-h"><span class="live-dot"></span>live · read and write · no account</div>'+
-      '<p style="color:var(--ink-2);font-size:14px;margin-bottom:10px">Add the graph to an MCP client:</p>'+
+      '<p class="note" style="margin-bottom:10px">Add the graph to an MCP client:</p>'+
       '<pre class="cmd">claude mcp add --transport http human-repair-map https://humanrepairmap.com/mcp</pre>'+
       '<p style="color:var(--ink-2);font-size:14px;margin:12px 0 6px">Tools:</p><ul class="toollist">'+tools+'</ul>'+
       '<p class="note" style="margin-top:10px">Every tool returns <code>structuredContent</code> alongside a text rendering. <a href="https://humanrepairmap.com/mcp">Endpoint documentation →</a></p></div>'+
@@ -500,8 +689,8 @@ function vMachine(){
     '<p class="lede-t">Returned records include their review state and provenance. Claims also carry their grounding class. '+REVIEW_CAVEAT+' '+esc(CAVEAT)+'</p>'+
 
     '<div class="sec-h"><span class="n">03</span> Agent permissions</div>'+
-    '<div class="gov-grid"><div class="gov-card"><h4 style="color:var(--accent)">May</h4><ul><li>discover candidate sources;</li><li>extract candidate claims with provenance;</li><li>propose dependencies and contradictions;</li><li>draft rung changes and open questions;</li><li>register predictions for later scoring.</li></ul></div>'+
-    '<div class="gov-card"><h4 style="color:var(--bad)">Requires human acceptance</h4><ul><li>promoting a record to human-reviewed;</li><li>accepting a change to a reviewed rung;</li><li>removing conflicting evidence from the canonical record;</li><li>treating a forecast as established evidence.</li></ul></div></div>'+
+    '<div class="gov-grid"><div class="gov-card"><h4 style="color:var(--ink)">May</h4><ul><li>discover candidate sources;</li><li>extract candidate claims with provenance;</li><li>propose dependencies and contradictions;</li><li>draft rung changes and open questions;</li><li>register predictions for later scoring.</li></ul></div>'+
+    '<div class="gov-card"><h4 style="color:var(--red)">Requires human acceptance</h4><ul><li>promoting a record to human-reviewed;</li><li>accepting a change to a reviewed rung;</li><li>removing conflicting evidence from the canonical record;</li><li>treating a forecast as established evidence.</li></ul></div></div>'+
     '<p class="lede-t" style="margin-top:14px">Each proposal records who or what produced it, the model version where applicable, the time, and the evidence accessed. Independent forecasts are retained before any later synthesis.</p>'+
 
     '<div class="sec-h"><span class="n">04</span> Current model capability</div>'+
@@ -518,7 +707,7 @@ function vMachine(){
     '<p class="note" style="margin-bottom:14px">These phases are ordered by dependency rather than date.</p>'+phases+
 
     '<div class="sec-h"><span class="n">07</span> Failure modes and controls</div>'+
-    '<div style="border:1px solid var(--rule);border-radius:6px;padding:4px 16px;background:var(--surface)">'+fails+'</div>'+
+    '<div style="border-top:1px solid var(--line)">'+fails+'</div>'+
 
     '<div class="sec-h"><span class="n">08</span> Missing pieces</div>'+
     '<p class="note" style="margin-bottom:12px">These are current limits of the project.</p>'+missing+
@@ -534,7 +723,7 @@ function vMethods(){
   var G=(CO.grounding&&CO.grounding.rows)||[];
   var states=[["ai-proposed","AI-PROPOSED · UNREVIEWED · HUMAN REVIEW: NONE. Sources are attached, but no human reviewer has confirmed them.","no"],["submitted","A named human proposed or endorsed the record. It remains UNREVIEWED.","no"],["in review","A steward is reviewing the record. It remains UNREVIEWED until the review is completed.","provisional"],["reviewed","A named human opened every cited source and confirmed that each supports the attached claim. The build requires the reviewer name.","yes"],["disputed","A public challenge is open. The record stays visible with the dispute attached.","yes, flagged"],["superseded","A newer record has replaced this version. The earlier record remains addressable.","no"]];
   var srows=states.map(function(s){return '<tr><td><span class="subj">'+esc(s[0])+'</span></td><td>'+esc(s[1])+'</td><td class="mono" style="font-size:12px">'+esc(s[2])+'</td></tr>';}).join("");
-  return '<div class="crumbs"><a href="#/start">start</a> / methods and governance</div>'+
+  return '<div class="coord"><a href="#/start">start</a> / methods and governance</div>'+
     '<h1 class="h-title">Methods and governance</h1>'+
     '<p class="h-lede">This page defines rung, measured, blocked by, and review state, then explains how records change. Record coordinates begin with <b>BODY /</b> for anatomical targets, <b>SYSTEM /</b> for system-level capabilities, or <b>CROSS-BODY /</b> for capabilities that span anatomical systems.</p>'+
     '<div id="methods-mast">'+loading()+'</div>'+
@@ -569,7 +758,7 @@ function vMethods(){
     '<div class="constraint">Source metadata can be checked automatically against Crossref, PubMed, or an issuing agency. <b>Machine-checked sources do not count as human review.</b> The current graph therefore remains <b>UNREVIEWED · HUMAN REVIEW: NONE</b> until named reviewers open the cited sources and confirm that they support the attached claims. A weekly job re-checks source resolution and flags failures.</div>'+
 
     '<div class="sec-h"><span class="n">08</span> Clinical boundary</div>'+
-    '<div class="banner" style="border-left-color:var(--bad);background:var(--bad-bg)">'+CAVEAT+' It provides no patient-specific prognosis, trial-eligibility certainty, individual genomic interpretation, or date for universal repair. Identity, consent, and reversibility are requirements on the system being mapped.</div>'+
+    '<div class="banner" style="border-left-color:var(--red)">'+CAVEAT+' It provides no patient-specific prognosis, trial-eligibility certainty, individual genomic interpretation, or date for universal repair. Identity, consent, and reversibility are requirements on the system being mapped.</div>'+
 
     '<div class="sec-h"><span class="n">09</span> How to cite</div>'+
     '<pre class="cmd" id="cite-block">Human Repair Map, graph v0.3. https://humanrepairmap.com — retrieved [date].</pre>'+
@@ -597,7 +786,7 @@ function methodsMast(){
    ================================================================ */
 function vContribute(){
   setTimeout(loadQueue,0);
-  return '<div class="crumbs"><a href="#/start">start</a> / contribute</div>'+
+  return '<div class="coord"><a href="#/start">start</a> / contribute</div>'+
     '<h1 class="h-title">Contribute</h1>'+
     '<p class="h-lede">If you find an unsupported rung, a missing source, a wrong dependency, or a poorly framed question, record the specific problem so it can be checked. No account is required. Proposals enter the public log before review.</p>'+
     '<div class="sec-h"><span class="n">01</span> Ways to help</div>'+
@@ -624,7 +813,7 @@ function loadQueue(){
     list.innerHTML=d.proposals.map(function(p){
       var rid=String(p.record_id||"");
       var href=rid.indexOf("hrm:")===0?nodeHref(rid):"#/route/"+esc(rid);
-      return '<div class="qp"><div class="qp-h"><span class="pill rs-'+esc(p.state)+'">'+esc(p.state)+'</span>'+
+      return '<div class="qp"><div class="qp-h"><span>'+esc(p.state)+'</span>'+
         '<span class="qp-k">'+esc(p.kind)+'</span><span class="qp-r">on <a href="'+href+'">'+esc(rid)+'</a></span>'+
         '<span class="qp-id mono">'+esc(p.id)+'</span></div>'+
         '<div class="qp-s">'+esc(p.summary)+'</div>'+
@@ -641,11 +830,11 @@ function vCorrections(){
       '<span class="cw"><b>'+esc(c.what)+'</b><span>'+esc(c.why)+'</span></span></div>';
   }).join("");
   var material=(C.corrections||[]).filter(function(c){return c.sev==="material";}).length;
-  return '<div class="crumbs"><a href="#/contribute">contribute</a> / corrections</div>'+
+  return '<div class="coord"><a href="#/contribute">contribute</a> / corrections</div>'+
     '<h1 class="h-title">Corrections</h1>'+
     '<p class="h-lede">This page records errors found during source resolution and later review. Each correction is dated, and the earlier record remains in history.</p>'+
     (material?'<div class="banner" style="margin-top:20px"><b>Material corrections: '+material+'.</b> The remaining entries correct citations or metadata.</div>':'')+
-    '<div style="border:1px solid var(--rule);border-radius:6px;background:var(--surface);padding:4px 16px">'+(rows||'<div class="empty">No corrections yet.</div>')+'</div>'+
+    '<div style="border-top:1px solid var(--line)">'+(rows||'<div class="empty">No corrections yet.</div>')+'</div>'+
     '<div class="sec-h"><span class="n">·</span> Report a problem</div>'+
     '<p class="lede-t">Use <i>Propose a change</i> on the relevant record, or open an issue on <a href="https://github.com/in-c0/human-repair-map" target="_blank" rel="noopener">the repository</a>. Include the narrowest claim or dependency you can identify and a primary source when available.</p>';
 }
@@ -666,7 +855,7 @@ function gnum(g){ return parseInt(String(g).slice(1),10) || 0; }
 function colMean(k){ if(!CELLS.length) return 0; var t=0; CELLS.forEach(function(c){ t+=gnum(c.capabilities[k].grade); }); return t/CELLS.length; }
 function vGrid(){
   setTimeout(renderGrid,0);
-  return '<div class="crumbs"><a href="#/start">start</a> / the body grid</div>'+
+  return '<div class="coord"><a href="#/start">start</a> / the body grid</div>'+
     '<h1 class="h-title">The body grid</h1>'+
     '<p class="h-lede">The body grid places 31 biological targets across five repair questions: Sense, Model, Reach, Edit, and Verify. The rows include cell types and non-cell targets such as extracellular matrix, scar, bone mineral, microbiome, neural wiring, and spatial organisation. Each cell corresponds to an addressable capability record with a rung and review state.</p>'+
     '<div id="gridhost"></div>';
@@ -678,28 +867,30 @@ function renderGrid(){
   var best=means.slice().sort(function(a,b){return b.m-a.m;})[0];
   var nFw=0,nSci=0;
   CELLS.forEach(function(c){GCOLS.forEach(function(g){var b=c.capabilities[g.k].blocked;if(b==="framework")nFw++;else if(b==="science")nSci++;});});
-  var finding='<div class="finding"><div class="f-t">Sensing and verification sit at higher average rungs than intervention in this grid.</div>'+
-    '<div class="f-d">Across '+CELLS.length+' targets, <b>'+best.t.toLowerCase()+'</b> averages '+best.m.toFixed(1)+' on the L0–L5 ruler and <b>'+worst.t.toLowerCase()+'</b> averages '+worst.m.toFixed(1)+'. These are aggregate descriptions of the current unreviewed grid records.</div></div>';
-  var tiles='<div class="sim-tiles">'+tile(CELLS.length,"body targets")+tile(CELLS.length*GCOLS.length,"capability rungs")+tile(nSci,"blocked by science")+tile(nFw,"blocked by framework")+tile('0<span style="font-size:15px;color:var(--muted)">/'+(CELLS.length*GCOLS.length)+'</span>',"human-reviewed","key")+'</div>';
-  var head='<div class="gr gr-head"><div class="gc-name"></div>'+GCOLS.map(function(c){return '<div class="gc" title="'+esc(c.q)+'"><span class="gc-t">'+c.t+'</span><span class="gc-m">'+colMean(c.k).toFixed(1)+'</span></div>';}).join("")+'</div>';
+  var stand='<div class="stand">'+
+    '<div class="st"><b>'+CELLS.length+'</b><span>body targets</span></div><div class="st"><b>'+(CELLS.length*GCOLS.length)+'</b><span>capability rungs</span></div><div class="st"><b>'+nSci+'</b><span>blocked by science</span></div><div class="st"><b>'+nFw+'</b><span>blocked by framework</span></div><div class="st key"><b>0 / '+(CELLS.length*GCOLS.length)+'</b><span>human-reviewed</span></div></div>'+
+    '<p class="note">Across '+CELLS.length+' targets, <b>'+best.t.toLowerCase()+'</b> averages '+best.m.toFixed(1)+' on the L0–L5 ruler and <b>'+worst.t.toLowerCase()+'</b> averages '+worst.m.toFixed(1)+'. Sensing and verification sit at higher average rungs than intervention in this grid. These are aggregate descriptions of the current unreviewed grid records.</p>';
+  var head='<div class="gr gr-head"><div class="gc-name"></div>'+GCOLS.map(function(c){return '<div class="gc"><span class="gc-t">'+c.t+' · '+colMean(c.k).toFixed(1)+'</span><span class="gc-q">'+esc(c.q)+'</span></div>';}).join("")+'</div>';
   var bySys={},order=[];
   CELLS.slice().sort(function(a,b){return (a.order||0)-(b.order||0);}).forEach(function(c){ if(!bySys[c.system]){bySys[c.system]=[];order.push(c.system);} bySys[c.system].push(c); });
-  var body=order.map(function(sys){
+  var body=order.map(function(sys,si){
     var rows=bySys[sys].map(function(c){
-      var cells=GCOLS.map(function(g){var v=c.capabilities[g.k];var n=gnum(v.grade);var cls='gv g'+n+(v.blocked==="framework"?" fw":"");return '<button class="'+cls+'" data-cell="'+esc(c.id)+'" data-cap="'+g.k+'" aria-label="'+esc(c.name+' '+g.t+' '+v.grade)+'">'+v.grade+'</button>';}).join("");
-      return '<div class="gr"><div class="gc-name"><span class="gn-t">'+esc(c.name)+'</span>'+(c.kind==="non-cell"?'<span class="gn-k">non-cell target</span>':'')+'</div>'+cells+'</div>';
+      var cells=GCOLS.map(function(g){var v=c.capabilities[g.k];return '<button class="gv" data-cell="'+esc(c.id)+'" data-cap="'+g.k+'" aria-label="'+esc(c.name+' '+g.t+' '+v.grade+(v.blocked==="framework"?", blocked by framework":""))+'">'+ruler(v.grade,"ai-proposed",{pitch:12,hatch:v.blocked==="framework"})+'</button>';}).join("");
+      return '<div class="gr"><div class="gc-name">'+esc(c.name)+(c.kind==="non-cell"?'<span class="gn-k">non-cell target</span>':'')+'</div>'+cells+'</div>';
     }).join("");
-    return '<div class="gsys">'+esc(sys)+'</div>'+rows;
+    return '<div class="gsys" id="gsys-'+si+'">'+esc(sys)+'</div>'+rows;
   }).join("");
-  var legend='<div class="glegend"><span class="lg"><b>rung</b> '+[1,2,3,4,5].map(function(n){return '<i class="gv g'+n+'" style="cursor:default">L'+n+'</i>';}).join("")+'</span><span class="lg"><i class="gv g2 fw" style="cursor:default">L2</i> hatched: blocked by <b>framework</b></span></div>';
+  var aindex='<div class="aindex"><div class="m9">Anatomical index</div>'+order.map(function(sys,si){return '<div class="ai" data-sys="'+si+'">'+esc(sys)+'</div>';}).join("")+'</div>';
+  var legend='<div class="glegend"><span class="lg">'+ruler("L2","ai-proposed",{labels:true,pitch:14})+' rung is position; the hollow amber mark is AI-PROPOSED · UNREVIEWED</span><span class="lg">'+ruler("L2","ai-proposed",{pitch:14,hatch:true})+' hatched: blocked by framework</span><span class="lg">'+ruler(null,"ai-proposed",{pitch:14})+' ungraded</span></div>';
   var dense=(localStorage.getItem('hrm-dense')!=='0');
-  host.innerHTML=finding+tiles+
+  host.innerHTML=stand+
     '<div class="gtoolbar"><span class="ctl-label">'+CELLS.length+' targets · five questions · '+(CELLS.length*GCOLS.length)+' capability records</span><button class="sim-reset" id="gdense">'+(dense?'expand rows':'fit to one screen')+'</button></div>'+
-    '<div class="gwrap'+(dense?' compact':'')+'">'+head+body+'</div>'+legend+
+    '<div class="plate">'+aindex+'<div><div class="gwrap'+(dense?' compact':'')+'">'+head+body+'</div>'+legend+'</div></div>'+
     '<div id="gdetail" class="gdetail-empty">Select a cell to inspect its rung, blocker, context, and source.</div>'+
     '<p class="note" style="margin-top:18px"><b>AI-PROPOSED · UNREVIEWED · HUMAN REVIEW: NONE.</b> The body-grid rungs have not been checked by a human reviewer. They use the same L0–L5 evidence ruler as the rest of the graph.</p>';
   var dn=document.getElementById("gdense");
   if(dn) dn.addEventListener("click",function(){ localStorage.setItem('hrm-dense', dense?'0':'1'); renderGrid(); });
+  host.querySelectorAll(".ai").forEach(function(a){a.addEventListener("click",function(){var t=document.getElementById("gsys-"+a.getAttribute("data-sys"));if(t)t.scrollIntoView({block:"start",behavior:"smooth"});host.querySelectorAll(".ai").forEach(function(x){x.classList.toggle("on",x===a);});});});
   host.querySelectorAll("[data-cell]").forEach(function(b){ b.addEventListener("click",function(){ gSel={id:b.getAttribute("data-cell"),cap:b.getAttribute("data-cap")}; host.querySelectorAll("[data-cell]").forEach(function(x){x.classList.remove("on");}); b.classList.add("on"); showGridDetail(); }); });
 }
 function showGridDetail(){
@@ -710,9 +901,9 @@ function showGridDetail(){
   var rung=((HR.rubrics&&HR.rubrics.ladder)||[]).filter(function(l){return l.id===v.grade;})[0];
   d.className="gdetail";
   d.innerHTML='<div class="gd-h"><span class="gd-cell">'+esc(c.name)+'</span><span class="gd-sep">&rarr;</span><span class="gd-cap">'+esc(g.t)+'</span>'+
-    '<span class="pill '+(v.blocked==="framework"?"rs-disputed":v.blocked==="science"?"rs-ai":"rs-reviewed")+'">'+(v.blocked==="none"?"no blocker recorded":"blocked by: "+esc(v.blocked))+'</span></div>'+
+    '<span class="tag">'+(v.blocked==="none"?"no blocker recorded":"blocked by "+esc(v.blocked))+'</span></div>'+furn("ai-proposed",null,null,true)+
     '<div class="gd-q">'+esc(g.q)+'</div>'+
-    '<div class="gd-grade"><b>'+esc(v.grade)+'</b> — '+esc(rung?rung.blurb:"")+'</div>'+
+    '<div class="gd-grade">'+ruler(v.grade,"ai-proposed",{labels:true,pitch:24})+' <b>'+esc(v.grade)+'</b> · '+esc(rung?rung.blurb:"")+'</div>'+
     '<p class="gd-n">'+esc(v.note)+'</p>'+
     '<div class="gd-meta"><span><b>renewal</b> '+esc(c.renewal)+'</span><span><b>fails by</b> '+esc(c.failures)+'</span></div>'+
     '<div class="gd-anchors">'+c.anchors.map(function(a){return '<span class="tag">'+esc(a)+'</span>';}).join("")+'</div>'+
@@ -725,9 +916,9 @@ function showGridDetail(){
 function vCns(){
   var rows=ROUTES.map(function(r){
     return '<tr><td><button class="route-btn" onclick="location.hash=\'#/route/'+r.id+'\'"><span class="subj">'+esc(r.subj)+'</span><div style="font-family:var(--fm);font-size:10px;color:var(--muted);margin-top:2px">'+esc(r.fam)+'</div></button></td>'+
-      '<td class="num">'+rungPill(r.rung)+'</td><td>'+esc(r.measured)+'</td><td>'+esc(r.status)+'</td><td>'+reviewPill(r.review)+'</td></tr>';
+      '<td class="num">'+ruler(r.rung,"ai-proposed")+' '+esc(r.rung)+'</td><td>'+esc(r.measured)+'</td><td>'+esc(r.status)+'</td><td>'+reviewPill(r.review)+'</td></tr>';
   }).join("");
-  return '<div class="crumbs"><a href="#/start">start</a> / case study: reaching the brain</div>'+
+  return '<div class="coord"><a href="#/start">start</a> / case study: reaching the brain</div>'+
     '<h1 class="h-title">Getting a drug into the brain</h1>'+
     '<p class="h-lede">This case study takes one capability, Reach, and compares sixteen routes past or around the blood-brain barrier. Each route records its evidence rung, what was measured, current status, and review state.</p>'+
     '<div class="sec-h"><span class="n">01</span> Evidence rung and reach</div>'+vizQuadrant()+
@@ -749,10 +940,10 @@ function vRoute(id){
     var pm=m.pmid?' · <a href="https://pubmed.ncbi.nlm.nih.gov/'+esc(m.pmid)+'/" target="_blank" rel="noopener">PMID '+esc(m.pmid)+'</a>':"";
     return '<div class="cite"><span class="ct2">'+esc(m.corrected||c)+' — '+esc(m.t)+'</span><span class="cj">'+esc(m.j)+'</span>'+(link?'<a href="'+esc(link)+'" target="_blank" rel="noopener">'+esc(m.doi?('doi:'+m.doi):'source')+'</a>':'')+pm+(m.n?'<span class="cn2">'+esc(m.n)+'</span>':'')+'</div>';
   }).join("");
-  return '<div class="crumbs"><a href="#/cns">reaching the brain</a> / route</div>'+
-    '<h1 class="h-title" style="font-size:clamp(22px,3vw,30px)">'+esc(r.subj)+'</h1>'+
-    '<div class="record" style="margin-top:22px"><div class="article">'+
-      '<p style="font-size:16px">'+esc(r.note)+'</p>'+
+  return '<div class="coord"><a href="#/cns">Body / Nervous system / Brain</a> / Delivery route</div>'+furn(r.review==="ai"?"ai-proposed":r.review)+
+    '<div class="rec"><aside class="ltrace"><div class="m9">Dependency trace</div><div class="tr"><a href="#/cns">Getting a drug into the brain</a></div><div class="tr here">'+esc(r.subj)+'</div><div class="tr"><a href="#/leverage">Leverage model</a></div></aside><div class="body">'+
+      '<h1 class="t28">'+esc(r.subj)+'</h1><div class="ruler-row">'+ruler(r.rung,"ai-proposed",{labels:true,pitch:40})+'<span class="kv">measured <b>'+esc(r.measured)+'</b></span><span class="kv">family <b>'+esc(r.fam)+'</b></span><span class="kv">status <b>'+esc(r.status)+'</b></span></div>'+
+      '<p class="lede">'+esc(r.note)+'</p>'+
       (r.drift?'<div class="drift-box"><b>Demonstrated vs claimed</b>'+esc(r.drift)+'</div>':'')+
       (r.wouldMove?'<h2>What would move this rung</h2><p>'+esc(r.wouldMove)+'</p>':'')+
       (r.precision?'<p class="precision">'+esc(r.precision)+'</p>':'')+
@@ -762,10 +953,7 @@ function vRoute(id){
       '<li>Replication: '+esc(r.repl)+'. Status: '+esc(r.status)+'.</li></ul>'+
       '<h2>Sources</h2><div class="ib-deps">'+cites+'</div>'+
       '<p class="note" style="margin-top:16px"><b>AI-PROPOSED · UNREVIEWED · HUMAN REVIEW: NONE.</b> Machine-checked sources do not count as human review.</p>'+challengeForm(r.id)+
-    '</div><aside class="infobox"><div class="ib-h">delivery route · record</div>'+
-      kv("rung",rungPill(r.rung))+kv("measured",esc(r.measured))+kv("family",esc(r.fam))+kv("status",esc(r.status))+kv("grounding",r.grounding?esc(r.grounding):'')+kv("review state",reviewPill(r.review))+
-      kv("as data",'<a class="mono" style="font-size:11px" href="https://humanrepairmap.com/api/routes/'+esc(r.id)+'">/api/routes/'+esc(r.id)+'</a>')+
-    '</aside></div>';
+    '</div><aside class="rtrace"><div class="m9">Provenance trace</div><div class="pt">grade<span class="v">'+esc(r.rung)+(r.grounding?' · grounding '+esc(r.grounding):'')+'</span></div><div class="pt">sources<span class="v">'+r.cites.length+' cited</span></div><div class="pt">replication<span class="v">'+esc(r.repl)+'</span></div><div class="pt">as data<span class="v"><a href="https://humanrepairmap.com/api/routes/'+esc(r.id)+'">/api/routes/'+esc(r.id)+'</a></span></div></aside></div>';
 }
 function vizQuadrant(){
   var rungs=["L5","L4","L2"];
@@ -814,7 +1002,7 @@ function renderSim(){
   var headline=flipped
     ? {t:s.broadProven+" broad route"+(s.broadProven===1?" reaches":"s reach")+" L5 under these assumptions.", d:"Inspect the blockers marked as cleared to see which assumptions produced this hypothetical state."}
     : {t:"No broad route is at L5 in the current records.", d:"The L5 routes in this module are anatomically local. The broad routes remain at lower rungs."};
-  var tiles='<div class="sim-tiles">'+tile(s.atL5,"routes at L5")+'<div class="sim-tile key'+(flipped?' on':'')+'"><div class="st-n">'+s.broadProven+'</div><div class="st-k">broad routes at L5</div></div>'+tile(s.moved,"routes advanced")+tile(s.cleared+'<span style="font-size:15px;color:var(--muted)">/'+(LV.blockers||[]).length+'</span>',"blockers cleared")+'</div>';
+  var tiles='<div class="sim-tiles">'+tile(s.atL5,"routes at L5")+'<div class="sim-tile key'+(flipped?' on':'')+'"><div class="st-n">'+s.broadProven+'</div><div class="st-k">broad routes at L5</div></div>'+tile(s.moved,"routes advanced")+tile(s.cleared+'<span style="font-size:15px;color:var(--ink-2)">/'+(LV.blockers||[]).length+'</span>',"blockers cleared")+'</div>';
   var blocks=(LV.blockers||[]).map(function(b){
     var gates=(LV.routes||[]).filter(function(r){return (r.blockers||[]).indexOf(b.id)>=0;}).length;
     var marg=simSolved[b.id]?0:simMarginal(b.id);
@@ -833,7 +1021,7 @@ function renderSim(){
 }
 function vLeverage(){
   setTimeout(renderSim,0);
-  return '<div class="crumbs"><a href="#/cns">reaching the brain</a> / leverage model</div>'+
+  return '<div class="coord"><a href="#/cns">reaching the brain</a> / leverage model</div>'+
     '<h1 class="h-title">Which blocker, cleared, moves the most?</h1>'+
     '<p class="h-lede">'+(LV.premise||"")+'</p>'+
     '<div class="banner" style="margin-top:18px"><b>This is a model, not a measurement.</b> '+esc(LV.modelNote||"").replace("This is a model, not a measurement. ","")+'</div>'+
@@ -882,21 +1070,19 @@ function wireChallenge(){
 function vSearch(q){
   q=q.toLowerCase();
   setTimeout(function(){withGraph("search-graph",function(){return searchGraph(q);});},0);
-  var rr=ROUTES.filter(function(r){return (r.subj+r.note+r.measured).toLowerCase().indexOf(q)>=0;}).map(function(r){return '<button class="cap-card" onclick="location.hash=\'#/route/'+r.id+'\'"><div class="top"><span class="cid">delivery route · '+r.rung+'</span>'+reviewPill(r.review)+'</div><h3 style="font-size:15px">'+esc(r.subj)+'</h3><p>'+esc(r.note)+'</p></button>';});
-  var cr=CELLS.filter(function(c){return (c.name+c.system+c.failures).toLowerCase().indexOf(q)>=0;}).map(function(c){return '<button class="cap-card" onclick="location.hash=\'#/node/cell/'+c.id+'\'"><div class="top"><span class="cid">body grid · '+esc(c.system)+'</span></div><h3 style="font-size:15px">'+esc(c.name)+'</h3><p>'+esc(c.failures)+'</p></button>';});
-  return '<div class="crumbs">search</div><h1 class="h-title">“'+esc(q)+'”</h1>'+
+  var rr=ROUTES.filter(function(r){return (r.subj+r.note+r.measured).toLowerCase().indexOf(q)>=0;}).map(function(r){return '<div class="hit"><div class="coord">Body / Nervous system / Brain / Delivery route · '+esc(r.rung)+'</div><div class="nm"><a href="#/route/'+r.id+'">'+esc(r.subj)+'</a></div><div class="dsc">'+esc(r.note)+'</div></div>';});
+  return '<div class="coord">Search</div><h1 class="h-title" style="margin-top:8px">“'+esc(q)+'”</h1>'+
     '<div id="search-graph">'+loading()+'</div>'+
-    ((rr.length||cr.length)?'<div class="sec-h">Routes and body-grid targets</div><div class="cap-grid">'+rr.join("")+cr.join("")+'</div>':'');
+    (rr.length?'<div class="sec-h">Delivery routes</div><div class="hits">'+rr.join("")+'</div>':'');
 }
 function searchGraph(q){
-  var hits=GRAPH.nodes.filter(function(n){return n.type!=="cell"&&n.type!=="route"&&(nodeName(n)+" "+(n.description||"")+" "+(n.why||"")+" "+(n.statement||"")+" "+(n.title||"")).toLowerCase().indexOf(q)>=0;}).slice(0,60);
-  if(!hits.length) return '<div class="empty">No graph records matched. Try “scar”, “vascular”, “reprogramming”, “delivery”, or “fibroblast”.</div>';
-  return '<p class="h-lede">'+hits.length+' graph record'+(hits.length===1?'':'s')+'.</p><div class="cap-grid" style="margin-top:16px">'+hits.map(function(n){
+  var hits=GRAPH.nodes.filter(function(n){return n.type!=="route"&&(nodeName(n)+" "+(n.description||"")+" "+(n.why||"")+" "+(n.statement||"")+" "+(n.title||"")+" "+(n.system||"")).toLowerCase().indexOf(q)>=0;}).slice(0,60);
+  if(!hits.length) return '<div class="empty">Nothing in the graph matched. Try "scar", "vascular", "reprogramming", "delivery" or "fibroblast".</div>';
+  return '<p class="h-lede">'+hits.length+' graph record'+(hits.length===1?'':'s')+'.</p><div class="hits">'+hits.map(function(n){
     var g=n.grade||{};
-    return '<button class="cap-card" onclick="location.hash=\''+nodeHref(n.id)+'\'"><div class="top"><span class="cid">'+esc(n.type)+(g.rung?' · '+esc(g.rung):'')+'</span>'+reviewPill(n.review?n.review.state:(n.type==="source"?"n/a":"ai-proposed"))+'</div><h3 style="font-size:15px">'+esc(nodeName(n))+'</h3><p>'+esc((n.description||n.why||n.statement||n.venue||"")).slice(0,180)+'</p></button>';
+    return '<div class="hit">'+coordOf(n)+'<div class="nm"><a href="'+nodeHref(n.id)+'">'+esc(nodeName(n))+'</a> '+(g.rung?ruler(g.rung,n.review?n.review.state:"ai-proposed"):'')+'</div><div class="dsc">'+esc((n.description||n.why||n.statement||n.venue||"")).slice(0,180)+'</div></div>';
   }).join("")+'</div>';
 }
-
 function vNotFound(){return '<div class="empty">Record not found. <a href="#/start">Return to the start.</a></div>';}
 
 /* ---------- ROUTER ---------- */
@@ -923,7 +1109,7 @@ function render(){
 }
 window.addEventListener("hashchange",render);
 var qbox=el("q");var qt;
-qbox.addEventListener("input",function(){clearTimeout(qt);var v=qbox.value.trim();qt=setTimeout(function(){if(v.length>=2)location.hash="#/search/"+encodeURIComponent(v);else if(location.hash.indexOf("#/search")===0)location.hash="#/start";},220);});
+if(qbox) qbox.addEventListener("input",function(){clearTimeout(qt);var v=qbox.value.trim();qt=setTimeout(function(){if(v.length>=2)location.hash="#/search/"+encodeURIComponent(v);else if(location.hash.indexOf("#/search")===0)location.hash="#/start";},220);});
 
 render();
 loadGraph().catch(function(){});

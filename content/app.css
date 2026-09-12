@@ -194,7 +194,8 @@ ul.dep,.dep ul{list-style:none;}
 .cap .nm a{border:none;}
 .cap .nm a:hover{color:var(--blue);}
 .cap .meta{font-family:var(--fm);font-size:9px;letter-spacing:.04em;color:var(--ink-2);}
-.cap.leaving{opacity:0;}
+.cap.leaving{animation:leave var(--t-switch) var(--ease-switch) both;}
+@keyframes leave{from{opacity:1;}to{opacity:0;}}
 .cap.entering{animation:enter var(--t-switch) var(--ease-switch) both;}
 @keyframes enter{from{opacity:0;transform:translateX(-6px);}to{opacity:1;transform:none;}}
 .cap[aria-selected="true"] .nm{color:var(--blue);}

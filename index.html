@@ -301,6 +301,9 @@ function vMap(proj){
     '<div id="map-body">'+loading()+'</div>';
 }
 var MAP_OPEN={}; /* which blocking questions are open, by capability id */
+/* frame-capture state (design/motion): ?hrm_open=1;hrm_t=80 or ?hrm_switch=enter|leave;hrm_t=240 */
+var FRZ=(function(){var q=new URLSearchParams(location.search.replace(/;/g,"&"));if(!q.has("hrm_t"))return null;return {t:parseInt(q.get("hrm_t"),10)||0,open:!!q.get("hrm_open"),sw:q.get("hrm_switch")||""};})();
+function frzStyle(){return FRZ?' style="animation-delay:-'+FRZ.t+'ms;animation-play-state:paused"':'';}
 var MAP_BAND={}; /* which body-target bands are expanded, by goal id */
 function mapBody(proj){
   var N=GRAPH.nodes.filter(function(n){return inProj(n,proj);});
@@ -326,9 +329,11 @@ function mapBody(proj){
     var c=node(id); if(!c) return '';
     var g=c.grade||{}, st=c.review?c.review.state:"ai-proposed";
     var blockers=(c.derivedRelations&&c.derivedRelations.blockedBy||[]).filter(function(q){return node(q);});
+    if(FRZ&&FRZ.open&&blockers.length&&!FRZ._done){FRZ._done=true;MAP_OPEN[c.id]=true;}
     var open=MAP_OPEN[c.id];
     var shared=(c.projections||[]).length>1;
-    var row='<li class="cap'+(open?' blocked-open':'')+'" role="treeitem" tabindex="-1" data-id="'+esc(c.id)+'" data-shared="'+(shared?1:0)+'">'+
+    var fcls=(FRZ&&FRZ.sw&&!shared)?(FRZ.sw==="enter"?' entering':' leaving'):'';
+    var row='<li class="cap'+(open?' blocked-open':'')+fcls+'" role="treeitem" tabindex="-1" data-id="'+esc(c.id)+'" data-shared="'+(shared?1:0)+'"'+(fcls?frzStyle():'')+'>'+
       '<span class="nm"><a href="'+nodeHref(c.id)+'">'+esc(c.name)+'</a></span>'+
       (blockers.length?'<button class="gap" data-gap="'+esc(c.id)+'" aria-expanded="'+(open?'true':'false')+'" aria-label="open the blocking question">'+gapGlyph()+'</button>':'')+
       ruler(g.rung, st)+
@@ -341,7 +346,7 @@ function mapBody(proj){
     return blockers.map(function(qid){
       var q=node(qid), rq=qById[qid]||(GRAPH.analysis.rankedQuestions||[]).filter(function(x){return x.id===qid;})[0];
       var n=rq?rq.downstreamTotal:((q.blocks||[]).length);
-      return '<div class="qopen"><span class="caps">┤</span><div>'+
+      return '<div class="qopen"'+frzStyle()+'><span class="caps">┤</span><div>'+
         '<div class="qt"><a href="'+nodeHref(qid)+'">'+esc(q.question)+'</a></div>'+
         '<div class="qm">'+(rq?'Q-'+String(rq.rank).padStart(4,"0")+' · ':'')+'blocks '+n+' record'+(n===1?'':'s')+(rq&&rq.testedBy&&rq.testedBy.length?' · experiment proposed':' · no experiment attached')+'</div>'+
         '<div class="qann"><span><b>what is unknown</b>'+esc((q.knownUnknowns||[]).slice(0,2).join("; ")||q.why||"")+'</span><span><b>what it blocks</b>'+(q.blocks||[]).slice(0,3).map(function(b){return esc(nodeName(node(b)));}).join("; ")+'</span><span><b>what would close it</b>'+esc(q.whatWouldResolve||"")+'</span></div>'+
@@ -1113,6 +1118,7 @@ if(qbox) qbox.addEventListener("input",function(){clearTimeout(qt);var v=qbox.va
 
 render();
 loadGraph().catch(function(){});
+/* frame capture is handled at render time via FRZ (see mapBody) */
 })();
 </script>
 </body>

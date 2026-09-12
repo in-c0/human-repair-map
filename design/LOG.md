@@ -1,5 +1,5 @@
 # Design log
-Stage: 2 complete — three renders accepted, DESIGN.md written; awaiting owner permission to download the renders, then Stage 3 build
+Stage: PIVOT (owner) — renders judged 'quite robotic, not very human friendly'; Stage 3 build of Dependency Survey exists on branch design/dependency-survey (commit 1ebee31) and is kept as the substrate; human layer being redesigned as a living atlas / explorable argument (Stage 1–2 again)
 Direction: Dependency Survey (D3 + D1 label discipline + D2 shared ruler), chosen 2026-09-11 after one critique round
 ## Components
 | component | build | review # | verdict | notes |
@@ -8,11 +8,12 @@ Direction: Dependency Survey (D3 + D1 label discipline + D2 shared ruler), chose
 | record page | 0 | — | — | |
 | body grid | 0 | — | — | |
 ## Session history (cont.)
+- 2026-09-12 Stage 3 built on branch design/dependency-survey (new app.css, survey entrance, dependency drawing with gaps, record traces, body plate); frame strips captured to design/motion/{gap,switch}/strip-1.png. Before Stage 4 review, the owner rejected the Stage 2 renders as robotic in the ChatGPT thread. ChatGPT's rethink: keep ontology/copy/evidence semantics; drop the survey grammar as the visual identity; plain-language states first, journeys ('Repair damage' / 'Reverse biological aging'), six-step sequence with natural-language state, 'follow any path until current science stops', evidence as a reveal, a quiet body silhouette as orientation, irregular hierarchy. New renders requested and received: render 4 (entrance: anatomical plate with organ systems in thin ink, dependency lines drawn as living branches, two journeys 'Repair damage' / 'Reverse biological aging' converging on restore function, one sentence 'Both are views of the same evidence graph. Follow any path until current science stops.') and render 5 (journey screen: six illustrated stages as one continuous path with plain-language state under each; the path stops at 'Reach the right place' with 'This is currently blocked.' + 'What would change this?' + three questions; formal RUNG/MEASURED/BLOCKED BY and UNREVIEWED line only beneath; body silhouette with region marked; 'View this in the research layer →'). Both read as human, drawn, legible. AWAITING OWNER: approve renders 4–5 as the human layer; permission to download them and to have ChatGPT generate the illustration assets (anatomical plate, six-stage path drawings, journey visuals) as separate images for embedding; the Dependency Survey build becomes the research layer behind 'View this in the research layer'.
 - 2026-09-11 Stage 1 reply: three directions (Annotated Atlas / Frontier Ledger / Dependency Survey), recommendation D3 — design/reviews/stage1-directions.md.
 - 2026-09-11 Stage 2: three renders generated in the project thread (regular chat; title 'Map Cure Machine Progress'), each accepted round 1: entrance 16:10 (hover state), glyph sheet, motion storyboard. DESIGN.md written from the Stage 1 spec + renders. Render files pending owner download permission (chatgpt.com estuary URLs are session-bound).
 - 2026-09-11 Stage 1 critique: four pushbacks (body missing, entrance underspecified, glyph vocabulary, buildability); all held, spec tightened — design/reviews/stage1-critique-reply.md. Direction locked.
 ## Open questions (ASK OWNER)
-- none yet
+- none open; owner's pivot verdict recorded 2026-09-12 (thread message: 'i think all of these renders are quite robotic - not very human friendly UIUX')
 ## Session history
 - 2026-09-11 Stage 0: owner answered feeling = "quiet authority"; likes = anatomical atlas + data visualization + analytics + git tree + something (consult the project ChatGPT thread); hates = biotech landing page, admin dashboard, sci-fi HUD, academic journal. BRIEF.md written; current UI captured to design/current/.
 - 2026-09-11 Stage 1: brief + banned-defaults list sent to the project ChatGPT thread (owner directed the project thread rather than a temporary chat).

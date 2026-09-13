@@ -1,0 +1,8 @@
+# Every change to the map's records, schema, ontology and generated graph is reviewed by a
+# named human. Proposals from people and models (API or PR) are inputs; a human decides.
+*                       @in-c0
+records/                @in-c0
+schema/                 @in-c0
+ontology/               @in-c0
+public/graph/           @in-c0
+proposals/              @in-c0

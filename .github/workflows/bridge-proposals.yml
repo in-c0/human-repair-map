@@ -1,0 +1,30 @@
+name: Bridge public proposals into pull requests
+
+# Every proposal filed at POST /api/proposals (the door for people and models who do not use
+# GitHub) becomes a draft pull request on branch proposal/<id>, with its provenance and event
+# hash, so both doors converge on one review queue. Records change only when a named human
+# edits them on that branch and merges.
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - name: Ensure the proposal label exists
+        env: { GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
+        run: gh label create proposal --repo "$GITHUB_REPOSITORY" --color A06B20 --description "Bridged from the public proposal queue (/api/proposals)" 2>/dev/null || true
+      - name: Open a draft PR for each new proposal
+        env: { GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
+        run: node scripts/bridge-proposals.mjs

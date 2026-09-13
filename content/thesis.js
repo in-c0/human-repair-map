@@ -1,24 +1,23 @@
-/* "Why this map" — content. Rewritten 2026-09-11 against the writing rulebook
-   (see writing-review-2026-09-11.md). Keeps the owner's frame: repair-only hook,
-   consent in the first sentence, legibility as a hypothesis not a finding,
-   conditional structure, no dates. */
+/* "Why this map" — content. Rewritten 2026-09-11 against in-c0/writing-skill.
+   Keeps the owner's frame: repair-only hook, consent in the first sentence,
+   legibility as a hypothesis, conditional structure, no dates. */
 window.HRM_THESIS = {
   hook: "Imagine a technology where a sick, injured, or disabled person walks in and, if they choose it, whatever happened to them can be repaired.",
-  lede: "Nothing known in physics forbids this. For it to work, a system would have to be able to do a short list of things: keep what makes the person who they are; measure enough of their body; decide what a safe, healthy target state is for them; reach the right cells; change those cells' state precisely; rebuild tissue around them; and check that the change held. Every item on that list is a capability that can be graded on evidence. That is what this map does.",
-  constraint: "The hard limit is information. If a system can still work out what must be kept and what must be changed, repair is possible in principle. Where that information is gone and cannot be recovered or inferred, it is not.",
+  lede: "No known law of physics rules that out. A working system would have to preserve what makes the person who they are, measure enough of their biological state, define a safe target state, reach the right cells, change them precisely, rebuild the surrounding tissue, and verify that the result held. This map breaks that problem into capabilities and records how far each capability has been demonstrated.",
+  constraint: "Repair depends on information. If the system can still determine what must be preserved and what must change, a repair path may exist. If essential information has been destroyed and cannot be recovered or inferred, exact restoration may be impossible.",
 
   primitive: {
     title: "The unit this map grades",
-    body: "The unit is a verified change in cell state: read a biological state, compare it with a target, change it, confirm the change held. Genes and molecules are too small to describe repair with; organs are too coarse. The cell is the smallest living thing that carries its own genome, reads signals, repairs itself, changes identity, builds tissue, and can go wrong into cancer.",
+    body: "The working unit is a verified change in biological state: read the current state, compare it with a target, intervene, and check the result. Genes and molecules describe part of that process, while organs are too coarse to describe many repair operations. Cells sit between those scales. They carry genomes, respond to signals, maintain tissue, change state, and can become pathological.",
     loop: ["Read", "Diagnose", "Define target state", "Intervene", "Verify", "Adapt"]
   },
 
-  whyCell: "So every capability on the map is something we have to be able to do to a target, and the body grid asks the same five questions of every cell type. A capability is graded L0 to L5 on what has actually been demonstrated, and says what would move it one rung.",
+  whyCell: "Each capability describes something that has to be done to a target. The body grid asks the same five questions of every target: can we sense it, model the desired state, reach it, edit it, and verify the result? Each capability has an evidence rung from L0 to L5, plus what was measured, what blocks the next rung, and its review state.",
 
   infoLimits: [
-    { t: "Destroyed brain tissue", d: "If memories, personality and neural structure are physically gone, exact restoration needs a backup, enough preserved structure to infer the rest, or acceptance that the result is a reconstruction rather than a continuation." },
-    { t: "Long-term developmental conditions", d: "Some differences are not damage. They are how a person developed. The target state is not obvious, and it is not the map's to assume." },
-    { t: "Death with severe decomposition", d: "When the organised information that made a person is gone, physics offers no recovery path. A new organism can be made. The same person cannot necessarily be restored." }
+    { t: "Destroyed brain tissue", d: "If memories, personality, or learned neural structure are physically gone, exact restoration would need a backup or enough preserved structure to infer what was lost. Otherwise the result may be a reconstruction rather than a continuation." },
+    { t: "Long-term developmental conditions", d: "Some differences are part of how a person developed rather than damage with an obvious earlier state to restore. The target state therefore depends on the person's goals as well as biology and safety." },
+    { t: "Death with severe decomposition", d: "If the organised information that made a person has been destroyed, current physics gives no known way to recover it exactly." }
   ],
 
   layers: [
@@ -31,7 +30,7 @@ window.HRM_THESIS = {
     ["Body plan", "Missing structures, spinal injury, malformation", "Regenerate structure and function"]
   ],
 
-  whyNotDna: "A severed spinal cord, a missing limb, protein aggregates, scar tissue, chronic immune memory, synaptic miswiring and epigenetic drift are not DNA-sequence problems. DNA is the blueprint; the body is also construction history, live signalling, spatial organisation, learned neural information and mechanical structure. Repair has to act on <b>state</b>, not only on genome.",
+  whyNotDna: "A severed spinal cord, missing tissue, protein aggregates, scar, chronic immune memory, synaptic miswiring, and epigenetic drift can remain even when the DNA sequence is intact. The state that matters also includes signalling, spatial organisation, learned neural information, and mechanical structure. A general repair system would therefore have to act across several biological layers.",
 
   primitives: [
     ["Stop", "bleeding, ischaemia, runaway inflammation, seizure"],
@@ -45,11 +44,11 @@ window.HRM_THESIS = {
   ],
 
   verdicts: [
-    { p: "Sufficient sensing", v: "Possible in principle", d: "Biological state can be measured. The hard part is measuring enough of it, fast enough, without harming the person. Total sensing is not needed; enough to know what to keep, remove and rebuild is." },
-    { p: "Target-state modelling", v: "Possible, and partly an ethical question", d: "\"Healthy\" is not one template. The target has to be set by biology, safety and the person's own choices together." },
-    { p: "Cell-specific access", v: "Possible in principle", d: "Biology already does targeted delivery: immune cells find infected cells, embryos build organs, wounds recruit repair cells. Engineering that specificity is the open problem, and on this map it is the most common blocker." },
-    { p: "Cell-state editing", v: "Possible, bounded by safety", d: "Development, regeneration in other animals and immune adaptation all show that cell states can be reprogrammed. Cancer shows they can be reprogrammed badly. The frontier is safe, constrained editing rather than more editing power." },
-    { p: "Closed-loop verification", v: "Necessary, underdeveloped", d: "Simple loops exist: insulin pumps, pacemakers, neurostimulation. Verification that runs from molecule to behaviour and over decades does not, and no general repair is plausible without it." }
+    { p: "Sufficient sensing", v: "Possible in principle", d: "Biological state can be measured, but a general repair system would need enough information at the required place and time without causing unacceptable harm. It may not need complete measurement of everything." },
+    { p: "Target-state modelling", v: "Partly technical, partly a choice", d: "There is no single healthy template for every person. Biology and safety constrain the target state, and the person's own choices matter where more than one acceptable state is possible." },
+    { p: "Cell-specific access", v: "Possible in principle", d: "Living systems already route cells and molecules selectively. Engineering comparable specificity across arbitrary human tissues is still an open problem, and delivery appears repeatedly as a blocker in this graph." },
+    { p: "Cell-state editing", v: "Demonstrated in narrow settings", d: "Development, regeneration, immune adaptation, gene editing, and cellular reprogramming show that cell states can be changed. The unresolved problem is controlling those changes with enough specificity and safety for repeated use in a whole person." },
+    { p: "Closed-loop verification", v: "Narrow systems exist", d: "Insulin pumps, pacemakers, and adaptive neurostimulation already measure and respond. A general repair system would need verification across more biological scales and over much longer periods." }
   ],
 
   whoTable: [
@@ -63,25 +62,25 @@ window.HRM_THESIS = {
   ],
 
   whyNoOne: [
-    ["Medicine is approved disease by disease", "No regulator approves \"cell-state editing for anything\". A general capability enters medicine one indication, one dose and one manufacturing process at a time, so it arrives in pieces."],
-    ["The body is not fully observable yet", "Reference atlases are still being built, and virtual-cell models still struggle with data heterogeneity and reproducibility. Without enough sensing, a loop cannot be closed safely."],
-    ["Delivery is still primitive", "We can reach the liver, the eye, blood stem cells and some tumours. General access would mean brain, pancreas, joints, marrow, retina, nerves and scarred tissue, reliably and repeatedly."],
-    ["Editing power sits next to cancer", "Making cells younger, more plastic and more proliferative uses the same machinery cancer uses. A system has to tell \"regenerate this\" from \"grow without limit\"."],
-    ["The right target state is often unknown", "For a broken enzyme it is obvious. For aging, chronic pain, neurodevelopmental difference or memory loss it is not, and it is partly the person's to decide."],
-    ["Brain repair is different", "Replace a liver cell and the person is unchanged. Overwrite a circuit that encodes memory or personality and they may not be."],
-    ["Verification is underdeveloped", "Monitoring from molecule to cell to organ to behaviour to long-term cancer risk is far beyond current clinical practice."]
+    ["Medicine is approved disease by disease", "A general capability still reaches patients through specific indications, doses, manufacturing processes, and evidence packages. This fragments progress across many programmes."],
+    ["The body is not fully observable yet", "Reference atlases are still being built, and biological models still struggle with incomplete and heterogeneous data. A repair loop cannot verify what it cannot measure well enough."],
+    ["Delivery is still limited", "Some tissues are comparatively tractable, while others remain difficult to reach precisely and repeatedly. A general system would need reliable access across many organs and cell types."],
+    ["Powerful editing can create new risks", "Rejuvenation and regeneration can involve pathways that also support uncontrolled growth. Any broadly useful method needs ways to stop, localise, and verify the intervention."],
+    ["The target state is sometimes uncertain", "A missing enzyme has a relatively clear target. Aging, chronic pain, neurodevelopmental differences, and memory loss can involve several acceptable outcomes, so the person's preferences become part of the specification."],
+    ["Brain repair can carry unique information", "Replacing a generic liver cell does not usually threaten identity. Reconstructing neural circuits that encode memories or personality may require information that is not stored elsewhere."],
+    ["Verification is still narrow", "Current clinical monitoring rarely follows an intervention from molecular state through tissue function to long-term risks such as malignancy. A general repair system would need that feedback across more scales."]
   ],
 
-  question: "What if the whole picture were visible at once: each component's progress, the bottlenecks named, and the evidence behind every claim open to inspection?",
+  question: "If the goal is human repair, which capabilities are required, how far has each one been demonstrated, and which unanswered questions currently block the most downstream work?",
 
   conviction: {
-    lead: "Three explanations are usually offered for why this has not happened. The first two are certainly real. The third is a hypothesis, and it is the only one a map could do anything about, which is a reason to be suspicious of it.",
+    lead: "There are several reasons a general repair system does not exist. Some are clearly scientific. This project tests a narrower possibility: whether making dependencies and evidence visible can help researchers find important gaps sooner.",
     items: [
-      { t: "The science isn't ready", s: "almost certainly true", d: "We lack causal models good enough to move a cell from state X to state Y safely. A map does not create that knowledge; labs do, over decades. On the evidence this is probably the dominant constraint." },
-      { t: "The rules are too slow", s: "partly true", d: "Approval pathways built for pills fit adaptive, multi-modality systems badly. But permissive jurisdictions have not produced faster repair; they have mostly produced unproven clinics. That suggests regulation limits how fast results translate rather than whether a capability exists." },
-      { t: "Nobody can see the whole board", s: "the hypothesis here", d: "Every piece is worked on by people who can mostly see their own piece. So it is hard for anyone to say which constraint currently binds, and attention may go to whatever is most visible (the striking mouse result, the cleared biomarker) rather than to what is blocking. If that is true, a shared public accounting should help at the margin. <b>It is a hypothesis, not a finding.</b>" }
+      { t: "The science is not ready", s: "strongly supported", d: "We still lack causal models and interventions that can move many biological systems from a damaged state to a safe target state. A map cannot supply that missing biology. It can only record where the evidence currently stops." },
+      { t: "Translation is slow", s: "supported", d: "Adaptive and multi-modality interventions do not fit every existing approval pathway cleanly, but regulatory flexibility alone has not produced general repair. Translation matters after a capability has enough evidence to translate." },
+      { t: "Dependencies are hard to see across fields", s: "the hypothesis being tested", d: "Research is distributed across specialties, and the same enabling capability can matter to several apparently unrelated problems. The map tests whether a shared dependency view helps researchers notice a blocker, contradiction, or useful connection they would otherwise miss. This has not yet been demonstrated." }
     ],
-    close: "This map does not claim the field is doing it wrong. Specialists know their subfields far better than any survey does, and the deep constraints are probably scientific rather than organisational. The narrower claim is this: some things are hard to see from inside one subfield, the map is cheap to build, and it is falsifiable. If experts read these records and say the structure was already obvious to them, that is the answer.",
+    close: "Specialists know their own fields better than this survey does. The current test is practical: give the graph to domain researchers, record what they say is wrong or missing, and measure whether it changes what they would read or investigate next. If it does not help, the graph should change before coverage expands.",
     standing: "Written by an independent builder, not a neuroscientist or clinician. No lab, no funding, no position in the field. That is a real limitation on everything above, and it is why every record carries its sources and review state on its face: so you can check the map rather than trust it."
   },
 
@@ -94,11 +93,11 @@ window.HRM_THESIS = {
     "a date for universal repair"
   ],
   is: [
-    "goals decomposed into the capabilities they require, with AND/OR alternatives",
-    "capabilities graded L0 to L5 on demonstrated evidence, with what would move each",
-    "open questions ranked by how much sits downstream of what they block",
-    "claims with context, measurement, sources, replication and contradiction",
-    "a machine interface: MCP, REST, bulk export, proposals and locked predictions",
+    "goals decomposed into required capabilities, including AND/OR alternatives",
+    "capabilities recorded with rung, measured, blocked by, and review state",
+    "open questions ranked by how much downstream structure they block",
+    "claims linked to context, measurements, sources, replication, and contradictions",
+    "machine access through MCP, REST, bulk export, proposals, and locked predictions",
     "public review states, a hash-chained event log, and a corrections history"
   ]
 };

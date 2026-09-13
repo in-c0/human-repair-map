@@ -8,6 +8,32 @@ The contribution rule is simple:
 
 The canonical records live in `records/graph/`. The website, REST API, MCP server and bulk graph exports are generated from those records. Do not edit generated files by hand.
 
+## Two doors, one queue
+
+There are two ways to propose a change, and they end up in the same place.
+
+**Through the site or the API.** Open any record and use *Propose a change*, call
+`POST /api/proposals`, or use the MCP tool `propose_change`. No account is needed. The
+proposal is written to the public hash-chained event log at once and shown as unreviewed.
+A scheduled workflow (`.github/workflows/bridge-proposals.yml`) then opens a draft pull
+request for it on branch `proposal/<id>`, adding `proposals/<id>.json` with the proposal,
+the record it targets, who filed it, and the event hash. This is the door for a model or an
+agent that does not have GitHub access, and for anyone who just wants to say what is wrong.
+
+**Through GitHub.** Fork, edit the record under `records/`, run `node scripts/build.mjs`,
+and open a pull request. Add a `proposals/<id>.json` file too (copy the shape of an existing
+one; set `provenance.via` to `github-pr`) so the decision leaves the same trail as an API
+proposal. Fill in `provenance.proposedBy` honestly: type (`human` or `ai`), name, and for a
+model its version and the evidence it accessed. The validator checks the file's shape, not
+its honesty; a steward does that.
+
+Either way, the same things happen next: `validate` runs on the branch; a named human
+(`.github/CODEOWNERS`) opens the cited sources, decides accept / dispute / decline, fills in
+`resolution` in the proposal file, edits the record if accepting, and merges. `main` is
+protected: nothing lands on it without a pull request and a green `validate`, and nothing is
+force-pushed. A proposal that is declined is still merged, as its file alone, so the reason
+stays on the record.
+
 ## Ways to contribute
 
 ### 1. Scientific review

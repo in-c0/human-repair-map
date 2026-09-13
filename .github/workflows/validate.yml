@@ -38,3 +38,22 @@ jobs:
       # prediction registration, and the hash-chain negative control.
       - name: Test the MCP/API worker
         run: node mcp/test.mjs
+
+      # Every bridged or hand-filed proposal must carry the fields a steward needs: what it
+      # targets, who filed it and how, its event hash, and a resolution block.
+      - name: Check proposal files
+        run: |
+          node -e '
+            const fs=require("fs"); const dir="proposals"; if(!fs.existsSync(dir)) process.exit(0);
+            let bad=0;
+            for (const f of fs.readdirSync(dir).filter(f=>f.endsWith(".json"))) {
+              const p=JSON.parse(fs.readFileSync(dir+"/"+f,"utf8"));
+              const miss=["id","filed","kind","target","summary","rationale","provenance","resolution"].filter(k=>!(k in p));
+              if (p.provenance && !p.provenance.eventHash && p.provenance.via!=="github-pr") miss.push("provenance.eventHash (or via: github-pr)");
+              if (p.resolution && !["open","accepted","disputed","declined"].includes(p.resolution.state)) miss.push("resolution.state");
+              if (p.id && f!==p.id+".json") miss.push("filename must equal id");
+              if (miss.length){ console.error("::error file="+dir+"/"+f+"::missing "+miss.join(", ")); bad++; }
+            }
+            if (bad) process.exit(1); console.log("proposal files ok");
+          '
+

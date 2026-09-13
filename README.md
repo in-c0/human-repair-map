@@ -72,6 +72,10 @@ Useful tools include `graph_manifest`, `how_to_read`, `get_node`, `list_nodes`, 
 
 Every result includes structured content and the review state of the returned records. `how_to_read` returns the same rung, measured, blocked by, and review state vocabulary used by the website.
 
+### Propose a change
+
+`POST /api/proposals` (or the MCP tool `propose_change`) files a change against any record. A scheduled workflow turns each one into a draft pull request carrying its event hash, so a proposal filed through the API and a pull request opened on GitHub reach the same human review queue. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 ### Use it without MCP
 
 - **REST** — [`/api`](https://humanrepairmap.com/api) · [`/api/openapi.json`](https://humanrepairmap.com/api/openapi.json). Examples: `/api/goals/scarless-skin-repair/critical-path`, `/api/questions/ranked?projection=rejuvenation`, `/api/claims/<slug>/evidence`.

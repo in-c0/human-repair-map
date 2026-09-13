@@ -30,11 +30,11 @@
   </header>
   <nav class="index" id="nav" aria-label="plate index">
     <a href="#/start" data-v="start">Start</a>
-    <a href="#/map/universal-repair" data-v="map-universal-repair">Universal Repair</a>
-    <a href="#/map/rejuvenation" data-v="map-rejuvenation">Rejuvenation</a>
-    <a href="#/map/full-graph" data-v="map-full-graph">Full research graph</a>
-    <a href="#/thesis" data-v="thesis">Why this map</a>
+    <a href="#/journey/repair" data-v="journey-repair">Repair damage</a>
+    <a href="#/journey/aging" data-v="journey-aging">Reverse biological aging</a>
+    <a href="#/research" data-v="research">Research layer</a>
     <a href="#/grid" data-v="grid">Body grid</a>
+    <a href="#/thesis" data-v="thesis">Why this map</a>
     <a href="#/cns" data-v="cns">Case study: the brain</a>
     <a href="#/machine" data-v="machine">Models &amp; agents</a>
     <a href="#/methods" data-v="methods">Methods &amp; governance</a>
@@ -51,10 +51,11 @@
 <script src="content/collaboration.js"></script>
 <script src="content/leverage.js"></script>
 <script src="content/citations.js"></script>
+<script src="content/human.js"></script>
 <script>
 (function(){
 "use strict";
-var T=window.HRM_THESIS||{}, CO=window.HRM_COLLAB||{};
+var T=window.HRM_THESIS||{}, CO=window.HRM_COLLAB||{}, HU=window.HRM_HUMAN||{};
 
 /* ---------- ONE CAVEAT, USED EVERYWHERE ---------- */
 var CAVEAT="Research state only. Not a clinical tool. It does not diagnose, recommend treatments, or give advice about any person's illness.";
@@ -194,11 +195,11 @@ function howToRead(extra){
 /* ================================================================
    START — the entrance
    ================================================================ */
-function vStart(){
+function vSurvey(){
   setTimeout(function(){withGraph("survey-host",surveyBody);},0);
-  return '<div class="orient">'+
+  return '<div class="coord">Research layer</div><div class="orient" style="margin-top:14px">'+
     '<h1 class="q46">What would it take to repair a human body?</h1>'+
-    '<p class="s17">Choose a map. Both are views of the same evidence graph.</p>'+
+    '<p class="s17">Choose a map. Both are views of the same evidence graph. <a href="#/start">'+esc(HU.research&&HU.research.backHuman||"Back to the plain explanation")+'</a></p>'+
     '<p class="s15">Each map shows what has been demonstrated, what is still required, and which open questions currently block the most downstream progress.</p>'+
     '</div>'+
     '<div id="survey-host">'+loading()+'</div>'+
@@ -282,6 +283,70 @@ function startStats(){
 }
 
 /* ================================================================
+   HUMAN LAYER — the living atlas (design/concepts/04, 05; copy in content/human.js)
+   ================================================================ */
+var JOURNEY={repair:{proj:"universal-repair",art:"content/art/b-repair.jpg"},aging:{proj:"rejuvenation",art:"content/art/c-aging.jpg"}};
+function vStart(){
+  var E=HU.entrance||{}, J=E.journeys||{};
+  setTimeout(function(){loadGraph().then(function(){var m=GRAPH.manifest;var el=document.getElementById("h-rev");if(el)el.textContent=(m.humanReviewed||0)+" of "+GRAPH.nodes.length+(E.reviewed?E.reviewed.replace(/^0 of 326/,""):" records have been checked by a human researcher.");});},0);
+  function jr(k){var j=J[k]||{};return '<a class="hj" href="#/journey/'+k+'"><div class="t">'+esc(j.title||k)+'</div><div class="sc">'+esc(j.scope||"")+'</div><img class="art" src="'+JOURNEY[k].art+'" alt="" width="1200" height="600"><div class="lead">'+esc(j.lead||"")+'</div></a>';}
+  return '<div class="hentr">'+
+      '<div><h1 class="hq">'+esc(E.question||"What would it take to repair a human body?")+'</h1></div>'+
+      '<img class="art hfig" src="content/art/a-figure.jpg" alt="A drawn anatomical figure with its organ systems, and dependency lines growing from it" width="1254" height="1254">'+
+    '</div>'+
+    '<div class="hchoose">'+esc(E.choose||"Choose where to begin")+'</div>'+
+    '<div class="hjourneys">'+jr("repair")+jr("aging")+'</div>'+
+    '<p class="hboth">'+esc(E.both||"")+'</p>'+
+    '<div class="hsmall"><span class="amber" id="h-rev">0 of 326</span><span>'+esc(E.footnote||"")+' <a href="#/research">'+esc(HU.research&&HU.research.enterResearch||"View the research layer")+' →</a></span></div>';
+}
+function vJourney(k){
+  var cfg=JOURNEY[k]; if(!cfg) return vNotFound();
+  var J=(HU.journeys||{})[k]||{}, E=(HU.entrance||{}).journeys||{}, T2=E[k]||{};
+  setTimeout(function(){withGraph("j-host",function(){return journeyBody(k);});},0);
+  return '<div class="coord"><a href="#/start">Human Repair Map</a> / '+esc(T2.title||k)+'</div>'+
+    '<div class="jhead" style="margin-top:14px"><h1 class="t">'+esc(J.headline||T2.title||"")+'</h1><div class="frame">'+esc(J.frame||"")+'</div></div>'+
+    '<p class="jopen">'+esc(J.opening||"")+'</p>'+
+    '<div id="j-host">'+loading()+'</div>';
+}
+var J_OPEN={};
+function rungSummary(items){var c={};items.forEach(function(x){var r=(x.grade&&x.grade.rung)||"ungraded";c[r]=(c[r]||0)+1;});return RUNGS.concat(["ungraded"]).filter(function(r){return c[r];}).map(function(r){return c[r]+" at "+r;}).join(", ").replace(/ at ungraded/g," ungraded");}
+function journeyBody(k){
+  var cfg=JOURNEY[k], proj=cfg.proj, J=(HU.journeys||{})[k]||{}, R=HU.research||{};
+  var caps=GRAPH.nodes.filter(function(n){return n.type==="capability"&&n.id.indexOf("--")<0&&inProj(n,proj);});
+  var stop=J.stop||"edit";
+  var stages=(HU.stages||[]).map(function(st){
+    var items=caps.filter(function(c){return c.class===st.id;});
+    var rungs=items.map(function(c){return c.grade&&c.grade.rung;}).filter(Boolean);
+    var idx=rungs.map(function(r){return rungIndex(r);}); var lo=idx.length?Math.min.apply(null,idx):-1;
+    return {st:st,items:items,rungs:rungs,lo:lo,open:J_OPEN[k+":"+st.id]};
+  });
+  var row=stages.map(function(S){
+    var st=S.st, isStop=st.id===stop;
+    var expand=S.open?'<ul class="caprows" style="margin-top:10px">'+S.items.map(function(c){var g=c.grade||{};return '<li class="caprow" style="grid-template-columns:1fr"><div class="nm"><a href="'+nodeHref(c.id)+'">'+esc(c.name)+'</a></div><div class="meta">'+ruler(g.rung,c.review?c.review.state:"ai-proposed")+' '+esc(g.rung||"ungraded")+(g.blocked&&g.blocked!=="none"?' · blocked by '+esc(g.blocked):"")+'</div></li>';}).join("")+'</ul>':"";
+    var n=S.items.length;
+    return '<div class="jst'+(isStop?' stop':'')+'"><div class="t">'+esc(st.title)+'</div><div class="ask">'+esc(st.ask||"")+'</div><div class="st">'+esc((J.states||{})[st.id]||"")+'</div>'+
+      '<button class="sim-reset" data-jst="'+esc(st.id)+'" aria-expanded="'+(S.open?'true':'false')+'" style="margin-top:8px">'+(S.open?'hide the capabilities':(n+' capabilit'+(n===1?'y':'ies')+' behind this'))+'</button>'+expand+'</div>';
+  }).join("");
+  var Sstop=stages.filter(function(S){return S.st.id===stop;})[0];
+  var qset={}; (Sstop?Sstop.items:[]).forEach(function(c){(c.derivedRelations&&c.derivedRelations.blockedBy||[]).forEach(function(q){qset[q]=true;});});
+  var qs=(GRAPH.analysis.rankedQuestions||[]).filter(function(q){return qset[q.id];}).slice(0,3);
+  var loRung=Sstop&&Sstop.lo>=0?RUNGS[Sstop.lo]:"ungraded";
+  var blockedBy={}; (Sstop?Sstop.items:[]).forEach(function(c){var b=c.grade&&c.grade.blocked;if(b&&b!=="none")blockedBy[b]=(blockedBy[b]||0)+1;});
+  var bb=Object.keys(blockedBy).sort(function(a,b){return blockedBy[b]-blockedBy[a];})[0]||"—";
+  var B=J.blocked||{};
+  var block='<div class="jblock"><div class="fig"><img class="art" src="content/art/e-silhouette.jpg" alt="" width="500" height="999"><div class="m9">Worked example</div><div class="st" style="font-size:12.5px;line-height:18px;color:var(--ink-2)">Adult skin after injury</div></div>'+
+    '<div><div class="h">'+esc(B.headline||"This is currently blocked.")+'</div><p class="ex">'+esc(B.explain||"")+'</p>'+(J.alsoOpen?'<p class="ex">'+esc(J.alsoOpen)+'</p>':"")+
+    '<div class="ch">'+esc(B.change||"What would change this?")+'</div>'+
+    (qs.length?'<ol>'+qs.map(function(q){return '<li><a href="'+nodeHref(q.id)+'">'+esc(q.question)+'</a></li>';}).join("")+'</ol>':'<p class="note">No ranked question is attached to this stage yet.</p>')+
+    '<div class="formal">'+(Sstop?Sstop.items.length:0)+' capabilities: '+esc(rungSummary(Sstop?Sstop.items:[]))+' · lowest '+esc(loRung)+' · most often blocked by '+esc(bb)+'<span class="amber">UNREVIEWED · HUMAN REVIEW: NONE</span></div>'+
+    '</div><div class="aside">Repair is a chain of steps. Right now, for this example, the chain breaks here.</div></div>';
+  setTimeout(function(){document.querySelectorAll("[data-jst]").forEach(function(b){b.addEventListener("click",function(){var key=k+":"+b.getAttribute("data-jst");J_OPEN[key]=!J_OPEN[key];var host=document.getElementById("j-host");if(host)host.innerHTML=journeyBody(k);});});},0);
+  return '<div class="jpath"><img class="art" src="content/art/d-path.jpg" alt="The six stages of repair drawn as one continuous path: damaged tissue, a healthy lattice, a branching tree that narrows to a stop, regenerating cells, sensing traces, a standing figure" width="2000" height="666"></div>'+
+    '<div class="jstages">'+row+'</div>'+block+
+    '<div class="jfoot"><span>'+esc(R.unreviewed||"")+'</span><a href="#/map/'+esc(proj)+'">'+esc(R.enterResearch||"View this in the research layer")+' →</a></div>';
+}
+
+/* ================================================================
    MAP — one projection of the graph
    ================================================================ */
 function vMap(proj){
@@ -293,7 +358,8 @@ function vMap(proj){
     "full-graph":"This view includes the hand-authored goals and capabilities, the 155 body-grid capability records, the 16 CNS-delivery routes, and every claim, source, question, and experiment in the current bundle."
   }[proj];
   var sw=['universal-repair','rejuvenation','full-graph'].map(function(k){return '<a href="#/map/'+k+'" class="'+(k===proj?'on':'')+'" data-switch="'+k+'">'+esc(PROJ[k].name)+'</a>';}).join("");
-  return '<div class="coord">Map / '+esc(P.name)+'</div>'+
+  var backJ=proj==="rejuvenation"?"aging":"repair";
+  return '<div class="coord"><a href="#/research">Research layer</a> / '+esc(P.name)+' · <a href="#/journey/'+backJ+'">'+esc(HU.research&&HU.research.backHuman||"Back to the plain explanation")+'</a></div>'+
     '<h1 class="h-title" style="margin-top:8px">'+esc(P.name)+'</h1>'+
     '<p class="h-lede">'+esc(P.tag)+'</p>'+
     '<p class="lede-t" style="margin-top:14px">'+esc(intro)+'</p>'+
@@ -403,7 +469,7 @@ function mapBody(proj){
     '<p class="note" style="margin-bottom:14px">For each goal, binding constraints are the AND-required capabilities currently at the lowest rung. An OR gate records alternatives where one member can satisfy that requirement. A break in a line (┤ ? ├) is an open question that blocks that capability; open it in place.</p>'+
     '<ul class="dep" role="tree" id="dep" aria-label="dependency drawing">'+drawing+'</ul>'+
     '<div class="sec-h"><span class="n">02</span> Open questions, ranked</div>'+
-    '<p class="note" style="margin-bottom:6px">The structural ranking counts how much graph structure sits downstream of what each question blocks. It does not estimate probability, cost, or time. A question with a candidate experiment attached is marked.</p>'+
+    '<p class="note" style="margin-bottom:6px">'+esc(HU.research&&HU.research.ranking||"")+' Ranked by downstream dependency count; the ranking does not estimate probability, cost, or time. A question with a candidate experiment attached is marked.</p>'+
     '<div class="margin-qs">'+(margin||'<div class="empty">No open questions in this projection yet.</div>')+'</div>'+
     '<div class="sec-h"><span class="n">03</span> Capabilities, grouped by repair question</div>'+
     '<p class="note" style="margin-bottom:4px">Each capability records a rung from L0 to L5, what was measured, what blocks the next rung, and its review state.</p>'+
@@ -1095,8 +1161,10 @@ function render(){
   var h=location.hash.replace(/^#\/?/,"")||"start";
   var parts=h.split("/");
   var view; var navKey=parts[0];
-  if(parts[0]==="map"&&parts[1]){view=vMap(parts[1]);navKey="map-"+parts[1];}
-  else if(parts[0]==="node"&&parts[1]){view=vNode(parts.slice(1).join("/"));var n0=null;navKey="map-full-graph";}
+  if(parts[0]==="map"&&parts[1]){view=vMap(parts[1]);navKey="research";}
+  else if(parts[0]==="journey"&&parts[1]){view=vJourney(parts[1]);navKey="journey-"+parts[1];}
+  else if(parts[0]==="research"){view=vSurvey();navKey="research";}
+  else if(parts[0]==="node"&&parts[1]){view=vNode(parts.slice(1).join("/"));var n0=null;navKey="research";}
   else if(parts[0]==="route"&&parts[1]){view=vRoute(parts[1]);navKey="cns";}
   else if(parts[0]==="leverage"){view=vLeverage();navKey="cns";}
   else if(parts[0]==="corrections"||parts[0]==="queue"){view=parts[0]==="queue"?vContribute():vCorrections();navKey="contribute";}

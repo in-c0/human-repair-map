@@ -184,9 +184,9 @@ ul.dep,.dep ul{list-style:none;}
 /* junction + branches: CSS tree lines, 1px, 6px elbows */
 .jn{position:relative;padding-left:26px;margin-top:6px;}
 .jn::before{content:'';position:absolute;left:8px;top:-4px;bottom:14px;width:1px;background:var(--line);}
-.jn>.jlab{font-family:var(--fm);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);display:flex;align-items:center;gap:8px;height:16px;position:relative;left:-26px;padding-left:26px;}
+.jn>.jlab{font-family:var(--fm);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;min-height:16px;position:relative;left:-26px;padding-left:26px;}
 .jn>.jlab svg{position:absolute;left:0;top:2px;}
-.jn>.jlab .jnote{font-family:var(--fs);font-size:11px;letter-spacing:0;text-transform:none;color:var(--ink-2);}
+.jn>.jlab .jnote{font-family:var(--fs);font-size:11px;line-height:15px;letter-spacing:0;text-transform:none;color:var(--ink-2);max-width:var(--maxw);padding-bottom:4px;}
 .cap{position:relative;padding:5px 0 5px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;min-height:28px;transition:opacity var(--t-switch) var(--ease-switch);}
 .cap::before{content:'';position:absolute;left:-18px;top:0;width:19px;height:14px;border-left:1px solid var(--line);border-bottom:1px solid var(--line);border-bottom-left-radius:6px;}
 .cap:last-child::after{content:'';position:absolute;left:-18px;top:14px;bottom:0;width:1px;background:var(--paper);}

@@ -8,7 +8,7 @@ Human Repair Map is an attempt to keep score on those pieces of science and make
 
 Live: [humanrepairmap.com](https://humanrepairmap.com) · MCP: [humanrepairmap.com/mcp](https://humanrepairmap.com/mcp) · API: [humanrepairmap.com/api](https://humanrepairmap.com/api)
 
-> **Prototype (graph v0.3, snapshot 2026-09-11). HUMAN REVIEW: NONE.** As of this snapshot, **0 of 326 records** are human-reviewed. Sources have been located and their metadata machine-checked. Unless a record says `reviewed` with a named human reviewer, treat it as **UNREVIEWED**. Research state only. Not a clinical tool. It does not diagnose, recommend treatments, or give advice about any person's illness.
+> **Prototype (graph v0.3, snapshot 2026-09-14). HUMAN REVIEW: NONE.** As of this snapshot, **0 of 503 records** are human-reviewed. Sources have been located and their metadata machine-checked. Unless a record says `reviewed` with a named human reviewer, treat it as **UNREVIEWED**. Research state only. Not a clinical tool. It does not diagnose, recommend treatments, or give advice about any person's illness.
 
 ## What I am trying to work backwards from
 
@@ -48,13 +48,15 @@ Rung and review state are independent. A capability can have human evidence at L
 
 | type | what it records | count |
 |---|---|---:|
-| **goal** | a repair outcome and its AND/OR requirements | 10 |
-| **capability** | something repair requires, with rung, measured, blocked by, and review state | 30 hand-authored + 155 from the body grid |
-| **question** | an unresolved uncertainty connected to what it blocks | 20 |
-| **claim** | one evidence-linked statement with experimental context and provenance | 24 |
-| **experiment** | a candidate or running study that tests a question | 6 |
-| **source** | the primary location of evidence, with machine resolution kept separate from human review | 34 |
+| **goal** | a repair outcome and its AND/OR requirements | 25 |
+| **capability** | something repair requires, with rung, measured, blocked by, and review state | 63 hand-authored + 155 from the body grid |
+| **question** | an unresolved uncertainty connected to what it blocks | 36 |
+| **claim** | one evidence-linked statement with experimental context and provenance | 67 |
+| **experiment** | a candidate or running study that tests a question | 18 |
+| **source** | the primary location of evidence, with machine resolution kept separate from human review | 92 |
 | **cell, route** | the 31-node body grid and 16 CNS-delivery routes retained from earlier versions | 47 |
+
+Six grounds have been worked through: scarless repair of skin, reversal of an established scar, transected peripheral nerve, spinal cord injury, myocardial infarction, and glioblastoma, plus systemic rejuvenation on the other projection. Fracture, sepsis and organ failure are named as planned and are not yet nodes. The list is not a claim that six grounds are enough for universal repair; it is what has actually been worked through.
 
 Relations are stored once and inverse relations are generated. The build rejects dangling references, dependency cycles and unsupported grade structure. For each goal it can identify the current binding constraints and rank open questions by how much downstream structure they block. That ranking does not invent probability, cost or completion dates.
 
@@ -104,9 +106,21 @@ Every result includes structured content plus review state and provenance. `how_
 
 A more capable future model should be able to inspect the same evidence, dependencies, provenance and history without depending on presentation copy.
 
+## Contributing
+
+Everything on the map is unreviewed, which makes the most useful contribution the smallest one: open one record, read its sources, and say whether they support what it claims.
+
+- [**Start here**](https://github.com/in-c0/human-repair-map/issues/33) — what is needed and how to give it.
+- [`review: first read`](https://github.com/in-c0/human-repair-map/labels/review%3A%20first%20read) — one record, one sitting.
+- [`grade this node`](https://github.com/in-c0/human-repair-map/labels/grade%20this%20node) — capabilities the map admits it has not graded.
+- [`needs replication check`](https://github.com/in-c0/human-repair-map/labels/needs%20replication%20check) — claims resting on a single group.
+- [`for a model`](https://github.com/in-c0/human-repair-map/labels/for%20a%20model) — work an agent can do end to end through the API.
+
+Two doors, one queue: `POST /api/proposals` needs no account and becomes a draft pull request within six hours; a GitHub pull request goes to the same place. A named human decides either way, and declined proposals are merged as their own record so the reason stays visible. [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## What is still missing
 
-- **Human review:** 0 of 326 records are human-reviewed in the current snapshot.
+- **Human review:** 0 of 503 records are human-reviewed in the current snapshot. This is the constraint on everything else.
 - **Automated ingestion:** the nightly feed searches Europe PMC and ClinicalTrials.gov per record and files strong hits as proposals; it does not read papers, so relevance is a human's call at review. OpenAlex is not used.
 - **Negative and null evidence:** the schema supports it, but little has been entered.
 - **Researcher validation:** the v0.4 pilot has not yet established whether the graph improves a real researcher's workflow.

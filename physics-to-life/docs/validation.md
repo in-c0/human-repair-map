@@ -5,7 +5,8 @@
 | rung | system | ground truth | what it validates | status |
 |---|---|---|---|---|
 | V0 | slow-fast network with hidden bistable subsystems | independent stiff solver | H1–H4, H6 (partial), H7 (partial), H9 | implemented; see `experiments/v0_toy/results/` |
-| V1 | small synthetic biochemical network (mass-action fast intermediates vs QSSA closure; stochastic option) | full mass-action / SSA | H5, H8 + repeat of V0 questions | specified in outline |
+| V1 | **Drosophila ion-channel → membrane bridge**: Shaker Markov gating → HH gating → reduced current, embedded in a Drosophila membrane/neuron model; multiple targets; interventions with mechanistic interpretation | Level A hidden simulator truth; Level B alternate formulation; Level C published experimental observations | H1, H3, H5, H8, H9 with real parameterisations; H10 precursor (functional restoration) | design + preregistration in progress (ADR-0006) |
+| V1a | small synthetic biochemical network (mass-action vs QSSA closure) — supporting benchmark, integration test, H5/H8 unit experiment | full mass-action / SSA | H5, H8 unit tests | outline only |
 | V2 | ion channel / membrane (Markov channel models vs Hodgkin-Huxley-style gating) | full Markov model | H6 across channel formulations, H7 | planned |
 | V3 | conductance-based neuron | high-resolution multicompartment / external simulator | routing across compartments and channels | planned |
 | V4 | small neural circuit | full circuit simulation | causal routing across neurons | planned |

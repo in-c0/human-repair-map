@@ -74,6 +74,14 @@ its status.
   falsification and historical prospective validation as a *combined* methodology.
 
 ### Consequences for the research question (recorded 2026-09-14)
+- **Owner review (2026-09-14):** the programme must not claim novelty for "using ML to
+  dynamically choose simulation fidelity" or "coupling learned and mechanistic multiscale
+  simulators" — MuMMI and the LED family (LED, AdaLED, iLED, G-LED) already cover those.
+  The candidate novelty is the *conjunction* of target-conditioned causal relevance,
+  selection correctness, value of computation, cross-scale intervention prediction,
+  inverse design, and the validation progression. A fresh adversarial scan against that
+  conjunction is recorded in `novelty_conjunction_scan.md`; if prior work covers it, the
+  contribution narrows again.
 - The framing is **learned goal-oriented model adaptivity for intervention prediction**,
   positioned explicitly against MuMMI and goal-oriented model adaptivity. The word "novel"
   is reserved for the combination, never for a component.

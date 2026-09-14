@@ -80,10 +80,12 @@ physics-aware heuristic, adjoint (goal-oriented) heuristic, learned ensemble rou
 accuracy/compute Pareto frontiers, calibration, refinement-location maps, OOD families,
 ablations — and pre-registered verdicts on H1–H4, H6, H7, H9.
 
-**Result (run `v0_main`, 2026-09-14):** all seven supported under their pre-registered
-criteria, with crossing frontiers between the learned router (selectivity) and the
-physics-aware rule (coverage) and no contribution from the uncertainty bonus. Full
-account: [`experiments/v0_toy/results/v0_main/RESULTS.md`](experiments/v0_toy/results/v0_main/RESULTS.md);
+**Result (runs `v0_main`, `v0_ratio13`, `v0_base0`, 2026-09-14):** the seven testable
+hypotheses passed their preregistered V0 criteria *within this synthetic family and only
+under sparse, causally concentrated closure error*; with a uniformly biased cheap model,
+adaptivity fails completely (no policy, not even the oracle, beats uniform refinement).
+Frontiers cross between the learned router (selectivity) and a written physics rule
+(coverage); the uncertainty bonus contributed nothing. Full account: [`experiments/v0_toy/results/v0_main/RESULTS.md`](experiments/v0_toy/results/v0_main/RESULTS.md);
 decision to proceed to V1: [`docs/decisions/ADR-0005-proceed-to-v1.md`](docs/decisions/ADR-0005-proceed-to-v1.md).
 
 ## Research discipline

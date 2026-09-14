@@ -1,5 +1,17 @@
 # Paper 0 — Physics-to-Life: Learning the Physical Resolution Required to Predict and Repair Living Systems
 
+**Proposition (narrowed after the owner review, 2026-09-14):** Physics-to-Life is a
+*target-conditioned* framework for learning which unresolved physical degrees of freedom
+are causally worth computing for an intervention or control objective, and ultimately for
+solving inverse biological design problems. Generic dynamic multiscale ML (choosing
+fidelity with ML; coupling learned and mechanistic simulators) is **not** our invention and
+is not claimed: MuMMI and the LED family (LED, AdaLED, iLED, G-LED) already do it. The
+manuscript's contribution must survive explicit comparison against MuMMI; LED/AdaLED/
+iLED/G-LED; scientific-ML closure methods; goal-oriented adaptive modelling;
+uncertainty-triggered ML-potential fallback; and active/multi-fidelity simulation. The
+adversarial scan against the six-part conjunction (`docs/literature/
+novelty_conjunction_scan.md`) decides whether the proposition narrows further.
+
 Type: perspective / framework. Gate: literature map complete; V0 worked example available
 (positive or negative). Status: outline (2026-09-14). Do not draft prose before the V0
 review package exists.
@@ -54,8 +66,10 @@ falsification; historical prospective validation as a no-wet-lab external test.
 ## 6. Worked example: V0 (what actually happened — run `v0_main`, 2026-09-14)
 - System, conditions, Pareto frontier, calibration, refinement maps, OOD, ablations
   (`experiments/v0_toy/results/v0_main/RESULTS.md`).
-- Outcome to report verbatim: all seven testable hypotheses supported under pre-registered
-  criteria; adaptivity exists (oracle at 33 % of fine cost, 79 % of episodes need no fine
+- Outcome to report verbatim: the seven testable hypotheses *passed their preregistered V0
+  criteria within one synthetic model family, under sparse, causally concentrated closure
+  error* — and failed completely when the cheap model's error was uniformly distributed
+  (`v0_base0`), which is reported as a central finding; adaptivity exists (oracle at 33 % of fine cost, 79 % of episodes need no fine
   physics); a learned router finds most of it (tolerance at 38 % of fine cost, ECE 0.007,
   AUROC 0.993) but the frontiers cross — the router buys *selectivity* (low waste,
   order-of-magnitude gains at low budgets) while the physics-aware rule buys *coverage*

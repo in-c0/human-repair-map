@@ -9,6 +9,21 @@ Tolerance defining the minimal refinement set: 0.01 (absolute, on the interventi
 effect Y = (1/T)∫x_r dt). Fine/medium/coarse nominal cost per node-step = 10/3/1.
 Main run 89 min on 4 cores; post-hoc grid extension and extra variants ≈ 20 min more.
 
+## 0. How to read this document (added after the owner review, 2026-09-14)
+
+Everything below is a statement about **one synthetic model family**. The correct
+summary is: *the seven testable hypotheses passed their preregistered V0 criteria within
+this family, under sparse, causally concentrated closure error*. They are not broadly
+established. Two results bound every other claim here:
+
+- **§10b (constant-closure cheap model) is a central finding, not a side check:** when
+  the cheap model's error is spread over all components, no policy — oracle included —
+  beats uniform refinement. Adaptive fidelity is useful only when approximation error has
+  exploitable structure.
+- **The "79 % of interventions need no fine physics" figure (§2, H4) is a property of the
+  episode generator** (pulse amplitudes, threshold distribution, network density). It is
+  not evidence that real biology is similarly sparse.
+
 ## 1. Headline
 
 **A cheap adaptive mixture exists and a learned router finds most of it.** The oracle

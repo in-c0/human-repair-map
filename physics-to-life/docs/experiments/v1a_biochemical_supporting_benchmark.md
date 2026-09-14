@@ -1,4 +1,9 @@
-# V1 outline — small synthetic biochemical system (not yet pre-registered)
+# V1a outline — small synthetic biochemical system (SUPPORTING benchmark; not the main V1)
+
+_Status change (owner review, 2026-09-14): another fully synthetic milestone would put too
+much distance between the programme and its objective. This system is retained as an
+integration test, a closure benchmark and an H5/H8 unit experiment. The main V1 is the
+Drosophila ion-channel → membrane bridge (ADR-0006)._
 
 Purpose: repeat the V0 questions in a system whose closure-failure condition is *not*
 analytically crisp, and add the two hypotheses V0 cannot test (H5 physics compilation,

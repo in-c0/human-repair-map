@@ -3,6 +3,18 @@
 Type: benchmark / methods. Gate: V0 and V1 complete with all conditions, OOD families,
 ablations, seed replicates and a cross-simulator test. Status: outline (2026-09-14).
 
+## Interpretive rules (owner review, 2026-09-14)
+- V0 results are stated as "passed the preregistered V0 criteria within this synthetic
+  model family"; the constant-closure negative result (adaptivity requires exploitable
+  error structure) is reported with equal prominence to the positive frontier.
+- H9 is interpreted conservatively: one-shot and sequential routers are distinct
+  conditions; the "one-shot or sequential" rule that carried V0's H9 is disclosed as such
+  and multiplicity is handled explicitly in V1.
+- The 79 % sparsity figure is a generator property and is never presented as evidence
+  about biology.
+- V1 (Drosophila channel/membrane) is the paper's biological test; simulation fidelity
+  and biological fidelity are reported separately.
+
 ## Claims this paper may make (only if the evidence supports them)
 1. An adaptive mixture of cheap closure and fine physics exists that matches uniform fine
    accuracy at a fraction of its cost (oracle bound; H1).

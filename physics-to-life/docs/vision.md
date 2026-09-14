@@ -90,9 +90,10 @@ treated as explicit uncertainty, never hand-waved.
 
 ## The validation ladder
 
-V0 analytically tractable dynamical system → V1 small synthetic biochemical system →
-V2 ion channel / membrane → V3 conductance-based neuron → V4 small circuit → V5 Drosophila
-circuit → V6 broader CNS context. Rungs are not skipped when skipping would make
+V0 analytically tractable dynamical system → V1 Drosophila ion channel → membrane bridge
+(with V1a, a synthetic biochemical system, as a supporting benchmark) → V2/V3 richer
+conductance-based Drosophila neurons → V4 small circuit → V5 Drosophila circuit → V6
+broader CNS context. Rungs are not skipped when skipping would make
 scientific validity hard to debug.
 
 ## Physics compilation

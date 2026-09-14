@@ -1,6 +1,6 @@
 # ADR-0005 — Proceed from V0 to V1, with four required additions
 
-Date: 2026-09-14 · Status: accepted
+Date: 2026-09-14 · Status: accepted; **amended by ADR-0006** (V1 is now the Drosophila ion-channel → membrane bridge; the synthetic biochemical system becomes supporting benchmark V1a)
 
 ## Context
 V0 (`experiments/v0_toy/results/v0_main/RESULTS.md`) supports H1–H4, H6, H7 and H9 under
@@ -11,8 +11,10 @@ members traceable to tolerance-defined hard labels.
 
 ## Decision
 The machinery is validated and failures are interpretable, so the programme graduates to
-V1 (small synthetic biochemical system, `docs/experiments/v1_biochemical_outline.md`).
-V1 must add, as pre-registered conditions:
+V1. *Original text:* V1 = small synthetic biochemical system. *Amended (ADR-0006):* V1 =
+Drosophila ion-channel → membrane bridge; the biochemical system is supporting benchmark
+V1a (`docs/experiments/v1a_biochemical_supporting_benchmark.md`). V1 must add, as
+pre-registered conditions:
 1. a **hybrid router** (physics-derived candidate set, learned ranking within it);
 2. a **value-regression label** (expected error reduction per node) alongside the hard
    necessity label;

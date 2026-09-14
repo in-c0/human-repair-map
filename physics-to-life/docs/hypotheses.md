@@ -180,18 +180,18 @@ policies that move a damaged or aged virtual system toward a target healthy stat
 
 ## Registry table
 
-| ID | Short name | Status (2026-09-14) | First rung tested | Owner doc |
-|----|------------|---------------------|-------------------|-----------|
-| H0 | adaptive physical computation | untested | V0 | this file |
-| H1 | adaptive efficiency | untested → see `experiments/v0_toy/results/` | V0 | this file |
-| H2 | causal fidelity | untested | V0 | this file |
-| H3 | error-aware routing | untested | V0 | this file |
-| H4 | sparse importance | untested | V0 | this file |
+| ID | Short name | Status (2026-09-14, run v0_main) | First rung tested | Owner doc |
+|----|------------|----------------------------------|-------------------|-----------|
+| H0 | adaptive physical computation | V0-supported (H1 ∧ H3/H9; see caveats) | V0 | this file |
+| H1 | adaptive efficiency | V0-supported (oracle 1.0× fine error at 32 % cost; learned 1.46× at 45 %, point estimate) | V0 | `experiments/v0_toy/results/v0_main/RESULTS.md` |
+| H2 | causal fidelity | V0-supported (0.091 vs 0.0009 medium error with/without switching) | V0 | same |
+| H3 | error-aware routing | V0-supported (AUROC 0.993, F1 0.66 at oracle cost, ECE 0.007) | V0 | same |
+| H4 | sparse importance | V0-supported (median 0, 79 % of episodes need no fine physics) | V0 | same |
 | H5 | physics compilation | untested | V1 | this file |
-| H6 | cross-model generalisation | untested | V0 (partial) | this file |
-| H7 | hidden-state inference | untested | V0 (partial) | this file |
+| H6 | cross-model generalisation | V0-supported (partial: formulation, ε, noise, size; fails on sustained-step shift) | V0 (partial) | same |
+| H7 | hidden-state inference | V0-supported (partial: routing probability ECE 0.007) | V0 (partial) | same |
 | H8 | neural closure | untested | V1 | this file |
-| H9 | value of computation | untested | V0 | this file |
+| H9 | value of computation | V0-supported under the registered rule (3 of 5 budgets vs physics via the sequential pair; 4 of 5 vs adjoint); crossing frontiers — physics rule better at high budgets | V0 | same |
 | H10 | inverse design | untested | ≥ V1 | this file |
 
 Statuses are updated only by a logged research-log entry that cites the run id and figure.

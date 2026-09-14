@@ -26,16 +26,6 @@
         "min_cost_meeting": null,
         "cost_fraction_of_fine": null
       },
-      "physics": {
-        "achieved": false,
-        "min_cost_meeting": null,
-        "cost_fraction_of_fine": null
-      },
-      "physics_seq": {
-        "achieved": false,
-        "min_cost_meeting": null,
-        "cost_fraction_of_fine": null
-      },
       "adjoint": {
         "achieved": false,
         "min_cost_meeting": null,
@@ -50,16 +40,6 @@
         "achieved": true,
         "min_cost_meeting": 17375.0,
         "cost_fraction_of_fine": 0.3619791666666667
-      },
-      "learned": {
-        "achieved": false,
-        "min_cost_meeting": null,
-        "cost_fraction_of_fine": null
-      },
-      "learned_seq": {
-        "achieved": false,
-        "min_cost_meeting": null,
-        "cost_fraction_of_fine": null
       },
       "abl_no_uncertainty": {
         "achieved": false,
@@ -150,6 +130,46 @@
         "achieved": true,
         "min_cost_meeting": 23975.0,
         "cost_fraction_of_fine": 0.49947916666666664
+      },
+      "physics": {
+        "achieved": false,
+        "min_cost_meeting": null,
+        "cost_fraction_of_fine": null
+      },
+      "physics_seq": {
+        "achieved": false,
+        "min_cost_meeting": null,
+        "cost_fraction_of_fine": null
+      },
+      "learned": {
+        "achieved": true,
+        "min_cost_meeting": 21649.0,
+        "cost_fraction_of_fine": 0.4510208333333333
+      },
+      "learned_seq": {
+        "achieved": false,
+        "min_cost_meeting": null,
+        "cost_fraction_of_fine": null
+      },
+      "abl_cascade_oversampled": {
+        "achieved": true,
+        "min_cost_meeting": 21621.0,
+        "cost_fraction_of_fine": 0.4504375
+      },
+      "abl_cascade_oversampled_seq": {
+        "achieved": false,
+        "min_cost_meeting": null,
+        "cost_fraction_of_fine": null
+      },
+      "abl_no_intervention": {
+        "achieved": false,
+        "min_cost_meeting": null,
+        "cost_fraction_of_fine": null
+      },
+      "abl_no_intervention_seq": {
+        "achieved": false,
+        "min_cost_meeting": null,
+        "cost_fraction_of_fine": null
       }
     },
     "supported_by_any_adaptive": true,
@@ -426,6 +446,38 @@
         "err_at_oracle_cost": 0.009806701237249553,
         "cost_at_oracle_cost": 16908.0,
         "tau_at_oracle_cost": 0.97
+      },
+      "abl_cascade_oversampled": {
+        "auroc_necessary_prob": 0.9925565058212192,
+        "auroc_necessary_score": 0.9909371644707121,
+        "auroc_flip_prob": 0.9034945177639191,
+        "ece_necessary": 0.007730321069473088,
+        "brier_necessary": 0.010088538155078814,
+        "mean_std": 0.007196529411764093,
+        "auroc_std_for_mistake": 0.984746066495116,
+        "n_nodes": 4800,
+        "f1_at_oracle_cost": 0.6530612244897959,
+        "precision_at_oracle_cost": 0.735632183908046,
+        "recall_at_oracle_cost": 0.5871559633027523,
+        "err_at_oracle_cost": 0.007813262678613224,
+        "cost_at_oracle_cost": 17745.0,
+        "tau_at_oracle_cost": 0.97
+      },
+      "abl_no_intervention": {
+        "auroc_necessary_prob": 0.9897871974246997,
+        "auroc_necessary_score": 0.9888699618046659,
+        "auroc_flip_prob": 0.9521655791170555,
+        "ece_necessary": 0.007015787388685656,
+        "brier_necessary": 0.009732837260259287,
+        "mean_std": 0.007323210806022866,
+        "auroc_std_for_mistake": 0.9776497749898637,
+        "n_nodes": 4800,
+        "f1_at_oracle_cost": 0.7282051282051282,
+        "precision_at_oracle_cost": 0.8255813953488372,
+        "recall_at_oracle_cost": 0.6513761467889908,
+        "err_at_oracle_cost": 0.005796703725263359,
+        "cost_at_oracle_cost": 17882.0,
+        "tau_at_oracle_cost": 0.97
       }
     },
     "supported": true,
@@ -443,8 +495,8 @@
         "learned": 0.015590577441125113,
         "learned_seq": 0.016366247184257207,
         "physics": 0.020769850311647794,
-        "physics_seq": NaN,
-        "adjoint": NaN,
+        "physics_seq": 0.11245162235141094,
+        "adjoint": 0.11245162235141094,
         "random": 0.08211855204493429,
         "oracle": 0.0011102171884576739,
         "uniform_fine": 0.007761249957724711,
@@ -476,11 +528,11 @@
     "multi2": {
       "budget_2x_medium": 28800.0,
       "err_at_budget": {
-        "learned": 0.00992941488326404,
+        "learned": 0.009563902795533506,
         "learned_seq": 0.00933947450299039,
         "physics": 0.013307443530673226,
-        "physics_seq": NaN,
-        "adjoint": NaN,
+        "physics_seq": 0.07874016145479362,
+        "adjoint": 0.07874016145479362,
         "random": 0.06518173355461708,
         "oracle": 0.0015837503555645256,
         "uniform_fine": 0.00743789209776041,
@@ -512,11 +564,11 @@
     "step": {
       "budget_2x_medium": 28800.0,
       "err_at_budget": {
-        "learned": 0.0600665266582439,
-        "learned_seq": 0.0600665266582439,
+        "learned": 0.05598171112485206,
+        "learned_seq": 0.05598171112485206,
         "physics": 0.0019156536665216836,
-        "physics_seq": NaN,
-        "adjoint": NaN,
+        "physics_seq": 0.06508030359229683,
+        "adjoint": 0.06508030359229683,
         "random": 0.03760933516279106,
         "oracle": 0.0008494149828095598,
         "uniform_fine": 0.0007363546630019169,
@@ -548,11 +600,11 @@
     "negative": {
       "budget_2x_medium": 28800.0,
       "err_at_budget": {
-        "learned": 0.0009715460713144915,
-        "learned_seq": 0.0009715460713144915,
+        "learned": 0.0009705861936438891,
+        "learned_seq": 0.0009705861936438891,
         "physics": 0.0009483577511915773,
         "physics_seq": 0.0009484223718979949,
-        "adjoint": NaN,
+        "adjoint": 0.0009705861936438891,
         "random": 0.0009485081258028761,
         "oracle": 0.0009457767064045471,
         "uniform_fine": 0.0009504211361282685,
@@ -584,11 +636,11 @@
     "K20": {
       "budget_2x_medium": 48000.0,
       "err_at_budget": {
-        "learned": 0.0028982709444987514,
-        "learned_seq": 0.0029158112057519605,
+        "learned": 0.0016094858567368509,
+        "learned_seq": 0.0016188894757109137,
         "physics": 0.0011477695049947573,
         "physics_seq": 0.014023638097194837,
-        "adjoint": NaN,
+        "adjoint": 0.036414572639649666,
         "random": 0.023612753001504613,
         "oracle": 0.0007602225523065643,
         "uniform_fine": 0.001141625424195206,
@@ -620,11 +672,11 @@
     "sigmoid": {
       "budget_2x_medium": 28800.0,
       "err_at_budget": {
-        "learned": 0.002308104566488959,
-        "learned_seq": 0.0023245135581976043,
-        "physics": 0.0009463074186533088,
+        "learned": 0.0015332533000565931,
+        "learned_seq": 0.0015261501731218738,
+        "physics": 0.000946013486169013,
         "physics_seq": 0.00253132064350632,
-        "adjoint": NaN,
+        "adjoint": 0.003856779804878671,
         "random": 0.0028141212135373967,
         "oracle": 0.002177320131872083,
         "uniform_fine": 0.000945952372546735,
@@ -656,11 +708,11 @@
     "noisy": {
       "budget_2x_medium": 28800.0,
       "err_at_budget": {
-        "learned": 0.0051997327616988874,
-        "learned_seq": 0.0012474688548665801,
-        "physics": 0.0014112028824359946,
-        "physics_seq": 0.013922213686166512,
-        "adjoint": NaN,
+        "learned": 0.005123383196734935,
+        "learned_seq": 0.0011971123207673623,
+        "physics": 0.0014056319257439635,
+        "physics_seq": 0.01397475660251595,
+        "adjoint": 0.05272462812565279,
         "random": 0.04087151847084581,
         "oracle": 0.0007953824364808422,
         "uniform_fine": 0.0013047553053805517,
@@ -692,11 +744,11 @@
     "sigma0": {
       "budget_2x_medium": 28800.0,
       "err_at_budget": {
-        "learned": 0.002300355918254499,
-        "learned_seq": 0.0017921725272641894,
+        "learned": 0.001959759588946701,
+        "learned_seq": 0.0012385581601893417,
         "physics": 0.0017428233091012354,
-        "physics_seq": NaN,
-        "adjoint": NaN,
+        "physics_seq": 0.03603090160789717,
+        "adjoint": 0.03603090160789717,
         "random": 0.029824478785137318,
         "oracle": 0.0011046049883441434,
         "uniform_fine": 0.0010670800171315457,
@@ -728,11 +780,11 @@
     "sigma06": {
       "budget_2x_medium": 28800.0,
       "err_at_budget": {
-        "learned": 0.007013980935423184,
-        "learned_seq": 0.006120432680810189,
+        "learned": 0.0043368013135981,
+        "learned_seq": 0.0048572721663107405,
         "physics": 0.005435646911568173,
         "physics_seq": 0.01634814144250649,
-        "adjoint": NaN,
+        "adjoint": 0.04025421155555375,
         "random": 0.03026600749492753,
         "oracle": 0.0009425932776168348,
         "uniform_fine": 0.0009734883819179245,
@@ -766,12 +818,12 @@
     "per_family": {
       "sigmoid": {
         "auroc": 0.9970404735242361,
-        "err_learned_at_budget": 0.002308104566488959,
+        "err_learned_at_budget": 0.0015332533000565931,
         "err_random_at_budget": 0.0028141212135373967
       },
       "noisy": {
         "auroc": 0.9915482954545454,
-        "err_learned_at_budget": 0.0051997327616988874,
+        "err_learned_at_budget": 0.005123383196734935,
         "err_random_at_budget": 0.04087151847084581
       }
     },
@@ -789,25 +841,25 @@
           43200.0
         ],
         "mean_diff": [
-          NaN,
-          -0.015130701075492943,
-          0.0005984398190967914,
-          0.0006125204190910635,
-          0.0006125204190910635
+          -0.013389714750746306,
+          -0.0161950777044745,
+          0.00036060878662988824,
+          0.00037470192325757376,
+          0.0003747041510811662
         ],
         "ci_lo": [
-          NaN,
-          -0.026591971392742334,
-          0.0003519360897059542,
-          0.00035324662786209466,
-          0.00035324662786209466
+          -0.042640262533309346,
+          -0.04367006756903399,
+          0.00014555063123152654,
+          0.00016245037561462273,
+          0.00016245037561462273
         ],
         "ci_hi": [
-          NaN,
-          -0.006286404289902063,
-          0.0009101442596617852,
-          0.0009461578764387983,
-          0.0009461578764387983
+          0.0,
+          -0.006457803717279424,
+          0.0006424449235666668,
+          0.0006595735195663433,
+          0.0006595735195663433
         ],
         "n_budgets_learned_significantly_better": 1,
         "n_budgets_comparator_significantly_better": 3
@@ -821,27 +873,27 @@
           43200.0
         ],
         "mean_diff": [
-          NaN,
-          NaN,
-          -0.013116042502293358,
-          -0.003137921303111415,
-          1.0098078188330985e-05
+          -0.0034413504068171925,
+          -0.04205182612107029,
+          -0.013301014509021157,
+          -0.003329286174048008,
+          -0.00018126679274826284
         ],
         "ci_lo": [
-          NaN,
-          NaN,
-          -0.02417517744169329,
-          -0.007616642833196179,
-          -0.0012736239082060277
+          -0.03593463298261147,
+          -0.05598334242169319,
+          -0.024346569707734488,
+          -0.00773201646297923,
+          -0.0014728074141369227
         ],
         "ci_hi": [
-          NaN,
-          NaN,
-          -0.0054753882133107305,
-          -3.8409776972093764e-05,
-          0.0006587737233339915
+          0.0,
+          -0.030862974553270802,
+          -0.005670503555792692,
+          -0.00019291677041048747,
+          0.00046975552766375197
         ],
-        "n_budgets_learned_significantly_better": 2,
+        "n_budgets_learned_significantly_better": 3,
         "n_budgets_comparator_significantly_better": 0
       },
       "F learned \u2212 E3 adjoint": {
@@ -853,27 +905,59 @@
           43200.0
         ],
         "mean_diff": [
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN
+          -0.013389714750746306,
+          -0.04316212608612631,
+          -0.04337760597380103,
+          -0.04337760597380103,
+          -0.04337760597380103
         ],
         "ci_lo": [
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN
+          -0.042640262533309346,
+          -0.05774086248692047,
+          -0.05795198724058661,
+          -0.05795198724058661,
+          -0.05795198724058661
         ],
         "ci_hi": [
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN
+          0.0,
+          -0.031320616141813765,
+          -0.0313842497581762,
+          -0.0313842497581762,
+          -0.0313842497581762
         ],
-        "n_budgets_learned_significantly_better": 0,
+        "n_budgets_learned_significantly_better": 4,
+        "n_budgets_comparator_significantly_better": 0
+      },
+      "Fs learned(seq) \u2212 E3 adjoint": {
+        "budgets": [
+          18000.0,
+          21600.0,
+          28800.0,
+          36000.0,
+          43200.0
+        ],
+        "mean_diff": [
+          -0.0034413504068171925,
+          -0.04205182612107029,
+          -0.04335188432070052,
+          -0.04335827718490932,
+          -0.04335827718490932
+        ],
+        "ci_lo": [
+          -0.03593463298261147,
+          -0.05598334242169319,
+          -0.057932739029463984,
+          -0.057932739029463984,
+          -0.057932739029463984
+        ],
+        "ci_hi": [
+          0.0,
+          -0.030862974553270802,
+          -0.031380298360987824,
+          -0.031380298360987824,
+          -0.031380298360987824
+        ],
+        "n_budgets_learned_significantly_better": 4,
         "n_budgets_comparator_significantly_better": 0
       },
       "Fs learned(seq) \u2212 O oracle": {
@@ -885,50 +969,36 @@
           43200.0
         ],
         "mean_diff": [
-          0.005502775138764701,
+          0.04030467006776337,
           0.001694194353510308,
-          0.0005791081606078145,
-          0.0005791081606078145,
-          0.0005791081606078145
+          0.00039413615388001855,
+          0.0003877432896712203,
+          0.0003877432896712203
         ],
         "ci_lo": [
-          0.0026361000014021056,
+          0.00396698774313951,
           0.000510685665398615,
-          0.0003291793875348143,
-          0.0003291793875348143,
-          0.0003291793875348143
+          0.0001816438707676569,
+          0.0001816438707676569,
+          0.0001816438707676569
         ],
         "ci_hi": [
-          0.008192757678005912,
+          0.05837343269824097,
           0.0036592917678658046,
-          0.0009319920644570222,
-          0.0009319920644570222,
-          0.0009319920644570222
+          0.0006728889673793165,
+          0.0006728889673793165,
+          0.0006728889673793165
         ],
         "n_budgets_learned_significantly_better": 0,
         "n_budgets_comparator_significantly_better": 5
       }
     },
-    "supported": false,
+    "n_budgets_better_than_physics": 3,
+    "n_budgets_better_than_adjoint": 4,
+    "supported": true,
     "falsified": false
   },
   "ablations": [
-    {
-      "name": "learned",
-      "err_at_1.5x_medium": 0.0016551913794777817,
-      "err_at_2x_medium": 0.0016551913794777817,
-      "cost_to_tol": 18118.0,
-      "auroc": 0.9925838859889814,
-      "ece": 0.007376953067581771
-    },
-    {
-      "name": "learned_seq",
-      "err_at_1.5x_medium": 0.003091216307823188,
-      "err_at_2x_medium": 0.0016304500501800273,
-      "cost_to_tol": 18619.0,
-      "auroc": NaN,
-      "ece": NaN
-    },
     {
       "name": "abl_no_uncertainty",
       "err_at_1.5x_medium": 0.001721822692423959,
@@ -1011,7 +1081,7 @@
     },
     {
       "name": "abl_flip_label",
-      "err_at_1.5x_medium": NaN,
+      "err_at_1.5x_medium": 0.0451754754511213,
       "err_at_2x_medium": 0.0010419221097614992,
       "cost_to_tol": 24242.0,
       "auroc": 0.9609959731596127,
@@ -1019,8 +1089,8 @@
     },
     {
       "name": "abl_flip_label_seq",
-      "err_at_1.5x_medium": NaN,
-      "err_at_2x_medium": NaN,
+      "err_at_1.5x_medium": 0.0451754754511213,
+      "err_at_2x_medium": 0.0451754754511213,
       "cost_to_tol": 37310.0,
       "auroc": NaN,
       "ece": NaN
@@ -1070,6 +1140,54 @@
       "err_at_1.5x_medium": 0.003485964049909027,
       "err_at_2x_medium": 0.0013448912293400738,
       "cost_to_tol": 17094.0,
+      "auroc": NaN,
+      "ece": NaN
+    },
+    {
+      "name": "learned",
+      "err_at_1.5x_medium": 0.0015848316473434914,
+      "err_at_2x_medium": 0.001418285318934398,
+      "cost_to_tol": 18118.0,
+      "auroc": 0.9925838859889814,
+      "ece": 0.007376953067581771
+    },
+    {
+      "name": "learned_seq",
+      "err_at_1.5x_medium": 0.003091216307823188,
+      "err_at_2x_medium": 0.0014382778077288469,
+      "cost_to_tol": 18619.0,
+      "auroc": NaN,
+      "ece": NaN
+    },
+    {
+      "name": "abl_cascade_oversampled",
+      "err_at_1.5x_medium": 0.001695471078391389,
+      "err_at_2x_medium": 0.0013813646689023295,
+      "cost_to_tol": 17745.0,
+      "auroc": 0.9925565058212192,
+      "ece": 0.007730321069473088
+    },
+    {
+      "name": "abl_cascade_oversampled_seq",
+      "err_at_1.5x_medium": 0.0030756798962577048,
+      "err_at_2x_medium": 0.0014814243571755017,
+      "cost_to_tol": 18389.0,
+      "auroc": NaN,
+      "ece": NaN
+    },
+    {
+      "name": "abl_no_intervention",
+      "err_at_1.5x_medium": 0.0019989423452419467,
+      "err_at_2x_medium": 0.0011979014568171658,
+      "cost_to_tol": 17882.0,
+      "auroc": 0.9897871974246997,
+      "ece": 0.007015787388685656
+    },
+    {
+      "name": "abl_no_intervention_seq",
+      "err_at_1.5x_medium": 0.002298318808801001,
+      "err_at_2x_medium": 0.0017796066050106637,
+      "cost_to_tol": 18297.0,
       "auroc": NaN,
       "ece": NaN
     }
@@ -1329,9 +1447,68 @@
         "frac_refined",
         "K"
       ]
+    },
+    "no_intervention": {
+      "n_rows": 30457,
+      "n_pos": 672,
+      "n_episodes": 1200,
+      "label": "necessary",
+      "features": [
+        "x_max",
+        "x_min",
+        "x_final",
+        "x_mean",
+        "margin",
+        "p_gauss",
+        "upstream_pressure",
+        "x_max_over_theta",
+        "influence",
+        "inv_dist",
+        "is_readout",
+        "is_ancestor",
+        "in_degree_abs",
+        "out_degree_abs",
+        "theta_obs",
+        "sigma_theta",
+        "n_refined_upstream",
+        "frac_refined",
+        "K"
+      ]
+    },
+    "cascade_oversampled": {
+      "n_rows": 31213,
+      "n_pos": 1428,
+      "n_episodes": 1200,
+      "label": "necessary",
+      "features": [
+        "x_max",
+        "x_min",
+        "x_final",
+        "x_mean",
+        "margin",
+        "p_gauss",
+        "upstream_pressure",
+        "x_max_over_theta",
+        "is_intervened",
+        "amp_on_node",
+        "amp_total",
+        "duration",
+        "in_weight_from_intervened",
+        "influence",
+        "inv_dist",
+        "is_readout",
+        "is_ancestor",
+        "in_degree_abs",
+        "out_degree_abs",
+        "theta_obs",
+        "sigma_theta",
+        "n_refined_upstream",
+        "frac_refined",
+        "K"
+      ]
     }
   },
   "n_test": 400,
   "n_train": 1200,
-  "runtime_s": 5346.955067396164
+  "runtime_s": 40.4324004650116
 }

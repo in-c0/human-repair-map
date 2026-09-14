@@ -1,38 +1,45 @@
 # STATUS — Physics-to-Life
 
-_Last updated: 2026-09-14 (programme initiation). Full V0 run in progress; this file is
-updated when it completes._
+_Last updated: 2026-09-14, after the V0 run `v0_main`._
 
 ## Current objective
-Obtain the first trustworthy answer to: **can a learned system determine when additional
-physical detail is worth computing?** — on the V0 synthetic slow-fast network with hidden
-ground truth, against random, spatial, physics-aware and adjoint heuristics and an oracle.
+First trustworthy answer to: **can a learned system determine when additional physical
+detail is worth computing?** Obtained at V0 (synthetic slow-fast network, hidden ground
+truth). Next: V1 (synthetic biochemical system) with the four additions of ADR-0005.
 
 ## Latest result
-Pipeline validated end to end (smoke run). Fine simulator matches the independent
-reference to ~1e-3; quasi-static closure is exact unless a node switches; switching is
-sparse (≈ half the episodes, ~1.2 of 12 nodes). Full run (1200 train / 400 test /
-9 OOD families × 150) running.
+All seven hypotheses testable at V0 are supported under their pre-registered criteria
+(H1–H4, H6, H7, H9), with two substantive caveats. (1) **Crossing frontiers:** the learned
+router reaches the 0.01 tolerance at 38 % of uniform-fine cost (physics rule 47 %,
+spatial 65 %, random ≥ 91 %, oracle 31 %) and is an order of magnitude more accurate than
+any heuristic below 1.6 × the cheap model's cost, but it saturates at 1.35 × the numerical
+floor because it confidently misses ~4 % of necessary nodes (intermediate cascade members),
+whereas the physics rule reaches the floor at 59 % of fine cost. (2) **Uncertainty did not
+carry it:** the ensemble-disagreement bonus changes nothing, and on sustained-step
+interventions the router fails with zero disagreement. Calibration is excellent (ECE
+0.007), ranking near-perfect (AUROC 0.993), transfer to a different fast-subsystem
+formulation, stochastic dynamics and a larger network holds.
 
 ## What changed
-Repository, docs, hypothesis registry (pre-registered criteria), V0 implementation, tests,
-four literature scans (see `docs/literature/README.md`).
+V0 run, post-hoc τ-grid extension (documented), failure analysis and two remedial
+variants, seed check, results document, review package, registry statuses, ADR-0005.
 
 ## Current blocker
-None technical. Literature verification is incomplete because the execution environment
-cannot reach publisher/DOI hosts: most citations are "citation-only (unconfirmed)" and
-need a verification pass from a session with web access.
+None technical. Literature citations remain largely unverified (publisher hosts blocked
+from this environment) — a verification pass is needed before any manuscript use.
 
 ## Next experiment
-V0 full run → results entry in `research-log/` → decision on V1 (synthetic biochemical
-system; adds H5 physics compilation and H8 neural closure).
+V1: enzymatic cascade with QSSA closure (graded failure condition); conditions add a
+hybrid router, a value-regression label, two OOD detectors beyond spread, compiled
+surrogate with OOD gating (H5), learned closure (H8), ODE-vs-SSA cross-simulator test.
+Background: V0 variants at cost ratio 13 and with the coarse default.
 
 ## Key scientific risk
-The physics-aware heuristic (which encodes the known closure-failure condition) may not be
-dominated by the learned router. That would mean learning adds nothing where the failure
-condition is known — a legitimate negative result that redirects the programme to systems
-where no such condition is available (the biological rungs).
+Where the closure-failure condition is known, a written rule provides coverage that
+learning does not; the programme's claim must be about selectivity *and* about systems
+where no rule is available. If the hybrid does not dominate both parents at V1, "learned
+routing" is demoted to "learned ranking inside a physics-derived candidate set".
 
 ## Most important figure/result
-`experiments/v0_toy/results/v0_main/figures/fig1_pareto_id.png` (accuracy vs compute) —
-pending.
+`experiments/v0_toy/results/v0_main/figures/fig1_pareto_id.png` (frontier) and §6 of
+`experiments/v0_toy/results/v0_main/RESULTS.md` (the confident misses).

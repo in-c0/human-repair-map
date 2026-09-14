@@ -109,7 +109,8 @@ def calibration_plot(curves: dict, std_hists: dict, path, eces: dict):
     bins = np.linspace(0, 0.5, 26)
     for (fam, s), col in zip(std_hists.items(), ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#4a3aa7"]):
         ax.hist(s, bins=bins, histtype="step", lw=1.4, color=col, density=True, label=fam)
-    ax.set_xlabel("ensemble disagreement (std of member probabilities)"); ax.set_ylabel("density")
+    ax.set_yscale("log")
+    ax.set_xlabel("ensemble disagreement (std of member probabilities)"); ax.set_ylabel("density (log scale)")
     ax.set_title("Model uncertainty in- vs out-of-distribution", fontsize=10, loc="left")
     ax.legend(fontsize=7.5, frameon=False)
     fig.tight_layout(w_pad=3.0)
@@ -301,6 +302,8 @@ def selection_plot(tab, family, path, policies=("learned", "learned_seq", "physi
             ax.scatter(g["cost_mean"], g[key], color=FAMILY_STYLE["oracle"]["color"], marker="*", s=40, zorder=4)
         ax.set_xscale("log"); ax.set_ylim(-0.02, 1.02)
         ax.xaxis.set_minor_formatter(NullFormatter())
+        ticks = [15000, 20000, 30000, 50000, 80000]
+        ax.set_xticks(ticks); ax.set_xticklabels([f"{t//1000}k" for t in ticks])
         ax.set_xlabel("mean total compute (nominal units)"); ax.set_title(lab, fontsize=9, loc="left")
     axes[0].set_ylabel("rate")
     fig.legend(handles=handles + [Line2D([], [], color=FAMILY_STYLE["oracle"]["color"], marker="*", ls="", ms=8, label="O oracle")],

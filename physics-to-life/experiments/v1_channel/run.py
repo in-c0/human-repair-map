@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """V1 pipeline: build (calibrate hierarchy) -> generate (label episodes) -> train -> evaluate -> ood -> analyze."""
 from __future__ import annotations
-import argparse, json, os, pickle, sys, time, resource
+import argparse, json, os, pickle, sys, time, resource, zlib
 from pathlib import Path
 for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS"):
     os.environ.setdefault(_v, "1")
@@ -20,14 +20,36 @@ from physics_to_life.v1.experiment import training_rows, evaluate_episodes, fron
 from physics_to_life.v1.routing import VoCRegressor, HardLabelClassifier  # noqa: E402
 from physics_to_life.v1.ood import RangeGuard, KNNDensity, Conformal, detector_metrics  # noqa: E402
 from physics_to_life.v1 import plots_v1 as P  # noqa: E402
+from physics_to_life.v1.systems import gunay2015_profile as GP  # noqa: E402
+
+
+class ProvisionalProfile:
+    """Episode definitions of the provisional placeholder system (pilot machinery only)."""
+    def sample_intervention(self, rng, family, names):
+        return sample_intervention(rng, family, names)
+
+    def groups(self, rng):
+        return standard_groups(rng)
+
+
+class GunayProfile:
+    def sample_intervention(self, rng, family, names):
+        return GP.sample_intervention(rng, family)
+
+    def groups(self, rng):
+        return GP.groups(rng)
 
 
 def build_system(cfg):
     if cfg["system"] == "provisional":
-        spec = provisional_membrane()
+        spec = provisional_membrane(); profile = ProvisionalProfile()
+    elif cfg["system"] == "gunay2015":
+        from physics_to_life.v1.systems.gunay2015_fine import gunay2015_hierarchy, load_params
+        params = load_params(HERE / cfg.get("hierarchy_params", "hierarchy/gunay2015_fine.json"))
+        spec = gunay2015_hierarchy(params, q10=float(cfg.get("q10", 3.0))); profile = GunayProfile()
     else:
         raise ValueError(cfg["system"])
-    report = {}
+    report = {"profile": type(profile).__name__}
     if cfg.get("calibrate_medium", True):
         for ch in spec.channels:
             if ch.hh_exact:
@@ -36,23 +58,23 @@ def build_system(cfg):
             power = ch.hh_gates[0].power
             info = calibrate_medium_to_fine_traces(spec, ch.name, power=power, n_starts=2)
             report[ch.name] = {"rel_rmse": info["rel_rmse"], "g_scale_cheap": info["params"][12]}
-    return spec, report
+    return spec, report, profile
 
 
 def _one_episode(args):
-    spec, seed, family, cfg_ep, g_cv, r_cv = args
+    spec, seed, family, cfg_ep, g_cv, r_cv, profile = args
     rng = np.random.default_rng(seed)
     inst = sample_instance(spec, rng, g_cv=g_cv, rate_cv=r_cv)
     names = [c.name for c in spec.channels]
-    interv = sample_intervention(rng, family, names)
-    groups = standard_groups(rng)
+    interv = profile.sample_intervention(rng, family, names)
+    groups = profile.groups(rng)
     return label_episode(spec, inst, interv, groups, cfg_ep, seed=seed, family=family)
 
 
-def generate(spec, seeds, families, cfg, n_proc, rng):
+def generate(spec, seeds, families, cfg, n_proc, rng, profile):
     fams = [str(rng.choice(families)) for _ in seeds]
     cfg_ep = EpisodeConfig(base_level=int(cfg["base_level"]), tol_rel=float(cfg["tol_rel"]))
-    jobs = [(spec, int(s), f, cfg_ep, float(cfg["instance_g_cv"]), float(cfg["instance_rate_cv"])) for s, f in zip(seeds, fams)]
+    jobs = [(spec, int(s), f, cfg_ep, float(cfg["instance_g_cv"]), float(cfg["instance_rate_cv"]), profile) for s, f in zip(seeds, fams)]
     if n_proc <= 1:
         return [_one_episode(j) for j in jobs]
     with mp.get_context("spawn").Pool(n_proc) as pool:
@@ -85,9 +107,9 @@ def main():
     print("[build]", flush=True); t0 = time.time()
     spec_path = cache / "spec.pkl"
     if spec_path.exists():
-        spec, report = pickle.load(open(spec_path, "rb"))
+        spec, report, profile = pickle.load(open(spec_path, "rb"))
     else:
-        spec, report = build_system(cfg); pickle.dump((spec, report), open(spec_path, "wb"))
+        spec, report, profile = build_system(cfg); pickle.dump((spec, report, profile), open(spec_path, "wb"))
     write_json(out / "calibration_report.json", report); timings["build_s"] = time.time() - t0
     names = [c.name for c in spec.channels]
     print(f"  channels {names}; calibration {report}", flush=True)
@@ -98,7 +120,8 @@ def main():
         p = cache / f"{name}.pkl"
         if p.exists():
             return pickle.load(open(p, "rb"))
-        eps = generate(spec, seeds, fams, cfg, n_proc, np.random.default_rng(seed + hash(name) % 1000))
+        # deterministic per-split stream (Python's str hash is salted per process; zlib.crc32 is not)
+        eps = generate(spec, seeds, fams, cfg, n_proc, np.random.default_rng(seed + zlib.crc32(name.encode()) % 1000), profile)
         pickle.dump(eps, open(p, "wb")); return eps
     train = load_or_gen("train", 10_000 + np.arange(cfg["n_train"]), cfg["id_families"])
     test = load_or_gen("test", 20_000 + np.arange(cfg["n_test"]), cfg["id_families"])

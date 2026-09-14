@@ -30,17 +30,15 @@ from .parameters import vclamp_activation, vclamp_recovery, cclamp_step
 # ---------------------------------------------------------------------------
 
 def sample_instance(spec: MembraneSpec, rng: np.random.Generator, g_cv: float = 0.25, rate_cv: float = 0.15) -> MembraneSpec:
-    """Log-normal jitter of conductances and of the k0 of every rate (kinetic variability).
-    The nominal spec is what the router 'knows'; the instance is what the simulators run."""
+    """Log-normal jitter of conductances and of the kinetic rates (by scale key), applied
+    identically at every fidelity level so that the levels remain descriptions of the same cell.
+    The nominal spec is what the router 'knows'; the instance is what the simulators run.
+    Block keys (drug concentration) are never jittered."""
     inst = copy.deepcopy(spec)
     for ch in inst.channels:
         ch.g_max *= float(np.exp(rng.normal(0.0, g_cv)))
-        for tr in ch.markov.transitions:
-            tr.rate.k0 *= float(np.exp(rng.normal(0.0, rate_cv)))
-        for g in ch.hh_gates:
-            if g.alpha is not None:
-                g.alpha.k0 *= float(np.exp(rng.normal(0.0, rate_cv)))
-                g.beta.k0 *= float(np.exp(rng.normal(0.0, rate_cv)))
+        for key in sorted(k for k in ch.scale_keys() if not k.startswith("block")):
+            ch.intrinsic_scales[key] = ch.intrinsic_scales.get(key, 1.0) * float(np.exp(rng.normal(0.0, rate_cv)))
     inst.g_leak *= float(np.exp(rng.normal(0.0, g_cv)))
     return inst
 

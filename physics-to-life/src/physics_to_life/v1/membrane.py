@@ -3,7 +3,8 @@
 State layout: [V] (current clamp only) followed by each channel's state block:
   level 2  Markov occupancies (n_states)
   level 1  HH gate variables (one per gate)
-  level 0  only the non-instantaneous gates (instantaneous gates are evaluated at x_inf(V))
+  level 0  only the dynamic coarse gates (instantaneous gates are evaluated at x_inf(V);
+           dropped gates are absorbed by their mix partner)
 Integration uses scipy's solve_ivp piecewise over protocol segments; the reference uses
 Radau at tight tolerance, the working simulator LSODA at moderate tolerance.  Cost is
 reported three ways: nominal (RHS evaluations x total state dimension), RHS evaluations,
@@ -39,14 +40,23 @@ class MembraneSpec:
     Na_out: float = 120.0
     Na_in: float = 15.0
     v_rest_guess: float = -65.0
+    e_rev_mode: str = "nernst"               # "nernst": E from concentrations; "fixed_shift": published E_rev, shifted by the Nernst term when K_out changes
+    K_ref: float = 5.0                       # mM; reference extracellular K+ of the published E_K (fixed_shift mode)
 
     def e_rev(self, ch: ChannelPopulation, T_K=None, K_out=None) -> float:
         T = T_K or self.T_K
+        if self.e_rev_mode == "fixed_shift":
+            if ch.ion == "K":
+                return ch.e_rev + R_F * T * np.log((K_out or self.K_out) / self.K_ref)
+            return ch.e_rev
         if ch.ion == "K":
             return nernst(T, K_out or self.K_out, self.K_in)
         if ch.ion == "Na":
             return nernst(T, self.Na_out, self.Na_in)
         return ch.e_rev
+
+    def channel(self, name: str) -> ChannelPopulation:
+        return [c for c in self.channels if c.name == name][0]
 
 
 @dataclass
@@ -92,6 +102,20 @@ class SimSettings:
     max_step: float = 0.5
 
 
+def merged_scales(spec: MembraneSpec, interv: Intervention) -> dict:
+    """Intrinsic (per-instance) kinetic multipliers composed with the intervention's."""
+    scales: dict = {}
+    for ch in spec.channels:
+        for k, v in ch.intrinsic_scales.items():
+            scales[k] = scales.get(k, 1.0) * v
+    for k, v in interv.rate_scales.items():
+        scales[k] = scales.get(k, 1.0) * v
+    for ch in spec.channels:
+        # drug concentration multiplier of the state-dependent block transition (0 = no drug)
+        scales[f"block_on:{ch.name}"] = float(interv.block_conc.get(ch.name, 0.0))
+    return scales
+
+
 def _layout(spec: MembraneSpec, fidelity: dict, kind: str):
     """Return list of (channel, level, slice) and total dimension."""
     off = 1 if kind == "cclamp" else 0
@@ -114,7 +138,7 @@ def _initial_state(spec: MembraneSpec, blocks, V0: float, T_K: float, scales: di
         elif lvl == 1:
             y[sl] = [g.x_inf(V0, T_K, scales) for g in ch.hh_gates]
         else:
-            y[sl] = [g.x_inf(V0, T_K, scales) for g, inst in zip(ch.hh_gates, ch.coarse_instant) if not inst]
+            y[sl] = [ch.hh_gates[k].x_inf(V0, T_K, scales) for k in ch.coarse_dynamic()]
     return y
 
 
@@ -122,17 +146,8 @@ def _channel_current(ch: ChannelPopulation, lvl: int, ys: np.ndarray, V: float, 
                      e_rev: float, g_scale: float, block: float) -> float:
     if lvl == 2:
         po = float(ys @ ch.markov.open)
-    elif lvl == 1:
-        po = 1.0
-        for g, x in zip(ch.hh_gates, ys):
-            po *= x ** g.power
     else:
-        po = 1.0; k = 0
-        for g, inst in zip(ch.hh_gates, ch.coarse_instant):
-            if inst:
-                po *= g.x_inf(V, T_K, scales) ** g.power
-            else:
-                po *= ys[k] ** g.power; k += 1
+        po = ch.po_from_values(ch.gate_values(lvl, ys, V, T_K, scales))
     g_eff = ch.g_max * (1.0 if lvl == 2 else ch.g_scale_cheap)
     return g_eff * g_scale * (1.0 - block) * po * (V - e_rev)
 
@@ -146,10 +161,7 @@ def simulate(spec: MembraneSpec, protocol: Protocol, fidelity: dict, interv: Int
     t_wall = time.perf_counter()
     T_K = interv.T_K or spec.T_K
     K_out = interv.K_out or spec.K_out
-    scales = dict(interv.rate_scales)
-    for ch in spec.channels:
-        if ch.name in interv.block_conc:
-            scales[f"block_on:{ch.name}"] = interv.block_conc[ch.name]
+    scales = merged_scales(spec, interv)
     kind = protocol.kind
     blocks, dim = _layout(spec, fidelity, kind)
     e_revs = {ch.name: spec.e_rev(ch, T_K, K_out) for ch in spec.channels}
@@ -160,6 +172,7 @@ def simulate(spec: MembraneSpec, protocol: Protocol, fidelity: dict, interv: Int
     if kind == "cclamp":
         V0 = _find_rest(spec, blocks, T_K, scales, e_revs, g_scales, blocks_frac, interv.i_extra + protocol.segments[0][1])
     y0 = _initial_state(spec, blocks, V0, T_K, scales, kind, dim)
+    coarse_idx = {ch.name: ch.coarse_dynamic() for ch in spec.channels}
 
     def rhs(t, y, cmd):
         dy = np.zeros_like(y)
@@ -175,10 +188,7 @@ def simulate(spec: MembraneSpec, protocol: Protocol, fidelity: dict, interv: Int
             elif lvl == 1:
                 dy[sl] = [g.dxdt(x, V, T_K, scales) for g, x in zip(ch.hh_gates, ys)]
             else:
-                k = 0
-                for g, inst in zip(ch.hh_gates, ch.coarse_instant):
-                    if not inst:
-                        dy[sl][k] = g.dxdt(ys[k], V, T_K, scales); k += 1
+                dy[sl] = [ch.hh_gates[k].dxdt(ys[i], V, T_K, scales) for i, k in enumerate(coarse_idx[ch.name])]
         if kind == "cclamp":
             I_leak = spec.g_leak * (V - spec.e_leak)
             dy[0] = (cmd + interv.i_extra - I_ion - I_leak) / spec.C
@@ -219,24 +229,31 @@ def simulate(spec: MembraneSpec, protocol: Protocol, fidelity: dict, interv: Int
     wall = time.perf_counter() - t_wall
     return {"t": t_grid, "V": V_t, "I": I_total, "I_ch": I_ch, "Y": Y, "blocks": [(ch.name, lvl) for ch, lvl, _ in blocks],
             "nfev": nfev, "state_dim": state_dim, "cost": float(nfev * state_dim), "wall": wall,
-            "levels": {ch.name: lvl for ch, lvl, _ in blocks}}
+            "levels": {ch.name: lvl for ch, lvl, _ in blocks}, "V0": V0}
+
+
+def steady_current(spec: MembraneSpec, V: float, levels: dict, T_K: float, scales: dict, e_revs: dict,
+                   g_scales: dict, blocks_frac: dict) -> float:
+    """Net steady-state membrane current (ionic + leak) at voltage V with every channel at its
+    steady state; positive = outward."""
+    I = spec.g_leak * (V - spec.e_leak)
+    for ch in spec.channels:
+        lvl = levels[ch.name]
+        if lvl == 2:
+            po = float(ch.markov.steady_state(V, T_K, scales) @ ch.markov.open); blk = 0.0
+        else:
+            po = ch.po_inf(V, T_K, scales); blk = blocks_frac[ch.name]
+        g_eff = ch.g_max * (1.0 if lvl == 2 else ch.g_scale_cheap)
+        I += g_eff * g_scales[ch.name] * (1 - blk) * po * (V - e_revs[ch.name])
+    return I
 
 
 def _find_rest(spec, blocks, T_K, scales, e_revs, g_scales, blocks_frac, i_hold: float, V_lo=-100.0, V_hi=0.0) -> float:
     """Resting potential by bisection on the steady-state current balance (all channels at steady state)."""
+    levels = {ch.name: lvl for ch, lvl, _ in blocks}
+
     def net(V):
-        I = spec.g_leak * (V - spec.e_leak) - i_hold
-        for ch, lvl, sl in blocks:
-            if lvl == 2:
-                po = float(ch.markov.steady_state(V, T_K, scales) @ ch.markov.open); blk = 0.0
-            else:
-                po = 1.0
-                for g in ch.hh_gates:
-                    po *= g.x_inf(V, T_K, scales) ** g.power
-                blk = blocks_frac[ch.name]
-            g_eff = ch.g_max * (1.0 if lvl == 2 else ch.g_scale_cheap)
-            I += g_eff * g_scales[ch.name] * (1 - blk) * po * (V - e_revs[ch.name])
-        return I
+        return steady_current(spec, V, levels, T_K, scales, e_revs, g_scales, blocks_frac) - i_hold
     # scan upward from V_lo and take the most hyperpolarised stable root (a membrane with a
     # sodium window current can be bistable; the physiological rest is the lower state)
     grid = np.arange(V_lo, V_hi + 1e-9, 0.5)
@@ -246,7 +263,7 @@ def _find_rest(spec, blocks, T_K, scales, e_revs, g_scales, blocks_frac, i_hold:
         return spec.v_rest_guess
     lo, hi = grid[idx[0]], grid[idx[0] + 1]
     flo = vals[idx[0]]
-    for _ in range(50):
+    for _ in range(60):
         mid = 0.5 * (lo + hi); fm = net(mid)
         if flo * fm <= 0:
             hi = mid

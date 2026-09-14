@@ -1,0 +1,20 @@
+# V1 main system: Günay 2015 isopotential aCC motoneuron (ADR-0007). PILOT configuration; the
+# preregistered main configuration is frozen in docs/experiments/v1_preregistration.md.
+run_id: v1_gunay_pilot
+seed: 0
+system: gunay2015
+hierarchy_params: hierarchy/gunay2015_fine.json
+q10: 3.0
+calibrate_medium: false      # the medium level is the published model: never fitted here
+base_level: 1
+tol_rel: 0.05
+n_train: 120
+n_test: 60
+n_ood: 30
+id_families: [none, density, kf_loss, kf_inactivation, kf_recovery, nat_inactivation, temperature, k_out]
+ood_families: [block, opening_step, combo, activation_rate]
+instance_g_cv: 0.2
+instance_rate_cv: 0.1
+n_proc: 4
+s_min: 0.05
+ensemble_members: 5

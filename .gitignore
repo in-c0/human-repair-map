@@ -2,3 +2,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+_site/
+# generated live data: deployed by the workflows, never committed
+public/graph/activity.json
+public/graph/feed.json

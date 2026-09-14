@@ -33,6 +33,7 @@
     <a href="#/journey/repair" data-v="journey-repair">Repair damage</a>
     <a href="#/journey/aging" data-v="journey-aging">Reverse biological aging</a>
     <a href="#/research" data-v="research">Research layer</a>
+    <a href="#/changes" data-v="changes">What changed</a>
     <a href="#/grid" data-v="grid">Body grid</a>
     <a href="#/thesis" data-v="thesis">Why this exists</a>
     <a href="#/cns" data-v="cns">Case study: the brain</a>
@@ -93,6 +94,28 @@ function loadGraph(){
     .then(function(g){GRAPH=g;BYID={};g.nodes.forEach(function(n){BYID[n.id]=n;});paintManifest();return g;});
   return GRAPH_P;
 }
+var ACT=null, ACT_P=null;
+function loadActivity(){
+  if(ACT) return Promise.resolve(ACT);
+  if(ACT_P) return ACT_P;
+  ACT_P=["graph/activity.json","public/graph/activity.json"].reduce(function(p,path){return p.catch(function(){return fetch(path).then(function(r){if(!r.ok)throw new Error(path);return r.json();});});},Promise.reject()).then(function(a){ACT=a;return a;}).catch(function(){ACT={records:{}};return ACT;});
+  return ACT_P;
+}
+/* "Who is working on this": recent papers and active trials for one record, from public/graph/activity.json */
+function activityBlock(id, opts){
+  opts=opts||{};
+  var r=ACT&&ACT.records&&ACT.records[id]; if(!r||(!r.papers&&!r.trials)) return '';
+  var P=r.papers||{papers:[],total:0,institutions:[]}, T=r.trials||{trials:[],total:0};
+  var n=opts.n||4;
+  var trials=T.trials.slice(0,n).map(function(t){return '<li><a href="https://clinicaltrials.gov/study/'+esc(t.nct)+'" target="_blank" rel="noopener">'+esc(t.title)+'</a><span class="meta"> '+esc(t.sponsor||"")+(t.phase?' · '+esc(t.phase.replace(/PHASE/g,"phase ").toLowerCase()):'')+' · '+esc(String(t.status||"").toLowerCase().replace(/_/g," "))+'</span></li>';}).join("");
+  var papers=P.papers.slice(0,n).map(function(x){var href=x.doi?'https://doi.org/'+x.doi:(x.pmid?'https://pubmed.ncbi.nlm.nih.gov/'+x.pmid+'/':'#');return '<li><a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(x.title)+'</a><span class="meta"> '+esc(x.year||"")+(x.affiliations&&x.affiliations[0]?' · '+esc(x.affiliations[0]):'')+(x.preprint?' · preprint':'')+'</span></li>';}).join("");
+  var inst=(P.institutions||[]).slice(0,4).map(function(i){return esc(i.name);}).join(" · ");
+  return '<div class="who"><div class="who-h">Who is working on this</div>'+
+    '<div class="who-g"><div><div class="m9">'+(T.total||0)+' active trial'+(T.total===1?'':'s')+' registered</div>'+(trials?'<ul>'+trials+'</ul>':'<p class="note">None found for this search.</p>')+'</div>'+
+    '<div><div class="m9">'+(P.total||0)+' paper'+(P.total===1?'':'s')+' in the last two years</div>'+(papers?'<ul>'+papers+'</ul>':'<p class="note">None found for this search.</p>')+(inst?'<div class="note" style="margin-top:6px">Groups in the top hits: '+inst+'</div>':'')+'</div></div>'+
+    '<div class="note" style="margin-top:8px">From ClinicalTrials.gov and Europe PMC, refreshed '+esc((ACT.fetchedAt||"").slice(0,10))+'. A search, not a judgement: presence here says the topic is being worked on, not that the work supports the record.</div></div>';
+}
+function activityCount(id){var r=ACT&&ACT.records&&ACT.records[id];if(!r)return null;return {trials:(r.trials&&r.trials.total)||0,papers:(r.papers&&r.papers.total)||0};}
 function paintManifest(){
   if(!GRAPH) return;
   var m=GRAPH.manifest;
@@ -302,7 +325,7 @@ function vStart(){
 function vJourney(k){
   var cfg=JOURNEY[k]; if(!cfg) return vNotFound();
   var J=(HU.journeys||{})[k]||{}, E=(HU.entrance||{}).journeys||{}, T2=E[k]||{};
-  setTimeout(function(){withGraph("j-host",function(){return journeyBody(k);});},0);
+  setTimeout(function(){Promise.all([loadGraph(),loadActivity()]).then(function(){var host=document.getElementById("j-host");if(host)host.innerHTML=journeyBody(k);});},0);
   return '<div class="coord"><a href="#/start">Human Repair Map</a> / '+esc(T2.title||k)+'</div>'+
     '<div class="jhead" style="margin-top:14px"><h1 class="t">'+esc(J.headline||T2.title||"")+'</h1><div class="frame">'+esc(J.frame||"")+'</div></div>'+
     '<p class="jopen">'+esc(J.opening||"")+'</p>'+
@@ -336,7 +359,8 @@ function journeyBody(k){
   var block='<div class="jblock"><div class="fig"><img class="art" src="content/art/e-silhouette.jpg" alt="" width="500" height="999"><div class="m9">Worked example</div><div class="st" style="font-size:12.5px;line-height:18px;color:var(--ink-2)">Adult skin after injury</div></div>'+
     '<div><div class="h">'+esc(B.headline||"This is where we get stuck.")+'</div><p class="ex">'+esc(B.explain||"")+'</p>'+(J.alsoOpen?'<p class="ex">'+esc(J.alsoOpen)+'</p>':"")+
     '<div class="ch">'+esc(B.change||"What would move this forward?")+'</div>'+
-    (qs.length?'<ol>'+qs.map(function(q){return '<li><a href="'+nodeHref(q.id)+'">'+esc(q.question)+'</a></li>';}).join("")+'</ol>':'<p class="note">No ranked question is attached to this stage yet.</p>')+
+    (qs.length?'<ol>'+qs.map(function(q){var c=activityCount(q.id);return '<li><a href="'+nodeHref(q.id)+'">'+esc(q.question)+'</a>'+(c?'<span class="meta"> '+c.trials+' active trial'+(c.trials===1?'':'s')+' · '+c.papers+' recent paper'+(c.papers===1?'':'s')+'</span>':'')+'</li>';}).join("")+'</ol>':'<p class="note">No ranked question is attached to this stage yet.</p>')+
+    (qs[0]&&ACT?activityBlock(qs[0].id,{n:3}):'')+
     '<div class="formal">'+(Sstop?Sstop.items.length:0)+' capabilities: '+esc(rungSummary(Sstop?Sstop.items:[]))+' · lowest '+esc(loRung)+' · most often blocked by '+esc(bb)+'<span class="amber">UNREVIEWED · HUMAN REVIEW: NONE</span></div>'+
     '</div><div class="aside">For this example, this is the step current science cannot complete.</div></div>';
   setTimeout(function(){document.querySelectorAll("[data-jst]").forEach(function(b){b.addEventListener("click",function(){var key=k+":"+b.getAttribute("data-jst");J_OPEN[key]=!J_OPEN[key];var host=document.getElementById("j-host");if(host)host.innerHTML=journeyBody(k);});});},0);
@@ -350,7 +374,7 @@ function journeyBody(k){
    ================================================================ */
 function vMap(proj){
   var P=PROJ[proj]; if(!P) return vNotFound();
-  setTimeout(function(){withGraph("map-body",function(){return mapBody(proj);});},0);
+  setTimeout(function(){Promise.all([loadGraph(),loadActivity()]).then(function(){var host=document.getElementById("map-body");if(host)host.innerHTML=mapBody(proj);}).catch(function(){withGraph("map-body",function(){return mapBody(proj);});});},0);
   var intro={
     "universal-repair":"A severe wound, an infection, cancer, a failing organ and a damaged spinal cord need different treatments. The research question here is which required capabilities repeat across those problems, how far each one has been demonstrated, and which blocker currently stops the next step.",
     "rejuvenation":"Rejuvenation asks what would have to change before an older tissue could regain younger structure and function safely. The same delivery, regeneration, verification and cancer-control problems can also appear in ordinary repair, so shared capabilities keep one evidence state.",
@@ -446,7 +470,7 @@ function mapBody(proj){
 
   var margin=qs.slice(0,proj==="full-graph"?40:20).map(function(q){
     return '<div class="mq"><span class="rk">'+q.rank+'</span><div><div class="qt"><a href="'+nodeHref(q.id)+'">'+esc(q.question)+'</a></div>'+
-      '<div class="qm"><span>'+q.downstreamTotal+' downstream</span>'+(q.directlyBlockedRungs||[]).slice(0,3).map(function(r){return '<span>'+esc(r.rung)+' '+esc(nodeName(node(r.id))).slice(0,48)+'</span>';}).join("")+'<span>'+(q.testedBy&&q.testedBy.length?'experiment proposed':'no experiment attached')+'</span></div></div></div>';
+      '<div class="qm"><span>'+q.downstreamTotal+' downstream</span>'+(function(){var c=activityCount(q.id);return c?'<span>'+c.trials+' active trials · '+c.papers+' recent papers</span>':'';})()+(q.directlyBlockedRungs||[]).slice(0,3).map(function(r){return '<span>'+esc(r.rung)+' '+esc(nodeName(node(r.id))).slice(0,48)+'</span>';}).join("")+'<span>'+(q.testedBy&&q.testedBy.length?'experiment proposed':'no experiment attached')+'</span></div></div></div>';
   }).join("");
 
   var byClass=CLASSES.map(function(k){
@@ -518,7 +542,7 @@ function vNode(rest){
   var id="hrm:"+rest;
   var parts=rest.split("/");
   if(parts[0]==="route") return vRoute(parts.slice(1).join("/"));
-  setTimeout(function(){withGraph("node-body",function(){return nodeBody(id);});setTimeout(wireChallenge,50);},0);
+  setTimeout(function(){withGraph("node-body",function(){return nodeBody(id);});setTimeout(wireChallenge,50);loadActivity().then(function(){var h=document.getElementById("who-host");if(h)h.innerHTML=activityBlock(id,{n:5});});},0);
   return '<div id="node-body">'+loading()+'</div>';
 }
 function kv(k,v){return v?'<div class="ib-row"><span class="ib-k">'+esc(k)+'</span><div class="ib-v">'+v+'</div></div>':'';}
@@ -648,6 +672,7 @@ function nodeBody(id){
     '<div class="rec"><aside class="ltrace">'+ltrace+'</aside><div class="body">'+
       '<h1 class="t28">'+esc(title)+'</h1>'+rulerRow+
       body+
+      '<div id="who-host"></div>'+
       '<h2>How to read this</h2>'+read+
       '<div class="unl"><b>Review state: '+esc(REVIEW_LABEL[rs]||rs)+'</b><span>'+esc(reviewMeaning(rs)||(rs==="n/a"?"Source resolution is a machine check. Human review is recorded on the claims that cite the source.":""))+'</span></div>'+
       prov(n)+
@@ -747,7 +772,7 @@ function vMachine(){
       '<p class="note" style="margin-top:10px">Every tool returns <code>structuredContent</code> alongside a text rendering. <a href="https://humanrepairmap.com/mcp">Endpoint documentation →</a></p></div>'+
     '<div class="two" style="margin-top:14px">'+
       '<div class="col"><h4>REST and OpenAPI</h4><ul style="list-style:none"><li><a href="https://humanrepairmap.com/api">/api</a> — index of every endpoint</li><li><a href="https://humanrepairmap.com/api/openapi.json">/api/openapi.json</a> — OpenAPI 3.1</li><li><span class="mono" style="font-size:12px">/api/nodes/{id}</span> — every record is addressable</li><li><span class="mono" style="font-size:12px">/api/goals/{slug}/critical-path</span> — binding constraints and AND/OR requirements</li><li><span class="mono" style="font-size:12px">/api/questions/ranked?projection=</span> — ranked open questions</li><li><span class="mono" style="font-size:12px">/api/{type}s/{slug}/would-move</span> — the recorded missing demonstration</li></ul></div>'+
-      '<div class="col"><h4>Bulk and versioned</h4><ul style="list-style:none"><li><a href="graph/graph.json">graph.json</a> — manifest, ontology, rubrics, nodes, and analysis</li><li><a href="graph/graph.jsonl">graph.jsonl</a> — one node per line</li><li><a href="graph/graph.jsonld">graph.jsonld</a> — JSON-LD context and resolvable IRIs</li><li><a href="graph/schema/">schema/</a> — JSON Schemas used to validate records</li><li><a href="graph/manifest.json">manifest.json</a> — version, snapshot date, and content hash</li></ul></div>'+
+      '<div class="col"><h4>Bulk and versioned</h4><ul style="list-style:none"><li><a href="graph/graph.json">graph.json</a> — manifest, ontology, rubrics, nodes, and analysis</li><li><a href="graph/graph.jsonl">graph.jsonl</a> — one node per line</li><li><a href="graph/graph.jsonld">graph.jsonld</a> — JSON-LD context and resolvable IRIs</li><li><a href="graph/schema/">schema/</a> — JSON Schemas used to validate records</li><li><a href="graph/manifest.json">manifest.json</a> — version, snapshot date, and content hash</li><li><a href="graph/activity.json">activity.json</a> — recent papers and active trials per record, nightly</li><li><a href="graph/feed.json">feed.json</a> — what appeared since the last run, and what was filed as a proposal</li></ul></div>'+
     '</div>'+
     '<p class="lede-t" style="margin-top:16px">Agents can write proposals and register predictions. <b>POST /api/proposals</b> files a correction, rung challenge, new evidence, or question. <b>POST /api/predictions</b> locks a forecast against the graph snapshot the model actually saw. Neither endpoint changes a canonical record by itself; a named human still decides whether a proposal is accepted.</p>'+
 
@@ -888,6 +913,36 @@ function loadQueue(){
         'proposed by '+esc(p.proposer||"anonymous")+(p.affil?' ('+esc(p.affil)+')':'')+' · '+esc(String(p.created).slice(0,10))+'</div></div>';
     }).join("");
   }).catch(function(){ if(list) list.innerHTML='<div class="empty">Could not load proposals.</div>'; });
+}
+/* WHAT CHANGED: the nightly feed's digest (public/graph/feed.json). A search over the field, not a
+   change to the map; the items a human should look at first are the ones that became proposals. */
+function vChanges(){
+  setTimeout(function(){
+    Promise.all([loadGraph(), fetch("graph/feed.json").then(function(r){if(!r.ok)throw new Error();return r.json();})]).then(function(x){
+      var f=x[1], host=document.getElementById("chg-host"); if(!host) return;
+      var items=f.items||[];
+      if(!items.length){host.innerHTML='<div class="empty">Nothing new in the window yet. The feed runs nightly.</div>';return;}
+      var byDay={}; items.forEach(function(it){(byDay[it.seen]=byDay[it.seen]||[]).push(it);});
+      var days=Object.keys(byDay).sort().reverse();
+      var filed=items.filter(function(i){return i.proposal;}).length;
+      host.innerHTML='<div class="chg-sum m9">'+items.length+' item'+(items.length===1?'':'s')+' in the last 90 days · '+filed+' filed as proposal'+(filed===1?'':'s')+' · last run '+esc(f.lastRun||"")+'</div>'+
+        days.map(function(d){
+          return '<div class="chg-day"><div class="chg-d">'+esc(d)+'</div><div class="chg-l">'+byDay[d].map(function(it){
+            var n=node(it.record);
+            return '<div class="chg'+(it.proposal?' chg-p':'')+'"><span class="chg-k">'+(it.kind==="trial"?"TRIAL":"PAPER")+'</span>'+
+              '<span class="chg-w"><a href="'+esc(it.url||"#")+'" target="_blank" rel="noopener">'+esc(it.title)+'</a>'+
+              '<span class="meta">'+esc(it.meta||"")+(it.date?' · '+esc(String(it.date).slice(0,10)):'')+'</span>'+
+              '<span class="meta">on <a href="'+nodeHref(it.record)+'">'+esc(n?nodeName(n):it.record)+'</a>'+(it.also&&it.also.length?' (+'+it.also.length+' more)':'')+
+              (it.proposal?' · <a href="https://github.com/in-c0/human-repair-map/pulls?q=is%3Apr+'+esc(it.proposal)+'" target="_blank" rel="noopener">proposal '+esc(it.proposal)+'</a>, awaiting a human':'')+'</span></span></div>';
+          }).join("")+'</div></div>';
+        }).join("");
+    }).catch(function(){var host=document.getElementById("chg-host");if(host)host.innerHTML='<div class="empty">The feed has not run yet, or graph/feed.json could not be loaded.</div>';});
+  },0);
+  return '<div class="coord"><a href="#/research">research</a> / what changed</div>'+
+    '<h1 class="h-title">What changed</h1>'+
+    '<p class="h-lede">Every night the feed searches Europe PMC and ClinicalTrials.gov with each record’s own query and lists what appeared. A new registered trial, a clinical paper, or a paper squarely on a record’s topic is also filed as a proposal, which becomes a draft pull request for a human to judge. The rest is listed here and nowhere else.</p>'+
+    '<p class="lede-t">This is a search, not a judgement. An item here does not support or weaken any record until a named person reads it and edits the record. <a href="graph/feed.json">feed.json</a> is the same list for machines.</p>'+
+    '<div id="chg-host">'+loading()+'</div>';
 }
 function vCorrections(){
   var C=window.HRM_CITATIONS||{};
@@ -1162,6 +1217,7 @@ function render(){
   else if(parts[0]==="node"&&parts[1]){view=vNode(parts.slice(1).join("/"));var n0=null;navKey="research";}
   else if(parts[0]==="route"&&parts[1]){view=vRoute(parts[1]);navKey="cns";}
   else if(parts[0]==="leverage"){view=vLeverage();navKey="cns";}
+  else if(parts[0]==="changes"){view=vChanges();navKey="changes";}
   else if(parts[0]==="corrections"||parts[0]==="queue"){view=parts[0]==="queue"?vContribute():vCorrections();navKey="contribute";}
   else if(parts[0]==="search"){view=vSearch(decodeURIComponent(parts.slice(1).join("/")||""));navKey="";}
   else if(parts[0]==="overview"||parts[0]==="capabilities"||parts[0]==="graph"||parts[0]==="evidence"||parts[0]==="tasks"){location.replace("#/map/full-graph");return;}

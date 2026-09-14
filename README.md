@@ -99,6 +99,7 @@ Every result includes structured content plus review state and provenance. `how_
 
 - **REST** — [`/api`](https://humanrepairmap.com/api) · [`/api/openapi.json`](https://humanrepairmap.com/api/openapi.json). Examples: `/api/goals/scarless-skin-repair/critical-path`, `/api/questions/ranked?projection=rejuvenation`, `/api/claims/<slug>/evidence`.
 - **Bulk** — [`/graph/graph.json`](https://humanrepairmap.com/graph/graph.json) · `graph.jsonl` · `graph.jsonld` · `manifest.json` · `schema/`.
+- **Live** — [`/graph/activity.json`](https://humanrepairmap.com/graph/activity.json): recent papers and active trials per record (who is working on this). [`/graph/feed.json`](https://humanrepairmap.com/graph/feed.json): what appeared since the last nightly run, and which items were filed as proposals. Both are searches over Europe PMC and ClinicalTrials.gov, regenerated nightly, and are not claims.
 - **Canonical source** — [`records/`](records/) contains the records; [`schema/`](schema/) and [`ontology/`](ontology/) define their structure and vocabulary; [`scripts/build.mjs`](scripts/build.mjs) generates the website/API exports.
 
 A more capable future model should be able to inspect the same evidence, dependencies, provenance and history without depending on presentation copy.

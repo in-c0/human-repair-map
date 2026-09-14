@@ -532,7 +532,7 @@ def nat_fine_channel_anchored(theta, q10: float = 1.0) -> ChannelPopulation:
 
 def natA_anchored_theta0():
     th0 = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, np.log10(0.05), -0.5, -60.0, np.log10(1.02)])
-    lo = np.array([-1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -4, -3.0, -120, -0.3])
+    lo = np.array([-1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -4, -3.0, -120, -0.7])
     hi = np.array([1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1, 1.0, 20, 0.7])
     return np.clip(th0, lo, hi), lo, hi
 
@@ -561,7 +561,7 @@ def nat_fineB_channel_anchored(theta, q10: float = 1.0) -> ChannelPopulation:
 
 def natB_anchored_theta0():
     th0 = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, np.log10(1e-3), np.log10(1e-2), np.log10(1.02)])
-    lo = np.array([-1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -6, -5, -0.3])
+    lo = np.array([-1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -6, -5, -0.7])
     hi = np.array([1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1, -0.5, 0.7])
     return np.clip(th0, lo, hi), lo, hi
 

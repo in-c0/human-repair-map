@@ -39,21 +39,27 @@ FAMILIES = {
 
 
 def make_episode(seed: int, family: str = "id", cfg: Optional[SimConfig] = None, base: int = 1,
-                 tol_ref: float = 0.01, max_exhaustive: int = 5, with_gains: bool = False) -> dict:
+                 tol_ref: float = 0.01, max_exhaustive: int = 5, with_gains: bool = False,
+                 system_overrides: Optional[dict] = None) -> dict:
     cfg = cfg or SimConfig()
     sys_kw, int_kw = FAMILIES[family]
+    if system_overrides:
+        sys_kw = {**sys_kw, **system_overrides}
     rng = np.random.default_rng(seed)
     spec = make_system(rng, family=family, seed=seed, **sys_kw)
     interv = make_intervention(rng, spec, horizon=cfg.horizon, **int_kw)
     K = spec.K
     t0 = time.perf_counter()
     sim_rng = np.random.default_rng(seed + 10_000)
-    ref = simulate_reference(spec, interv, cfg) if spec.noise == 0 else None
+    if spec.noise == 0:
+        ref = simulate_reference(spec, interv, cfg)
+    else:
+        # stochastic family: the reference is one fine SDE realisation drawn with an
+        # *independent* noise stream, so that every policy (uniform fine included) carries
+        # the irreducible realisation error rather than reproducing the reference exactly
+        ref = simulate_mixed(spec, interv, np.full(K, 2), cfg, rng=np.random.default_rng(seed + 20_000))
     sim = SimCache(spec, interv, cfg, rng=sim_rng)
     fine = sim.run(np.full(K, 2))
-    if ref is None:
-        # stochastic family: the reference is the fine sub-cycled SDE integration itself
-        ref = {"target": fine["target"], "x": fine["x"], "y": fine["y"], "wall": fine["wall"]}
     Y_ref = ref["target"]
     flips = flips_from_traj(ref["y"])
     inv = check_trajectory(spec, interv, ref["x"], ref["y"])
@@ -121,13 +127,16 @@ def make_episode(seed: int, family: str = "id", cfg: Optional[SimConfig] = None,
 
 
 def _make_episode_star(args):
+    if len(args) == 4:
+        seed, family, cfg, kw = args
+        return make_episode(seed, family, cfg, **kw)
     return make_episode(*args)
 
 
 def generate_episodes(seeds, family="id", cfg=None, n_proc=4, **kw) -> list[dict]:
-    args = [(int(s), family, cfg) for s in seeds]
+    args = [(int(s), family, cfg, dict(kw)) for s in seeds]
     if n_proc <= 1:
-        return [make_episode(*a, **kw) for a in args]
+        return [make_episode(*a[:3], **a[3]) for a in args]
     # spawn (not fork): the parent may hold multithreaded BLAS state after model training
     with mp.get_context("spawn").Pool(n_proc) as pool:
         return pool.map(_make_episode_star, args, chunksize=4)

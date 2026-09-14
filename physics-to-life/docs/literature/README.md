@@ -6,7 +6,7 @@ limitations, design implication, novelty-threat call and verification status:
 | file | cluster | entries |
 |---|---|---|
 | `adaptive_fidelity_and_value_of_computation.md` | multi-fidelity methods, RL-AMR, goal-oriented adaptivity, adaptive QM/MM & AdResS, uncertainty-triggered MLIP fallback, adaptive MD sampling, metareasoning | 39 |
-| `sciml_core_methods.md` | neural operators, closures, hybrid/UDE, differentiable simulators, UQ, SBI, active learning, symbolic regression, causal representation learning, model-based RL, inverse design in biology | pending (scan running) |
+| `sciml_core_methods.md` | neural operators, closures, hybrid/UDE, differentiable simulators, UQ, SBI, active learning, symbolic regression, causal representation learning, model-based RL, inverse design in biology | 53 |
 | `molecular_cellular_multiscale.md` | MLIPs, QM/MM, coarse-graining, MSMs/physics compilation, stochastic biochemistry, whole-cell and virtual-cell models, tissue platforms, ion channels, hybrid mechanistic–neural | 48 |
 | `drosophila_and_historical_validation.md` | connectomes, connectome-constrained models, body models, electrophysiology and atlases, aging, regeneration and homeosis, perturbation resources, historical prospective validation | 45 |
 
@@ -48,6 +48,18 @@ its status.
    explicit uncertainty and from repair/aging objectives.
 9. **Cell-tier perturbation prediction is at the linear-baseline floor** (Ahlmann-Eltze
    2025; PerturBench): any cellular rung must beat additive/linear baselines first.
+10. **Alternating learned latent dynamics with bursts of the fine simulator:** LED
+    (Vlachas et al. 2022, *Nat. Mach. Intell.*) already does this on a *fixed* schedule.
+    The programme's routing must be shown to beat a fixed LED-style schedule at matched
+    compute; "adaptive" is only a contribution if it wins that comparison.
+11. **Method defaults recommended by the SciML scan:** UDE-style residual closures trained
+    a posteriori (with memory where needed); amortised neural posterior estimation with
+    misspecification checks for hidden state (identifiability needs intervention-labelled
+    trajectories); heteroscedastic ensembles + conformal calibration for routing-grade
+    uncertainty (not evidential regression); attractor/feedback-vertex-set enumeration →
+    uncertainty-aware MPC with mechanistic re-simulation for inverse design. Not by
+    default: free-running operator/world-model rollouts, PINN forward solvers, vanilla
+    SINDy on noisy partially observed biology.
 
 ### Open (the programme's defensible claims)
 - A **learned per-subsystem fidelity policy** over {surrogate, coarse mechanistic, fine

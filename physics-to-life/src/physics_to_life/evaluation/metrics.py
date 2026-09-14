@@ -48,9 +48,18 @@ def pareto_table(df: pd.DataFrame, tol_ref: float, n_boot: int = 1000) -> pd.Dat
     return pd.DataFrame(out)
 
 
-def _curve(tab: pd.DataFrame, policy: str, family: str):
+def _curve(tab: pd.DataFrame, policy: str, family: str, fallback: bool = True):
+    """(mean cost, mean error) points of a policy's sweep.  For adaptive policies the
+    uniform-medium point is appended as an always-available fallback: with a budget below a
+    policy's own minimum cost one simply runs the cheap model."""
     t = tab[(tab.policy == policy) & (tab.family == family)].sort_values("cost_mean")
-    return t["cost_mean"].values, t["err_mean"].values
+    c, e = t["cost_mean"].values, t["err_mean"].values
+    if fallback and not policy.startswith("uniform"):
+        m = tab[(tab.policy == "uniform_medium") & (tab.family == family)]
+        if not m.empty:
+            c = np.append(c, m["cost_mean"].values[0]); e = np.append(e, m["err_mean"].values[0])
+            o = np.argsort(c); c, e = c[o], e[o]
+    return c, e
 
 
 def interp_error_at_cost(cost, err, budget):
@@ -85,6 +94,9 @@ def bootstrap_curve_difference(df: pd.DataFrame, family: str, pol_a: str, pol_b:
     seeds = np.array(sorted(d.seed.unique()))
     rng = np.random.default_rng(seed)
     A = d[d.policy == pol_a]; B = d[d.policy == pol_b]
+    # the uniform-medium run is the always-available fallback point (param = -1) for both policies
+    Mrows = d[d.policy == "uniform_medium"].copy(); Mrows["param"] = -1.0
+    A = pd.concat([A, Mrows]); B = pd.concat([B, Mrows]) if not pol_b.startswith("uniform") else B
     pa = A.pivot_table(index="seed", columns="param", values="abs_err"); ca = A.pivot_table(index="seed", columns="param", values="cost")
     pb = B.pivot_table(index="seed", columns="param", values="abs_err"); cb = B.pivot_table(index="seed", columns="param", values="cost")
     pa, ca, pb, cb = (x.reindex(seeds) for x in (pa, ca, pb, cb))

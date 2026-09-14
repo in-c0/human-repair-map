@@ -85,7 +85,7 @@ def pareto_plot(tab, family, path, cost_col="cost_mean", err_col="err_mean", lo_
     ax.set_xscale("log"); ax.set_yscale("log")
     ax.set_xlabel(xlabel); ax.set_ylabel("mean |Ŷ − Y*|  (intervention effect, hidden truth)")
     ax.set_title(title or f"Accuracy vs compute — family '{family}'", fontsize=10, loc="left")
-    ax.legend(handles=handles, fontsize=7.5, frameon=False, loc="upper right", ncol=1)
+    ax.legend(handles=handles, fontsize=7.5, frameon=False, loc="center left", bbox_to_anchor=(1.01, 0.5), ncol=1)
     _save(fig, path)
 
 
@@ -96,10 +96,11 @@ def calibration_plot(curves: dict, std_hists: dict, path, eces: dict):
     ax.plot([0, 1], [0, 1], color=AXIS, lw=0.8)
     cols = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"]
     for (name, (conf, acc, cnt)), col in zip(curves.items(), cols):
-        m = cnt > 0
+        m = cnt >= 10  # bins with fewer than 10 nodes are not shown
         ax.plot(conf[m], acc[m], color=col, lw=1.6, marker="o", ms=4, mec="white", mew=0.6,
                 label=f"{name} (ECE {eces[name]:.3f})")
-    ax.set_xlabel("predicted probability that node is in the minimal refinement set")
+        ax.scatter(conf[m], acc[m], s=np.clip(cnt[m] / max(cnt.max(), 1) * 120, 8, 120), color=col, alpha=0.35, lw=0)
+    ax.set_xlabel("predicted P(node in minimal refinement set)")
     ax.set_ylabel("observed frequency"); ax.set_xlim(0, 1); ax.set_ylim(0, 1)
     ax.set_title("Reliability of routing probabilities", fontsize=10, loc="left")
     ax.legend(fontsize=7.5, frameon=False, loc="upper left")
@@ -110,6 +111,7 @@ def calibration_plot(curves: dict, std_hists: dict, path, eces: dict):
     ax.set_xlabel("ensemble disagreement (std of member probabilities)"); ax.set_ylabel("density")
     ax.set_title("Model uncertainty in- vs out-of-distribution", fontsize=10, loc="left")
     ax.legend(fontsize=7.5, frameon=False)
+    fig.tight_layout(w_pad=3.0)
     _save(fig, path)
 
 
@@ -229,7 +231,7 @@ def curve_difference_plot(diffs: dict, path, cost_ref: dict):
         ax.fill_between(d["cost_grid"], d["lo"], d["hi"], color=col, alpha=0.12, lw=0)
     for name, c in cost_ref.items():
         ax.axvline(c, color=GRID, lw=0.8)
-        ax.annotate(name, (c, ax.get_ylim()[1]), xytext=(2, -10), textcoords="offset points", fontsize=7, color=MUTED)
+        ax.annotate(name, (c, ax.get_ylim()[0]), xytext=(2, 4), textcoords="offset points", fontsize=7, color=MUTED)
     ax.set_xlabel("compute budget (nominal units)"); ax.set_ylabel("Δ mean error at matched budget\n(learned − comparator; < 0 favours learned)")
     ax.set_title("Paired bootstrap of frontier differences (95% CI)", fontsize=10, loc="left")
     ax.legend(fontsize=7.5, frameon=False)

@@ -89,7 +89,7 @@ def analyze(cfg, out_dir: Path, fig_dir: Path, train_eps, test_eps, ood_eps, row
     summary["uniform"] = {"cost_medium": c_med, "cost_fine": c_fine, "err_fine": e_fine, "err_medium": e_med,
                           "err_coarse": e_coarse, "cost_coarse": float(uni["uniform_coarse"].cost_mean)}
     P.pareto_plot(tab, "id", fig_dir / "fig1_pareto_id", tol_ref=tol_ref,
-                  title="Accuracy vs compute, in-distribution test set (400 episodes, 95% bootstrap CI)")
+                  title=f"Accuracy vs compute, in-distribution test set ({len(test_eps)} episodes, 95% bootstrap CI)")
     P.pareto_plot(tab, "id", fig_dir / "fig1b_pareto_id_wallclock", cost_col="wall_mean", lo_col="none", hi_col="none",
                   tol_ref=tol_ref, title="Accuracy vs wall-clock (seconds, includes controller overhead)",
                   xlabel="mean wall-clock per episode (s)")
@@ -208,7 +208,8 @@ def analyze(cfg, out_dir: Path, fig_dir: Path, train_eps, test_eps, ood_eps, row
     grid = budgets
     diffs = {}
     pairs = [("learned", "physics", "F learned − E2 physics"), ("learned_seq", "physics_seq", "Fs learned(seq) − E2s physics(seq)"),
-             ("learned", "adjoint", "F learned − E3 adjoint"), ("learned_seq", "oracle", "Fs learned(seq) − O oracle")]
+             ("learned", "adjoint", "F learned − E3 adjoint"), ("learned_seq", "adjoint", "Fs learned(seq) − E3 adjoint"),
+             ("learned_seq", "oracle", "Fs learned(seq) − O oracle")]
     h9 = {}
     for a, b, lab in pairs:
         if a in set(df.policy) and b in set(df.policy):
@@ -220,10 +221,15 @@ def analyze(cfg, out_dir: Path, fig_dir: Path, train_eps, test_eps, ood_eps, row
                        "n_budgets_learned_significantly_better": int(sum(b_ for b_, _ in better)),
                        "n_budgets_comparator_significantly_better": int(sum(bool(lo > 0) for lo in d["lo"]))}
     summary["H9"] = {"pairs": h9}
-    key = "F learned − E2 physics"; key_s = "Fs learned(seq) − E2s physics(seq)"
-    n_better = max(h9.get(key, {}).get("n_budgets_learned_significantly_better", 0), h9.get(key_s, {}).get("n_budgets_learned_significantly_better", 0))
-    summary["H9"]["supported"] = bool(n_better >= 3)
-    summary["H9"]["falsified"] = bool(n_better == 0)
+    nb = lambda k: h9.get(k, {}).get("n_budgets_learned_significantly_better", 0)
+    n_better_physics = max(nb("F learned − E2 physics"), nb("Fs learned(seq) − E2s physics(seq)"))
+    n_better_adjoint = max(nb("F learned − E3 adjoint"), nb("Fs learned(seq) − E3 adjoint"))
+    summary["H9"]["n_budgets_better_than_physics"] = n_better_physics
+    summary["H9"]["n_budgets_better_than_adjoint"] = n_better_adjoint
+    # supported only if the learned router beats BOTH heuristic families (the best heuristic) at >= 3 of 5 budgets
+    summary["H9"]["supported"] = bool(min(n_better_physics, n_better_adjoint) >= 3)
+    # falsified if some heuristic family is never significantly dominated
+    summary["H9"]["falsified"] = bool(min(n_better_physics, n_better_adjoint) == 0)
     if diffs:
         P.curve_difference_plot(diffs, fig_dir / "fig7_frontier_differences", {"B medium": c_med, "C fine": c_fine})
 
@@ -245,8 +251,16 @@ def analyze(cfg, out_dir: Path, fig_dir: Path, train_eps, test_eps, ood_eps, row
     by_seed = {ep["seed"]: ep for ep in test_eps}
     op_l = matched_operating_point(tab, "id", "learned_seq", oracle_cost); op_p = matched_operating_point(tab, "id", "physics_seq", oracle_cost)
     examples = []
-    cand = [ep for ep in test_eps if ep["necessary"].sum() >= 1]
-    cand = sorted(cand, key=lambda ep: -int(ep["flips_true"].sum()))[:3] if cand else test_eps[:3]
+    # three qualitatively different examples: a cascade with several necessary nodes, a typical
+    # single-necessary case, and switching that is causally irrelevant to the readout
+    def pick(pred, key):
+        c = [ep for ep in test_eps if pred(ep)]
+        return sorted(c, key=key)[:1]
+    cand = pick(lambda ep: ep["necessary"].sum() >= 2, lambda ep: -int(ep["flips_true"].sum()))
+    cand += pick(lambda ep: ep["necessary"].sum() == 1 and ep["flips_true"].sum() >= 2, lambda ep: -int(ep["flips_true"].sum()))
+    cand += pick(lambda ep: ep["necessary"].sum() == 0 and ep["flips_true"].sum() >= 1, lambda ep: -int(ep["flips_true"].sum()))
+    if not cand:
+        cand = test_eps[:3]
     for ep in cand:
         panels, errs, costs = {}, {}, {}
         for pol, op in (("learned (seq.)", op_l), ("physics heuristic (seq.)", op_p)):

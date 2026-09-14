@@ -40,13 +40,15 @@ def cfg_hash(d: dict) -> str:
     return hashlib.sha1(json.dumps(d, sort_keys=True, default=str).encode()).hexdigest()[:10]
 
 
-def load_or_generate(cache_dir: Path, name: str, seeds, family, sim_cfg, n_proc, tol_ref, base, key):
+def load_or_generate(cache_dir: Path, name: str, seeds, family, sim_cfg, n_proc, tol_ref, base, key,
+                     system_overrides=None):
     path = cache_dir / f"{name}_{key}.pkl"
     if path.exists():
         with open(path, "rb") as f:
             return pickle.load(f)
     t0 = time.time()
-    eps = generate_episodes(seeds, family=family, cfg=sim_cfg, n_proc=n_proc, tol_ref=tol_ref, base=base)
+    eps = generate_episodes(seeds, family=family, cfg=sim_cfg, n_proc=n_proc, tol_ref=tol_ref, base=base,
+                            system_overrides=system_overrides)
     print(f"  generated {len(eps)} '{family}' episodes for {name} in {time.time()-t0:.0f}s", flush=True)
     with open(path, "wb") as f:
         pickle.dump(eps, f)
@@ -101,7 +103,8 @@ def main():
         d.mkdir(parents=True, exist_ok=True)
     sim_cfg = SimConfig(**cfg["sim"])
     seed = int(cfg["seed"]); base = int(cfg["base_level"]); tol_ref = float(cfg["tol_ref"]); n_proc = int(cfg["n_proc"])
-    key = cfg_hash({"sim": cfg["sim"], "base": base, "tol_ref": tol_ref})
+    sys_over = cfg.get("system_overrides") or None
+    key = cfg_hash({"sim": cfg["sim"], "base": base, "tol_ref": tol_ref, "system_overrides": sys_over})
     t_start = time.time()
     prov = collect_provenance(cfg, seed)
     write_json(out_dir / "provenance.json", prov)
@@ -113,12 +116,12 @@ def main():
     rng = np.random.default_rng(seed)
     train_seeds = 100_000 + np.arange(cfg["n_train"])
     test_seeds = 200_000 + np.arange(cfg["n_test"])
-    train_eps = load_or_generate(cache_dir, "train", train_seeds, "id", sim_cfg, n_proc, tol_ref, base, key)
-    test_eps = load_or_generate(cache_dir, "test", test_seeds, "id", sim_cfg, n_proc, tol_ref, base, key)
+    train_eps = load_or_generate(cache_dir, "train", train_seeds, "id", sim_cfg, n_proc, tol_ref, base, key, sys_over)
+    test_eps = load_or_generate(cache_dir, "test", test_seeds, "id", sim_cfg, n_proc, tol_ref, base, key, sys_over)
     ood_eps = {}
     for i, fam in enumerate(cfg["ood_families"]):
         seeds_f = 300_000 + 1000 * i + np.arange(cfg["n_ood"])
-        ood_eps[fam] = load_or_generate(cache_dir, f"ood_{fam}", seeds_f, fam, sim_cfg, n_proc, tol_ref, base, key)
+        ood_eps[fam] = load_or_generate(cache_dir, f"ood_{fam}", seeds_f, fam, sim_cfg, n_proc, tol_ref, base, key, sys_over)
     if args.stage == "generate":
         return
 

@@ -1,6 +1,6 @@
-/* "For models and agents" — content. What the machine interface is today, how AI
-   and humans divide the work, and current failure modes. Rewritten 2026-09-11
-   using in-c0/writing-skill. Full reasoning in ai-collaboration.md. */
+/* "For models and agents" — machine-facing copy.
+   Exact graph vocabulary is intentional here. Rules-first rewrite removes explanatory filler
+   while keeping provenance, review state and human gates explicit. */
 window.HRM_COLLAB = {
   live: {
     tools: [
@@ -28,53 +28,53 @@ window.HRM_COLLAB = {
       ["G1", "Cited text", "A paper or report contains the claim", "Full verification packet + human"],
       ["G2", "Structured record", "Registry entry, regulatory filing, or trial record", "Automated cross-check; human spot-audit"],
       ["G3", "Primary data", "Deposited data that can be re-analysed", "Automated re-analysis; human reviews method"],
-      ["G4", "Instrument-signed", "Captured data with an intact signed provenance chain", "No human check for the captured fact; human review for the inference"]
+      ["G4", "Instrument-signed", "Captured data with an intact signed provenance chain", "Captured fact can be machine-verified; inference still needs accountable review"]
     ]
   },
 
   today: {
     can: [
-      "Search literature, trial registries, and regulatory records in parallel",
-      "Extract candidate claims into a fixed schema with source locators",
-      "Compare independent searches and surface conflicting evidence",
-      "Carry a multi-step research task across many sources"
+      "Search papers, trial registries, and regulatory records in parallel",
+      "Extract candidate claims into a fixed schema with exact source locators",
+      "Compare independent searches and flag conflicting evidence",
+      "Carry a research task across many sources without losing the question being asked"
     ],
     cannot: [
-      "Turn an unopened citation into reviewed evidence",
-      "Infer clinical benefit from a surrogate endpoint without supporting evidence",
-      "Set the scientific importance of a result without an accountable decision process"
+      "Turn a citation nobody opened into reviewed evidence",
+      "Treat a biomarker as clinical benefit unless the evidence supports that step",
+      "Decide that a scientific claim matters simply because several models agree"
     ],
-    proof: "One example from this project: six agents graded the sixteen brain-delivery routes in parallel. A second search corrected one agent's statement about a regulatory clinical hold to the narrower public record: the pause was voluntary, while the origin of the reported hold was not publicly established. The record therefore stayed a proposal until its sources could be checked."
+    proof: "In the first brain-delivery audit, six agents graded sixteen routes in parallel. A second search caught one overstatement about a regulatory clinical hold: the public record supported a voluntary pause, while the reported origin of the hold was not publicly established. The entry stayed unreviewed until a person could check the sources."
   },
 
   phases: [
     {
       k: "A",
-      name: "Standing attention",
-      cap: "Agents can run unattended for hours or days, return verifiable source spans, follow a schema reliably, and parse figures, tables, and supplementary data.",
+      name: "Agents that can keep watch",
+      cap: "Agents can run for hours or days, return exact source spans, follow the schema reliably, and read figures, tables, and supplementary data.",
       unlocks: [
-        { t: "Continuous monitoring", d: "A standing agent can watch sources for a capability and file a proposal when something changes. A human still decides whether the canonical record changes." },
-        { t: "Verification packets", d: "For a G1 claim, the reviewer can receive the claim, exact source passage, locator, study context, and contradictions together. This reduces search work while leaving the review decision with the named reviewer.", packet: true }
+        { t: "Continuous monitoring", d: "An agent can watch the sources connected to one capability and file a proposal when new evidence appears. A person still decides whether the canonical record changes." },
+        { t: "Review packets", d: "A reviewer can get the claim, exact passage, locator, study context, and contradictory evidence in one place. That removes search work without pretending the review itself has been automated.", packet: true }
       ]
     },
     {
       k: "B",
-      name: "Adversarial and reproducible",
-      cap: "Agents can re-run analyses from deposited data, compare contradictions across the corpus, and keep persistent identities with a visible record of prior proposals.",
+      name: "Agents that can argue with the evidence",
+      cap: "Agents can re-run analyses from deposited data, compare contradictions across the corpus, and keep a persistent record of their own prior proposals.",
       unlocks: [
-        { t: "Routine re-analysis", d: "When deposited data are available, the system can check whether a reported effect survives a reproducible re-analysis and attach that result to the evidence record." },
-        { t: "Corpus-wide contradiction checks", d: "The system can compare claims that would otherwise remain in separate literatures and propose contradiction links for review." },
-        { t: "Calibration records", d: "Human and model proposers can accumulate a public history of proposals that were accepted, overturned, or disputed. That history can guide how much checking a new proposal receives without bypassing human acceptance." }
+        { t: "Routine re-analysis", d: "When the data are available, the system can check whether a reported result survives a reproducible re-analysis and attach that result to the evidence record." },
+        { t: "Contradiction checks", d: "Claims from separate literatures can be compared directly and proposed as contradictions for review." },
+        { t: "Calibration histories", d: "A model or human proposer can accumulate a visible history of proposals that were accepted, overturned, or disputed. That history can affect how aggressively later proposals are checked without bypassing human acceptance." }
       ]
     },
     {
       k: "C",
-      name: "Closed loops",
-      cap: "Domain models can make testable perturbation forecasts, automated laboratories can execute suitable low-risk studies, and results can return to the graph with provenance.",
+      name: "Models connected to experiments",
+      cap: "Domain models can make testable forecasts, suitable automated laboratories can run low-risk studies, and the results can return with provenance.",
       unlocks: [
-        { t: "Prospective prediction evaluation", d: "A forecast can be locked to a graph snapshot with explicit resolution criteria, then scored when the relevant result becomes available." },
-        { t: "Experiment specifications", d: "For a high-impact open question, the system can propose the experiment that would discriminate between the relevant alternatives and record the assumptions behind that proposal." },
-        { t: "High-volume claim review", d: "More capable models could produce far more candidate claims than people can review. Provenance, review state, prioritisation, and sampling become more important as that volume rises.", warn: true }
+        { t: "Prospective prediction tests", d: "A forecast can be locked to the graph snapshot that existed before the result, with the resolution criteria written down in advance." },
+        { t: "Experiment proposals", d: "For a high-impact open question, a model can propose the experiment that would distinguish the important alternatives and state the assumptions behind it." },
+        { t: "More proposals than people can read", d: "More capable models may produce useful candidate claims much faster than people can review them. Provenance, review state, prioritisation, and sampling matter more as that volume grows.", warn: true }
       ]
     }
   ],
@@ -97,27 +97,27 @@ window.HRM_COLLAB = {
       "Approving <b>target-state and ethics</b> content",
       "Resolving <b>disputes</b>",
       "Accepting <b>safety claims</b>",
-      "Making decisions about <b>research priority</b> when the evidence does not determine them"
+      "Making research-priority decisions when the evidence does not determine them"
     ],
-    why: "The items in the human-gated column carry scientific or normative responsibility. The protocol keeps a named person attached to those decisions. The division of labour is versioned so that any later change is visible."
+    why: "These decisions carry scientific or normative responsibility. A named person stays attached to them. If that boundary changes later, the protocol should change in public rather than quietly moving a human decision into an automated path."
   },
 
   failures: [
-    ["Model monoculture", "Agents built on similar models can make correlated errors, so apparent agreement may add little independent evidence.", "Record the model behind each verdict and use genuinely different models for refutation; agreement from one model family counts accordingly."],
-    ["Citation laundering", "A secondary or AI-generated statement can be repeated until its primary source is hard to find.", "Require a primary-source locator for claims that affect a rung; label secondary evidence explicitly."],
-    ["Review theatre", "A large queue can encourage reviewers to approve packets without checking the underlying evidence.", "Sample-audit reviews, publish overturn rates, and keep disputes visible."],
-    ["Proposal flooding", "Automated proposals can grow faster than review capacity.", "Keep the reviewed core deliberately small, show UNREVIEWED prominently, and prioritise proposals by the dependencies they affect."],
-    ["Capture", "A funder, company, or research group could influence grades that affect its own work.", "Require conflict disclosure for reviewers and keep challenges public. Funding policy should prevent a mapped commercial party from controlling the review process."],
-    ["Automation drift", "Human-gated decisions can gradually move into automated paths because the queue is large.", "Version the division of labour and require a public protocol change before a human gate is removed."]
+    ["Model monoculture", "Several agents built on similar models can repeat the same mistake and look like independent agreement.", "Record the model behind each verdict. Treat agreement from one model family accordingly and use genuinely different systems for refutation."],
+    ["Citation laundering", "A secondary or AI-generated statement can be repeated until nobody checks where it originally came from.", "Require a primary-source locator for claims that affect a rung and label secondary evidence explicitly."],
+    ["Review theatre", "A large queue can turn human review into clicking approve without opening the evidence.", "Sample-audit reviews, publish overturn rates, and keep disputes visible."],
+    ["Proposal flooding", "Agents can create proposals faster than people can check them.", "Keep the reviewed core deliberately small, show UNREVIEWED prominently, and prioritise proposals by the dependencies they affect."],
+    ["Capture", "A funder, company, or research group could have an interest in the grade attached to its own work.", "Require conflict disclosure and keep challenges public. Funding policy should stop a mapped commercial party from controlling review."],
+    ["Automation drift", "Human decisions can slip into automated paths because the queue is inconvenient.", "Version the division of labour and require a public protocol change before removing a human gate."]
   ],
 
   missing: [
-    ["Automated ingestion", "The current records were assembled in one AI-assisted research pass from papers, abstracts, registries, and regulatory material. There is no continuous ingestion pipeline from OpenAlex, PubMed, or ClinicalTrials.gov yet. A future pipeline should create proposals with provenance."],
-    ["Negative and null results", "The schema can record them, but the current graph contains few. This limits any attempt to judge which approaches have already failed."],
-    ["Human review", "HUMAN REVIEW: NONE across the current graph. The first expert reviews will test whether the source-verification and dispute process works in practice."],
-    ["Researcher utility evidence", "No domain researcher has yet completed the v0.4 comparison against their normal literature workflow. The pilot is meant to measure search time, scientific errors, missed evidence, and changes to the researcher's next step."],
-    ["Institutional federation", "Institutions cannot yet run a compatible node beside private data. The public formats were chosen so that federation can be added without changing the meaning of existing records."]
+    ["Automated ingestion", "The current records came from one AI-assisted research pass over papers, abstracts, registries, and regulatory material. There is no continuous OpenAlex, PubMed, or ClinicalTrials.gov ingestion yet."],
+    ["Negative and null results", "The schema can store them, but the current graph has few. That makes it harder to see which approaches have already failed."],
+    ["Human review", "HUMAN REVIEW: NONE across the current graph. The first expert reviews will test whether the source-verification and dispute process is usable."],
+    ["Researcher utility evidence", "No domain researcher has yet completed the v0.4 comparison against their normal literature workflow. The pilot is meant to measure search time, scientific errors, missed evidence, and changes to what the researcher does next."],
+    ["Institutional federation", "An institution cannot yet run a compatible node beside private data. The public formats are intended to make that possible later without changing the meaning of existing records."]
   ],
 
-  test: "For each interface decision, ask whether a more capable future model could inspect the same evidence, dependencies, provenance, and history without scraping or guessing at meaning. If important information exists only in the website presentation, expose it in the graph or machine interface."
+  test: "A future model should be able to inspect the evidence, dependencies, provenance, and history directly. If it has to scrape the website or guess what a field means, that part of the machine interface is unfinished."
 };

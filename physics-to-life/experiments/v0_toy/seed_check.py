@@ -46,6 +46,7 @@ def main():
     rows = [r for r in rows if r["policy"].startswith("learned_seed")]
     pickle.dump(rows, open(cache / "rows_seed_check.pkl", "wb"))
     df = M.rows_to_frame(rows); tab = M.pareto_table(df, float(cfg["tol_ref"]))
+    (out_dir / "tables").mkdir(exist_ok=True)
     tab.to_csv(out_dir / "tables" / "seed_check.csv", index=False)
     summ = []
     for pol in sorted(tab.policy.unique()):

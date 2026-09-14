@@ -104,7 +104,10 @@ def main():
     sim_cfg = SimConfig(**cfg["sim"])
     seed = int(cfg["seed"]); base = int(cfg["base_level"]); tol_ref = float(cfg["tol_ref"]); n_proc = int(cfg["n_proc"])
     sys_over = cfg.get("system_overrides") or None
-    key = cfg_hash({"sim": cfg["sim"], "base": base, "tol_ref": tol_ref, "system_overrides": sys_over})
+    key_src = {"sim": cfg["sim"], "base": base, "tol_ref": tol_ref}
+    if sys_over:
+        key_src["system_overrides"] = sys_over   # keeps the default config's cache key unchanged
+    key = cfg_hash(key_src)
     t_start = time.time()
     prov = collect_provenance(cfg, seed)
     write_json(out_dir / "provenance.json", prov)

@@ -90,6 +90,7 @@ def analyze(cfg, out_dir: Path, fig_dir: Path, train_eps, test_eps, ood_eps, row
                           "err_coarse": e_coarse, "cost_coarse": float(uni["uniform_coarse"].cost_mean)}
     P.pareto_plot(tab, "id", fig_dir / "fig1_pareto_id", tol_ref=tol_ref,
                   title=f"Accuracy vs compute, in-distribution test set ({len(test_eps)} episodes, 95% bootstrap CI)")
+    P.selection_plot(tab, "id", fig_dir / "fig8_selection_correctness")
     P.pareto_plot(tab, "id", fig_dir / "fig1b_pareto_id_wallclock", cost_col="wall_mean", lo_col="none", hi_col="none",
                   tol_ref=tol_ref, title="Accuracy vs wall-clock (seconds, includes controller overhead)",
                   xlabel="mean wall-clock per episode (s)")

@@ -11,6 +11,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+from matplotlib.ticker import NullFormatter
 import networkx as nx
 
 INK = "#0b0b0b"; INK2 = "#52514e"; MUTED = "#898781"; GRID = "#e1e0d9"; AXIS = "#c3c2b7"; SURFACE = "#fcfcfb"
@@ -273,5 +274,37 @@ def trajectory_example_plot(ex: dict, path):
         ax.plot(t, ex["y_med"][:, k], color=col, lw=1.0, ls="--", alpha=0.8)
     ax.set_xlabel("time"); ax.set_ylabel("y_k"); ax.set_title("Hidden fast variables: truth (solid) vs quasi-static closure (dashed)", fontsize=9, loc="left")
     ax.legend(fontsize=7, frameon=False)
+    fig.tight_layout()
+    _save(fig, path)
+
+
+def selection_plot(tab, family, path, policies=("learned", "learned_seq", "physics", "physics_seq", "adjoint", "random", "spatial")):
+    """Computation-selection correctness along each policy's sweep: miss rate (necessary nodes
+    left coarse) and waste (refined nodes that were unnecessary) versus mean compute."""
+    t = tab[tab.family == family]
+    fig, axes = plt.subplots(1, 2, figsize=(9.6, 3.8), sharex=True)
+    handles = []
+    for ax, key, lab in zip(axes, ("miss", "waste"), ("miss rate: necessary nodes not refined", "waste: fraction of refined nodes that were unnecessary")):
+        _style_axes(ax)
+        for pol in policies:
+            if pol not in FAMILY_STYLE:
+                continue
+            st = FAMILY_STYLE[pol]
+            g = t[t.policy == pol].sort_values("cost_mean")
+            if g.empty:
+                continue
+            ax.plot(g["cost_mean"], g[key], color=st["color"], ls=st["ls"], lw=1.6, marker=st["marker"], ms=4, mec="white", mew=0.6)
+            if key == "miss":
+                handles.append(Line2D([], [], color=st["color"], ls=st["ls"], marker=st["marker"], ms=5, lw=1.6, label=st["label"]))
+        g = t[t.policy == "oracle"]
+        if not g.empty:
+            ax.scatter(g["cost_mean"], g[key], color=FAMILY_STYLE["oracle"]["color"], marker="*", s=40, zorder=4)
+        ax.set_xscale("log"); ax.set_ylim(-0.02, 1.02)
+        ax.xaxis.set_minor_formatter(NullFormatter())
+        ax.set_xlabel("mean total compute (nominal units)"); ax.set_title(lab, fontsize=9, loc="left")
+    axes[0].set_ylabel("rate")
+    fig.legend(handles=handles + [Line2D([], [], color=FAMILY_STYLE["oracle"]["color"], marker="*", ls="", ms=8, label="O oracle")],
+               fontsize=7.5, frameon=False, loc="center left", bbox_to_anchor=(1.0, 0.5))
+    fig.suptitle("Did the policy refine what mattered and avoid what did not?", fontsize=10, x=0.01, ha="left")
     fig.tight_layout()
     _save(fig, path)

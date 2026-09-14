@@ -1,8 +1,8 @@
 {
-  "timestamp_utc": "2026-09-14T15:06:32Z",
-  "git_commit": "e4559d6e41a4e8bbb91c82008d6cbee1e0a43aeb",
+  "timestamp_utc": "2026-09-14T16:00:09Z",
+  "git_commit": "608af9180e149f88432e4d60314855d68e654224",
   "git_branch": "claude/physics-to-life-init-fhd8x8",
-  "git_dirty": false,
+  "git_dirty": true,
   "python": "3.11.15 (main, Mar  3 2026, 09:26:23) [GCC 13.3.0]",
   "packages": {
     "numpy": "2.4.6",
@@ -20,22 +20,21 @@
   "hostname": "vm",
   "seed": 0,
   "config": {
-    "run_id": "v0_ratio13",
+    "run_id": "v0_base0",
     "seed": 0,
     "sim": {
       "horizon": 8.0,
       "dt": 0.02,
-      "n_sub": 40,
+      "n_sub": 10,
       "target": "auc"
     },
-    "base_level": 1,
+    "base_level": 0,
     "tol_ref": 0.01,
     "n_train": 600,
     "n_test": 300,
     "n_ood": 100,
     "ood_families": [
-      "amp_high",
-      "sigmoid"
+      "amp_high"
     ],
     "n_proc": 4,
     "kappa": 1.0,
@@ -72,10 +71,6 @@
     },
     "label": "necessary",
     "include_path_states": true,
-    "system_overrides": {
-      "eps": 0.0025
-    },
     "ablations": {}
-  },
-  "runtime_s": 3214.1836643218994
+  }
 }

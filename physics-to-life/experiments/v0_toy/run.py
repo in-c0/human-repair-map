@@ -90,6 +90,7 @@ def main():
     ap.add_argument("--smoke", action="store_true", help="tiny sizes for a pipeline check")
     ap.add_argument("--run-id", default=None)
     ap.add_argument("--n-proc", type=int, default=None)
+    ap.add_argument("--retrain", action="store_true", help="retrain models even if cache/models.pkl exists")
     args = ap.parse_args()
 
     with open(args.config) as f:
@@ -136,15 +137,21 @@ def main():
 
     # ---------------- train ----------------
     print("[train]", flush=True)
-    models, model_info = {}, {}
-    models["main"], model_info["main"] = train_model(train_eps, cfg, None, seed)
-    for name, variant in cfg.get("ablations", {}).items():
-        v = dict(variant); v.pop("kappa", None)
-        if v:
-            models[name], model_info[name] = train_model(train_eps, cfg, v, seed)
-    write_json(out_dir / "model_info.json", model_info)
-    with open(cache_dir / "models.pkl", "wb") as f:
-        pickle.dump(models, f)
+    models_path = cache_dir / "models.pkl"
+    if models_path.exists() and not args.retrain:
+        models = pickle.load(open(models_path, "rb"))
+        model_info = json.load(open(out_dir / "model_info.json")) if (out_dir / "model_info.json").exists() else {}
+        print(f"  loaded {len(models)} cached models (use --retrain to refit)", flush=True)
+    else:
+        models, model_info = {}, {}
+        models["main"], model_info["main"] = train_model(train_eps, cfg, None, seed)
+        for name, variant in cfg.get("ablations", {}).items():
+            v = dict(variant); v.pop("kappa", None)
+            if v:
+                models[name], model_info[name] = train_model(train_eps, cfg, v, seed)
+        write_json(out_dir / "model_info.json", model_info)
+        with open(models_path, "wb") as f:
+            pickle.dump(models, f)
     if args.stage == "train":
         return
 

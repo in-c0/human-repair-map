@@ -63,6 +63,12 @@ def train_model(episodes, cfg, variant: dict | None = None, seed: int = 0):
     n_train = v.get("n_train", len(episodes))
     eps = episodes[:n_train]
     X, y, groups = build_training_set(eps, label=label, include_path=include_path)
+    if v.get("oversample_third_party"):
+        # replicate the rare positives that are neither the intervened node nor the readout
+        i_int, i_read = FEATURE_NAMES.index("is_intervened"), FEATURE_NAMES.index("is_readout")
+        rare = (y == 1) & (X[:, i_int] == 0) & (X[:, i_read] == 0)
+        reps = int(v["oversample_third_party"])
+        X = np.concatenate([X] + [X[rare]] * reps); y = np.concatenate([y] + [y[rare]] * reps)
     feature_idx = None
     if "drop_groups" in v:
         drop = set()
@@ -153,12 +159,12 @@ def main():
         variants[f"abl_{name}"] = dict(model=mk, sequential=False, kappa=k)
         variants[f"abl_{name}_seq"] = dict(model=mk, sequential=True, kappa=k)
     def merge_ext(rows, ext_path):
-        """Replace the score-based policies' rows with the extended-grid rows if available."""
-        if not ext_path.exists():
-            return rows
-        ext = pickle.load(open(ext_path, "rb"))
-        replaced = {r["policy"] for r in ext}
-        return [r for r in rows if r["policy"] not in replaced] + ext
+        """Replace/add rows from post-hoc extension files (extended tau grid, extra variants)."""
+        for path in sorted(ext_path.parent.glob(ext_path.name.replace(".pkl", "*.pkl"))):
+            ext = pickle.load(open(path, "rb"))
+            replaced = {r["policy"] for r in ext}
+            rows = [r for r in rows if r["policy"] not in replaced] + ext
+        return rows
 
     rows_path = cache_dir / "rows_test.pkl"
     if rows_path.exists():

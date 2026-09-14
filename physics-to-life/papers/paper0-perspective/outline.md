@@ -51,10 +51,20 @@ H1–H10 with measurable outcomes, baselines, falsification criteria and confoun
 V0–V6; scoring both prediction and computation-selection correctness; cross-simulator
 falsification; historical prospective validation as a no-wet-lab external test.
 
-## 6. Worked example: V0 (report what actually happened)
-- System, conditions, Pareto frontier, calibration, refinement maps, OOD, ablations.
-- Pre-registered verdicts. If the physics-aware heuristic is not dominated, say so and
-  explain what it implies (learning is only needed where the failure condition is unknown).
+## 6. Worked example: V0 (what actually happened — run `v0_main`, 2026-09-14)
+- System, conditions, Pareto frontier, calibration, refinement maps, OOD, ablations
+  (`experiments/v0_toy/results/v0_main/RESULTS.md`).
+- Outcome to report verbatim: all seven testable hypotheses supported under pre-registered
+  criteria; adaptivity exists (oracle at 33 % of fine cost, 79 % of episodes need no fine
+  physics); a learned router finds most of it (tolerance at 38 % of fine cost, ECE 0.007,
+  AUROC 0.993) but the frontiers cross — the router buys *selectivity* (low waste,
+  order-of-magnitude gains at low budgets) while the physics-aware rule buys *coverage*
+  (recall 1.0, numerical floor at 59 % of fine cost); the uncertainty bonus contributes
+  nothing and ensemble spread does not detect a sustained-input shift.
+- Framing consequence for the paper: "learned vs heuristic" becomes "selectivity vs
+  coverage, and when a learned router should defer to a known rule"; the claim about
+  learned routing is reserved for systems where no failure rule is available, with a
+  hybrid (rule-derived candidates, learned ranking) as the default design.
 
 ## 7. Toward Drosophila and the miniature Human Repair Map
 - Connectome as scaffold, missing biology as uncertainty.

@@ -150,7 +150,8 @@ def label_episode(spec_nominal: MembraneSpec, inst: MembraneSpec, interv: Interv
     sets, costs, and cheap-trajectory summaries for the router."""
     t0 = time.perf_counter()
     names = [ch.name for ch in inst.channels]
-    out = {"seed": seed, "family": family, "interv": interv, "groups": [], "n_sims": 0, "wall_truth": 0.0}
+    out = {"seed": seed, "family": family, "interv": interv, "groups": [], "n_sims": 0, "wall_truth": 0.0,
+           "instance": instance_descriptor(inst)}
     for grp in groups:
         fid_fine = {n: 2 for n in names}
         truth = simulate(inst, grp.protocol, fid_fine, interv, cfg.settings, reference=True)
@@ -215,11 +216,32 @@ def label_episode(spec_nominal: MembraneSpec, inst: MembraneSpec, interv: Interv
                               "errs": errs, "costs": costs, "walls": walls, "gains": gains, "interactions": inter,
                               "minimal": minimal, "tol": tol_used, "features": feats[()], "features_by_subset": feats,
                               "discrepancy": discrepancy, "sensitivity": sens, "sensitivity_cost": sens_cost, "sensitivity_wall": sens_wall,
+                              "protocol_desc": protocol_descriptor(grp),
                               "cost_fine": fine_work["cost"], "cost_base": base["cost"], "wall_fine": fine_work["wall"],
                               "wall_base": base["wall"], "protocol": grp.protocol, "window": grp.window,
                               "err_fine_numerical": {k: errs[tuple(names)][k] for k in grp.targets}})
     out["wall_label"] = time.perf_counter() - t0
     return out
+
+
+def instance_descriptor(inst: MembraneSpec) -> dict:
+    """What a compiled surrogate is allowed to know about the cell it replaces: the instance's
+    parameters (conductances, leak, per-key kinetic multipliers)."""
+    d = {"g_leak": float(inst.g_leak), "C": float(inst.C)}
+    for ch in inst.channels:
+        d[f"g:{ch.name}"] = float(ch.g_max)
+        for k, v in ch.intrinsic_scales.items():
+            d[f"k:{k}"] = float(v)
+    return d
+
+
+def protocol_descriptor(grp: TargetGroup) -> dict:
+    """Scalar protocol descriptors: command levels and segment times."""
+    segs = grp.protocol.segments
+    d = {"kind": grp.protocol.kind, "t_end": float(grp.protocol.t_end)}
+    for i, (t0, v) in enumerate(segs[:6]):
+        d[f"t{i}"] = float(t0); d[f"v{i}"] = float(v)
+    return d
 
 
 def base_features(base: dict, grp: TargetGroup, names: list[str]) -> dict:

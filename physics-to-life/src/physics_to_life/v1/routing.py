@@ -29,8 +29,15 @@ from sklearn.preprocessing import StandardScaler
 
 from .targets import TARGET_NAMES
 
+# feature schema (set per system by `set_schema`; defaults = provisional placeholder system)
 GROUP_NAMES = ["vclamp_shaker", "recovery_shaker", "cclamp"]
 RATE_KEYS = ["activation", "opening", "inactivation", "recovery", "c_inactivation", "k_activation", "na_activation", "na_inactivation", "na_recovery"]
+
+
+def set_schema(group_names: list[str], rate_keys: list[str]) -> None:
+    """Configure the one-hot group slots and the intervention rate keys the router sees."""
+    GROUP_NAMES[:] = list(group_names)
+    RATE_KEYS[:] = list(rate_keys)
 
 
 def feature_names(channel_names: list[str]) -> list[str]:

@@ -91,3 +91,24 @@ def detector_bars(det: dict, path):
         ax.set_ylim(0, 1.02)
     axes[0].legend(fontsize=7, frameon=False)
     fig.tight_layout(); _save(fig, path)
+
+
+def closure_bars(summ: dict, path):
+    """H5/H8: error (relative to tolerance) of the five closures per family, and the false-safe
+    rate of each distrust gate for the emulator and the hybrid."""
+    fams = list(summ["by_family"].keys()); cl = ["coarse", "medium", "hybrid", "emulator", "fine"]
+    cols = {"coarse": "#898781", "medium": "#eda100", "hybrid": "#4a3aa7", "emulator": "#e34948", "fine": "#1baf7a"}
+    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.0))
+    ax = axes[0]; _style_axes(ax); w = 0.16; x = np.arange(len(fams))
+    for j, c in enumerate(cl):
+        ax.bar(x + (j - 2) * w, [summ["by_family"][f][c]["err_rel_tol_median"] for f in fams], w, color=cols[c], label=c)
+    ax.set_xticks(x); ax.set_xticklabels(fams, rotation=20); ax.set_ylabel("median error / tolerance"); ax.set_yscale("log"); ax.axhline(1.0, color=INK2, lw=0.8, ls=":")
+    ax.legend(fontsize=8, frameon=False, ncol=2); ax.set_title("closures (H8)", fontsize=10)
+    for k, kind in enumerate(("emulator", "hybrid")):
+        ax = axes[1 + k]; _style_axes(ax)
+        gates = list(summ["by_family"][fams[0]][kind]["gates"].keys()); w = 0.8 / len(gates)
+        for j, gt in enumerate(gates):
+            ax.bar(x + (j - len(gates) / 2 + 0.5) * w, [summ["by_family"][f][kind]["gates"][gt]["false_safe_rate"] for f in fams], w, label=gt)
+        ax.set_xticks(x); ax.set_xticklabels(fams, rotation=20); ax.set_ylabel("false-safe rate"); ax.set_ylim(0, 1.05)
+        ax.set_title(f"{kind}: distrust gates (H5)", fontsize=10); ax.legend(fontsize=7, frameon=False)
+    _save(fig, path)

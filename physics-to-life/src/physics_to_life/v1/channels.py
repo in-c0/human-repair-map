@@ -29,14 +29,17 @@ def f_rt(T_K: float) -> float:
 
 
 def _prod_scales(keys, scales: Optional[dict]) -> float:
-    if not keys or not scales:
+    """Product of the multipliers of `keys`.  A missing key means 1 (no perturbation) except for
+    drug-block keys ("block_on:<channel>"), whose absence means no drug (0)."""
+    if not keys:
         return 1.0
     if isinstance(keys, str):
         keys = (keys,)
+    scales = scales or {}
     s = 1.0
     for k in keys:
         if k:
-            s *= scales.get(k, 1.0)
+            s *= scales.get(k, 0.0 if k.startswith("block_on") else 1.0)
     return s
 
 
@@ -76,6 +79,16 @@ class SigmoidRate:
 
 
 @dataclass
+class ScaledRate:
+    """factor x another rate callable (keeps the base rate's voltage/temperature dependence)."""
+    base: Callable
+    factor: float
+
+    def __call__(self, V, T_K: float = 298.15, scale: float = 1.0):
+        return self.factor * self.base(V, T_K, scale)
+
+
+@dataclass
 class Transition:
     src: int
     dst: int
@@ -85,7 +98,9 @@ class Transition:
     def keys(self) -> tuple:
         if self.scale_key is None:
             return ()
-        return (self.scale_key,) if isinstance(self.scale_key, str) else tuple(self.scale_key)
+        if isinstance(self.scale_key, str):
+            return (self.scale_key,)
+        return tuple(k for k in self.scale_key if k)
 
 
 @dataclass

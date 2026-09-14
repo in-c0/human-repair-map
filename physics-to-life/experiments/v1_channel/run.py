@@ -17,14 +17,18 @@ from physics_to_life.v1.parameters import provisional_membrane  # noqa: E402
 from physics_to_life.v1.calibrate import calibrate_medium_to_fine_traces  # noqa: E402
 from physics_to_life.v1.episodes import sample_instance, sample_intervention, standard_groups, label_episode, EpisodeConfig  # noqa: E402
 from physics_to_life.v1.experiment import training_rows, evaluate_episodes, frontier_table, pooled_frontier, row_features  # noqa: E402
-from physics_to_life.v1.routing import VoCRegressor, HardLabelClassifier  # noqa: E402
+from physics_to_life.v1.routing import VoCRegressor, HardLabelClassifier, set_schema  # noqa: E402
 from physics_to_life.v1.ood import RangeGuard, KNNDensity, Conformal, detector_metrics  # noqa: E402
 from physics_to_life.v1 import plots_v1 as P  # noqa: E402
+from physics_to_life.v1.surrogate import fit_and_evaluate  # noqa: E402
 from physics_to_life.v1.systems import gunay2015_profile as GP  # noqa: E402
 
 
 class ProvisionalProfile:
     """Episode definitions of the provisional placeholder system (pilot machinery only)."""
+    group_names = ["vclamp_shaker", "recovery_shaker", "cclamp"]
+    rate_keys = ["activation", "opening", "inactivation", "recovery", "c_inactivation", "k_activation", "na_activation", "na_inactivation", "na_recovery"]
+
     def sample_intervention(self, rng, family, names):
         return sample_intervention(rng, family, names)
 
@@ -33,6 +37,9 @@ class ProvisionalProfile:
 
 
 class GunayProfile:
+    group_names = GP.GROUP_NAMES
+    rate_keys = GP.RATE_KEYS
+
     def sample_intervention(self, rng, family, names):
         return GP.sample_intervention(rng, family)
 
@@ -112,6 +119,7 @@ def main():
         spec, report, profile = build_system(cfg); pickle.dump((spec, report, profile), open(spec_path, "wb"))
     write_json(out / "calibration_report.json", report); timings["build_s"] = time.time() - t0
     names = [c.name for c in spec.channels]
+    set_schema(profile.group_names, profile.rate_keys)
     print(f"  channels {names}; calibration {report}", flush=True)
 
     # ---- generate
@@ -152,6 +160,8 @@ def main():
     # ---- evaluate
     print("[evaluate]", flush=True); t0 = time.time()
     models = {"voc": voc, "hard": hard, "voc_fullstate": voc_fullstate, "novelty": novelty, "novelty_quantiles": novelty_quantiles}
+    inc_mean = {c: float(np.mean([g["costs"][(c,)] - g["costs"][()] for ep in train for g in ep["groups"]])) for c in names}
+    pickle.dump({**models, "cost_increment": inc_mean}, open(cache / "models.pkl", "wb"))
     df_test = evaluate_episodes(test, names, models, seed); df_test["family"] = "id"
     df_ood = pd.concat([evaluate_episodes(eps, names, models, seed) for eps in ood.values()], ignore_index=True) if ood else pd.DataFrame()
     df = pd.concat([df_test, df_ood], ignore_index=True)
@@ -203,6 +213,14 @@ def main():
                "note": "conformal_residual uses the realised gain and is therefore an oracle diagnostic of shift, not a deployable detector"})
     timings["ood_s"] = time.time() - t0
 
+    # ---- H5 / H8: compiled surrogate and hybrid closure (validation split = last 20 % of training seeds)
+    print("[surrogate]", flush=True); t0 = time.time()
+    n_val = max(int(0.2 * len(train)), 5)
+    sur_summary, sur_df = fit_and_evaluate(train[:-n_val], train[-n_val:], test, ood, names, seed=seed, n_members=int(cfg["ensemble_members"]))
+    sur_df.to_csv(tabs / "surrogate_rows.csv", index=False); write_json(out / "surrogate_h5_h8.json", sur_summary)
+    P.closure_bars(sur_summary, figs / "fig4_closures_h5_h8")
+    timings["surrogate_s"] = time.time() - t0
+
     # ---- analyze
     print("[analyze]", flush=True); t0 = time.time()
     ft = frontier_table(df); ft.to_csv(tabs / "frontier_by_target.csv", index=False)
@@ -239,7 +257,7 @@ def main():
                "cost_to_95pct_success": {p: cost_to_success(p) for p in ("voc", "voc_seq", "hybrid", "hybrid_seq", "hardlabel", "share", "discrepancy", "sensitivity", "novelty", "uncertainty", "uncertainty_per_cost", "fullstate_voc", "random", "oracle_voc")},
                "err_at_half_fine_cost": {p: best_at(p, 0.5) for p in ("voc", "voc_seq", "hybrid", "hardlabel", "share", "discrepancy", "sensitivity", "novelty", "uncertainty", "uncertainty_per_cost", "fullstate_voc", "random", "oracle_voc")},
                "target_dependence": {f"{k[0]}|{k[1]}": v for k, v in matrix.items()},
-               "ood_detectors": det, "conformal_coverage": coverage,
+               "ood_detectors": det, "conformal_coverage": coverage, "surrogate_h5_h8": {k: v for k, v in sur_summary.items() if k != "gate_thresholds"},
                "false_safe_rate_at_operating_points": {},
                "runtime_s": time.time() - t_start}
     # false-safe rate of each learned policy at the cheapest parameter reaching >= 95 % success on ID

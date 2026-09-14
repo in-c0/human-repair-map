@@ -11,6 +11,9 @@ from . import gunay2015 as G
 from .gunay2015_fine import KF_BLOCK_KON, KF_BLOCK_KOFF
 
 CHANNELS = ["Ks", "Kf", "NaT", "NaP"]
+GROUP_NAMES = ["vclamp_Kf", "recovery_Kf", "vclamp_NaT", "cclamp"]
+RATE_KEYS = ["kf_activation", "kf_opening", "kf_inactivation", "kf_recovery", "kf_c_inactivation", "kf_c_recovery",
+             "nat_activation", "nat_inactivation", "nat_recovery", "ks_activation", "nap_activation"]
 NEGATIVE_CONTROL = ["Ks", "NaP"]     # fine == medium exactly: refining them can never help
 ID_FAMILIES = ["none", "density", "kf_loss", "kf_inactivation", "kf_recovery", "nat_inactivation", "temperature", "k_out"]
 OOD_FAMILIES = ["block", "opening_step", "combo", "activation_rate"]

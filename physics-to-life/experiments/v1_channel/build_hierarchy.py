@@ -18,7 +18,7 @@ from physics_to_life.v1.markov_fit import fit_markov_to_hh  # noqa: E402
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--channel", choices=["Kf", "NaT"], required=True)
-    ap.add_argument("--form", choices=["eyring", "sigmoid", "B"], default="sigmoid")
+    ap.add_argument("--form", choices=["eyring", "sigmoid", "B", "coupled", "coupledB"], default="sigmoid")
     ap.add_argument("--entry", default=None, help="JSON key to write (default: channel, or channel_B for form B)")
     ap.add_argument("--n-starts", type=int, default=4)
     ap.add_argument("--max-nfev", type=int, default=400)
@@ -27,7 +27,7 @@ def main():
     args = ap.parse_args()
     out = Path(args.out); out.parent.mkdir(parents=True, exist_ok=True)
     res = json.load(open(out)) if out.exists() else {}
-    entry = args.entry or (args.channel + ("_B" if args.form == "B" else ""))
+    entry = args.entry or (args.channel + ("_B" if args.form in ("B", "coupledB") else ""))
     rng = np.random.default_rng(args.seed)
     theta0_fn, builder, names = F.FORMS[args.channel][args.form]
     th0, lo, hi = theta0_fn()

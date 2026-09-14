@@ -79,6 +79,29 @@ class SigmoidRate:
 
 
 @dataclass
+class HHAnchoredRate:
+    """A rate anchored to the on/off rate implied by a published HH gate's tables:
+    k(V) = c * k_HH(V) * exp(z (V - v0) F/RT).  With c = 1, z = 0 the transition reproduces the
+    HH kinetics exactly; the multiplier and tilt let a fit adjust for the extra structure of a
+    Markov scheme (coupling, concerted steps) while the voltage dependence stays that of the
+    published tables.  Temperature enters through the gate's own Q10."""
+    gate: "HHGate"
+    which: str          # "on" | "off"
+    c: float = 1.0
+    z: float = 0.0
+    v0: float = -30.0
+    factor: float = 1.0  # stoichiometric multiplier
+
+    def __call__(self, V, T_K: float = 298.15, scale: float = 1.0):
+        a, b = self.gate.rates(V, T_K, None)
+        k = a if self.which == "on" else b
+        return scale * self.factor * self.c * k * np.exp(self.z * (np.asarray(V, float) - self.v0) * f_rt(T_K))
+
+    def scaled(self, factor: float) -> "HHAnchoredRate":
+        return HHAnchoredRate(self.gate, self.which, self.c, self.z, self.v0, self.factor * factor)
+
+
+@dataclass
 class ScaledRate:
     """factor x another rate callable (keeps the base rate's voltage/temperature dependence)."""
     base: Callable

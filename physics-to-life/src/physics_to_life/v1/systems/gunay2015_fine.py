@@ -21,7 +21,7 @@ from typing import Optional
 
 import numpy as np
 
-from ..channels import Rate, SigmoidRate, ScaledRate, Transition, MarkovScheme, ChannelPopulation, shaker_like_scheme, HHGate
+from ..channels import Rate, SigmoidRate, ScaledRate, HHAnchoredRate, Transition, MarkovScheme, ChannelPopulation, shaker_like_scheme, HHGate
 from ..membrane import MembraneSpec, Protocol
 from ..markov_fit import FitFamily
 from . import gunay2015 as G
@@ -133,7 +133,8 @@ def _eyring_fit(V, k):
 
 def kf_fit_family(dt_out: float = 0.1) -> FitFamily:
     P, N, W = [], [], []
-    for v in (-40.0, -20.0, 0.0, 20.0, 40.0):
+    # -30 mV is the most negative step with a resolvable Kf current (peak at -40 mV is < 0.01 pA and would only amplify noise)
+    for v in (-30.0, -20.0, 0.0, 20.0, 40.0):
         P.append(Protocol("vclamp", [(0.0, -90.0), (20.0, v), (120.0, -90.0)], 150.0, dt_out)); N.append(f"act_{v:+.0f}"); W.append(1.0)
     for vp in (-80.0, -60.0, -50.0, -40.0, -30.0, -10.0):
         P.append(Protocol("vclamp", [(0.0, -90.0), (20.0, vp), (220.0, 20.0), (280.0, -90.0)], 300.0, dt_out)); N.append(f"inact_{vp:+.0f}"); W.append(1.0)
@@ -443,12 +444,136 @@ def kfcB_theta0() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     return np.clip(th0, lo, hi), lo, hi
 
 
+# ---------------------------------------------------------------------------
+# HH-anchored forms: every rate that has an HH counterpart is c * k_HH(V) * exp(z (V - v0) F/RT);
+# only the structure without an HH counterpart (concerted step, coupling factors, C-type, slow
+# state, closed-state recovery) has free rate functions.  theta0 = the HH kinetics exactly
+# (c = 1, z = 0), so the fit starts from the published tables.
+# ---------------------------------------------------------------------------
+KFA_THETA_NAMES = ["alpha_log10_c", "alpha_z", "beta_log10_c", "beta_z", "gamma_log10_kmax", "gamma_z", "gamma_v0", "delta_log10_kmax", "delta_z", "delta_v0",
+                   "on_log10_c", "on_z", "off_log10_c", "off_z", "log10_a", "log10_b", "log10_kc_on", "log10_kc_off", "log10_g_factor"]
+
+
+def kf_fine_channel_anchored(theta, q10: float = 1.0, h2_as_written: bool = True, with_block: bool = True) -> ChannelPopulation:
+    th = np.asarray(theta, float)
+    m, h1, h2 = G.kf_gates(q10, h2_as_written)
+    alpha = HHAnchoredRate(m, "on", 10.0 ** th[0], th[1], V0_REF); beta = HHAnchoredRate(m, "off", 10.0 ** th[2], th[3], V0_REF)
+    gamma = SigmoidRate(10.0 ** th[4], th[5], th[6], q10, G.T_REF_K); delta = SigmoidRate(10.0 ** th[7], th[8], th[9], q10, G.T_REF_K)
+    kon = HHAnchoredRate(h1, "off", 10.0 ** th[10], th[11], V0_REF); koff = HHAnchoredRate(h1, "on", 10.0 ** th[12], th[13], V0_REF)
+    a, b = 10.0 ** th[14], 10.0 ** th[15]
+    kc_on = Rate(10.0 ** th[16], 0.0, V0_REF, q10, G.T_REF_K); kc_off = Rate(10.0 ** th[17], 0.0, V0_REF, q10, G.T_REF_K)
+    fwd = [alpha.scaled(4 - i) for i in range(4)] + [gamma]; bwd = [beta.scaled(i + 1) for i in range(4)] + [delta]
+    keys = ["kf_activation"] * 4 + ["kf_opening"]
+    sch = _coupled_scheme(fwd, bwd, keys, 5, kon, koff, a, b, kc_on, kc_off, ctype_from_open=False, with_block=with_block, name="Kf_anchored_A")
+    gf = 10.0 ** th[18]
+    m.scale_key_on = "kf_opening"; m.scale_key_off = "kf_opening"
+    return ChannelPopulation("Kf", G.G_KF * gf, G.E_K, sch, [m, h1, h2], coarse_instant=[True, False, False], ion="K",
+                             g_scale_cheap=1.0 / gf, hh_exact=False, hh_mix=(1, 2, G.FH), coarse_drop=[False, False, True])
+
+
+def kfA_anchored_theta0():
+    th0 = np.array([0.0, 0.0, 0.0, 0.0, np.log10(20.0), 0.2, -30.0, np.log10(0.5), -0.2, -30.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, np.log10(5e-4), np.log10(8e-3), np.log10(1.05)])
+    lo = np.array([-1.5, -1.5, -1.5, -1.5, -1, -1.0, -90, -3, -2.0, -90, -1.5, -1.5, -1.5, -1.5, -1.0, -1.0, -6, -5, -0.3])
+    hi = np.array([1.5, 1.5, 1.5, 1.5, 2.5, 2.0, 40, 2, 1.0, 40, 1.5, 1.5, 1.5, 1.5, 1.0, 1.0, -1, -1, 0.7])
+    return np.clip(th0, lo, hi), lo, hi
+
+
+KFB_ANCH_THETA_NAMES = ["a1_log10_c", "a1_z", "b1_log10_c", "b1_z", "a2_log10_kmax", "a2_z", "a2_v0", "b2_log10_kmax", "b2_z", "b2_v0",
+                        "on_log10_c", "on_z", "off_log10_c", "off_z", "log10_a", "log10_b", "log10_kc_on", "log10_kc_off", "log10_g_factor"]
+
+
+def kf_fineB_channel_anchored(theta, q10: float = 1.0, h2_as_written: bool = True, with_block: bool = True) -> ChannelPopulation:
+    th = np.asarray(theta, float)
+    m, h1, h2 = G.kf_gates(q10, h2_as_written)
+    a1 = HHAnchoredRate(m, "on", 10.0 ** th[0], th[1], V0_REF); b1 = HHAnchoredRate(m, "off", 10.0 ** th[2], th[3], V0_REF)
+    a2 = SigmoidRate(10.0 ** th[4], th[5], th[6], q10, G.T_REF_K); b2 = SigmoidRate(10.0 ** th[7], th[8], th[9], q10, G.T_REF_K)
+    kon = HHAnchoredRate(h1, "off", 10.0 ** th[10], th[11], V0_REF); koff = HHAnchoredRate(h1, "on", 10.0 ** th[12], th[13], V0_REF)
+    a, b = 10.0 ** th[14], 10.0 ** th[15]
+    kc_on = Rate(10.0 ** th[16], 0.0, V0_REF, q10, G.T_REF_K); kc_off = Rate(10.0 ** th[17], 0.0, V0_REF, q10, G.T_REF_K)
+    fwd = [a1.scaled(4 - i) for i in range(4)] + [a2.scaled(4 - i) for i in range(4)]
+    bwd = [b1.scaled(i + 1) for i in range(4)] + [b2.scaled(i + 1) for i in range(4)]
+    keys = ["kf_activation"] * 4 + [("kf_activation", "kf_opening")] * 4
+    sch = _coupled_scheme(fwd, bwd, keys, 8, kon, koff, a, b, kc_on, kc_off, ctype_from_open=True, with_block=with_block, name="Kf_anchored_B")
+    gf = 10.0 ** th[18]
+    m.scale_key_on = "kf_opening"; m.scale_key_off = "kf_opening"
+    return ChannelPopulation("Kf", G.G_KF * gf, G.E_K, sch, [m, h1, h2], coarse_instant=[True, False, False], ion="K",
+                             g_scale_cheap=1.0 / gf, hh_exact=False, hh_mix=(1, 2, G.FH), coarse_drop=[False, False, True])
+
+
+def kfB_anchored_theta0():
+    th0 = np.array([0.3, 0.0, 0.3, 0.0, np.log10(10.0), 0.5, -20.0, np.log10(1.0), -0.5, -30.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, np.log10(5e-4), np.log10(8e-3), np.log10(1.05)])
+    lo = np.array([-1.5, -1.5, -1.5, -1.5, -1, -1.0, -90, -3, -3.0, -90, -1.5, -1.5, -1.5, -1.5, -1.0, -1.0, -6, -5, -0.3])
+    hi = np.array([1.5, 1.5, 1.5, 1.5, 2.5, 3.0, 40, 2, 1.0, 40, 1.5, 1.5, 1.5, 1.5, 1.0, 1.0, -1, -1, 0.7])
+    return np.clip(th0, lo, hi), lo, hi
+
+
+NATA_ANCH_THETA_NAMES = ["alpha_log10_c", "alpha_z", "beta_log10_c", "beta_z", "on_log10_c", "on_z", "off_log10_c", "off_z",
+                         "rec_log10_kmax", "rec_z", "rec_v0", "log10_g_factor"]
+
+
+def nat_fine_channel_anchored(theta, q10: float = 1.0) -> ChannelPopulation:
+    th = np.asarray(theta, float)
+    m, h = G.nat_gates(q10)
+    alpha = HHAnchoredRate(m, "on", 10.0 ** th[0], th[1], V0_REF); beta = HHAnchoredRate(m, "off", 10.0 ** th[2], th[3], V0_REF)
+    kon = HHAnchoredRate(h, "off", 10.0 ** th[4], th[5], V0_REF); koff = HHAnchoredRate(h, "on", 10.0 ** th[6], th[7], V0_REF)
+    krec = SigmoidRate(10.0 ** th[8], th[9], th[10], q10, G.T_REF_K)
+    trans = []
+    for i in range(3):
+        trans.append(Transition(i, i + 1, alpha.scaled(3 - i), "nat_activation")); trans.append(Transition(i + 1, i, beta.scaled(i + 1), "nat_activation"))
+    O, I = 3, 4
+    trans.append(Transition(O, I, kon, "nat_inactivation")); trans.append(Transition(I, O, koff, "nat_recovery"))
+    trans.append(Transition(I, 2, krec, "nat_recovery"))
+    trans.append(Transition(2, I, CycleRate(krec, kon, koff, alpha, beta), ("nat_recovery", "nat_inactivation")))
+    open_ = np.zeros(5); open_[O] = 1.0
+    sch = MarkovScheme("NaT_anchored_A", 5, trans, open_, initial_state=0)
+    gf = 10.0 ** th[11]
+    return ChannelPopulation("NaT", G.G_NAT * gf, G.E_NA, sch, [m, h], coarse_instant=[True, False], ion="Na", g_scale_cheap=1.0 / gf, hh_exact=False)
+
+
+def natA_anchored_theta0():
+    th0 = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, np.log10(0.05), -0.5, -60.0, np.log10(1.02)])
+    lo = np.array([-1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -4, -3.0, -120, -0.3])
+    hi = np.array([1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1, 1.0, 20, 0.7])
+    return np.clip(th0, lo, hi), lo, hi
+
+
+NATB_ANCH_THETA_NAMES = ["alpha_log10_c", "alpha_z", "beta_log10_c", "beta_z", "on_log10_c", "on_z", "off_log10_c", "off_z",
+                         "log10_k_slow_on", "log10_k_slow_off", "log10_g_factor"]
+
+
+def nat_fineB_channel_anchored(theta, q10: float = 1.0) -> ChannelPopulation:
+    th = np.asarray(theta, float)
+    m, h = G.nat_gates(q10)
+    alpha = HHAnchoredRate(m, "on", 10.0 ** th[0], th[1], V0_REF); beta = HHAnchoredRate(m, "off", 10.0 ** th[2], th[3], V0_REF)
+    kon = HHAnchoredRate(h, "off", 10.0 ** th[4], th[5], V0_REF); koff = HHAnchoredRate(h, "on", 10.0 ** th[6], th[7], V0_REF)
+    trans = []
+    for i in range(3):
+        trans.append(Transition(i, i + 1, alpha.scaled(3 - i), "nat_activation")); trans.append(Transition(i + 1, i, beta.scaled(i + 1), "nat_activation"))
+    O, I, I2 = 3, 4, 5
+    trans.append(Transition(O, I, kon, "nat_inactivation")); trans.append(Transition(I, O, koff, "nat_recovery"))
+    trans.append(Transition(I, I2, Rate(10.0 ** th[8], 0.0, V0_REF, q10, G.T_REF_K), "nat_inactivation"))
+    trans.append(Transition(I2, I, Rate(10.0 ** th[9], 0.0, V0_REF, q10, G.T_REF_K), "nat_recovery"))
+    open_ = np.zeros(6); open_[O] = 1.0
+    sch = MarkovScheme("NaT_anchored_B", 6, trans, open_, initial_state=0)
+    gf = 10.0 ** th[10]
+    return ChannelPopulation("NaT", G.G_NAT * gf, G.E_NA, sch, [m, h], coarse_instant=[True, False], ion="Na", g_scale_cheap=1.0 / gf, hh_exact=False)
+
+
+def natB_anchored_theta0():
+    th0 = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, np.log10(1e-3), np.log10(1e-2), np.log10(1.02)])
+    lo = np.array([-1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -6, -5, -0.3])
+    hi = np.array([1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1, -0.5, 0.7])
+    return np.clip(th0, lo, hi), lo, hi
+
+
 FORMS = {
     "Kf": {"eyring": (kf_theta0, kf_fine_channel, KF_THETA_NAMES), "sigmoid": (kf_sig_theta0, kf_fine_channel_sig, KF_SIG_THETA_NAMES),
            "B": (kfB_theta0, kf_fineB_channel, KFB_THETA_NAMES), "coupled": (kfc_theta0, kf_fine_channel_coupled, KFC_THETA_NAMES),
-           "coupledB": (kfcB_theta0, kf_fineB_channel_coupled, KFCB_THETA_NAMES)},
+           "coupledB": (kfcB_theta0, kf_fineB_channel_coupled, KFCB_THETA_NAMES),
+           "anchored": (kfA_anchored_theta0, kf_fine_channel_anchored, KFA_THETA_NAMES), "anchoredB": (kfB_anchored_theta0, kf_fineB_channel_anchored, KFB_ANCH_THETA_NAMES)},
     "NaT": {"eyring": (nat_theta0, nat_fine_channel, NAT_THETA_NAMES), "sigmoid": (nat_sig_theta0, nat_fine_channel_sig, NAT_SIG_THETA_NAMES),
-            "B": (natB_theta0, nat_fineB_channel, NATB_THETA_NAMES)},
+            "B": (natB_theta0, nat_fineB_channel, NATB_THETA_NAMES),
+            "anchored": (natA_anchored_theta0, nat_fine_channel_anchored, NATA_ANCH_THETA_NAMES), "anchoredB": (natB_anchored_theta0, nat_fineB_channel_anchored, NATB_ANCH_THETA_NAMES)},
 }
 
 

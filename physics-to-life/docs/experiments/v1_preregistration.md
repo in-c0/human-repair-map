@@ -42,8 +42,9 @@ parameterisation.
   channels** (refining them can never reduce error; their labelled gains are the noise floor).
 - Q10 = 3 on every rate (all levels); E_K shifts with [K⁺]o by the Nernst term; both inert at
   25 °C / 5 mM.
-- Fit family (declared, excluded from evaluation protocols): activation steps −40, −20, 0, +20,
-  +40 mV from −90 mV; 200-ms prepulses −80…−10 mV; twin-pulse recovery gaps 5, 20, 50, 150 ms;
+- Fit family (declared, excluded from evaluation protocols): activation steps −30, −20, 0, +20,
+  +40 mV from −90 mV (Kf; the −40 mV step carries < 0.01 pA and was dropped as pure noise);
+  200-ms prepulses −80…−10 mV; twin-pulse recovery gaps 5, 20, 50, 150 ms;
   steady-state holds at −70, −60, −55, −50 mV followed by a test step (Kf: +20 mV; these pin the
   availability at rest-like potentials, without which a scheme can satisfy the −90 mV protocols
   while being inactivated at rest); NaT: steps −40…+20 mV, prepulses −90…−30 mV, gaps 1, 3, 10,

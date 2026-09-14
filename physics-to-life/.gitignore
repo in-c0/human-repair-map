@@ -9,3 +9,4 @@ experiments/**/results/cache/
 *.pkl
 experiments/**/results/smoke/
 experiments/**/results/ci-smoke/
+experiments/v1_channel/results/smoke/

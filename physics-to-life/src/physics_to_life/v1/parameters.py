@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from .channels import Rate, HHGate, ChannelPopulation, shaker_like_scheme, sequential_subunit_scheme, Transition, MarkovScheme
+from .channels import Rate, HHGate, ChannelPopulation, shaker_like_scheme, sequential_subunit_scheme, Transition, MarkovScheme, SigmoidTau
 from .membrane import MembraneSpec
 
 
@@ -34,7 +34,7 @@ def provisional_shaker(g_max: float = 30.0, with_ctype: bool = True, with_block:
         scheme.open = np.append(scheme.open, 0.0)
     # HH medium: m^4 from the subunit rates (ignores the concerted step), h from an independent gate
     m = HHGate(alpha=alpha, beta=beta, power=4, scale_key="activation")
-    h = HHGate(v_half=-55.0, slope=-6.0, tau_fn=lambda V, T: 3.0 + 25.0 / (1.0 + np.exp((V + 40.0) / 8.0)), power=1, scale_key="inactivation")
+    h = HHGate(v_half=-55.0, slope=-6.0, tau_fn=SigmoidTau(3.0, 25.0, -40.0, 8.0), power=1, scale_key="inactivation")
     return ChannelPopulation("shaker", g_max, -85.0, scheme, [m, h], coarse_instant=[True, False], ion="K")
 
 
@@ -45,7 +45,7 @@ def provisional_shab(g_max: float = 12.0) -> ChannelPopulation:
     beta = Rate(k0=0.06, z=-0.35, v0=-30.0, q10=3.0)
     scheme = sequential_subunit_scheme(alpha, beta, n_sub=4, name="shab_provisional", scale_key="k_activation")
     n = HHGate(alpha=alpha, beta=beta, power=4, scale_key="k_activation")
-    return ChannelPopulation("shab", g_max, -85.0, scheme, [n], coarse_instant=[True], ion="K")
+    return ChannelPopulation("shab", g_max, -85.0, scheme, [n], coarse_instant=[True], ion="K", hh_exact=True)
 
 
 def provisional_na(g_max: float = 60.0) -> ChannelPopulation:
@@ -61,7 +61,7 @@ def provisional_na(g_max: float = 60.0) -> ChannelPopulation:
     scheme.n_states += 1
     scheme.open = np.append(scheme.open, 0.0)
     m = HHGate(alpha=am, beta=bm, power=3, scale_key="na_activation")
-    h = HHGate(v_half=-62.0, slope=-7.0, tau_fn=lambda V, T: 0.5 + 6.0 / (1.0 + np.exp((V + 45.0) / 7.0)), power=1, scale_key="na_inactivation")
+    h = HHGate(v_half=-62.0, slope=-7.0, tau_fn=SigmoidTau(0.5, 6.0, -45.0, 7.0), power=1, scale_key="na_inactivation")
     return ChannelPopulation("na", g_max, 50.0, scheme, [m, h], coarse_instant=[True, False], ion="Na")
 
 
@@ -91,3 +91,11 @@ def vclamp_recovery(interval_ms: float, step_mV: float = 20.0, hold: float = -80
 def cclamp_step(i_pA: float, t_pre: float = 30.0, t_step: float = 150.0, t_post: float = 40.0, dt_out: float = 0.05):
     from .membrane import Protocol
     return Protocol("cclamp", [(0.0, 0.0), (t_pre, i_pA), (t_pre + t_step, 0.0)], t_pre + t_step + t_post, dt_out)
+
+
+def vclamp_inactivation(v_pre: float, hold: float = -100.0, t_hold: float = 20.0, t_pre: float = 200.0,
+                        test_mV: float = 20.0, t_test: float = 60.0, dt_out: float = 0.05):
+    """Steady-state inactivation: hold -> long prepulse at v_pre -> test step; peak at test vs v_pre = h_inf."""
+    from .membrane import Protocol
+    t1 = t_hold; t2 = t1 + t_pre; t3 = t2 + t_test
+    return Protocol("vclamp", [(0.0, hold), (t1, v_pre), (t2, test_mV), (t3, hold)], t3 + 20.0, dt_out)

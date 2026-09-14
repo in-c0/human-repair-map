@@ -123,6 +123,32 @@ def shaker_like_scheme(alpha: Rate, beta: Rate, gamma: Rate, delta: Rate, kon: R
 # ---------------------------------------------------------------------------
 
 @dataclass
+class BellTau:
+    """tau(V) = tau_min + tau_amp / (exp((V-v_c)/w) + exp(-(V-v_c)/w))  (picklable callable)."""
+    tau_min: float
+    tau_amp: float
+    v_c: float
+    width: float
+
+    def __call__(self, V, T_K=298.15):
+        V = np.asarray(V, float)
+        return self.tau_min + self.tau_amp / (np.exp((V - self.v_c) / self.width) + np.exp(-(V - self.v_c) / self.width))
+
+
+@dataclass
+class SigmoidTau:
+    """tau(V) = tau_min + tau_amp / (1 + exp((V - v_c)/w))  (picklable callable)."""
+    tau_min: float
+    tau_amp: float
+    v_c: float
+    width: float
+
+    def __call__(self, V, T_K=298.15):
+        V = np.asarray(V, float)
+        return self.tau_min + self.tau_amp / (1.0 + np.exp((V - self.v_c) / self.width))
+
+
+@dataclass
 class HHGate:
     """A gate with x_inf(V), tau_x(V) either from alpha/beta rates or from Boltzmann/tau tables."""
     alpha: Optional[Rate] = None
@@ -163,6 +189,8 @@ class ChannelPopulation:
     hh_gates: list[HHGate]             # medium: product of gates
     coarse_instant: list[bool]         # coarse: which gates are treated as instantaneous
     ion: str = "K"
+    g_scale_cheap: float = 1.0         # effective conductance factor of the HH/coarse descriptions (fitted)
+    hh_exact: bool = False             # True when the HH level is exactly equivalent to the Markov level (no fit needed)
 
     def n_state(self, level: int) -> int:
         if level == 2:

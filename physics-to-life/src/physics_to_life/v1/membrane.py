@@ -133,7 +133,8 @@ def _channel_current(ch: ChannelPopulation, lvl: int, ys: np.ndarray, V: float, 
                 po *= g.x_inf(V, T_K, scales) ** g.power
             else:
                 po *= ys[k] ** g.power; k += 1
-    return ch.g_max * g_scale * (1.0 - block) * po * (V - e_rev)
+    g_eff = ch.g_max * (1.0 if lvl == 2 else ch.g_scale_cheap)
+    return g_eff * g_scale * (1.0 - block) * po * (V - e_rev)
 
 
 def simulate(spec: MembraneSpec, protocol: Protocol, fidelity: dict, interv: Intervention | None = None,
@@ -233,7 +234,8 @@ def _find_rest(spec, blocks, T_K, scales, e_revs, g_scales, blocks_frac, i_hold:
                 for g in ch.hh_gates:
                     po *= g.x_inf(V, T_K, scales) ** g.power
                 blk = blocks_frac[ch.name]
-            I += ch.g_max * g_scales[ch.name] * (1 - blk) * po * (V - e_revs[ch.name])
+            g_eff = ch.g_max * (1.0 if lvl == 2 else ch.g_scale_cheap)
+            I += g_eff * g_scales[ch.name] * (1 - blk) * po * (V - e_revs[ch.name])
         return I
     # scan upward from V_lo and take the most hyperpolarised stable root (a membrane with a
     # sodium window current can be bistable; the physiological rest is the lower state)

@@ -162,17 +162,19 @@ def label_episode(spec_nominal: MembraneSpec, inst: MembraneSpec, interv: Interv
         fid_base = {n: cfg.base_level for n in names}
         base = simulate(inst, grp.protocol, fid_base, interv, cfg.settings)
         ybase = compute_targets(base, grp, ref_V=truth["V"])
+        # every subset of channels refined to fine on top of the base level (exhaustive for K <= 5)
         sims = {(): base}
-        for c in names:
-            f = dict(fid_base); f[c] = 2
-            sims[(c,)] = simulate(inst, grp.protocol, f, interv, cfg.settings)
-        if cfg.pairwise:
-            for c, d in itertools.combinations(names, 2):
-                f = dict(fid_base); f[c] = 2; f[d] = 2
-                sims[(c, d)] = simulate(inst, grp.protocol, f, interv, cfg.settings)
-        fine_work = simulate(inst, grp.protocol, fid_fine, interv, cfg.settings)
-        sims[tuple(names)] = fine_work
-        out["n_sims"] += len(sims) + 1
+        for m in range(1, len(names) + 1):
+            for S in itertools.combinations(names, m):
+                if m > 1 and not cfg.pairwise and m < len(names):
+                    continue
+                f = dict(fid_base)
+                for c in S:
+                    f[c] = 2
+                sims[S] = simulate(inst, grp.protocol, f, interv, cfg.settings)
+        fine_work = sims[tuple(names)]
+        coarse_all = simulate(inst, grp.protocol, {n: 0 for n in names}, interv, cfg.settings)
+        out["n_sims"] += len(sims) + 2
         errs = {S: {k: _err(compute_targets(r, grp, ref_V=truth["V"]), ystar, k, scale) for k in grp.targets} for S, r in sims.items()}
         costs = {S: r["cost"] for S, r in sims.items()}
         walls = {S: r["wall"] for S, r in sims.items()}
@@ -190,11 +192,21 @@ def label_episode(spec_nominal: MembraneSpec, inst: MembraneSpec, interv: Interv
             tol_used[k] = tol
             ok = [S for S in sims if errs[S][k] <= tol]
             minimal[k] = min(ok, key=lambda S: (costs[S], errs[S][k])) if ok else min(sims, key=lambda S: errs[S][k])
-        # cheap-trajectory summaries per channel for the router (from the base run)
-        feats = base_features(base, grp, names)
+        # cheap-trajectory summaries per channel for the router, for every simulated subset
+        # (the base run's features are what a one-shot router sees; a sequential router sees
+        # the features of the current partial-refinement state)
+        feats = {S: base_features(r, grp, names) for S, r in sims.items()}
+        # mechanistic discrepancy monitor: medium vs coarse per-channel current in the window
+        t = base["t"]; mwin = (t >= grp.window[0]) & (t <= grp.window[1])
+        discrepancy = {c: float(np.mean(np.abs(base["I_ch"][c][mwin] - coarse_all["I_ch"][c][mwin])) /
+                               (np.mean(np.abs(base["I_ch"][c][mwin])) + 1e-9)) for c in names}
+        ycoarse = compute_targets(coarse_all, grp, ref_V=truth["V"])
+        errs["coarse_all"] = {k: _err(ycoarse, ystar, k, scale) for k in grp.targets}
+        costs["coarse_all"] = coarse_all["cost"]; walls["coarse_all"] = coarse_all["wall"]
         out["groups"].append({"name": grp.name, "targets": grp.targets, "ystar": ystar, "ybase": ybase, "scale": scale,
                               "errs": errs, "costs": costs, "walls": walls, "gains": gains, "interactions": inter,
-                              "minimal": minimal, "tol": tol_used, "features": feats,
+                              "minimal": minimal, "tol": tol_used, "features": feats[()], "features_by_subset": feats,
+                              "discrepancy": discrepancy,
                               "cost_fine": fine_work["cost"], "cost_base": base["cost"], "wall_fine": fine_work["wall"],
                               "wall_base": base["wall"], "protocol": grp.protocol, "window": grp.window,
                               "err_fine_numerical": {k: errs[tuple(names)][k] for k in grp.targets}})

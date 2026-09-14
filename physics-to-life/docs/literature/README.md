@@ -1,7 +1,10 @@
 # Literature map and novelty assessment
 
 Scan date: 2026-09-14. Four cluster files, each with per-entry key result, relevance,
-limitations, design implication, novelty-threat call and verification status:
+limitations, design implication, novelty-threat call and verification status — plus
+`novelty_conjunction_scan.md`, the adversarial scan of the *narrowed* novelty claim
+(the six-element conjunction: target-conditioned causal relevance, scored selection
+correctness, value of computation, intervention prediction, inverse design, validation ladder):
 
 | file | cluster | entries |
 |---|---|---|
@@ -9,6 +12,7 @@ limitations, design implication, novelty-threat call and verification status:
 | `sciml_core_methods.md` | neural operators, closures, hybrid/UDE, differentiable simulators, UQ, SBI, active learning, symbolic regression, causal representation learning, model-based RL, inverse design in biology | 53 |
 | `molecular_cellular_multiscale.md` | MLIPs, QM/MM, coarse-graining, MSMs/physics compilation, stochastic biochemistry, whole-cell and virtual-cell models, tissue platforms, ion channels, hybrid mechanistic–neural | 48 |
 | `drosophila_and_historical_validation.md` | connectomes, connectome-constrained models, body models, electrophysiology and atlases, aging, regeneration and homeosis, perturbation resources, historical prospective validation | 45 |
+| `novelty_conjunction_scan.md` | adversarial test of the six-element conjunction: MuMMI/DynIm, LED/AdaLED/iLED/G-LED, goal-oriented model adaptivity, uncertainty fallback, VoI-per-cost, metareasoning, HyPER, interventional surrogates, in-silico rescue precedents; coverage matrix + verdict | 30 |
 
 **Verification caveat.** The execution environment's egress proxy blocked every publisher,
 preprint, DOI and index host during the scans; only GitHub was reachable. Entries marked

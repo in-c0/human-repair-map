@@ -1,33 +1,30 @@
-/* Leverage model — which blocker, if cleared, moves the most routes up a rung?
+/* Leverage model — research-layer copy.
 
-   INTEGRITY NOTE: this is an explicit model. The blocker definitions and route
-   mappings are editorial judgements derived from the graded records. Toggling a
-   blocker creates a hypothetical state. The resulting counts are computed from
-   the mapping below. */
+   The blocker definitions and route mappings are editorial judgements derived from the graded records.
+   Toggling a blocker creates a hypothetical state; it does not change the evidence rung of any canonical record. */
 window.HRM_LEVERAGE = {
-  premise: "Each route is associated with specific blockers. Mark a blocker as cleared to see which routes would move under this model, and what would have to change before a route is both broad and demonstrated independently in humans.",
-  modelNote: "This is a model, not a measurement. The blocker definitions and route mappings are editorial judgements based on the graded records. The arithmetic follows those inputs exactly. Use it to inspect and challenge the dependency assumptions.",
+  premise: "Suppose one delivery problem were solved. Which brain-delivery routes would actually move up a rung, and which would still be stuck for another reason? Clear a blocker below to inspect that question.",
+  modelNote: "This is a model, not a measurement. The blocker definitions and route mappings are editorial judgements based on the graded records. The arithmetic follows those inputs exactly. Use it to challenge the dependency assumptions, not to treat a hypothetical as new evidence.",
 
   blockers: [
-    { id: "B1", name: "A targeting mechanism present in humans", short: "human receptor",
+    { id: "B1", name: "A targeting mechanism that exists in humans", short: "human receptor",
       desc: "The engineered PHP.B capsid family depends on LY6A in mice. Humans do not have the same receptor, so that mechanism does not transfer directly." },
-    { id: "B2", name: "Rodent results that hold in a primate", short: "primate translation",
-      desc: "Many brain-delivery results are demonstrated in rodents. Several approaches have performed differently when tested in non-human primates." },
-    { id: "B3", name: "Measuring drug exposure in human brain tissue", short: "parenchymal measurement",
-      desc: "Human brain exposure is often inferred from cerebrospinal-fluid measurements and animal models. Those measures do not always track drug concentration in brain parenchyma." },
-    { id: "B4", name: "A surrogate that predicts functional benefit", short: "surrogate → function",
-      desc: "Several programmes show biomarker changes. For this model, the blocker remains until the relevant surrogate is shown to predict a meaningful functional outcome." },
-    { id: "B5", name: "Verifying target-volume coverage", short: "coverage verification",
-      desc: "Direct delivery can bypass the blood-brain barrier, but placement and distribution still need to be verified. In one audited failed trial, catheter placement was a material problem." },
-    { id: "B6", name: "A tolerable systemic route", short: "systemic safety",
-      desc: "Systemic delivery exposes tissues outside the intended target. The records on this map include dose-limiting toxicity and a death, so systemic safety remains a separate blocker." },
-    { id: "B7", name: "Distribution beyond one compartment", short: "broad distribution",
-      desc: "The strongest human evidence is concentrated in anatomically local routes: one nucleus, one cavity, the spinal fluid, or a focused region. Extending those results across the CNS requires an additional distribution capability." }
+    { id: "B2", name: "A rodent result that still works in a primate", short: "primate translation",
+      desc: "Many brain-delivery results are demonstrated in rodents. Several approaches have behaved differently in non-human primates." },
+    { id: "B3", name: "Direct evidence of exposure inside human brain tissue", short: "parenchymal measurement",
+      desc: "Human brain exposure is often inferred from cerebrospinal-fluid measurements and animal models. Those measures do not always match drug concentration in brain parenchyma." },
+    { id: "B4", name: "A surrogate that predicts meaningful function", short: "surrogate → function",
+      desc: "Several programmes change a biomarker. For this model, the blocker stays in place until the relevant surrogate is shown to predict a meaningful functional outcome." },
+    { id: "B5", name: "Proof that the intended brain volume was reached", short: "coverage verification",
+      desc: "Direct delivery can bypass the blood-brain barrier, but placement and distribution still need to be checked. In one audited failed trial, catheter placement was a material problem." },
+    { id: "B6", name: "A systemic dose people can tolerate", short: "systemic safety",
+      desc: "Systemic delivery exposes tissues outside the target. The records here include dose-limiting toxicity and a death, so systemic safety remains a separate blocker." },
+    { id: "B7", name: "Distribution beyond one local compartment", short: "broad distribution",
+      desc: "The strongest human evidence is concentrated in local routes: one nucleus, one cavity, the spinal fluid, or a focused region. Reaching a large part of the CNS requires another delivery capability." }
   ],
 
   /* broad = could this route, if it worked, reach the whole CNS?
-     Crossing the barrier is potentially broad; bypassing it with a needle is
-     anatomically local. This is an editorial property used by the model. */
+     Crossing the barrier is potentially broad; bypassing it with a needle is anatomically local. */
   routes: [
     { id: "cart",        subject: "Locoregional CAR-T",              rung: "L5", broad: false, blockers: ["B6", "B7"],       to: "L5", note: "proven route; responses follow locoregional injection" },
     { id: "fus",         subject: "Focused ultrasound opening",       rung: "L5", broad: false, blockers: ["B5", "B7"],       to: "L5", note: "L5 for barrier opening; no delivery-to-functional-outcome trial is attached" },
@@ -51,12 +48,12 @@ window.HRM_LEVERAGE = {
 
   insights: [
     { when: (s) => s.broadProven === 0 && s.cleared === 0,
-      text: "No route in the current model is both broad and L5. The L5 routes are anatomically local; the broad routes remain at lower rungs. Mark a blocker as cleared to inspect the dependency assumptions." },
+      text: "Right now, none of the potentially broad routes is at L5. The L5 routes reach local compartments. Clear a blocker to see whether that alone would be enough to move any broad route." },
     { when: (s) => s.cleared > 0 && s.broadProven === 0,
-      text: "There is still no broad L5 route in this hypothetical. Most broad routes depend on more than one unresolved blocker, so clearing one may leave their rung unchanged." },
+      text: "There is still no broad L5 route under these assumptions. Most broad routes have more than one unresolved blocker, so solving one problem does not necessarily move the rung." },
     { when: (s) => s.broadProven > 0 && s.broadProven < 3,
-      text: "At least one broad route reaches L5 under the selected assumptions. Inspect which blockers were cleared; for several routes, parenchymal measurement and evidence connecting a surrogate to function are both required." },
+      text: "At least one broad route reaches L5 in this hypothetical. Check which blockers you cleared: for several routes, direct brain-tissue exposure and evidence of functional benefit are separate requirements." },
     { when: (s) => s.broadProven >= 3,
-      text: "Several broad routes reach L5 under this hypothetical. The selected assumptions include evidence about delivery and evidence that the relevant intervention improves function." }
+      text: "Several broad routes reach L5 in this hypothetical. That only follows because the selected assumptions supply both delivery evidence and evidence that the relevant intervention improves function." }
   ]
 };

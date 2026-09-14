@@ -223,3 +223,35 @@ rows, and training-set size beyond 300 episodes. Three training seeds agree.
 - Single system family, single readout definition (AUC); one main seed for the world.
 - The oracle exploits numerical noise when the fine floor is high (§7).
 - 18.75 % of episodes are non-monotone: hard membership labels are noisy for those.
+
+## 10. Robustness variants (separate runs; smaller sizes; main-model conditions only)
+
+### 10a. Fine/medium cost ratio 13 (`v0_ratio13`: ε = 0.0025, 40 sub-steps; 600/300/2 × 100 episodes; 54 min)
+
+Uniform: coarse 0.130 @ 4,800 · medium 0.0535 @ 14,400 · fine 0.00112 @ 192,000.
+
+| policy | cost to bring mean error under 0.01 (% of fine) | best error (at % of fine) |
+|---|---|---|
+| oracle | 9 | 0.0011 (11) |
+| learned one-shot / sequential | 11 / 11 | 0.0016 (16) / 0.0016 (20) |
+| physics one-shot / sequential | 18 / 27 | 0.0011 (30) / 0.0011 (68) |
+| adjoint | 29 | 0.0012 (41) |
+| spatial | 69 | 0.0011 (100) |
+| random (ancestors) / random | 88 / 100 | 0.0011 (88) / 0.0011 (100) |
+
+- Every verdict of §2 is reproduced (H1–H4, H7, H9 supported; learned AUROC 0.993, ECE
+  0.006, F1 at oracle cost 0.71; 80 % of episodes need no fine physics; 18 % non-monotone).
+- H1 is now met by *every* adaptive policy at ≤ 38 % of fine cost, and the adjoint
+  heuristic becomes competitive (29 % vs 101 % at ratio 3.3): its two-base-simulation
+  overhead is a fixed price that matters less when fine physics is expensive.
+- **The crossing persists and moves outward:** learned beats physics at 1.5 × and 2 ×
+  medium cost (paired CIs exclude 0), ties at 2.5 ×, and is again beaten by 0.0004 at
+  3 ×; the learned floor is 1.4 × the numerical floor, exactly as at ratio 3.3. The
+  selectivity/coverage picture is ratio-independent; only the price of coverage changes.
+- The OOD table of this variant is *not interpretable*: at the "2 × medium" reporting
+  budget a single fine node (14,800 units) already exceeds the headroom, so every policy
+  falls back to the medium model; and the `sigmoid` family at ε = 0.0025 produced no
+  necessary node at all (§7 correction), so its H6 AUROC is undefined. A budget defined as
+  "medium + two fine nodes" should be used for high-ratio configurations (V1).
+
+### 10b. Coarse (constant-closure) default (`v0_base0`) — pending

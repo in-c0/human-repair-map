@@ -12,7 +12,7 @@ For the assembled hierarchy (hierarchy/gunay2015_fine.json):
 Writes results/hierarchy_validation/{RESULTS.md, tables/*.csv, figures/*}.
 """
 from __future__ import annotations
-import json, sys, time
+import json, os, sys, time
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -32,6 +32,23 @@ from physics_to_life.v1.targets import spikes  # noqa: E402
 from physics_to_life.v1.episodes import TargetGroup, compute_targets, sample_instance  # noqa: E402
 
 OUT = HERE / "results" / "hierarchy_validation"
+
+
+def _preview_job(args):
+    spec, fam, k, iv = args
+    names = [c.name for c in spec.channels]; st = SimSettings(); out = []
+    inst = sample_instance(spec, np.random.default_rng(1000 + 37 * k), g_cv=0.2, rate_cv=0.1)
+    for grp in GP.groups(np.random.default_rng(k)):
+        truth = simulate(inst, grp.protocol, {n: 2 for n in names}, iv, st, reference=True); ystar = compute_targets(truth, grp, ref_V=truth["V"])
+        base = simulate(inst, grp.protocol, {n: 1 for n in names}, iv, st); yb = compute_targets(base, grp, ref_V=truth["V"])
+        kf = simulate(inst, grp.protocol, {n: (2 if n == "Kf" else 1) for n in names}, iv, st); ykf = compute_targets(kf, grp, ref_V=truth["V"])
+        na = simulate(inst, grp.protocol, {n: (2 if n == "NaT" else 1) for n in names}, iv, st); yna = compute_targets(na, grp, ref_V=truth["V"])
+        for t in grp.targets:
+            sc = max(abs(ystar[t]), 1e-9); tol = max(0.05, {"spike_latency": 0.5, "spike_count": 0.5, "min_isi": 1.0, "mean_v": 1.0, "v_rmse": 1.0, "time_to_peak": 0.1, "recovery_fraction": 0.02}.get(t, 0.0) / sc)
+            e = lambda y: (abs(y[t] - ystar[t]) / sc if t != "v_rmse" else y[t])  # noqa: E731
+            out.append({"family": fam, "group": grp.name, "target": t, "err_medium_over_tol": e(yb) / tol, "err_fineKf_over_tol": e(ykf) / tol, "err_fineNaT_over_tol": e(yna) / tol,
+                        "wall_truth": truth["wall"], "wall_fine_kf": kf["wall"], "wall_base": base["wall"]})
+    return out
 
 
 def rel_err(a, b):
@@ -100,25 +117,19 @@ def main():
     R["cclamp"] = {lvl: {"max_err_spike_count": float(g.err_spike_count.max()), "max_err_latency_ms": float(g.err_spike_latency.max()),
                          "max_v_rmse": float(g.v_rmse.max()), "mean_cost": float(g.cost.mean()), "mean_wall": float(g.wall.mean()), "state_dim": int(g.state_dim.iloc[0])}
                    for lvl, g in cc_df.groupby("level")}
-    # 4. intervention-family preview (5 samples per family; medium vs fine A; instance jitter on)
-    rng = np.random.default_rng(7); prev = []
+    # 4. intervention-family preview (3 samples per family; medium vs fine A; instance jitter on), in parallel
+    rng = np.random.default_rng(7); jobs = []
     for fam in GP.ID_FAMILIES + GP.OOD_FAMILIES:
         for k in range(3):
-            inst = sample_instance(specs["A"], np.random.default_rng(1000 + 37 * k), g_cv=0.2, rate_cv=0.1)
-            iv = GP.sample_intervention(rng, fam)
-            for grp in GP.groups(np.random.default_rng(k)):
-                truth = simulate(inst, grp.protocol, {n: 2 for n in names}, iv, st, reference=True); ystar = compute_targets(truth, grp, ref_V=truth["V"])
-                base = simulate(inst, grp.protocol, {n: 1 for n in names}, iv, st); yb = compute_targets(base, grp, ref_V=truth["V"])
-                kf = simulate(inst, grp.protocol, {n: (2 if n == "Kf" else 1) for n in names}, iv, st); ykf = compute_targets(kf, grp, ref_V=truth["V"])
-                na = simulate(inst, grp.protocol, {n: (2 if n == "NaT" else 1) for n in names}, iv, st); yna = compute_targets(na, grp, ref_V=truth["V"])
-                for t in grp.targets:
-                    sc = max(abs(ystar[t]), 1e-9); tol = max(0.05, {"spike_latency": 0.5, "spike_count": 0.5, "min_isi": 1.0, "mean_v": 1.0, "v_rmse": 1.0, "time_to_peak": 0.1, "recovery_fraction": 0.02}.get(t, 0.0) / sc)
-                    e = lambda y: (abs(y[t] - ystar[t]) / sc if t != "v_rmse" else y[t])  # noqa: E731
-                    prev.append({"family": fam, "group": grp.name, "target": t, "err_medium_over_tol": e(yb) / tol, "err_fineKf_over_tol": e(ykf) / tol, "err_fineNaT_over_tol": e(yna) / tol})
+            jobs.append((specs["A"], fam, k, GP.sample_intervention(rng, fam)))
+    import multiprocessing as mp
+    with mp.get_context("spawn").Pool(int(os.environ.get("N_PROC", "4"))) as pool:
+        prev = [r for rows_ in pool.map(_preview_job, jobs) for r in rows_]
     pv = pd.DataFrame(prev); pv.to_csv(OUT / "tables" / "family_preview.csv", index=False)
     R["family_preview"] = {fam: {"frac_medium_outside_tol": float((g.err_medium_over_tol > 1).mean()), "median_err_medium_over_tol": float(g.err_medium_over_tol.median()),
                                  "frac_fixed_by_Kf": float(((g.err_medium_over_tol > 1) & (g.err_fineKf_over_tol <= 1)).mean()),
                                  "frac_fixed_by_NaT": float(((g.err_medium_over_tol > 1) & (g.err_fineNaT_over_tol <= 1)).mean())} for fam, g in pv.groupby("family")}
+    R["preview_walls"] = {"truth_radau_mean_s": float(pv.wall_truth.mean()), "fine_kf_mean_s": float(pv.wall_fine_kf.mean()), "base_mean_s": float(pv.wall_base.mean())}
     R["wall_total_s"] = time.time() - t_start
     write_json(OUT / "tables" / "summary.json", R); write_json(OUT / "provenance.json", collect_provenance({"script": "validate_hierarchy.py"}, 0))
     # figure: channel errors

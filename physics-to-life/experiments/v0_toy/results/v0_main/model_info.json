@@ -253,5 +253,32 @@
       "frac_refined",
       "K"
     ]
+  },
+  "no_intervention": {
+    "n_rows": 30457,
+    "n_pos": 672,
+    "n_episodes": 1200,
+    "label": "necessary",
+    "features": [
+      "x_max",
+      "x_min",
+      "x_final",
+      "x_mean",
+      "margin",
+      "p_gauss",
+      "upstream_pressure",
+      "x_max_over_theta",
+      "influence",
+      "inv_dist",
+      "is_readout",
+      "is_ancestor",
+      "in_degree_abs",
+      "out_degree_abs",
+      "theta_obs",
+      "sigma_theta",
+      "n_refined_upstream",
+      "frac_refined",
+      "K"
+    ]
   }
 }

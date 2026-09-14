@@ -1,0 +1,40 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/timely-muscle-reinnervation",
+  "name": "Reinnervate a muscle before it is lost",
+  "class": "control",
+  "primitive": "reconnect",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Restore motor endplates on a denervated muscle while the muscle still has the fibres, endplates and satellite cells to respond — in practice, within roughly a year of denervation.",
+  "target": {
+    "node": "hrm:cell/skeletal-muscle"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Reinnervation within months restores function; after prolonged denervation the muscle does not recover even when axons arrive, and no clinical intervention changes that window. The evidence for the window itself is clinical and consistent (Ruijs 2005 identifies delay and proximal level as the strongest predictors of failure); interventions to extend it are rodent-stage."
+  },
+  "wouldMove": "Any intervention that lets a muscle denervated for over a year recover useful force after reinnervation, shown in a large animal.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/ruijs-2005-prs",
+      "hrm:source/gordon-2020-ijms"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

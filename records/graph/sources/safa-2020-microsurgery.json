@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/safa-2020-microsurgery",
+  "type": "source",
+  "citation": "Safa et al., Microsurgery, 2020",
+  "title": "Peripheral nerve repair throughout the body with processed nerve allografts: Results from a large multicenter study",
+  "authors": "Safa Bauback; Jain Sonu; Desai Mihir J.; Greenberg Jeffrey A.; Niacaris Timothy R.; Nydick Jason A.; Leversedge Fraser J.; Megee David M.; Zoldos Jozef; Rinker Brian D.; McKee Desirae M.; MacKay Brendan J.; Ingari John V.; Nesti Leon J.; Cho Mickey; Valerio Ian Lee; Kao Dennis S.; El‐Sheikh Yasser; Weber Renata V.; Shores Jaimie T.; Styron Joseph F.; Thayer Wesley P.; Przylecki Wojciech H.; Hoyen Harry A.; Buncke Gregory M.",
+  "venue": "Microsurgery",
+  "year": 2020,
+  "kind": "article",
+  "doi": "10.1002/micr.30574",
+  "pmid": "32101338",
+  "url": "https://doi.org/10.1002/micr.30574",
+  "license": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Peripheral nerve repair throughout the body with processed nerve allografts: Results from a large multicenter study",
+    "note": "Crossref record found; PubMed id 32101338 located by DOI."
+  },
+  "note": "RANGER registry: processed nerve allograft outcomes.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-peripheral-nerve.mjs)",
+    "date": "2026-09-14"
+  }
+}

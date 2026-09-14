@@ -1,0 +1,58 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/high-dose-steroids-sci-benefit-was-a-subgroup-finding",
+  "statement": "The NASCIS 2 trial of methylprednisolone in acute spinal cord injury reported motor and sensory improvement only in a post-hoc subgroup treated within eight hours; the primary analysis of the whole cohort was not positive.",
+  "context": {
+    "species": "human",
+    "model": "acute spinal cord injury",
+    "intervention": "high-dose methylprednisolone or naloxone",
+    "comparator": "placebo"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "motor and sensory scores",
+    "endpoint": "neurological recovery at 6 months",
+    "effect": "no benefit overall; benefit reported in the within-8-hours subgroup"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/bracken-1990-nejm",
+      "design": "rct",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L5",
+  "replication": {
+    "independentGroups": 1,
+    "note": "The trial itself is high quality; the disputed part is the subgroup analysis, which later trials and guideline reviews did not sustain."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "contradicts": [
+    "hrm:capability/acute-cord-damage-limitation"
+  ],
+  "drift": "'Steroids improve spinal cord injury outcomes' — a post-hoc subgroup result entered practice for two decades and was then withdrawn from most guidelines. Kept on the map as a documented failure mode of evidence, not as support.",
+  "limitations": [
+    "1990 trial with methods and endpoints of its era",
+    "the subgroup was not pre-specified"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/bracken-1990-nejm"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

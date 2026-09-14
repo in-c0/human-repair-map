@@ -1,0 +1,40 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/controllable-cardiomyocyte-proliferation",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "question": "Can adult cardiomyocyte proliferation be switched on to repair an infarct and then switched off, or does the same signal that repairs the heart keep going until it kills the animal?",
+  "why": "The pig miR-199a result is the map's clearest case of a therapy that worked and was lethal. Control, not induction, is what is missing, and it is the same problem that appears in the rejuvenation branch as cancer risk under reprogramming.",
+  "blocks": [
+    "hrm:capability/cardiomyocyte-proliferation-induction",
+    "hrm:goal/myocardial-remuscularisation"
+  ],
+  "hypotheses": [
+    "Transient delivery — mRNA, a self-limiting vector, or a small molecule — gives the same repair without the persistence that caused the deaths.",
+    "Proliferation requires a sustained signal to produce useful muscle, so the therapeutic window is narrow or absent.",
+    "The deaths were arrhythmic rather than proliferative, making this the same problem as the graft integration question."
+  ],
+  "knownUnknowns": [
+    "whether transient delivery achieves the same functional repair",
+    "what the treated pigs actually died of, mechanistically",
+    "whether a dose exists that repairs without dysplasia"
+  ],
+  "whatWouldResolve": "A repeat of the pig experiment with a transient delivery vehicle and telemetry, reporting both function and cause of death for every animal.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

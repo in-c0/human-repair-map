@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/chong-2014-nature",
+  "type": "source",
+  "citation": "Chong et al., Nature, 2014",
+  "title": "Human embryonic-stem-cell-derived cardiomyocytes regenerate non-human primate hearts",
+  "authors": "Chong James J. H.; Yang Xiulan; Don Creighton W.; Minami Elina; Liu Yen-Wen; Weyers Jill J.; Mahoney William M.; Van Biber Benjamin; Cook Savannah M.; Palpant Nathan J.; Gantz Jay A.; Fugate James A.; Muskheli Veronica; Gough G. Michael; Vogel Keith W.; Astley Cliff A.; Hotchkiss Charlotte E.; Baldessari Audrey; Pabon Lil; Reinecke Hans; Gill Edward A.; Nelson Veronica; Kiem Hans-Peter; Laflamme Michael A.; Murry Charles E.",
+  "venue": "Nature",
+  "year": 2014,
+  "kind": "article",
+  "doi": "10.1038/nature13233",
+  "pmid": "24776797",
+  "url": "https://doi.org/10.1038/nature13233",
+  "license": "http://www.springer.com/tdm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Human embryonic-stem-cell-derived cardiomyocytes regenerate non-human primate hearts",
+    "note": "Crossref record found; PubMed id 24776797 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+  }
+}

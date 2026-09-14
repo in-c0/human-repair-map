@@ -1,0 +1,39 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/biological-age-measurement-that-predicts-outcome",
+  "name": "Tell whether someone got biologically younger",
+  "class": "verify",
+  "primitive": "preserve",
+  "projections": [
+    "rejuvenation"
+  ],
+  "description": "Measure a person's biological age well enough that a change in the measure, produced by an intervention, predicts a change in their health outcomes — so that a rejuvenation trial does not have to run for forty years.",
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "biomarker",
+    "blocked": "science",
+    "note": "Epigenetic clocks predict chronological age accurately across tissues and predict mortality in cohorts (Horvath 2013). What has not been shown is that moving a clock with an intervention moves the outcome: the clock is a correlate of age, and no trial has demonstrated that lowering it lowers risk. Studies reporting epigenetic age reversal (Fahy 2019, nine men, no control arm) illustrate the problem rather than solving it. Graded L2 deliberately: as a surrogate endpoint, which is what the field uses it for, the causal evidence is preclinical.",
+    "drift": "Clocks are reported as measurements of how old someone biologically is, and used as endpoints. They are trained predictors of chronological age whose response to intervention has no validated meaning."
+  },
+  "wouldMove": "An intervention trial in which a clock change measured early predicts the clinical outcome measured later, in an independent cohort.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/horvath-2013-genomebiol",
+      "hrm:source/fahy-2019-agingcell",
+      "hrm:source/yang-2023-cell"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/adult-cell-therapy-after-mi-shows-no-effect-in-ipd-meta-analysis",
+  "statement": "An individual-patient-data meta-analysis of randomised trials of intracoronary adult cell therapy after acute myocardial infarction found no effect on left ventricular ejection fraction, ventricular volumes, or clinical events.",
+  "context": {
+    "species": "human",
+    "model": "acute myocardial infarction",
+    "intervention": "intracoronary bone-marrow or adult cell therapy",
+    "comparator": "control"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "imaging-derived LVEF and volumes; clinical events",
+    "endpoint": "cardiac function and outcomes",
+    "effect": "no significant effect"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/gyongyosi-2015-circres",
+      "design": "meta-analysis",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L5",
+  "replication": {
+    "independentGroups": 2,
+    "note": "Individual patient data pooled across many independent trials."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "contradicts": [
+    "hrm:capability/infarct-remuscularisation",
+    "hrm:capability/pluripotent-derived-cardiomyocyte-grafting"
+  ],
+  "drift": "Individual positive trials from this era are still cited as evidence that cell therapy repairs the heart. Pooled at patient level, the effect is not there.",
+  "limitations": [
+    "heterogeneous cell products and protocols",
+    "does not test pluripotent-derived cardiomyocytes, which are a different intervention"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/gyongyosi-2015-circres"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/regeneration-speed-increase",
+  "name": "Make axons regrow faster than a millimetre a day",
+  "class": "control",
+  "primitive": "recalibrate",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Raise the rate at which regenerating axons advance, or shorten the delay before they start, so that they reach the target while the target is still viable.",
+  "target": {
+    "node": "hrm:cell/peripheral-neuron"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "science",
+    "note": "One hour of 20 Hz electrical stimulation applied to the nerve at the time of surgery accelerated axon outgrowth and improved muscle reinnervation in patients after carpal tunnel release (Gordon 2010). That is human evidence for shortening the delay before regeneration starts, in a short-distance, low-stakes injury. Whether it helps over the distances that matter is untested.",
+    "drift": "'Electrical stimulation speeds nerve regeneration' — it shortens staggered regeneration onset in a distal compression injury; the millimetre-a-day rate itself has not been shown to change in humans."
+  },
+  "wouldMove": "A randomised trial of conditioning stimulation in a proximal nerve injury with muscle function, not sensory latency, as the endpoint.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/gordon-2010-expneurol",
+      "hrm:source/gordon-2020-ijms"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

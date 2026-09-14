@@ -1,0 +1,34 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/cord-repair-restores-autonomic-function",
+  "projections": [
+    "universal-repair"
+  ],
+  "question": "Would any of the current repair or stimulation strategies restore bladder, bowel and cardiovascular control, or do those pathways need their own intervention?",
+  "why": "People with spinal cord injury rank autonomic function above walking. The field's endpoints are motor, so the map currently has an L0 node next to several L4 ones, and that mismatch is a statement about the field rather than about the biology.",
+  "blocks": [
+    "hrm:capability/autonomic-function-restoration-after-sci",
+    "hrm:goal/spinal-cord-injury-repair"
+  ],
+  "hypotheses": [
+    "Autonomic pathways are anatomically separate and will need separate targeting.",
+    "Stimulation protocols already produce autonomic benefits that go unreported because the endpoints are motor.",
+    "Autonomic circuits below the lesion degrade differently and are more recoverable."
+  ],
+  "whatWouldResolve": "A trial of an existing stimulation protocol with continence or cardiovascular stability as the pre-registered primary endpoint.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

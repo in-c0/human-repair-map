@@ -1,0 +1,39 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/sensory-target-reinnervation-with-discrimination",
+  "name": "Restore sensation, not just feeling",
+  "class": "control",
+  "primitive": "reconnect",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Reinnervate sensory end organs so that the patient recovers two-point discrimination and localisation, rather than the diffuse protective sensation that a repaired nerve usually delivers.",
+  "target": {
+    "node": "hrm:cell/peripheral-neuron"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Protective sensation returns after most repairs; normal discrimination usually does not in adults, and age is one of the strongest predictors of the difference (Ruijs 2005). The gap between 'feels something' and 'can identify an object' is a cortical remapping problem as much as a peripheral one, which is why this is graded on function rather than structure."
+  },
+  "wouldMove": "A repair method or rehabilitation protocol that restores adult two-point discrimination to normal in a randomised comparison.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/ruijs-2005-prs"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

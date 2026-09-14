@@ -1,0 +1,115 @@
+{
+  "$comment": "The standing prediction sheet. Ten statements tied to graph records, each with a date and a resolution rule, so that different predictors (frontier models, researchers) answer the same questions and can be compared when the dates arrive. Register answers with scripts/predict.mjs; they are locked in the public event log and shown at #/predictions. Add a statement only with a resolution rule a stranger could apply. Retired statements keep their id and locked answers but take no new answers; the sheet lists what replaced them.",
+  "version": "2026-09-14",
+  "statements": [
+    {
+      "id": "ps-01",
+      "subject": "hrm:question/en1-inhibition-translates-to-human-skin",
+      "statement": "By 2028-12-31, a peer-reviewed primary study reports that YAP inhibition (verteporfin or another agent) produces regeneration with hair follicles in a porcine full-thickness wound model.",
+      "resolutionCriteria": "Resolves YES if a primary research paper (not a review or preprint) in a peer-reviewed journal reports histologically confirmed hair follicles in treated porcine full-thickness wounds and their absence or reduction in controls. Preprints, mouse-only data, and conference abstracts do not count.",
+      "horizon": "2028-12-31",
+      "retired": {
+        "date": "2026-09-14",
+        "reason": "Already true when posed: Mascharak et al., Sci Transl Med 2025 (doi:10.1126/scitranslmed.adt6387) reports neogenic follicles in verteporfin-treated red Duroc pig wounds. Surfaced by ChatGPT during the first prediction run; filed as proposal p_33d30caa5b. Locked answers stay in the registry; the statement takes no new answers. Replaced by ps-11."
+      }
+    },
+    {
+      "id": "ps-02",
+      "subject": "hrm:capability/pharmacological-scar-reduction-in-humans",
+      "statement": "By 2028-12-31, a randomised controlled trial of verteporfin for scar reduction in human wounds reports that its registered primary scar endpoint was met.",
+      "resolutionCriteria": "Resolves YES if a registered RCT (ClinicalTrials.gov or equivalent) of verteporfin in human wounds reports, in a peer-reviewed paper or a posted results record, a statistically significant improvement on the primary scar endpoint as registered before unblinding. Secondary endpoints or open-label series do not count.",
+      "horizon": "2028-12-31"
+    },
+    {
+      "id": "ps-03",
+      "subject": "hrm:question/partial-reprogramming-human-safety",
+      "statement": "By 2027-12-31, a Phase 1 trial of partial epigenetic reprogramming in humans (for example ER-100, OSK) reports completed dosing with no dose-limiting toxicity and no treatment-related tumour.",
+      "resolutionCriteria": "Resolves YES if the sponsor, a registry results record, or a peer-reviewed paper reports that a Phase 1 partial-reprogramming trial completed its planned dosing cohorts with no dose-limiting toxicity and no treatment-attributed neoplasm. A trial paused or halted for safety, or with no public safety readout by the date, resolves NO.",
+      "horizon": "2027-12-31"
+    },
+    {
+      "id": "ps-04",
+      "subject": "hrm:question/pluripotent-derived-skin-engrafts-in-humans",
+      "statement": "By 2029-12-31, a skin graft derived from pluripotent stem cells and carrying hair follicles is transplanted into a person in a registered clinical trial.",
+      "resolutionCriteria": "Resolves YES if a registered trial (any phase) reports at least one participant transplanted with a pluripotent-stem-cell-derived graft that contains hair follicles at transplant, confirmed by the trial's own description or a peer-reviewed report. Grafts without appendages, or adult-stem-cell grafts, do not count.",
+      "horizon": "2029-12-31"
+    },
+    {
+      "id": "ps-05",
+      "subject": "hrm:question/wound-induced-hair-neogenesis-in-human-skin",
+      "statement": "By 2028-12-31, de novo hair follicle formation after wounding in adult human skin is reported in a peer-reviewed paper, in vivo or in a human skin xenograft, with histological or lineage confirmation.",
+      "resolutionCriteria": "Resolves YES if a peer-reviewed primary paper reports new hair follicles forming within the wound bed of adult human skin (in a person or a human skin xenograft), confirmed by histology or lineage tracing, and distinguished from follicles that survived at the wound edge. Mouse data and organoid-only data do not count.",
+      "horizon": "2028-12-31"
+    },
+    {
+      "id": "ps-06",
+      "subject": "hrm:question/gene-corrected-epidermal-graft-long-term-safety",
+      "statement": "By 2028-12-31, a peer-reviewed follow-up of at least five years after transplantation of gene-corrected autologous epidermal stem-cell grafts reports no clonal expansion of concern and no malignancy in the grafted skin.",
+      "resolutionCriteria": "Resolves YES if a peer-reviewed paper reports at least five years of follow-up in one or more recipients of gene-corrected epidermal stem-cell grafts with integration-site or clonal analysis and no malignancy in grafted skin. A report of malignancy, or no five-year report by the date, resolves NO.",
+      "horizon": "2028-12-31",
+      "retired": {
+        "date": "2026-09-14",
+        "reason": "Already true when posed: De Rosa et al., Stem Cell Reports 2014 (doi:10.1016/j.stemcr.2013.11.001) reports 6.5 years of follow-up with integration-site analysis and no malignancy. Surfaced by ChatGPT during the first prediction run; filed as proposal p_352e03077d. Replaced by ps-12."
+      }
+    },
+    {
+      "id": "ps-07",
+      "subject": "hrm:question/topical-gene-delivery-generalises-beyond-eb",
+      "statement": "By 2028-12-31, a topical HSV-vector gene therapy for a skin indication other than epidermolysis bullosa reports that its registered primary endpoint was met in a Phase 2 or later trial.",
+      "resolutionCriteria": "Resolves YES if a registered Phase 2 or Phase 3 trial of a topically applied HSV-based gene therapy for a non-epidermolysis-bullosa indication reports meeting its primary endpoint, in a peer-reviewed paper, a registry results record, or a sponsor announcement with the endpoint data. Phase 1 safety-only readouts do not count.",
+      "horizon": "2028-12-31"
+    },
+    {
+      "id": "ps-08",
+      "subject": "hrm:question/organised-microvasculature-in-thick-regenerated-tissue",
+      "statement": "By 2029-12-31, an engineered dermal construct more than 2 mm thick with a prevascularised, hierarchically organised vessel network is shown perfused and stable for at least 12 weeks in a large animal, in a peer-reviewed paper.",
+      "resolutionCriteria": "Resolves YES if a peer-reviewed primary paper reports a dermal or skin construct with stated thickness above 2 mm, vessels of more than one calibre connected to host circulation, perfusion demonstrated by imaging or histology, and persistence at 12 weeks or more in a pig, sheep or non-human primate. Rodent models do not count.",
+      "horizon": "2029-12-31"
+    },
+    {
+      "id": "ps-09",
+      "subject": "hrm:question/why-avotermin-phase-3-failed",
+      "statement": "By 2027-12-31, the full Phase 3 results of avotermin (TGF-β3, Juvista) are published in a peer-reviewed journal or posted to a registry with primary endpoint data.",
+      "resolutionCriteria": "Resolves YES if a peer-reviewed paper or a registry results record presents the Phase 3 primary endpoint data for avotermin, including the numbers behind the failure. Press releases and secondary summaries do not count.",
+      "horizon": "2027-12-31"
+    },
+    {
+      "id": "ps-10",
+      "subject": "hrm:question/dermal-adipocyte-regeneration-in-human-wounds",
+      "statement": "By 2028-12-31, conversion of myofibroblasts to adipocytes is demonstrated in human wound tissue, in vivo or in ex-vivo human skin, in a peer-reviewed paper with lineage evidence.",
+      "resolutionCriteria": "Resolves YES if a peer-reviewed primary paper shows, with lineage tracing or an equivalent clonal method, that cells of myofibroblast origin become adipocytes in human wound tissue (in a person, a human skin xenograft, or ex-vivo human skin). Mouse-only data and correlative marker co-expression do not count.",
+      "horizon": "2028-12-31"
+    },
+    {
+      "id": "ps-11",
+      "subject": "hrm:question/en1-inhibition-translates-to-human-skin",
+      "statement": "By 2029-12-31, a peer-reviewed primary study from a group with no author in common with the Longaker laboratory reports that YAP inhibition produces hair follicle regeneration within full-thickness wounds in pig or human skin.",
+      "resolutionCriteria": "Resolves YES if a peer-reviewed primary paper (not a preprint, review or abstract) whose author list shares no author with Mascharak et al. 2021 (Science) or Mascharak et al. 2025 (Sci Transl Med) reports histologically confirmed hair follicles within the wound bed of YAP-inhibitor-treated full-thickness wounds in pig skin or in humans, with their absence or reduction in controls. Mouse data do not count.",
+      "horizon": "2029-12-31",
+      "added": "2026-09-14",
+      "replaces": "ps-01"
+    },
+    {
+      "id": "ps-12",
+      "subject": "hrm:question/gene-corrected-epidermal-graft-long-term-safety",
+      "statement": "By 2028-12-31, a Phase 2/3 or pivotal trial of gene-corrected autologous epidermal stem-cell grafts for epidermolysis bullosa (for example Hologene 5) reports that its registered primary endpoint was met.",
+      "resolutionCriteria": "Resolves YES if a registered Phase 2/3, Phase 3 or pivotal trial of ex-vivo gene-corrected autologous epidermal (keratinocyte stem-cell) grafts for any form of epidermolysis bullosa reports meeting its registered primary endpoint, in a peer-reviewed paper, a registry results record, or a regulatory decision that cites the endpoint. Compassionate-use series and Phase 1/2 safety readouts do not count.",
+      "horizon": "2028-12-31",
+      "added": "2026-09-14",
+      "replaces": "ps-06",
+      "retired": {
+        "date": "2026-09-14",
+        "reason": "Already true when posed, on the same day it was written: the VIITAL trial (NCT04227106) of prademagene zamikeracel met both co-primary endpoints, was published in The Lancet in 2025 (doi:10.1016/s0140-6736(25)00778-0) and supported FDA approval. Surfaced by ChatGPT within minutes of the statement being added; filed as proposal p_794a73cb0b. Two of the first twelve statements were retired this way, which says more about the map's coverage than about the predictors. Replaced by ps-13."
+      }
+    },
+    {
+      "id": "ps-13",
+      "subject": "hrm:capability/epidermis-gene-corrected-stem-cell-replacement",
+      "statement": "By 2029-12-31, an ex-vivo gene-corrected autologous epidermal graft is approved or reported in a completed randomised trial for a skin condition that is not epidermolysis bullosa.",
+      "resolutionCriteria": "Resolves YES if a regulator approves, or a peer-reviewed report of a completed randomised trial describes, an ex-vivo gene-corrected autologous keratinocyte or epidermal stem-cell graft for an indication other than any form of epidermolysis bullosa. Compassionate use, single-patient reports and non-randomised series do not count, nor does a further EB indication.",
+      "horizon": "2029-12-31",
+      "added": "2026-09-14",
+      "replaces": "ps-12"
+    }
+  ]
+}

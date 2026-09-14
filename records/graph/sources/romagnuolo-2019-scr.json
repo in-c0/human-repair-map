@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/romagnuolo-2019-scr",
+  "type": "source",
+  "citation": "Romagnuolo et al., Stem Cell Reports, 2019",
+  "title": "Human Embryonic Stem Cell-Derived Cardiomyocytes Regenerate the Infarcted Pig Heart but Induce Ventricular Tachyarrhythmias",
+  "authors": "Romagnuolo Rocco; Masoudpour Hassan; Porta-Sánchez Andreu; Qiang Beiping; Barry Jennifer; Laskary Andrew; Qi Xiuling; Massé Stéphane; Magtibay Karl; Kawajiri Hiroyuki; Wu Jun; Valdman Sadikov Tamilla; Rothberg Janet; Panchalingam Krishna M.; Titus Emily; Li Ren-Ke; Zandstra Peter W.; Wright Graham A.; Nanthakumar Kumaraswamy; Ghugre Nilesh R.; Keller Gordon; Laflamme Michael A.",
+  "venue": "Stem Cell Reports",
+  "year": 2019,
+  "kind": "article",
+  "doi": "10.1016/j.stemcr.2019.04.005",
+  "pmid": "31056479",
+  "url": "https://doi.org/10.1016/j.stemcr.2019.04.005",
+  "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Human Embryonic Stem Cell-Derived Cardiomyocytes Regenerate the Infarcted Pig Heart but Induce Ventricular Tachyarrhythmias",
+    "note": "Crossref record found; PubMed id 31056479 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+  }
+}

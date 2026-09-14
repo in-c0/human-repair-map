@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/fehlings-2012-plosone",
+  "type": "source",
+  "citation": "Fehlings et al., PLoS ONE, 2012",
+  "title": "Early versus Delayed Decompression for Traumatic Cervical Spinal Cord Injury: Results of the Surgical Timing in Acute Spinal Cord Injury Study (STASCIS)",
+  "authors": "Fehlings Michael G.; Vaccaro Alexander; Wilson Jefferson R.; Singh Anoushka; W. Cadotte David; Harrop James S.; Aarabi Bizhan; Shaffrey Christopher; Dvorak Marcel; Fisher Charles; Arnold Paul; Massicotte Eric M.; Lewis Stephen; Rampersaud Raja",
+  "venue": "PLoS ONE",
+  "year": 2012,
+  "kind": "article",
+  "doi": "10.1371/journal.pone.0032037",
+  "pmid": "22384132",
+  "url": "https://doi.org/10.1371/journal.pone.0032037",
+  "license": "http://creativecommons.org/licenses/by/4.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Early versus Delayed Decompression for Traumatic Cervical Spinal Cord Injury: Results of the Surgical Timing in Acute Spinal Cord Injury Study (STASCIS)",
+    "note": "Crossref record found; PubMed id 22384132 located by DOI."
+  },
+  "note": "STASCIS: early versus delayed decompression.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/weller-2017-lancetoncol",
+  "type": "source",
+  "citation": "Weller et al., The Lancet Oncology, 2017",
+  "title": "Rindopepimut with temozolomide for patients with newly diagnosed, EGFRvIII-expressing glioblastoma (ACT IV): a randomised, double-blind, international phase 3 trial",
+  "authors": "Weller Michael; Butowski Nicholas; Tran David D; Recht Lawrence D; Lim Michael; Hirte Hal; Ashby Lynn; Mechtler Laszlo; Goldlust Samuel A; Iwamoto Fabio; Drappatz Jan; O'Rourke Donald M; Wong Mark; Hamilton Mark G; Finocchiaro Gaetano; Perry James; Wick Wolfgang; Green Jennifer; He Yi; Turner Christopher D; Yellin Michael J; Keler Tibor; Davis Thomas A; Stupp Roger; Sampson John H; Butowski Nicholas; Campian Jian; Recht Lawrence; Lim Michael; Ashby Lynn; Drappatz Jan; Hirte Hal; Iwamoto Fabio; Mechtler Laszlo; Goldlust Samuel; Becker Kevin; Barnett Gene; Nicholas Garth; Desjardins Annick; Benkers Tara; Wagle Naveed; Groves Morris; Kesari Santosh; Horvath Zsolt; Merrell Ryan; Curry Richard; O'Rourke James; Schuster David; Wong Mark; Mrugala Maciej; Jensen Randy; Trusheim John; Lesser Glenn; Belanger Karl; Sloan Andrew; Purow Benjamin; Fink Karen; Raizer Jeffrey; Schulder Michael; Nair Suresh; Peak Scott; Perry James; Brandes Alba; Weller Michael; Mohile Nimish; Landolfi Joseph; Olson Jon; Finocchiaro Gaetano; Jennens Ross; DeSouza Paul; Robinson Bridget; Crittenden Marka; Shih Kent; Flowers Alexandra; Ong Shirley; Connelly Jennifer; Hadjipanayis Costas; Giglio Pierre; Mott Frank; Mathieu David; Lessard Nathalie; Sepulveda Sanchez Juan; Lövey József; Wheeler Helen; Inglis Po-Ling; Hardie Claire; Bota Daniela; Lesniak Maciej; Portnow Jana; Frankel Bruce; Junck Larry; Thompson Reid; Berk Lawrence; McGhie John; Macdonald David; Saran Frank; Soffietti Riccardo; Blumenthal Deborah; André de Sá Barreto Costa Marcos; Nowak Anna; Singhal Nimit; Hottinger Andreas; Schmid Andrea; Srkalovic Gordan; Baskin David; Fadul Camilo; Nabors Louis; LaRocca Renato; Villano John; Paleologos Nina; Kavan Petr; Pitz Marshall; Thiessen Brian; Idbaih Ahmed; Frenel Jean Sébastien; Domont Julien; Grauer Oliver; Hau Peter; Marosi Christine; Sroubek Jan; Hovey Elizabeth; Sridhar P.S.; Cher Lawrence; Dunbar Erin; Coyle Thomas; Raymond Jane; Barton Kevin; Guarino Michael; Raval Sumul; Stea Baldassarre; Dietrich Jorge; Hopkins Kirsten; Erridge Sara; Steinbach Joachim-Peter; Pineda Losada Estela; Balana Quintero Carmen; Sonia del Barco Berron; Wenczl Miklós; Molnár Katalin; Hideghéty Katalin; Lossos Alexander; Myra van Linde; Levy Ana; Harrup Rosemary; Patterson William; Lwin Zarnie; Sathornsumetee Sith; Lee E-Jian; Ho Jih-Tsun; Emmons Steven; Duic J. Paul; Shao Spencer; Ashamalla Hani; Weaver Michael; Lutzky Jose; Avgeropoulos Nicholas; Hanna Wahid; Nadipuram Mukund; Cecchi Gary; O'Donnell Robert; Pannullo Susan; Carney Jennifer; Hamilton Mark; MacNeil Mary; Beaney Ronald; Fabbro Michel; Schnell Oliver; Fietkau Rainer; Stockhammer Guenther; Malinova Bela; Odrazka Karel; Sames Martin; Miguel Gil Gil; Razis Evangelia; Lavrenkov Konstantin; Castro Guillermo; Ramirez Francisco; Baldotto Clarissa; Viola Fabiana; Malheiros Suzana; Lickliter Jason; Gauden Stanislaw; Dechaphunkul Arunee; Thaipisuttikul Iyavut; Thotathil Ziad; Ma Hsin-I; Cheng Wen-Yu; Chang Chin-Hong; Salas Fernando; Dietrich Pierre-Yves; Mamot Christoph; Nayak Lakshmi; Nag Shona",
+  "venue": "The Lancet Oncology",
+  "year": 2017,
+  "kind": "article",
+  "doi": "10.1016/s1470-2045(17)30517-x",
+  "pmid": "28844499",
+  "url": "https://doi.org/10.1016/s1470-2045(17)30517-x",
+  "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Rindopepimut with temozolomide for patients with newly diagnosed, EGFRvIII-expressing glioblastoma (ACT IV): a randomised, double-blind, international phase 3 trial",
+    "note": "Crossref record found; PubMed id 28844499 located by DOI."
+  },
+  "note": "ACT IV: rindopepimut phase 3, negative.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+  }
+}

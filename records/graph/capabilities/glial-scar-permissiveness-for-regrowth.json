@@ -1,0 +1,42 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/glial-scar-permissiveness-for-regrowth",
+  "name": "Make the scar a path rather than a wall",
+  "class": "control",
+  "primitive": "recalibrate",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Change the composition of the injury site — chondroitin sulphate proteoglycans, myelin inhibitors, astrocyte state — so that axons can grow through it.",
+  "target": {
+    "node": "hrm:cell/glia"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Chondroitinase ABC degrades inhibitory proteoglycans and promoted functional recovery in rats (Bradbury 2002); anti-Nogo-A antibody, targeting a myelin inhibitor, has been given intrathecally to patients in a first-in-man study with acceptable tolerability (Kucher 2018) — a human safety readout, not a demonstrated functional benefit. The L4 records that the intervention has reached people, and the note records that it has not yet been shown to work in them.",
+    "drift": "The astrocytic scar was long described as purely inhibitory; later work argues it is also required for regrowth. The map treats 'remove the scar' as an unresolved framing, not a goal."
+  },
+  "wouldMove": "A randomised trial of an anti-inhibitory agent with a motor endpoint that succeeds, or a large-animal study showing regrowth through a modified scar with function.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/bradbury-2002-nature",
+      "hrm:source/kucher-2018-nnr",
+      "hrm:source/anderson-2018-nature"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "type": "experiment",
+  "id": "hrm:experiment/phase-0-margin-concentration-study",
+  "name": "Phase 0 study measuring drug concentration at the infiltrating margin",
+  "tests": [
+    "hrm:question/bbb-really-the-delivery-limit"
+  ],
+  "status": "proposed",
+  "design": {
+    "species": "human",
+    "model": "patients undergoing resection for glioblastoma",
+    "intervention": "the candidate drug given before surgery, with and without ultrasound barrier opening",
+    "comparator": "core versus margin tissue within each patient",
+    "readout": "drug concentration and a pharmacodynamic marker of target engagement in core and margin tissue",
+    "duration": "18 months",
+    "n": "20-30"
+  },
+  "discriminates": "Adequate concentration at the margin with no pharmacodynamic effect would show the drug is the problem; inadequate concentration would show delivery is, and would tell the field whether barrier opening actually reaches the margin.",
+  "feasibility": {
+    "costClass": "low",
+    "durationClass": "months",
+    "requires": [
+      "a neurosurgical centre with phase 0 infrastructure",
+      "tissue pharmacokinetics",
+      "image-guided margin sampling"
+    ],
+    "ethics": "human research ethics approval"
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

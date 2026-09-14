@@ -1,0 +1,34 @@
+{
+  "main": {
+    "n_rows": 15284,
+    "n_pos": 358,
+    "n_episodes": 600,
+    "label": "necessary",
+    "features": [
+      "x_max",
+      "x_min",
+      "x_final",
+      "x_mean",
+      "margin",
+      "p_gauss",
+      "upstream_pressure",
+      "x_max_over_theta",
+      "is_intervened",
+      "amp_on_node",
+      "amp_total",
+      "duration",
+      "in_weight_from_intervened",
+      "influence",
+      "inv_dist",
+      "is_readout",
+      "is_ancestor",
+      "in_degree_abs",
+      "out_degree_abs",
+      "theta_obs",
+      "sigma_theta",
+      "n_refined_upstream",
+      "frac_refined",
+      "K"
+    ]
+  }
+}

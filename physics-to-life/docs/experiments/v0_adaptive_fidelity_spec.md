@@ -89,6 +89,9 @@ state), label = `necessary`.
 4. OOD intervention benchmark (families: higher amplitude, two-node, sustained step,
    negative pulse, K = 20, sigmoidal fast subsystem with ε = 0.03, stochastic fast
    subsystem, σ_θ = 0 and 0.6 information levels).
+   *Post-run correction:* the sigmoidal family's folds are at ±0.127 (not ±0.385 as
+   intended), so its quasi-static closure captures switch-on and only hysteresis needs
+   fine physics; it is a weak cross-formulation test (14 necessary nodes in 150 episodes).
 5. Ablations (no uncertainty bonus, no graph features, no trajectory features,
    intervention-only, GBM instead of MLP, switch label instead of necessity label,
    100/300 training episodes, no partial-state training rows).

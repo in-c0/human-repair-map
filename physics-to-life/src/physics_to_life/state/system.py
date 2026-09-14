@@ -96,8 +96,12 @@ def fast_rhs(y: np.ndarray, x: np.ndarray, theta: np.ndarray, beta: float, model
     if model == "cubic":
         return y - y**3 + b
     if model == "sigmoid":
-        # positive-feedback switch with the same fold thresholds as the cubic:
-        # branches exist while |b| < FOLD; the transient shape differs from the cubic.
+        # positive-feedback switch. NOTE (corrected 2026-09-14 after the V0 run): with
+        # kappa = 12 its folds lie at b = ±0.127, not at ±FOLD as originally intended, so
+        # its hysteresis loop is three times narrower than the cubic's and the quasi-static
+        # closure (which follows the only surviving branch) already captures switch-ON;
+        # fine physics is needed only for the delayed switch-OFF. It is therefore a weaker
+        # cross-formulation test than the 'noisy' family (see RESULTS.md §7 of run v0_main).
         kappa = 12.0
         return 2.0 / (1.0 + np.exp(-kappa * (b + FOLD * y))) - 1.0 - y
     raise ValueError(model)

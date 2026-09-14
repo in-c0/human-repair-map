@@ -83,3 +83,14 @@ def test_graph_utils():
     assert ancestors_of(W, 3) == {0, 1, 2}
     inf = influence_to(W, 3)
     assert inf[2] > inf[1] > inf[0] > 0 and inf[3] == 0
+
+
+def test_sigmoid_fold_is_narrower_than_cubic():
+    """Documents the actual (corrected) behaviour of the sigmoidal fast subsystem: its lower
+    branch vanishes at b ≈ 0.127, i.e. well before the cubic fold at ±0.385, and the
+    quasi-static closure then follows the upper branch."""
+    lo = y_lower_branch(np.array([0.10]), np.zeros(1), 1.0, "sigmoid")[0]
+    hi = y_lower_branch(np.array([0.15]), np.zeros(1), 1.0, "sigmoid")[0]
+    assert lo < -0.8 and hi > 0.9
+    # the cubic closure is still on the lower branch there
+    assert y_lower_branch(np.array([0.15]), np.zeros(1), 1.0, "cubic")[0] < -0.8

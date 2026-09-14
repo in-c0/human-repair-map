@@ -40,7 +40,7 @@ ensemble spread does not flag. The physics heuristic handles that family without
 | H2 causal fidelity | medium error > 10 × floor when a node switches, ≤ 2 × floor when none does | 0.091 vs 0.00094 (floor 0.00105); 49 % of episodes switch | **supported** |
 | H3 error-aware routing | AUROC ≥ 0.85, F1 at oracle cost ≥ 0.6, ECE ≤ 0.1 | AUROC 0.993, F1 0.66, ECE 0.007 (physics: 0.959 / 0.33 / 0.088) | **supported** |
 | H4 sparse importance | median minimal set ≤ 2 of 12; ≥ 40 % need none | median 0, mean 0.27, 79 % need none | **supported** |
-| H6 cross-model generalisation | AUROC ≥ 0.8 on `sigmoid` and `noisy`; dominates random | 0.997 and 0.992; learned 0.0015 vs random 0.0028 (sigmoid), 0.0051 vs 0.041 (noisy) at 2 × medium budget | **supported** |
+| H6 cross-model generalisation | AUROC ≥ 0.8 on `sigmoid` and `noisy`; dominates random | 0.997 and 0.992; learned 0.0015 vs random 0.0028 (sigmoid), 0.0051 vs 0.041 (noisy) at 2 × medium budget | **supported (weak on `sigmoid`)** — that family's folds are at ±0.127, its quasi-static closure already tracks switch-on, and only 14 necessary nodes exist in 150 episodes; the `noisy` leg (40 necessary nodes, medium error 0.053) is the proper test |
 | H7 hidden-state inference (partial) | ECE ≤ 0.1 | 0.007 | **supported** |
 | H9 value of computation | learned beats the best heuristic at ≥ 3 of 5 budgets, paired-bootstrap CI excluding 0, for both heuristic families | vs physics: 3 of 5 (sequential pair: budgets 1.5, 2, 2.5 × medium); one-shot pair only at 1.5 ×; physics one-shot significantly *better* at 2–3 × medium by 0.0004 (CI 0.0001–0.0007). vs adjoint: 4 of 5 | **supported under the registered rule; crossing frontiers** — see §4 |
 
@@ -160,9 +160,15 @@ the budget; medium fallback if none). Router trained on `id` only.
 | σθ = 0.6 | 0.0043 | 0.0049 | 0.0054 | 0.030 | 0.0009 | 0.0010 | 0.040 | 0.987 / 0.926 | 0.007 |
 
 Observations.
-- **Transfer that works:** different fast-subsystem formulation (`sigmoid`), stochastic
-  fast subsystem (`noisy`, sequential), larger network (`K20`), exact and worse threshold
-  information. Ranking quality (AUROC ≥ 0.98) survives every shift.
+- **Transfer that works:** stochastic fast subsystem (`noisy`, sequential), larger
+  network (`K20`), exact and worse threshold information, and — weakly — a different
+  fast-subsystem formulation (`sigmoid`). *Correction found after the run:* the sigmoidal
+  switch's folds are at ±0.127 rather than the intended ±0.385, so its quasi-static closure
+  already follows switch-on (the fixed-point solver lands on the only surviving branch) and
+  fine physics is needed only for the delayed switch-off; only 14 necessary nodes occur in
+  150 episodes and the medium error is 0.0039. The AUROC of 0.997 rests on those 14
+  positives. A proper formulation test needs a fast subsystem with matched hysteresis
+  width; scheduled for V1. Ranking quality (AUROC ≥ 0.98) survives every other shift.
 - **Transfer that fails:** `step`. The duration feature (7.5 vs 0.5–2 in training)
   pushes the MLP members into the same saturated regime: probabilities collapse to zero,
   nothing is refined, error equals the medium model's, and disagreement is exactly zero.

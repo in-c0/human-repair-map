@@ -188,7 +188,7 @@ policies that move a damaged or aged virtual system toward a target healthy stat
 | H3 | error-aware routing | V0-supported (AUROC 0.993, F1 0.66 at oracle cost, ECE 0.007) | V0 | same |
 | H4 | sparse importance | V0-supported (median 0, 79 % of episodes need no fine physics) | V0 | same |
 | H5 | physics compilation | untested | V1 | this file |
-| H6 | cross-model generalisation | V0-supported (partial: formulation, ε, noise, size; fails on sustained-step shift) | V0 (partial) | same |
+| H6 | cross-model generalisation | V0-supported, weak (noise, size and information level: proper tests; the sigmoid formulation test is weak — its folds are at ±0.127 so the closure already tracks switch-on; fails on sustained-step shift) | V0 (partial) | same |
 | H7 | hidden-state inference | V0-supported (partial: routing probability ECE 0.007) | V0 (partial) | same |
 | H8 | neural closure | untested | V1 | this file |
 | H9 | value of computation | V0-supported under the registered rule (3 of 5 budgets vs physics via the sequential pair; 4 of 5 vs adjoint); crossing frontiers — physics rule better at high budgets | V0 | same |

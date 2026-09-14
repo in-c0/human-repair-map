@@ -9,16 +9,16 @@ window.HRM_HUMAN = {
   "journeys": {
    "repair": {
     "title": "Repair damage",
-    "scope": "Injuries, infection, cancer, organ failure, neurological damage",
+    "scope": "Trauma, cancer, organ failure, neurological injury",
     "lead": "Someone gets hurt or sick. How much of the damage can we actually find, reach and repair today?"
    },
    "aging": {
     "title": "Reverse biological aging",
-    "scope": "Tissue ageing, lost regenerative ability, younger cell states",
+    "scope": "Regenerative capacity, tissue age, cellular state",
     "lead": "What would have to change before an older body could recover younger function without losing what makes the person themselves?"
    }
   },
-  "reviewed": "0 / 326 human-reviewed. The sources were found automatically; no researcher has checked the full evidence behind these entries yet.",
+  "reviewed": "0 of 326 research entries have been checked by a human researcher. The sources were found automatically and still need human review.",
   "footnote": "Research state only. Not a clinical tool.",
   "intro": "If someone has a deep wound, a tumour, a failing organ or damage to the nervous system, medicine can already do some remarkable things. Other parts of repair are still missing completely. This site follows those gaps from the body outward.",
   "aim": "I want to know what would have to become possible before we could repair almost any biological damage, and what research would move us there faster."
@@ -61,7 +61,7 @@ window.HRM_HUMAN = {
    "frame": "We start with adult skin after a serious wound. Skin is useful because medicine can already close wounds and replace some lost tissue, while complete scarless regrowth is still far away.",
    "states": {
     "see": "A doctor can already assess how deep a wound is, whether it has enough blood flow and whether it is infected. What we still cannot do here is read, inside a living human wound, exactly which fibroblasts are switching into scar-forming states as it heals.",
-    "model": "We know human skin can heal without a scar early in fetal development. Adult spiny mice can also regrow skin far more completely than we do. That shows the biology is possible in some settings; it does not yet tell us how to make adult human skin do it.",
+    "model": "We know human skin can heal without a scar early in fetal development. Adult spiny mice can also regrow skin far more completely than we do. That tells us scarless repair exists in those settings; it does not yet tell us how to make adult human skin do it.",
     "reach": "We can already deliver some treatments to skin cells, including topical gene delivery to keratinocytes in people. Reaching one chosen cell type throughout an entire tissue, evenly and without affecting the wrong cells, is still a major limitation.",
     "edit": "This is where the gap gets large. We can replace lost epidermis, close some chronic wounds and, in a small number of people, rebuild epidermis from gene-corrected stem cells. We still cannot regrow adult human skin with normal dermis, hair follicles, blood vessels, fat, matrix and sensation and leave no scar.",
     "verify": "Once a wound has healed, we can examine the tissue and score the scar in people. That tells us whether the skin closed and what the repaired tissue looks like; it does not make the missing regeneration happen.",

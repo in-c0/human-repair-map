@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Human Repair Map — what it would take to repair a human body</title>
+<title>Human Repair Map — how close we are to repairing the human body</title>
 <meta name="description" content="A public evidence graph of the capabilities required for human repair: what has been demonstrated, what remains blocked, and whether the evidence has been human-reviewed.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,7 +198,7 @@ function howToRead(extra){
 function vSurvey(){
   setTimeout(function(){withGraph("survey-host",surveyBody);},0);
   return '<div class="coord">Research layer</div><div class="orient" style="margin-top:14px">'+
-    '<h1 class="q46">What would it take to repair a human body?</h1>'+
+    '<h1 class="q46">How close we are to repairing the human body, as a research graph.</h1>'+
     '<p class="s17">Choose a map. Both are views of the same evidence graph. <a href="#/start">'+esc(HU.research&&HU.research.backHuman||"Back to the plain explanation")+'</a></p>'+
     '<p class="s15">Each map shows what has been demonstrated, what is still required, and which open questions currently block the most downstream progress.</p>'+
     '</div>'+
@@ -291,7 +291,7 @@ function vStart(){
   setTimeout(function(){loadGraph().then(function(){var m=GRAPH.manifest;var el=document.getElementById("h-rev");if(el)el.textContent=(m.humanReviewed||0)+" of "+GRAPH.nodes.length+(E.reviewed?E.reviewed.replace(/^0 of 326/,""):" records have been checked by a human researcher.");});},0);
   function jr(k){var j=J[k]||{};return '<a class="hj" href="#/journey/'+k+'"><div class="t">'+esc(j.title||k)+'</div><div class="sc">'+esc(j.scope||"")+'</div><img class="art" src="'+JOURNEY[k].art+'" alt="" width="1200" height="600"><div class="lead">'+esc(j.lead||"")+'</div></a>';}
   return '<div class="hentr">'+
-      '<div><h1 class="hq">'+esc(E.question||"What would it take to repair a human body?")+'</h1></div>'+
+      '<div><h1 class="hq">'+esc(E.question||"A map of how close we are to repairing the human body.")+'</h1>'+(E.intro?'<p class="intro">'+esc(E.intro)+'</p>':'')+(E.aim?'<p class="aim">'+esc(E.aim)+'</p>':'')+'</div>'+
       '<img class="art hfig" src="content/art/a-figure.jpg" alt="A drawn anatomical figure with its organ systems, and dependency lines growing from it" width="1254" height="1254">'+
     '</div>'+
     '<div class="hchoose">'+esc(E.choose||"Choose where to begin")+'</div>'+

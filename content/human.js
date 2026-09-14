@@ -3,7 +3,7 @@
    what a person needs to understand first. Stage states are per journey; "stop" is where the data says the path ends. */
 window.HRM_HUMAN = {
  "entrance": {
-  "question": "What would it take to repair a human body?",
+  "question": "A map of how close we are to repairing the human body.",
   "choose": "Choose where to begin",
   "both": "Both are views of the same evidence graph. Follow any path until current science stops.",
   "journeys": {
@@ -19,7 +19,9 @@ window.HRM_HUMAN = {
    }
   },
   "reviewed": "0 of 326 records have been checked by a human researcher. The sources were found automatically and still need human review.",
-  "footnote": "Research state only. Not a clinical tool."
+  "footnote": "Research state only. Not a clinical tool.",
+  "intro": "Injuries, infections, cancers, failing organs, and the changes that come with age each need a set of things medicine has to be able to do. This map shows which of those things exist today, how well each has been shown to work, and where the science stops. Every claim links to its evidence and says whether a human has checked it.",
+  "aim": "The long-term aim is repair for any damage, for anyone. This map is how far the science has got, and what is still missing, laid out so that researchers and AI models can work on it."
  },
  "stages": [
   {

@@ -1,0 +1,39 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/pharmacological-aging-rate-reduction",
+  "name": "Slow aging with a drug",
+  "class": "control",
+  "primitive": "recalibrate",
+  "projections": [
+    "rejuvenation"
+  ],
+  "description": "Take a drug over years that slows the accumulation of age-related disease and dysfunction, rather than treating each disease as it arrives.",
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "biomarker",
+    "blocked": "framework",
+    "note": "Rapamycin extends lifespan in genetically heterogeneous mice even when started late in life (Harrison 2009), the strongest single result in the field. In humans, an mTOR inhibitor improved vaccine response in older adults (Mannick 2014) — an immune biomarker, and the only randomised human evidence cited here that a geroprotector does anything age-related. Metformin has a trial rationale and a design (Barzilai 2016) but no result. The blocker is partly framework: aging is not an approvable indication, which is what TAME was designed to change.",
+    "drift": "'Rapamycin extends human lifespan' — no human lifespan or healthspan trial has reported. The human data are immune-response biomarkers."
+  },
+  "wouldMove": "A randomised human trial with a composite clinical endpoint — incident age-related disease or functional decline — that succeeds.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/harrison-2009-nature",
+      "hrm:source/mannick-2014-scitranslmed",
+      "hrm:source/barzilai-2016-cellmetab"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

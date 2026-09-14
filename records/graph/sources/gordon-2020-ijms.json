@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/gordon-2020-ijms",
+  "type": "source",
+  "citation": "Gordon et al., International Journal of Molecular Sciences, 2020",
+  "title": "Peripheral Nerve Regeneration and Muscle Reinnervation",
+  "authors": "Gordon Tessa",
+  "venue": "International Journal of Molecular Sciences",
+  "year": 2020,
+  "kind": "article",
+  "doi": "10.3390/ijms21228652",
+  "pmid": "33212795",
+  "url": "https://doi.org/10.3390/ijms21228652",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Peripheral Nerve Regeneration and Muscle Reinnervation",
+    "note": "Crossref record found; PubMed id 33212795 located by DOI."
+  },
+  "note": "Review of chronic denervation and Schwann cell decline.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-peripheral-nerve.mjs)",
+    "date": "2026-09-14"
+  }
+}

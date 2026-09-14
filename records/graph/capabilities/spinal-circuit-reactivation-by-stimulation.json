@@ -1,0 +1,43 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+  "name": "Wake up the circuitry below the injury",
+  "class": "control",
+  "primitive": "recalibrate",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Use epidural or transcutaneous stimulation of the lumbosacral cord, with training, to make spinal circuits below the lesion respond to whatever descending input remains.",
+  "target": {
+    "node": "hrm:cell/neural-connectivity"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Participants with motor-complete injury achieved over-ground walking with epidural stimulation and training (Angeli 2018, Gill 2018), and targeted spatiotemporal stimulation improved walking in participants with chronic injury (Wagner 2018, Rowald 2022). Human, functional, and replicated across at least three independent groups — but in single-digit numbers per study, in participants selected partly for spared fibres, and requiring implantation and months of training.",
+    "drift": "'Paralysed people walk again' — participants step in a specialised setting with a device on and training behind them; independent community walking is not what these papers report."
+  },
+  "wouldMove": "A multi-centre trial in unselected participants with motor-complete injury reporting a functional benefit outside the laboratory.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/angeli-2018-nejm",
+      "hrm:source/gill-2018-natmed",
+      "hrm:source/wagner-2018-nature",
+      "hrm:source/rowald-2022-natmed"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

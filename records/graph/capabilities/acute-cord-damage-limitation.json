@@ -1,0 +1,41 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/acute-cord-damage-limitation",
+  "name": "Limit the damage in the hours after a cord injury",
+  "class": "control",
+  "primitive": "stop",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Reduce the secondary injury cascade after the initial trauma, so that more cord survives to be repaired or retrained.",
+  "target": {
+    "node": "hrm:cell/cns-neuron"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Surgical decompression within 24 hours is associated with better neurological improvement in a prospective cohort (Fehlings 2012), and is now common practice. Pharmacological neuroprotection is the opposite story: high-dose methylprednisolone (Bracken 1990) reported a benefit in a post-hoc subgroup, was adopted, and was then largely abandoned after the effect failed to hold up and the harms accumulated. The rung reflects decompression, not drugs.",
+    "drift": "'Steroids are given for spinal cord injury' — most guidelines no longer recommend them; the map keeps the history because it is the field's clearest example of a subgroup finding becoming standard care."
+  },
+  "wouldMove": "A randomised trial of a neuroprotective intervention with a pre-specified primary neurological endpoint that succeeds.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/fehlings-2012-plosone",
+      "hrm:source/bracken-1990-nejm"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

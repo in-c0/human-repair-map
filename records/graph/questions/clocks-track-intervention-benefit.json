@@ -1,0 +1,40 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/clocks-track-intervention-benefit",
+  "projections": [
+    "rejuvenation"
+  ],
+  "question": "Does moving an epigenetic clock with an intervention predict a change in health outcome, or is the clock only a correlate of chronological age?",
+  "why": "Every intervention in this projection is measured against a clock because the alternative is a forty-year trial. If clocks do not respond meaningfully to intervention, the entire rejuvenation field is running on an unvalidated surrogate and the map's grades in this projection are built on sand.",
+  "blocks": [
+    "hrm:capability/biological-age-measurement-that-predicts-outcome",
+    "hrm:capability/pharmacological-aging-rate-reduction",
+    "hrm:capability/senescent-cell-clearance-in-humans",
+    "hrm:goal/aging-rate-modification"
+  ],
+  "hypotheses": [
+    "Clocks measure a causal driver — loss of epigenetic information — so moving them moves outcomes.",
+    "Clocks are downstream readouts of cell composition and turnover, and can be moved without changing anything that matters.",
+    "Different clocks differ: mortality-trained clocks may be responsive where age-trained clocks are not."
+  ],
+  "knownUnknowns": [
+    "whether any intervention has moved a clock and then been followed to a clinical outcome",
+    "how much of a clock reading is cell-type composition in the sample"
+  ],
+  "whatWouldResolve": "A randomised intervention trial with clock measurement early and a pre-registered clinical endpoint years later, showing that the early clock change predicted the outcome.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

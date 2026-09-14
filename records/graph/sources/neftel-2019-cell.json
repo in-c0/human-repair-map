@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/neftel-2019-cell",
+  "type": "source",
+  "citation": "Neftel et al., Cell, 2019",
+  "title": "An Integrative Model of Cellular States, Plasticity, and Genetics for Glioblastoma",
+  "authors": "Neftel Cyril; Laffy Julie; Filbin Mariella G.; Hara Toshiro; Shore Marni E.; Rahme Gilbert J.; Richman Alyssa R.; Silverbush Dana; Shaw McKenzie L.; Hebert Christine M.; Dewitt John; Gritsch Simon; Perez Elizabeth M.; Gonzalez Castro L. Nicolas; Lan Xiaoyang; Druck Nicholas; Rodman Christopher; Dionne Danielle; Kaplan Alexander; Bertalan Mia S.; Small Julia; Pelton Kristine; Becker Sarah; Bonal Dennis; Nguyen Quang-De; Servis Rachel L.; Fung Jeremy M.; Mylvaganam Ravindra; Mayr Lisa; Gojo Johannes; Haberler Christine; Geyeregger Rene; Czech Thomas; Slavc Irene; Nahed Brian V.; Curry William T.; Carter Bob S.; Wakimoto Hiroaki; Brastianos Priscilla K.; Batchelor Tracy T.; Stemmer-Rachamimov Anat; Martinez-Lage Maria; Frosch Matthew P.; Stamenkovic Ivan; Riggi Nicolo; Rheinbay Esther; Monje Michelle; Rozenblatt-Rosen Orit; Cahill Daniel P.; Patel Anoop P.; Hunter Tony; Verma Inder M.; Ligon Keith L.; Louis David N.; Regev Aviv; Bernstein Bradley E.; Tirosh Itay; Suvà Mario L.",
+  "venue": "Cell",
+  "year": 2019,
+  "kind": "article",
+  "doi": "10.1016/j.cell.2019.06.024",
+  "pmid": "31327527",
+  "url": "https://doi.org/10.1016/j.cell.2019.06.024",
+  "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "An Integrative Model of Cellular States, Plasticity, and Genetics for Glioblastoma",
+    "note": "Crossref record found; PubMed id 31327527 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+  }
+}

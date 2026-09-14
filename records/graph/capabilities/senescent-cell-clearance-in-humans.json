@@ -1,0 +1,42 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/senescent-cell-clearance-in-humans",
+  "name": "Clear senescent cells from a living person",
+  "class": "control",
+  "primitive": "remove",
+  "projections": [
+    "rejuvenation"
+  ],
+  "description": "Selectively kill senescent cells in human tissue, reducing the inflammatory secretory programme they impose on the tissue around them.",
+  "target": {
+    "node": "hrm:cell/fibroblast"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "biomarker",
+    "blocked": "science",
+    "note": "Dasatinib plus quercetin reduced senescent cell markers in adipose tissue and skin in nine patients with diabetic kidney disease (Hickson 2019), and improved six-minute walk distance in fourteen patients with idiopathic pulmonary fibrosis (Justice 2019). Both are open-label, single-arm, and very small. The rodent evidence for function and lifespan is strong (Xu 2018). L4 records that the drugs have been given to people and moved a marker; it does not record a demonstrated clinical benefit.",
+    "drift": "'Senolytics reverse aging in humans' — two uncontrolled studies of nine and fourteen patients, with a marker endpoint and a walking-distance endpoint respectively."
+  },
+  "wouldMove": "A randomised, placebo-controlled trial with a functional primary endpoint in an aged population.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/xu-2018-natmed",
+      "hrm:source/justice-2019-ebiomedicine",
+      "hrm:source/hickson-2019-ebiomedicine"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

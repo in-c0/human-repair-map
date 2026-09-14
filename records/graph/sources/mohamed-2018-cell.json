@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/mohamed-2018-cell",
+  "type": "source",
+  "citation": "Mohamed et al., Cell, 2018",
+  "title": "Regulation of Cell Cycle to Stimulate Adult Cardiomyocyte Proliferation and Cardiac Regeneration",
+  "authors": "Mohamed Tamer M.A.; Ang Yen-Sin; Radzinsky Ethan; Zhou Ping; Huang Yu; Elfenbein Arye; Foley Amy; Magnitsky Sergey; Srivastava Deepak",
+  "venue": "Cell",
+  "year": 2018,
+  "kind": "article",
+  "doi": "10.1016/j.cell.2018.02.014",
+  "pmid": "29502971",
+  "url": "https://doi.org/10.1016/j.cell.2018.02.014",
+  "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Regulation of Cell Cycle to Stimulate Adult Cardiomyocyte Proliferation and Cardiac Regeneration",
+    "note": "Crossref record found; PubMed id 29502971 located by DOI."
+  },
+  "note": "Cell cycle regulators driving adult cardiomyocyte division.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+  }
+}

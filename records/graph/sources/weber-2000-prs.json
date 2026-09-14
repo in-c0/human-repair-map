@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/weber-2000-prs",
+  "type": "source",
+  "citation": "Weber et al., Plastic and Reconstructive Surgery, 2000",
+  "title": "A Randomized Prospective Study of Polyglycolic Acid Conduits for Digital Nerve Reconstruction in Humans",
+  "authors": "Weber Robert A.; Breidenbach Warren C.; Brown Richard E.; Jabaley Michael E.; Mass Daniel P.",
+  "venue": "Plastic and Reconstructive Surgery",
+  "year": 2000,
+  "kind": "article",
+  "doi": "10.1097/00006534-200010000-00013",
+  "pmid": "11039375",
+  "url": "https://doi.org/10.1097/00006534-200010000-00013",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "A Randomized Prospective Study of Polyglycolic Acid Conduits for Digital Nerve Reconstruction in Humans",
+    "note": "Crossref record found; PubMed id 11039375 located by DOI."
+  },
+  "note": "Randomised comparison of polyglycolic acid conduit against standard repair in digital nerves.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-peripheral-nerve.mjs)",
+    "date": "2026-09-14"
+  }
+}

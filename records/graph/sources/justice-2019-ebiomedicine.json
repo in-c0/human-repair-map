@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/justice-2019-ebiomedicine",
+  "type": "source",
+  "citation": "Justice et al., EBioMedicine, 2019",
+  "title": "Senolytics in idiopathic pulmonary fibrosis: Results from a first-in-human, open-label, pilot study",
+  "authors": "Justice Jamie N.; Nambiar Anoop M.; Tchkonia Tamar; LeBrasseur Nathan K.; Pascual Rodolfo; Hashmi Shahrukh K.; Prata Larissa; Masternak Michal M.; Kritchevsky Stephen B.; Musi Nicolas; Kirkland James L.",
+  "venue": "EBioMedicine",
+  "year": 2019,
+  "kind": "article",
+  "doi": "10.1016/j.ebiom.2018.12.052",
+  "pmid": "30616998",
+  "url": "https://doi.org/10.1016/j.ebiom.2018.12.052",
+  "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Senolytics in idiopathic pulmonary fibrosis: Results from a first-in-human, open-label, pilot study",
+    "note": "Crossref record found; PubMed id 30616998 located by DOI."
+  },
+  "note": "First-in-human senolytics, IPF, open-label, n=14.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+  }
+}

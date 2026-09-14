@@ -1,22 +1,22 @@
 {
   "name": "Human Repair Graph",
   "version": "0.3.0",
-  "snapshot": "2026-09-11",
-  "contentHash": "6c6db5f42d339ed08f70417b3e05726bb9e911aa69645fd82bcc7c4808a02187",
+  "snapshot": "2026-09-14",
+  "contentHash": "d5f4b63d834e530e3def86b858721fe8049e70ecb99f7474cfac185695503846",
   "counts": {
-    "capability": 185,
+    "capability": 218,
     "cell": 31,
-    "claim": 24,
-    "experiment": 6,
-    "goal": 10,
-    "question": 20,
+    "claim": 67,
+    "experiment": 18,
+    "goal": 25,
+    "question": 36,
     "route": 16,
-    "source": 34
+    "source": 92
   },
   "reviewStates": {
-    "ai-proposed": 289,
+    "ai-proposed": 408,
     "disputed": 3,
-    "n/a": 34
+    "n/a": 92
   },
   "humanReviewed": 0,
   "projections": [

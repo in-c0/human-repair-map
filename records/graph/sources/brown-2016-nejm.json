@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/brown-2016-nejm",
+  "type": "source",
+  "citation": "Brown et al., New England Journal of Medicine, 2016",
+  "title": "Regression of Glioblastoma after Chimeric Antigen Receptor T-Cell Therapy",
+  "authors": "Brown Christine E.; Alizadeh Darya; Starr Renate; Weng Lihong; Wagner Jamie R.; Naranjo Araceli; Ostberg Julie R.; Blanchard M. Suzette; Kilpatrick Julie; Simpson Jennifer; Kurien Anita; Priceman Saul J.; Wang Xiuli; Harshbarger Todd L.; D’Apuzzo Massimo; Ressler Julie A.; Jensen Michael C.; Barish Michael E.; Chen Mike; Portnow Jana; Forman Stephen J.; Badie Behnam",
+  "venue": "New England Journal of Medicine",
+  "year": 2016,
+  "kind": "article",
+  "doi": "10.1056/nejmoa1610497",
+  "pmid": "28029927",
+  "url": "https://doi.org/10.1056/nejmoa1610497",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Regression of Glioblastoma after Chimeric Antigen Receptor T-Cell Therapy",
+    "note": "Crossref record found; PubMed id 28029927 located by DOI."
+  },
+  "note": "IL13Ralpha2 CAR T, intraventricular, one patient with regression.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+  }
+}

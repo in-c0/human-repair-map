@@ -1,0 +1,35 @@
+{
+  "type": "goal",
+  "id": "hrm:goal/systemic-environment-rejuvenation",
+  "name": "Changing the environment the cells live in",
+  "parent": "hrm:goal/systemic-rejuvenation",
+  "description": "Rejuvenate tissue by changing what circulates around it — removing aged factors, diluting the plasma, or supplying young ones — rather than by editing the cells themselves.",
+  "projections": [
+    "rejuvenation"
+  ],
+  "requires": [
+    {
+      "any": [
+        "hrm:capability/aged-plasma-factor-removal",
+        "hrm:capability/young-systemic-factor-supplementation"
+      ]
+    }
+  ],
+  "blockedBy": [
+    "hrm:question/dilution-or-young-factors"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

@@ -24,10 +24,10 @@ const args = process.argv.slice(2);
 if (args.includes("--prompt")) {
   const graph = JSON.parse(fs.readFileSync(path.join(root, "public", "graph", "graph.json"), "utf8"));
   const node = (id) => graph.nodes.find((n) => n.id === id) || {};
-  console.log(`You are being asked to forecast ${sheet.statements.length} statements about regenerative medicine for a public, dated prediction registry (Human Repair Map, https://humanrepairmap.com). Your answers will be locked with today's date and scored when each statement resolves. Give calibrated probabilities, not hopes. Use what you know as of your training data; say so if you cannot access anything newer.\n`);
+  console.log(`You are being asked to forecast ${sheet.statements.filter((s) => !s.retired).length} statements about regenerative medicine for a public, dated prediction registry (Human Repair Map, https://humanrepairmap.com). Your answers will be locked with today's date and scored when each statement resolves. Give calibrated probabilities, not hopes. Use what you know as of your training data; say so if you cannot access anything newer.\n`);
   console.log(`For each statement, reply with exactly one line in this form:\n<id> | <probability between 0 and 1> | <one or two sentences of reasoning: the main consideration and the main uncertainty>\n\nThen one final line: MODEL | <your model name and version as precisely as you know it>\n`);
   console.log(`Today's date: ${new Date().toISOString().slice(0, 10)}. Graph snapshot: ${graph.manifest.version}@${graph.manifest.contentHash.slice(0, 12)}.\n`);
-  sheet.statements.forEach((s, i) => {
+  sheet.statements.filter((s) => !s.retired).forEach((s, i) => {
     const n = node(s.subject);
     console.log(`${s.id}. ${s.statement}`);
     console.log(`   Resolves: ${s.resolutionCriteria}`);
@@ -48,6 +48,7 @@ let ok = 0, failed = 0;
 for (const a of A.answers || []) {
   const s = byId.get(a.id);
   if (!s) { console.error(`${a.id}: not on the sheet`); failed++; continue; }
+  if (s.retired) { console.error(`${a.id}: retired (${s.retired.reason.slice(0, 80)}…); skipped`); continue; }
   const body = {
     subject: s.subject, statement: s.statement, resolutionCriteria: s.resolutionCriteria, horizon: s.horizon,
     probability: Number(a.probability), predictor: A.predictor, reasoning: `[${s.id}] ${a.reasoning || ""}`.trim(),

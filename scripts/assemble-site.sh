@@ -12,6 +12,7 @@ cp content/art/*.jpg _site/content/art/
 cp og.svg _site/og.svg
 cp reconstruction/index.html _site/reconstruction/index.html
 cp data/cns-delivery.json _site/data/cns-delivery.json
+cp data/prediction-sheet.json _site/data/prediction-sheet.json
 # The machine-readable graph: bulk exports, the JSON Schemas, and the generated
 # live data (activity.json, feed.json) when present.
 cp -r public/graph/. _site/graph/

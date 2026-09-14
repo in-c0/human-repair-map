@@ -1,0 +1,40 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/distal-schwann-cell-support-maintenance",
+  "name": "Keep the distal nerve able to receive axons",
+  "class": "control",
+  "primitive": "preserve",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Maintain the denervated distal stump — Schwann cells in a growth-supportive state, bands of Bungner, trophic signalling — for the months an axon needs to reach it, instead of letting it atrophy into a path that no longer guides.",
+  "target": {
+    "node": "hrm:cell/peripheral-neuron"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Chronic denervation degrades Schwann cell support and is a documented cause of poor outcome after proximal injury (Gordon 2020, review of rodent and human evidence). Interventions that maintain the distal environment are rodent-stage; no human therapy exists.",
+    "drift": "Described in clinical writing as 'the muscle atrophies', which is only half of it: the nerve pathway degrades as well, and it degrades whether or not the muscle is exercised."
+  },
+  "wouldMove": "A large-animal study in which the distal stump is kept receptive for six months and delayed repair then yields function comparable to immediate repair.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/gordon-2020-ijms"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

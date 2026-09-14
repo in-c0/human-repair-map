@@ -1,0 +1,42 @@
+{
+  "type": "experiment",
+  "id": "hrm:experiment/clock-as-surrogate-validation",
+  "name": "Validate epigenetic clocks as an intervention surrogate inside an existing trial",
+  "tests": [
+    "hrm:question/clocks-track-intervention-benefit"
+  ],
+  "status": "proposed",
+  "design": {
+    "species": "human",
+    "model": "participants in an ongoing randomised trial with a clinical endpoint (any intervention plausibly age-related)",
+    "intervention": "none additional: methylation measured at baseline, 6 and 12 months",
+    "comparator": "the trial's own control arm",
+    "readout": "whether early clock change predicts the trial's pre-registered clinical endpoint, within and across arms",
+    "duration": "the host trial's duration",
+    "n": "whatever the host trial has"
+  },
+  "discriminates": "If early clock movement predicts the clinical endpoint, clocks become a usable surrogate and every rejuvenation trial gets shorter; if it does not, the field's main endpoint is invalid and the map should regrade accordingly.",
+  "feasibility": {
+    "costClass": "low",
+    "durationClass": "years",
+    "requires": [
+      "an existing trial willing to add methylation sampling",
+      "pre-registration of the surrogate analysis"
+    ],
+    "ethics": "amendment to the host trial's approval"
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

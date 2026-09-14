@@ -1,0 +1,42 @@
+{
+  "type": "experiment",
+  "id": "hrm:experiment/neutral-blood-exchange-independent-replication",
+  "name": "Independent replication of neutral blood exchange in aged mice, then a plasma-exchange trial",
+  "tests": [
+    "hrm:question/dilution-or-young-factors"
+  ],
+  "status": "proposed",
+  "design": {
+    "species": "mouse, then human",
+    "model": "aged mice; then adults over 70",
+    "intervention": "neutral blood exchange (saline-albumin); then therapeutic plasma exchange",
+    "comparator": "heterochronic exchange; sham apheresis in the human stage",
+    "readout": "muscle repair, cognition and frailty measures in mice; gait speed, cognition and inflammatory markers in humans",
+    "duration": "1 year (mouse) then 2 years (human)",
+    "n": "20 per arm; then 100-150"
+  },
+  "discriminates": "Replication would make plasma exchange the fastest testable rejuvenation intervention, because the procedure already exists; failure to replicate would send the field back to identifying factors.",
+  "feasibility": {
+    "costClass": "medium",
+    "durationClass": "years",
+    "requires": [
+      "an unaffiliated mouse aging laboratory",
+      "apheresis service for the human stage"
+    ],
+    "ethics": "animal and human research ethics approval"
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

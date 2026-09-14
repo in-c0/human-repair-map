@@ -1,0 +1,38 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/young-systemic-factor-supplementation",
+  "name": "Add young factors to old circulation",
+  "class": "control",
+  "primitive": "replace",
+  "projections": [
+    "rejuvenation"
+  ],
+  "description": "Supply the circulating factors present in young blood and absent or reduced in old blood, and show that aged tissue responds.",
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Heterochronic parabiosis restored regenerative capacity in aged mouse muscle and liver (Conboy 2005), and young plasma improved hippocampal function and cognition in aged mice (Villeda 2014). Rodent, and the dilution result above puts the interpretation in question. No identified factor has produced a functional benefit in an older person."
+  },
+  "wouldMove": "A single identified factor with a functional benefit in a randomised human trial.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/conboy-2005-nature",
+      "hrm:source/villeda-2014-natmed",
+      "hrm:source/mehdipour-2020-aging"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

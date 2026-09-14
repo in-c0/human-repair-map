@@ -1,0 +1,74 @@
+{
+  "type": "goal",
+  "id": "hrm:goal/myocardial-infarction-repair",
+  "name": "Repair of the heart after a myocardial infarction",
+  "parent": "hrm:goal/universal-repair",
+  "description": "After part of the heart muscle dies from an interrupted blood supply, restore it: contractile muscle in place of scar, blood supply to that muscle, electrical continuity with the rest of the heart, and pump function back to where it was. Reperfusion, which saves the patient's life, is a separate and largely solved problem.",
+  "projections": [
+    "universal-repair"
+  ],
+  "existenceProof": "Zebrafish regenerate resected ventricle; neonatal mice regenerate an infarct for about the first week of life and lose the ability after that. Adult humans do not: cardiomyocyte turnover is under one per cent a year and the infarct becomes permanent scar. New muscle has been made in a primate heart from pluripotent cells, so remuscularisation is possible in principle.",
+  "requires": [
+    {
+      "all": [
+        "hrm:capability/acute-reperfusion-of-the-infarct-artery",
+        "hrm:capability/infarct-remuscularisation",
+        "hrm:capability/graft-host-electrical-integration",
+        "hrm:capability/myocardial-graft-vascularisation"
+      ]
+    },
+    {
+      "any": [
+        "hrm:capability/cardiomyocyte-proliferation-induction",
+        "hrm:capability/pluripotent-derived-cardiomyocyte-grafting"
+      ],
+      "note": "OR-group: make the surviving muscle divide, or add muscle from outside. The map does not assume which route arrives first."
+    }
+  ],
+  "blockedBy": [
+    "hrm:question/remuscularisation-arrhythmia-controllable",
+    "hrm:question/controllable-cardiomyocyte-proliferation",
+    "hrm:question/why-adult-cell-therapy-failed-in-the-heart"
+  ],
+  "testSuite": [
+    {
+      "scenario": "restore blood flow within hours of the infarct",
+      "state": "routine",
+      "note": "primary angioplasty; mortality benefit established"
+    },
+    {
+      "scenario": "prevent adverse remodelling with drugs",
+      "state": "partial",
+      "note": "slows the decline; does not replace muscle"
+    },
+    {
+      "scenario": "replace lost muscle with new contractile tissue",
+      "state": "unsolved",
+      "note": "shown in primates, not in people"
+    },
+    {
+      "scenario": "electrically integrate new muscle without arrhythmia",
+      "state": "unsolved",
+      "note": "the reproducible failure mode in every large-animal remuscularisation study"
+    },
+    {
+      "scenario": "reverse an established ischaemic scar",
+      "state": "unsolved"
+    }
+  ],
+  "informationLimited": false,
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

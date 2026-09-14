@@ -609,3 +609,6 @@ a.tag{border-bottom:1px solid var(--line);}
 .pred-r{font-size:13px;line-height:18px;}
 .pred-cell .meta{display:block;}
 .pred-none{color:var(--ink-2);}
+.pred-ret .pred-st p{color:var(--ink-2);text-decoration:line-through;text-decoration-color:var(--line-2,var(--line));}
+.pred-ret .pred-why{color:var(--amber);margin-bottom:4px;}
+.pred-ret .pred-p{color:var(--ink-2);}

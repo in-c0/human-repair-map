@@ -1,0 +1,61 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/plasma-dilution-rejuvenates-as-well-as-young-blood",
+  "statement": "Replacing half of an old mouse's plasma with saline and albumin rejuvenated muscle, liver and brain measures as much as, or more than, exchange with young blood — indicating dilution of old factors rather than transfer of young ones.",
+  "context": {
+    "species": "mouse",
+    "model": "aged mice",
+    "intervention": "neutral blood exchange (plasma replaced with saline-albumin)",
+    "comparator": "heterochronic exchange with young blood"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "muscle repair, liver adiposity and fibrosis, neurogenesis",
+    "endpoint": "tissue rejuvenation markers",
+    "effect": "equal or greater rejuvenation with neutral exchange"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/mehdipour-2020-aging",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 0,
+    "note": "One group (Conboy), reinterpreting their own earlier parabiosis work."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/aged-plasma-factor-removal"
+  ],
+  "contradicts": [
+    "hrm:capability/young-systemic-factor-supplementation"
+  ],
+  "limitations": [
+    "single group",
+    "mouse",
+    "measures are tissue markers rather than function over time"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/mehdipour-2020-aging"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

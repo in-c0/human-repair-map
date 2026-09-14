@@ -977,9 +977,9 @@ function vChanges(){
    from /api/predictions. Every registration is locked in the event log; nothing here can be edited. */
 function vPredictions(){
   setTimeout(function(){
-    Promise.all([loadGraph(), fetch(API+"/predictions?limit=200").then(function(r){return r.json();})]).then(function(x){
+    Promise.all([loadGraph(), fetch(API+"/predictions?limit=200").then(function(r){return r.json();}), fetch("data/prediction-sheet.json").then(function(r){return r.ok?r.json():{statements:[]};}).catch(function(){return {statements:[]};})]).then(function(x){
       var host=document.getElementById("pred-host"); if(!host) return;
-      var P=(x[1].predictions||[]);
+      var P=(x[1].predictions||[]); var SHEET={}; (x[2].statements||[]).forEach(function(t){SHEET[t.id]=t;});
       if(!P.length){host.innerHTML='<div class="empty">No predictions registered yet.</div>';return;}
       /* group by statement (sheet id in the reasoning prefix, else the statement text), then by predictor */
       var who=function(p){return (p.predictor_name||"anonymous")+(p.predictor_model?" / "+p.predictor_model:"");};
@@ -990,10 +990,10 @@ function vPredictions(){
       var head='<div class="chg-sum m9">'+P.length+' locked prediction'+(P.length===1?'':'s')+' · '+order.length+' predictor'+(order.length===1?'':'s')+' · '+resolved+' resolved</div>';
       var board='<div class="sec-h"><span class="n">·</span> Predictors</div><div class="pred-board">'+order.map(function(k){var d=preds[k];var mean=d.ps.reduce(function(a,p){return a+Number(p.probability);},0)/d.n;return '<div class="pred-row"><span class="pred-who">'+esc(k)+'</span><span class="meta">'+esc(d.type)+' · '+d.n+' prediction'+(d.n===1?'':'s')+' · mean p '+mean.toFixed(2)+' · first locked '+esc(String(d.first).slice(0,10))+' · Brier: not yet scorable</span></div>';}).join("")+'</div>';
       var table='<div class="sec-h"><span class="n">·</span> Statements</div>'+sOrder.map(function(k){
-        var S=byS[k]; var n=node(S.subject);
+        var S=byS[k]; var n=node(S.subject); var sh=SHEET[k]||{}; var ret=sh.retired;
         var cells=order.map(function(w){var p=S.by[w];return '<div class="pred-cell'+(p?'':' pred-none')+'">'+(p?'<span class="pred-p">'+Number(p.probability).toFixed(2)+'</span><span class="pred-r">'+esc((p.reasoning||"").replace(/^\[ps-\d+\]\s*/,""))+'</span><span class="meta">'+esc(w)+' · '+esc(String(p.created).slice(0,10))+' · '+esc(p.graph_snapshot||"")+' · '+esc(p.state||"open")+'</span>':'<span class="meta">'+esc(w)+': no answer</span>')+'</div>';}).join("");
         var spread=(function(){var v=order.map(function(w){return S.by[w]&&Number(S.by[w].probability);}).filter(function(x){return typeof x==="number";});if(v.length<2)return '';return ' · spread '+(Math.max.apply(null,v)-Math.min.apply(null,v)).toFixed(2);})();
-        return '<div class="pred-s"><div class="pred-st"><span class="m9">'+esc(k.indexOf("ps-")===0?k.toUpperCase():"")+' · resolves by '+esc(S.horizon)+spread+'</span><p>'+esc(S.statement)+'</p><div class="meta">On <a href="'+nodeHref(S.subject)+'">'+esc(n?nodeName(n):S.subject)+'</a>. Rule: '+esc(S.criteria||"")+'</div></div><div class="pred-g">'+cells+'</div></div>';
+        return '<div class="pred-s'+(ret?' pred-ret':'')+'"><div class="pred-st"><span class="m9">'+esc(k.indexOf("ps-")===0?k.toUpperCase():"")+(ret?' · <b>retired '+esc(ret.date)+'</b>':' · resolves by '+esc(S.horizon))+spread+'</span><p>'+esc(S.statement)+'</p>'+(ret?'<div class="meta pred-why">'+esc(ret.reason)+'</div>':'')+'<div class="meta">On <a href="'+nodeHref(S.subject)+'">'+esc(n?nodeName(n):S.subject)+'</a>. Rule: '+esc(S.criteria||"")+'</div></div><div class="pred-g">'+cells+'</div></div>';
       }).join("");
       host.innerHTML=head+board+table;
     }).catch(function(){var host=document.getElementById("pred-host");if(host)host.innerHTML='<div class="empty">Could not load /api/predictions.</div>';});

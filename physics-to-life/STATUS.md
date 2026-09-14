@@ -28,6 +28,16 @@ cascade is demoted to a supporting benchmark (V1a).
 - Do not describe H0 or the seven V0 hypotheses as broadly established. The correct
   phrase is "passed the preregistered V0 criteria within this synthetic model family".
 
+## Novelty after the adversarial scan (2026-09-14)
+Target-conditioned refinement is prior art (goal-oriented model adaptivity), as is
+restoring wild-type electrophysiology by model search (Allam 2021; Moreno 2019; Pai/Levin
+2018) and cost-aware learned simulator invocation (HyPER 2025). Residue: (1) set-level
+scoring of whether the right physics was requested against hidden ground truth; (2)
+refinement conditioned on a requested intervention outcome where no adjoint exists. The
+V1 conditions now include the mandatory baselines the scan named (adjoint/finite-difference
+sensitivity, novelty, uncertainty threshold, deviation trigger, HyPER-style full-state
+causal-blind policy). See `docs/literature/README.md`.
+
 ## What changed
 Owner review (2026-09-14) accepted V0 as a methodological scaffold and redirected V1 to
 Drosophila channel/membrane biophysics; novelty claim narrowed to a six-part conjunction

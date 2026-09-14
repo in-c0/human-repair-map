@@ -65,17 +65,53 @@ its status.
     default: free-running operator/world-model rollouts, PINN forward solvers, vanilla
     SINDy on noisy partially observed biology.
 
-### Open (the programme's defensible claims)
-- A **learned per-subsystem fidelity policy** over {surrogate, coarse mechanistic, fine
-  mechanistic} whose selection criterion is **causal relevance to a target observable
-  under a specified intervention**, evaluated for **computation-selection correctness
-  against hidden ground truth**, across simulators, in biological systems where no adjoint
-  is available (stochastic, discrete, non-differentiable).
-- Whether such a policy differs from and beats uncertainty/novelty/proximity/adjoint
-  selection at matched compute — V0 tests exactly this against the physics-aware and
-  adjoint heuristics.
-- The validation ladder with hidden-ground-truth selection scoring, cross-simulator
-  falsification and historical prospective validation as a *combined* methodology.
+### Open — after the adversarial conjunction scan (`novelty_conjunction_scan.md`, 2026-09-14)
+No prior work covers ≥ 4 of the six conjunction elements (maximum found: 2), but every
+element is individually occupied and three pairs are firmly held: target-conditioned
+refinement + value-per-cost (goal-oriented model adaptivity: Oden & Vemaganti 2000; van
+Opstal 2015; Li, Garg & Willcox 2017; learned DWR indicators E2N/Roth–Wick; Karelina &
+Kulik 2017 in chemistry), value-per-cost + causal targets (Zhang et al. NeurIPS 2023),
+and intervention prediction + restoration (computational electrophysiology: Allam 2021
+"virtual drugs" restoring wild-type excitability; Moreno 2019 in-silico LQT3 rescue;
+Pai/Levin 2018 BETSE-predicted, wet-lab-confirmed HCN2 rescue). MuMMI's selection
+criterion is verifiably farthest-point *novelty* (DynIm README); AdaLED's trigger is
+prediction error/ensemble confidence; HyPER (ICLR 2025) is a cost-aware RL policy deciding
+per step whether to invoke the simulator, with the full state as its objective.
+
+**Defensible residue (two items, narrower than the six-element list):**
+1. Hidden-ground-truth scoring of *whether the right physics was requested* — precision,
+   recall, waste and miss over the refined set, reported separately from prediction error.
+   No located precedent (RL-AMR compares to oracles on error-at-budget; DWR reports
+   effectivity indices of an estimator, not correctness of a decision set).
+2. Refinement conditioned on a *requested intervention outcome* in a system where no
+   adjoint exists (stochastic, discrete, non-differentiable biology). Goal-oriented
+   adaptivity needs a dual solve; HyPER's target is the full state.
+
+**Tightest defensible contribution statement (Paper 0/1):** a learned refinement policy
+that selects which sub-models to compute at higher fidelity by their expected effect on a
+requested intervention outcome, ranked by expected target-error reduction per unit cost,
+must be shown to outperform novelty-, uncertainty-, proximity- and adjoint-based selection
+at matched compute in non-differentiable biological simulators (a competitive claim to be
+won empirically), and hidden-ground-truth scoring of computation-selection correctness is
+introduced as a metric distinct from prediction error (the only part without precedent).
+
+**Mandatory baselines (all at matched compute):** fixed-schedule LED-style alternation;
+AdaLED-style ensemble-uncertainty/error threshold; MuMMI/DynIm farthest-point novelty;
+FLARE/DP-GEN model-deviation trigger; adjoint/DWR goal-oriented model adaptivity where a
+dual exists and a finite-difference sensitivity surrogate where it does not (the real
+competitor); a misoKG-style information-gain-per-cost allocator retargeted to refinement;
+HyPER-style cost-aware RL with a full-state error reward (causal-blind ablation); oracle
+minimal set and uniform/random bounds. Adopt the RL-AMR oracle protocol as the ancestor of
+hidden-ground-truth scoring. Never call multi-fidelity, value-of-information-per-cost,
+uncertainty fallback, interventional surrogate consistency or in-silico rescue novel;
+state that functional restoration is prior art and that the programme's claim there is
+only that the *same routed world model* serves prediction and repair; address degeneracy
+(Prinz 2004; O'Leary 2014) whenever a restoration solution is reported; report end-to-end
+wall-clock, not step counts.
+
+**Corrections from the scan:** the three-scale MuMMI paper is Ingólfsson et al. 2023
+(JCTC 19(9)), with the scaling paper Bhatia et al. SC'21, not "Bhatia 2023 Nature
+Computational Science"; iLED's first author is Menier, not Vlachas.
 
 ### Consequences for the research question (recorded 2026-09-14)
 - **Owner review (2026-09-14):** the programme must not claim novelty for "using ML to

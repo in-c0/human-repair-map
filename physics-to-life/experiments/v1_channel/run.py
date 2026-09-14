@@ -116,6 +116,11 @@ def main():
     t_hard = time.time() - t1
     X0, yg0, yh0, _ = training_rows(train, names, include_partial=False)
     voc_base_only = VoCRegressor(n_members=int(cfg["ensemble_members"]), seed=seed).fit(X0, yg0)
+    # HyPER-style causal-blind model: trained only on trajectory-error (v_rmse) gains, applied to all targets
+    fs_mask = np.array([k[2] == "v_rmse" for k in keys])
+    voc_fullstate = VoCRegressor(n_members=int(cfg["ensemble_members"]), seed=seed).fit(X[fs_mask], yg[fs_mask]) if fs_mask.sum() > 50 else None
+    novelty = KNNDensity(k=10).fit(X0)
+    nov_scores = novelty.score(X0); novelty_quantiles = {q: float(np.quantile(nov_scores, q)) for q in (0.5, 0.75, 0.9, 0.95, 0.99)}
     timings["train_s"] = time.time() - t0
     t2 = time.time(); voc.predict(X[:1000]); timings["inference_ms_per_row"] = (time.time() - t2) / min(1000, len(X)) * 1000
     write_json(out / "model_info.json", {"n_rows": int(len(yg)), "n_rows_base_only": int(len(yg0)), "positives_hard": int(yh.sum()),
@@ -123,7 +128,7 @@ def main():
 
     # ---- evaluate
     print("[evaluate]", flush=True); t0 = time.time()
-    models = {"voc": voc, "hard": hard}
+    models = {"voc": voc, "hard": hard, "voc_fullstate": voc_fullstate, "novelty": novelty, "novelty_quantiles": novelty_quantiles}
     df_test = evaluate_episodes(test, names, models, seed); df_test["family"] = "id"
     df_ood = pd.concat([evaluate_episodes(eps, names, models, seed) for eps in ood.values()], ignore_index=True) if ood else pd.DataFrame()
     df = pd.concat([df_test, df_ood], ignore_index=True)
@@ -208,14 +213,14 @@ def main():
     summary = {"n_train": len(train), "n_test": len(test), "n_ood": {k: len(v) for k, v in ood.items()}, "channels": names,
                "calibration": report, "timings": timings, "max_rss_mb": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024,
                "uniform": {p: {"err_rel_tol": float(r.err_rel_tol_mean), "success": float(r.success_rate), "cost_frac_fine": float(r.cost_frac_fine)} for p, r in uni.items()},
-               "cost_to_95pct_success": {p: cost_to_success(p) for p in ("voc", "voc_seq", "hybrid", "hybrid_seq", "hardlabel", "share", "discrepancy", "random", "oracle_voc")},
-               "err_at_half_fine_cost": {p: best_at(p, 0.5) for p in ("voc", "voc_seq", "hybrid", "hardlabel", "share", "discrepancy", "random", "oracle_voc")},
+               "cost_to_95pct_success": {p: cost_to_success(p) for p in ("voc", "voc_seq", "hybrid", "hybrid_seq", "hardlabel", "share", "discrepancy", "sensitivity", "novelty", "uncertainty", "uncertainty_per_cost", "fullstate_voc", "random", "oracle_voc")},
+               "err_at_half_fine_cost": {p: best_at(p, 0.5) for p in ("voc", "voc_seq", "hybrid", "hardlabel", "share", "discrepancy", "sensitivity", "novelty", "uncertainty", "uncertainty_per_cost", "fullstate_voc", "random", "oracle_voc")},
                "target_dependence": {f"{k[0]}|{k[1]}": v for k, v in matrix.items()},
                "ood_detectors": det, "conformal_coverage": coverage,
                "false_safe_rate_at_operating_points": {},
                "runtime_s": time.time() - t_start}
     # false-safe rate of each learned policy at the cheapest parameter reaching >= 95 % success on ID
-    for pol in ("voc", "voc_seq", "hybrid", "hybrid_seq", "hardlabel", "share", "discrepancy"):
+    for pol in ("voc", "voc_seq", "hybrid", "hybrid_seq", "hardlabel", "share", "discrepancy", "sensitivity", "novelty", "uncertainty", "uncertainty_per_cost", "fullstate_voc"):
         g = pf[(pf.family == "id") & (pf.policy == pol) & (pf.success_rate >= 0.95)]
         if len(g):
             par = float(g.sort_values("cost_frac_fine").iloc[0].param)

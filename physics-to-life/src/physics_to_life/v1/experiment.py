@@ -117,6 +117,43 @@ def evaluate_policies(ep: dict, g: dict, tgt: str, names: list[str], models: dic
         extra = base_cost + costs["coarse_all"]
         rows.append(mk("discrepancy", tau, S, extra + (costs[S] if S else 0.0), base_wall + walls["coarse_all"] + (walls[S] if S else 0.0), 2 + (1 if S else 0),
                        {c: g["discrepancy"][c] for c in names}))
+    # adjoint / goal-oriented surrogate: sensitivity of the target to the channel x its closure discrepancy,
+    # charged the base run, the coarse run and one base-level sensitivity run per channel
+    sens_score = {c: g["sensitivity"][c][tgt] * g["discrepancy"][c] for c in names}
+    sens_extra = base_cost + costs["coarse_all"] + g["sensitivity_cost"]; sens_wextra = base_wall + walls["coarse_all"] + g["sensitivity_wall"]
+    smax = max(sens_score.values()) + 1e-12
+    for tau in taus:
+        S = _sorted([c for c in names if sens_score[c] / smax >= tau] if smax > 1e-9 else [], names)
+        rows.append(mk("sensitivity", tau, S, sens_extra + (costs[S] if S else 0.0), sens_wextra + (walls[S] if S else 0.0), 2 + len(names) + (1 if S else 0),
+                       {c: sens_score[c] for c in names}))
+    # novelty (DynIm-style farthest-point distance of the candidate's feature row to the training set) and
+    # uncertainty (AdaLED-style ensemble disagreement) triggers, both needing only the base run
+    if models.get("voc") is not None:
+        X = np.array([row_features(ep, g, tgt, c, names, (), inc) for c in names])
+        pred, std = models["voc"].predict(X)
+        if models.get("novelty") is not None:
+            nov = models["novelty"].score(X)
+            for q in (0.5, 0.75, 0.9, 0.95, 0.99):
+                thr = models["novelty_quantiles"][q]
+                S = _sorted([c for c, v in zip(names, nov) if v > thr], names)
+                rows.append(mk("novelty", q, S, base_cost + (costs[S] if S else 0.0), base_wall + (walls[S] if S else 0.0), 1 + (1 if S else 0)))
+        smax_u = max(std.max(), 1e-12)
+        for tau in taus:
+            S = _sorted([c for c, v in zip(names, std) if v / smax_u >= tau], names)
+            rows.append(mk("uncertainty", tau, S, base_cost + (costs[S] if S else 0.0), base_wall + (walls[S] if S else 0.0), 1 + (1 if S else 0)))
+        # uncertainty-per-cost allocation (misoKG-style proxy): rank by std / cost increment
+        upc = std / np.array([inc[c] for c in names])
+        for lam in lambdas:
+            S = _sorted([c for c, v in zip(names, upc) if v > lam], names)
+            rows.append(mk("uncertainty_per_cost", lam, S, base_cost + (costs[S] if S else 0.0), base_wall + (walls[S] if S else 0.0), 1 + (1 if S else 0)))
+    # HyPER-style causal-blind policy: a learned VoC trained on the FULL-STATE (trajectory) error gain, applied to every target
+    if models.get("voc_fullstate") is not None:
+        X = np.array([row_features(ep, g, "v_rmse", c, names, (), inc) for c in names])
+        pred_fs, _ = models["voc_fullstate"].predict(X)
+        v_fs = pred_fs / np.array([inc[c] for c in names])
+        for lam in lambdas:
+            S = _sorted([c for c, v in zip(names, v_fs) if v > lam], names)
+            rows.append(mk("fullstate_voc", lam, S, base_cost + (costs[S] if S else 0.0), base_wall + (walls[S] if S else 0.0), 1 + (1 if S else 0)))
     # learned one-shot policies
     for mname, model, kind in (("voc", models.get("voc"), "gain"), ("hardlabel", models.get("hard"), "prob")):
         if model is None:

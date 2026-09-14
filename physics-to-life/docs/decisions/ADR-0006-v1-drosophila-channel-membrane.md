@@ -62,7 +62,13 @@ control.
     `false_safe_rate`, H5/H8 falsification criteria, comparison policies, seeds, minimum
     effect sizes, failed-run treatment, cross-model tests, V2 advancement criteria).
     One-shot and sequential routers are separate preregistered conditions.
-12. The synthetic enzymatic cascade is **V1a**: integration test, closure benchmark, H5/H8
+12. **Mandatory baselines** (added after the conjunction scan): finite-difference target
+    sensitivity × discrepancy (adjoint/DWR surrogate — the real competitor), DynIm-style
+    novelty (distance to training features), AdaLED-style ensemble-uncertainty threshold,
+    FLARE-style model-deviation trigger (medium-vs-coarse discrepancy), HyPER-style learned
+    invocation with a full-state (trajectory) error objective as the causal-blind ablation,
+    uncertainty-per-cost allocation, uniform/random/oracle bounds.
+13. The synthetic enzymatic cascade is **V1a**: integration test, closure benchmark, H5/H8
     unit experiment. Not a graduation rung.
 
 ## Consequences

@@ -15,6 +15,10 @@ STYLE = {
     "hardlabel":    dict(color="#e87ba4", ls="-",  marker="X", label="hard-label learned (V0-style)"),
     "share":        dict(color="#eda100", ls="-",  marker="^", label="current-share heuristic"),
     "discrepancy":  dict(color="#eb6834", ls="-",  marker="s", label="medium-vs-coarse discrepancy monitor"),
+    "sensitivity":  dict(color="#e34948", ls="-",  marker="D", label="sensitivity × discrepancy (adjoint surrogate)"),
+    "novelty":      dict(color="#898781", ls="-",  marker="h", label="novelty trigger (DynIm-style)"),
+    "uncertainty":  dict(color="#898781", ls="--", marker="h", label="ensemble-uncertainty trigger (AdaLED-style)"),
+    "fullstate_voc": dict(color="#2a78d6", ls=":", marker="o", label="full-state VoC (HyPER-style, causal-blind)"),
     "random":       dict(color="#1baf7a", ls="-",  marker="v", label="random"),
     "oracle_voc":   dict(color="#008300", ls=":",  marker="*", label="oracle VoC (hidden truth)"),
 }

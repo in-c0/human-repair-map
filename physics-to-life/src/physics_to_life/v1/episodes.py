@@ -203,10 +203,20 @@ def label_episode(spec_nominal: MembraneSpec, inst: MembraneSpec, interv: Interv
         ycoarse = compute_targets(coarse_all, grp, ref_V=truth["V"])
         errs["coarse_all"] = {k: _err(ycoarse, ystar, k, scale) for k in grp.targets}
         costs["coarse_all"] = coarse_all["cost"]; walls["coarse_all"] = coarse_all["wall"]
+        # finite-difference sensitivity of every target to each channel's cheap-level conductance
+        # (the adjoint / goal-oriented-adaptivity surrogate): one extra base-level run per channel
+        sens, sens_cost, sens_wall = {}, 0.0, 0.0
+        for c in names:
+            iv = copy.deepcopy(interv); iv.g_scales = dict(iv.g_scales); iv.g_scales[c] = iv.g_scales.get(c, 1.0) * 1.05
+            r = simulate(inst, grp.protocol, fid_base, iv, cfg.settings)
+            yp = compute_targets(r, grp, ref_V=truth["V"])
+            sens[c] = {k: abs(_err(yp, ybase, k, scale)) / 0.05 for k in grp.targets}  # |dY/d ln g| in target-scale units
+            sens_cost += r["cost"]; sens_wall += r["wall"]
+        out["n_sims"] += len(names)
         out["groups"].append({"name": grp.name, "targets": grp.targets, "ystar": ystar, "ybase": ybase, "scale": scale,
                               "errs": errs, "costs": costs, "walls": walls, "gains": gains, "interactions": inter,
                               "minimal": minimal, "tol": tol_used, "features": feats[()], "features_by_subset": feats,
-                              "discrepancy": discrepancy,
+                              "discrepancy": discrepancy, "sensitivity": sens, "sensitivity_cost": sens_cost, "sensitivity_wall": sens_wall,
                               "cost_fine": fine_work["cost"], "cost_base": base["cost"], "wall_fine": fine_work["wall"],
                               "wall_base": base["wall"], "protocol": grp.protocol, "window": grp.window,
                               "err_fine_numerical": {k: errs[tuple(names)][k] for k in grp.targets}})

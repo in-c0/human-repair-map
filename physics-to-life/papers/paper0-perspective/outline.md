@@ -1,20 +1,21 @@
 # Paper 0 — Physics-to-Life: Learning the Physical Resolution Required to Predict and Repair Living Systems
 
-**Proposition (narrowed after the owner review, 2026-09-14):** Physics-to-Life is a
-*target-conditioned* framework for learning which unresolved physical degrees of freedom
-are causally worth computing for an intervention or control objective, and ultimately for
-solving inverse biological design problems. Generic dynamic multiscale ML (choosing
-fidelity with ML; coupling learned and mechanistic simulators) is **not** our invention and
-is not claimed: MuMMI and the LED family (LED, AdaLED, iLED, G-LED) already do it. The
-manuscript's contribution must survive explicit comparison against MuMMI; LED/AdaLED/
-iLED/G-LED; scientific-ML closure methods; goal-oriented adaptive modelling;
-uncertainty-triggered ML-potential fallback; and active/multi-fidelity simulation. The
-adversarial scan against the six-part conjunction (`docs/literature/
-novelty_conjunction_scan.md`) decides whether the proposition narrows further.
-
-Type: perspective / framework. Gate: literature map complete; V0 worked example available
-(positive or negative). Status: outline (2026-09-14). Do not draft prose before the V0
-review package exists.
+**Proposition (v3, after the adversarial conjunction scan, 2026-09-14):** Physics-to-Life
+is a target-conditioned framework for deciding which unresolved physical degrees of freedom
+are worth computing for a *requested intervention outcome* in biological systems where no
+adjoint is available, with the decision itself scored against hidden ground truth. The
+only element without located precedent is hidden-ground-truth scoring of
+computation-selection correctness (precision/recall/waste/miss of the refined set) as a
+metric distinct from prediction error; everything else is a competitive claim to be won
+empirically against goal-oriented model adaptivity (Oden & Vemaganti 2000; van Opstal
+2015; Li, Garg & Willcox 2017; learned DWR indicators), novelty-driven selection (MuMMI /
+DynIm), uncertainty/error-triggered alternation (LED, AdaLED, FLARE, DP-GEN), cost-aware
+learned invocation (HyPER, ICLR 2025), and value-of-information allocators (misoKG,
+BMFAL-BC). Functional restoration by model search is prior art (Allam 2021; Moreno 2019;
+Pai/Levin 2018) and is claimed only as a downstream use of the same routed world model,
+with degeneracy (Prinz 2004; O'Leary 2014) addressed whenever a solution is reported.
+Source of record: `docs/literature/novelty_conjunction_scan.md` (verification limited to
+GitHub-hosted pages in this environment).
 
 ## Abstract (target 200 words; to be written last)
 Frame the question (how much physical detail is necessary to predict and control living

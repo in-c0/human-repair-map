@@ -37,3 +37,12 @@
 ## Next
 Design the V1 hierarchy from the resource scan, reproduce a published result, validate
 each level numerically, then freeze the preregistration.
+
+## Addendum — adversarial novelty scan returned (same day)
+41 entries; verification limited to GitHub-hosted pages (all publisher/DOI hosts blocked).
+No prior work reaches 4 of the 6 conjunction elements, but element 1 (target-conditioned
+refinement) is goal-oriented model adaptivity, element 5 (restore WT electrophysiology by
+model search) is prior art, and HyPER (ICLR 2025) is the closest learned-routing competitor.
+Residue: set-level selection-correctness scoring against hidden ground truth; refinement
+conditioned on a requested intervention outcome without an adjoint. Proposition rewritten
+(Paper 0 outline v3); baselines added to ADR-0006 and to the V1 code.

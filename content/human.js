@@ -15,12 +15,12 @@ window.HRM_HUMAN = {
    "aging": {
     "title": "Reverse biological aging",
     "scope": "Regenerative capacity, tissue age, cellular state",
-    "lead": "What would have to change before an older body could recover younger function without losing what makes the person themselves?"
+    "lead": "What would have to change before an older body could recover younger function without changing who the person is?"
    }
   },
   "reviewed": "0 of 326 research entries have been checked by a human researcher. The sources were found automatically and still need human review.",
   "footnote": "Research state only. Not a clinical tool.",
-  "intro": "If someone has a deep wound, a tumour, a failing organ or damage to the nervous system, medicine can already do some remarkable things. Other parts of repair are still missing completely. This site follows those gaps from the body outward.",
+  "intro": "If someone has a deep wound, a tumour, a failing organ or damage to the nervous system, medicine can already stop some immediate damage and restore some lost function. Other parts of repair are still missing completely. This site follows those gaps from the body outward.",
   "aim": "I want to know what would have to become possible before we could repair almost any biological damage, and what research would move us there faster."
  },
  "stages": [
@@ -58,7 +58,7 @@ window.HRM_HUMAN = {
  "journeys": {
   "repair": {
    "opening": "Start with something going wrong in a body: a deep wound, an infection, a tumour, a damaged organ, a spinal injury. For each one, the practical question is the same: what can we fix now, and where do we still get stuck?",
-   "frame": "We start with adult skin after a serious wound. Skin is useful because medicine can already close wounds and replace some lost tissue, while complete scarless regrowth is still far away.",
+   "frame": "We start with adult skin after a serious wound. Skin is useful because medicine can already close wounds and replace some lost tissue, while complete scarless regrowth has not been shown in adult humans.",
    "states": {
     "see": "A doctor can already assess how deep a wound is, whether it has enough blood flow and whether it is infected. What we still cannot do here is read, inside a living human wound, exactly which fibroblasts are switching into scar-forming states as it heals.",
     "model": "We know human skin can heal without a scar early in fetal development. Adult spiny mice can also regrow skin far more completely than we do. That tells us scarless repair exists in those settings; it does not yet tell us how to make adult human skin do it.",
@@ -77,22 +77,22 @@ window.HRM_HUMAN = {
   },
   "aging": {
    "opening": "Becoming young again is a different problem from closing a wound. An older tissue has changed in many places at once, so we need to know which changes matter, which younger state we actually want, and whether we can restore it without causing new damage.",
-   "frame": "We stay with skin for the first example. It gives us something concrete to compare: ordinary adult repair, scarless regeneration in other biological settings, and the much earlier evidence for changing age-related cell states.",
+   "frame": "We stay with skin for the first example. It gives us something concrete to compare: ordinary adult repair, scarless regeneration in other biological settings, and age-related cell changes that researchers have so far altered mainly in cells and animals.",
    "states": {
-    "see": "We can measure many signs of ageing in cells and tissue samples. In this worked example, we still do not have a graded way to read fibroblast state directly inside a living human wound while it changes over time.",
+    "see": "We can measure many signs of ageing in cells and tissue samples. In this worked example, we still cannot read fibroblast state directly inside a living human wound while it changes over time.",
     "model": "In rodents, researchers have pushed some cells toward a younger state while keeping their identity. Human fetal skin and spiny-mouse skin also show that very different repair states can exist. We still do not know how to recreate the useful parts of those states safely in an older person.",
     "reach": "A rejuvenation treatment only matters if it can reach the cells that need changing. We can reach some tissues and cell types in people, but wide, selective delivery across many human tissues is still unresolved, especially beyond relatively accessible organs such as the eye and liver.",
-    "edit": "In animals, some interventions can move measures of epigenetic age in a younger direction. That is much smaller than rebuilding an aged human tissue so that its structure and function are genuinely younger. Most of the skin-regeneration steps needed for that are still at cell or rodent evidence.",
-    "verify": "We can examine tissue structure in people and measure many biological markers. We do not yet have a graded demonstration that a rejuvenated human tissue can stay younger, keep working normally and be treated again safely when needed.",
-    "control": "Cancer is one of the questions we cannot wave away. The cancer risk of repeatedly rejuvenating tissue is not graded yet here, so this part of the path is still an open safety problem."
+    "edit": "In animals, some interventions can move measures of epigenetic age in a younger direction. That is much smaller than rebuilding an aged human tissue so that its structure and function are genuinely younger. Most of the skin-regeneration steps needed for that are still supported only by cell or rodent evidence.",
+    "verify": "We can examine tissue structure in people and measure many biological markers. We have not shown in people that a rejuvenated tissue can stay younger, keep working normally and be treated again safely when needed.",
+    "control": "Cancer is one of the questions we cannot wave away. We do not yet know how repeated or widespread tissue rejuvenation would change cancer risk in people.",
    },
    "stop": "edit",
    "blocked": {
     "headline": "This is where we get stuck.",
-    "explain": "Researchers can change some age-related cell states in animals. We cannot yet take an aged human tissue and restore younger structure and function throughout it while keeping the tissue stable and safe. The regeneration work needed to do that is still mostly at cell or rodent evidence.",
+    "explain": "Researchers can change some age-related cell states in animals. We cannot yet take an aged human tissue and restore younger structure and function throughout it while keeping the tissue stable and safe. The regeneration work needed to do that is still supported mostly by cell or rodent evidence.",
     "change": "What would move this forward?"
    },
-   "alsoOpen": "Even if we learn to make the change, we still have to show that it lasts and does not raise cancer risk. That safety problem is not graded yet here.",
+   "alsoOpen": "Even if we learn to make the change, we still have to show that it lasts and does not raise cancer risk. That safety problem is still unresolved.",
    "headline": "What would have to change before an older tissue could become younger again?"
   }
  },

@@ -96,7 +96,20 @@
       "resolutionCriteria": "Resolves YES if a registered Phase 2/3, Phase 3 or pivotal trial of ex-vivo gene-corrected autologous epidermal (keratinocyte stem-cell) grafts for any form of epidermolysis bullosa reports meeting its registered primary endpoint, in a peer-reviewed paper, a registry results record, or a regulatory decision that cites the endpoint. Compassionate-use series and Phase 1/2 safety readouts do not count.",
       "horizon": "2028-12-31",
       "added": "2026-09-14",
-      "replaces": "ps-06"
+      "replaces": "ps-06",
+      "retired": {
+        "date": "2026-09-14",
+        "reason": "Already true when posed, on the same day it was written: the VIITAL trial (NCT04227106) of prademagene zamikeracel met both co-primary endpoints, was published in The Lancet in 2025 (doi:10.1016/s0140-6736(25)00778-0) and supported FDA approval. Surfaced by ChatGPT within minutes of the statement being added; filed as proposal p_794a73cb0b. Two of the first twelve statements were retired this way, which says more about the map's coverage than about the predictors. Replaced by ps-13."
+      }
+    },
+    {
+      "id": "ps-13",
+      "subject": "hrm:capability/epidermis-gene-corrected-stem-cell-replacement",
+      "statement": "By 2029-12-31, an ex-vivo gene-corrected autologous epidermal graft is approved or reported in a completed randomised trial for a skin condition that is not epidermolysis bullosa.",
+      "resolutionCriteria": "Resolves YES if a regulator approves, or a peer-reviewed report of a completed randomised trial describes, an ex-vivo gene-corrected autologous keratinocyte or epidermal stem-cell graft for an indication other than any form of epidermolysis bullosa. Compassionate use, single-patient reports and non-randomised series do not count, nor does a further EB indication.",
+      "horizon": "2029-12-31",
+      "added": "2026-09-14",
+      "replaces": "ps-12"
     }
   ]
 }

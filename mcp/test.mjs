@@ -3,6 +3,11 @@
    non-zero on the first failing assertion. CI runs it after the build. */
 
 import worker from "./src/index.js";
+/* Counts come from the generated graph, not from constants: the records change whenever a
+   proving ground is seeded, and a test that has to be edited with every record is a test
+   nobody trusts. What is asserted is the relationship between the API and the build output. */
+import { GRAPH } from "./src/generated.js";
+const EXPECT = { capabilities: GRAPH.manifest.counts.capability, records: GRAPH.nodes.length, contradictions: (GRAPH.analysis.contradictions || []).length };
 
 /* ---- a tiny D1 shim: just enough SQL for store.js ---- */
 function fakeD1() {
@@ -63,7 +68,7 @@ console.log("MCP");
   ok(res.body.result.resources.some((r) => r.uri.endsWith("/graph/graph.json")), "resources/list points at the bulk export");
 
   const m = await call("graph_manifest", {});
-  ok(m.structuredContent && m.structuredContent.contentHash && m.structuredContent.counts.capability === 185, "graph_manifest structuredContent has hash and 185 capabilities");
+  ok(m.structuredContent && m.structuredContent.contentHash === GRAPH.manifest.contentHash && m.structuredContent.counts.capability === EXPECT.capabilities, `graph_manifest matches the build: hash and ${EXPECT.capabilities} capabilities`);
   ok(/NOT MEDICAL ADVICE/.test(m.content[0].text), "every tool result carries the caveat");
 
   const t = await call("trace_dependency", { goal: "scarless-skin-repair" });
@@ -79,7 +84,7 @@ console.log("MCP");
   const e = await call("get_primary_evidence", { id: "hrm:capability/keratinocyte-in-vivo-topical-gene-delivery" });
   ok(e.structuredContent.claims.length === 2 && e.structuredContent.claims.every((c) => c.evidence.every((s) => s.machineResolved && !s.humanOpened)), "B-VEC evidence: 2 claims, sources machine-resolved, none human-opened");
   const c = await call("find_contradictions", {});
-  ok(c.structuredContent.count === 3, "three contradictions in the seed");
+  ok(c.structuredContent.count === EXPECT.contradictions && EXPECT.contradictions >= 3, `find_contradictions returns all ${EXPECT.contradictions} computed contradictions`);
   const w = await call("what_would_move_this", { id: "capsid" });
   ok(w.structuredContent.rung === "L2" && /biodistribution|primate|human/i.test(w.structuredContent.wouldMove || w.content), "what_would_move_this still works for a v0.1 route id");
   const g = await call("get_node", { id: "hrm:cell/cardiomyocyte" });
@@ -142,7 +147,7 @@ console.log("REST");
   const ver2 = await get("/api/verify");
   ok(ver2.body.intact === false && ver2.body.brokenAt === 1, "altering a stored prediction breaks the chain at that event");
   const st = await get("/api/stats");
-  ok(st.body.predictions.open === 2 && st.body.records === 326, "stats: 2 open predictions, 326 records");
+  ok(st.body.predictions.open === 2 && st.body.records === EXPECT.records, `stats: 2 open predictions, ${EXPECT.records} records`);
   const docs = await worker.fetch(new Request(BASE + "/mcp"), env);
   ok(docs.status === 200 && /structuredContent/.test(await docs.text()), "GET /mcp serves the docs page");
 }

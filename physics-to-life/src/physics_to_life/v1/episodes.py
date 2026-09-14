@@ -134,6 +134,9 @@ class EpisodeConfig:
                                                    "charge": 0.0, "recovery_fraction": 0.02})
     pairwise: bool = True
     settings: SimSettings = field(default_factory=SimSettings)
+    routable: Optional[list] = None   # channels over which subsets are enumerated exhaustively (None = all);
+                                      # the others (negative controls) get one single-refinement run each and are
+                                      # never combined (preregistration §4 main-run rule)
 
 
 def _err(y: dict, ystar: dict, key: str, scale: dict) -> float:
@@ -161,29 +164,52 @@ def label_episode(spec_nominal: MembraneSpec, inst: MembraneSpec, interv: Interv
         fid_base = {n: cfg.base_level for n in names}
         base = simulate(inst, grp.protocol, fid_base, interv, cfg.settings)
         ybase = compute_targets(base, grp, ref_V=truth["V"])
-        # every subset of channels refined to fine on top of the base level (exhaustive for K <= 5)
+        # every subset of channels refined to fine on top of the base level (exhaustive for K <= 5);
+        # with cfg.routable, exhaustive over the routable channels only, plus single refinements of the others
+        route = list(cfg.routable) if cfg.routable else list(names)
         sims = {(): base}
-        for m in range(1, len(names) + 1):
-            for S in itertools.combinations(names, m):
-                if m > 1 and not cfg.pairwise and m < len(names):
+        for m in range(1, len(route) + 1):
+            for S in itertools.combinations(route, m):
+                if m > 1 and not cfg.pairwise and m < len(route):
                     continue
                 f = dict(fid_base)
                 for c in S:
                     f[c] = 2
-                sims[S] = simulate(inst, grp.protocol, f, interv, cfg.settings)
+                sims[tuple(sorted(S, key=names.index))] = simulate(inst, grp.protocol, f, interv, cfg.settings)
+        for c in names:
+            if c not in route:
+                f = dict(fid_base); f[c] = 2
+                sims[(c,)] = simulate(inst, grp.protocol, f, interv, cfg.settings)
+        if tuple(names) not in sims:
+            sims[tuple(names)] = simulate(inst, grp.protocol, {n: 2 for n in names}, interv, cfg.settings)
         fine_work = sims[tuple(names)]
         coarse_all = simulate(inst, grp.protocol, {n: 0 for n in names}, interv, cfg.settings)
         out["n_sims"] += len(sims) + 2
         errs = {S: {k: _err(compute_targets(r, grp, ref_V=truth["V"]), ystar, k, scale) for k in grp.targets} for S, r in sims.items()}
         costs = {S: r["cost"] for S, r in sims.items()}
         walls = {S: r["wall"] for S, r in sims.items()}
+        feats_sim = {S: base_features(r, grp, names) for S, r in sims.items()}
+        # subsets not simulated under cfg.routable are synthesised by the preregistered rule: a
+        # negative-control channel's refinement changes nothing (exact chain) and costs its single-
+        # refinement increment; the routable part carries the error and the features
+        synthesized = []
+        for m in range(1, len(names) + 1):
+            for S in itertools.combinations(names, m):
+                S = tuple(sorted(S, key=names.index))
+                if S in errs:
+                    continue
+                R = tuple(c for c in S if c in route)
+                extra = [c for c in S if c not in route]
+                errs[S] = dict(errs[R]); costs[S] = costs[R] + sum(costs[(c,)] - costs[()] for c in extra)
+                walls[S] = walls[R] + sum(walls[(c,)] - walls[()] for c in extra); feats_sim[S] = feats_sim[R]; synthesized.append(S)
         gains = {k: {c: errs[()][k] - errs[(c,)][k] for c in names} for k in grp.targets}
         inter = {}
         if cfg.pairwise:
             for k in grp.targets:
                 inter[k] = {}
                 for c, d in itertools.combinations(names, 2):
-                    inter[k][(c, d)] = (errs[()][k] - errs[(c, d)][k]) - gains[k][c] - gains[k][d]
+                    if (c, d) in errs:
+                        inter[k][(c, d)] = (errs[()][k] - errs[(c, d)][k]) - gains[k][c] - gains[k][d]
         # minimal set at tolerance (per target), searched over the evaluated subsets
         minimal, tol_used = {}, {}
         for k in grp.targets:
@@ -194,7 +220,7 @@ def label_episode(spec_nominal: MembraneSpec, inst: MembraneSpec, interv: Interv
         # cheap-trajectory summaries per channel for the router, for every simulated subset
         # (the base run's features are what a one-shot router sees; a sequential router sees
         # the features of the current partial-refinement state)
-        feats = {S: base_features(r, grp, names) for S, r in sims.items()}
+        feats = feats_sim
         # mechanistic discrepancy monitor: medium vs coarse per-channel current in the window
         t = base["t"]; mwin = (t >= grp.window[0]) & (t <= grp.window[1])
         discrepancy = {c: float(np.mean(np.abs(base["I_ch"][c][mwin] - coarse_all["I_ch"][c][mwin])) /
@@ -216,7 +242,7 @@ def label_episode(spec_nominal: MembraneSpec, inst: MembraneSpec, interv: Interv
                               "errs": errs, "costs": costs, "walls": walls, "gains": gains, "interactions": inter,
                               "minimal": minimal, "tol": tol_used, "features": feats[()], "features_by_subset": feats,
                               "discrepancy": discrepancy, "sensitivity": sens, "sensitivity_cost": sens_cost, "sensitivity_wall": sens_wall,
-                              "protocol_desc": protocol_descriptor(grp),
+                              "protocol_desc": protocol_descriptor(grp), "synthesized_subsets": synthesized,
                               "cost_fine": fine_work["cost"], "cost_base": base["cost"], "wall_fine": fine_work["wall"],
                               "wall_base": base["wall"], "protocol": grp.protocol, "window": grp.window,
                               "err_fine_numerical": {k: errs[tuple(names)][k] for k in grp.targets}})

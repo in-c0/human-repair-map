@@ -57,4 +57,48 @@ across processes); replaced by `zlib.crc32`.
 All 22 tests pass (V0 8, V1 machinery 5 + 4 policy, Günay port 5).
 
 ## 5. Fit quality of the constructed fine levels
-(to be appended)
+Normalised RMS over the fit family (each trace normalised by its own peak current), best of 4
+seeded multi-starts (`experiments/v1_channel/hierarchy/gunay2015_fine.json`):
+
+| entry | form | RMS | worst protocols | parameters |
+|---|---|---|---|---|
+| Kf | coupled | 0.057 | act_+40 0.089; act_+20 0.080 | 23 |
+| NaT | sigmoid | 0.040 | act_-30 0.155; act_-20 0.124 | 16 |
+| Kf_B | coupledB | 0.029 | act_-20 0.057; act_-40 0.050 | 23 |
+| NaT_B | B | 0.044 | act_-30 0.176; act_-20 0.133 | 15 |
+
+Rejected forms (recorded in the JSON): Kf_eyring 0.158, Kf_sequential_uncoupled_B 0.117, NaT_eyring 0.040. The decisive structural ingredient for Kf was
+**closed-state inactivation**: the published HH Kf has an independent inactivation gate with
+h∞ midpoint −45 mV, i.e. substantial steady-state inactivation at voltages where m∞⁴ ≈ 0, which
+a scheme that inactivates only from the open state cannot reproduce (16 % RMS, dominated by
+the prepulse traces). Allosterically coupled inactivated chains (Kv4/Shal-type closed-state
+inactivation; coupling degree fitted, reversibility enforced) brought the floor to 5.8 % (level
+A, concerted-opening topology) and 2.9 % (level B, sequential two-step topology). Saturating
+(sigmoid) rate forms were needed because the published τ tables have floors that Eyring rates
+cannot represent. NaT's residual (4 %) sits in the steep part of activation (−30/−20 mV steps).
+Several level-A parameters sit at their bounds (activation charges at z = 4; C-type on-rate at
+its cap); the fine levels are what they are — constructed, documented, and the floor enters
+the preregistration's tolerance reasoning (§14 iii).
+
+The analytic voltage-clamp solvers (HH closed form; Markov eigendecomposition) agree with
+the ODE integrator to 1e-10 relative and made each fit ~1–5 min.
+
+## 6. Hierarchy validation, first pass: two fitting defects found and fixed (before any label was used)
+The first validation run of the assembled hierarchy showed that the fine Kf level was
+**97 % inactivated at steady state for every holding potential** (HH availability 0.999 at −90
+mV) and the fine NaT had **no steady-state inactivation at rest** (availability 1.00 at −50 mV
+vs HH 0.84), while both had passed the fit family with 3–6 % RMS. Causes:
+1. **Objective dilution.** Residuals were normalised by the trace peak and averaged over all
+   samples, so a 30-ms test pulse inside a 250-ms prepulse protocol contributed almost nothing:
+   a 16 % peak error after a −50 mV prepulse showed up as 1.3 % RMS. Fixed: residuals are
+   normalised by peak × √(number of active samples), i.e. the objective is the mean squared
+   relative error over the samples where the target current is non-negligible.
+2. **Unconstrained rest state.** Every fit protocol started from −90 mV, so a scheme could be
+   inactivated at rest and *recover on depolarisation* to produce the transient — a degenerate
+   solution the family could not exclude. Fixed: steady-state holds at −70, −60, −55, −50 mV
+   with a test step were added to both families (the analytic solver starts from the exact
+   steady state, so these pin the rest-state availability directly).
+A third defect was in the analysis, not the fit: the spike detector's default threshold (0 mV)
+missed the published model's spikes, which peak near −1 mV; the default is now −25 mV (the
+reproduction report used −25 mV explicitly and is unaffected). No label, verdict or figure had
+been produced from the defective hierarchy; the pilot was restarted after the refit.

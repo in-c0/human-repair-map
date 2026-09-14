@@ -111,14 +111,16 @@ def fit_markov_to_hh(build: Callable[[np.ndarray], ChannelPopulation], theta0: n
     targets = []
     for p in family.protocols:
         t, I = hh_vclamp(target_ch, p, T_K, None, e_rev)
-        targets.append((t, I, max(np.abs(I).max(), 1e-9)))
+        peak = max(np.abs(I).max(), 1e-9)
+        n_active = max(int((np.abs(I) > 0.02 * peak).sum()), 10)   # samples where the target current is non-negligible
+        targets.append((t, I, peak, n_active))
 
     def resid(theta):
         ch = build(theta)
         out = []
-        for p, (t, I, s), w in zip(family.protocols, targets, family.weights):
+        for p, (t, I, s, n_act), w in zip(family.protocols, targets, family.weights):
             _, If = markov_current(ch, p, T_K, None, e_rev)
-            out.append(np.sqrt(w) * (If - I) / s)
+            out.append(np.sqrt(w / n_act) * (If - I) / s)   # sum of squares = mean squared relative error over the active samples
         return np.concatenate(out)
 
     best = None
@@ -132,10 +134,13 @@ def fit_markov_to_hh(build: Callable[[np.ndarray], ChannelPopulation], theta0: n
             print(f"  start {k}: normalised rms {rms:.4f} (nfev {sol.nfev})", flush=True)
         if best is None or rms < best["rms"]:
             best = {"theta": sol.x, "rms": rms, "sol": sol}
-    # per-protocol diagnostics at the best parameters
+    # per-protocol diagnostics at the best parameters (rel_rmse over the active samples; rel_max over all)
     ch = build(best["theta"])
     per = {}
-    for p, name, (t, I, s) in zip(family.protocols, family.names, targets):
+    for p, name, (t, I, s, n_act) in zip(family.protocols, family.names, targets):
         _, If = markov_current(ch, p, T_K, None, e_rev)
-        per[name] = {"rel_rmse": float(np.sqrt(np.mean((If - I) ** 2)) / s), "rel_max": float(np.abs(If - I).max() / s)}
-    return {"theta": best["theta"], "rms": best["rms"], "per_protocol": per, "history": history}
+        act = np.abs(I) > 0.02 * s
+        per[name] = {"rel_rmse": float(np.sqrt(np.mean(((If - I)[act]) ** 2)) / s) if act.any() else float(np.sqrt(np.mean((If - I) ** 2)) / s),
+                     "rel_max": float(np.abs(If - I).max() / s)}
+    rms_active = float(np.sqrt(np.mean([v["rel_rmse"] ** 2 for v in per.values()])))
+    return {"theta": best["theta"], "rms": rms_active, "rms_objective": best["rms"], "per_protocol": per, "history": history}

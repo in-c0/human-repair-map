@@ -139,6 +139,9 @@ def kf_fit_family(dt_out: float = 0.1) -> FitFamily:
         P.append(Protocol("vclamp", [(0.0, -90.0), (20.0, vp), (220.0, 20.0), (280.0, -90.0)], 300.0, dt_out)); N.append(f"inact_{vp:+.0f}"); W.append(1.0)
     for gap in (5.0, 20.0, 50.0, 150.0):
         P.append(Protocol("vclamp", [(0.0, -90.0), (20.0, 20.0), (70.0, -90.0), (70.0 + gap, 20.0), (120.0 + gap, -90.0)], 150.0 + gap, dt_out)); N.append(f"rec_{gap:.0f}"); W.append(1.0)
+    # steady-state availability from rest-like holding potentials (the initial condition is the exact steady state)
+    for vh in (-70.0, -60.0, -55.0, -50.0):
+        P.append(Protocol("vclamp", [(0.0, vh), (20.0, 20.0), (80.0, vh)], 100.0, dt_out)); N.append(f"hold_{vh:+.0f}"); W.append(1.0)
     return FitFamily(P, N, W)
 
 
@@ -207,6 +210,8 @@ def nat_fit_family(dt_out: float = 0.05) -> FitFamily:
         P.append(Protocol("vclamp", [(0.0, -90.0), (10.0, vp), (210.0, -10.0), (240.0, -90.0)], 250.0, dt_out)); N.append(f"inact_{vp:+.0f}"); W.append(1.0)
     for gap in (1.0, 3.0, 10.0, 30.0):
         P.append(Protocol("vclamp", [(0.0, -90.0), (10.0, -10.0), (30.0, -90.0), (30.0 + gap, -10.0), (50.0 + gap, -90.0)], 60.0 + gap, dt_out)); N.append(f"rec_{gap:.0f}"); W.append(1.0)
+    for vh in (-70.0, -60.0, -55.0, -50.0):
+        P.append(Protocol("vclamp", [(0.0, vh), (10.0, -10.0), (40.0, vh)], 50.0, dt_out)); N.append(f"hold_{vh:+.0f}"); W.append(1.0)
     return FitFamily(P, N, W)
 
 

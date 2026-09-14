@@ -45,6 +45,11 @@ behind publisher hosts that this environment cannot reach.
      medium for these two by construction; they are negative-control channels — a correct
      router must learn never to refine them, and any measured "gain" from refining them is
      the numerical noise floor (the V0 lesson about oracles exploiting solver noise).
+   The declared fit family is: activation steps from −90 mV, 200-ms prepulse inactivation,
+   twin-pulse recovery, and steady-state holds at rest-like potentials (−70…−50 mV) with a
+   test step; residuals are normalised per protocol by the peak current and the number of
+   active samples (a first version without the holds and with whole-trace RMS admitted a
+   degenerate "inactivated at rest" solution and was discarded; research log 2026-09-14 §6).
    Every fine-level rate constant is **CONSTRUCTED** (fitted to the published HH currents on
    the fit family), never a measurement; the docstrings and the JSON say so. Fine-vs-medium
    differences therefore appear where the added kinetic structure matters — outside the fit

@@ -80,7 +80,7 @@ def _one_episode(args):
 
 def generate(spec, seeds, families, cfg, n_proc, rng, profile):
     fams = [str(rng.choice(families)) for _ in seeds]
-    cfg_ep = EpisodeConfig(base_level=int(cfg["base_level"]), tol_rel=float(cfg["tol_rel"]))
+    cfg_ep = EpisodeConfig(base_level=int(cfg["base_level"]), tol_rel=float(cfg["tol_rel"]), routable=cfg.get("routable"))
     jobs = [(spec, int(s), f, cfg_ep, float(cfg["instance_g_cv"]), float(cfg["instance_rate_cv"]), profile) for s, f in zip(seeds, fams)]
     if n_proc <= 1:
         return [_one_episode(j) for j in jobs]
@@ -131,9 +131,11 @@ def main():
         # deterministic per-split stream (Python's str hash is salted per process; zlib.crc32 is not)
         eps = generate(spec, seeds, fams, cfg, n_proc, np.random.default_rng(seed + zlib.crc32(name.encode()) % 1000), profile)
         pickle.dump(eps, open(p, "wb")); return eps
-    train = load_or_gen("train", 10_000 + np.arange(cfg["n_train"]), cfg["id_families"])
-    test = load_or_gen("test", 20_000 + np.arange(cfg["n_test"]), cfg["id_families"])
-    ood = {fam: load_or_gen(f"ood_{fam}", 30_000 + 1000 * i + np.arange(cfg["n_ood"]), [fam]) for i, fam in enumerate(cfg["ood_families"])}
+    off = int(cfg.get("seed_offset", 0))     # preregistration §10: pilot 0, main 100_000 (disjoint seed streams)
+    train = load_or_gen("train", off + 10_000 + np.arange(cfg["n_train"]), cfg["id_families"])
+    test = load_or_gen("test", off + 20_000 + np.arange(cfg["n_test"]), cfg["id_families"])
+    ood = {fam: load_or_gen(f"ood_{fam}", off + 30_000 + 1000 * i + np.arange(cfg["n_ood"]), [fam]) for i, fam in enumerate(cfg["ood_families"])}
+    reserve = load_or_gen("reserve", off + 40_000 + np.arange(cfg["n_reserve"]), cfg["id_families"]) if int(cfg.get("n_reserve", 0)) > 0 else []
     timings["generate_s"] = time.time() - t0
     print(f"  {len(train)} train / {len(test)} test / {sum(len(v) for v in ood.values())} OOD episodes; "
           f"label wall/episode {np.mean([e['wall_label'] for e in train]):.1f}s (truth {np.mean([e['wall_truth'] for e in train]):.1f}s)", flush=True)
@@ -165,6 +167,8 @@ def main():
     df_test = evaluate_episodes(test, names, models, seed); df_test["family"] = "id"
     df_ood = pd.concat([evaluate_episodes(eps, names, models, seed) for eps in ood.values()], ignore_index=True) if ood else pd.DataFrame()
     df = pd.concat([df_test, df_ood], ignore_index=True)
+    if reserve:   # reserved evaluation set: evaluated once, reported as a separate family line, never used for any choice
+        df_res = evaluate_episodes(reserve, names, models, seed); df_res["family"] = "reserve"; df = pd.concat([df, df_res], ignore_index=True)
     # ablation: VoC trained on base-state rows only
     df_abl = evaluate_episodes(test, names, {"voc": voc_base_only}, seed); df_abl = df_abl[df_abl.policy.isin(["voc", "voc_seq", "hybrid", "hybrid_seq"])].copy()
     df_abl["policy"] = "abl_baseonly_" + df_abl["policy"]; df_abl["family"] = "id"

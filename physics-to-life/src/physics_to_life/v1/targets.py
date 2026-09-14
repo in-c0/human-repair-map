@@ -7,7 +7,10 @@ TARGET_NAMES = ["peak_current", "time_to_peak", "charge", "recovery_fraction", "
                 "spike_count", "min_isi", "mean_v"]
 
 
-def spikes(t: np.ndarray, V: np.ndarray, thresh: float = 0.0) -> np.ndarray:
+SPIKE_THRESH = -25.0   # mV; the Günay 2015 isopotential model's spikes peak near -1 mV, so 0 mV would miss them
+
+
+def spikes(t: np.ndarray, V: np.ndarray, thresh: float = SPIKE_THRESH) -> np.ndarray:
     """Upward threshold-crossing times."""
     above = V > thresh
     idx = np.where(~above[:-1] & above[1:])[0]

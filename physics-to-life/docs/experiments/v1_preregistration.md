@@ -43,9 +43,14 @@ parameterisation.
 - Q10 = 3 on every rate (all levels); E_K shifts with [K⁺]o by the Nernst term; both inert at
   25 °C / 5 mM.
 - Fit family (declared, excluded from evaluation protocols): activation steps −40, −20, 0, +20,
-  +40 mV from −90 mV; 200-ms prepulses −80…−10 mV; twin-pulse recovery gaps 5, 20, 50, 150 ms
-  (Kf); steps −40…+20 mV, prepulses −90…−30 mV, gaps 1, 3, 10, 30 ms (NaT). Fit quality at the
-  freeze (normalised RMS on the family): *to be recorded in §16 from the JSON*.
+  +40 mV from −90 mV; 200-ms prepulses −80…−10 mV; twin-pulse recovery gaps 5, 20, 50, 150 ms;
+  steady-state holds at −70, −60, −55, −50 mV followed by a test step (Kf: +20 mV; these pin the
+  availability at rest-like potentials, without which a scheme can satisfy the −90 mV protocols
+  while being inactivated at rest); NaT: steps −40…+20 mV, prepulses −90…−30 mV, gaps 1, 3, 10,
+  30 ms, the same holds with a −10 mV test. Residuals are normalised per protocol by the peak
+  current and by the number of samples where the target current is non-negligible (> 2 % of
+  peak), so that short test pulses are not diluted by silent samples. Fit quality at the freeze
+  (normalised RMS over active samples): *to be recorded in §16 from the JSON*.
 - Level A truth: all channels fine at Radau rtol 1e-9 / atol 1e-11. Level B truth: the
   alternate-topology fine levels (`Kf_B`, `NaT_B`) at the same tolerance. Level C: the
   published/independent anchors of the medium level (reproduction report), reporting only.

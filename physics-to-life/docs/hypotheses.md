@@ -183,7 +183,7 @@ policies that move a damaged or aged virtual system toward a target healthy stat
 | ID | Short name | Status (2026-09-14, run v0_main) | First rung tested | Owner doc |
 |----|------------|----------------------------------|-------------------|-----------|
 | H0 | adaptive physical computation | V0-supported (H1 ∧ H3/H9; see caveats) | V0 | this file |
-| H1 | adaptive efficiency | V0-supported (oracle 1.0× fine error at 32 % cost; learned 1.46× at 45 %, point estimate) | V0 | `experiments/v0_toy/results/v0_main/RESULTS.md` |
+| H1 | adaptive efficiency | V0-supported with the quasi-static cheap model (oracle 1.0× fine error at 32 % cost; learned 1.46× at 45 %, point estimate; at cost ratio 13: learned 16 %, oracle 10 %) — **V0-falsified with the constant-closure cheap model** (`v0_base0`: tolerance unreachable for any switcher subset in 78 % of episodes; only uniform refinement reaches the floor). Adaptivity requires sparse cheap-model error. | V0 | `experiments/v0_toy/results/v0_main/RESULTS.md` §10 |
 | H2 | causal fidelity | V0-supported (0.091 vs 0.0009 medium error with/without switching) | V0 | same |
 | H3 | error-aware routing | V0-supported (AUROC 0.993, F1 0.66 at oracle cost, ECE 0.007) | V0 | same |
 | H4 | sparse importance | V0-supported (median 0, 79 % of episodes need no fine physics) | V0 | same |
@@ -191,7 +191,7 @@ policies that move a damaged or aged virtual system toward a target healthy stat
 | H6 | cross-model generalisation | V0-supported, weak (noise, size and information level: proper tests; the sigmoid formulation test is weak — its folds are at ±0.127 so the closure already tracks switch-on; fails on sustained-step shift) | V0 (partial) | same |
 | H7 | hidden-state inference | V0-supported (partial: routing probability ECE 0.007) | V0 (partial) | same |
 | H8 | neural closure | untested | V1 | this file |
-| H9 | value of computation | V0-supported under the registered rule (3 of 5 budgets vs physics via the sequential pair; 4 of 5 vs adjoint); crossing frontiers — physics rule better at high budgets | V0 | same |
+| H9 | value of computation | V0-supported under the registered rule (3 of 5 budgets vs physics via the sequential pair; 4 of 5 vs adjoint; 4 of 5 at cost ratio 13); crossing frontiers — physics rule better at high budgets. Not supported with the constant-closure cheap model (no policy differs when the cheap model's error is not sparse). | V0 | same |
 | H10 | inverse design | untested | ≥ V1 | this file |
 
 Statuses are updated only by a logged research-log entry that cites the run id and figure.

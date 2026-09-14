@@ -20,7 +20,13 @@ V1 must add, as pre-registered conditions:
    set size or a density estimate), scored on planted shifts including a sustained-input
    family;
 4. **per-family re-validation of the fine simulator's numerical floor** before any oracle
-   comparison.
+   comparison;
+5. *(amendment after `v0_base0`)* a **pre-registered sparsity check of the cheap model's
+   error** — the fraction of the coarse-model error attributable to the causally relevant
+   subset — because adaptivity failed completely when the cheap model was uniformly
+   biased (constant closure): no router, not even the oracle, could reach the tolerance
+   below uniform fine cost. Adaptivity is conditional on sparse, causally concentrated
+   closure error, and V1 must measure that property before claiming anything.
 
 ## Consequences
 - H5 (physics compilation) and H8 (neural closure) become testable at V1.

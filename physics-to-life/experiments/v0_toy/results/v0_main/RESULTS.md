@@ -254,4 +254,30 @@ Uniform: coarse 0.130 @ 4,800 · medium 0.0535 @ 14,400 · fine 0.00112 @ 192,00
   necessary node at all (§7 correction), so its H6 AUROC is undefined. A budget defined as
   "medium + two fine nodes" should be used for high-ratio configurations (V1).
 
-### 10b. Coarse (constant-closure) default (`v0_base0`) — pending
+### 10b. Coarse (constant-closure) default (`v0_base0`; 600/300/100 episodes; 14 min) — a negative result
+
+Adaptive policies refine on top of the *coarse* model (fast subsystem invisible) instead
+of the quasi-static closure. Uniform: coarse 0.126 @ 4,800 · medium 0.050 @ 14,400 ·
+fine 0.00112 @ 48,000.
+
+| policy | best mean error (at % of fine cost) | reaches tolerance 0.01 below uniform fine? |
+|---|---|---|
+| oracle (switchers upstream of r) | 0.056 (16) | no |
+| learned one-shot / sequential | 0.049 (27) / 0.050 (52) | no |
+| physics one-shot / sequential | 0.050 (29) / 0.050 (61) | no |
+| adjoint | 0.126 (30) | no |
+| random (ancestors) / random / spatial | 0.0011 only when all 12 nodes are fine | no (89–100 %) |
+
+- The tolerance is **unreachable in 78 % of episodes** for *any* subset of switchers: the
+  coarse model's sub-threshold bias (0.048 even when nothing switches) is distributed over
+  every node, and refining the few nodes that switch leaves it untouched. Importance is no
+  longer sparse, so no router — learned, physics-aware or oracle — can help; only uniform
+  refinement reaches the floor. H1 fails for every policy including the oracle; H9 has no
+  significant differences at any budget.
+- Ranking quality survives (learned AUROC 0.981 on the best-subset labels) but is
+  irrelevant when the achievable floor is 50 × the tolerance.
+- **Reading:** adaptive fidelity is conditional on the cheap model being *locally* wrong
+  (sparse, causally concentrated closure error) rather than *uniformly* biased. A
+  programme that wants adaptivity must first establish, per system and cheap model,
+  where the cheap model's error lives — which is itself a measurable, pre-registrable
+  property (V1 requirement 5, ADR-0005 amendment).

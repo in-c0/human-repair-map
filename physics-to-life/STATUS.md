@@ -20,6 +20,14 @@ interventions the router fails with zero disagreement. Calibration is excellent 
 0.007), ranking near-perfect (AUROC 0.993), transfer to a different fast-subsystem
 formulation, stochastic dynamics and a larger network holds.
 
+**Robustness variants (added after the main run).** Cost ratio 13: every verdict
+reproduced; learned router reaches tolerance at 11 % of fine cost (physics 18 %, adjoint
+29 %, oracle 9 %); the crossing persists. **Coarse-default cheap model: adaptivity fails
+completely** — the constant closure's error is spread over all nodes, the tolerance is
+unreachable for any switcher subset in 78 % of episodes, and no policy (oracle included)
+beats uniform refinement. Adaptive fidelity is conditional on sparse cheap-model error;
+that sparsity is now a pre-registered V1 measurement (ADR-0005 amendment).
+
 ## What changed
 V0 run, post-hoc τ-grid extension (documented), failure analysis and two remedial
 variants, seed check, results document, review package, registry statuses, ADR-0005.

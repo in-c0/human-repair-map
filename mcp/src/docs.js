@@ -1,5 +1,5 @@
 /* The HTML served at GET /mcp — documentation for a person configuring a client.
-   Same visual shell as v0.1; copy aligned with the Human Repair Graph. */
+   Machine-facing language stays exact: rung, measured, blocked by, review state, provenance. */
 
 import { MANIFEST } from "./graph.js";
 import { TOOLS } from "./tools.js";
@@ -29,9 +29,9 @@ a{color:#00E5CC}
 </style></head><body><main>
 <div class="e">Human Repair Map · MCP endpoint · graph v${esc(MANIFEST.version)} · snapshot ${esc(MANIFEST.snapshot)}</div>
 <h1>Human Repair Graph for models and agents</h1>
-<p>This server exposes the same evidence graph used by <a href="https://humanrepairmap.com">humanrepairmap.com</a>. It represents repair goals, the capabilities they require, the questions that block those capabilities, and the claims and sources behind each record. The two public projections are <code>universal-repair</code> and <code>rejuvenation</code>; pass either as <code>projection</code> to listing and ranking tools. Current graph: ${esc(counts)}. Content hash <code>${esc(MANIFEST.contentHash.slice(0, 12))}</code>.</p>
-<p>Capabilities use four fields throughout the project: <b>rung</b> (L0–L5 evidence), <b>measured</b> (what changed), <b>blocked by</b> (what prevents the next rung), and <b>review state</b> (whether the Human Repair Map record has been checked by a human).</p>
-<p>Add the server to any MCP client:</p>
+<p>If your model is trying to answer a research question about human repair, it should be able to inspect the same evidence and dependencies a researcher sees without scraping the website. This endpoint exposes the canonical graph directly: repair goals, required capabilities, blocking questions, claims, sources, provenance, and history. Current graph: ${esc(counts)}. Content hash <code>${esc(MANIFEST.contentHash.slice(0, 12))}</code>.</p>
+<p>The two projections are <code>universal-repair</code> and <code>rejuvenation</code>. Capabilities use the same four fields everywhere: <b>rung</b> (L0–L5 evidence), <b>measured</b> (what changed), <b>blocked by</b> (what prevents the next rung), and <b>review state</b> (whether a named human checked the record).</p>
+<p>Add the server to an MCP client:</p>
 <pre>claude mcp add --transport http human-repair-map https://humanrepairmap.com/mcp</pre>
 <p>Or configure it directly:</p>
 <pre>{
@@ -39,17 +39,17 @@ a{color:#00E5CC}
     "human-repair-map": { "type": "http", "url": "https://humanrepairmap.com/mcp" }
   }
 }</pre>
-<p>Start with <code>how_to_read</code> for the grading vocabulary and review semantics. Then use <code>trace_dependency</code> on a goal, <code>find_blockers</code> on a capability, or <code>rank_research_questions</code> for a projection.</p>
+<p>Start with <code>how_to_read</code>. Then use <code>trace_dependency</code> on a goal, <code>find_blockers</code> on a capability, or <code>rank_research_questions</code> for a projection. If you need the evidence behind a rung, call <code>get_primary_evidence</code> instead of inferring it from the summary text.</p>
 <h2>Tools</h2>
 <ul>
 ${tools}
 </ul>
-<p>Every tool returns <code>structuredContent</code> alongside a text rendering. Returned records include their review state and provenance.</p>
+<p>Every tool returns <code>structuredContent</code> as well as text. Returned records keep their review state and provenance attached.</p>
 <h2>Without MCP</h2>
 <ul>
 <li><b>REST</b> — <a href="/api">/api</a> (index) · <a href="/api/openapi.json">/api/openapi.json</a>. Every node is addressable: <code>/api/nodes/hrm:goal/scarless-skin-repair</code>, <code>/api/goals/scarless-skin-repair/critical-path</code>, <code>/api/questions/ranked?projection=rejuvenation</code>.</li>
 <li><b>Bulk</b> — <a href="/graph/graph.json">/graph/graph.json</a> · <a href="/graph/graph.jsonl">graph.jsonl</a> · <a href="/graph/graph.jsonld">graph.jsonld</a> · <a href="/graph/manifest.json">manifest.json</a> · <a href="/graph/schema/">JSON Schemas</a>. The manifest content hash identifies the graph state.</li>
-<li><b>Write back</b> — <code>POST /api/proposals</code> records a correction, rung challenge, new evidence, or question against a record. <code>POST /api/predictions</code> locks a forecast against the graph snapshot used. Both are written to the public hash-chained log at <a href="/api/verify">/api/verify</a>. A proposal does not change a canonical record by itself: each one becomes a draft pull request on <a href="https://github.com/in-c0/human-repair-map/pulls?q=label%3Aproposal">the repository</a> carrying its event hash, and a named human decides. If you have GitHub access you may open the pull request yourself; see <a href="https://github.com/in-c0/human-repair-map/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.</li>
+<li><b>Write back</b> — <code>POST /api/proposals</code> records a correction, rung challenge, new evidence, or question against a record. <code>POST /api/predictions</code> locks a forecast against the graph snapshot used. Both go into the public hash-chained log at <a href="/api/verify">/api/verify</a>. A proposal does not change a canonical record by itself. It becomes a draft pull request carrying its event hash, and a named human decides whether to accept it. See <a href="https://github.com/in-c0/human-repair-map/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.</li>
 </ul>
 <div class="warn"><b>UNREVIEWED · HUMAN REVIEW: NONE across the current graph.</b> Machine-checked sources do not count as human review. Unless a record says <code>reviewed</code> with a named human reviewer, no human has confirmed that its cited sources support the attached claim. Research state only. Not a clinical tool. It does not diagnose, recommend treatments, or give advice about any person's illness.</div>
 <p style="font-size:13px">Spec 2025-11-25 · Streamable HTTP · <a href="https://humanrepairmap.com">humanrepairmap.com</a> · <a href="https://humanrepairmap.com/#/machine">model and agent interface</a> · <a href="https://github.com/in-c0/human-repair-map">source</a></p>

@@ -1,0 +1,120 @@
+{
+  "timestamp_utc": "2026-09-14T13:27:37Z",
+  "git_commit": "9247d8341d33928e47831c3280dab5210f225e58",
+  "git_branch": "claude/physics-to-life-init-fhd8x8",
+  "git_dirty": true,
+  "python": "3.11.15 (main, Mar  3 2026, 09:26:23) [GCC 13.3.0]",
+  "packages": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.11.2",
+    "pandas": "3.0.5",
+    "networkx": "3.6.1",
+    "pyyaml": "6.0.3"
+  },
+  "platform": "Linux-6.18.44-fc-v24-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "processor": "x86_64",
+  "cpu_count": 4,
+  "hostname": "vm",
+  "seed": 0,
+  "config": {
+    "run_id": "v0_main",
+    "seed": 0,
+    "sim": {
+      "horizon": 8.0,
+      "dt": 0.02,
+      "n_sub": 10,
+      "target": "auc"
+    },
+    "base_level": 1,
+    "tol_ref": 0.01,
+    "n_train": 1200,
+    "n_test": 400,
+    "n_ood": 150,
+    "ood_families": [
+      "amp_high",
+      "multi2",
+      "step",
+      "negative",
+      "K20",
+      "sigmoid",
+      "noisy",
+      "sigma0",
+      "sigma06"
+    ],
+    "n_proc": 4,
+    "kappa": 1.0,
+    "taus": [
+      0.02,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      0.97
+    ],
+    "tols": [
+      0.002,
+      0.005,
+      0.01,
+      0.02,
+      0.05,
+      0.1
+    ],
+    "ensemble": {
+      "kind": "mlp",
+      "n_members": 5,
+      "hidden": [
+        64,
+        64
+      ]
+    },
+    "label": "necessary",
+    "include_path_states": true,
+    "ablations": {
+      "no_uncertainty": {
+        "kappa": 0.0
+      },
+      "no_graph": {
+        "drop_groups": [
+          "graph"
+        ]
+      },
+      "no_trajectory": {
+        "drop_groups": [
+          "trajectory"
+        ]
+      },
+      "intervention_only": {
+        "drop_groups": [
+          "trajectory",
+          "graph",
+          "state"
+        ]
+      },
+      "gbm": {
+        "kind": "gbm"
+      },
+      "flip_label": {
+        "label": "flip"
+      },
+      "train_100": {
+        "n_train": 100
+      },
+      "train_300": {
+        "n_train": 300
+      },
+      "no_path_states": {
+        "include_path_states": false
+      }
+    }
+  }
+}

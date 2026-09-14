@@ -20,6 +20,34 @@
 <meta name="twitter:title" content="Human Repair Map">
 <meta name="twitter:description" content="What can medicine already repair, where does current science stop, and what would have to change before we could repair much more of the human body?">
 <meta name="twitter:image" content="https://humanrepairmap.com/og.svg">
+<link rel="canonical" href="https://humanrepairmap.com/">
+<link rel="alternate" type="application/json" href="https://humanrepairmap.com/graph/graph.json" title="Human Repair Graph (JSON)">
+<link rel="alternate" type="application/ld+json" href="https://humanrepairmap.com/graph/graph.jsonld" title="Human Repair Graph (JSON-LD)">
+<link rel="alternate" type="text/plain" href="https://humanrepairmap.com/llms.txt" title="Guide for language models">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Human Repair Graph",
+  "alternateName": "Human Repair Map",
+  "description": "A dependency graph of what medicine can repair in a human body: goals, capabilities graded on a rung from idea (L0) to independent human replication (L5), the open questions that block them, and the claims and sources behind each grade. Every record carries a review state; records drafted by AI are marked ai-proposed until a named person reviews them. Research state only, not clinical advice.",
+  "url": "https://humanrepairmap.com/",
+  "sameAs": "https://github.com/in-c0/human-repair-map",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "isAccessibleForFree": true,
+  "creator": {"@type": "Person", "name": "Ava Kim", "url": "https://ava.kim"},
+  "keywords": ["regenerative medicine", "wound healing", "scar", "rejuvenation", "biological aging", "dependency graph", "evidence map", "open questions", "MCP"],
+  "version": "0.3.0",
+  "distribution": [
+    {"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://humanrepairmap.com/graph/graph.json"},
+    {"@type": "DataDownload", "encodingFormat": "application/x-ndjson", "contentUrl": "https://humanrepairmap.com/graph/graph.jsonl"},
+    {"@type": "DataDownload", "encodingFormat": "application/ld+json", "contentUrl": "https://humanrepairmap.com/graph/graph.jsonld"},
+    {"@type": "DataDownload", "encodingFormat": "text/plain", "contentUrl": "https://humanrepairmap.com/llms-full.txt"}
+  ],
+  "includedInDataCatalog": {"@type": "DataCatalog", "name": "Human Repair Map", "url": "https://humanrepairmap.com/graph/manifest.json"},
+  "potentialAction": {"@type": "SearchAction", "target": "https://humanrepairmap.com/api/search?q={query}", "query-input": "required name=query"}
+}
+</script>
 </head>
 <body>
 <svg class="hatch-def" aria-hidden="true"><defs><pattern id="hrm-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="4" stroke="currentColor" stroke-width="1" style="stroke:var(--ink);opacity:.18"/></pattern></defs></svg>

@@ -107,7 +107,7 @@ A more capable future model should be able to inspect the same evidence, depende
 ## What is still missing
 
 - **Human review:** 0 of 326 records are human-reviewed in the current snapshot.
-- **Automated ingestion:** there is no continuous ingestion pipeline from OpenAlex, PubMed, or ClinicalTrials.gov.
+- **Automated ingestion:** the nightly feed searches Europe PMC and ClinicalTrials.gov per record and files strong hits as proposals; it does not read papers, so relevance is a human's call at review. OpenAlex is not used.
 - **Negative and null evidence:** the schema supports it, but little has been entered.
 - **Researcher validation:** the v0.4 pilot has not yet established whether the graph improves a real researcher's workflow.
 - **Institutional federation:** compatible private nodes are an intended direction; none is running today.

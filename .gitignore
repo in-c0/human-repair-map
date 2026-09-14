@@ -3,6 +3,8 @@ node_modules/
 Thumbs.db
 *.log
 _site/
-# generated live data: deployed by the workflows, never committed
+# generated at assembly or by the nightly workflow, never committed
 public/graph/activity.json
 public/graph/feed.json
+public/llms-full.txt
+public/sitemap.xml

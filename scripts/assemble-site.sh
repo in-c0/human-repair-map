@@ -15,4 +15,8 @@ cp data/cns-delivery.json _site/data/cns-delivery.json
 # The machine-readable graph: bulk exports, the JSON Schemas, and the generated
 # live data (activity.json, feed.json) when present.
 cp -r public/graph/. _site/graph/
+# Discoverability: robots, sitemap, and the plain-text guides for language models.
+node scripts/llms-full.mjs
+node scripts/sitemap.mjs
+cp public/robots.txt public/llms.txt public/llms-full.txt public/sitemap.xml _site/
 echo "Assembled:"; find _site -type f | sort

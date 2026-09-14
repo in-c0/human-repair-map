@@ -1,38 +1,38 @@
-/* Human-layer copy. Written by ChatGPT rules-first under in-c0/writing-skill (project thread, 2026-09-13),
-   grounded in the graph snapshot 2026-09-11. The research layer keeps the exact vocabulary; this file says
-   what a person needs to understand first. Stage states are per journey; "stop" is where the data says the path ends. */
+/* Human-layer copy. Rules-first under in-c0/writing-skill.
+   The human layer explains the body and the science first. Exact grading vocabulary stays in the research layer
+   and in the formal line beneath each worked example. Facts remain bounded by the 2026-09-11 graph snapshot. */
 window.HRM_HUMAN = {
  "entrance": {
-  "question": "A map of how close we are to repairing the human body.",
+  "question": "What would it take to repair a human body?",
   "choose": "Choose where to begin",
-  "both": "Both are views of the same evidence graph. Follow any path until current science stops.",
+  "both": "Start with damage or ageing. A lot of the science underneath is shared.",
   "journeys": {
    "repair": {
     "title": "Repair damage",
     "scope": "Trauma, cancer, organ failure, neurological injury",
-    "lead": "Start with something going wrong in the body and follow how far current repair methods can take it."
+    "lead": "Someone gets hurt or sick. How much of the damage can we actually find, reach and repair today?"
    },
    "aging": {
     "title": "Reverse biological aging",
     "scope": "Regenerative capacity, tissue age, cellular state",
-    "lead": "Start with the changes that come with age and follow how far current repair methods can take them."
+    "lead": "What would have to change before an older body could recover younger function without changing who the person is?"
    }
   },
-  "reviewed": "0 of 326 records have been checked by a human researcher. The sources were found automatically and still need human review.",
+  "reviewed": "0 of 326 research entries have been checked by a human researcher. The sources were found automatically and still need human review.",
   "footnote": "Research state only. Not a clinical tool.",
-  "intro": "Injuries, infections, cancers, failing organs, and the changes that come with age each need a set of things medicine has to be able to do. This map shows which of those things exist today, how well each has been shown to work, and where the science stops. Every claim links to its evidence and says whether a human has checked it.",
-  "aim": "The long-term aim is repair for any damage, for anyone. This map is how far the science has got, and what is still missing, laid out so that researchers and AI models can work on it."
+  "intro": "If someone has a deep wound, a tumour, a failing organ or damage to the nervous system, medicine can already stop some immediate damage and restore some lost function. Other parts of repair are still missing completely. This site follows those gaps from the body outward.",
+  "aim": "I want to know what would have to become possible before we could repair almost any biological damage, and what research would move us there faster."
  },
  "stages": [
   {
    "id": "see",
    "title": "Understand what changed",
-   "ask": "What exactly has been damaged?"
+   "ask": "What exactly was damaged?"
   },
   {
    "id": "model",
    "title": "Know what healthy should look like",
-   "ask": "What should healthy tissue look like?"
+   "ask": "What are we trying to restore?"
   },
   {
    "id": "reach",
@@ -42,63 +42,63 @@ window.HRM_HUMAN = {
   {
    "id": "edit",
    "title": "Repair or replace it",
-   "ask": "Can we restore what was lost?"
+   "ask": "Can we put the tissue back?"
   },
   {
    "id": "verify",
    "title": "Verify the result",
-   "ask": "Did the repair actually work?"
+   "ask": "Did the repair really work?"
   },
   {
    "id": "control",
    "title": "Keep it stable",
-   "ask": "Will it stay safe and stable?"
+   "ask": "Will it stay safe?"
   }
  ],
  "journeys": {
   "repair": {
-   "opening": "Start with something going wrong in the body: a deep wound, an infection, a tumour, a damaged organ, a spinal injury. The question is how much of that damage we can understand, reach and repair today.",
-   "frame": "The first worked example is adult skin after injury because it lets us compare things medicine already does well with the parts of scarless regeneration that are still missing.",
+   "opening": "Start with something going wrong in a body: a deep wound, an infection, a tumour, a damaged organ, a spinal injury. For each one, the practical question is the same: what can we fix now, and where do we still get stuck?",
+   "frame": "We start with adult skin after a serious wound. Skin is useful because medicine can already close wounds and replace some lost tissue, while complete scarless regrowth has not been shown in adult humans.",
    "states": {
-    "see": "Doctors can already assess wound depth, blood flow and infection in a living patient, with independently replicated human evidence. We do not yet have a graded capability for measuring fibroblast state directly inside a living human wound.",
-    "model": "Early-gestation human skin can heal without a scar, so scarless human skin repair exists biologically. Adult spiny mice can regenerate skin with much less scarring, but that evidence is still at the rodent rung.",
-    "reach": "Some targeted delivery already works in people, including topical gene delivery to keratinocytes. Delivering a payload to one chosen cell type throughout an entire tissue has human evidence from one group and is still blocked by science.",
-    "edit": "We can replace lost epidermis and close some difficult wounds in people, and gene-corrected stem-cell epidermis has been rebuilt in humans. Restoring dermis, hair follicles, native matrix, blood vessels, fat and sensation without scar is still mostly at dish or rodent level, with some parts only at the idea stage.",
-    "verify": "We can check skin repair with histology and validated scar scales in people. That part of the path has independently replicated human evidence.",
-    "control": "We already know how to stop bleeding, restore a temporary barrier, and prevent or treat acute wound infection in people. Synthetic injectable haemostasis is at the rodent rung here, and clearing an established biofilm from a chronic wound is still ungraded."
+    "see": "A doctor can already assess how deep a wound is, whether it has enough blood flow and whether it is infected. What we still cannot do here is read, inside a living human wound, exactly which fibroblasts are switching into scar-forming states as it heals.",
+    "model": "We know human skin can heal without a scar early in fetal development. Adult spiny mice can also regrow skin far more completely than we do. That tells us scarless repair exists in those settings; it does not yet tell us how to make adult human skin do it.",
+    "reach": "We can already deliver some treatments to skin cells, including topical gene delivery to keratinocytes in people. Reaching one chosen cell type throughout an entire tissue, evenly and without affecting the wrong cells, is still a major limitation.",
+    "edit": "This is where the gap gets large. We can replace lost epidermis, close some chronic wounds and, in a small number of people, rebuild epidermis from gene-corrected stem cells. We still cannot regrow adult human skin with normal dermis, hair follicles, blood vessels, fat, matrix and sensation and leave no scar.",
+    "verify": "Once a wound has healed, we can examine the tissue and score the scar in people. That tells us whether the skin closed and what the repaired tissue looks like; it does not make the missing regeneration happen.",
+    "control": "We are already good at several urgent parts of wound care: stopping bleeding, covering the wound and treating acute infection. Harder problems remain, including established biofilms in chronic wounds and keeping a much more powerful regenerative treatment under control."
    },
    "stop": "edit",
    "blocked": {
-    "headline": "This is currently blocked.",
-    "explain": "Adult skin can already be closed, covered and partly reconstructed in people. The missing step is restoring the full tissue, including dermis, appendages, vessels, fat, matrix and sensation, without leaving a scar. Most of those regenerative capabilities are still at the rodent or dish rung, and remodelling an established scar into native dermis is only at the idea rung in this graph.",
-    "change": "What would change this?"
+    "headline": "This is where we get stuck.",
+    "explain": "A surgeon can close a wound, and medicine can replace parts of the skin. What we cannot yet do is tell an adult human wound to rebuild the original tissue: normal dermis, hair follicles, tiny blood vessels, fat, matrix and nerves, with normal strength and no scar. The strongest evidence for several of those missing steps is still from cells or rodents.",
+    "change": "What would move this forward?"
    },
-   "headline": "To repair damage, six things have to work together."
+   "headline": "What has to happen before damaged tissue can be put back properly?"
   },
   "aging": {
-   "opening": "Aging changes many parts of a tissue at once. To reverse it safely, we need to know what has changed, decide what a younger healthy state should be, reach the right cells, change them, and then check that the result lasts.",
-   "frame": "The worked example stays with skin because the same tissue lets us compare known human repair with the much earlier evidence for rejuvenation and regeneration.",
+   "opening": "Becoming young again is a different problem from closing a wound. An older tissue has changed in many places at once, so we need to know which changes matter, which younger state we actually want, and whether we can restore it without causing new damage.",
+   "frame": "We stay with skin for the first example. It gives us something concrete to compare: ordinary adult repair, scarless regeneration in other biological settings, and age-related cell changes that researchers have so far altered mainly in cells and animals.",
    "states": {
-    "see": "We still do not have a graded capability for reading fibroblast state directly inside a living human wound. That leaves an important part of the local aging state poorly measured in this example.",
-    "model": "Rodent studies show that cells can be pushed toward a younger state while keeping their identity in some settings. Human fetal skin and the regenerative skin of spiny mice also show that very different repair states are biologically possible, but they do not tell us how to recreate them safely in an adult person.",
-    "reach": "There is human evidence that payloads can reach chosen cells in some settings, but broad selective delivery throughout a tissue is still blocked by science. For rejuvenation, reaching tissues beyond relatively tractable organs such as the eye and liver remains an open problem.",
-    "edit": "In animals, some interventions can reset measures of epigenetic age in living tissue. The wider job of rebuilding aged skin with native dermis, appendages, vessels, matrix, fat and nerves is still mostly between the idea and rodent rungs.",
-    "verify": "We can verify tissue structure with histology in people. We do not yet have a graded capability showing that a rejuvenated state can be maintained or safely repeated over time.",
-    "control": "The cancer risk of rejuvenating tissue is still ungraded in this map. It remains an open safety question for repeated or widespread use."
+    "see": "We can measure many signs of ageing in cells and tissue samples. In this worked example, we still cannot read fibroblast state directly inside a living human wound while it changes over time.",
+    "model": "In rodents, researchers have pushed some cells toward a younger state while keeping their identity. Human fetal skin and spiny-mouse skin also show that very different repair states can exist. We still do not know how to recreate the useful parts of those states safely in an older person.",
+    "reach": "A rejuvenation treatment only matters if it can reach the cells that need changing. We can reach some tissues and cell types in people, but wide, selective delivery across many human tissues is still unresolved, especially beyond relatively accessible organs such as the eye and liver.",
+    "edit": "In animals, some interventions can move measures of epigenetic age in a younger direction. That is much smaller than rebuilding an aged human tissue so that its structure and function are genuinely younger. Most of the skin-regeneration steps needed for that are still supported only by cell or rodent evidence.",
+    "verify": "We can examine tissue structure in people and measure many biological markers. We have not shown in people that a rejuvenated tissue can stay younger, keep working normally and be treated again safely when needed.",
+    "control": "Cancer is one of the questions we cannot wave away. We do not yet know how repeated or widespread tissue rejuvenation would change cancer risk in people.",
    },
    "stop": "edit",
    "blocked": {
-    "headline": "This is currently blocked.",
-    "explain": "We can change some age-related cell states in animals, but we cannot yet restore an aged human tissue to a younger state with its structure and function intact. Most of the regeneration capabilities needed for that are still at the idea, dish or rodent rungs, and resetting epigenetic age in living tissue is still rodent evidence.",
-    "change": "What would change this?"
+    "headline": "This is where we get stuck.",
+    "explain": "Researchers can change some age-related cell states in animals. We cannot yet take an aged human tissue and restore younger structure and function throughout it while keeping the tissue stable and safe. The regeneration work needed to do that is still supported mostly by cell or rodent evidence.",
+    "change": "What would move this forward?"
    },
-   "alsoOpen": "Keeping a rejuvenated state stable and safe is still open too. The cancer-risk capability has not been graded yet.",
-   "headline": "To reverse biological aging, the same six things have to work together."
+   "alsoOpen": "Even if we learn to make the change, we still have to show that it lasts and does not raise cancer risk. That safety problem is still unresolved.",
+   "headline": "What would have to change before an older tissue could become younger again?"
   }
  },
  "research": {
-  "ranking": "Some unanswered questions hold up several kinds of repair at once. Those are the ones we show first.",
-  "unreviewed": "No researcher has checked this record yet. The sources were found automatically. A human still needs to open them and check that we represented the evidence correctly.",
+  "ranking": "Some unanswered questions stand in the way of several kinds of repair at once. We show those first so researchers can inspect whether the dependency is real.",
+  "unreviewed": "No researcher has checked this yet. The sources were found automatically. A human still needs to open them and check that the evidence has been represented correctly.",
   "enterResearch": "View this in the research layer",
   "backHuman": "Back to the plain explanation"
  }

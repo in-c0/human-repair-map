@@ -152,6 +152,14 @@ def main():
         k = float(variant.get("kappa", kappa))
         variants[f"abl_{name}"] = dict(model=mk, sequential=False, kappa=k)
         variants[f"abl_{name}_seq"] = dict(model=mk, sequential=True, kappa=k)
+    def merge_ext(rows, ext_path):
+        """Replace the score-based policies' rows with the extended-grid rows if available."""
+        if not ext_path.exists():
+            return rows
+        ext = pickle.load(open(ext_path, "rb"))
+        replaced = {r["policy"] for r in ext}
+        return [r for r in rows if r["policy"] not in replaced] + ext
+
     rows_path = cache_dir / "rows_test.pkl"
     if rows_path.exists():
         rows = pickle.load(open(rows_path, "rb"))
@@ -161,6 +169,7 @@ def main():
                                    tols=cfg["tols"], kappa=kappa, learned_variants=variants, seed=seed)
         pickle.dump(rows, open(rows_path, "wb"))
         print(f"  evaluated test set in {time.time()-t0:.0f}s", flush=True)
+    rows = merge_ext(rows, cache_dir / "rows_test_ext.pkl")
     ood_rows = {}
     main_variants = {"learned": variants["learned"], "learned_seq": variants["learned_seq"]}
     for fam, eps in ood_eps.items():
@@ -174,6 +183,7 @@ def main():
                                                 learned_variants=main_variants, seed=seed)
             pickle.dump(ood_rows[fam], open(p, "wb"))
             print(f"  evaluated OOD family '{fam}' in {time.time()-t0:.0f}s", flush=True)
+        ood_rows[fam] = merge_ext(ood_rows[fam], cache_dir / f"rows_ood_{fam}_ext.pkl")
     if args.stage == "evaluate":
         return
 

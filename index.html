@@ -62,6 +62,7 @@
     <a href="#/journey/aging" data-v="journey-aging">Reverse biological aging</a>
     <a href="#/research" data-v="research">Research layer</a>
     <a href="#/changes" data-v="changes">What changed</a>
+    <a href="#/predictions" data-v="predictions">Predictions</a>
     <a href="#/grid" data-v="grid">Body grid</a>
     <a href="#/thesis" data-v="thesis">Why this exists</a>
     <a href="#/cns" data-v="cns">Case study: the brain</a>
@@ -972,6 +973,37 @@ function vChanges(){
     '<p class="lede-t">This is a search, not a judgement. An item here does not support or weaken any record until a named person reads it and edits the record. <a href="graph/feed.json">feed.json</a> is the same list for machines.</p>'+
     '<div id="chg-host">'+loading()+'</div>';
 }
+/* PREDICTIONS: the standing sheet (data/prediction-sheet.json) answered by named predictors, read back
+   from /api/predictions. Every registration is locked in the event log; nothing here can be edited. */
+function vPredictions(){
+  setTimeout(function(){
+    Promise.all([loadGraph(), fetch(API+"/predictions?limit=200").then(function(r){return r.json();})]).then(function(x){
+      var host=document.getElementById("pred-host"); if(!host) return;
+      var P=(x[1].predictions||[]);
+      if(!P.length){host.innerHTML='<div class="empty">No predictions registered yet.</div>';return;}
+      /* group by statement (sheet id in the reasoning prefix, else the statement text), then by predictor */
+      var who=function(p){return (p.predictor_name||"anonymous")+(p.predictor_model?" / "+p.predictor_model:"");};
+      var preds={}, order=[]; P.forEach(function(p){var k=who(p);if(!preds[k]){preds[k]={n:0,type:p.predictor_type,first:p.created,ps:[]};order.push(k);}preds[k].n++;preds[k].ps.push(p);});
+      var byS={}, sOrder=[]; P.forEach(function(p){var m=/^\[(ps-\d+)\]/.exec(p.reasoning||"");var k=m?m[1]:p.statement;if(!byS[k]){byS[k]={statement:p.statement,subject:p.subject,horizon:p.horizon,criteria:p.resolution_criteria,by:{}};sOrder.push(k);}byS[k].by[who(p)]=p;});
+      sOrder.sort();
+      var resolved=P.filter(function(p){return p.state&&p.state!=="open";}).length;
+      var head='<div class="chg-sum m9">'+P.length+' locked prediction'+(P.length===1?'':'s')+' · '+order.length+' predictor'+(order.length===1?'':'s')+' · '+resolved+' resolved</div>';
+      var board='<div class="sec-h"><span class="n">·</span> Predictors</div><div class="pred-board">'+order.map(function(k){var d=preds[k];var mean=d.ps.reduce(function(a,p){return a+Number(p.probability);},0)/d.n;return '<div class="pred-row"><span class="pred-who">'+esc(k)+'</span><span class="meta">'+esc(d.type)+' · '+d.n+' prediction'+(d.n===1?'':'s')+' · mean p '+mean.toFixed(2)+' · first locked '+esc(String(d.first).slice(0,10))+' · Brier: not yet scorable</span></div>';}).join("")+'</div>';
+      var table='<div class="sec-h"><span class="n">·</span> Statements</div>'+sOrder.map(function(k){
+        var S=byS[k]; var n=node(S.subject);
+        var cells=order.map(function(w){var p=S.by[w];return '<div class="pred-cell'+(p?'':' pred-none')+'">'+(p?'<span class="pred-p">'+Number(p.probability).toFixed(2)+'</span><span class="pred-r">'+esc((p.reasoning||"").replace(/^\[ps-\d+\]\s*/,""))+'</span><span class="meta">'+esc(w)+' · '+esc(String(p.created).slice(0,10))+' · '+esc(p.graph_snapshot||"")+' · '+esc(p.state||"open")+'</span>':'<span class="meta">'+esc(w)+': no answer</span>')+'</div>';}).join("");
+        var spread=(function(){var v=order.map(function(w){return S.by[w]&&Number(S.by[w].probability);}).filter(function(x){return typeof x==="number";});if(v.length<2)return '';return ' · spread '+(Math.max.apply(null,v)-Math.min.apply(null,v)).toFixed(2);})();
+        return '<div class="pred-s"><div class="pred-st"><span class="m9">'+esc(k.indexOf("ps-")===0?k.toUpperCase():"")+' · resolves by '+esc(S.horizon)+spread+'</span><p>'+esc(S.statement)+'</p><div class="meta">On <a href="'+nodeHref(S.subject)+'">'+esc(n?nodeName(n):S.subject)+'</a>. Rule: '+esc(S.criteria||"")+'</div></div><div class="pred-g">'+cells+'</div></div>';
+      }).join("");
+      host.innerHTML=head+board+table;
+    }).catch(function(){var host=document.getElementById("pred-host");if(host)host.innerHTML='<div class="empty">Could not load /api/predictions.</div>';});
+  },0);
+  return '<div class="coord"><a href="#/research">research</a> / predictions</div>'+
+    '<h1 class="h-title">Predictions</h1>'+
+    '<p class="h-lede">Ten dated statements about where this field will be, each tied to a record and a resolution rule a stranger could apply. Models and people answer the same sheet; every answer is locked in the public event log with the graph snapshot it was made against, and scored when the date arrives. Disagreement between predictors is the useful part until then.</p>'+
+    '<p class="lede-t">To add a predictor, run <code>node scripts/predict.mjs --prompt</code> from the <a href="https://github.com/in-c0/human-repair-map" target="_blank" rel="noopener">repository</a>, give the prompt to a model or a person, and register the answers with the same script. The sheet is <code>data/prediction-sheet.json</code>; the raw registry is <a href="'+API+'/predictions">/api/predictions</a>.</p>'+
+    '<div id="pred-host">'+loading()+'</div>';
+}
 function vCorrections(){
   var C=window.HRM_CITATIONS||{};
   var rows=(C.corrections||[]).map(function(c){
@@ -1246,6 +1278,7 @@ function render(){
   else if(parts[0]==="route"&&parts[1]){view=vRoute(parts[1]);navKey="cns";}
   else if(parts[0]==="leverage"){view=vLeverage();navKey="cns";}
   else if(parts[0]==="changes"){view=vChanges();navKey="changes";}
+  else if(parts[0]==="predictions"){view=vPredictions();navKey="predictions";}
   else if(parts[0]==="corrections"||parts[0]==="queue"){view=parts[0]==="queue"?vContribute():vCorrections();navKey="contribute";}
   else if(parts[0]==="search"){view=vSearch(decodeURIComponent(parts.slice(1).join("/")||""));navKey="";}
   else if(parts[0]==="overview"||parts[0]==="capabilities"||parts[0]==="graph"||parts[0]==="evidence"||parts[0]==="tasks"){location.replace("#/map/full-graph");return;}

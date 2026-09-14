@@ -594,3 +594,18 @@ a.tag{border-bottom:1px solid var(--line);}
 .chg-w a{border:none;} .chg-w a:hover{color:var(--blue);}
 .chg-w .meta{display:block;font-family:var(--fm);font-size:9.5px;letter-spacing:.03em;color:var(--ink-2);margin-top:1px;}
 @media (max-width:760px){.chg-day{grid-template-columns:1fr;gap:4px;}}
+
+/* ---------- PREDICTIONS (/api/predictions) ---------- */
+.pred-board{border-top:1px solid var(--line);}
+.pred-row{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px;}
+.pred-who{font-family:var(--fs);font-weight:500;}
+.pred-row .meta,.pred-cell .meta,.pred-st .meta{font-family:var(--fm);font-size:9.5px;letter-spacing:.03em;color:var(--ink-2);}
+.pred-s{padding:14px 0;border-bottom:1px solid var(--line);}
+.pred-st p{margin:4px 0 6px;font-size:15px;line-height:22px;max-width:var(--maxw);}
+.pred-st .meta{display:block;line-height:14px;max-width:var(--maxw);}
+.pred-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 24px;margin-top:10px;}
+.pred-cell{display:grid;grid-template-columns:44px 1fr;gap:2px 10px;padding:6px 0;border-top:1px dashed var(--line);}
+.pred-p{font-family:var(--fm);font-size:18px;line-height:22px;color:var(--blue);grid-row:span 2;}
+.pred-r{font-size:13px;line-height:18px;}
+.pred-cell .meta{display:block;}
+.pred-none{color:var(--ink-2);}

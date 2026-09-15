@@ -1,8 +1,8 @@
 {
-  "timestamp_utc": "2026-09-15T05:40:53Z",
-  "git_commit": "d0c66a4ade7cd72b71c7c913509ab0bb6be07778",
+  "timestamp_utc": "2026-09-15T05:48:57Z",
+  "git_commit": "6fe9cde2647a904f287669f848adade4d5288727",
   "git_branch": "claude/physics-to-life-init-fhd8x8",
-  "git_dirty": true,
+  "git_dirty": false,
   "python": "3.11.15 (main, Mar  3 2026, 09:26:23) [GCC 13.3.0]",
   "packages": {
     "numpy": "2.4.6",
@@ -52,6 +52,5 @@
     "n_proc": 4,
     "s_min": 0.05,
     "ensemble_members": 5
-  },
-  "runtime_s": 376.25484347343445
+  }
 }

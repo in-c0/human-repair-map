@@ -219,9 +219,14 @@ figures as first computed) and `results/v1_gunay_pilot/` after the corrections b
   tolerance units, log-compressed — and the tolerance is a router input; predictions are
   gains in tolerance units and the VoC rule is (gain / tolerance) / cost, applied identically
   to the oracle. Thresholds remain selected on the validation split only.
-- Corrections 1–3 change labels/rules only; the cached pilot simulations were relabelled under
-  them (`run.py --relabel`, no new simulation) and the analysis stages re-run; the pre-correction
-  outputs are kept. No main-run seed has been touched.
+- **Correction 4 (threshold grids):** the dress rehearsal with corrections 1–3 showed the
+  validation-selected operating points under-spending their budgets (e.g. cost 0.109 for the
+  0.15 budget) because the VoC threshold grid had two points per decade; the grids are now
+  49 log-spaced thresholds over 1e-8…1e-2 (plus 0) and 27 trigger fractions. Grid resolution
+  only; selection remains on validation.
+- Corrections 1–4 change labels/rules/grids only; the cached pilot simulations were relabelled
+  under them (`run.py --relabel`, persisted, no new simulation) and the analysis stages re-run;
+  the pre-correction outputs are kept. No main-run seed has been touched.
 
 ## 15. Advancement criteria (V2)
 Move toward a *Drosophila* circuit rung (Augustin 2019 giant-fibre lineage / MaleCNS) only if

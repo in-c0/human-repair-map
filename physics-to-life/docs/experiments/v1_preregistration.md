@@ -50,8 +50,11 @@ parameterisation.
   while being inactivated at rest); NaT: steps −40…+20 mV, prepulses −90…−30 mV, gaps 1, 3, 10,
   30 ms, the same holds with a −10 mV test. Residuals are normalised per protocol by the peak
   current and by the number of samples where the target current is non-negligible (> 2 % of
-  peak), so that short test pulses are not diluted by silent samples. Fit quality at the freeze
-  (normalised RMS over active samples): *to be recorded in §16 from the JSON*.
+  peak), so that short test pulses are not diluted by silent samples. Fit floors (RMS over
+  active samples; `hierarchy/gunay2015_fine.json`): level A Kf 5.1 % (sequential two-step
+  topology, coupled inactivation), NaT 5.9 % (coupled, closed-state recovery); level B Kf
+  9.5 % (ZHA concerted-opening topology), NaT 6.0 % (open-state-only, slow state). Level A is
+  the formulation with the smaller floor per channel (ADR-0007 amendment).
 - Level A truth: all channels fine at Radau rtol 1e-9 / atol 1e-11. Level B truth: the
   alternate-topology fine levels (`Kf_B`, `NaT_B`) at the same tolerance. Level C: the
   published/independent anchors of the medium level (reproduction report), reporting only.

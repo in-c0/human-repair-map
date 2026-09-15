@@ -65,6 +65,9 @@ def test_block_and_opening_keys(specs):
     assert np.max(np.abs(base["I_ch"]["Kf"] - nob["I_ch"]["Kf"])) < 1e-6 * np.abs(base["I_ch"]["Kf"]).max()
     blk = simulate(spec, prot, fid, Intervention(block_conc={"Kf": 1.0}, block_frac={"Kf": 0.8}))
     assert np.abs(blk["I_ch"]["Kf"]).max() < 0.9 * np.abs(base["I_ch"]["Kf"]).max()
+    # the cheap levels apply the equilibrium fraction, the fine level blocks only channels that open: they must differ
+    medb = simulate(spec, prot, {n: 1 for n in names}, Intervention(block_conc={"Kf": 1.0}, block_frac={"Kf": 0.8}))
+    assert abs(np.abs(medb["I_ch"]["Kf"]).max() - np.abs(blk["I_ch"]["Kf"]).max()) > 0.05 * np.abs(base["I_ch"]["Kf"]).max()
     slow = simulate(spec, prot, fid, Intervention(rate_scales={"kf_opening": 0.3}))
     assert base["t"][np.argmax(np.abs(base["I_ch"]["Kf"]))] < slow["t"][np.argmax(np.abs(slow["I_ch"]["Kf"]))]
     med = simulate(spec, prot, {n: 1 for n in names}); med_slow = simulate(spec, prot, {n: 1 for n in names}, Intervention(rate_scales={"kf_opening": 0.3}))

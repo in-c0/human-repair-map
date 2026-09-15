@@ -100,3 +100,21 @@ behind publisher hosts that this environment cannot reach.
 - If the fits of the constructed fine levels cannot reach a small residual on the fit
   family (target: normalised RMS ≲ 5 % of the peak current per protocol), the hierarchy is
   reported as such and the tolerance in the preregistration is set relative to that floor.
+
+## Amendment 2026-09-15 — level A/B assignment by fit floor; anchored rate forms
+The constructed Kf schemes were refitted with HH-anchored rates (every rate with an HH
+counterpart is the published HH rate × a fitted multiplier × an exponential tilt; only the
+structure without an HH counterpart — concerted step, second step type, coupling factors,
+C-type, slow state, closed-state recovery — has free rate functions), on the corrected fit
+family and objective (research log 2026-09-14 §6). Floors (RMS over active samples):
+sequential two-step Kf topology 5.1 %; ZHA concerted-opening Kf topology 9.5 %; NaT coupled
+with closed-state recovery 5.9 %; NaT open-state-only with slow state 6.0 %.
+**Decision:** level A (the hidden truth) is the formulation with the smaller fit floor for
+each channel — Kf: the sequential two-step topology; NaT: the coupled scheme with
+closed-state recovery — so that fine-vs-medium closure error on the fit family is as small
+as the constructions allow and the error the router faces comes from structure engaged by
+interventions and evaluation protocols. The ZHA concerted-opening Kf scheme and the
+open-state-only NaT scheme are level B. Both remain constructed; the earlier statement
+that level A is the ZHA topology is superseded. Both NaT forms converge to nearly the same
+solution (the closed-state recovery path is driven to negligible rates), so the NaT
+cross-formulation contrast is weaker than the Kf one; this is recorded, not hidden.

@@ -36,7 +36,8 @@ V0_REF = -30.0   # mV; reference voltage of the Eyring rates
 # ---------------------------------------------------------------------------
 KF_THETA_NAMES = ["log10_k_alpha", "z_alpha", "log10_k_beta", "z_beta", "log10_k_gamma", "z_gamma", "log10_k_delta", "z_delta",
                   "log10_k_on", "z_on", "log10_k_off", "z_off", "log10_kc_on", "log10_kc_off", "log10_g_factor"]
-KF_BLOCK_KON, KF_BLOCK_KOFF = 0.2, 0.05     # 1/ms per unit concentration, 1/ms (constructed; block family only)
+KF_BLOCK_KON, KF_BLOCK_KOFF = 2.0, 0.5      # 1/ms per unit concentration, 1/ms (constructed: a fast open-channel blocker,
+                                            # K_D = 0.25 concentration units; block family only)
 
 
 def kf_fine_channel(theta, q10: float = 1.0, h2_as_written: bool = True, with_block: bool = True) -> ChannelPopulation:

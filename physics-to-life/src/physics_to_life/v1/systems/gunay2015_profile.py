@@ -27,7 +27,7 @@ FAMILY_MEANING = {
     "nat_inactivation": "fast inactivation rate of NaT (para inactivation-gate mutants), x0.3-x3",
     "temperature": "bath temperature 15-30 C with Q10 = 3 on every rate (constructed extension; inert at 25 C)",
     "k_out": "extracellular K+ 2-15 mM (E_K shifted by the Nernst term from the published -80 mV at 5 mM)",
-    "block": "state-dependent open-channel block of Kf (fine: explicit blocked state; cheap: equilibrium block fraction)",
+    "block": "open-channel block of Kf by a fast blocker (K_D 0.25 conc. units; fine: explicit blocked state reached from O, hence use-dependent; cheap: the equilibrium block fraction applied to the open probability)",
     "opening_step": "concerted opening step of Kf (ILT-like S4 mutants), x0.3-x3 (fine: gamma/delta; cheap: tau_m scaled)",
     "combo": "two perturbations at once",
     "activation_rate": "Kf activation kinetics, x0.5-x2 (all subunit steps)",

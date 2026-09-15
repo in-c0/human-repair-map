@@ -1,0 +1,25 @@
+{
+  "timestamp_utc": "2026-09-15T00:35:32Z",
+  "git_commit": "6ec36310be996c389cbebbe753e0aeb4612c1a4d",
+  "git_branch": "claude/physics-to-life-init-fhd8x8",
+  "git_dirty": true,
+  "python": "3.11.15 (main, Mar  3 2026, 09:26:23) [GCC 13.3.0]",
+  "packages": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.11.2",
+    "pandas": "3.0.5",
+    "networkx": "3.6.1",
+    "pyyaml": "6.0.3"
+  },
+  "platform": "Linux-6.18.44-fc-v33-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "processor": "x86_64",
+  "cpu_count": 4,
+  "hostname": "vm",
+  "seed": 0,
+  "config": {
+    "script": "validate_hierarchy.py"
+  }
+}

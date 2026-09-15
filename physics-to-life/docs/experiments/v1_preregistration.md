@@ -254,5 +254,49 @@ system.
   behind the AdaLED-style ensemble-uncertainty trigger at 15 % and 30 %; selection precision at
   equal recall was 2.0–2.5× the discrepancy and sensitivity baselines'. These numbers set no
   threshold and change no criterion; the main run decides H1-V1 and H3-V1 as written.
-- Post-hoc changes: none (the time-stamp correction above is clerical).
 - Main run launched 2026-09-15 05:57:45 UTC (`config_gunay_main.yaml`, 4 processes).
+- **Post-hoc changes** (all made 2026-09-15 08:45–09:30 UTC, while the main run was still in its
+  generation stage and before any main-run result existed; none touches a seed, a threshold, an
+  operating point or an H1/H3 criterion):
+  1. *H10 damage is functionally inert in the published model.* A probe on the pilot machinery
+     showed that removing Kf completely leaves the 10 pA current-clamp response of the published
+     model unchanged (authors' Euler integrator: 45 spikes, first spike 23.20 ms with G_Kf = 24.1
+     nS and with G_Kf = 0; peak |I_Kf| ≈ 3.7 pA against ≈ 34 pA for Ks and ≈ 430 pA for NaT), and
+     that this holds at every hold (−12 … −50 pA) and step (−2 … +20 pA) tried and for the
+     jittered cell instances of the main configuration. The pilot restoration check (4 instances)
+     had 4/4 damaged phenotypes within tolerance. H10-V1 as preregistered is therefore reported
+     as **not testable on this model** unless the main-run instances contain functionally damaged
+     cases; the verdict rule is unchanged and is evaluated over *functionally damaged* instances
+     (damaged phenotype outside tolerance), which is what "damaged instances" must mean.
+     Consequently the ID intervention family `kf_loss` is expected to behave like `none` for the
+     current-clamp groups (it still scales the Kf currents in the voltage-clamp groups); this is
+     an observation about the published model, not a protocol change.
+  2. *Exploratory H10 variant (not a preregistered verdict).* `restoration.py --damage nat_loss`:
+     NaT conductance × f, f ~ U(0.75, 0.95) (a *para*-hypomorph-like loss of excitability; × 0.7
+     already silences most instances at 10 pA), compensation searched over Ks, Kf, NaP density
+     and the NaT inactivation rate (never NaT density, the trivial fix). The same rule as H10-V1
+     is applied and reported separately, labelled post-hoc exploratory.
+  3. *Restoration protocol clarifications (both variants):* instances whose wild type fires fewer
+     than 3 spikes at the design protocol are skipped (nothing to restore); the search is skipped
+     when the damaged phenotype is within tolerance (x = 0 is then trivially optimal); the routed
+     search uses the one-shot router's parameter at the preregistered principal operating point
+     (from `verdicts.json`, chosen on validation) instead of the script's earlier fixed 1e-6; the
+     search also records whether the routed simulator itself believed the candidate restored, so
+     the falsification clause "restorations found on the routed simulator fail on fine A" is
+     computable; instances run in parallel; 16 instances for the exploratory variant.
+  4. *H5-V1 detector choice "on validation ID data only" made explicit:* the surrogate is re-fitted
+     deterministically on the same split and the gates are scored on the validation split; the
+     chosen gate is the one with the highest validation coverage among those with validation
+     `false_safe_rate` ≤ 0.05 (the hypothesis' own ID target), else the lowest validation
+     `false_safe_rate`. (A gate that never trusts the surrogate satisfies the target trivially and
+     is chosen only when nothing else does.) Clause 4 reads "post-fallback error within tolerance"
+     as the mean post-fallback error ≤ 1 tolerance unit on every OOD family.
+  5. *H8-V1 / H9-V1 computations made explicit* (`verdicts_extended.py`): H8 error = mean
+     error/tolerance over paired (episode, group, target) rows per OOD family with the paired
+     bootstrap of §8; "detects its own invalidity" = rank AUROC of the gate score for error >
+     tolerance on the pooled OOD rows (hybrid discrepancy monitor vs emulator ensemble spread).
+     H9 "falls below the physics baselines'" is read as below the best of share / discrepancy /
+     sensitivity under B at their own 30 % points; precision at equal recall is reported alongside
+     as a supplementary (not decisive) comparison, as in H3-V1.
+  6. *Reserved set:* reported by `verdicts_extended.py` as a replication line at the operating
+     points already selected on validation (no new selection).

@@ -1,6 +1,6 @@
 # STATUS — Physics-to-Life
 
-_Last updated: 2026-09-14, V1 system ported and reproduced; hierarchy built; preregistration draft v1._
+_Last updated: 2026-09-15 09:15 UTC, V1 preregistration frozen (v1.1); main run in progress; post-hoc record §16 items 1–6 written before any main-run result._
 
 ## Current objective
 V0 passed its preregistered criteria **within one synthetic model family and only under
@@ -40,6 +40,16 @@ benchmark (V1a).
   regression had R² < 0), finer threshold grids. Dress rehearsal (not a result): the learned
   router at parity with the V0-style classifier at 50 % budget, behind the ensemble-uncertainty
   trigger at 15–30 %; selection precision 2–2.5× the written rules at equal recall.
+- **While the main run generates (2026-09-15 08:45–09:30 UTC)** — research log §12: the
+  preregistered H10 damage (Kf loss) is **functionally inert in the published model** (complete
+  Kf removal leaves the 10 pA response unchanged by the authors' own integrator: 45 spikes,
+  first spike 23.20 ms; peak |I_Kf| ≈ 3.7 pA vs ≈ 430 pA NaT). Recorded as post-hoc in
+  preregistration §16 (items 1–6) before any main-run result existed: H10-V1 is evaluated over
+  functionally damaged instances and reported as *not testable* if there are none; an
+  exploratory NaT-loss variant is run and reported separately; `verdicts_extended.py` applies
+  the H5/H8/H9/H10 rules and the reserved-set replication mechanically. Dress rehearsal on the
+  pilot (not a result): H5 falsified, H8 not passed, H9 falsified under the literal reading,
+  H10 not testable.
 - **Preregistration FROZEN v1.1** (`docs/experiments/v1_preregistration.md`, commit `32a39d1`)
   and the **main run launched 2026-09-15 05:57 UTC** (400 / 200 / 4×60 / 100 reserved episodes,
   disjoint seeds; ~7–10 h on 4 processes). Then: verdicts, cross-formulation (level B),

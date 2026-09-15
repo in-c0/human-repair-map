@@ -206,3 +206,48 @@ descriptors (simulation only: 0.30) matches the full router on the pilot; the ta
 router is slightly worse (0.34). Leave-one-family-out: every held-out ID family is routed as
 well as by the reference router (the ID families are close to one another). These controls
 run in ~15 min on cached labels and will be applied to the main run as preregistered.
+
+## 12. While the main run generates: the H10 damage is functionally inert in the published model (2026-09-15, 08:45–09:30 UTC)
+
+Before running any main-run analysis I probed the H10 restoration protocol on the pilot machinery
+and found that the preregistered damage has no phenotype in the published model:
+
+- Knocking Kf out completely (`g_scales={"Kf": 0}`) leaves the medium-level 10 pA response
+  unchanged to the printed precision: 45 spikes, first spike 13.2 ms, min ISI 10.9 ms, mean V
+  −32.8 mV, with or without Kf. Ks knock-out changes the count to 58; NaT or NaP knock-out
+  silences the cell.
+- The published equations integrated by the authors' own method (`xpp_euler`, dt = 0.001 ms)
+  agree: G_Kf = 24.1 nS and G_Kf = 0 both give 45 spikes with the first spike at 23.20 ms.
+- Why: at the −12 pA hold the cell rests at −54.6 mV, where the published Kf activation
+  (V½ = −17.6 mV, slope 7.3 mV, τ 2–8 ms) barely opens during the ≈ 1 ms spikes of this model;
+  peak |I_Kf| ≈ 3.7 pA against ≈ 34 pA (Ks) and ≈ 430 pA (NaT). Hyperpolarised holds
+  (−30, −50 pA; rest −58.6 / −62.0 mV) and steps from −2 to +20 pA change nothing either, for
+  the nominal cell and for the jittered instances of the main configuration (g CV 0.2, rate
+  CV 0.1).
+- The pilot restoration check (4 instances, Kf × 0.01–0.32) had 4/4 damaged phenotypes within
+  tolerance: every method "restored" with x = 0, which is why all three methods scored 1.0.
+
+Consequences, recorded as post-hoc in the preregistration (§16, items 1–6) before any main-run
+result existed: H10-V1 as preregistered will be reported as *not testable on this model* if the
+main-run instances contain no functionally damaged case (the rule itself is unchanged and is
+evaluated over functionally damaged instances); an exploratory NaT-loss variant (× 0.75–0.95,
+*para*-hypomorph-like; × 0.7 already silences most instances) is run and reported separately;
+the restoration script gained validity filters (silent wild types skipped, search skipped when
+the damage is within tolerance), the preregistered principal-point threshold for the routed
+search, the "claimed restored" record needed by the falsification clause, and parallel
+instances. A second consequence for interpretation: the ID family `kf_loss` is expected to
+behave like `none` in the current-clamp groups of the main run (it still scales the Kf currents
+in the voltage-clamp groups); that is a property of the published model, and it is reported as
+such rather than repaired.
+
+Also written while waiting: `verdicts_extended.py`, which applies the preregistered H5-V1,
+H8-V1, H9-V1 and H10-V1 rules mechanically (detector chosen on the validation split by refitting
+the surrogate deterministically; paired bootstrap per OOD family; rank AUROC for invalidity
+detection; the level-B precision comparison with the equal-recall supplementary; the reserved-set
+replication at the validation-selected operating points). Dress rehearsal on the pilot (not a
+result): H5 falsified (emulator within tolerance on 13.6 % of ID rows; every gate except the
+never-trusting conformal gate has ID `false_safe_rate` ≈ 0.9), H8 not passed (hybrid lower error
+on 4/4 OOD families with CIs excluding 0, but its discrepancy monitor's invalidity AUROC 0.54 is
+below the emulator's ensemble spread 0.74), H9 falsified under the literal reading (precision
+under B 0.70 ≥ 0.8 × 0.57, but the sensitivity rule reaches 0.74 under B at its own 30 % point;
+at equal recall the router is ahead), H10 not testable. The main run decides.

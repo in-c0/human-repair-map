@@ -5,89 +5,89 @@
         "auroc": 0.5826822916666667,
         "threshold": 0.01738108323079697,
         "flag_rate_ood": 0.25,
-        "false_safe_rate": 0.5465587044534413,
-        "n_necessary_ood": 247
+        "false_safe_rate": 0.5313807531380753,
+        "n_necessary_ood": 239
       },
       "opening_step": {
         "auroc": 1.0,
         "threshold": 0.01738108323079697,
         "flag_rate_ood": 1.0,
         "false_safe_rate": 0.0,
-        "n_necessary_ood": 236
+        "n_necessary_ood": 224
       },
       "combo": {
         "auroc": 0.6560275607638889,
         "threshold": 0.01738108323079697,
         "flag_rate_ood": 0.3736111111111111,
-        "false_safe_rate": 0.5814977973568282,
-        "n_necessary_ood": 227
+        "false_safe_rate": 0.5852534562211982,
+        "n_necessary_ood": 217
       },
       "activation_rate": {
         "auroc": 1.0,
         "threshold": 0.01738108323079697,
         "flag_rate_ood": 1.0,
         "false_safe_rate": 0.0,
-        "n_necessary_ood": 214
+        "n_necessary_ood": 202
       }
     },
     "knn_density": {
       "block": {
-        "auroc": 0.2696906346450617,
-        "threshold": 5.177523310440598,
-        "flag_rate_ood": 0.0,
+        "auroc": 0.27151716820987654,
+        "threshold": 5.214243018000217,
+        "flag_rate_ood": 0.0006944444444444445,
         "false_safe_rate": 1.0,
-        "n_necessary_ood": 247
+        "n_necessary_ood": 239
       },
       "opening_step": {
-        "auroc": 0.30038628472222223,
-        "threshold": 5.177523310440598,
-        "flag_rate_ood": 0.0,
-        "false_safe_rate": 1.0,
-        "n_necessary_ood": 236
+        "auroc": 0.303149112654321,
+        "threshold": 5.214243018000217,
+        "flag_rate_ood": 0.002777777777777778,
+        "false_safe_rate": 0.9955357142857143,
+        "n_necessary_ood": 224
       },
       "combo": {
-        "auroc": 0.6957561728395063,
-        "threshold": 5.177523310440598,
-        "flag_rate_ood": 0.05277777777777778,
-        "false_safe_rate": 0.9647577092511013,
-        "n_necessary_ood": 227
+        "auroc": 0.6936084587191358,
+        "threshold": 5.214243018000217,
+        "flag_rate_ood": 0.05347222222222222,
+        "false_safe_rate": 0.9631336405529954,
+        "n_necessary_ood": 217
       },
       "activation_rate": {
-        "auroc": 0.22866632908950618,
-        "threshold": 5.177523310440598,
+        "auroc": 0.23022907021604938,
+        "threshold": 5.214243018000217,
         "flag_rate_ood": 0.0020833333333333333,
         "false_safe_rate": 1.0,
-        "n_necessary_ood": 214
+        "n_necessary_ood": 202
       }
     },
     "ensemble_std": {
       "block": {
-        "auroc": 0.4772806954089506,
-        "threshold": 0.4087385860327702,
-        "flag_rate_ood": 0.027083333333333334,
-        "false_safe_rate": 0.9068825910931174,
-        "n_necessary_ood": 247
+        "auroc": 0.4592441888503086,
+        "threshold": 0.34742310065587234,
+        "flag_rate_ood": 0.029861111111111113,
+        "false_safe_rate": 0.8493723849372385,
+        "n_necessary_ood": 239
       },
       "opening_step": {
-        "auroc": 0.48060860339506173,
-        "threshold": 0.4087385860327702,
-        "flag_rate_ood": 0.0375,
-        "false_safe_rate": 0.8771186440677966,
-        "n_necessary_ood": 236
+        "auroc": 0.4635965229552469,
+        "threshold": 0.34742310065587234,
+        "flag_rate_ood": 0.05277777777777778,
+        "false_safe_rate": 0.7142857142857143,
+        "n_necessary_ood": 224
       },
       "combo": {
-        "auroc": 0.5535900125385802,
-        "threshold": 0.4087385860327702,
-        "flag_rate_ood": 0.0875,
-        "false_safe_rate": 0.8370044052863436,
-        "n_necessary_ood": 227
+        "auroc": 0.5469602382330246,
+        "threshold": 0.34742310065587234,
+        "flag_rate_ood": 0.06875,
+        "false_safe_rate": 0.663594470046083,
+        "n_necessary_ood": 217
       },
       "activation_rate": {
-        "auroc": 0.45483169367283954,
-        "threshold": 0.4087385860327702,
-        "flag_rate_ood": 0.019444444444444445,
-        "false_safe_rate": 0.9252336448598131,
-        "n_necessary_ood": 214
+        "auroc": 0.44334780092592596,
+        "threshold": 0.34742310065587234,
+        "flag_rate_ood": 0.035416666666666666,
+        "false_safe_rate": 0.7920792079207921,
+        "n_necessary_ood": 202
       }
     },
     "discrepancy": {
@@ -95,68 +95,68 @@
         "auroc": 0.5294275655864198,
         "threshold": 10.540973270346486,
         "flag_rate_ood": 0.06944444444444445,
-        "false_safe_rate": 0.9554655870445344,
-        "n_necessary_ood": 247
+        "false_safe_rate": 0.9539748953974896,
+        "n_necessary_ood": 239
       },
       "opening_step": {
         "auroc": 0.5071317997685185,
         "threshold": 10.540973270346486,
         "flag_rate_ood": 0.04861111111111111,
-        "false_safe_rate": 0.9703389830508474,
-        "n_necessary_ood": 236
+        "false_safe_rate": 0.96875,
+        "n_necessary_ood": 224
       },
       "combo": {
         "auroc": 0.5017751736111111,
         "threshold": 10.540973270346486,
         "flag_rate_ood": 0.05625,
-        "false_safe_rate": 0.973568281938326,
-        "n_necessary_ood": 227
+        "false_safe_rate": 0.9723502304147466,
+        "n_necessary_ood": 217
       },
       "activation_rate": {
         "auroc": 0.485290798611111,
         "threshold": 10.540973270346486,
         "flag_rate_ood": 0.03819444444444445,
-        "false_safe_rate": 0.9626168224299065,
-        "n_necessary_ood": 214
+        "false_safe_rate": 0.9603960396039604,
+        "n_necessary_ood": 202
       }
     },
     "conformal_residual": {
       "block": {
-        "auroc": 0.5001457609953704,
-        "threshold": 3.2739424036228026,
-        "flag_rate_ood": 0.06597222222222222,
-        "false_safe_rate": 0.6639676113360324,
-        "n_necessary_ood": 247
+        "auroc": 0.4718201437114197,
+        "threshold": 1.5417370844602971,
+        "flag_rate_ood": 0.0375,
+        "false_safe_rate": 0.7866108786610879,
+        "n_necessary_ood": 239
       },
       "opening_step": {
-        "auroc": 0.4919660252700617,
-        "threshold": 3.2739424036228026,
-        "flag_rate_ood": 0.05277777777777778,
-        "false_safe_rate": 0.7669491525423728,
-        "n_necessary_ood": 236
+        "auroc": 0.4773070987654321,
+        "threshold": 1.5417370844602971,
+        "flag_rate_ood": 0.058333333333333334,
+        "false_safe_rate": 0.65625,
+        "n_necessary_ood": 224
       },
       "combo": {
-        "auroc": 0.5364679783950617,
-        "threshold": 3.2739424036228026,
-        "flag_rate_ood": 0.09652777777777778,
-        "false_safe_rate": 0.7709251101321586,
-        "n_necessary_ood": 227
+        "auroc": 0.5327823591820988,
+        "threshold": 1.5417370844602971,
+        "flag_rate_ood": 0.06736111111111111,
+        "false_safe_rate": 0.6451612903225806,
+        "n_necessary_ood": 217
       },
       "activation_rate": {
-        "auroc": 0.4735105613425926,
-        "threshold": 3.2739424036228026,
-        "flag_rate_ood": 0.025,
-        "false_safe_rate": 0.8738317757009346,
-        "n_necessary_ood": 214
+        "auroc": 0.46540388695987656,
+        "threshold": 1.5417370844602971,
+        "flag_rate_ood": 0.03819444444444445,
+        "false_safe_rate": 0.7475247524752475,
+        "n_necessary_ood": 202
       }
     }
   },
   "conformal_coverage_alpha0.1": {
-    "id": 0.8850694444444445,
-    "block": 0.88125,
-    "opening_step": 0.8701388888888889,
-    "combo": 0.8104166666666667,
-    "activation_rate": 0.9125
+    "id": 0.9045138888888888,
+    "block": 0.9208333333333333,
+    "opening_step": 0.9055555555555556,
+    "combo": 0.8916666666666667,
+    "activation_rate": 0.9166666666666666
   },
   "note": "conformal_residual uses the realised gain and is therefore an oracle diagnostic of shift, not a deployable detector"
 }

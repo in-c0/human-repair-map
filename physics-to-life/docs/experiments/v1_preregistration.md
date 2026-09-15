@@ -57,8 +57,12 @@ parameterisation.
   peak), so that short test pulses are not diluted by silent samples. Fit floors (RMS over
   active samples; `hierarchy/gunay2015_fine.json`): level A Kf 5.1 % (sequential two-step
   topology, coupled inactivation), NaT 5.9 % (coupled, closed-state recovery); level B Kf
-  9.5 % (ZHA concerted-opening topology), NaT 6.0 % (open-state-only, slow state). Level A is
-  the formulation with the smaller floor per channel (ADR-0007 amendment).
+  9.5 % (ZHA concerted-opening topology), NaT 6.0 % (open-state-only, slow state) — superseded
+  by the AP-clamp-constrained set: **level A Kf 5.1 % (3.3 % under the spike waveform), NaT
+  2.5 % (Kuo–Bean coupled chain, coupling fixed at 3 per activation step by design); level B
+  Kf 9.7 % (3.5 % under the spike waveform), NaT 6.3 %.** The NaT coupling is a design choice
+  (a free coupling collapses onto the HH gate); a = 2 and a = 5 variants are robustness checks
+  reported with the results (ADR-0007 amendments).
 - Level A truth: all channels fine at LSODA rtol 1e-9 / atol 1e-11 (Radau at the same tolerance
   agrees to 1e-4 mV and identical spike times on the 530-ms current-clamp protocol at 7.5× the
   cost; the working simulator at rtol 1e-6 differs from it by 0.03 mV). Level B truth: the

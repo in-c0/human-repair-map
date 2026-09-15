@@ -118,3 +118,22 @@ open-state-only NaT scheme are level B. Both remain constructed; the earlier sta
 that level A is the ZHA topology is superseded. Both NaT forms converge to nearly the same
 solution (the closed-state recovery path is driven to negligible rates), so the NaT
 cross-formulation contrast is weaker than the Kf one; this is recorded, not hidden.
+
+## Amendment 2026-09-15 (2) — NaT fine level: coupling fixed by design; AP-clamp constraint
+Two further findings changed the NaT construction. (i) With the step families alone (even with
+rest-state holds), the constructed fine levels fired at 50 % higher rates than the published
+model at the same current: step protocols from −90 mV do not constrain the currents along a
+spike trajectory. An **action-potential clamp** trace (the published model's own voltage
+trajectory under the 10 pA step) was added to both fit families. (ii) The open-state-coupled
+NaT schemes remained far too excitable (47 vs 17 spikes at −1 pA), because a scheme that
+cannot inactivate closed channels carries much more current near threshold than the
+published independent gate; and a Kuo–Bean-type coupled chain with *free* coupling collapses
+onto the HH gate exactly (a richer model constrained only by the reduced model's outputs
+recovers it). **Decision:** level-A NaT is the coupled chain with the coupling **fixed by
+design**: inactivation from activation state j at kon·3^j (closed channels inactivate 3×
+more slowly per activation step; recovery state-independent), anchored rates refitted. Fit
+floor 2.5 % (2.6 % under the spike waveform); baseline firing differs from the published
+model moderately and in both directions (24 vs 17 spikes at −1 pA, 43 vs 45 at 10 pA, 61 vs
+67 at 40 pA), which is the informative regime for the routing question. The coupling constant
+is a design choice, not a measurement; a = 2 and a = 5 variants are fitted and kept as
+robustness checks. Level-B NaT stays the open-state-only formulation (a strong alternative).

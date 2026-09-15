@@ -603,6 +603,40 @@ def natC_theta0():
     return th0, lo, hi
 
 
+# Coupled chain with the coupling FIXED by design (the published data cannot identify it: with a, b free the
+# fit collapses onto the HH gate).  Inactivation from activation state j proceeds at kon a^j: with a > 1,
+# closed channels inactivate more slowly than open ones (Kuo-Bean-type coupling); b = 1 keeps recovery
+# state-independent.  theta = [alpha c,z; beta c,z; on c,z; off c,z; log10 g].
+NATF_THETA_NAMES = ["alpha_log10_c", "alpha_z", "beta_log10_c", "beta_z", "on_log10_c", "on_z", "off_log10_c", "off_z", "log10_g_factor"]
+NAT_COUPLING_A, NAT_COUPLING_B = 3.0, 1.0
+
+
+def nat_fine_channel_coupled_fixed(theta, q10: float = 1.0, a: float = NAT_COUPLING_A, b: float = NAT_COUPLING_B) -> ChannelPopulation:
+    th = np.asarray(theta, float)
+    m, h = G.nat_gates(q10)
+    alpha = HHAnchoredRate(m, "on", 10.0 ** th[0], th[1], V0_REF); beta = HHAnchoredRate(m, "off", 10.0 ** th[2], th[3], V0_REF)
+    kon = HHAnchoredRate(h, "off", 10.0 ** th[4], th[5], V0_REF); koff = HHAnchoredRate(h, "on", 10.0 ** th[6], th[7], V0_REF)
+    fwd = [alpha.scaled(3 - i) for i in range(3)]; bwd = [beta.scaled(i + 1) for i in range(3)]
+    sch = _coupled_scheme(fwd, bwd, ["nat_activation"] * 3, 3, kon, koff, a, b, None, None, ctype_from_open=True, with_block=False,
+                          name=f"NaT_coupled_chain_a{a:g}", prefix="nat", with_ctype=False)
+    gf = 10.0 ** th[8]
+    return ChannelPopulation("NaT", G.G_NAT * gf, G.E_NA, sch, [m, h], coarse_instant=[True, False], ion="Na", g_scale_cheap=1.0 / gf, hh_exact=False)
+
+
+def natF_theta0():
+    th0 = np.zeros(9)
+    lo = np.array([-1.5, -2.5, -1.5, -2.5, -1.5, -2.5, -1.5, -2.5, -0.7]); hi = -lo
+    return th0, lo, hi
+
+
+def nat_fine_channel_coupled_a2(theta, q10: float = 1.0) -> ChannelPopulation:
+    return nat_fine_channel_coupled_fixed(theta, q10, a=2.0, b=1.0)
+
+
+def nat_fine_channel_coupled_a5(theta, q10: float = 1.0) -> ChannelPopulation:
+    return nat_fine_channel_coupled_fixed(theta, q10, a=5.0, b=1.0)
+
+
 FORMS = {
     "Kf": {"eyring": (kf_theta0, kf_fine_channel, KF_THETA_NAMES), "sigmoid": (kf_sig_theta0, kf_fine_channel_sig, KF_SIG_THETA_NAMES),
            "B": (kfB_theta0, kf_fineB_channel, KFB_THETA_NAMES), "coupled": (kfc_theta0, kf_fine_channel_coupled, KFC_THETA_NAMES),
@@ -611,7 +645,9 @@ FORMS = {
     "NaT": {"eyring": (nat_theta0, nat_fine_channel, NAT_THETA_NAMES), "sigmoid": (nat_sig_theta0, nat_fine_channel_sig, NAT_SIG_THETA_NAMES),
             "B": (natB_theta0, nat_fineB_channel, NATB_THETA_NAMES),
             "anchored": (natA_anchored_theta0, nat_fine_channel_anchored, NATA_ANCH_THETA_NAMES), "anchoredB": (natB_anchored_theta0, nat_fineB_channel_anchored, NATB_ANCH_THETA_NAMES),
-            "coupledchain": (natC_theta0, nat_fine_channel_coupled, NATC_THETA_NAMES)},
+            "coupledchain": (natC_theta0, nat_fine_channel_coupled, NATC_THETA_NAMES),
+            "coupledfixed": (natF_theta0, nat_fine_channel_coupled_fixed, NATF_THETA_NAMES),
+            "coupledfixed_a2": (natF_theta0, nat_fine_channel_coupled_a2, NATF_THETA_NAMES), "coupledfixed_a5": (natF_theta0, nat_fine_channel_coupled_a5, NATF_THETA_NAMES)},
 }
 
 

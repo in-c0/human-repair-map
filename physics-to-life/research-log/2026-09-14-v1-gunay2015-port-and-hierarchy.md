@@ -137,3 +137,16 @@ NaT schemes. Without independent kinetic data (the ZHA / Schoppa rate tables wer
 unreadable here), no constructed fine level can be closer to the biology than the published
 HH; the hierarchy tests simulation fidelity, and this is stated wherever the results are
 reported. The nested NaT form is kept in the parameter file under rejected forms with this note.
+
+## 9. (2026-09-15) NaT coupling fixed by design; the hierarchy that goes to the pilot
+The AP-clamp constraint alone did not tame the NaT construction: with open-state-coupled
+inactivation the fine cell still fired 47 spikes at −1 pA against the published model's 17
+(validation of the v5 set; 69 % of baseline targets outside tolerance in the family preview,
+dominated by NaT). A Kuo–Bean-type coupled chain with the coupling **fixed at a = 3 per
+activation step** (b = 1) and anchored rates refitted reaches a 2.5 % floor (2.6 % under the
+spike waveform) and changes baseline firing moderately and in both directions: −1 pA 24 vs
+17 spikes, 0 pA 27 vs 23, 10 pA 43 vs 45, 40 pA 61 vs 67 (medium vs fine). Kf's constructed
+level alone leaves current-clamp behaviour unchanged at baseline (its differences are in the
+voltage-clamp targets: 3–8 % RMS) — so at baseline "which physics matters" is already
+target-dependent: NaT for spiking targets, Kf for Kf-current targets. This is the hierarchy
+taken into the pilot; a = 2 and a = 5 variants are fitted as robustness checks.

@@ -30,10 +30,10 @@
    }
   },
   "NaT": {
-   "timestamp_utc": "2026-09-15T00:27:03Z",
-   "git_commit": "f4f7849c83ba3242134d74773a75908cc40b8fd9",
+   "timestamp_utc": "2026-09-15T00:54:47Z",
+   "git_commit": "9136a1d55113c6b6b57111410d4784eea634288c",
    "git_branch": "claude/physics-to-life-init-fhd8x8",
-   "git_dirty": false,
+   "git_dirty": true,
    "python": "3.11.15 (main, Mar  3 2026, 09:26:23) [GCC 13.3.0]",
    "packages": {
     "numpy": "2.4.6",
@@ -53,9 +53,9 @@
    "config": {
     "script": "build_hierarchy.py",
     "channel": "NaT",
-    "form": "anchored",
+    "form": "coupledfixed",
     "n_starts": 2,
-    "max_nfev": 250
+    "max_nfev": 300
    }
   },
   "Kf_B": {
@@ -117,7 +117,7 @@
    }
   }
  },
- "note": "Level A: Kf = ZHA-type activation (4 subunit steps + concerted opening) with an allosterically coupled inactivated chain (closed-state inactivation), C-type after N-type, open-channel block; NaT = 3-step activation with open-state inactivation and cycle-consistent recovery through a closed state. Level B: Kf = sequential 8-step activation with two step types (no concerted step), coupled inactivated chain, parallel C-type; NaT = open-state-only inactivation with a slow inactivated state. Rates with an HH counterpart are the published HH rates x fitted multiplier x exponential tilt ('anchored' forms); free rate functions only for structure without an HH counterpart. All rate constants are CONSTRUCTED (fitted to the published HH currents on the declared fit family), never measured.",
+ "note": "Level A: Kf = sequential 8-step activation with two step types, allosterically coupled inactivated chain (coupling fitted), parallel C-type, open-channel block; NaT = 3-step activation with a Kuo-Bean-type coupled inactivated chain whose coupling is FIXED by design (inactivation from activation state j at kon*3^j; recovery state-independent) because the published data cannot identify it (a free coupling collapses onto the HH gate). Level B: Kf = ZHA concerted-opening topology with coupled chain, C-type after N-type; NaT = open-state-only inactivation with a slow inactivated state. Rates with an HH counterpart are the published HH rates x fitted multiplier x exponential tilt; free rate functions only for structure without an HH counterpart. Fit family: activation steps, prepulse inactivation, recovery, rest-state holds, and the published model's own spike waveform (AP clamp). All rate constants are CONSTRUCTED, never measured.",
  "Kf": {
   "theta": [
    0.4246368115800068,
@@ -308,18 +308,15 @@
  },
  "NaT": {
   "theta": [
-   0.5082886068659576,
-   -0.5735815614462799,
-   0.6755603182057921,
-   0.5871074744896178,
-   0.19585679775114015,
-   0.3921951162587778,
-   0.38111280501288236,
-   0.13724459968893457,
-   0.9999999904992755,
-   -2.9999999999999996,
-   -119.33548746125616,
-   -0.3627507493758389
+   -0.009661019234538326,
+   -0.3757538842918163,
+   0.27977481093247675,
+   0.13105769596511116,
+   -0.9493921708441444,
+   -0.08676556405433221,
+   -0.0641563764683757,
+   0.26736988306210135,
+   0.3236673444281042
   ],
   "names": [
    "alpha_log10_c",
@@ -330,127 +327,121 @@
    "on_z",
    "off_log10_c",
    "off_z",
-   "rec_log10_kmax",
-   "rec_z",
-   "rec_v0",
    "log10_g_factor"
   ],
-  "form": "anchored",
-  "rms": 0.0617446634022675,
+  "form": "coupledfixed",
+  "rms": 0.024926117001909685,
   "per_protocol": {
    "act_-40": {
-    "rel_rmse": 0.06595977978314131,
-    "rel_max": 0.3620351409430353
+    "rel_rmse": 0.03133884041449945,
+    "rel_max": 0.12032253841600399
    },
    "act_-30": {
-    "rel_rmse": 0.15966644036071204,
-    "rel_max": 0.6130259190298154
+    "rel_rmse": 0.0661525226628972,
+    "rel_max": 0.21673193042684183
    },
    "act_-20": {
-    "rel_rmse": 0.14756048444975844,
-    "rel_max": 0.5926049716874886
+    "rel_rmse": 0.0328126403693217,
+    "rel_max": 0.10269295487839139
    },
    "act_-10": {
-    "rel_rmse": 0.018647667148363325,
-    "rel_max": 0.11090590761866759
+    "rel_rmse": 0.005164565243552305,
+    "rel_max": 0.023177930888421766
    },
    "act_+0": {
-    "rel_rmse": 0.06840446709366678,
-    "rel_max": 0.1409460190543298
+    "rel_rmse": 0.018121385771037286,
+    "rel_max": 0.05618509094092995
    },
    "act_+20": {
-    "rel_rmse": 0.10377788614173428,
-    "rel_max": 0.22008896931967467
+    "rel_rmse": 0.01922211494026294,
+    "rel_max": 0.07470742926141953
    },
    "inact_-90": {
-    "rel_rmse": 0.018647667148363505,
-    "rel_max": 0.11090590761866734
+    "rel_rmse": 0.0051645652435523045,
+    "rel_max": 0.023177930888421943
    },
    "inact_-70": {
-    "rel_rmse": 0.01882185589936823,
-    "rel_max": 0.1123132316404459
+    "rel_rmse": 0.005093050311165201,
+    "rel_max": 0.02238562094904036
    },
    "inact_-60": {
-    "rel_rmse": 0.018532527083984125,
-    "rel_max": 0.10928187208738346
+    "rel_rmse": 0.0050003347857474935,
+    "rel_max": 0.019882910667048923
    },
    "inact_-50": {
-    "rel_rmse": 0.016215770477178062,
-    "rel_max": 0.08055493272878521
+    "rel_rmse": 0.005341979560138616,
+    "rel_max": 0.020515145093195505
    },
    "inact_-40": {
-    "rel_rmse": 0.006429582498288335,
-    "rel_max": 0.08888138065899939
+    "rel_rmse": 0.0033389219973283066,
+    "rel_max": 0.04656688146805585
    },
    "inact_-30": {
-    "rel_rmse": 0.026164555652406024,
-    "rel_max": 0.2000675187264808
+    "rel_rmse": 0.007122752515229535,
+    "rel_max": 0.07073276708743792
    },
    "rec_1": {
-    "rel_rmse": 0.02261748208111238,
-    "rel_max": 0.15078628176876516
+    "rel_rmse": 0.024744851237562007,
+    "rel_max": 0.21390457132232174
    },
    "rec_3": {
-    "rel_rmse": 0.024576437119899402,
-    "rel_max": 0.14768259031032796
+    "rel_rmse": 0.028558208209496023,
+    "rel_max": 0.23641833492642284
    },
    "rec_10": {
-    "rel_rmse": 0.021872076912476373,
-    "rel_max": 0.12058974934365578
+    "rel_rmse": 0.011496569056866038,
+    "rel_max": 0.09606756745878803
    },
    "rec_30": {
-    "rel_rmse": 0.021562587083510932,
-    "rel_max": 0.11098417884368755
+    "rel_rmse": 0.005545411560766893,
+    "rel_max": 0.025324244288179778
    },
    "hold_-70": {
-    "rel_rmse": 0.02116883624757352,
-    "rel_max": 0.13549356401350826
+    "rel_rmse": 0.02100091857167158,
+    "rel_max": 0.10995070719669424
    },
    "hold_-60": {
-    "rel_rmse": 0.03515399818775255,
-    "rel_max": 0.16397132562151753
+    "rel_rmse": 0.02983421891391316,
+    "rel_max": 0.1658544225642237
    },
    "hold_-55": {
-    "rel_rmse": 0.036199875013513814,
-    "rel_max": 0.18978796217988583
+    "rel_rmse": 0.03214807557378416,
+    "rel_max": 0.18538091944231028
    },
    "hold_-50": {
-    "rel_rmse": 0.04075388245493464,
-    "rel_max": 0.2171913556423237
+    "rel_rmse": 0.032794400396595376,
+    "rel_max": 0.1969226743790972
    },
    "ap_clamp_10pA": {
-    "rel_rmse": 0.062426839405439534,
-    "rel_max": 0.15839879294285383
+    "rel_rmse": 0.026251011859614534,
+    "rel_max": 0.1726258602963975
    }
   },
   "history": [
    {
     "start": 0,
-    "rms": 0.0014162761214317181,
-    "nfev": 14,
+    "rms": 0.0005737301772784925,
+    "nfev": 11,
     "status": 2
    },
    {
     "start": 1,
-    "rms": 0.0014162761213832257,
-    "nfev": 20,
+    "rms": 0.0005737301772837394,
+    "nfev": 10,
     "status": 2
    }
   ],
-  "wall_s": 74.2790892124176,
+  "wall_s": 20.010849952697754,
   "theta0": [
-   0.43530486234966115,
-   -0.5384911488299138,
-   0.5481032474788443,
-   0.468903130634517,
-   0.10467387090740683,
-   0.26142713076788676,
-   0.4306889230452605,
-   0.12932124422798894,
-   0.9057466781300885,
-   -2.9999999999999996,
-   -119.99999635416759,
-   -0.4210812454859363
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
   ],
   "family": [
    "act_-40",
@@ -836,7 +827,62 @@
   "status": "CONSTRUCTED: fitted to the published HH currents on the fit family; not measured"
  },
  "rejected_forms": {
-  "NaT_coupled_chain_nested_collapses_to_HH_v5": {
+  "NaT_open_state_coupled_anchored_APclamp_v5_too_severe_in_cclamp": {
+   "rms": 0.0617446634022675,
+   "form": "anchored",
+   "family": [
+    "act_-40",
+    "act_-30",
+    "act_-20",
+    "act_-10",
+    "act_+0",
+    "act_+20",
+    "inact_-90",
+    "inact_-70",
+    "inact_-60",
+    "inact_-50",
+    "inact_-40",
+    "inact_-30",
+    "rec_1",
+    "rec_3",
+    "rec_10",
+    "rec_30",
+    "hold_-70",
+    "hold_-60",
+    "hold_-55",
+    "hold_-50",
+    "ap_clamp_10pA"
+   ],
+   "theta": [
+    0.5082886068659576,
+    -0.5735815614462799,
+    0.6755603182057921,
+    0.5871074744896178,
+    0.19585679775114015,
+    0.3921951162587778,
+    0.38111280501288236,
+    0.13724459968893457,
+    0.9999999904992755,
+    -2.9999999999999996,
+    -119.33548746125616,
+    -0.3627507493758389
+   ],
+   "names": [
+    "alpha_log10_c",
+    "alpha_z",
+    "beta_log10_c",
+    "beta_z",
+    "on_log10_c",
+    "on_z",
+    "off_log10_c",
+    "off_z",
+    "rec_log10_kmax",
+    "rec_z",
+    "rec_v0",
+    "log10_g_factor"
+   ]
+  },
+  "NaT_coupled_chain_free_coupling_collapses_to_HH_v5": {
    "rms": 2.370073214184358e-15,
    "form": "coupledchain",
    "family": [

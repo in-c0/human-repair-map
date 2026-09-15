@@ -1,0 +1,235 @@
+{
+  "ii_negative_controls": {
+    "n_labels": 4320,
+    "frac_abs_gain_within_2x_floor": 0.9178240740740741,
+    "max_abs_gain": 0.0007157304279470367,
+    "frac_in_minimal_set": 0.0030092592592592593,
+    "floor_median": 2.0482573711751573e-08,
+    "floor_p95": 0.0002887228083388596
+  },
+  "ii_routable_gains": {
+    "Kf": {
+      "frac_gain_above_2x_floor": 0.525
+    },
+    "NaT": {
+      "frac_gain_above_2x_floor": 0.6268518518518519
+    }
+  },
+  "iii_nonempty_minimal_set": {
+    "id_train|peak_current": 0.9125,
+    "id_train|time_to_peak": 0.49583333333333335,
+    "id_train|charge": 0.6458333333333334,
+    "id_train|recovery_fraction": 0.775,
+    "id_train|spike_latency": 0.49166666666666664,
+    "id_train|spike_count": 0.5666666666666667,
+    "id_train|min_isi": 0.375,
+    "id_train|mean_v": 0.23333333333333334,
+    "id_train|v_rmse": 0.6916666666666667,
+    "id_test|peak_current": 0.9416666666666667,
+    "id_test|time_to_peak": 0.5333333333333333,
+    "id_test|charge": 0.5916666666666667,
+    "id_test|recovery_fraction": 0.8833333333333333,
+    "id_test|spike_latency": 0.4166666666666667,
+    "id_test|spike_count": 0.5166666666666667,
+    "id_test|min_isi": 0.2,
+    "id_test|mean_v": 0.05,
+    "id_test|v_rmse": 0.6666666666666666,
+    "activation_rate|peak_current": 0.8666666666666667,
+    "activation_rate|time_to_peak": 0.5,
+    "activation_rate|charge": 0.6666666666666666,
+    "activation_rate|recovery_fraction": 0.8666666666666667,
+    "activation_rate|spike_latency": 0.3,
+    "activation_rate|spike_count": 0.6,
+    "activation_rate|min_isi": 0.26666666666666666,
+    "activation_rate|mean_v": 0.0,
+    "activation_rate|v_rmse": 0.5666666666666667,
+    "block|peak_current": 1.0,
+    "block|time_to_peak": 0.5166666666666667,
+    "block|charge": 0.75,
+    "block|recovery_fraction": 0.8333333333333334,
+    "block|spike_latency": 0.43333333333333335,
+    "block|spike_count": 0.7,
+    "block|min_isi": 0.23333333333333334,
+    "block|mean_v": 0.13333333333333333,
+    "block|v_rmse": 0.8333333333333334,
+    "combo|peak_current": 0.95,
+    "combo|time_to_peak": 0.65,
+    "combo|charge": 0.7,
+    "combo|recovery_fraction": 0.8,
+    "combo|spike_latency": 0.36666666666666664,
+    "combo|spike_count": 0.5,
+    "combo|min_isi": 0.2,
+    "combo|mean_v": 0.06666666666666667,
+    "combo|v_rmse": 0.7333333333333333,
+    "opening_step|peak_current": 1.0,
+    "opening_step|time_to_peak": 0.6833333333333333,
+    "opening_step|charge": 0.7833333333333333,
+    "opening_step|recovery_fraction": 0.7333333333333333,
+    "opening_step|spike_latency": 0.4,
+    "opening_step|spike_count": 0.4,
+    "opening_step|min_isi": 0.13333333333333333,
+    "opening_step|mean_v": 0.06666666666666667,
+    "opening_step|v_rmse": 0.7
+  },
+  "iii_id_by_target": {
+    "peak_current": 0.9270833333333333,
+    "time_to_peak": 0.5145833333333334,
+    "charge": 0.61875,
+    "recovery_fraction": 0.8291666666666666,
+    "spike_latency": 0.45416666666666666,
+    "spike_count": 0.5416666666666667,
+    "min_isi": 0.2875,
+    "mean_v": 0.14166666666666666,
+    "v_rmse": 0.6791666666666667
+  },
+  "iii_flag_uninformative_targets": [
+    "peak_current"
+  ],
+  "iv_timing": {
+    "wall_label_per_episode_s": 147.8200307498666,
+    "wall_truth_per_episode_s": 28.89785429175011,
+    "sims_per_episode": 88.0,
+    "n_proc": 4,
+    "projected_main_generate_h": 9.649363118394069,
+    "pipeline_timings_s": {
+      "build_s": 0.002466440200805664,
+      "generate_s": 12364.358965396881,
+      "train_s": 41.88271450996399,
+      "inference_ms_per_row": 0.06966686248779297,
+      "evaluate_s": 294.14308762550354,
+      "ood_s": 1.3169152736663818,
+      "surrogate_s": 8.76519775390625,
+      "analyze_s": 18.464025735855103
+    }
+  },
+  "v_detectors_vs_planted": {
+    "block": {
+      "range_guard:should_fire": {
+        "auroc": 0.5826822916666667,
+        "false_safe_rate": 0.5465587044534413,
+        "ok": false
+      },
+      "discrepancy:should_fire": {
+        "auroc": 0.5294275655864198,
+        "false_safe_rate": 0.9554655870445344,
+        "ok": false
+      }
+    },
+    "opening_step": {
+      "knn_density:should_fire": {
+        "auroc": 0.30038628472222223,
+        "false_safe_rate": 1.0,
+        "ok": false
+      },
+      "discrepancy:should_fire": {
+        "auroc": 0.5071317997685185,
+        "false_safe_rate": 0.9703389830508474,
+        "ok": false
+      },
+      "ensemble_std:predicted_to_fail": {
+        "auroc": 0.48060860339506173,
+        "false_safe_rate": 0.8771186440677966
+      }
+    },
+    "combo": {
+      "range_guard:should_fire": {
+        "auroc": 0.6560275607638889,
+        "false_safe_rate": 0.5814977973568282,
+        "ok": false
+      },
+      "knn_density:should_fire": {
+        "auroc": 0.6957561728395063,
+        "false_safe_rate": 0.9647577092511013,
+        "ok": false
+      }
+    },
+    "activation_rate": {}
+  },
+  "i_leakage": {
+    "n_features": 43,
+    "features": [
+      "target=peak_current",
+      "target=time_to_peak",
+      "target=charge",
+      "target=recovery_fraction",
+      "target=v_rmse",
+      "target=spike_latency",
+      "target=spike_count",
+      "target=min_isi",
+      "target=mean_v",
+      "group=vclamp_shaker",
+      "group=recovery_shaker",
+      "group=cclamp",
+      "channel=Ks",
+      "channel=Kf",
+      "channel=NaT",
+      "channel=NaP",
+      "share",
+      "peak",
+      "t_peak",
+      "late_over_peak",
+      "V_min",
+      "V_max",
+      "V_mean",
+      "g_scale_self",
+      "g_scale_other_max",
+      "g_scale_other_min",
+      "T_C",
+      "K_out",
+      "block_frac_self",
+      "block_conc_self",
+      "i_extra",
+      "rate:activation",
+      "rate:opening",
+      "rate:inactivation",
+      "rate:recovery",
+      "rate:c_inactivation",
+      "rate:k_activation",
+      "rate:na_activation",
+      "rate:na_inactivation",
+      "rate:na_recovery",
+      "cost_base",
+      "cost_increment",
+      "share_rank"
+    ],
+    "note": "features are computed from the base (medium) run's window summaries, the intervention and protocol descriptors and nominal cost increments; partial-state rows (sequential condition) use the refined cheap runs the policy has already paid for; no feature reads a fine-level run or a label"
+  },
+  "vi_seeds": {
+    "train": [
+      10000,
+      10119
+    ],
+    "test": [
+      20000,
+      20059
+    ],
+    "ood": {
+      "activation_rate": [
+        33000,
+        33029
+      ],
+      "block": [
+        30000,
+        30029
+      ],
+      "combo": [
+        32000,
+        32029
+      ],
+      "opening_step": [
+        31000,
+        31029
+      ]
+    },
+    "families_train": [
+      "density",
+      "k_out",
+      "kf_inactivation",
+      "kf_loss",
+      "kf_recovery",
+      "nat_inactivation",
+      "none",
+      "temperature"
+    ]
+  }
+}

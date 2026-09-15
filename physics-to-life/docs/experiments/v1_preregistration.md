@@ -184,6 +184,45 @@ non-empty minimal set per target and family (the experiment is uninformative if 
 episode and projected main-run cost; (v) detector sanity on planted shifts; (vi) seeds and
 provenance. Corrections are appended here with the pilot commit hash.
 
+### Pilot audit record (v1_gunay_pilot, 120 / 60 / 4×30 episodes, run 2026-09-15 02:02–05:35 UTC; pilot commit `973a19e`)
+Audit outputs: `results/v1_gunay_pilot/before_corrections/` (audit.md, verdicts.md, summary.json,
+figures as first computed) and `results/v1_gunay_pilot/` after the corrections below.
+- (i) leakage: structural check passed (features come from cheap runs, descriptors and cost
+  increments; partial-state rows use refined cheap runs the policy has paid for).
+- (ii) negative controls: Ks/NaP refinement appeared in 0.3 % of minimal sets; 91.8 % of their
+  gains were within 2× the numerical floor and 100 % within max(2× floor, 1 % of tolerance)
+  (the numerical floor is ~1e-8 in target units, so "2× floor" alone is stricter than any
+  meaningful noise level). **Correction 1:** the noise floor is max(2× numerical floor, 1 % of
+  the tolerance); with it the §4 main-run rule applies: labels over the 2² subsets of
+  {Kf, NaT}, Ks/NaP charged their single-refinement increments (`routable: [Kf, NaT]`).
+- (iii) informativeness: non-empty minimal sets per ID target: time_to_peak 0.51, charge 0.62,
+  recovery_fraction 0.83, spike_latency 0.45, spike_count 0.54, min_isi 0.29, mean_v 0.14,
+  v_rmse 0.68 — informative; **peak_current 0.93 (flagged)**: the constructed fine levels'
+  peak-current floors (Kf 5 %, NaT 2.5 % RMS; 10–15 % maxima) exceed a 5 % tolerance almost
+  always. **Correction 2:** the relative tolerance for `peak_current` is 10 % (75 % non-empty at
+  10 %, 45 % at 15 % in the pilot; 10 % is the smallest value inside the informative band).
+  All other tolerances unchanged.
+- (iv) timing: 148 s per episode (88 simulations; truth 29 s); main run projected 9.6 h
+  exhaustive / ~6 h with the routable rule on 4 processes.
+- (v) detectors vs planted shifts (per-row AUROC vs ID): range guard 1.00 on opening_step and
+  activation_rate (their rate-scale descriptors are outside the training range — detection by
+  descriptor, not by dynamics), 0.58 block, 0.66 combo; kNN density 0.23–0.30 on the
+  descriptor-only shifts (*worse than chance*: the prediction that kNN would fire on
+  opening_step/combo is not supported), 0.70 combo; ensemble spread 0.45–0.55 (fails, as
+  predicted); discrepancy monitor ~0.5 (the medium-vs-coarse discrepancy does not respond to
+  these shifts); conformal ~0.5. Recorded; no change to the detector set.
+- Machinery defect found by the dress-rehearsal verdicts: the VoC regressor's raw-gain target
+  (zero-inflated: 72 % zeros; heavy-tailed: 99th percentile 8 tolerance units, maximum 118) gave
+  R² = −3.6 on test rows while its ranking was usable (AUROC 0.90 against the minimal-set
+  label), and the V0-style hard-label classifier dominated it at every operating point.
+  **Correction 3:** the regression label is log1p(max(gain, 0) / tolerance) — gains in
+  tolerance units, log-compressed — and the tolerance is a router input; predictions are
+  gains in tolerance units and the VoC rule is (gain / tolerance) / cost, applied identically
+  to the oracle. Thresholds remain selected on the validation split only.
+- Corrections 1–3 change labels/rules only; the cached pilot simulations were relabelled under
+  them (`run.py --relabel`, no new simulation) and the analysis stages re-run; the pre-correction
+  outputs are kept. No main-run seed has been touched.
+
 ## 15. Advancement criteria (V2)
 Move toward a *Drosophila* circuit rung (Augustin 2019 giant-fibre lineage / MaleCNS) only if
 H1-V1 and H5-V1 pass and ID `false_safe_rate` ≤ 0.05; otherwise V1 is reported as a limiting

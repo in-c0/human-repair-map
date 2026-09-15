@@ -30,7 +30,7 @@ def row_features(ep: dict, g: dict, tgt: str, c: str, names: list[str], S: tuple
     row += [gs_self, max(others), min(others), (interv.T_K or 295.15) - 273.15, interv.K_out or 5.0,
             interv.block_frac.get(c, 0.0), interv.block_conc.get(c, 0.0), interv.i_extra]
     row += [interv.rate_scales.get(k, 1.0) for k in RATE_KEYS]
-    row += [g["cost_base"], cost_increment.get(c, 1.0), float(rank[i]), float(len(S)), 1.0 if c in S else 0.0]
+    row += [g["cost_base"], cost_increment.get(c, 1.0), float(rank[i]), float(len(S)), 1.0 if c in S else 0.0, float(g["tol"][tgt])]
     return row
 
 
@@ -49,7 +49,9 @@ def training_rows(episodes: list[dict], names: list[str], include_partial: bool 
                             continue
                         S2 = tuple(sorted(set(S) | {c}, key=names.index))
                         gain = g["errs"][S][tgt] - g["errs"][S2][tgt]
-                        X.append(row_features(ep, g, tgt, c, names, S, inc)); y_gain.append(gain)
+                        # label in tolerance units, log-compressed (pilot-audit correction: raw gains are zero-inflated and
+                        # heavy-tailed; the regressor's job is the decision 'is the gain worth its cost', not the tail)
+                        X.append(row_features(ep, g, tgt, c, names, S, inc)); y_gain.append(np.log1p(max(gain, 0.0) / g["tol"][tgt]))
                         y_hard.append(1 if c in g["minimal"][tgt] else 0); keys.append((ep["seed"], g["name"], tgt, c, S))
     return np.array(X, float), np.array(y_gain, float), np.array(y_hard, int), keys
 
@@ -198,7 +200,7 @@ def evaluate_policies(ep: dict, g: dict, tgt: str, names: list[str], models: dic
                 rows.append(mk(variant, lam, chosen[0], chosen[1], chosen[2], chosen[3]))
     # oracles
     rows.append(mk("oracle", 0, tuple(minimal), costs[_sorted(minimal, names)], walls[_sorted(minimal, names)], 1))
-    true_voc = {c: g["gains"][tgt][c] / inc[c] for c in names}
+    true_voc = {c: (g["gains"][tgt][c] / tol) / inc[c] for c in names}
     for lam in lambdas:
         S = _sorted([c for c in names if true_voc[c] > lam], names)
         rows.append(mk("oracle_voc", lam, S, costs[S], walls[S], 1))

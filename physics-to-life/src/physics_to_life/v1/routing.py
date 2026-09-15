@@ -45,7 +45,7 @@ def feature_names(channel_names: list[str]) -> list[str]:
     names += ["share", "peak", "t_peak", "late_over_peak", "V_min", "V_max", "V_mean",
               "g_scale_self", "g_scale_other_max", "g_scale_other_min", "T_C", "K_out", "block_frac_self", "block_conc_self", "i_extra"]
     names += [f"rate:{k}" for k in RATE_KEYS]
-    names += ["cost_base", "cost_increment", "share_rank"]
+    names += ["cost_base", "cost_increment", "share_rank", "n_refined_so_far", "candidate_already_refined", "tolerance"]
     return names
 
 
@@ -97,8 +97,10 @@ class VoCRegressor:
         return self
 
     def predict(self, X):
+        """Predicted gain in tolerance units (expm1 of the log-compressed label) and the ensemble
+        spread on the same scale."""
         Xs = self.scaler.transform(self._sel(np.asarray(X, float)))
-        P = np.stack([m.predict(Xs) for m in self.members])
+        P = np.expm1(np.stack([m.predict(Xs) for m in self.members]))
         return P.mean(axis=0), P.std(axis=0)
 
 

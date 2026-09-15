@@ -132,6 +132,8 @@ class EpisodeConfig:
     tol_abs: dict = field(default_factory=lambda: {"spike_latency": 0.5, "spike_count": 0.5, "min_isi": 1.0, "mean_v": 1.0,
                                                    "v_rmse": 1.0, "peak_current": 0.0, "time_to_peak": 0.1,
                                                    "charge": 0.0, "recovery_fraction": 0.02})
+    tol_rel_by_target: dict = field(default_factory=lambda: {"peak_current": 0.10})   # pilot-audit correction (preregistration §14 iii)
+    noise_floor_tol_frac: float = 0.01   # noise floor = max(2 x numerical floor, this x tolerance) (pilot-audit correction)
     pairwise: bool = True
     settings: SimSettings = field(default_factory=SimSettings)
     routable: Optional[list] = None   # channels over which subsets are enumerated exhaustively (None = all);
@@ -217,13 +219,14 @@ def label_episode(spec_nominal: MembraneSpec, inst: MembraneSpec, interv: Interv
         floor = {k: errs[tuple(names)][k] for k in grp.targets}
         all_subsets = [S for S in errs if isinstance(S, tuple)]
         for k in grp.targets:
-            tol = max(cfg.tol_rel, cfg.tol_abs.get(k, 0.0) / max(scale.get(k, 1.0), 1e-9))
+            tol = max(cfg.tol_rel_by_target.get(k, cfg.tol_rel), cfg.tol_abs.get(k, 0.0) / max(scale.get(k, 1.0), 1e-9))
             tol_used[k] = tol
+            nf = max(2.0 * floor[k], cfg.noise_floor_tol_frac * tol)
 
             def useful(S):
                 for c in S:
                     R = tuple(x for x in S if x != c)
-                    if errs[R][k] - errs[S][k] <= 2.0 * floor[k]:
+                    if errs[R][k] - errs[S][k] <= nf:
                         return False
                 return True
             ok = [S for S in all_subsets if errs[S][k] <= tol and useful(S)]
@@ -301,3 +304,33 @@ def base_features(base: dict, grp: TargetGroup, names: list[str]) -> dict:
                 "late_over_peak": float(late / (np.abs(I).max() + 1e-9)) if len(I) else 0.0}
     f["_V"] = {"min": float(base["V"][m].min()), "max": float(base["V"][m].max()), "mean": float(base["V"][m].mean())}
     return f
+
+
+def relabel(episodes: list[dict], cfg: "EpisodeConfig") -> list[dict]:
+    """Recompute tolerances and minimal sets of already-labelled episodes from their stored subset
+    errors (no simulation): used to apply preregistered tolerance / noise-floor corrections to
+    cached episodes.  Gains and interactions are unchanged (they do not depend on the tolerance)."""
+    for ep in episodes:
+        for g in ep["groups"]:
+            names = list(g["costs"].keys()); names = [n for n in names]  # keys are subsets
+            subsets = [S for S in g["errs"] if isinstance(S, tuple)]
+            full = max(subsets, key=len)
+            for k in g["targets"]:
+                sc = max(g["scale"].get(k, 1.0), 1e-9)
+                tol = max(cfg.tol_rel_by_target.get(k, cfg.tol_rel), cfg.tol_abs.get(k, 0.0) / sc)
+                g["tol"][k] = tol
+                floor = g["err_fine_numerical"][k]; nf = max(2.0 * floor, cfg.noise_floor_tol_frac * tol)
+
+                def useful(S):
+                    for c in S:
+                        R = tuple(x for x in S if x != c)
+                        if g["errs"][R][k] - g["errs"][S][k] <= nf:
+                            return False
+                    return True
+                ok = [S for S in subsets if g["errs"][S][k] <= tol and useful(S)]
+                if ok:
+                    g["minimal"][k] = min(ok, key=lambda S: (g["costs"][S], g["errs"][S][k]))
+                else:
+                    cand = [S for S in subsets if useful(S)] or subsets
+                    g["minimal"][k] = min(cand, key=lambda S: (g["errs"][S][k], g["costs"][S]))
+    return episodes

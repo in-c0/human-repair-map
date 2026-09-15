@@ -15,7 +15,7 @@ sys.path.insert(0, str(HERE.parents[1] / "src"))
 from physics_to_life.evaluation.provenance import collect_provenance, write_json  # noqa: E402
 from physics_to_life.v1.parameters import provisional_membrane  # noqa: E402
 from physics_to_life.v1.calibrate import calibrate_medium_to_fine_traces  # noqa: E402
-from physics_to_life.v1.episodes import sample_instance, sample_intervention, standard_groups, label_episode, EpisodeConfig  # noqa: E402
+from physics_to_life.v1.episodes import sample_instance, sample_intervention, standard_groups, label_episode, EpisodeConfig, relabel  # noqa: E402
 from physics_to_life.v1.experiment import training_rows, evaluate_episodes, frontier_table, pooled_frontier, row_features  # noqa: E402
 from physics_to_life.v1.routing import VoCRegressor, HardLabelClassifier, set_schema  # noqa: E402
 from physics_to_life.v1.ood import RangeGuard, KNNDensity, Conformal, detector_metrics  # noqa: E402
@@ -94,6 +94,7 @@ def main():
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--run-id", default=None)
     ap.add_argument("--n-proc", type=int, default=None)
+    ap.add_argument("--relabel", action="store_true", help="recompute tolerances/minimal sets of cached episodes under the current rules")
     args = ap.parse_args()
     cfg = yaml.safe_load(open(args.config))
     if args.smoke:
@@ -127,7 +128,10 @@ def main():
     def load_or_gen(name, seeds, fams):
         p = cache / f"{name}.pkl"
         if p.exists():
-            return pickle.load(open(p, "rb"))
+            eps = pickle.load(open(p, "rb"))
+            if args.relabel:   # apply the current tolerance / noise-floor rules to cached labels (no simulation)
+                eps = relabel(eps, EpisodeConfig(base_level=int(cfg["base_level"]), tol_rel=float(cfg["tol_rel"])))
+            return eps
         # deterministic per-split stream (Python's str hash is salted per process; zlib.crc32 is not)
         eps = generate(spec, seeds, fams, cfg, n_proc, np.random.default_rng(seed + zlib.crc32(name.encode()) % 1000), profile)
         pickle.dump(eps, open(p, "wb")); return eps

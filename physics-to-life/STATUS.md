@@ -1,6 +1,6 @@
 # STATUS — Physics-to-Life
 
-_Last updated: 2026-09-15 09:15 UTC, V1 preregistration frozen (v1.1); main run in progress; post-hoc record §16 items 1–6 written before any main-run result._
+_Last updated: 2026-09-15 14:10 UTC, V1 main run complete; preregistered verdicts H1/H3/H5/H8/H10 in; H9 (cross-formulation) and the exploratory restoration variant still computing._
 
 ## Current objective
 V0 passed its preregistered criteria **within one synthetic model family and only under
@@ -9,6 +9,30 @@ experimentally grounded biology: **V1 = *Drosophila* ion-channel → membrane br
 published Günay 2015 aCC/MN1-Ib motoneuron model** (ADR-0006, ADR-0007), to be
 preregistered before its main run. The synthetic enzymatic cascade is a supporting
 benchmark (V1a).
+
+## V1 main run — preregistered verdicts (2026-09-15; research log `2026-09-15-v1-main-run.md`)
+- **Run** `experiments/v1_channel/results/v1_gunay_main/`: 400 / 200 / 4×60 / 100 reserved
+  episodes, 6.9 h on 4 processes; negative controls in 0 minimal sets; every target informative;
+  the published HH model is outside tolerance on 54 % of target rows (err/tol 8.0), the oracle
+  minimal set reaches 0.21 at 24 % of uniform-fine cost.
+- **H1-V1 falsified** in both conditions and under both readings of the operating-point rule:
+  at the 30 % point the learned VoC router (err/tol 0.82) loses to the ensemble-spread triggers
+  (0.17 at 40 %; 0.42 at 32 % at fixed compute); parity with the V0-style classifier at 50 %.
+  The router's mean is carried by one silence-vs-firing row of the published model that it
+  missed (48 % of the summed error); without it, parity with the uncertainty-per-cost trigger.
+- **H3-V1 not passed**: precision at equal recall 2.2–2.6× the written rules (clause holds), but
+  the predicted frontier crossing did not occur — the router dominates the written rules at
+  every budget. A target-blind router is nearly as good as the target-conditioned one.
+- **H5-V1 falsified**: the descriptor-only emulator is within tolerance on 28 % of ID rows; the
+  only calibrated distrust gate is the one that never trusts.
+- **H8-V1 not passed**: medium + learned residual halves the black box's error on 4/4 OOD
+  families, but detects its own invalidity worse than the black box's ensemble spread and
+  violates structural constraints more often.
+- **H10-V1 not testable as preregistered**: the Kf-loss damage has no phenotype in the published
+  model (10/10 evaluable instances within tolerance); exploratory NaT-loss variant running.
+- **Falsification controls**: permuted labels collapse the router; leave-one-family-out
+  transfers; simulation features and descriptors are redundant.
+- **H9-V1** (level-B truth) computing; final reading and report follow.
 
 ## V1 progress (2026-09-14)
 - **Published model ported verbatim and reproduced** (`experiments/v1_channel/results/

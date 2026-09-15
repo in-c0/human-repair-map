@@ -27,8 +27,16 @@ benchmark (V1a).
 - **Machinery generalised** to real systems: interventions and instance variability act on
   the same physical rate at every level (two pilot-machinery bugs fixed; no claim affected);
   H5/H8 closure-comparison stage and the H10 functional-restoration script added.
-- **Preregistration draft v1** written (`docs/experiments/v1_preregistration.md`); to be
-  frozen after the hierarchy validation and the pilot audit.
+- **Hierarchy validated and corrected twice** (research log §6–§9): objective dilution and
+  unconstrained rest states (fixed by active-sample residuals and rest-hold protocols); a 50 %
+  firing-rate discrepancy (fixed by an action-potential-clamp trace in the fit family and a
+  Kuo–Bean coupling fixed by design for NaT, since a free coupling collapses onto the HH gate).
+  The pilot hierarchy has the medium outside tolerance for ~half of the preview targets, split
+  between Kf-fixable and NaT-fixable — the informative regime.
+- **Pipeline smoke-tested end to end**; **pilot running** (120/60/4×30 episodes, launched
+  2026-09-15 02:02 UTC). Then: audit → corrections → preregistration freeze → main run.
+- **Preregistration draft v1** written (`docs/experiments/v1_preregistration.md`); frozen after
+  the pilot audit.
 
 ## Latest result (V0, three runs)
 - **Central finding, positive half:** with a quasi-static cheap model, an adaptive

@@ -163,3 +163,19 @@ taken into the pilot; a = 2 and a = 5 variants are fitted as robustness checks.
   informative regime of preregistration §14 (iii), with target-dependent "which physics".
 - Per-run wall on one core: medium 0.7 s, fine-NaT-only 2.8 s, fine-Kf-only 7.8 s, fine A 16 s,
   fine B 19 s (530-ms current clamp). The pilot goes ahead exhaustively (16 subsets) as preregistered.
+
+## 10. (2026-09-15) Smoke run of the full V1 pipeline on the pilot hierarchy; pilot launched
+`run.py --smoke` (12 train / 6 test / 16 OOD episodes, exhaustive 16-subset labelling, LSODA
+1e-9 truth) ran end to end in 46 min on 4 processes: 174 s per episode (88 simulations; the
+truth run 35 s). Machinery checks passed: negative-control channels' gains within 2× the
+numerical floor in 94 % of labels (the remaining 6 % were tolerance-boundary cases, which
+motivated implementing the preregistered noise-floor rule in the minimal-set search before
+the pilot); the audit, surrogate (H5/H8) and OOD stages produce their tables and figures. With
+12 training episodes the learned policies are untrained, so no number from the smoke is
+interpreted. Two targets are already visibly at the edge of informativeness at the
+preregistered 5 % tolerance — voltage-clamp `peak_current` (medium outside tolerance in 98 %
+of labels: the fit floors exceed 5 % for peak currents) and `v_rmse` (92 %) — to be handled by
+the preregistered pilot-audit rule §14 (iii) after the pilot, not before.
+Projected main-run generation: 11.4 h on 4 processes exhaustive, ~7 h with the routable rule.
+**Pilot launched 2026-09-15 02:02 UTC** (`v1_gunay_pilot`: 120 / 60 / 4×30 episodes, seeds
+10 000+ / 20 000+ / 30 000+, exhaustive labelling, 4 processes).

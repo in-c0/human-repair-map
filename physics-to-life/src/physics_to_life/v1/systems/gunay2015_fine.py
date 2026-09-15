@@ -364,9 +364,13 @@ def natB_theta0() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 # ---------------------------------------------------------------------------
 
 def _coupled_scheme(act_fwd: list, act_bwd: list, act_keys: list, n_open: int, kon, koff, a: float, b: float,
-                    kc_on, kc_off, ctype_from_open: bool, with_block: bool, name: str) -> MarkovScheme:
+                    kc_on, kc_off, ctype_from_open: bool, with_block: bool, name: str, prefix: str = "kf",
+                    with_ctype: bool = True) -> MarkovScheme:
     """act_fwd[i], act_bwd[i]: rates of activation step i (state i -> i+1 and back), i < n_act-1;
-    the last activation state (index n_open) is the open state."""
+    the last activation state (index n_open) is the open state.  Every activation state j has an
+    inactivated partner (kon a^j / koff b^j); the inactivated chain repeats the activation steps
+    scaled by sqrt(a/b) (microscopic reversibility).  a = b = 1 is exactly an independent HH-type
+    inactivation gate; a, b != 1 couple inactivation to activation (Kuo-Bean type)."""
     n_act = n_open + 1
     s = np.sqrt(a / b)
     trans = []
@@ -374,13 +378,13 @@ def _coupled_scheme(act_fwd: list, act_bwd: list, act_keys: list, n_open: int, k
         trans += [Transition(i, i + 1, f, key), Transition(i + 1, i, r, key),
                   Transition(n_act + i, n_act + i + 1, ScaledRate(f, s), key), Transition(n_act + i + 1, n_act + i, ScaledRate(r, 1.0 / s), key)]
     for j in range(n_act):
-        trans += [Transition(j, n_act + j, ScaledRate(kon, a ** j), "kf_inactivation"), Transition(n_act + j, j, ScaledRate(koff, b ** j), "kf_recovery")]
-    IC = 2 * n_act
-    src = n_open if ctype_from_open else n_act + n_open
-    trans += [Transition(src, IC, kc_on, "kf_c_inactivation"), Transition(IC, src, kc_off, "kf_c_recovery")]
-    n = IC + 1
+        trans += [Transition(j, n_act + j, ScaledRate(kon, a ** j), f"{prefix}_inactivation"), Transition(n_act + j, j, ScaledRate(koff, b ** j), f"{prefix}_recovery")]
+    n = 2 * n_act
+    if with_ctype:
+        IC = n; src = n_open if ctype_from_open else n_act + n_open
+        trans += [Transition(src, IC, kc_on, f"{prefix}_c_inactivation"), Transition(IC, src, kc_off, f"{prefix}_c_recovery")]; n += 1
     if with_block:
-        B = n; trans += [Transition(n_open, B, Rate(KF_BLOCK_KON, 0.0, V0_REF, 1.0, G.T_REF_K), "block_on:Kf"),
+        B = n; trans += [Transition(n_open, B, Rate(KF_BLOCK_KON, 0.0, V0_REF, 1.0, G.T_REF_K), f"block_on:{'Kf' if prefix == 'kf' else 'NaT'}"),
                          Transition(B, n_open, Rate(KF_BLOCK_KOFF, 0.0, V0_REF, 1.0, G.T_REF_K), None)]; n += 1
     open_ = np.zeros(n); open_[n_open] = 1.0
     return MarkovScheme(name, n, trans, open_, initial_state=0)
@@ -574,6 +578,31 @@ def natB_anchored_theta0():
     return np.clip(th0, lo, hi), lo, hi
 
 
+# NaT with a coupled inactivated chain (Kuo-Bean-type closed-state inactivation; a = b = 1 is the HH
+# independent gate exactly): theta = [alpha c,z; beta c,z; on c,z; off c,z; log10 a; log10 b; log10 g]
+NATC_THETA_NAMES = ["alpha_log10_c", "alpha_z", "beta_log10_c", "beta_z", "on_log10_c", "on_z", "off_log10_c", "off_z", "log10_a", "log10_b", "log10_g_factor"]
+
+
+def nat_fine_channel_coupled(theta, q10: float = 1.0) -> ChannelPopulation:
+    th = np.asarray(theta, float)
+    m, h = G.nat_gates(q10)
+    alpha = HHAnchoredRate(m, "on", 10.0 ** th[0], th[1], V0_REF); beta = HHAnchoredRate(m, "off", 10.0 ** th[2], th[3], V0_REF)
+    kon = HHAnchoredRate(h, "off", 10.0 ** th[4], th[5], V0_REF); koff = HHAnchoredRate(h, "on", 10.0 ** th[6], th[7], V0_REF)
+    a, b = 10.0 ** th[8], 10.0 ** th[9]
+    fwd = [alpha.scaled(3 - i) for i in range(3)]; bwd = [beta.scaled(i + 1) for i in range(3)]
+    sch = _coupled_scheme(fwd, bwd, ["nat_activation"] * 3, 3, kon, koff, a, b, None, None, ctype_from_open=True, with_block=False,
+                          name="NaT_coupled_chain_A", prefix="nat", with_ctype=False)
+    gf = 10.0 ** th[10]
+    return ChannelPopulation("NaT", G.G_NAT * gf, G.E_NA, sch, [m, h], coarse_instant=[True, False], ion="Na", g_scale_cheap=1.0 / gf, hh_exact=False)
+
+
+def natC_theta0():
+    th0 = np.zeros(11)
+    lo = np.array([-1.5, -2.5, -1.5, -2.5, -1.5, -2.5, -1.5, -2.5, -1.0, -1.0, -0.7])
+    hi = np.array([1.5, 2.5, 1.5, 2.5, 1.5, 2.5, 1.5, 2.5, 1.0, 1.0, 0.7])
+    return th0, lo, hi
+
+
 FORMS = {
     "Kf": {"eyring": (kf_theta0, kf_fine_channel, KF_THETA_NAMES), "sigmoid": (kf_sig_theta0, kf_fine_channel_sig, KF_SIG_THETA_NAMES),
            "B": (kfB_theta0, kf_fineB_channel, KFB_THETA_NAMES), "coupled": (kfc_theta0, kf_fine_channel_coupled, KFC_THETA_NAMES),
@@ -581,7 +610,8 @@ FORMS = {
            "anchored": (kfA_anchored_theta0, kf_fine_channel_anchored, KFA_THETA_NAMES), "anchoredB": (kfB_anchored_theta0, kf_fineB_channel_anchored, KFB_ANCH_THETA_NAMES)},
     "NaT": {"eyring": (nat_theta0, nat_fine_channel, NAT_THETA_NAMES), "sigmoid": (nat_sig_theta0, nat_fine_channel_sig, NAT_SIG_THETA_NAMES),
             "B": (natB_theta0, nat_fineB_channel, NATB_THETA_NAMES),
-            "anchored": (natA_anchored_theta0, nat_fine_channel_anchored, NATA_ANCH_THETA_NAMES), "anchoredB": (natB_anchored_theta0, nat_fineB_channel_anchored, NATB_ANCH_THETA_NAMES)},
+            "anchored": (natA_anchored_theta0, nat_fine_channel_anchored, NATA_ANCH_THETA_NAMES), "anchoredB": (natB_anchored_theta0, nat_fineB_channel_anchored, NATB_ANCH_THETA_NAMES),
+            "coupledchain": (natC_theta0, nat_fine_channel_coupled, NATC_THETA_NAMES)},
 }
 
 

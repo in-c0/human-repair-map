@@ -18,7 +18,7 @@ from physics_to_life.v1.markov_fit import fit_markov_to_hh  # noqa: E402
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--channel", choices=["Kf", "NaT"], required=True)
-    ap.add_argument("--form", choices=["eyring", "sigmoid", "B", "coupled", "coupledB", "anchored", "anchoredB"], default="anchored")
+    ap.add_argument("--form", choices=["eyring", "sigmoid", "B", "coupled", "coupledB", "anchored", "anchoredB", "coupledchain"], default="anchored")
     ap.add_argument("--entry", default=None, help="JSON key to write (default: channel, or channel_B for form B)")
     ap.add_argument("--n-starts", type=int, default=4)
     ap.add_argument("--max-nfev", type=int, default=400)

@@ -24,6 +24,7 @@ def main():
     ap.add_argument("--max-nfev", type=int, default=400)
     ap.add_argument("--seed", type=int, default=2015)
     ap.add_argument("--out", default=str(HERE / "hierarchy" / "gunay2015_fine.json"))
+    ap.add_argument("--theta0-from", default=None, help="JSON:KEY — start from a previously fitted theta (same form)")
     args = ap.parse_args()
     out = Path(args.out); out.parent.mkdir(parents=True, exist_ok=True)
     res = json.load(open(out)) if out.exists() else {}
@@ -31,6 +32,11 @@ def main():
     rng = np.random.default_rng(args.seed)
     theta0_fn, builder, names = F.FORMS[args.channel][args.form]
     th0, lo, hi = theta0_fn()
+    if args.theta0_from:
+        path, key = args.theta0_from.rsplit(":", 1)
+        prev = json.load(open(path))[key]
+        assert prev.get("form") == args.form, "theta0 must come from the same form"
+        th0 = np.clip(np.array(prev["theta"], float), lo, hi)
     if args.channel == "Kf":
         target, fam, e_rev = G.channel_kf(), F.kf_fit_family(), G.E_K
         build = lambda th: builder(th, with_block=False)  # noqa: E731

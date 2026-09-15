@@ -132,7 +132,10 @@ def _eyring_fit(V, k):
     return float(np.exp(c[0])), float(c[1])
 
 
-def kf_fit_family(dt_out: float = 0.1) -> FitFamily:
+AP_CLAMP_WEIGHT = 4.0   # the AP-clamp trace counts as four step protocols in the objective
+
+
+def kf_fit_family(dt_out: float = 0.1, ap_clamp: bool = True) -> FitFamily:
     P, N, W = [], [], []
     # -30 mV is the most negative step with a resolvable Kf current (peak at -40 mV is < 0.01 pA and would only amplify noise)
     for v in (-30.0, -20.0, 0.0, 20.0, 40.0):
@@ -144,6 +147,8 @@ def kf_fit_family(dt_out: float = 0.1) -> FitFamily:
     # steady-state availability from rest-like holding potentials (the initial condition is the exact steady state)
     for vh in (-70.0, -60.0, -55.0, -50.0):
         P.append(Protocol("vclamp", [(0.0, vh), (20.0, 20.0), (80.0, vh)], 100.0, dt_out)); N.append(f"hold_{vh:+.0f}"); W.append(1.0)
+    if ap_clamp:
+        P.append(ap_clamp_protocol(dt_seg=0.2, dt_out=0.2, t_to=60.0)); N.append("ap_clamp_10pA"); W.append(AP_CLAMP_WEIGHT)
     return FitFamily(P, N, W)
 
 
@@ -204,7 +209,7 @@ def nat_theta0() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     return np.clip(th0, lo, hi), lo, hi
 
 
-def nat_fit_family(dt_out: float = 0.05) -> FitFamily:
+def nat_fit_family(dt_out: float = 0.05, ap_clamp: bool = True) -> FitFamily:
     P, N, W = [], [], []
     for v in (-40.0, -30.0, -20.0, -10.0, 0.0, 20.0):
         P.append(Protocol("vclamp", [(0.0, -90.0), (10.0, v), (40.0, -90.0)], 50.0, dt_out)); N.append(f"act_{v:+.0f}"); W.append(1.0)
@@ -214,6 +219,8 @@ def nat_fit_family(dt_out: float = 0.05) -> FitFamily:
         P.append(Protocol("vclamp", [(0.0, -90.0), (10.0, -10.0), (30.0, -90.0), (30.0 + gap, -10.0), (50.0 + gap, -90.0)], 60.0 + gap, dt_out)); N.append(f"rec_{gap:.0f}"); W.append(1.0)
     for vh in (-70.0, -60.0, -55.0, -50.0):
         P.append(Protocol("vclamp", [(0.0, vh), (10.0, -10.0), (40.0, vh)], 50.0, dt_out)); N.append(f"hold_{vh:+.0f}"); W.append(1.0)
+    if ap_clamp:
+        P.append(ap_clamp_protocol(dt_seg=0.2, dt_out=0.2, t_to=60.0)); N.append("ap_clamp_10pA"); W.append(AP_CLAMP_WEIGHT)
     return FitFamily(P, N, W)
 
 
@@ -608,3 +615,27 @@ def gunay2015_hierarchy(params: Optional[dict] = None, q10: float = 3.0, with_bl
     return MembraneSpec(C=G.C_M, g_leak=G.G_LEAK, e_leak=G.E_LEAK,
                         channels=[G.channel_ks(q10), kf, nat, G.channel_nap(q10)],
                         T_K=G.T_REF_K, K_out=G.K_OUT_REF, v_rest_guess=-55.0, e_rev_mode="fixed_shift", K_ref=G.K_OUT_REF)
+
+
+# ---------------------------------------------------------------------------
+# Action-potential clamp: the published (medium) model's own voltage trajectory under the
+# Günay current step, applied as a piecewise-constant voltage command.  Constrains the
+# constructed schemes in the physiological regime (rest → spike → afterhyperpolarisation),
+# which step families from -90 mV do not cover.  Standard electrophysiology practice.
+# ---------------------------------------------------------------------------
+
+def ap_clamp_protocol(i_pulse: float = 10.0, t_from: float = 10.0, t_to: float = 70.0, dt_seg: float = 0.1, dt_out: float = 0.1) -> Protocol:
+    from ..membrane import simulate
+    spec = G.gunay2015_membrane()
+    names = [c.name for c in spec.channels]
+    r = simulate(spec, G.gunay_cclamp(i_pulse, t_end=t_to + 1.0, dt_out=dt_seg), {n: 1 for n in names})
+    t = r["t"]; V = r["V"]
+    m = (t >= t_from) & (t <= t_to)
+    segs = [(0.0, float(V[m][0]))] + [(round(float(ti - t_from + 5.0), 6), float(vi)) for ti, vi in zip(t[m], V[m])]
+    # 5 ms of holding at the resting voltage precedes the waveform (steady state is the initial condition anyway)
+    return Protocol("vclamp", segs, float(t_to - t_from + 5.0), dt_out)
+
+
+def with_ap_clamp(fam: FitFamily, weight: float = 4.0) -> FitFamily:
+    """Append the AP-clamp trace (weight = the number of step protocols it counts as)."""
+    return FitFamily(list(fam.protocols) + [ap_clamp_protocol()], list(fam.names) + ["ap_clamp_10pA"], list(fam.weights) + [weight])

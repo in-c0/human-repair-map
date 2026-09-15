@@ -93,12 +93,15 @@ class Intervention:
 
 @dataclass
 class SimSettings:
+    """Working simulator: LSODA at rtol 1e-6.  Reference (hidden truth): LSODA at rtol 1e-9 /
+    atol 1e-11 — on the Günay fine level in current clamp it agrees with Radau at the same
+    tolerance to 1e-4 mV and identical spike times at 7.5x lower cost (research log 2026-09-15)."""
     rtol: float = 1e-6
     atol: float = 1e-8
     method: str = "LSODA"
     ref_rtol: float = 1e-9
     ref_atol: float = 1e-11
-    ref_method: str = "Radau"
+    ref_method: str = "LSODA"
     max_step: float = 0.5
 
 
@@ -204,8 +207,8 @@ def simulate(spec: MembraneSpec, protocol: Protocol, fidelity: dict, interv: Int
     atol = settings.ref_atol if reference else settings.atol
     for lo, hi in zip(bps[:-1], bps[1:]):
         cmd = protocol.command(lo + 1e-9)
-        mask = (t_grid > lo + 1e-12) & (t_grid <= hi + 1e-12)
-        t_eval = list(t_grid[mask])
+        mask = (t_grid > lo + 1e-9) & (t_grid <= hi + 1e-9)
+        t_eval = [min(max(float(v), lo), hi) for v in t_grid[mask]]   # guard against round-off outside the span
         if not t_eval or abs(t_eval[-1] - hi) > 1e-9:
             t_eval.append(hi)
         sol = solve_ivp(rhs, (lo, hi), y, args=(cmd,), method=method, rtol=rtol, atol=atol,

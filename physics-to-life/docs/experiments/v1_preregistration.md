@@ -48,14 +48,20 @@ parameterisation.
   steady-state holds at −70, −60, −55, −50 mV followed by a test step (Kf: +20 mV; these pin the
   availability at rest-like potentials, without which a scheme can satisfy the −90 mV protocols
   while being inactivated at rest); NaT: steps −40…+20 mV, prepulses −90…−30 mV, gaps 1, 3, 10,
-  30 ms, the same holds with a −10 mV test. Residuals are normalised per protocol by the peak
+  30 ms, the same holds with a −10 mV test; and, for both channels, an **action-potential clamp**:
+  the published model's own voltage trajectory under the 10 pA step (10–60 ms, 0.2-ms segments)
+  applied as the command, weighted as four step protocols, so that the constructed schemes are
+  constrained in the physiological regime (rest → spike → afterhyperpolarisation) that step
+  families from −90 mV do not cover. Residuals are normalised per protocol by the peak
   current and by the number of samples where the target current is non-negligible (> 2 % of
   peak), so that short test pulses are not diluted by silent samples. Fit floors (RMS over
   active samples; `hierarchy/gunay2015_fine.json`): level A Kf 5.1 % (sequential two-step
   topology, coupled inactivation), NaT 5.9 % (coupled, closed-state recovery); level B Kf
   9.5 % (ZHA concerted-opening topology), NaT 6.0 % (open-state-only, slow state). Level A is
   the formulation with the smaller floor per channel (ADR-0007 amendment).
-- Level A truth: all channels fine at Radau rtol 1e-9 / atol 1e-11. Level B truth: the
+- Level A truth: all channels fine at LSODA rtol 1e-9 / atol 1e-11 (Radau at the same tolerance
+  agrees to 1e-4 mV and identical spike times on the 530-ms current-clamp protocol at 7.5× the
+  cost; the working simulator at rtol 1e-6 differs from it by 0.03 mV). Level B truth: the
   alternate-topology fine levels (`Kf_B`, `NaT_B`) at the same tolerance. Level C: the
   published/independent anchors of the medium level (reproduction report), reporting only.
 - Working simulator: LSODA rtol 1e-6 / atol 1e-8, max step 0.5 ms, for every level.

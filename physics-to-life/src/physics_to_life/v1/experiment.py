@@ -77,8 +77,10 @@ class PolicyRow:
     scores: Optional[dict] = None
 
 
-LAMBDAS = [0.0, 1e-7, 3e-7, 1e-6, 3e-6, 1e-5, 3e-5, 1e-4, 3e-4, 1e-3]
-TAUS = [0.02, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9]
+# threshold grids (pilot-audit correction 4: 8 points per decade so that validation-selected operating
+# points use their budgets; the earlier 2-per-decade grid left a 27 % gap below the 15 % budget)
+LAMBDAS = [0.0] + [float(v) for v in np.logspace(-8, -2, 49)]
+TAUS = [float(v) for v in np.concatenate([np.linspace(0.01, 0.1, 10), np.linspace(0.15, 0.95, 17)])]
 
 
 def _sorted(S, names):

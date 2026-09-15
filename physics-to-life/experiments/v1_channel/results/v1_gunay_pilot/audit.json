@@ -92,61 +92,61 @@
     "n_proc": 4,
     "projected_main_generate_h": 9.649363118394069,
     "pipeline_timings_s": {
-      "build_s": 0.002466440200805664,
-      "generate_s": 12364.358965396881,
-      "train_s": 41.88271450996399,
-      "inference_ms_per_row": 0.06966686248779297,
-      "evaluate_s": 294.14308762550354,
-      "ood_s": 1.3169152736663818,
-      "surrogate_s": 8.76519775390625,
-      "analyze_s": 18.464025735855103
+      "build_s": 0.0014064311981201172,
+      "generate_s": 0.1674947738647461,
+      "train_s": 46.60217046737671,
+      "inference_ms_per_row": 0.06747198104858398,
+      "evaluate_s": 301.8736755847931,
+      "ood_s": 1.2687251567840576,
+      "surrogate_s": 8.627602815628052,
+      "analyze_s": 17.660383939743042
     }
   },
   "v_detectors_vs_planted": {
     "block": {
       "range_guard:should_fire": {
         "auroc": 0.5826822916666667,
-        "false_safe_rate": 0.5465587044534413,
+        "false_safe_rate": 0.5313807531380753,
         "ok": false
       },
       "discrepancy:should_fire": {
         "auroc": 0.5294275655864198,
-        "false_safe_rate": 0.9554655870445344,
+        "false_safe_rate": 0.9539748953974896,
         "ok": false
       }
     },
     "opening_step": {
       "knn_density:should_fire": {
-        "auroc": 0.30038628472222223,
-        "false_safe_rate": 1.0,
+        "auroc": 0.303149112654321,
+        "false_safe_rate": 0.9955357142857143,
         "ok": false
       },
       "discrepancy:should_fire": {
         "auroc": 0.5071317997685185,
-        "false_safe_rate": 0.9703389830508474,
+        "false_safe_rate": 0.96875,
         "ok": false
       },
       "ensemble_std:predicted_to_fail": {
-        "auroc": 0.48060860339506173,
-        "false_safe_rate": 0.8771186440677966
+        "auroc": 0.4635965229552469,
+        "false_safe_rate": 0.7142857142857143
       }
     },
     "combo": {
       "range_guard:should_fire": {
         "auroc": 0.6560275607638889,
-        "false_safe_rate": 0.5814977973568282,
+        "false_safe_rate": 0.5852534562211982,
         "ok": false
       },
       "knn_density:should_fire": {
-        "auroc": 0.6957561728395063,
-        "false_safe_rate": 0.9647577092511013,
+        "auroc": 0.6936084587191358,
+        "false_safe_rate": 0.9631336405529954,
         "ok": false
       }
     },
     "activation_rate": {}
   },
   "i_leakage": {
-    "n_features": 43,
+    "n_features": 46,
     "features": [
       "target=peak_current",
       "target=time_to_peak",
@@ -190,7 +190,10 @@
       "rate:na_recovery",
       "cost_base",
       "cost_increment",
-      "share_rank"
+      "share_rank",
+      "n_refined_so_far",
+      "candidate_already_refined",
+      "tolerance"
     ],
     "note": "features are computed from the base (medium) run's window summaries, the intervention and protocol descriptors and nominal cost increments; partial-state rows (sequential condition) use the refined cheap runs the policy has already paid for; no feature reads a fine-level run or a label"
   },

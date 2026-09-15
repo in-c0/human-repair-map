@@ -129,8 +129,9 @@ def main():
         p = cache / f"{name}.pkl"
         if p.exists():
             eps = pickle.load(open(p, "rb"))
-            if args.relabel:   # apply the current tolerance / noise-floor rules to cached labels (no simulation)
+            if args.relabel:   # apply the current tolerance / noise-floor rules to cached labels (no simulation) and persist them
                 eps = relabel(eps, EpisodeConfig(base_level=int(cfg["base_level"]), tol_rel=float(cfg["tol_rel"])))
+                pickle.dump(eps, open(p, "wb"))
             return eps
         # deterministic per-split stream (Python's str hash is salted per process; zlib.crc32 is not)
         eps = generate(spec, seeds, fams, cfg, n_proc, np.random.default_rng(seed + zlib.crc32(name.encode()) % 1000), profile)

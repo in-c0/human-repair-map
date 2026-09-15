@@ -11,7 +11,7 @@
   ],
   "n_descriptor_features": 59,
   "n_hybrid_features": 90,
-  "train_wall_s": 6.5442585945129395,
+  "train_wall_s": 6.459627389907837,
   "gate_thresholds": {
     "emulator": {
       "range": 0.11993805880198122,
@@ -22,7 +22,7 @@
     "hybrid": {
       "range": 0.1339608820750228,
       "knn": 8.81964066313446,
-      "ens_std": 107.05882925660772,
+      "ens_std": 90.62322822121983,
       "conformal": 1.0
     }
   },
@@ -49,7 +49,7 @@
   "by_family": {
     "id": {
       "coarse": {
-        "err_rel_tol_mean": 26.83293670098893,
+        "err_rel_tol_mean": 17.31742059600831,
         "err_rel_tol_median": 10.077334519095515,
         "within_tol_rate": 0.19393939393939394,
         "cost_frac_fine": 0.01976458209568113,
@@ -57,94 +57,94 @@
         "n": 660
       },
       "medium": {
-        "err_rel_tol_mean": 2.7729390005537433,
-        "err_rel_tol_median": 1.2999999999999972,
-        "within_tol_rate": 0.43636363636363634,
+        "err_rel_tol_mean": 2.4170499098380582,
+        "err_rel_tol_median": 1.1477506926678196,
+        "within_tol_rate": 0.453030303030303,
         "cost_frac_fine": 0.05993478108197121,
         "wall_frac_fine": 0.04885912063831364,
         "n": 660
       },
       "hybrid": {
-        "err_rel_tol_mean": 54.56350876967976,
-        "err_rel_tol_median": 1.250626886004071,
-        "within_tol_rate": 0.4484848484848485,
+        "err_rel_tol_mean": 43.598371708874325,
+        "err_rel_tol_median": 1.1665090754645129,
+        "within_tol_rate": 0.4666666666666667,
         "cost_frac_fine": 0.05993478108197121,
-        "wall_frac_fine": 0.04928024526617052,
-        "n": 660,
-        "gates": {
-          "ens_std": {
-            "coverage": 0.9484848484848485,
-            "false_safe_rate": 0.9065934065934066,
-            "err_given_safe": 5.379393873330434,
-            "within_tol_given_safe": 0.4728434504792332,
-            "fallback_cost_frac_fine": 0.11144993259712271,
-            "post_fallback_err_rel_tol": 5.10227380511739
-          },
-          "knn": {
-            "coverage": 0.9303030303030303,
-            "false_safe_rate": 0.9203296703296703,
-            "err_given_safe": 55.312899917055425,
-            "within_tol_given_safe": 0.4543973941368078,
-            "fallback_cost_frac_fine": 0.1296317507789409,
-            "post_fallback_err_rel_tol": 51.457758566820196
-          },
-          "range": {
-            "coverage": 0.9121212121212121,
-            "false_safe_rate": 0.9148351648351648,
-            "err_given_safe": 53.589214119777786,
-            "within_tol_given_safe": 0.446843853820598,
-            "fallback_cost_frac_fine": 0.1478135689607591,
-            "post_fallback_err_rel_tol": 48.879859194163465
-          },
-          "conformal": {
-            "coverage": 0.03787878787878788,
-            "false_safe_rate": 0.0,
-            "err_given_safe": 0.21491244777325685,
-            "within_tol_given_safe": 1.0,
-            "fallback_cost_frac_fine": 1.0220559932031834,
-            "post_fallback_err_rel_tol": 0.008142585390053374
-          },
-          "discrepancy": {
-            "coverage": 0.1393939393939394,
-            "false_safe_rate": 0.11813186813186813,
-            "err_given_safe": 7.461366710753431,
-            "within_tol_given_safe": 0.532608695652174,
-            "fallback_cost_frac_fine": 0.9205408416880319,
-            "post_fallback_err_rel_tol": 1.0400713518053815
-          }
-        }
-      },
-      "emulator": {
-        "err_rel_tol_mean": 468.29305085285716,
-        "err_rel_tol_median": 5.836196140456918,
-        "within_tol_rate": 0.11515151515151516,
-        "cost_frac_fine": 0.0,
-        "wall_frac_fine": 0.0004211246278568887,
+        "wall_frac_fine": 0.049287358379972286,
         "n": 660,
         "gates": {
           "ens_std": {
             "coverage": 0.9409090909090909,
-            "false_safe_rate": 0.9332191780821918,
-            "err_given_safe": 28.344672155675372,
-            "within_tol_given_safe": 0.12238325281803543,
+            "false_safe_rate": 0.8920454545454546,
+            "err_given_safe": 5.017637770482555,
+            "within_tol_given_safe": 0.4943639291465378,
+            "fallback_cost_frac_fine": 0.1190256901728803,
+            "post_fallback_err_rel_tol": 4.721141155484235
+          },
+          "knn": {
+            "coverage": 0.9303030303030303,
+            "false_safe_rate": 0.9176136363636364,
+            "err_given_safe": 43.742711414010216,
+            "within_tol_given_safe": 0.4739413680781759,
+            "fallback_cost_frac_fine": 0.1296317507789409,
+            "post_fallback_err_rel_tol": 40.69397713680152
+          },
+          "range": {
+            "coverage": 0.9121212121212121,
+            "false_safe_rate": 0.9204545454545454,
+            "err_given_safe": 42.809465484344344,
+            "within_tol_given_safe": 0.46179401993355484,
+            "fallback_cost_frac_fine": 0.1478135689607591,
+            "post_fallback_err_rel_tol": 39.04742176778457
+          },
+          "conformal": {
+            "coverage": 0.06666666666666667,
+            "false_safe_rate": 0.0,
+            "err_given_safe": 0.19197966424704857,
+            "within_tol_given_safe": 1.0,
+            "fallback_cost_frac_fine": 0.9932681144153045,
+            "post_fallback_err_rel_tol": 0.012800073113071919
+          },
+          "discrepancy": {
+            "coverage": 0.1393939393939394,
+            "false_safe_rate": 0.12215909090909091,
+            "err_given_safe": 7.461366710753431,
+            "within_tol_given_safe": 0.532608695652174,
+            "fallback_cost_frac_fine": 0.9205408416880319,
+            "post_fallback_err_rel_tol": 1.0400708782768204
+          }
+        }
+      },
+      "emulator": {
+        "err_rel_tol_mean": 330.3383352470446,
+        "err_rel_tol_median": 4.931900116660195,
+        "within_tol_rate": 0.13636363636363635,
+        "cost_frac_fine": 0.0,
+        "wall_frac_fine": 0.00042823774165863467,
+        "n": 660,
+        "gates": {
+          "ens_std": {
+            "coverage": 0.9409090909090909,
+            "false_safe_rate": 0.9315789473684211,
+            "err_given_safe": 27.606389571910526,
+            "within_tol_given_safe": 0.14492753623188406,
             "fallback_cost_frac_fine": 0.05909090909090909,
-            "post_fallback_err_rel_tol": 26.669759932343986
+            "post_fallback_err_rel_tol": 25.97510307773691
           },
           "knn": {
             "coverage": 0.9666666666666667,
-            "false_safe_rate": 0.9691780821917808,
-            "err_given_safe": 474.24778772759794,
-            "within_tol_given_safe": 0.11285266457680251,
+            "false_safe_rate": 0.968421052631579,
+            "err_given_safe": 335.49343112638303,
+            "within_tol_given_safe": 0.13479623824451412,
             "fallback_cost_frac_fine": 0.03333333333333333,
-            "post_fallback_err_rel_tol": 458.4395282520991
+            "post_fallback_err_rel_tol": 324.3103168664662
           },
           "range": {
             "coverage": 0.8833333333333333,
-            "false_safe_rate": 0.8886986301369864,
-            "err_given_safe": 509.54897340584154,
-            "within_tol_given_safe": 0.1097770154373928,
+            "false_safe_rate": 0.8894736842105263,
+            "err_given_safe": 360.70333777475037,
+            "within_tol_given_safe": 0.13036020583190394,
             "fallback_cost_frac_fine": 0.11666666666666667,
-            "post_fallback_err_rel_tol": 450.1015934563999
+            "post_fallback_err_rel_tol": 318.62128194072557
           },
           "conformal": {
             "coverage": 0.0,
@@ -152,13 +152,13 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0,
-            "post_fallback_err_rel_tol": 2.078239993845825e-06
+            "post_fallback_err_rel_tol": 1.6047114329172884e-06
           }
         }
       },
       "fine": {
-        "err_rel_tol_mean": 2.078239993845825e-06,
-        "err_rel_tol_median": 1.2691019652250793e-07,
+        "err_rel_tol_mean": 1.6047114329172884e-06,
+        "err_rel_tol_median": 1.0560510661467057e-07,
         "within_tol_rate": 1.0,
         "cost_frac_fine": 1.0,
         "wall_frac_fine": 1.0,
@@ -179,44 +179,44 @@
     },
     "block": {
       "coarse": {
-        "err_rel_tol_mean": 19.982382278943913,
-        "err_rel_tol_median": 10.917363995589252,
-        "within_tol_rate": 0.17575757575757575,
+        "err_rel_tol_mean": 14.964390475632706,
+        "err_rel_tol_median": 10.162235878250595,
+        "within_tol_rate": 0.1787878787878788,
         "cost_frac_fine": 0.02078408236971615,
         "wall_frac_fine": 0.0874090273164467,
         "n": 330
       },
       "medium": {
-        "err_rel_tol_mean": 5.557840260106167,
-        "err_rel_tol_median": 1.6000000000000014,
-        "within_tol_rate": 0.37575757575757573,
+        "err_rel_tol_mean": 4.769875053998195,
+        "err_rel_tol_median": 1.3488242130306176,
+        "within_tol_rate": 0.3878787878787879,
         "cost_frac_fine": 0.059153616900511685,
         "wall_frac_fine": 0.04693716313081866,
         "n": 330
       },
       "hybrid": {
-        "err_rel_tol_mean": 43.071427282787525,
-        "err_rel_tol_median": 1.865020928200308,
-        "within_tol_rate": 0.396969696969697,
+        "err_rel_tol_mean": 31.707032043573236,
+        "err_rel_tol_median": 1.857657627112393,
+        "within_tol_rate": 0.4,
         "cost_frac_fine": 0.059153616900511685,
-        "wall_frac_fine": 0.04751483953861691,
+        "wall_frac_fine": 0.04750237623674807,
         "n": 330,
         "gates": {
           "ens_std": {
-            "coverage": 0.9333333333333333,
-            "false_safe_rate": 0.8894472361809045,
-            "err_given_safe": 7.854462294023981,
-            "within_tol_given_safe": 0.4253246753246753,
-            "fallback_cost_frac_fine": 0.12582028356717836,
-            "post_fallback_err_rel_tol": 7.330831715559411
+            "coverage": 0.9303030303030303,
+            "false_safe_rate": 0.8838383838383839,
+            "err_given_safe": 7.312821754119991,
+            "within_tol_given_safe": 0.42996742671009774,
+            "fallback_cost_frac_fine": 0.1288505865974814,
+            "post_fallback_err_rel_tol": 6.803140426030068
           },
           "knn": {
             "coverage": 0.9636363636363636,
-            "false_safe_rate": 0.9547738693467337,
-            "err_given_safe": 44.342553117051665,
-            "within_tol_given_safe": 0.4025157232704403,
+            "false_safe_rate": 0.9545454545454546,
+            "err_given_safe": 32.54931277447081,
+            "within_tol_given_safe": 0.4056603773584906,
             "fallback_cost_frac_fine": 0.09551725326414805,
-            "post_fallback_err_rel_tol": 42.73009665002679
+            "post_fallback_err_rel_tol": 31.365701410812505
           },
           "range": {
             "coverage": 0.0,
@@ -224,49 +224,49 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0591536169005118,
-            "post_fallback_err_rel_tol": 2.125421186121977e-06
+            "post_fallback_err_rel_tol": 1.6112063410718809e-06
           },
           "conformal": {
-            "coverage": 0.04242424242424243,
-            "false_safe_rate": 0.005025125628140704,
-            "err_given_safe": 1.3219428260470127,
-            "within_tol_given_safe": 0.9285714285714286,
-            "fallback_cost_frac_fine": 1.0167293744762693,
-            "post_fallback_err_rel_tol": 0.0560844613214155
+            "coverage": 0.0696969696969697,
+            "false_safe_rate": 0.005050505050505051,
+            "err_given_safe": 0.8448303910906085,
+            "within_tol_given_safe": 0.9565217391304348,
+            "fallback_cost_frac_fine": 0.989456647203542,
+            "post_fallback_err_rel_tol": 0.05888357738905386
           },
           "discrepancy": {
             "coverage": 0.08484848484848485,
-            "false_safe_rate": 0.08040201005025126,
+            "false_safe_rate": 0.08080808080808081,
             "err_given_safe": 19.38296563633082,
             "within_tol_given_safe": 0.42857142857142855,
             "fallback_cost_frac_fine": 0.9743051320520266,
-            "post_fallback_err_rel_tol": 1.644617388708404
+            "post_fallback_err_rel_tol": 1.644616874493559
           }
         }
       },
       "emulator": {
-        "err_rel_tol_mean": 203.30370650059385,
-        "err_rel_tol_median": 4.692632375315306,
-        "within_tol_rate": 0.14545454545454545,
+        "err_rel_tol_mean": 142.52814558553285,
+        "err_rel_tol_median": 4.408019125114215,
+        "within_tol_rate": 0.17272727272727273,
         "cost_frac_fine": 0.0,
-        "wall_frac_fine": 0.0005776764077982585,
+        "wall_frac_fine": 0.0005652131059294166,
         "n": 330,
         "gates": {
           "ens_std": {
             "coverage": 0.9212121212121213,
-            "false_safe_rate": 0.9078014184397163,
-            "err_given_safe": 25.417845854207865,
-            "within_tol_given_safe": 0.15789473684210525,
+            "false_safe_rate": 0.9047619047619048,
+            "err_given_safe": 24.954394155408757,
+            "within_tol_given_safe": 0.1875,
             "fallback_cost_frac_fine": 0.07878787878787878,
-            "post_fallback_err_rel_tol": 23.415227944093722
+            "post_fallback_err_rel_tol": 22.988290568532925
           },
           "knn": {
             "coverage": 1.0,
             "false_safe_rate": 1.0,
-            "err_given_safe": 203.30370650059385,
-            "within_tol_given_safe": 0.14545454545454545,
+            "err_given_safe": 142.52814558553285,
+            "within_tol_given_safe": 0.17272727272727273,
             "fallback_cost_frac_fine": 0.0,
-            "post_fallback_err_rel_tol": 203.30370650059385
+            "post_fallback_err_rel_tol": 142.52814558553285
           },
           "range": {
             "coverage": 0.0,
@@ -274,7 +274,7 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0,
-            "post_fallback_err_rel_tol": 2.125421186121977e-06
+            "post_fallback_err_rel_tol": 1.6112063410718809e-06
           },
           "conformal": {
             "coverage": 0.0,
@@ -282,13 +282,13 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0,
-            "post_fallback_err_rel_tol": 2.125421186121977e-06
+            "post_fallback_err_rel_tol": 1.6112063410718809e-06
           }
         }
       },
       "fine": {
-        "err_rel_tol_mean": 2.125421186121977e-06,
-        "err_rel_tol_median": 1.7662240617996154e-07,
+        "err_rel_tol_mean": 1.6112063410718809e-06,
+        "err_rel_tol_median": 1.50757753930358e-07,
         "within_tol_rate": 1.0,
         "cost_frac_fine": 1.0,
         "wall_frac_fine": 1.0,
@@ -309,7 +309,7 @@
     },
     "opening_step": {
       "coarse": {
-        "err_rel_tol_mean": 27.75391417984215,
+        "err_rel_tol_mean": 18.489229444317502,
         "err_rel_tol_median": 10.040669523943345,
         "within_tol_rate": 0.19696969696969696,
         "cost_frac_fine": 0.021296661139379062,
@@ -317,36 +317,36 @@
         "n": 330
       },
       "medium": {
-        "err_rel_tol_mean": 5.27325405680295,
-        "err_rel_tol_median": 1.6225639674264665,
-        "within_tol_rate": 0.39090909090909093,
+        "err_rel_tol_mean": 4.55987555134292,
+        "err_rel_tol_median": 1.322404371584701,
+        "within_tol_rate": 0.41515151515151516,
         "cost_frac_fine": 0.0649082869802492,
         "wall_frac_fine": 0.051830022326765146,
         "n": 330
       },
       "hybrid": {
-        "err_rel_tol_mean": 30.099611104415033,
-        "err_rel_tol_median": 2.5665863040009453,
-        "within_tol_rate": 0.3424242424242424,
+        "err_rel_tol_mean": 23.63591214379158,
+        "err_rel_tol_median": 2.4822821640071595,
+        "within_tol_rate": 0.3515151515151515,
         "cost_frac_fine": 0.0649082869802492,
-        "wall_frac_fine": 0.0525383067353439,
+        "wall_frac_fine": 0.05250798643678691,
         "n": 330,
         "gates": {
           "ens_std": {
-            "coverage": 0.9545454545454546,
-            "false_safe_rate": 0.9308755760368663,
-            "err_given_safe": 7.006040088918424,
-            "within_tol_given_safe": 0.35873015873015873,
-            "fallback_cost_frac_fine": 0.11036283243479465,
-            "post_fallback_err_rel_tol": 6.687583882575872
+            "coverage": 0.9515151515151515,
+            "false_safe_rate": 0.9252336448598131,
+            "err_given_safe": 6.536574559056268,
+            "within_tol_given_safe": 0.36942675159235666,
+            "fallback_cost_frac_fine": 0.11339313546509767,
+            "post_fallback_err_rel_tol": 6.219649862183509
           },
           "knn": {
             "coverage": 0.9878787878787879,
-            "false_safe_rate": 0.9861751152073732,
-            "err_given_safe": 30.24080756929572,
-            "within_tol_given_safe": 0.34355828220858897,
+            "false_safe_rate": 0.985981308411215,
+            "err_given_safe": 23.69779941897137,
+            "within_tol_given_safe": 0.35276073619631904,
             "fallback_cost_frac_fine": 0.07702949910146131,
-            "post_fallback_err_rel_tol": 29.874252340871312
+            "post_fallback_err_rel_tol": 23.41055338024786
           },
           "range": {
             "coverage": 0.0,
@@ -354,49 +354,49 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0649082869802493,
-            "post_fallback_err_rel_tol": 2.2141066249609673e-06
+            "post_fallback_err_rel_tol": 1.6508783201952585e-06
           },
           "conformal": {
-            "coverage": 0.051515151515151514,
-            "false_safe_rate": 0.013824884792626729,
-            "err_given_safe": 0.9691597940232561,
-            "within_tol_given_safe": 0.8235294117647058,
-            "fallback_cost_frac_fine": 1.0133931354650978,
-            "post_fallback_err_rel_tol": 0.04992851405352541
+            "coverage": 0.08787878787878788,
+            "false_safe_rate": 0.009345794392523364,
+            "err_given_safe": 0.5837554205049076,
+            "within_tol_given_safe": 0.9310344827586207,
+            "fallback_cost_frac_fine": 0.9770294991014614,
+            "post_fallback_err_rel_tol": 0.05130120186159076
           },
           "discrepancy": {
             "coverage": 0.1484848484848485,
-            "false_safe_rate": 0.14285714285714285,
-            "err_given_safe": 43.14941096675286,
-            "within_tol_given_safe": 0.3673469387755102,
+            "false_safe_rate": 0.14018691588785046,
+            "err_given_safe": 37.79433648543649,
+            "within_tol_given_safe": 0.3877551020408163,
             "fallback_cost_frac_fine": 0.9164234384954009,
-            "post_fallback_err_rel_tol": 6.407035868666549
+            "post_fallback_err_rel_tol": 5.6118879117463765
           }
         }
       },
       "emulator": {
-        "err_rel_tol_mean": 144.16670848626526,
-        "err_rel_tol_median": 4.4402831226992365,
-        "within_tol_rate": 0.1393939393939394,
+        "err_rel_tol_mean": 107.73335767548016,
+        "err_rel_tol_median": 4.078429287397225,
+        "within_tol_rate": 0.1606060606060606,
         "cost_frac_fine": 0.0,
-        "wall_frac_fine": 0.0007082844085787521,
+        "wall_frac_fine": 0.0006779641100217685,
         "n": 330,
         "gates": {
           "ens_std": {
             "coverage": 0.9484848484848485,
-            "false_safe_rate": 0.9401408450704225,
-            "err_given_safe": 31.26796149858215,
-            "within_tol_given_safe": 0.14696485623003194,
+            "false_safe_rate": 0.9386281588447654,
+            "err_given_safe": 30.902286513285944,
+            "within_tol_given_safe": 0.16932907348242812,
             "fallback_cost_frac_fine": 0.051515151515151514,
-            "post_fallback_err_rel_tol": 29.65718788574833
+            "post_fallback_err_rel_tol": 29.31035067162239
           },
           "knn": {
             "coverage": 1.0,
             "false_safe_rate": 1.0,
-            "err_given_safe": 144.16670848626526,
-            "within_tol_given_safe": 0.1393939393939394,
+            "err_given_safe": 107.73335767548016,
+            "within_tol_given_safe": 0.1606060606060606,
             "fallback_cost_frac_fine": 0.0,
-            "post_fallback_err_rel_tol": 144.16670848626526
+            "post_fallback_err_rel_tol": 107.73335767548016
           },
           "range": {
             "coverage": 0.0,
@@ -404,7 +404,7 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0,
-            "post_fallback_err_rel_tol": 2.2141066249609673e-06
+            "post_fallback_err_rel_tol": 1.6508783201952585e-06
           },
           "conformal": {
             "coverage": 0.0,
@@ -412,13 +412,13 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0,
-            "post_fallback_err_rel_tol": 2.2141066249609673e-06
+            "post_fallback_err_rel_tol": 1.6508783201952585e-06
           }
         }
       },
       "fine": {
-        "err_rel_tol_mean": 2.2141066249609673e-06,
-        "err_rel_tol_median": 1.2805141995307342e-07,
+        "err_rel_tol_mean": 1.6508783201952585e-06,
+        "err_rel_tol_median": 1.0221717702191184e-07,
         "within_tol_rate": 1.0,
         "cost_frac_fine": 1.0,
         "wall_frac_fine": 1.0,
@@ -439,102 +439,102 @@
     },
     "combo": {
       "coarse": {
-        "err_rel_tol_mean": 33.13711735663643,
-        "err_rel_tol_median": 11.450000000000006,
+        "err_rel_tol_mean": 24.1578284532013,
+        "err_rel_tol_median": 10.908685617918785,
         "within_tol_rate": 0.15454545454545454,
         "cost_frac_fine": 0.022682902742516657,
         "wall_frac_fine": 0.09687716509456899,
         "n": 330
       },
       "medium": {
-        "err_rel_tol_mean": 6.830986121214849,
-        "err_rel_tol_median": 1.4551674338804386,
-        "within_tol_rate": 0.4090909090909091,
+        "err_rel_tol_mean": 6.220701854248841,
+        "err_rel_tol_median": 1.228408403589607,
+        "within_tol_rate": 0.43636363636363634,
         "cost_frac_fine": 0.06084125906192587,
         "wall_frac_fine": 0.04966085456661493,
         "n": 330
       },
       "hybrid": {
-        "err_rel_tol_mean": 47.97904448138102,
-        "err_rel_tol_median": 2.2854993402453117,
-        "within_tol_rate": 0.3696969696969697,
+        "err_rel_tol_mean": 35.544052008366016,
+        "err_rel_tol_median": 2.067363792573787,
+        "within_tol_rate": 0.38484848484848483,
         "cost_frac_fine": 0.06084125906192587,
-        "wall_frac_fine": 0.05036859690397442,
+        "wall_frac_fine": 0.0503020484195045,
         "n": 330,
         "gates": {
           "ens_std": {
-            "coverage": 0.9424242424242424,
-            "false_safe_rate": 0.9086538461538461,
-            "err_given_safe": 9.777783046751233,
-            "within_tol_given_safe": 0.39228295819935693,
-            "fallback_cost_frac_fine": 0.11841701663768343,
-            "post_fallback_err_rel_tol": 9.214820190960857
+            "coverage": 0.9393939393939394,
+            "false_safe_rate": 0.9014778325123153,
+            "err_given_safe": 6.575403384400283,
+            "within_tol_given_safe": 0.4096774193548387,
+            "fallback_cost_frac_fine": 0.12144731966798647,
+            "post_fallback_err_rel_tol": 6.176894367887866
           },
           "knn": {
             "coverage": 0.8121212121212121,
-            "false_safe_rate": 0.7836538461538461,
-            "err_given_safe": 49.65391568952683,
-            "within_tol_given_safe": 0.3917910447761194,
+            "false_safe_rate": 0.7783251231527094,
+            "err_given_safe": 35.9704015687455,
+            "within_tol_given_safe": 0.41044776119402987,
             "fallback_cost_frac_fine": 0.24872004694071373,
-            "post_fallback_err_rel_tol": 40.32499856140245
+            "post_fallback_err_rel_tol": 29.212326402553867
           },
           "range": {
             "coverage": 0.4,
-            "false_safe_rate": 0.39903846153846156,
-            "err_given_safe": 53.13681576435035,
-            "within_tol_given_safe": 0.3712121212121212,
+            "false_safe_rate": 0.39901477832512317,
+            "err_given_safe": 34.909837849787976,
+            "within_tol_given_safe": 0.38636363636363635,
             "fallback_cost_frac_fine": 0.6608412590619259,
-            "post_fallback_err_rel_tol": 21.254727757204122
+            "post_fallback_err_rel_tol": 13.9639362500235
           },
           "conformal": {
-            "coverage": 0.03636363636363636,
-            "false_safe_rate": 0.004807692307692308,
-            "err_given_safe": 0.7510729817622646,
-            "within_tol_given_safe": 0.9166666666666666,
-            "fallback_cost_frac_fine": 1.0244776226982895,
-            "post_fallback_err_rel_tol": 0.02731392026608881
+            "coverage": 0.051515151515151514,
+            "false_safe_rate": 0.0049261083743842365,
+            "err_given_safe": 0.5495445060879275,
+            "within_tol_given_safe": 0.9411764705882353,
+            "fallback_cost_frac_fine": 1.0093261075467743,
+            "post_fallback_err_rel_tol": 0.02831153740912074
           },
           "discrepancy": {
             "coverage": 0.12727272727272726,
-            "false_safe_rate": 0.11057692307692307,
-            "err_given_safe": 45.517800669914415,
+            "false_safe_rate": 0.11330049261083744,
+            "err_given_safe": 36.97028621036485,
             "within_tol_given_safe": 0.4523809523809524,
             "fallback_cost_frac_fine": 0.9335685317891985,
-            "post_fallback_err_rel_tol": 5.79317684320741
+            "post_fallback_err_rel_tol": 4.705310866085861
           }
         }
       },
       "emulator": {
-        "err_rel_tol_mean": 203.487439982066,
-        "err_rel_tol_median": 5.922093480735379,
-        "within_tol_rate": 0.10909090909090909,
+        "err_rel_tol_mean": 143.46852978396518,
+        "err_rel_tol_median": 5.151594612928551,
+        "within_tol_rate": 0.13333333333333333,
         "cost_frac_fine": 0.0,
-        "wall_frac_fine": 0.0007077423373594942,
+        "wall_frac_fine": 0.0006411938528895923,
         "n": 330,
         "gates": {
           "ens_std": {
             "coverage": 0.9424242424242424,
-            "false_safe_rate": 0.935374149659864,
-            "err_given_safe": 29.749721183099336,
-            "within_tol_given_safe": 0.1157556270096463,
+            "false_safe_rate": 0.9335664335664335,
+            "err_given_safe": 28.968335823384255,
+            "within_tol_given_safe": 0.1414790996784566,
             "fallback_cost_frac_fine": 0.05757575757575758,
-            "post_fallback_err_rel_tol": 28.03685885885255
+            "post_fallback_err_rel_tol": 27.300462222155797
           },
           "knn": {
             "coverage": 0.8515151515151516,
-            "false_safe_rate": 0.8469387755102041,
-            "err_given_safe": 219.96629158090104,
-            "within_tol_given_safe": 0.11387900355871886,
+            "false_safe_rate": 0.8426573426573427,
+            "err_given_safe": 150.4611803947257,
+            "within_tol_given_safe": 0.1423487544483986,
             "fallback_cost_frac_fine": 0.1484848484848485,
-            "post_fallback_err_rel_tol": 187.30463035894925
+            "post_fallback_err_rel_tol": 128.11997504240526
           },
           "range": {
             "coverage": 0.4,
-            "false_safe_rate": 0.3945578231292517,
-            "err_given_safe": 220.97934654406902,
-            "within_tol_given_safe": 0.12121212121212122,
+            "false_safe_rate": 0.3881118881118881,
+            "err_given_safe": 157.17097250510417,
+            "within_tol_given_safe": 0.1590909090909091,
             "fallback_cost_frac_fine": 0.6,
-            "post_fallback_err_rel_tol": 88.39174006909161
+            "post_fallback_err_rel_tol": 62.86839011214997
           },
           "conformal": {
             "coverage": 0.0,
@@ -542,13 +542,13 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0,
-            "post_fallback_err_rel_tol": 2.227999561344743e-06
+            "post_fallback_err_rel_tol": 1.7263358875641713e-06
           }
         }
       },
       "fine": {
-        "err_rel_tol_mean": 2.227999561344743e-06,
-        "err_rel_tol_median": 1.918991906711178e-07,
+        "err_rel_tol_mean": 1.7263358875641713e-06,
+        "err_rel_tol_median": 1.4477213093402322e-07,
         "within_tol_rate": 1.0,
         "cost_frac_fine": 1.0,
         "wall_frac_fine": 1.0,
@@ -569,7 +569,7 @@
     },
     "activation_rate": {
       "coarse": {
-        "err_rel_tol_mean": 31.06116350703171,
+        "err_rel_tol_mean": 19.68080320021709,
         "err_rel_tol_median": 10.059033278181605,
         "within_tol_rate": 0.20909090909090908,
         "cost_frac_fine": 0.020116280322527276,
@@ -577,36 +577,36 @@
         "n": 330
       },
       "medium": {
-        "err_rel_tol_mean": 2.038674572197994,
-        "err_rel_tol_median": 1.2024425768657712,
-        "within_tol_rate": 0.44545454545454544,
+        "err_rel_tol_mean": 1.7605683183311833,
+        "err_rel_tol_median": 1.1461152223666327,
+        "within_tol_rate": 0.47878787878787876,
         "cost_frac_fine": 0.06256876582715805,
         "wall_frac_fine": 0.05192123313491075,
         "n": 330
       },
       "hybrid": {
-        "err_rel_tol_mean": 31.855380030815528,
-        "err_rel_tol_median": 1.253981713888051,
-        "within_tol_rate": 0.4484848484848485,
+        "err_rel_tol_mean": 24.392921865477554,
+        "err_rel_tol_median": 1.1049054577248492,
+        "within_tol_rate": 0.47575757575757577,
         "cost_frac_fine": 0.06256876582715805,
-        "wall_frac_fine": 0.052634085561368775,
+        "wall_frac_fine": 0.05260875319520832,
         "n": 330,
         "gates": {
           "ens_std": {
-            "coverage": 0.9484848484848485,
-            "false_safe_rate": 0.9065934065934066,
-            "err_given_safe": 4.2917177859052495,
-            "within_tol_given_safe": 0.4728434504792332,
-            "fallback_cost_frac_fine": 0.11408391734230956,
-            "post_fallback_err_rel_tol": 4.070629470908057
+            "coverage": 0.9424242424242424,
+            "false_safe_rate": 0.8901734104046243,
+            "err_given_safe": 3.8104753684832806,
+            "within_tol_given_safe": 0.5048231511254019,
+            "fallback_cost_frac_fine": 0.12014452340291562,
+            "post_fallback_err_rel_tol": 3.5910845056261547
           },
           "knn": {
             "coverage": 0.9454545454545454,
-            "false_safe_rate": 0.9175824175824175,
-            "err_given_safe": 32.466822285537155,
-            "within_tol_given_safe": 0.46474358974358976,
+            "false_safe_rate": 0.9132947976878613,
+            "err_given_safe": 24.58519774435048,
+            "within_tol_given_safe": 0.4935897435897436,
             "fallback_cost_frac_fine": 0.11711422037261258,
-            "post_fallback_err_rel_tol": 30.69590492223971
+            "post_fallback_err_rel_tol": 23.24418716492455
           },
           "range": {
             "coverage": 0.0,
@@ -614,49 +614,49 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0625687658271579,
-            "post_fallback_err_rel_tol": 2.14466247248939e-06
+            "post_fallback_err_rel_tol": 1.7305145822881887e-06
           },
           "conformal": {
-            "coverage": 0.03939393939393939,
+            "coverage": 0.06363636363636363,
             "false_safe_rate": 0.0,
-            "err_given_safe": 0.22882098539545973,
+            "err_given_safe": 0.1905222931888616,
             "within_tol_given_safe": 1.0,
-            "fallback_cost_frac_fine": 1.0231748264332186,
-            "post_fallback_err_rel_tol": 0.009016075003569178
+            "fallback_cost_frac_fine": 0.9989324021907943,
+            "post_fallback_err_rel_tol": 0.012125612330330921
           },
           "discrepancy": {
             "coverage": 0.16666666666666666,
-            "false_safe_rate": 0.14835164835164835,
-            "err_given_safe": 10.448857963699707,
+            "false_safe_rate": 0.15606936416184972,
+            "err_given_safe": 8.363339361140994,
             "within_tol_given_safe": 0.509090909090909,
             "fallback_cost_frac_fine": 0.8959020991604912,
-            "post_fallback_err_rel_tol": 1.7414784658170157
+            "post_fallback_err_rel_tol": 1.3938916181325804
           }
         }
       },
       "emulator": {
-        "err_rel_tol_mean": 129.46875254598697,
-        "err_rel_tol_median": 5.963645180990669,
-        "within_tol_rate": 0.1,
+        "err_rel_tol_mean": 92.86056550839123,
+        "err_rel_tol_median": 5.268861037102369,
+        "within_tol_rate": 0.12424242424242424,
         "cost_frac_fine": 0.0,
-        "wall_frac_fine": 0.0007128524264580179,
+        "wall_frac_fine": 0.000687520060297565,
         "n": 330,
         "gates": {
           "ens_std": {
             "coverage": 0.9393939393939394,
-            "false_safe_rate": 0.9326599326599326,
-            "err_given_safe": 27.79220572701082,
-            "within_tol_given_safe": 0.1064516129032258,
+            "false_safe_rate": 0.9307958477508651,
+            "err_given_safe": 27.2811263244462,
+            "within_tol_given_safe": 0.13225806451612904,
             "fallback_cost_frac_fine": 0.06060606060606061,
-            "post_fallback_err_rel_tol": 26.10782979934748
+            "post_fallback_err_rel_tol": 25.627724872232285
           },
           "knn": {
             "coverage": 1.0,
             "false_safe_rate": 1.0,
-            "err_given_safe": 129.46875254598697,
-            "within_tol_given_safe": 0.1,
+            "err_given_safe": 92.86056550839123,
+            "within_tol_given_safe": 0.12424242424242424,
             "fallback_cost_frac_fine": 0.0,
-            "post_fallback_err_rel_tol": 129.46875254598697
+            "post_fallback_err_rel_tol": 92.86056550839123
           },
           "range": {
             "coverage": 0.0,
@@ -664,7 +664,7 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0,
-            "post_fallback_err_rel_tol": 2.14466247248939e-06
+            "post_fallback_err_rel_tol": 1.7305145822881887e-06
           },
           "conformal": {
             "coverage": 0.0,
@@ -672,13 +672,13 @@
             "err_given_safe": NaN,
             "within_tol_given_safe": NaN,
             "fallback_cost_frac_fine": 1.0,
-            "post_fallback_err_rel_tol": 2.14466247248939e-06
+            "post_fallback_err_rel_tol": 1.7305145822881887e-06
           }
         }
       },
       "fine": {
-        "err_rel_tol_mean": 2.14466247248939e-06,
-        "err_rel_tol_median": 7.105591930410719e-08,
+        "err_rel_tol_mean": 1.7305145822881887e-06,
+        "err_rel_tol_median": 6.8813342980016e-08,
         "within_tol_rate": 1.0,
         "cost_frac_fine": 1.0,
         "wall_frac_fine": 1.0,
@@ -698,6 +698,6 @@
       }
     }
   },
-  "speedup_wall_fine_over_emulator": 5377.766934734431,
-  "break_even_queries": 1.248543195435128
+  "speedup_wall_fine_over_emulator": 5558.54061918595,
+  "break_even_queries": 1.2323894179931283
 }

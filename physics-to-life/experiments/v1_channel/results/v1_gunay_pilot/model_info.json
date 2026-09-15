@@ -1,7 +1,7 @@
 {
   "n_rows": 46080,
   "n_rows_base_only": 5760,
-  "positives_hard": 7440,
-  "train_wall_voc_s": 17.971046924591064,
-  "train_wall_hard_s": 15.64223051071167
+  "positives_hard": 6952,
+  "train_wall_voc_s": 20.669957637786865,
+  "train_wall_hard_s": 17.09147882461548
 }

@@ -30,7 +30,9 @@ def row_features(ep: dict, g: dict, tgt: str, c: str, names: list[str], S: tuple
     row += [gs_self, max(others), min(others), (interv.T_K or 295.15) - 273.15, interv.K_out or 5.0,
             interv.block_frac.get(c, 0.0), interv.block_conc.get(c, 0.0), interv.i_extra]
     row += [interv.rate_scales.get(k, 1.0) for k in RATE_KEYS]
-    row += [g["cost_base"], cost_increment.get(c, 1.0), float(rank[i]), float(len(S)), 1.0 if c in S else 0.0, float(g["tol"][tgt])]
+    # tolerance of the requested target (the full-state policy asks for v_rmse rows on groups without that target: use the group's first target's tolerance)
+    tol = g["tol"].get(tgt, g["tol"][g["targets"][0]])
+    row += [g["cost_base"], cost_increment.get(c, 1.0), float(rank[i]), float(len(S)), 1.0 if c in S else 0.0, float(tol)]
     return row
 
 

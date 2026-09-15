@@ -1,0 +1,35 @@
+base_level: 1
+calibrate_medium: false
+ensemble_members: 5
+hierarchy_params: hierarchy/gunay2015_fine.json
+id_families:
+- none
+- density
+- kf_loss
+- kf_inactivation
+- kf_recovery
+- nat_inactivation
+- temperature
+- k_out
+instance_g_cv: 0.2
+instance_rate_cv: 0.1
+n_ood: 60
+n_proc: 4
+n_reserve: 100
+n_test: 200
+n_train: 400
+ood_families:
+- block
+- opening_step
+- combo
+- activation_rate
+q10: 3.0
+routable:
+- Kf
+- NaT
+run_id: v1_gunay_main
+s_min: 0.05
+seed: 0
+seed_offset: 100000
+system: gunay2015
+tol_rel: 0.05

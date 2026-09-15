@@ -1,0 +1,267 @@
+# 2026-09-14 — V1: the published Günay 2015 aCC motoneuron model ported; reproduction; constructed fine levels
+
+Owner execution order (ADR-0006): identify usable published models → reproduce at least one
+published electrophysiology result → establish the fine/medium/coarse hierarchy → validate
+each level numerically → freeze the preregistration. This entry covers the first four.
+
+## 1. Published model chosen and ported (ADR-0007)
+The Günay et al. 2015 isopotential aCC/MN1-Ib larval motoneuron model is the only
+*Drosophila* neuron model whose complete equations, parameters, stimulus protocol, initial
+state **and** reported behaviour were readable here (XPP file + NeuroML2 port in the authors'
+GitHub repository; JATS full text mirrored on GitHub; Megwa 2023 Python reimplementation of
+the same channel set; an independent third-party XPP reproduction with quantitative numbers,
+jrieke/drosophila-dynamics). Ported verbatim to `src/physics_to_life/v1/systems/gunay2015.py`.
+Channels: Ks (Shab-like, m⁴), Kf (A-type, m⁴(0.95h₁+0.05h₂)), NaT (m³h), NaP (m); C = 4 pF.
+
+## 2. Reproduction (`experiments/v1_channel/results/gunay2015_reproduction/RESULTS.md`)
+| anchor | result |
+|---|---|
+| settled state at −12 pA quoted in the XPP file (V + 7 gates, 17 digits) | reproduced to 7e-8 |
+| reported CV(ISI) = 0.002 at ~50 Hz | CV 0.0010–0.0023 across 0–10 pA; 49.5 Hz for a +12 pA step from the −12 pA hold (0 pA absolute); 91.5 Hz for +10 pA absolute — the paper's stimulus convention is not stated in the readable text: **ambiguity recorded, not resolved** |
+| large delays to first spike near rheobase (Fig 2C, qualitative) | 326 ms at −1.8 pA, 147 at −1.5, 89 at −1, 54 at 0, 13 at +10 pA |
+| independent XPP staircases (jrieke README): silence→tonic between −1.91/−1.90 pA; tonic→silence between −2.72/−2.73 pA | **reproduced exactly at 0.01 pA resolution** with both the port (LSODA) and a forward-Euler re-integration of the XPP equations (dt = 0.001 ms) |
+| authors' integrator (Euler, dt 0.001) vs port | first spikes agree to 0.05 ms; the 2 mV end-of-train phase drift is the published integrator's own error (Euler 1e-3 vs 2e-4: 1.7 mV; Radau vs Euler 2e-4: 0.4 mV) |
+| −10 mV prepulse inactivates Kf (Methods) | Kf peak after −10 mV / after −90 mV = 0.056 |
+
+Biological features the paper says the isopotential model misses (recorded CV 0.076 at ~35 Hz;
+spike amplitude; inter-spike voltage offset) are recorded as the *biological-fidelity* limit of
+the medium level and are not touched by V1's fine-vs-medium ("simulation fidelity") question.
+
+## 3. Hierarchy (ADR-0007)
+- **Medium = the published model** (nothing fitted).
+- **Fine = constructed Markov schemes fitted to the published HH currents** on a declared fit
+  family (activation steps −40…+40 mV from −90; 200-ms prepulse inactivation; twin-pulse
+  recovery). Kf: Zagotta–Hoshi–Aldrich topology (4 subunit steps + concerted opening) +
+  N-type inactivation from O + C-type component + open-channel block state. NaT:
+  activation chain with inactivation coupled to the open state and recovery through a
+  closed state (cycle-consistent). Ks, NaP: exact HH-equivalent chains (fine == medium) —
+  negative-control channels.
+- **Coarse = reduced model**: instantaneous activation, Kf slow inactivation dropped (2 states).
+- Level B (alternate formulation for cross-model tests): Kf-B sequential 8-step chain with
+  two step types, closed-state inactivation, C-type after N-type; NaT-B open-state-only
+  inactivation with a slow inactivated state.
+- Fit results: see §5 (appended when the fits finished).
+
+## 4. Two pilot-machinery bugs found and fixed while generalising the system
+Both affected only the pilot on provisional placeholder parameters (a machinery check; no
+claim was made from it):
+1. Instance variability was applied *independently* to the Markov transitions and the HH
+   gates, so the levels were no longer descriptions of the same cell (the "exact" channel
+   became inexact per instance). Now: per-cell kinetic multipliers by shared scale key,
+   applied identically at every level (`sample_instance` → `intrinsic_scales`).
+2. The constructed open-channel block transition was active (concentration 1) whenever
+   no block intervention was present, because a missing scale key defaulted to 1. Now the
+   drug concentration key is always set (0 = no drug).
+Also fixed: the per-split RNG stream used Python's salted `hash(str)` (non-deterministic
+across processes); replaced by `zlib.crc32`.
+All 22 tests pass (V0 8, V1 machinery 5 + 4 policy, Günay port 5).
+
+## 5. Fit quality of the constructed fine levels
+Normalised RMS over the fit family (each trace normalised by its own peak current), best of 4
+seeded multi-starts (`experiments/v1_channel/hierarchy/gunay2015_fine.json`):
+
+| entry | form | RMS | worst protocols | parameters |
+|---|---|---|---|---|
+| Kf | coupled | 0.057 | act_+40 0.089; act_+20 0.080 | 23 |
+| NaT | sigmoid | 0.040 | act_-30 0.155; act_-20 0.124 | 16 |
+| Kf_B | coupledB | 0.029 | act_-20 0.057; act_-40 0.050 | 23 |
+| NaT_B | B | 0.044 | act_-30 0.176; act_-20 0.133 | 15 |
+
+Rejected forms (recorded in the JSON): Kf_eyring 0.158, Kf_sequential_uncoupled_B 0.117, NaT_eyring 0.040. The decisive structural ingredient for Kf was
+**closed-state inactivation**: the published HH Kf has an independent inactivation gate with
+h∞ midpoint −45 mV, i.e. substantial steady-state inactivation at voltages where m∞⁴ ≈ 0, which
+a scheme that inactivates only from the open state cannot reproduce (16 % RMS, dominated by
+the prepulse traces). Allosterically coupled inactivated chains (Kv4/Shal-type closed-state
+inactivation; coupling degree fitted, reversibility enforced) brought the floor to 5.8 % (level
+A, concerted-opening topology) and 2.9 % (level B, sequential two-step topology). Saturating
+(sigmoid) rate forms were needed because the published τ tables have floors that Eyring rates
+cannot represent. NaT's residual (4 %) sits in the steep part of activation (−30/−20 mV steps).
+Several level-A parameters sit at their bounds (activation charges at z = 4; C-type on-rate at
+its cap); the fine levels are what they are — constructed, documented, and the floor enters
+the preregistration's tolerance reasoning (§14 iii).
+
+The analytic voltage-clamp solvers (HH closed form; Markov eigendecomposition) agree with
+the ODE integrator to 1e-10 relative and made each fit ~1–5 min.
+
+## 6. Hierarchy validation, first pass: two fitting defects found and fixed (before any label was used)
+The first validation run of the assembled hierarchy showed that the fine Kf level was
+**97 % inactivated at steady state for every holding potential** (HH availability 0.999 at −90
+mV) and the fine NaT had **no steady-state inactivation at rest** (availability 1.00 at −50 mV
+vs HH 0.84), while both had passed the fit family with 3–6 % RMS. Causes:
+1. **Objective dilution.** Residuals were normalised by the trace peak and averaged over all
+   samples, so a 30-ms test pulse inside a 250-ms prepulse protocol contributed almost nothing:
+   a 16 % peak error after a −50 mV prepulse showed up as 1.3 % RMS. Fixed: residuals are
+   normalised by peak × √(number of active samples), i.e. the objective is the mean squared
+   relative error over the samples where the target current is non-negligible.
+2. **Unconstrained rest state.** Every fit protocol started from −90 mV, so a scheme could be
+   inactivated at rest and *recover on depolarisation* to produce the transient — a degenerate
+   solution the family could not exclude. Fixed: steady-state holds at −70, −60, −55, −50 mV
+   with a test step were added to both families (the analytic solver starts from the exact
+   steady state, so these pin the rest-state availability directly).
+A third defect was in the analysis, not the fit: the spike detector's default threshold (0 mV)
+missed the published model's spikes, which peak near −1 mV; the default is now −25 mV (the
+reproduction report used −25 mV explicitly and is unaffected). No label, verdict or figure had
+been produced from the defective hierarchy; the pilot was restarted after the refit.
+
+## 7. (2026-09-15) Anchored rate forms, level assignment, reference integrator, AP-clamp constraint
+- **Anchored forms.** Rates with an HH counterpart are now the published HH rates × a fitted
+  multiplier × an exponential tilt; only structure without a counterpart has free rate
+  functions. Floors (RMS over active samples): sequential two-step Kf 5.1 %, ZHA concerted Kf
+  9.5 %, coupled NaT 5.9 %, open-state NaT 6.0 %. Level A = the smaller floor per channel
+  (ADR-0007 amendment). Rejected forms and their floors are kept in the parameter file.
+- **Reference integrator.** On the level-A fine model in current clamp (33 states, 530 ms,
+  68 spikes): Radau rtol 1e-9 154 s; Radau 1e-7 71 s; LSODA 1e-9 20 s; working LSODA 1e-6
+  12 s. All agree to ≤ 0.03 mV with identical spike times. The hidden truth is therefore
+  LSODA 1e-9 / 1e-11 (7.5× cheaper than Radau at the same tolerance, no measurable difference).
+- **A 50 % firing-rate discrepancy at baseline.** The assembled hierarchy fired 68 spikes per
+  500 ms at 10 pA against the published model's 45: the step families from −90 mV, even with
+  rest-state holds, do not constrain the currents along a physiological spike trajectory
+  (fine-vs-medium current under the published model's own spike waveform: 9 % RMS, 36 % max
+  for Kf; 9.5 % / 28 % for NaT). Fix: an **action-potential-clamp** trace (the published
+  model's V(t) under the 10 pA step, 10–60 ms, 0.2-ms segments, weight 4) is added to both
+  fit families — standard practice for constraining channel models in the physiological
+  regime — and the four levels are refitted from their current solutions. The scientific
+  point stands: the fine levels must reproduce the published behaviour at baseline (Level C
+  fidelity of the medium is what we have), so that closure error appears where interventions
+  and evaluation protocols engage the extra structure, not everywhere.
+
+## 8. (2026-09-15) A nested "richer" scheme collapses onto the published model — a constraint on how hierarchies can be constructed
+A Kuo–Bean-type NaT scheme with an allosterically coupled inactivated chain *nests* the HH
+gate (a = b = 1, multipliers 1, tilts 0 reproduce m³h exactly). Fitted to the published HH
+currents (with the AP-clamp trace), it converged to the HH solution to machine precision
+(RMS 0.0000): a richer model constrained only by the reduced model's own outputs recovers the
+reduced model. Consequence for V1: the fine levels must be **non-nested** structures whose
+fit floors (5–10 % on the family) *are* the baseline closure error — the sequential
+two-step / ZHA-concerted Kf activation with coupled inactivation and the open-state-coupled
+NaT schemes. Without independent kinetic data (the ZHA / Schoppa rate tables were
+unreadable here), no constructed fine level can be closer to the biology than the published
+HH; the hierarchy tests simulation fidelity, and this is stated wherever the results are
+reported. The nested NaT form is kept in the parameter file under rejected forms with this note.
+
+## 9. (2026-09-15) NaT coupling fixed by design; the hierarchy that goes to the pilot
+The AP-clamp constraint alone did not tame the NaT construction: with open-state-coupled
+inactivation the fine cell still fired 47 spikes at −1 pA against the published model's 17
+(validation of the v5 set; 69 % of baseline targets outside tolerance in the family preview,
+dominated by NaT). A Kuo–Bean-type coupled chain with the coupling **fixed at a = 3 per
+activation step** (b = 1) and anchored rates refitted reaches a 2.5 % floor (2.6 % under the
+spike waveform) and changes baseline firing moderately and in both directions: −1 pA 24 vs
+17 spikes, 0 pA 27 vs 23, 10 pA 43 vs 45, 40 pA 61 vs 67 (medium vs fine). Kf's constructed
+level alone leaves current-clamp behaviour unchanged at baseline (its differences are in the
+voltage-clamp targets: 3–8 % RMS) — so at baseline "which physics matters" is already
+target-dependent: NaT for spiking targets, Kf for Kf-current targets. This is the hierarchy
+taken into the pilot; a = 2 and a = 5 variants are fitted as robustness checks.
+
+### Validation of the pilot hierarchy (`experiments/v1_channel/results/hierarchy_validation/`, 2026-09-15)
+- Channel currents, medium vs fine A (max |ΔI| / peak): Kf 12–15 % (3–4 % RMS), NaT 10–14 % (max 27 %);
+  coarse vs fine: ×3–15.
+- Current clamp (−1 … 40 pA), medium vs fine A: worst Δspike count 7, worst Δlatency 26 ms (near
+  rheobase), spike-train V RMSE up to 14 mV; refining Kf alone leaves current-clamp targets
+  unchanged, refining NaT alone reproduces fine A. Fine B differs strongly from fine A (Δspikes
+  up to 28) — the alternate truth is a genuine shift.
+- Family preview (3 instances × 4 groups): 47–64 % of targets have the medium outside tolerance
+  (median err/tol 0.8–1.9); 19–36 % are fixed by refining Kf alone, 25–31 % by NaT alone — the
+  informative regime of preregistration §14 (iii), with target-dependent "which physics".
+- Per-run wall on one core: medium 0.7 s, fine-NaT-only 2.8 s, fine-Kf-only 7.8 s, fine A 16 s,
+  fine B 19 s (530-ms current clamp). The pilot goes ahead exhaustively (16 subsets) as preregistered.
+
+## 10. (2026-09-15) Smoke run of the full V1 pipeline on the pilot hierarchy; pilot launched
+`run.py --smoke` (12 train / 6 test / 16 OOD episodes, exhaustive 16-subset labelling, LSODA
+1e-9 truth) ran end to end in 46 min on 4 processes: 174 s per episode (88 simulations; the
+truth run 35 s). Machinery checks passed: negative-control channels' gains within 2× the
+numerical floor in 94 % of labels (the remaining 6 % were tolerance-boundary cases, which
+motivated implementing the preregistered noise-floor rule in the minimal-set search before
+the pilot); the audit, surrogate (H5/H8) and OOD stages produce their tables and figures. With
+12 training episodes the learned policies are untrained, so no number from the smoke is
+interpreted. Two targets are already visibly at the edge of informativeness at the
+preregistered 5 % tolerance — voltage-clamp `peak_current` (medium outside tolerance in 98 %
+of labels: the fit floors exceed 5 % for peak currents) and `v_rmse` (92 %) — to be handled by
+the preregistered pilot-audit rule §14 (iii) after the pilot, not before.
+Projected main-run generation: 11.4 h on 4 processes exhaustive, ~7 h with the routable rule.
+**Pilot launched 2026-09-15 02:02 UTC** (`v1_gunay_pilot`: 120 / 60 / 4×30 episodes, seeds
+10 000+ / 20 000+ / 30 000+, exhaustive labelling, 4 processes).
+
+## 11. (2026-09-15) Pilot audit, corrections, preregistration freeze, main run
+The pilot (120/60/4×30, exhaustive labelling, 3.5 h on 4 processes) was audited against
+preregistration §14. Findings and the four corrections (all recorded in the preregistration's
+audit record before the freeze): negative controls 0.3 % of minimal sets with the raw 2×-floor
+rule and 100 % within max(2× floor, 1 % of tolerance) → tolerance-relative noise floor and the
+routable {Kf, NaT} rule for the main run; peak_current uninformative at 5 % (93 % need
+refinement; fit floors exceed 5 % for peak currents) → 10 %; VoC regressor with raw gains
+(72 % zeros, maximum 118 tolerance units) had R² = −3.6 while the V0-style hard classifier
+dominated → log-compressed gain/tolerance label with tolerance as an input; threshold grids
+too coarse (operating points under-spent budgets by 27 %) → 8 per decade. The cached pilot
+was relabelled (no simulation) and re-analysed: negative controls 0 % of minimal sets, all
+targets informative (peak_current 0.78). Dress-rehearsal verdicts (not results): learned VoC
+one-shot at the 30 % budget err/tol 0.31 (success 0.90, precision 0.63, recall 0.83) vs the
+ensemble-uncertainty trigger 0.18; parity with the hard-label classifier at 50 %; precision at
+equal recall 2.5× (discrepancy) and 2.0× (sensitivity). Detectors: the range guard detects the
+descriptor-only shifts trivially (AUROC 1.0 on opening_step/activation_rate), kNN density is
+worse than chance on them, ensemble spread and the discrepancy monitor ~0.5.
+**Preregistration frozen (v1.1, commit 32a39d1) and the main run launched at 05:57 UTC.**
+
+### Falsification-control dry run on the corrected pilot (`results/v1_gunay_pilot/falsification.md`; not a result)
+Permuted labels collapse the router (err/tol 2.34 vs 0.31; precision 0.07 vs 0.63) — no leakage.
+A router without the cheap-run features (descriptors only: 0.31) or without the intervention
+descriptors (simulation only: 0.30) matches the full router on the pilot; the target-blind
+router is slightly worse (0.34). Leave-one-family-out: every held-out ID family is routed as
+well as by the reference router (the ID families are close to one another). These controls
+run in ~15 min on cached labels and will be applied to the main run as preregistered.
+
+## 12. While the main run generates: the H10 damage is functionally inert in the published model (2026-09-15, 08:45–09:30 UTC)
+
+Before running any main-run analysis I probed the H10 restoration protocol on the pilot machinery
+and found that the preregistered damage has no phenotype in the published model:
+
+- Knocking Kf out completely (`g_scales={"Kf": 0}`) leaves the medium-level 10 pA response
+  unchanged to the printed precision: 45 spikes, first spike 13.2 ms, min ISI 10.9 ms, mean V
+  −32.8 mV, with or without Kf. Ks knock-out changes the count to 58; NaT or NaP knock-out
+  silences the cell.
+- The published equations integrated by the authors' own method (`xpp_euler`, dt = 0.001 ms)
+  agree: G_Kf = 24.1 nS and G_Kf = 0 both give 45 spikes with the first spike at 23.20 ms.
+- Why: at the −12 pA hold the cell rests at −54.6 mV, where the published Kf activation
+  (V½ = −17.6 mV, slope 7.3 mV, τ 2–8 ms) barely opens during the ≈ 1 ms spikes of this model;
+  peak |I_Kf| ≈ 3.7 pA against ≈ 34 pA (Ks) and ≈ 430 pA (NaT). Hyperpolarised holds
+  (−30, −50 pA; rest −58.6 / −62.0 mV) and steps from −2 to +20 pA change nothing either, for
+  the nominal cell and for the jittered instances of the main configuration (g CV 0.2, rate
+  CV 0.1).
+- The pilot restoration check (4 instances, Kf × 0.01–0.32) had 4/4 damaged phenotypes within
+  tolerance: every method "restored" with x = 0, which is why all three methods scored 1.0.
+
+Consequences, recorded as post-hoc in the preregistration (§16, items 1–6) before any main-run
+result existed: H10-V1 as preregistered will be reported as *not testable on this model* if the
+main-run instances contain no functionally damaged case (the rule itself is unchanged and is
+evaluated over functionally damaged instances); an exploratory NaT-loss variant (× 0.75–0.95,
+*para*-hypomorph-like; × 0.7 already silences most instances) is run and reported separately;
+the restoration script gained validity filters (silent wild types skipped, search skipped when
+the damage is within tolerance), the preregistered principal-point threshold for the routed
+search, the "claimed restored" record needed by the falsification clause, and parallel
+instances. A second consequence for interpretation: the ID family `kf_loss` is expected to
+behave like `none` in the current-clamp groups of the main run (it still scales the Kf currents
+in the voltage-clamp groups); that is a property of the published model, and it is reported as
+such rather than repaired.
+
+Also written while waiting: `verdicts_extended.py`, which applies the preregistered H5-V1,
+H8-V1, H9-V1 and H10-V1 rules mechanically (detector chosen on the validation split by refitting
+the surrogate deterministically; paired bootstrap per OOD family; rank AUROC for invalidity
+detection; the level-B precision comparison with the equal-recall supplementary; the reserved-set
+replication at the validation-selected operating points). Dress rehearsal on the pilot (not a
+result): H5 falsified (emulator within tolerance on 13.6 % of ID rows; every gate except the
+never-trusting conformal gate has ID `false_safe_rate` ≈ 0.9), H8 not passed (hybrid lower error
+on 4/4 OOD families with CIs excluding 0, but its discrepancy monitor's invalidity AUROC 0.54 is
+below the emulator's ensemble spread 0.74), H9 falsified under the literal reading (precision
+under B 0.70 ≥ 0.8 × 0.57, but the sensitivity rule reaches 0.74 under B at its own 30 % point;
+at equal recall the router is ahead), H10 not testable. The main run decides.
+
+### 12.1 Training split of the main run — read-only label audit (09:45 UTC; no selection made)
+
+The train cache (400 episodes, seeds 110 000–110 399, families 39–62 each) was read once, without
+touching the test, OOD or reserved streams, to confirm that the frozen labelling rules behave as
+the pilot audit predicted:
+
+- Negative controls: Ks/NaP appear in **0** minimal sets (the routable rule of correction 1).
+- Current-clamp targets need refinement in 35–47 % of cases per family, almost entirely through
+  NaT (35–47 %); Kf enters a current-clamp minimal set in only 3–12 %. Voltage-clamp and recovery
+  groups need Kf in 58–74 % and 67–93 % of targets, NaT in 56–64 % — the informative band.
+- `kf_loss` behaves like `none` in current clamp (non-empty minimal set 0.40 vs 0.40; Kf needed
+  in 0.03 vs 0.11), as §12 predicted from the published model's small Kf current.
+These are properties of the frozen generator; they set no threshold and change no criterion.

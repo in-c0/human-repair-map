@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this platform, please cite it as below."
+title: "Physics-to-Life: learning the physical resolution required to predict and repair living systems"
+version: 0.0.1
+date-released: 2026-09-14
+license: MIT
+repository-code: "https://github.com/in-c0/human-repair-map"
+abstract: >-
+  Research platform for testing whether a learned controller can decide when additional
+  physical detail is worth computing in multiscale models of living systems. Contains the
+  hypothesis registry, the validation ladder (V0 synthetic slow-fast network upward), and
+  reproducible adaptive-fidelity experiments with hidden ground truth.
+authors:
+  - name: "Physics-to-Life contributors"

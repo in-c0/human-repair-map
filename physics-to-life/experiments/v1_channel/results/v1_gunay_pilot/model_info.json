@@ -1,0 +1,7 @@
+{
+  "n_rows": 46080,
+  "n_rows_base_only": 5760,
+  "positives_hard": 6952,
+  "train_wall_voc_s": 20.365519762039185,
+  "train_wall_hard_s": 16.913909435272217
+}

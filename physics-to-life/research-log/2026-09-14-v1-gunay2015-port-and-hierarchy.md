@@ -198,3 +198,11 @@ equal recall 2.5× (discrepancy) and 2.0× (sensitivity). Detectors: the range g
 descriptor-only shifts trivially (AUROC 1.0 on opening_step/activation_rate), kNN density is
 worse than chance on them, ensemble spread and the discrepancy monitor ~0.5.
 **Preregistration frozen (v1.1, commit 32a39d1) and the main run launched at 05:57 UTC.**
+
+### Falsification-control dry run on the corrected pilot (`results/v1_gunay_pilot/falsification.md`; not a result)
+Permuted labels collapse the router (err/tol 2.34 vs 0.31; precision 0.07 vs 0.63) — no leakage.
+A router without the cheap-run features (descriptors only: 0.31) or without the intervention
+descriptors (simulation only: 0.30) matches the full router on the pilot; the target-blind
+router is slightly worse (0.34). Leave-one-family-out: every held-out ID family is routed as
+well as by the reference router (the ID families are close to one another). These controls
+run in ~15 min on cached labels and will be applied to the main run as preregistered.

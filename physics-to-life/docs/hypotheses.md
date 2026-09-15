@@ -196,10 +196,10 @@ episode generator, not of biology.
 | H2 | causal fidelity | V0-passed (0.091 vs 0.0009 medium error with/without switching) | V0 | same |
 | H3 | error-aware routing | **V1-inconclusive** (`v1_gunay_main`): selection precision at equal recall 2.6× / 2.2× the written rules (clause holds) but the predicted frontier crossing did not occur — the router dominates the written rules at every budget; research log 2026-09-15 §3. V0-passed (AUROC 0.993, F1 0.66 at oracle cost, ECE 0.007) | V0, V1 | same; `results/v1_gunay_main/verdicts.md` |
 | H4 | sparse importance | V0-passed (median 0, 79 % of episodes need no fine physics — a property of the generator, not evidence about biology; falsified for the constant-closure cheap model) | V0 | same |
-| H5 | physics compilation | untested | V1 | this file |
+| H5 | physics compilation | **V1-falsified** (`v1_gunay_main`, `verdicts_extended.md`, `fig4_closures_h5_h8`): descriptor-only emulator within tolerance on 28 % of ID rows (< 60 %); every distrust gate except the never-trusting conformal gate has false_safe_rate ≈ 0.9; research log 2026-09-15 §5 | V1 | `results/v1_gunay_main/verdicts_extended.md` |
 | H6 | cross-model generalisation | V0-passed, weak (noise, size and information level: proper tests; the sigmoid formulation test is weak — its folds are at ±0.127 so the closure already tracks switch-on; fails on sustained-step shift) | V0 (partial) | same |
 | H7 | hidden-state inference | V0-passed (partial: routing probability ECE 0.007) | V0 (partial) | same |
-| H8 | neural closure | untested | V1 | this file |
+| H8 | neural closure | **V1-inconclusive** (`v1_gunay_main`): medium + learned residual beats the black box on 4/4 OOD families (paired CIs exclude 0) but its discrepancy monitor detects invalidity worse than the black box's ensemble spread (AUROC 0.59 vs 0.79) and it violates structural constraints more often (4–7 % vs 1–2 %); research log 2026-09-15 §5 | V1 | same |
 | H9 | value of computation | V0-passed only under the registered "one-shot or sequential" rule (3 of 5 budgets vs physics via the sequential pair; 4 of 5 vs adjoint; 4 of 5 at cost ratio 13); crossing frontiers — physics rule better at high budgets. Not supported with the constant-closure cheap model (no policy differs when the cheap model's error is not sparse). | V0 | same |
 | H10 | inverse design | untested | ≥ V1 | this file |
 

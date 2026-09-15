@@ -178,7 +178,13 @@ target-blind router is nearly as good as the target-conditioned one — on this 
 protocol group already determines which channel can matter. The "target-conditioned" part of
 the proposition reduces to "protocol-conditioned" here.
 
-*(H5, H8, H9, H10 and the final reading follow when the chain completes.)*
+**H5-V1: falsified (research log §5).** The descriptor-only emulator of the fine targets is
+within tolerance on 28 % of ID rows; the only calibrated distrust gate is the one that never
+trusts. **H8-V1: not passed.** Medium + learned residual halves the black box's error on every
+OOD family (paired CIs exclude 0) but detects its own invalidity worse than the black box's
+ensemble spread and violates the medium model's structural constraints more often.
+
+*(H9, H10 and the final reading follow when the chain completes.)*
 
 ## 8. Threats to validity
 - Simulation fidelity only: the fine levels are constructions fitted to the published model;

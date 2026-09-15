@@ -1,0 +1,486 @@
+{
+  "n_train": 400,
+  "n_test": 200,
+  "controls": {
+    "reference": {
+      "voc": {
+        "param": 1.778279410038923e-05,
+        "attained": true,
+        "cost_frac": 0.2772022262607508,
+        "err_rel_tol": 0.8230184836788735,
+        "success": 0.8604166666666667,
+        "precision": 0.6679340937896071,
+        "recall": 0.7550143266475645,
+        "cost_to_95pct_success": 0.3466330877931706
+      },
+      "voc_seq": {
+        "param": 1.778279410038923e-05,
+        "attained": true,
+        "cost_frac": 0.27969049407560176,
+        "err_rel_tol": 0.8230184836788735,
+        "success": 0.8604166666666667,
+        "precision": 0.6675110829639012,
+        "recall": 0.7550143266475645,
+        "cost_to_95pct_success": 0.38354459091433574
+      }
+    },
+    "permuted_labels": {
+      "voc": {
+        "param": 9.999999999999999e-06,
+        "attained": true,
+        "cost_frac": 0.2534598438552261,
+        "err_rel_tol": 6.024283438472782,
+        "success": 0.6129166666666667,
+        "precision": 0.06502816180235535,
+        "recall": 0.27292263610315187,
+        "cost_to_95pct_success": 0.8717186783206324
+      },
+      "voc_seq": {
+        "param": 2.3713737056616554e-05,
+        "attained": true,
+        "cost_frac": 0.2773587080561992,
+        "err_rel_tol": 7.670859412569436,
+        "success": 0.6054166666666667,
+        "precision": 0.07514088916718847,
+        "recall": 0.25787965616045844,
+        "cost_to_95pct_success": 1.220807318499841
+      }
+    },
+    "descriptors_only": {
+      "voc": {
+        "param": 1.778279410038923e-05,
+        "attained": true,
+        "cost_frac": 0.28210076280158763,
+        "err_rel_tol": 1.8578016934496024,
+        "success": 0.8529166666666667,
+        "precision": 0.655085281111813,
+        "recall": 0.7428366762177651,
+        "cost_to_95pct_success": 0.34392529278815176
+      },
+      "voc_seq": {
+        "param": 1.778279410038923e-05,
+        "attained": true,
+        "cost_frac": 0.28315095346221564,
+        "err_rel_tol": 1.8578016934496024,
+        "success": 0.8529166666666667,
+        "precision": 0.6554993678887484,
+        "recall": 0.7428366762177651,
+        "cost_to_95pct_success": 0.3655408293196208
+      }
+    },
+    "simulation_only": {
+      "voc": {
+        "param": 1.778279410038923e-05,
+        "attained": true,
+        "cost_frac": 0.27531583629539985,
+        "err_rel_tol": 0.4290027540109957,
+        "success": 0.8616666666666667,
+        "precision": 0.6758488148622678,
+        "recall": 0.755730659025788,
+        "cost_to_95pct_success": 0.34593110981444136
+      },
+      "voc_seq": {
+        "param": 1.778279410038923e-05,
+        "attained": true,
+        "cost_frac": 0.27615650315742196,
+        "err_rel_tol": 0.4290027540109957,
+        "success": 0.8616666666666667,
+        "precision": 0.6758488148622678,
+        "recall": 0.755730659025788,
+        "cost_to_95pct_success": 0.3692169062035438
+      }
+    },
+    "target_blind": {
+      "voc": {
+        "param": 1.778279410038923e-05,
+        "attained": true,
+        "cost_frac": 0.2914562422961148,
+        "err_rel_tol": 0.8639863609678142,
+        "success": 0.8533333333333334,
+        "precision": 0.6388206388206388,
+        "recall": 0.7449856733524355,
+        "cost_to_95pct_success": 0.35307228059067536
+      },
+      "voc_seq": {
+        "param": 1.778279410038923e-05,
+        "attained": true,
+        "cost_frac": 0.29454194763192504,
+        "err_rel_tol": 0.8639863609678142,
+        "success": 0.8533333333333334,
+        "precision": 0.6392132759680393,
+        "recall": 0.7449856733524355,
+        "cost_to_95pct_success": 0.3943615655918782
+      }
+    },
+    "leave_family_out": {
+      "density": {
+        "held_out": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2681963314280024,
+            "err_rel_tol": 0.47261307924275786,
+            "success": 0.8240740740740741,
+            "precision": 0.6496350364963503,
+            "recall": 0.6953125,
+            "cost_to_95pct_success": 0.34860067390265864
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2693160004410724,
+            "err_rel_tol": 0.47261307924275786,
+            "success": 0.8240740740740741,
+            "precision": 0.6496350364963503,
+            "recall": 0.6953125,
+            "cost_to_95pct_success": 0.39668925190318366
+          }
+        },
+        "reference_on_family": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2735267455655966,
+            "err_rel_tol": 0.47315988388360813,
+            "success": 0.8240740740740741,
+            "precision": 0.644927536231884,
+            "recall": 0.6953125,
+            "cost_to_95pct_success": 0.3453200154276941
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2746464145786666,
+            "err_rel_tol": 0.47315988388360813,
+            "success": 0.8240740740740741,
+            "precision": 0.644927536231884,
+            "recall": 0.6953125,
+            "cost_to_95pct_success": 0.4012330438520133
+          }
+        }
+      },
+      "k_out": {
+        "held_out": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.25742157858723635,
+            "err_rel_tol": 0.35041225446434116,
+            "success": 0.8365384615384616,
+            "precision": 0.6666666666666666,
+            "recall": 0.711864406779661,
+            "cost_to_95pct_success": 0.3473739177940937
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2591171719172216,
+            "err_rel_tol": 0.35041225446434116,
+            "success": 0.8365384615384616,
+            "precision": 0.6666666666666666,
+            "recall": 0.711864406779661,
+            "cost_to_95pct_success": 0.3940661492858796
+          }
+        },
+        "reference_on_family": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2600268204035149,
+            "err_rel_tol": 0.35970814737710183,
+            "success": 0.8333333333333334,
+            "precision": 0.6510416666666666,
+            "recall": 0.7062146892655368,
+            "cost_to_95pct_success": 0.34700380706337924
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2610458999103176,
+            "err_rel_tol": 0.35970814737710183,
+            "success": 0.8333333333333334,
+            "precision": 0.6510416666666666,
+            "recall": 0.7062146892655368,
+            "cost_to_95pct_success": 0.4076504279302887
+          }
+        }
+      },
+      "kf_inactivation": {
+        "held_out": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2819783516921253,
+            "err_rel_tol": 0.39049119410726774,
+            "success": 0.88,
+            "precision": 0.700507614213198,
+            "recall": 0.7885714285714286,
+            "cost_to_95pct_success": 0.34063811745394884
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2819783516921253,
+            "err_rel_tol": 0.39049119410726774,
+            "success": 0.88,
+            "precision": 0.700507614213198,
+            "recall": 0.7885714285714286,
+            "cost_to_95pct_success": 0.357295336851373
+          }
+        },
+        "reference_on_family": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.29886519987411686,
+            "err_rel_tol": 0.3570569207922875,
+            "success": 0.8933333333333333,
+            "precision": 0.6859903381642513,
+            "recall": 0.8114285714285714,
+            "cost_to_95pct_success": 0.3423715748711555
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.3016657582636975,
+            "err_rel_tol": 0.3570569207922875,
+            "success": 0.8933333333333333,
+            "precision": 0.6826923076923077,
+            "recall": 0.8114285714285714,
+            "cost_to_95pct_success": 0.3808580980582043
+          }
+        }
+      },
+      "kf_loss": {
+        "held_out": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.28867933143418983,
+            "err_rel_tol": 0.5782264634476068,
+            "success": 0.8521505376344086,
+            "precision": 0.6046511627906976,
+            "recall": 0.7393364928909952,
+            "cost_to_95pct_success": 0.3407864994195088
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2921116685400021,
+            "err_rel_tol": 0.5782264634476068,
+            "success": 0.8521505376344086,
+            "precision": 0.6046511627906976,
+            "recall": 0.7393364928909952,
+            "cost_to_95pct_success": 0.3529336085077327
+          }
+        },
+        "reference_on_family": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2709824624262438,
+            "err_rel_tol": 0.4707356702799475,
+            "success": 0.8548387096774194,
+            "precision": 0.6408163265306123,
+            "recall": 0.7440758293838863,
+            "cost_to_95pct_success": 0.3413229003647515
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.27885899754410304,
+            "err_rel_tol": 0.4707356702799475,
+            "success": 0.8548387096774194,
+            "precision": 0.6408163265306123,
+            "recall": 0.7440758293838863,
+            "cost_to_95pct_success": 0.37206736926702016
+          }
+        }
+      },
+      "kf_recovery": {
+        "held_out": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.278691824258564,
+            "err_rel_tol": 0.5438419222125566,
+            "success": 0.8186274509803921,
+            "precision": 0.6201550387596899,
+            "recall": 0.6837606837606838,
+            "cost_to_95pct_success": 0.35264453110325694
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.27853662294066733,
+            "err_rel_tol": 0.5438419222125566,
+            "success": 0.8186274509803921,
+            "precision": 0.625,
+            "recall": 0.6837606837606838,
+            "cost_to_95pct_success": 0.3870216326849936
+          }
+        },
+        "reference_on_family": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2725130281494376,
+            "err_rel_tol": 0.5209870026528735,
+            "success": 0.8284313725490197,
+            "precision": 0.6507936507936508,
+            "recall": 0.7008547008547008,
+            "cost_to_95pct_success": 0.365367763080895
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2725130281494376,
+            "err_rel_tol": 0.5209870026528735,
+            "success": 0.8284313725490197,
+            "precision": 0.6507936507936508,
+            "recall": 0.7008547008547008,
+            "cost_to_95pct_success": 0.4204915822214314
+          }
+        }
+      },
+      "nat_inactivation": {
+        "held_out": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.28147875686920576,
+            "err_rel_tol": 0.6262908143295901,
+            "success": 0.8371212121212122,
+            "precision": 0.6242774566473989,
+            "recall": 0.7058823529411765,
+            "cost_to_95pct_success": 0.35922808144224594
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.28620755298435396,
+            "err_rel_tol": 0.6262908143295901,
+            "success": 0.8371212121212122,
+            "precision": 0.6242774566473989,
+            "recall": 0.7058823529411765,
+            "cost_to_95pct_success": 0.389772484351141
+          }
+        },
+        "reference_on_family": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.282482377852463,
+            "err_rel_tol": 4.149120278208366,
+            "success": 0.8560606060606061,
+            "precision": 0.6363636363636364,
+            "recall": 0.7320261437908496,
+            "cost_to_95pct_success": 0.3602134313093454
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.284737010706465,
+            "err_rel_tol": 4.149120278208366,
+            "success": 0.8560606060606061,
+            "precision": 0.6363636363636364,
+            "recall": 0.7320261437908496,
+            "cost_to_95pct_success": 0.39518352063214585
+          }
+        }
+      },
+      "none": {
+        "held_out": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.266966956629399,
+            "err_rel_tol": 0.4170315227712386,
+            "success": 0.8706896551724138,
+            "precision": 0.7027027027027027,
+            "recall": 0.7722772277227723,
+            "cost_to_95pct_success": 0.3225491113950863
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.2687743583689448,
+            "err_rel_tol": 0.4170315227712386,
+            "success": 0.8706896551724138,
+            "precision": 0.7058823529411765,
+            "recall": 0.7722772277227723,
+            "cost_to_95pct_success": 0.3303326986717881
+          }
+        },
+        "reference_on_family": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.26772043712154736,
+            "err_rel_tol": 0.41018310580952044,
+            "success": 0.8735632183908046,
+            "precision": 0.7104072398190046,
+            "recall": 0.7772277227722773,
+            "cost_to_95pct_success": 0.32574735237300356
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.268088016489758,
+            "err_rel_tol": 0.41018310580952044,
+            "success": 0.8735632183908046,
+            "precision": 0.7104072398190046,
+            "recall": 0.7772277227722773,
+            "cost_to_95pct_success": 0.33809224535844057
+          }
+        }
+      },
+      "temperature": {
+        "held_out": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.31014669766265535,
+            "err_rel_tol": 0.3861659666800877,
+            "success": 0.8776041666666666,
+            "precision": 0.6208053691275168,
+            "recall": 0.7939914163090128,
+            "cost_to_95pct_success": 0.3698168356970331
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.3269798557454724,
+            "err_rel_tol": 0.3861659666800877,
+            "success": 0.8776041666666666,
+            "precision": 0.625,
+            "recall": 0.7939914163090128,
+            "cost_to_95pct_success": 0.45501455982052
+          }
+        },
+        "reference_on_family": {
+          "voc": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.28977980317475205,
+            "err_rel_tol": 0.3494513425443924,
+            "success": 0.890625,
+            "precision": 0.6959706959706959,
+            "recall": 0.8154506437768241,
+            "cost_to_95pct_success": 0.3545360348640054
+          },
+          "voc_seq": {
+            "param": 1.778279410038923e-05,
+            "attained": true,
+            "cost_frac": 0.29217215257158796,
+            "err_rel_tol": 0.3494513425443924,
+            "success": 0.890625,
+            "precision": 0.6959706959706959,
+            "recall": 0.8154506437768241,
+            "cost_to_95pct_success": 0.4067804347466964
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,10 @@
 # STATUS — Physics-to-Life
 
-_Last updated: 2026-09-15 14:10 UTC, V1 main run complete; preregistered verdicts H1/H3/H5/H8/H10 in; H9 (cross-formulation) and the exploratory restoration variant still computing._
+_Last updated: 2026-09-15 17:00 UTC, V1 complete: main run analysed, all six preregistered verdicts in, final report to the owner written (`research-log/2026-09-15-v1-final-report.md`). Awaiting the owner's decision on the next rung._
 
 ## Current objective
+**V1 is complete and reported (2026-09-15); the next rung awaits the owner's decision — see the final report §6.**
+
 V0 passed its preregistered criteria **within one synthetic model family and only under
 sparse, causally concentrated closure error**. The programme has crossed into
 experimentally grounded biology: **V1 = *Drosophila* ion-channel → membrane bridge on the
@@ -35,7 +37,20 @@ benchmark (V1a).
   restorations do not transfer to the level-B formulation (1/11 for every method).
 - **Falsification controls**: permuted labels collapse the router; leave-one-family-out
   transfers; simulation features and descriptors are redundant.
-- **H9-V1** (level-B truth) computing; final reading and report follow.
+- **H9-V1 passes for the VoC router** (precursor): precision under the level-B truth 0.80 vs
+  0.65 under A and above every written rule's (best 0.75); a narrow, base-rate-inflated pass
+  (every policy's precision rises under B; the two truths disagree on 37 % of labels; the
+  router's error rises 0.72 → 1.24). Hybrids falsified.
+- **Final report** (`research-log/2026-09-15-v1-final-report.md`): what survived (machinery, a
+  transferable learned ranking, learned signals over written rules, routed refinement as a
+  restoration search engine), what failed (the preregistered proposition H1, the crossing, H5,
+  H8's self-knowledge, "target-conditioned", dynamics-based OOD detection), what was
+  simulator-specific (the fine levels, 37 % of labels, restorations, the metric's tail, the inert
+  damage), what reproduced published biology (the published model only), what changed vs V0
+  (ensemble disagreement went from useless to the best signal; no crossing frontiers).
+  **Recommendation: no circuit / MaleCNS rung on this evidence**; next rung = a fine level that
+  answers to measured channel kinetics, or a controller re-centred on calibrated ensemble
+  disagreement per cost (owner decides, preregistration §15).
 
 ## V1 progress (2026-09-14)
 - **Published model ported verbatim and reproduced** (`experiments/v1_channel/results/

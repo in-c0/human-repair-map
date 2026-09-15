@@ -300,3 +300,14 @@ system.
      as a supplementary (not decisive) comparison, as in H3-V1.
   6. *Reserved set:* reported by `verdicts_extended.py` as a replication line at the operating
      points already selected on validation (no new selection).
+  7. *After the verdicts were read (2026-09-15 12:55 UTC onward; labelled post-hoc in the
+     research log):* `verdicts_supplement.py` re-runs the H1-V1 comparison with baselines that
+     cannot attain a budget on validation listed instead of compared at their cheapest point
+     (the coded rule's fallback); H1-V1 is falsified under both readings. A descriptive
+     breakdown of the principal-point error by family, target and worst rows (research log
+     §3.1) and a cosmetic re-plot of the Pareto figures from the run's own tables
+     (`replot.py`) were also made after the verdicts; no verdict, threshold or criterion changed.
+- Main run finished 2026-09-15 12:50 UTC; post-main chain (verdicts, audit, falsification,
+  restoration, cross-formulation, extended verdicts) finished 16:48 UTC. Verdicts: H1-V1
+  falsified, H3-V1 not passed, H5-V1 falsified, H8-V1 not passed, H9-V1 passes (VoC router),
+  H10-V1 not testable as preregistered (research log `2026-09-15-v1-main-run.md`).

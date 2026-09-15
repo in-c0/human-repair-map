@@ -1,9 +1,9 @@
 # Review package — milestone V1 (target-conditioned adaptive fidelity on the published Günay 2015 *Drosophila* aCC motoneuron)
 
-**Status: main run complete (2026-09-15 12:50 UTC); H1/H3 verdicts final; H5/H8/H9/H10 and the
-final reading are filled in as the post-main chain completes.** Every number marked *(pilot)*
-comes from the pilot/dress rehearsal and is not a result. For an external reviewer with no
-conversational memory; everything cited is in the repository.
+**Status: COMPLETE (main run 2026-09-15 12:50 UTC; post-main analyses 16:48 UTC). All six
+preregistered verdicts are in; the owner's report is `2026-09-15-v1-final-report.md`.** Every
+number marked *(pilot)* comes from the pilot/dress rehearsal and is not a result. For an external
+reviewer with no conversational memory; everything cited is in the repository.
 
 ## 1. Objective
 Can a target-conditioned learned controller determine when the published reduced (HH)
@@ -126,7 +126,9 @@ validation split; `verdicts.md`, `verdicts_supplement.md`, `summary.json`, `tabl
 | H10 exploratory (NaT loss, 11 functionally damaged): restored on fine A, routed / medium / fine | 0.73 / 0.09 / 0.73; routed cost 0.26 of fine; medium claims failing fine A 0.86; transfer to formulation B 0.09 for every method |
 | falsification: permuted labels / target-blind / simulation-only (err at 30 %, precision) | 6.02, 0.07 / 0.86, 0.64 / 0.43, 0.68 |
 
-H9 (`cross_formulation/`) is filled in when the level-B labelling completes.
+| H9: VoC precision under A → under B; written rules' best under B; labels needing refinement A / B; minimal-set agreement | 0.65 → 0.80; 0.75; 0.55 / 0.73; 0.63 |
+| H9: VoC err/tol and false-safe under A → B | 0.72 → 1.24; 0.12 → 0.25 |
+| level-B labelling compute | 4726 s on 4 processes (200 episodes) |
 
 ## 6. Failure cases and discarded results (so far)
 - First hierarchy: the fits satisfied the step families while being degenerate at rest
@@ -198,7 +200,24 @@ the routed simulator did what the proposition says. But restorations found under
 restore the formulation-B cell in 1/11 cases for every method: what "compensates" a sodium
 loss is a property of the constructed fine formulation, not of the cell.
 
-*(H9 and the final reading follow when the chain completes.)*
+**H9-V1: passes for the VoC router (research log §7), hybrids falsified.** Under the level-B
+truth the router's precision is 0.80 (0.65 under A) and above every written rule's (best
+0.75). Three caveats keep this a precursor result: every policy's precision rises under B
+because B's minimal sets are larger (73 % vs 55 % of labels), the margin over the sensitivity
+rule is narrow (1.12× at equal recall), and the two truths disagree on 37 % of labels — what
+transfers is the router's ranking relative to written rules, not an error guarantee (its error
+at 30 % rises 0.72 → 1.24, its false-safe rate doubles).
+
+**Final reading (research log §8; owner's report `2026-09-15-v1-final-report.md`).** Survived:
+the machinery, the router as a learned and transferable ranking, learned signals over written
+rules, routed refinement as a restoration search engine. Failed: the preregistered proposition
+(H1), the crossing (H3), compilation with distrust (H5), the hybrid's self-knowledge (H8), the
+"target-conditioned" qualifier, dynamics-based OOD detection. Simulator-specific: the fine
+levels, 37 % of the labels, restorations, the metric's tail, the inert damage. Reproduced
+biology: the published model against its own anchors and one independent report, nothing
+beyond it. The evidence does not justify a circuit / MaleCNS rung; the next rung should make
+the fine level answer to measured channel kinetics, or re-centre the controller on calibrated
+ensemble disagreement per cost.
 
 ## 8. Threats to validity
 - Simulation fidelity only: the fine levels are constructions fitted to the published model;
@@ -219,7 +238,31 @@ loss is a property of the constructed fine formulation, not of the cell.
   H1/H3 criterion, and all were fixed before any main-run result existed.
 
 ## 9. Open questions
-*(after the main run)*
+- Why does the ensemble spread beat the point estimate here but not at V0? Hypothesis: the V1
+  labels are zero-inflated with rare catastrophic gains (qualitative flips of the published
+  model), which a mean regresses toward zero while members disagree; testable by comparing the
+  two signals' rankings on the catastrophic rows (log §3.1) and on a label distribution without
+  flips.
+- Is the router's ranking-transfer under formulation B (H9) worth anything when the two
+  formulations disagree on 37 % of the labels? A third formulation, or a data-constrained fine
+  level, would tell.
+- Would a median or success-rate criterion, registered alongside the mean, have changed H1?
+  The reserved set says the router is at parity with the spread trigger at 30 % and ahead of
+  the classifier at 50 % on the mean as well; the question is not whether the router is bad
+  but whether the mean is the right decision metric for a routing controller.
+- Does any distrust gate other than "never trust" become calibrated with more training
+  episodes, or is the emulator's within-tolerance rate the binding constraint (28 % ID)?
+- The exploratory restoration result (routed = fine at 26 % of the cost) is the only place the
+  routed simulator did what the proposition says; it is exploratory and under one formulation.
+  Preregister it, with the transfer check, before it is claimed.
 
 ## 10. Next proposed actions
-*(after the main run; the owner decides on the V2 rung per preregistration §15)*
+The owner decides on the V2 rung (preregistration §15). Two options are consistent with the
+evidence (final report §6): (1) a data-constrained fine level — a channel whose Markov kinetics
+are measured (Shaker/Shal single-channel or gating-current data), with the ensemble-spread
+trigger as the incumbent and a median/success-rate secondary metric registered alongside the
+mean; (2) re-centre the controller on calibrated ensemble disagreement per cost on this system,
+with the reserved set and the level-B truth as replication and transfer checks. A circuit or
+MaleCNS rung is not recommended on this evidence. Paper 0 is rewritten around the negative
+result and the machinery (publication roadmap); no manuscript claims "target-conditioned value
+of computation".

@@ -49,9 +49,10 @@ def merge(damage: Intervention, x: np.ndarray) -> Intervention:
     iv.name = "restore"; return iv
 
 
-def evaluate(spec, inst, iv, protocol, method, models, names, settings, voc_lambda):
+def evaluate(spec, inst, iv, protocol, method, models, names, settings, voc_lambda, tol_map=None):
     """Targets under one method; returns (targets, cost, levels used)."""
     grp = TargetGroup("cclamp", protocol, (10.0, 510.0), TARGETS)
+    tol_map = tol_map or {t: TOL_REL for t in TARGETS}
     if method == "fine":
         r = simulate(inst, protocol, {n: 2 for n in names}, iv, settings); return compute_targets(r, grp), r["cost"], tuple(names)
     base = simulate(inst, protocol, {n: 1 for n in names}, iv, settings); cost = base["cost"]
@@ -59,7 +60,7 @@ def evaluate(spec, inst, iv, protocol, method, models, names, settings, voc_lamb
         return compute_targets(base, grp), cost, ()
     # routed: one-shot VoC decision for the union of the two targets
     f = base_features(base, grp, names)
-    g = {"features_by_subset": {(): f}, "name": "cclamp", "cost_base": base["cost"], "targets": TARGETS}
+    g = {"features_by_subset": {(): f}, "name": "cclamp", "cost_base": base["cost"], "targets": TARGETS, "tol": tol_map}
     ep = {"interv": iv}
     inc = models["cost_increment"]
     S = set()
@@ -89,9 +90,11 @@ def within(y, y_wt):
 
 def search(spec, inst, damage, y_wt, protocol, method, models, names, settings, rng, n_random=24, n_local=16, voc_lambda=1e-6):
     best_x, best_f, cost, n_eval = None, np.inf, 0.0, 0
+    # tolerance in target-scale units (as the router sees it): relative 5 % with the absolute floors
+    tol_map = {t: max(TOL_REL, TOL_ABS[t] / max(abs(y_wt[t]), 1e-9)) for t in TARGETS}
     cands = [np.zeros(len(SEARCH_KEYS))] + [rng.uniform(-LOG_RANGE, LOG_RANGE, size=len(SEARCH_KEYS)) for _ in range(n_random - 1)]
     for x in cands:
-        y, c, _ = evaluate(spec, inst, merge(damage, x), protocol, method, models, names, settings, voc_lambda); cost += c; n_eval += 1
+        y, c, _ = evaluate(spec, inst, merge(damage, x), protocol, method, models, names, settings, voc_lambda, tol_map); cost += c; n_eval += 1
         f = objective(y, y_wt, x)
         if f < best_f:
             best_x, best_f = x, f
@@ -100,7 +103,7 @@ def search(spec, inst, damage, y_wt, protocol, method, models, names, settings, 
         k = it % len(SEARCH_KEYS); improved = False
         for sgn in (+1, -1):
             x = best_x.copy(); x[k] = np.clip(x[k] + sgn * step, -LOG_RANGE, LOG_RANGE)
-            y, c, _ = evaluate(spec, inst, merge(damage, x), protocol, method, models, names, settings, voc_lambda); cost += c; n_eval += 1
+            y, c, _ = evaluate(spec, inst, merge(damage, x), protocol, method, models, names, settings, voc_lambda, tol_map); cost += c; n_eval += 1
             f = objective(y, y_wt, x)
             if f < best_f:
                 best_x, best_f, improved = x, f, True

@@ -179,3 +179,22 @@ the preregistered pilot-audit rule §14 (iii) after the pilot, not before.
 Projected main-run generation: 11.4 h on 4 processes exhaustive, ~7 h with the routable rule.
 **Pilot launched 2026-09-15 02:02 UTC** (`v1_gunay_pilot`: 120 / 60 / 4×30 episodes, seeds
 10 000+ / 20 000+ / 30 000+, exhaustive labelling, 4 processes).
+
+## 11. (2026-09-15) Pilot audit, corrections, preregistration freeze, main run
+The pilot (120/60/4×30, exhaustive labelling, 3.5 h on 4 processes) was audited against
+preregistration §14. Findings and the four corrections (all recorded in the preregistration's
+audit record before the freeze): negative controls 0.3 % of minimal sets with the raw 2×-floor
+rule and 100 % within max(2× floor, 1 % of tolerance) → tolerance-relative noise floor and the
+routable {Kf, NaT} rule for the main run; peak_current uninformative at 5 % (93 % need
+refinement; fit floors exceed 5 % for peak currents) → 10 %; VoC regressor with raw gains
+(72 % zeros, maximum 118 tolerance units) had R² = −3.6 while the V0-style hard classifier
+dominated → log-compressed gain/tolerance label with tolerance as an input; threshold grids
+too coarse (operating points under-spent budgets by 27 %) → 8 per decade. The cached pilot
+was relabelled (no simulation) and re-analysed: negative controls 0 % of minimal sets, all
+targets informative (peak_current 0.78). Dress-rehearsal verdicts (not results): learned VoC
+one-shot at the 30 % budget err/tol 0.31 (success 0.90, precision 0.63, recall 0.83) vs the
+ensemble-uncertainty trigger 0.18; parity with the hard-label classifier at 50 %; precision at
+equal recall 2.5× (discrepancy) and 2.0× (sensitivity). Detectors: the range guard detects the
+descriptor-only shifts trivially (AUROC 1.0 on opening_step/activation_rate), kNN density is
+worse than chance on them, ensemble spread and the discrepancy monitor ~0.5.
+**Preregistration frozen (v1.1, commit 32a39d1) and the main run launched at 05:57 UTC.**

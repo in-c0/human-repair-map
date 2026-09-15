@@ -1,6 +1,6 @@
 # V1 preregistration — target-conditioned adaptive fidelity on the Günay 2015 *Drosophila* aCC motoneuron
 
-**Status: FROZEN v1.1 (2026-09-15 06:05 UTC) — see §16. Changes after this point are post-hoc and marked as such.**
+**Status: FROZEN v1.1 (2026-09-15 05:57 UTC, commit `32a39d1`) — see §16. Changes after this point are post-hoc and marked as such.**
 Rules of this document: everything in §2–§15 is fixed at the freeze. After the freeze, the only
 allowed changes are (a) the pilot-audit corrections listed in §14 *before* the main run, and
 (b) changes marked **post-hoc** in the results. Thresholds, operating points, seeds, effect sizes
@@ -235,8 +235,9 @@ result and the next step is a second real parameterisation (Level-B-style) rathe
 system.
 
 ## 16. Freeze record
-- **v1.1 freeze: 2026-09-15 06:05 UTC**, frozen on top of commit `36ed0c6` (corrected pilot
-  outputs; this document's own commit follows immediately and is the freeze commit).
+- **v1.1 freeze: 2026-09-15 05:57 UTC, freeze commit `32a39d1`** (on top of `36ed0c6`, the corrected
+  pilot outputs). Clerical amendment after the freeze: the time stamp first written as 06:05 was
+  corrected to the commit's actual time; no protocol content changed.
 - Hierarchy: `experiments/v1_channel/hierarchy/gunay2015_fine.json` as committed at the freeze —
   level A Kf 5.1 % (3.3 % under the spike waveform), NaT 2.5 % (coupling a = 3 fixed by design);
   level B Kf 9.7 %, NaT 6.3 % (RMS over active samples on the fit family).
@@ -253,4 +254,5 @@ system.
   behind the AdaLED-style ensemble-uncertainty trigger at 15 % and 30 %; selection precision at
   equal recall was 2.0–2.5× the discrepancy and sensitivity baselines'. These numbers set no
   threshold and change no criterion; the main run decides H1-V1 and H3-V1 as written.
-- Post-hoc changes: none.
+- Post-hoc changes: none (the time-stamp correction above is clerical).
+- Main run launched 2026-09-15 05:57:45 UTC (`config_gunay_main.yaml`, 4 processes).

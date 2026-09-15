@@ -33,10 +33,17 @@ benchmark (V1a).
   Kuo–Bean coupling fixed by design for NaT, since a free coupling collapses onto the HH gate).
   The pilot hierarchy has the medium outside tolerance for ~half of the preview targets, split
   between Kf-fixable and NaT-fixable — the informative regime.
-- **Pipeline smoke-tested end to end**; **pilot running** (120/60/4×30 episodes, launched
-  2026-09-15 02:02 UTC). Then: audit → corrections → preregistration freeze → main run.
-- **Preregistration draft v1** written (`docs/experiments/v1_preregistration.md`); frozen after
-  the pilot audit.
+- **Pilot run and audited** (120/60/4×30 episodes, 3.5 h). Four preregistered corrections
+  recorded before the freeze: tolerance-relative noise floor (negative-control refinements then
+  0 % of minimal sets → main run labels the {Kf, NaT} subsets), peak-current tolerance 10 %
+  (all targets in the informative band), log-compressed VoC label in tolerance units (the raw
+  regression had R² < 0), finer threshold grids. Dress rehearsal (not a result): the learned
+  router at parity with the V0-style classifier at 50 % budget, behind the ensemble-uncertainty
+  trigger at 15–30 %; selection precision 2–2.5× the written rules at equal recall.
+- **Preregistration FROZEN v1.1** (`docs/experiments/v1_preregistration.md`, commit `32a39d1`)
+  and the **main run launched 2026-09-15 05:57 UTC** (400 / 200 / 4×60 / 100 reserved episodes,
+  disjoint seeds; ~7–10 h on 4 processes). Then: verdicts, cross-formulation (level B),
+  H5/H8 closures, functional restoration, falsification attempts, review package.
 
 ## Latest result (V0, three runs)
 - **Central finding, positive half:** with a quasi-static cheap model, an adaptive

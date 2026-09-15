@@ -1,6 +1,6 @@
 # V1 preregistration — target-conditioned adaptive fidelity on the Günay 2015 *Drosophila* aCC motoneuron
 
-**Status: DRAFT v1 (to be frozen before the main run; the freeze record in §16 is empty until then).**
+**Status: FROZEN v1.1 (2026-09-15 06:05 UTC) — see §16. Changes after this point are post-hoc and marked as such.**
 Rules of this document: everything in §2–§15 is fixed at the freeze. After the freeze, the only
 allowed changes are (a) the pilot-audit corrections listed in §14 *before* the main run, and
 (b) changes marked **post-hoc** in the results. Thresholds, operating points, seeds, effect sizes
@@ -235,6 +235,22 @@ result and the next step is a second real parameterisation (Level-B-style) rathe
 system.
 
 ## 16. Freeze record
-- v1 freeze: commit *(to fill)*, date *(to fill)*, fit floors *(to fill)*, main-run seeds
-  untouched: *(to confirm)*.
-- v1.1 (post-pilot corrections): *(to fill)*.
+- **v1.1 freeze: 2026-09-15 06:05 UTC**, frozen on top of commit `36ed0c6` (corrected pilot
+  outputs; this document's own commit follows immediately and is the freeze commit).
+- Hierarchy: `experiments/v1_channel/hierarchy/gunay2015_fine.json` as committed at the freeze —
+  level A Kf 5.1 % (3.3 % under the spike waveform), NaT 2.5 % (coupling a = 3 fixed by design);
+  level B Kf 9.7 %, NaT 6.3 % (RMS over active samples on the fit family).
+- Pilot corrections 1–4 (§14) are part of the frozen protocol. Tolerances: 5 % relative with the
+  absolute floors of §3, except peak_current 10 %. Noise floor max(2× numerical floor, 1 % of
+  tolerance). Main-run labelling over the {Kf, NaT} subsets with Ks/NaP charged their measured
+  single-refinement increments. Reference integrator LSODA rtol 1e-9 / atol 1e-11.
+- Main-run configuration: `experiments/v1_channel/config_gunay_main.yaml` — seeds offset 100 000
+  (train 110 000+, test 120 000+, OOD 130 000 + 1000·i, reserved 140 000+), sizes 400 / 200 /
+  4×60 / 100. **No main-run seed has been simulated before this freeze** (the pilot used offsets
+  0; the smoke used the pilot streams at reduced sizes).
+- Dress rehearsal on the pilot (not a result; 120 training episodes): the learned one-shot
+  VoC router was at parity with the V0-style hard-label classifier at the 50 % budget and
+  behind the AdaLED-style ensemble-uncertainty trigger at 15 % and 30 %; selection precision at
+  equal recall was 2.0–2.5× the discrepancy and sensitivity baselines'. These numbers set no
+  threshold and change no criterion; the main run decides H1-V1 and H3-V1 as written.
+- Post-hoc changes: none.

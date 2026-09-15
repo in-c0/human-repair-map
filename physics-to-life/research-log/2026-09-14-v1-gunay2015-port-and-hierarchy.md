@@ -251,3 +251,17 @@ on 4/4 OOD families with CIs excluding 0, but its discrepancy monitor's invalidi
 below the emulator's ensemble spread 0.74), H9 falsified under the literal reading (precision
 under B 0.70 ≥ 0.8 × 0.57, but the sensitivity rule reaches 0.74 under B at its own 30 % point;
 at equal recall the router is ahead), H10 not testable. The main run decides.
+
+### 12.1 Training split of the main run — read-only label audit (09:45 UTC; no selection made)
+
+The train cache (400 episodes, seeds 110 000–110 399, families 39–62 each) was read once, without
+touching the test, OOD or reserved streams, to confirm that the frozen labelling rules behave as
+the pilot audit predicted:
+
+- Negative controls: Ks/NaP appear in **0** minimal sets (the routable rule of correction 1).
+- Current-clamp targets need refinement in 35–47 % of cases per family, almost entirely through
+  NaT (35–47 %); Kf enters a current-clamp minimal set in only 3–12 %. Voltage-clamp and recovery
+  groups need Kf in 58–74 % and 67–93 % of targets, NaT in 56–64 % — the informative band.
+- `kf_loss` behaves like `none` in current clamp (non-empty minimal set 0.40 vs 0.40; Kf needed
+  in 0.03 vs 0.11), as §12 predicted from the published model's small Kf current.
+These are properties of the frozen generator; they set no threshold and change no criterion.

@@ -1,0 +1,56 @@
+{
+  "timestamp_utc": "2026-09-15T01:14:23Z",
+  "git_commit": "8055db3cbb7ca82a4094cdd00eb2ed4ae80a6eef",
+  "git_branch": "claude/physics-to-life-init-fhd8x8",
+  "git_dirty": true,
+  "python": "3.11.15 (main, Mar  3 2026, 09:26:23) [GCC 13.3.0]",
+  "packages": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.11.2",
+    "pandas": "3.0.5",
+    "networkx": "3.6.1",
+    "pyyaml": "6.0.3"
+  },
+  "platform": "Linux-6.18.44-fc-v33-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "processor": "x86_64",
+  "cpu_count": 4,
+  "hostname": "vm",
+  "seed": 0,
+  "config": {
+    "run_id": "smoke_gunay",
+    "seed": 0,
+    "system": "gunay2015",
+    "hierarchy_params": "hierarchy/gunay2015_fine.json",
+    "q10": 3.0,
+    "calibrate_medium": false,
+    "base_level": 1,
+    "tol_rel": 0.05,
+    "n_train": 12,
+    "n_test": 6,
+    "n_ood": 4,
+    "id_families": [
+      "none",
+      "density",
+      "kf_loss",
+      "kf_inactivation",
+      "kf_recovery",
+      "nat_inactivation",
+      "temperature",
+      "k_out"
+    ],
+    "ood_families": [
+      "block",
+      "opening_step",
+      "combo",
+      "activation_rate"
+    ],
+    "instance_g_cv": 0.2,
+    "instance_rate_cv": 0.1,
+    "n_proc": 4,
+    "s_min": 0.05,
+    "ensemble_members": 2
+  }
+}

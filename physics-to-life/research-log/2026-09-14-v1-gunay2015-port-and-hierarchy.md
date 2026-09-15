@@ -150,3 +150,16 @@ level alone leaves current-clamp behaviour unchanged at baseline (its difference
 voltage-clamp targets: 3–8 % RMS) — so at baseline "which physics matters" is already
 target-dependent: NaT for spiking targets, Kf for Kf-current targets. This is the hierarchy
 taken into the pilot; a = 2 and a = 5 variants are fitted as robustness checks.
+
+### Validation of the pilot hierarchy (`experiments/v1_channel/results/hierarchy_validation/`, 2026-09-15)
+- Channel currents, medium vs fine A (max |ΔI| / peak): Kf 12–15 % (3–4 % RMS), NaT 10–14 % (max 27 %);
+  coarse vs fine: ×3–15.
+- Current clamp (−1 … 40 pA), medium vs fine A: worst Δspike count 7, worst Δlatency 26 ms (near
+  rheobase), spike-train V RMSE up to 14 mV; refining Kf alone leaves current-clamp targets
+  unchanged, refining NaT alone reproduces fine A. Fine B differs strongly from fine A (Δspikes
+  up to 28) — the alternate truth is a genuine shift.
+- Family preview (3 instances × 4 groups): 47–64 % of targets have the medium outside tolerance
+  (median err/tol 0.8–1.9); 19–36 % are fixed by refining Kf alone, 25–31 % by NaT alone — the
+  informative regime of preregistration §14 (iii), with target-dependent "which physics".
+- Per-run wall on one core: medium 0.7 s, fine-NaT-only 2.8 s, fine-Kf-only 7.8 s, fine A 16 s,
+  fine B 19 s (530-ms current clamp). The pilot goes ahead exhaustively (16 subsets) as preregistered.

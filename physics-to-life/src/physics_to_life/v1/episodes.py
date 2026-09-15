@@ -210,13 +210,29 @@ def label_episode(spec_nominal: MembraneSpec, inst: MembraneSpec, interv: Interv
                 for c, d in itertools.combinations(names, 2):
                     if (c, d) in errs:
                         inter[k][(c, d)] = (errs[()][k] - errs[(c, d)][k]) - gains[k][c] - gains[k][d]
-        # minimal set at tolerance (per target), searched over the evaluated subsets
+        # minimal set at tolerance (per target), searched over all subsets, with the preregistered
+        # noise-floor rule: a member whose removal changes the error by less than 2x the fine-vs-
+        # reference numerical error of that target contributes nothing and disqualifies the subset
         minimal, tol_used = {}, {}
+        floor = {k: errs[tuple(names)][k] for k in grp.targets}
+        all_subsets = [S for S in errs if isinstance(S, tuple)]
         for k in grp.targets:
             tol = max(cfg.tol_rel, cfg.tol_abs.get(k, 0.0) / max(scale.get(k, 1.0), 1e-9))
             tol_used[k] = tol
-            ok = [S for S in sims if errs[S][k] <= tol]
-            minimal[k] = min(ok, key=lambda S: (costs[S], errs[S][k])) if ok else min(sims, key=lambda S: errs[S][k])
+
+            def useful(S):
+                for c in S:
+                    R = tuple(x for x in S if x != c)
+                    if errs[R][k] - errs[S][k] <= 2.0 * floor[k]:
+                        return False
+                return True
+            ok = [S for S in all_subsets if errs[S][k] <= tol and useful(S)]
+            if ok:
+                minimal[k] = min(ok, key=lambda S: (costs[S], errs[S][k]))
+            else:
+                # nothing reaches tolerance: the cheapest subset with the smallest error among useful ones
+                cand = [S for S in all_subsets if useful(S)] or all_subsets
+                minimal[k] = min(cand, key=lambda S: (errs[S][k], costs[S]))
         # cheap-trajectory summaries per channel for the router, for every simulated subset
         # (the base run's features are what a one-shot router sees; a sequential router sees
         # the features of the current partial-refinement state)

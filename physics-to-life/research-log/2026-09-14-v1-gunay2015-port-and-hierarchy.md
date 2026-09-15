@@ -124,3 +124,16 @@ been produced from the defective hierarchy; the pilot was restarted after the re
   point stands: the fine levels must reproduce the published behaviour at baseline (Level C
   fidelity of the medium is what we have), so that closure error appears where interventions
   and evaluation protocols engage the extra structure, not everywhere.
+
+## 8. (2026-09-15) A nested "richer" scheme collapses onto the published model — a constraint on how hierarchies can be constructed
+A Kuo–Bean-type NaT scheme with an allosterically coupled inactivated chain *nests* the HH
+gate (a = b = 1, multipliers 1, tilts 0 reproduce m³h exactly). Fitted to the published HH
+currents (with the AP-clamp trace), it converged to the HH solution to machine precision
+(RMS 0.0000): a richer model constrained only by the reduced model's own outputs recovers the
+reduced model. Consequence for V1: the fine levels must be **non-nested** structures whose
+fit floors (5–10 % on the family) *are* the baseline closure error — the sequential
+two-step / ZHA-concerted Kf activation with coupled inactivation and the open-state-coupled
+NaT schemes. Without independent kinetic data (the ZHA / Schoppa rate tables were
+unreadable here), no constructed fine level can be closer to the biology than the published
+HH; the hierarchy tests simulation fidelity, and this is stated wherever the results are
+reported. The nested NaT form is kept in the parameter file under rejected forms with this note.

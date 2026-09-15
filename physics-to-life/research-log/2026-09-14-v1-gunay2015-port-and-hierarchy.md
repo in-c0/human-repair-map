@@ -102,3 +102,25 @@ A third defect was in the analysis, not the fit: the spike detector's default th
 missed the published model's spikes, which peak near −1 mV; the default is now −25 mV (the
 reproduction report used −25 mV explicitly and is unaffected). No label, verdict or figure had
 been produced from the defective hierarchy; the pilot was restarted after the refit.
+
+## 7. (2026-09-15) Anchored rate forms, level assignment, reference integrator, AP-clamp constraint
+- **Anchored forms.** Rates with an HH counterpart are now the published HH rates × a fitted
+  multiplier × an exponential tilt; only structure without a counterpart has free rate
+  functions. Floors (RMS over active samples): sequential two-step Kf 5.1 %, ZHA concerted Kf
+  9.5 %, coupled NaT 5.9 %, open-state NaT 6.0 %. Level A = the smaller floor per channel
+  (ADR-0007 amendment). Rejected forms and their floors are kept in the parameter file.
+- **Reference integrator.** On the level-A fine model in current clamp (33 states, 530 ms,
+  68 spikes): Radau rtol 1e-9 154 s; Radau 1e-7 71 s; LSODA 1e-9 20 s; working LSODA 1e-6
+  12 s. All agree to ≤ 0.03 mV with identical spike times. The hidden truth is therefore
+  LSODA 1e-9 / 1e-11 (7.5× cheaper than Radau at the same tolerance, no measurable difference).
+- **A 50 % firing-rate discrepancy at baseline.** The assembled hierarchy fired 68 spikes per
+  500 ms at 10 pA against the published model's 45: the step families from −90 mV, even with
+  rest-state holds, do not constrain the currents along a physiological spike trajectory
+  (fine-vs-medium current under the published model's own spike waveform: 9 % RMS, 36 % max
+  for Kf; 9.5 % / 28 % for NaT). Fix: an **action-potential-clamp** trace (the published
+  model's V(t) under the 10 pA step, 10–60 ms, 0.2-ms segments, weight 4) is added to both
+  fit families — standard practice for constraining channel models in the physiological
+  regime — and the four levels are refitted from their current solutions. The scientific
+  point stands: the fine levels must reproduce the published behaviour at baseline (Level C
+  fidelity of the medium is what we have), so that closure error appears where interventions
+  and evaluation protocols engage the extra structure, not everywhere.

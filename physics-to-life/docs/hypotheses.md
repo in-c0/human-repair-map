@@ -189,12 +189,12 @@ on that structure, and the 79 % "no refinement needed" figure is a property of t
 episode generator, not of biology.
 
 
-| ID | Short name | Status (2026-09-14, run v0_main) | First rung tested | Owner doc |
+| ID | Short name | Status (2026-09-15; runs v0_main, v1_gunay_main) | First rung tested | Owner doc |
 |----|------------|----------------------------------|-------------------|-----------|
 | H0 | adaptive physical computation | V0-passed, conditional (H1 ∧ H3/H9 within the synthetic family; falsified when cheap-model error is not sparse) | V0 | this file |
-| H1 | adaptive efficiency | V0-passed with the quasi-static cheap model (oracle 1.0× fine error at 32 % cost; learned 1.46× at 45 %, point estimate; at cost ratio 13: learned 16 %, oracle 10 %) — **V0-falsified with the constant-closure cheap model** (`v0_base0`: tolerance unreachable for any switcher subset in 78 % of episodes; only uniform refinement reaches the floor). Adaptivity requires sparse cheap-model error. | V0 | `experiments/v0_toy/results/v0_main/RESULTS.md` §10 |
+| H1 | adaptive efficiency | **V1-falsified** (`v1_gunay_main`, `verdicts.md`, `fig1_pareto_pooled_id`): the learned VoC router at the 30 % point (err/tol 0.82) loses to the ensemble-uncertainty triggers (0.17 at 40 %; 0.42 at 32 % under the fixed-compute reading), parity with the V0-style classifier at 50 %; research log 2026-09-15 §2. V0-passed with the quasi-static cheap model (oracle 1.0× fine error at 32 % cost; learned 1.46× at 45 %, point estimate; at cost ratio 13: learned 16 %, oracle 10 %) — **V0-falsified with the constant-closure cheap model** (`v0_base0`: tolerance unreachable for any switcher subset in 78 % of episodes; only uniform refinement reaches the floor). Adaptivity requires sparse cheap-model error. | V0 | `experiments/v0_toy/results/v0_main/RESULTS.md` §10 |
 | H2 | causal fidelity | V0-passed (0.091 vs 0.0009 medium error with/without switching) | V0 | same |
-| H3 | error-aware routing | V0-passed (AUROC 0.993, F1 0.66 at oracle cost, ECE 0.007) | V0 | same |
+| H3 | error-aware routing | **V1-inconclusive** (`v1_gunay_main`): selection precision at equal recall 2.6× / 2.2× the written rules (clause holds) but the predicted frontier crossing did not occur — the router dominates the written rules at every budget; research log 2026-09-15 §3. V0-passed (AUROC 0.993, F1 0.66 at oracle cost, ECE 0.007) | V0, V1 | same; `results/v1_gunay_main/verdicts.md` |
 | H4 | sparse importance | V0-passed (median 0, 79 % of episodes need no fine physics — a property of the generator, not evidence about biology; falsified for the constant-closure cheap model) | V0 | same |
 | H5 | physics compilation | untested | V1 | this file |
 | H6 | cross-model generalisation | V0-passed, weak (noise, size and information level: proper tests; the sigmoid formulation test is weak — its folds are at ±0.127 so the closure already tracks switch-on; fails on sustained-step shift) | V0 (partial) | same |

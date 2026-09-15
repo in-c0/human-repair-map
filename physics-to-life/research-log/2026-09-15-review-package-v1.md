@@ -1,9 +1,9 @@
 # Review package — milestone V1 (target-conditioned adaptive fidelity on the published Günay 2015 *Drosophila* aCC motoneuron)
 
-**Status: DRAFT written while the preregistered main run executes (launched 2026-09-15 05:57 UTC).**
-Sections 5, 7 and parts of 6, 8 are completed from the main-run outputs when they exist; every
-number marked *(pilot)* comes from the pilot/dress rehearsal and is not a result. For an external
-reviewer with no conversational memory; everything cited is in the repository.
+**Status: main run complete (2026-09-15 12:50 UTC); H1/H3 verdicts final; H5/H8/H9/H10 and the
+final reading are filled in as the post-main chain completes.** Every number marked *(pilot)*
+comes from the pilot/dress rehearsal and is not a result. For an external reviewer with no
+conversational memory; everything cited is in the repository.
 
 ## 1. Objective
 Can a target-conditioned learned controller determine when the published reduced (HH)
@@ -77,13 +77,51 @@ reproduce_gunay2015.py, audit_pilot.py, verdicts.py, verdicts_extended.py,
 cross_formulation.py, restoration.py, falsification.py}`.
 
 ## 4. Figures
-*(main run; to be listed with one-sentence claims)*
+All under `experiments/v1_channel/results/v1_gunay_main/figures/` (regenerated from the run's
+tables by `replot.py`; the numbers are the tables').
+- `fig1_pareto_pooled_id` — accuracy vs compute pooled over targets, ID test set (2400 target
+  rows): the learned VoC router (one-shot, sequential), the hybrids, the V0-style classifier,
+  the written rules, the ensemble-uncertainty triggers and the oracles. Claim: no learned router
+  beats the ensemble-spread triggers at ≤ 40 % of uniform-fine cost; the written rules are
+  dominated at every budget; the router reaches the hard-label classifier's frontier at 50 %.
+- `figS_pareto_pooled_reserve` — the same on the reserved 100 episodes at the validation-selected
+  thresholds (replication line).
+- `figS_pareto_pooled_{block, opening_step, combo, activation_rate}` — the same on the OOD
+  families.
+- `figT_pareto_<target>` — per-target frontiers (nine targets).
+- `fig2_target_dependence` — fraction of episodes in which each channel's fine physics is
+  necessary, per target and family: Ks/NaP never; Kf for recovery (80–90 %); NaT for spiking.
+- `fig3_ood_detectors` — AUROC and false-safe rate of the five detectors per OOD family:
+  descriptor range guard perfect on descriptor-visible shifts, everything else at chance.
+- `fig4_closures_h5_h8` — median error of the five closures and the false-safe rate of the
+  distrust gates (emulator and hybrid) per family.
 Reproduction and hierarchy figures: `results/gunay2015_reproduction/figures/`,
 `results/hierarchy_validation/figures/`.
 
 ## 5. Metrics
-*(main run: `results/v1_gunay_main/{summary.json, verdicts.md, tables/}`; cross-formulation,
-restoration and falsification outputs alongside)*
+Main run `v1_gunay_main` (ID test set, 200 episodes, 2400 target rows; thresholds chosen on the
+validation split; `verdicts.md`, `verdicts_supplement.md`, `summary.json`, `tables/`).
+
+| quantity | value |
+|---|---|
+| uniform medium (published HH) err/tol, success | 8.03, 0.46 |
+| oracle minimal set err/tol at cost | 0.21 at 23.6 % |
+| learned VoC (one-shot) at the 15 / **30** / 50 % points: cost, err/tol | 0.146, 1.46 / **0.277, 0.82** / 0.516, 0.040 |
+| — selection precision / recall at 30 % | 0.67 / 0.76 |
+| best baseline at 30 % (coded rule): ensemble-uncertainty trigger, cost, err/tol | 0.399, 0.166 — ratio 4.96, Holm p < 0.001 (wrong direction) |
+| best attaining baseline at 30 % (post-hoc fixed-compute reading): uncertainty-per-cost | 0.324, 0.418 — ratio 1.97, Δ +0.41 [−0.02, +1.22] |
+| at 50 %: hard-label classifier | 0.506, 0.036 — Δ +0.004 [−0.017, +0.019] (parity) |
+| cost to 95 % success: hard-label / VoC / VoC seq / uncertainty / unc-per-cost / discrepancy / share / oracle VoC | 0.31 / 0.35 / 0.38 / 0.41 / 0.55 / 0.79 / 1.06 / 0.27 |
+| H3: precision at equal recall (0.755) — learned vs discrepancy vs sensitivity | 0.668 vs 0.256 (2.6×) vs 0.310 (2.2×) |
+| H3 crossing: learned better at 15 % / written rule not worse at 50 % | yes / **no** (router dominates the written rules everywhere) |
+| false-safe rate at 30 %: VoC (ID, reserve, OOD families) | 0.19, 0.19, 0.17–0.24 |
+| reserved set at the same thresholds, 30 % / 50 %: VoC vs best attaining baseline | 0.365 vs 0.360 / 0.017 vs 0.046 |
+| OOD detectors (AUROC): range guard on activation_rate, opening_step, block, combo | 1.00, 1.00, 0.61, 0.76; all dynamics-based detectors 0.2–0.7 |
+| compute | 6.87 h on 4 processes (generation 6.52 h; 126 s per episode, 52 simulations) |
+
+H5/H8 (`verdicts_extended.md`), H9 (`cross_formulation/`), H10 (`restoration/`,
+`restoration_nat_loss/`) and the falsification attempts (`falsification.md`): filled in below as
+the chain completes.
 
 ## 6. Failure cases and discarded results (so far)
 - First hierarchy: the fits satisfied the step families while being degenerate at rest
@@ -109,9 +147,27 @@ restoration and falsification outputs alongside)*
   instances contain no functionally damaged case, and an exploratory NaT-loss variant is run.
 
 ## 7. Interpretation
-*(main run)* — The dress rehearsal on the pilot *(pilot; not a result)* had the learned router
-behind the ensemble-uncertainty trigger at 15–30 % budgets and at parity with the V0-style
-classifier at 50 %, with 2–2.5× the written rules' selection precision at equal recall.
+**H1-V1: falsified, in both conditions and under both readings of the operating-point rule
+(research log 2026-09-15 §2).** The target-conditioned VoC router does not beat the best
+baseline at fixed compute at the principal point: the ensemble-spread triggers (AdaLED-style
+uncertainty; uncertainty per cost) reach lower error at ≤ 40 % of uniform fine, and at 50 %
+the router is at parity with the V0-style hard-label classifier. The learned *point estimate*
+of the value of computation is a worse refinement signal than the *disagreement* of the same
+ensemble — the reverse of V0, where ensemble disagreement contributed nothing. The written
+physics rules (current share, medium-vs-coarse discrepancy, sensitivity × discrepancy) are
+dominated at every budget on this system: the reduced level is far from the HH level for every
+channel, so a discrepancy monitor cannot discriminate.
+
+**H3-V1: not passed (research log §3).** The selectivity clause holds (precision 2.2–2.6× the
+written rules at equal recall), the predicted frontier crossing does not: the router is
+better than the written rules at high budgets too. The narrowed proposition of ADR-0006
+("selectivity at low budgets, coverage at high budgets") is not what this system shows; what
+it shows is that a learned signal of *any* kind (classifier, regressor, ensemble spread) beats
+written rules here, and that among learned signals the calibrated-disagreement trigger is the
+best.
+
+*(H5, H8, H9, H10, the falsification controls and the final reading follow when the chain
+completes.)*
 
 ## 8. Threats to validity
 - Simulation fidelity only: the fine levels are constructions fitted to the published model;

@@ -56,8 +56,12 @@ ADR-0007 (+ amendments).
   validation split only; paired bootstrap; Holm correction.
 - **H5/H8.** Emulator (descriptors only) vs medium + learned residual vs coarse/medium/fine,
   with five distrust gates and `false_safe_rate`. **H9.** Level-B relabelling of the test set
-  (`cross_formulation.py`). **H10.** Kf-loss functional restoration with routed / medium / fine
-  search (`restoration.py`). **Falsification attempts** (`falsification.py`): permuted labels,
+  (`cross_formulation.py`). **H10.** Functional restoration with routed / medium / fine search
+  (`restoration.py`): the preregistered Kf-loss damage, evaluated over *functionally damaged*
+  instances, and — because that damage turned out to be inert in the published model
+  (preregistration §16, research log §12) — a post-hoc exploratory NaT-loss variant reported
+  separately. **Mechanical verdicts** for H5/H8/H9/H10 and the reserved-set replication
+  (`verdicts_extended.py`). **Falsification attempts** (`falsification.py`): permuted labels,
   descriptors-only, simulation-only, target-blind, leave-one-family-out.
 - **Sizes and compute.** Main run 400 / 200 / 4 × 60 / 100 reserved episodes, seeds offset
   100 000; pilot 120 / 60 / 4 × 30 at offset 0 (148 s per episode exhaustive on one process).
@@ -69,8 +73,8 @@ fitting) · `systems/gunay2015.py`, `gunay2015_fine.py`, `gunay2015_profile.py` 
 `episodes.py` (labels, noise floor, relabel) · `experiment.py` (exact-lookup policy
 evaluation, frontiers) · `routing.py`, `ood.py`, `surrogate.py` ·
 `experiments/v1_channel/{run.py, build_hierarchy.py, validate_hierarchy.py,
-reproduce_gunay2015.py, audit_pilot.py, verdicts.py, cross_formulation.py, restoration.py,
-falsification.py}`.
+reproduce_gunay2015.py, audit_pilot.py, verdicts.py, verdicts_extended.py,
+cross_formulation.py, restoration.py, falsification.py}`.
 
 ## 4. Figures
 *(main run; to be listed with one-sentence claims)*
@@ -96,6 +100,13 @@ restoration and falsification outputs alongside)*
   preregistration; pre-correction outputs kept in `results/v1_gunay_pilot/before_corrections/`.
 - Two pilot-machinery bugs on the provisional placeholder system (per-level independent
   jitter; block active without drug) — fixed before any real system was labelled.
+- **The preregistered H10 damage has no phenotype.** Complete Kf removal leaves the published
+  model's 10 pA response unchanged (authors' integrator: 45 spikes, first spike 23.20 ms with
+  and without Kf; peak |I_Kf| ≈ 3.7 pA vs ≈ 430 pA NaT), at every hold and step tried and for
+  the jittered instances. The pilot restoration check (4/4 damaged phenotypes within tolerance)
+  had scored every method 1.0 on a trivial problem. Recorded post-hoc before any main-run
+  result (preregistration §16 items 1–3); H10-V1 is reported as not testable if the main-run
+  instances contain no functionally damaged case, and an exploratory NaT-loss variant is run.
 
 ## 7. Interpretation
 *(main run)* — The dress rehearsal on the pilot *(pilot; not a result)* had the learned router
@@ -112,6 +123,13 @@ classifier at 50 %, with 2–2.5× the written rules' selection precision at equ
   cannot use budgets below their base cost (reported as unattained points).
 - Tolerances and the peak_current exception were set by the pilot audit before the freeze.
 - Level-B contrast is weaker for NaT than for Kf (both NaT forms converge to similar solutions).
+- The published model's Kf current is small (≈ 1 % of the NaT peak at 10 pA), so Kf-loss and
+  Kf-kinetic interventions have almost no current-clamp phenotype here; conclusions about
+  "A-type loss" in this cell type cannot be drawn from this model (`kf_loss` ≈ `none` in current
+  clamp on the training split, research log §12.1).
+- Post-hoc items (preregistration §16): the H5 detector-choice statistic, the H8/H9 reading and
+  the H10 validity filters were made explicit after the freeze; none changes a threshold, seed or
+  H1/H3 criterion, and all were fixed before any main-run result existed.
 
 ## 9. Open questions
 *(after the main run)*

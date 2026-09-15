@@ -138,6 +138,12 @@ the chain completes.
   preregistration; pre-correction outputs kept in `results/v1_gunay_pilot/before_corrections/`.
 - Two pilot-machinery bugs on the provisional placeholder system (per-level independent
   jitter; block active without drug) — fixed before any real system was labelled.
+- **The preregistered mean-error metric is carried by single rows.** At the router's 30 % point
+  one of 2400 rows (a silence-versus-firing flip of the published model under NaT inactivation
+  × 2.76, missed by the router) is 48 % of the summed error; without it the router is at parity
+  with the uncertainty-per-cost trigger (0.43 vs 0.42). The verdict stands as preregistered
+  (research log 2026-09-15 §3.1); a median- or success-rate-based criterion would have read
+  differently and was not preregistered.
 - **The preregistered H10 damage has no phenotype.** Complete Kf removal leaves the published
   model's 10 pA response unchanged (authors' integrator: 45 spikes, first spike 23.20 ms with
   and without Kf; peak |I_Kf| ≈ 3.7 pA vs ≈ 430 pA NaT), at every hold and step tried and for
@@ -166,8 +172,13 @@ it shows is that a learned signal of *any* kind (classifier, regressor, ensemble
 written rules here, and that among learned signals the calibrated-disagreement trigger is the
 best.
 
-*(H5, H8, H9, H10, the falsification controls and the final reading follow when the chain
-completes.)*
+**Falsification controls (research log §4).** Labels matter (permutation collapses the router);
+the router transfers across families; simulation features and descriptors are redundant; a
+target-blind router is nearly as good as the target-conditioned one — on this system the
+protocol group already determines which channel can matter. The "target-conditioned" part of
+the proposition reduces to "protocol-conditioned" here.
+
+*(H5, H8, H9, H10 and the final reading follow when the chain completes.)*
 
 ## 8. Threats to validity
 - Simulation fidelity only: the fine levels are constructions fitted to the published model;

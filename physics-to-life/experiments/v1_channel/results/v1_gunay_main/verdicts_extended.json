@@ -317,7 +317,166 @@
     "verdict": "not passed",
     "note": "error = mean error/tolerance over paired (episode, group, target) rows; invalidity AUROC = rank AUROC of the gate score for error > tolerance on the pooled OOD rows"
   },
-  "H9_V1": null,
+  "H9_V1": {
+    "minimal_set_agreement_A_vs_B": 0.6275,
+    "necessary_rate_A": 0.5445833333333333,
+    "necessary_rate_B": 0.7320833333333333,
+    "physics_baselines": [
+      "share",
+      "discrepancy",
+      "sensitivity"
+    ],
+    "conditions": {
+      "voc": {
+        "precision_A": 0.6491637752603754,
+        "precision_B": 0.8024262190870727,
+        "ratio_B_over_A": 1.2360921075197469,
+        "recall_A": 0.6986638972075023,
+        "recall_B": 0.6206023255098417,
+        "supplementary_precision_at_equal_recall_B": {
+          "share": {
+            "baseline_precision_at_equal_recall_B": 0.39997011760116224,
+            "ratio": 2.006215424041321
+          },
+          "discrepancy": {
+            "baseline_precision_at_equal_recall_B": 0.3037736366615368,
+            "ratio": 2.641526855015178
+          },
+          "sensitivity": {
+            "baseline_precision_at_equal_recall_B": 0.7140963968803689,
+            "ratio": 1.1236945356293424
+          }
+        },
+        "err_rel_tol_A": 0.7197925387751515,
+        "err_rel_tol_B": 1.244360448008135,
+        "cost_frac_A": 0.3133296822079573,
+        "cost_frac_B": 0.3026070085560468,
+        "physics_baseline_precision_B": {
+          "share": 0.32111111111111107,
+          "discrepancy": 0.29386980290561326,
+          "sensitivity": 0.7466613071198814
+        },
+        "best_physics_baseline_precision_B": 0.7466613071198814,
+        "clause_precision_B_ge_0.8_A": true,
+        "clause_precision_B_ge_physics_baselines_B": true,
+        "passes": true,
+        "falsified": false,
+        "verdict": "passes"
+      },
+      "voc_seq": {
+        "precision_A": 0.6512379825803948,
+        "precision_B": 0.8026650767197343,
+        "ratio_B_over_A": 1.2325219016546627,
+        "recall_A": 0.6986638972075023,
+        "recall_B": 0.6206023255098417,
+        "supplementary_precision_at_equal_recall_B": {
+          "share": {
+            "baseline_precision_at_equal_recall_B": 0.39997011760116224,
+            "ratio": 2.0068126127365518
+          },
+          "discrepancy": {
+            "baseline_precision_at_equal_recall_B": 0.3037736366615368,
+            "ratio": 2.6423131564048794
+          },
+          "sensitivity": {
+            "baseline_precision_at_equal_recall_B": 0.7140963968803689,
+            "ratio": 1.1240290249695843
+          }
+        },
+        "err_rel_tol_A": 0.7197925387751515,
+        "err_rel_tol_B": 1.244360448008135,
+        "cost_frac_A": 0.31771362075968756,
+        "cost_frac_B": 0.3046917564972728,
+        "physics_baseline_precision_B": {
+          "share": 0.32111111111111107,
+          "discrepancy": 0.29386980290561326,
+          "sensitivity": 0.7466613071198814
+        },
+        "best_physics_baseline_precision_B": 0.7466613071198814,
+        "clause_precision_B_ge_0.8_A": true,
+        "clause_precision_B_ge_physics_baselines_B": true,
+        "passes": true,
+        "falsified": false,
+        "verdict": "passes"
+      },
+      "hybrid": {
+        "precision_A": 0.4227906221443253,
+        "precision_B": 0.5857727716601538,
+        "ratio_B_over_A": 1.3854914016049118,
+        "recall_A": 0.801888305241973,
+        "recall_B": 0.8253628770443826,
+        "supplementary_precision_at_equal_recall_B": {
+          "share": {
+            "baseline_precision_at_equal_recall_B": 0.3301645260531668,
+            "ratio": 1.774184460888527
+          },
+          "discrepancy": {
+            "baseline_precision_at_equal_recall_B": 0.2818772755145525,
+            "ratio": 2.0781127907202017
+          },
+          "sensitivity": {
+            "baseline_precision_at_equal_recall_B": 0.5679733361012839,
+            "ratio": 1.0313385055732545
+          }
+        },
+        "err_rel_tol_A": 0.5810174485536957,
+        "err_rel_tol_B": 0.8345230116918767,
+        "cost_frac_A": 0.30394165650035254,
+        "cost_frac_B": 0.2981385479733699,
+        "physics_baseline_precision_B": {
+          "share": 0.32111111111111107,
+          "discrepancy": 0.29386980290561326,
+          "sensitivity": 0.7466613071198814
+        },
+        "best_physics_baseline_precision_B": 0.7466613071198814,
+        "clause_precision_B_ge_0.8_A": true,
+        "clause_precision_B_ge_physics_baselines_B": false,
+        "passes": false,
+        "falsified": true,
+        "verdict": "falsified"
+      },
+      "hybrid_seq": {
+        "precision_A": 0.5109898010025046,
+        "precision_B": 0.6892287416024753,
+        "ratio_B_over_A": 1.3488111509276426,
+        "recall_A": 0.8017352217555562,
+        "recall_B": 0.7846190979905132,
+        "supplementary_precision_at_equal_recall_B": {
+          "share": {
+            "baseline_precision_at_equal_recall_B": 0.3440546214716508,
+            "ratio": 2.003253839911771
+          },
+          "discrepancy": {
+            "baseline_precision_at_equal_recall_B": 0.29877234825593146,
+            "ratio": 2.306869245516907
+          },
+          "sensitivity": {
+            "baseline_precision_at_equal_recall_B": 0.5679733361012839,
+            "ratio": 1.213487848449929
+          }
+        },
+        "err_rel_tol_A": 0.5836782483833532,
+        "err_rel_tol_B": 0.8920858387123412,
+        "cost_frac_A": 0.3026778919168173,
+        "cost_frac_B": 0.30000247952486403,
+        "physics_baseline_precision_B": {
+          "share": 0.32111111111111107,
+          "discrepancy": 0.29386980290561326,
+          "sensitivity": 0.7466613071198814
+        },
+        "best_physics_baseline_precision_B": 0.7466613071198814,
+        "clause_precision_B_ge_0.8_A": true,
+        "clause_precision_B_ge_physics_baselines_B": false,
+        "passes": false,
+        "falsified": true,
+        "verdict": "falsified"
+      }
+    },
+    "passes": true,
+    "falsified": false,
+    "verdict": "passes",
+    "note": "principal condition: one-shot VoC router at the principal operating point; 'falls below the physics baselines' read as below the best of share / discrepancy / sensitivity under B"
+  },
   "H10_V1": {
     "damage": "kf_loss",
     "status": "preregistered (v1.1)",

@@ -30,7 +30,14 @@ Constraint violations (spike_count ≥ 0, recovery_fraction ∈ [0, 1.05], min_i
 
 ## H9-V1 — cross-formulation transfer (level-A-trained router under the level-B truth)
 
-Not evaluated (cross_formulation/summary.json missing).
+Verdict (one-shot VoC): **passes**. Minimal-set agreement A vs B 0.627; necessary-rate A 0.545, B 0.732.
+
+| condition | precision A | precision B | B/A | recall A | recall B | err/tol A | err/tol B | best physics baseline precision under B (at its own 30 % point) | ≥ 0.8·A | ≥ physics baselines | verdict | supplementary: baselines' precision at equal recall under B (ratio) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| voc | 0.649 | 0.802 | 1.236 | 0.699 | 0.621 | 0.720 | 1.244 | 0.747 (share 0.321, discrepancy 0.294, sensitivity 0.747) | yes | yes | passes | share 0.400 (2.01×), discrepancy 0.304 (2.64×), sensitivity 0.714 (1.12×) |
+| voc_seq | 0.651 | 0.803 | 1.233 | 0.699 | 0.621 | 0.720 | 1.244 | 0.747 (share 0.321, discrepancy 0.294, sensitivity 0.747) | yes | yes | passes | share 0.400 (2.01×), discrepancy 0.304 (2.64×), sensitivity 0.714 (1.12×) |
+| hybrid | 0.423 | 0.586 | 1.385 | 0.802 | 0.825 | 0.581 | 0.835 | 0.747 (share 0.321, discrepancy 0.294, sensitivity 0.747) | yes | no | falsified | share 0.330 (1.77×), discrepancy 0.282 (2.08×), sensitivity 0.568 (1.03×) |
+| hybrid_seq | 0.511 | 0.689 | 1.349 | 0.802 | 0.785 | 0.584 | 0.892 | 0.747 (share 0.321, discrepancy 0.294, sensitivity 0.747) | yes | no | falsified | share 0.344 (2.00×), discrepancy 0.299 (2.31×), sensitivity 0.568 (1.21×) |
 
 ## H10-V1 — functional restoration precursor (preregistered damage: Kf loss)
 

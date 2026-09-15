@@ -119,9 +119,14 @@ validation split; `verdicts.md`, `verdicts_supplement.md`, `summary.json`, `tabl
 | OOD detectors (AUROC): range guard on activation_rate, opening_step, block, combo | 1.00, 1.00, 0.61, 0.76; all dynamics-based detectors 0.2–0.7 |
 | compute | 6.87 h on 4 processes (generation 6.52 h; 126 s per episode, 52 simulations) |
 
-H5/H8 (`verdicts_extended.md`), H9 (`cross_formulation/`), H10 (`restoration/`,
-`restoration_nat_loss/`) and the falsification attempts (`falsification.md`): filled in below as
-the chain completes.
+| H5: emulator ID within-tolerance rate; amortised speed-up; chosen gate coverage | 0.28; 157×; conformal 0.003 (never trusts) |
+| H8: hybrid vs emulator mean err/tol on block / opening_step / combo / activation_rate | 9.6 vs 40.6 / 12.7 vs 42.7 / 31.7 vs 129.8 / 5.1 vs 27.4 (all CIs exclude 0) |
+| H8: invalidity AUROC, hybrid discrepancy monitor vs emulator ensemble spread | 0.59 vs 0.79 |
+| H10 preregistered (Kf loss): functionally damaged instances | 0 of 10 evaluable → not testable |
+| H10 exploratory (NaT loss, 11 functionally damaged): restored on fine A, routed / medium / fine | 0.73 / 0.09 / 0.73; routed cost 0.26 of fine; medium claims failing fine A 0.86; transfer to formulation B 0.09 for every method |
+| falsification: permuted labels / target-blind / simulation-only (err at 30 %, precision) | 6.02, 0.07 / 0.86, 0.64 / 0.43, 0.68 |
+
+H9 (`cross_formulation/`) is filled in when the level-B labelling completes.
 
 ## 6. Failure cases and discarded results (so far)
 - First hierarchy: the fits satisfied the step families while being degenerate at rest
@@ -184,7 +189,16 @@ trusts. **H8-V1: not passed.** Medium + learned residual halves the black box's 
 OOD family (paired CIs exclude 0) but detects its own invalidity worse than the black box's
 ensemble spread and violates the medium model's structural constraints more often.
 
-*(H9, H10 and the final reading follow when the chain completes.)*
+**H10-V1: not testable as preregistered (research log §6)** — the Kf-loss damage has no
+phenotype in the published model. **Exploratory NaT-loss variant (§6.1, not a verdict):** the
+routed search matches the uniform-fine search (8/11 restored on fine A, more on the held-out
+protocol) at 26 % of its cost, and every routed candidate survives the fine-A check, whereas
+the medium-only search's restorations fail fine A in 86 % of cases — the one place in V1 where
+the routed simulator did what the proposition says. But restorations found under formulation A
+restore the formulation-B cell in 1/11 cases for every method: what "compensates" a sodium
+loss is a property of the constructed fine formulation, not of the cell.
+
+*(H9 and the final reading follow when the chain completes.)*
 
 ## 8. Threats to validity
 - Simulation fidelity only: the fine levels are constructions fitted to the published model;

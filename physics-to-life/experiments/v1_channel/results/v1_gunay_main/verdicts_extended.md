@@ -34,11 +34,20 @@ Not evaluated (cross_formulation/summary.json missing).
 
 ## H10-V1 — functional restoration precursor (preregistered damage: Kf loss)
 
-Not evaluated (restoration outputs missing).
+Verdict: **not testable (no functionally damaged instance: the damage leaves both targets within tolerance)**. Instances 12 (silent wild types skipped: 2); functionally damaged 0; damage within tolerance in 1.000 of evaluated instances; routed threshold 0.0000 (verdicts.json principal operating point).
+
 
 ## H10 post-hoc exploratory variant (NaT loss; not a preregistered verdict)
 
-Not evaluated (restoration outputs missing).
+Verdict: **not passed**. Instances 16 (silent wild types skipped: 3); functionally damaged 11; damage within tolerance in 0.154 of evaluated instances; routed threshold 0.0000 (verdicts.json principal operating point).
+
+| method | restored fine A | restored fine B | restored held-out | all three | claimed by the search | claimed but fails fine A | search cost (nominal) |
+|---|---|---|---|---|---|---|---|
+| routed | 0.727 | 0.091 | 0.818 | 0.091 | 0.727 | 0.000 | 13659961 |
+| medium | 0.091 | 0.091 | 0.091 | 0.000 | 0.636 | 0.857 | 3724825 |
+| fine | 0.727 | 0.091 | 0.727 | 0.091 | 0.727 | 0.000 | 52726240 |
+
+Routed search cost / uniform-fine search cost: 0.259.
 
 ## Reserved ID set — replication at the operating points selected on validation (no new selection)
 

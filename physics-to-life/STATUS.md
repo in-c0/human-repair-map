@@ -29,7 +29,10 @@ benchmark (V1a).
   families, but detects its own invalidity worse than the black box's ensemble spread and
   violates structural constraints more often.
 - **H10-V1 not testable as preregistered**: the Kf-loss damage has no phenotype in the published
-  model (10/10 evaluable instances within tolerance); exploratory NaT-loss variant running.
+  model (10/10 evaluable instances within tolerance). Exploratory NaT-loss variant (not a
+  verdict): the routed search matches the uniform-fine search on every check at 26 % of its
+  cost while the medium-only search's restorations fail the fine check in 86 % of cases — but
+  restorations do not transfer to the level-B formulation (1/11 for every method).
 - **Falsification controls**: permuted labels collapse the router; leave-one-family-out
   transfers; simulation features and descriptors are redundant.
 - **H9-V1** (level-B truth) computing; final reading and report follow.

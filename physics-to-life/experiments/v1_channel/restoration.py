@@ -143,8 +143,10 @@ def main():
         damage = Intervention(f"kf_loss:{f_loss:.2f}", g_scales={"Kf": f_loss}, family="kf_loss")
         wt = simulate(instA, design, {n: 2 for n in names}, Intervention(), settings); y_wt = compute_targets(wt, grp_d)
         wt_h = simulate(instA, heldout, {n: 2 for n in names}, Intervention(), settings); y_wt_h = compute_targets(wt_h, grp_h)
+        # the level-B check compares against level B's own wild type (the formulations differ at baseline)
+        wt_B = simulate(instB, design, {n: 2 for n in names}, Intervention(), settings); y_wt_B = compute_targets(wt_B, grp_d)
         dmg = simulate(instA, design, {n: 2 for n in names}, damage, settings); y_dmg = compute_targets(dmg, grp_d)
-        rec = {"instance": i, "kf_loss": f_loss, "y_wt": y_wt, "y_damaged": y_dmg, "damaged_within_tol": within(y_dmg, y_wt), "methods": {}}
+        rec = {"instance": i, "kf_loss": f_loss, "y_wt": y_wt, "y_wt_B": y_wt_B, "y_damaged": y_dmg, "damaged_within_tol": within(y_dmg, y_wt), "methods": {}}
         for method in ("routed", "medium", "fine"):
             t0 = time.time()
             x, fbest, cost, n_eval = search(specA, instA, damage, y_wt, design, method, models, names, settings, np.random.default_rng(args.seed + 7 * i))
@@ -153,9 +155,9 @@ def main():
             yB = compute_targets(simulate(instB, design, {n: 2 for n in names}, iv, settings), grp_d)
             yH = compute_targets(simulate(instA, heldout, {n: 2 for n in names}, iv, settings), grp_h)
             rec["methods"][method] = {"x_log": [float(v) for v in x], "objective": float(fbest), "search_cost": float(cost), "n_eval": n_eval,
-                                      "wall_s": time.time() - t0, "restored_fineA": within(yA, y_wt), "restored_fineB": within(yB, y_wt),
+                                      "wall_s": time.time() - t0, "restored_fineA": within(yA, y_wt), "restored_fineB": within(yB, y_wt_B),
                                       "restored_heldout": within(yH, y_wt_h), "y_fineA": yA, "y_fineB": yB, "y_heldout": yH}
-            print(f"inst {i} loss {f_loss:.2f} {method:7s}: obj {fbest:.2f} cost {cost:.0f} evals {n_eval} restoredA {within(yA, y_wt)} B {within(yB, y_wt)} heldout {within(yH, y_wt_h)}", flush=True)
+            print(f"inst {i} loss {f_loss:.2f} {method:7s}: obj {fbest:.2f} cost {cost:.0f} evals {n_eval} restoredA {within(yA, y_wt)} B {within(yB, y_wt_B)} heldout {within(yH, y_wt_h)}", flush=True)
         results.append(rec)
     summ = {"n_instances": len(results), "damaged_within_tol_rate": float(np.mean([r["damaged_within_tol"] for r in results]))}
     for method in ("routed", "medium", "fine"):

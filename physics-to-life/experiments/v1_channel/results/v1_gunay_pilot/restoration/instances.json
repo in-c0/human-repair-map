@@ -1,0 +1,474 @@
+[
+  {
+    "instance": 0,
+    "kf_loss": 0.31848084366072715,
+    "y_wt": {
+      "spike_count": 33.0,
+      "spike_latency": 13.950000000000003,
+      "min_isi": 15.0,
+      "mean_v": -35.10877045866398
+    },
+    "y_damaged": {
+      "spike_count": 33.0,
+      "spike_latency": 13.950000000000003,
+      "min_isi": 15.0,
+      "mean_v": -35.083657971609384
+    },
+    "damaged_within_tol": true,
+    "methods": {
+      "routed": {
+        "x_log": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 0.0,
+        "search_cost": 12157846.0,
+        "n_eval": 56,
+        "wall_s": 241.72968697547913,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 33.0,
+          "spike_latency": 13.950000000000003,
+          "min_isi": 15.0,
+          "mean_v": -35.083657971609384
+        },
+        "y_fineB": {
+          "spike_count": 53.0,
+          "spike_latency": 11.05,
+          "min_isi": 9.349999999999966,
+          "mean_v": -30.010222585665193
+        },
+        "y_heldout": {
+          "spike_count": 44.0,
+          "spike_latency": 7.650000000000002,
+          "min_isi": 11.349999999999966,
+          "mean_v": -32.48014422492083
+        }
+      },
+      "medium": {
+        "x_log": [
+          0.30000000000000004,
+          0.0,
+          0.0,
+          -0.30000000000000004
+        ],
+        "objective": 0.10168458781361597,
+        "search_cost": 3628464.0,
+        "n_eval": 56,
+        "wall_s": 106.42591214179993,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 33.0,
+          "spike_latency": 13.350000000000001,
+          "min_isi": 14.949999999999989,
+          "mean_v": -34.68007197750317
+        },
+        "y_fineB": {
+          "spike_count": 50.0,
+          "spike_latency": 11.150000000000002,
+          "min_isi": 9.899999999999999,
+          "mean_v": -30.323700113662074
+        },
+        "y_heldout": {
+          "spike_count": 44.0,
+          "spike_latency": 7.449999999999999,
+          "min_isi": 11.299999999999955,
+          "mean_v": -32.1157063900846
+        }
+      },
+      "fine": {
+        "x_log": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 0.0,
+        "search_cost": 44853200.0,
+        "n_eval": 56,
+        "wall_s": 813.3950748443604,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 33.0,
+          "spike_latency": 13.950000000000003,
+          "min_isi": 15.0,
+          "mean_v": -35.083657971609384
+        },
+        "y_fineB": {
+          "spike_count": 53.0,
+          "spike_latency": 11.05,
+          "min_isi": 9.349999999999966,
+          "mean_v": -30.010222585665193
+        },
+        "y_heldout": {
+          "spike_count": 44.0,
+          "spike_latency": 7.650000000000002,
+          "min_isi": 11.349999999999966,
+          "mean_v": -32.48014422492083
+        }
+      }
+    }
+  },
+  {
+    "instance": 1,
+    "kf_loss": 0.13489335688193516,
+    "y_wt": {
+      "spike_count": 51.0,
+      "spike_latency": 7.150000000000002,
+      "min_isi": 9.75,
+      "mean_v": -30.537895310180893
+    },
+    "y_damaged": {
+      "spike_count": 51.0,
+      "spike_latency": 7.150000000000002,
+      "min_isi": 9.75,
+      "mean_v": -30.525103117294602
+    },
+    "damaged_within_tol": true,
+    "methods": {
+      "routed": {
+        "x_log": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 0.0,
+        "search_cost": 12999270.0,
+        "n_eval": 56,
+        "wall_s": 243.30401992797852,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 51.0,
+          "spike_latency": 7.150000000000002,
+          "min_isi": 9.75,
+          "mean_v": -30.525103117294602
+        },
+        "y_fineB": {
+          "spike_count": 67.0,
+          "spike_latency": 0.5500000000000007,
+          "min_isi": 7.449999999999989,
+          "mean_v": -27.363071268598002
+        },
+        "y_heldout": {
+          "spike_count": 55.0,
+          "spike_latency": 5.15,
+          "min_isi": 8.950000000000001,
+          "mean_v": -29.287854184368477
+        }
+      },
+      "medium": {
+        "x_log": [
+          0.35000000000000003,
+          0.0,
+          0.05,
+          0.05
+        ],
+        "objective": 0.7146568627451022,
+        "search_cost": 3406774.0,
+        "n_eval": 56,
+        "wall_s": 83.43199586868286,
+        "restored_fineA": false,
+        "restored_fineB": false,
+        "restored_heldout": false,
+        "y_fineA": {
+          "spike_count": 51.0,
+          "spike_latency": 1.4000000000000004,
+          "min_isi": 9.849999999999966,
+          "mean_v": -30.970900369291375
+        },
+        "y_fineB": {
+          "spike_count": 66.0,
+          "spike_latency": 0.7000000000000011,
+          "min_isi": 7.5499999999999545,
+          "mean_v": -28.121861808582622
+        },
+        "y_heldout": {
+          "spike_count": 55.0,
+          "spike_latency": 1.0500000000000007,
+          "min_isi": 9.05,
+          "mean_v": -29.863081572944374
+        }
+      },
+      "fine": {
+        "x_log": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 0.0,
+        "search_cost": 45036180.0,
+        "n_eval": 56,
+        "wall_s": 807.7603795528412,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 51.0,
+          "spike_latency": 7.150000000000002,
+          "min_isi": 9.75,
+          "mean_v": -30.525103117294602
+        },
+        "y_fineB": {
+          "spike_count": 67.0,
+          "spike_latency": 0.5500000000000007,
+          "min_isi": 7.449999999999989,
+          "mean_v": -27.363071268598002
+        },
+        "y_heldout": {
+          "spike_count": 55.0,
+          "spike_latency": 5.15,
+          "min_isi": 8.950000000000001,
+          "mean_v": -29.287854184368477
+        }
+      }
+    }
+  },
+  {
+    "instance": 2,
+    "kf_loss": 0.020486761968097345,
+    "y_wt": {
+      "spike_count": 35.0,
+      "spike_latency": 8.350000000000001,
+      "min_isi": 14.399999999999977,
+      "mean_v": -34.58325735405295
+    },
+    "y_damaged": {
+      "spike_count": 35.0,
+      "spike_latency": 8.350000000000001,
+      "min_isi": 14.399999999999977,
+      "mean_v": -34.578330364801964
+    },
+    "damaged_within_tol": true,
+    "methods": {
+      "routed": {
+        "x_log": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 0.0,
+        "search_cost": 10552869.0,
+        "n_eval": 56,
+        "wall_s": 216.13740181922913,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 35.0,
+          "spike_latency": 8.350000000000001,
+          "min_isi": 14.399999999999977,
+          "mean_v": -34.578330364801964
+        },
+        "y_fineB": {
+          "spike_count": 50.0,
+          "spike_latency": 2.75,
+          "min_isi": 9.949999999999989,
+          "mean_v": -30.381340579570786
+        },
+        "y_heldout": {
+          "spike_count": 41.0,
+          "spike_latency": 5.75,
+          "min_isi": 12.149999999999977,
+          "mean_v": -32.916352108580426
+        }
+      },
+      "medium": {
+        "x_log": [
+          -0.5000000000000001,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 2.4249999999999985,
+        "search_cost": 2346491.0,
+        "n_eval": 56,
+        "wall_s": 78.76646161079407,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 36.0,
+          "spike_latency": 8.150000000000002,
+          "min_isi": 13.849999999999994,
+          "mean_v": -33.86874035715529
+        },
+        "y_fineB": {
+          "spike_count": 53.0,
+          "spike_latency": 0.9000000000000004,
+          "min_isi": 9.4,
+          "mean_v": -29.418019118807496
+        },
+        "y_heldout": {
+          "spike_count": 42.0,
+          "spike_latency": 5.700000000000001,
+          "min_isi": 11.899999999999977,
+          "mean_v": -32.19814437007859
+        }
+      },
+      "fine": {
+        "x_log": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 0.0,
+        "search_cost": 37366840.0,
+        "n_eval": 56,
+        "wall_s": 680.5296764373779,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 35.0,
+          "spike_latency": 8.350000000000001,
+          "min_isi": 14.399999999999977,
+          "mean_v": -34.578330364801964
+        },
+        "y_fineB": {
+          "spike_count": 50.0,
+          "spike_latency": 2.75,
+          "min_isi": 9.949999999999989,
+          "mean_v": -30.381340579570786
+        },
+        "y_heldout": {
+          "spike_count": 41.0,
+          "spike_latency": 5.75,
+          "min_isi": 12.149999999999977,
+          "mean_v": -32.916352108580426
+        }
+      }
+    }
+  },
+  {
+    "instance": 3,
+    "kf_loss": 0.008263817764264547,
+    "y_wt": {
+      "spike_count": 0.0,
+      "spike_latency": 500.0,
+      "min_isi": 500.0,
+      "mean_v": -47.24153893579668
+    },
+    "y_damaged": {
+      "spike_count": 0.0,
+      "spike_latency": 500.0,
+      "min_isi": 500.0,
+      "mean_v": -47.241531319658634
+    },
+    "damaged_within_tol": true,
+    "methods": {
+      "routed": {
+        "x_log": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 0.0,
+        "search_cost": 8606574.0,
+        "n_eval": 56,
+        "wall_s": 183.93162894248962,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 0.0,
+          "spike_latency": 500.0,
+          "min_isi": 500.0,
+          "mean_v": -47.241531319658634
+        },
+        "y_fineB": {
+          "spike_count": 58.0,
+          "spike_latency": 26.4,
+          "min_isi": 8.25,
+          "mean_v": -30.66434876896928
+        },
+        "y_heldout": {
+          "spike_count": 37.0,
+          "spike_latency": 13.0,
+          "min_isi": 13.25,
+          "mean_v": -35.05525264590775
+        }
+      },
+      "medium": {
+        "x_log": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 0.0,
+        "search_cost": 1918021.0,
+        "n_eval": 56,
+        "wall_s": 71.53202247619629,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 0.0,
+          "spike_latency": 500.0,
+          "min_isi": 500.0,
+          "mean_v": -47.241531319658634
+        },
+        "y_fineB": {
+          "spike_count": 58.0,
+          "spike_latency": 26.4,
+          "min_isi": 8.25,
+          "mean_v": -30.66434876896928
+        },
+        "y_heldout": {
+          "spike_count": 37.0,
+          "spike_latency": 13.0,
+          "min_isi": 13.25,
+          "mean_v": -35.05525264590775
+        }
+      },
+      "fine": {
+        "x_log": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 0.0,
+        "search_cost": 30057405.0,
+        "n_eval": 56,
+        "wall_s": 550.7400715351105,
+        "restored_fineA": true,
+        "restored_fineB": false,
+        "restored_heldout": true,
+        "y_fineA": {
+          "spike_count": 0.0,
+          "spike_latency": 500.0,
+          "min_isi": 500.0,
+          "mean_v": -47.241531319658634
+        },
+        "y_fineB": {
+          "spike_count": 58.0,
+          "spike_latency": 26.4,
+          "min_isi": 8.25,
+          "mean_v": -30.66434876896928
+        },
+        "y_heldout": {
+          "spike_count": 37.0,
+          "spike_latency": 13.0,
+          "min_isi": 13.25,
+          "mean_v": -35.05525264590775
+        }
+      }
+    }
+  }
+]

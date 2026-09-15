@@ -1,0 +1,30 @@
+{
+  "n_instances": 4,
+  "damaged_within_tol_rate": 1.0,
+  "routed": {
+    "restored_fineA": 1.0,
+    "restored_fineB": 0.0,
+    "restored_heldout": 1.0,
+    "search_cost": 11079139.75,
+    "n_eval": 56.0,
+    "wall_s": 221.2756844162941
+  },
+  "medium": {
+    "restored_fineA": 0.75,
+    "restored_fineB": 0.0,
+    "restored_heldout": 0.75,
+    "search_cost": 2824937.5,
+    "n_eval": 56.0,
+    "wall_s": 85.03909802436829
+  },
+  "fine": {
+    "restored_fineA": 1.0,
+    "restored_fineB": 0.0,
+    "restored_heldout": 1.0,
+    "search_cost": 39328406.25,
+    "n_eval": 56.0,
+    "wall_s": 713.1063005924225
+  },
+  "routed_cost_over_fine": 0.28170833263806616,
+  "runtime_s": 4264.104779720306
+}

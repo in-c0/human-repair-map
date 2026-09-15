@@ -58,5 +58,6 @@
     "n_proc": 4,
     "s_min": 0.05,
     "ensemble_members": 5
-  }
+  },
+  "runtime_s": 24743.78994512558
 }

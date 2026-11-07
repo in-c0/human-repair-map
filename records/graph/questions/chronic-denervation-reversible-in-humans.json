@@ -1,0 +1,40 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/chronic-denervation-reversible-in-humans",
+  "projections": [
+    "universal-repair"
+  ],
+  "question": "Can a muscle and a distal nerve pathway that have been denervated for many months be made receptive again, so that a late repair works as well as an early one?",
+  "why": "It is the single question that decides whether proximal nerve injury is repairable at all. Every current strategy — nerve transfers, faster regrowth, shorter grafts — is an attempt to beat a clock. If the clock could be stopped, the surgery would stop being a race.",
+  "blocks": [
+    "hrm:capability/distal-schwann-cell-support-maintenance",
+    "hrm:capability/timely-muscle-reinnervation",
+    "hrm:goal/peripheral-nerve-repair"
+  ],
+  "hypotheses": [
+    "Schwann cell support can be maintained pharmacologically or by electrical activity, and the muscle follows.",
+    "The muscle is the harder limit: endplates and satellite cells are lost irreversibly regardless of the pathway.",
+    "Both decay, but a period of denervation can be tolerated if the muscle is kept active by stimulation."
+  ],
+  "knownUnknowns": [
+    "how long the human window actually is, as opposed to the rodent window",
+    "whether chronic electrical stimulation of denervated muscle preserves reinnervation capacity or only bulk",
+    "which cell population fails first in humans"
+  ],
+  "whatWouldResolve": "A large-animal study with denervation held for six to twelve months under an intervention, then repair, with force generation and endplate counts compared against immediate repair; then a trial in patients with delayed presentation.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

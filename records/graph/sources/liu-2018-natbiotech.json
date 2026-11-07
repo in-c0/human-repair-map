@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/liu-2018-natbiotech",
+  "type": "source",
+  "citation": "Liu et al., Nature Biotechnology, 2018",
+  "title": "Human embryonic stem cell–derived cardiomyocytes restore function in infarcted hearts of non-human primates",
+  "authors": "Liu Yen-Wen; Chen Billy; Yang Xiulan; Fugate James A; Kalucki Faith A; Futakuchi-Tsuchida Akiko; Couture Larry; Vogel Keith W; Astley Clifford A; Baldessari Audrey; Ogle Jason; Don Creighton W; Steinberg Zachary L; Seslar Stephen P; Tuck Stephanie A; Tsuchida Hiroshi; Naumova Anna V; Dupras Sarah K; Lyu Milly S; Lee James; Hailey Dale W; Reinecke Hans; Pabon Lil; Fryer Benjamin H; MacLellan W Robb; Thies R Scott; Murry Charles E",
+  "venue": "Nature Biotechnology",
+  "year": 2018,
+  "kind": "article",
+  "doi": "10.1038/nbt.4162",
+  "pmid": "29969440",
+  "url": "https://doi.org/10.1038/nbt.4162",
+  "license": "https://www.springernature.com/gp/researchers/text-and-data-mining",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Human embryonic stem cell–derived cardiomyocytes restore function in infarcted hearts of non-human primates",
+    "note": "Crossref record found; PubMed id 29969440 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+  }
+}

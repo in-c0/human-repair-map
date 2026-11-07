@@ -1,0 +1,61 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/young-systemic-environment-restores-aged-tissue-in-mice",
+  "statement": "Exposing aged mice to a young systemic environment by parabiosis restored the regenerative capacity of aged muscle and liver progenitor cells, and young plasma improved hippocampal plasticity and cognitive function in aged mice.",
+  "context": {
+    "species": "mouse",
+    "model": "heterochronic parabiosis; young plasma infusion"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "progenitor regenerative capacity; hippocampal plasticity and behaviour",
+    "endpoint": "tissue regeneration and cognition",
+    "effect": "restored regenerative capacity; improved cognitive measures"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/conboy-2005-nature",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    },
+    {
+      "source": "hrm:source/villeda-2014-natmed",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 2,
+    "note": "Two independent groups (Conboy; Wyss-Coray)."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/young-systemic-factor-supplementation"
+  ],
+  "limitations": [
+    "parabiosis shares organs and physiology, not only plasma",
+    "no human evidence"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/conboy-2005-nature",
+      "hrm:source/villeda-2014-natmed"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

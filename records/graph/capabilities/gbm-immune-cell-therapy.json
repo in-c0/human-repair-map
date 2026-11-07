@@ -1,0 +1,40 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/gbm-immune-cell-therapy",
+  "name": "Turn engineered immune cells on the tumour",
+  "class": "control",
+  "primitive": "remove",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Direct CAR T cells or another engineered immune population against glioblastoma, delivered where they can reach it.",
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Intraventricular IL13Ralpha2 CAR T produced regression of all intracranial and spinal tumours in one patient for 7.5 months (Brown 2016); intrathecal bivalent EGFR/IL13Ralpha2 CAR T produced early tumour reduction in three patients (Bagley 2024); intraventricular CARv3-TEAM-E produced dramatic regression within days in three patients, transient in two (Choi 2024). Human, radiographic, reproducible across three groups — and in almost every case the tumour came back. Intravenous EGFRvIII CAR T trafficked to tumour and drove antigen loss without clinical benefit (O'Rourke 2017).",
+    "drift": "The 2024 reports were covered as a breakthrough. They are the first reproducible rapid regressions in this disease and they are, so far, temporary."
+  },
+  "wouldMove": "A response lasting beyond a year in a substantial fraction of treated patients, or a trial with a survival endpoint that succeeds.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/brown-2016-nejm",
+      "hrm:source/bagley-2024-natmed",
+      "hrm:source/choi-2024-nejm",
+      "hrm:source/orourke-2017-scitranslmed"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

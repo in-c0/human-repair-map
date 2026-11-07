@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/menasche-2018-jacc",
+  "type": "source",
+  "citation": "Menasché et al., Journal of the American College of Cardiology, 2018",
+  "title": "Transplantation of Human Embryonic Stem Cell–Derived Cardiovascular Progenitors for Severe Ischemic Left Ventricular Dysfunction",
+  "authors": "Menasché Philippe; Vanneaux Valérie; Hagège Albert; Bel Alain; Cholley Bernard; Parouchev Alexandre; Cacciapuoti Isabelle; Al-Daccak Reem; Benhamouda Nadine; Blons Hélène; Agbulut Onnik; Tosca Lucie; Trouvin Jean-Hugues; Fabreguettes Jean-Roch; Bellamy Valérie; Charron Dominique; Tartour Eric; Tachdjian Gérard; Desnos Michel; Larghero Jérôme",
+  "venue": "Journal of the American College of Cardiology",
+  "year": 2018,
+  "kind": "article",
+  "doi": "10.1016/j.jacc.2017.11.047",
+  "pmid": "29389360",
+  "url": "https://doi.org/10.1016/j.jacc.2017.11.047",
+  "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Transplantation of Human Embryonic Stem Cell–Derived Cardiovascular Progenitors for Severe Ischemic Left Ventricular Dysfunction",
+    "note": "Crossref record found; PubMed id 29389360 located by DOI."
+  },
+  "note": "ESCORT: first-in-human embryonic-stem-cell-derived cardiovascular progenitor patch.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+  }
+}

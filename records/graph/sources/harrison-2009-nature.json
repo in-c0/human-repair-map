@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/harrison-2009-nature",
+  "type": "source",
+  "citation": "Harrison et al., Nature, 2009",
+  "title": "Rapamycin fed late in life extends lifespan in genetically heterogeneous mice",
+  "authors": "Harrison David E.; Strong Randy; Sharp Zelton Dave; Nelson James F.; Astle Clinton M.; Flurkey Kevin; Nadon Nancy L.; Wilkinson J. Erby; Frenkel Krystyna; Carter Christy S.; Pahor Marco; Javors Martin A.; Fernandez Elizabeth; Miller Richard A.",
+  "venue": "Nature",
+  "year": 2009,
+  "kind": "article",
+  "doi": "10.1038/nature08221",
+  "pmid": "19587680",
+  "url": "https://doi.org/10.1038/nature08221",
+  "license": "http://www.springer.com/tdm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Rapamycin fed late in life extends lifespan in genetically heterogeneous mice",
+    "note": "Crossref record found; PubMed id 19587680 located by DOI."
+  },
+  "note": "Rapamycin extends lifespan when started late in life.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/stupp-2005-nejm",
+  "type": "source",
+  "citation": "Stupp et al., New England Journal of Medicine, 2005",
+  "title": "Radiotherapy plus Concomitant and Adjuvant Temozolomide for Glioblastoma",
+  "authors": "Stupp Roger; Mason Warren P.; van den Bent Martin J.; Weller Michael; Fisher Barbara; Taphoorn Martin J.B.; Belanger Karl; Brandes Alba A.; Marosi Christine; Bogdahn Ulrich; Curschmann Jürgen; Janzer Robert C.; Ludwin Samuel K.; Gorlia Thierry; Allgeier Anouk; Lacombe Denis; Cairncross J. Gregory; Eisenhauer Elizabeth; Mirimanoff René O.",
+  "venue": "New England Journal of Medicine",
+  "year": 2005,
+  "kind": "article",
+  "doi": "10.1056/nejmoa043330",
+  "pmid": "15758009",
+  "url": "https://doi.org/10.1056/nejmoa043330",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Radiotherapy plus Concomitant and Adjuvant Temozolomide for Glioblastoma",
+    "note": "Crossref record found; PubMed id 15758009 located by DOI."
+  },
+  "note": "The trial that set the standard of care.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+  }
+}

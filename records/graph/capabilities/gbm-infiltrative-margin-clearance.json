@@ -1,0 +1,38 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/gbm-infiltrative-margin-clearance",
+  "name": "Clear the cells that have already spread into working brain",
+  "class": "control",
+  "primitive": "remove",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Eliminate the individual tumour cells that have migrated along tracts and vessels into brain that must keep working, where surgery and focal radiation cannot go.",
+  "target": {
+    "node": "hrm:cell/glia"
+  },
+  "grade": {
+    "basis": "no-evidence-located",
+    "rung": "L0",
+    "searchedOn": "2026-09-14",
+    "note": "Placed so the gap is visible. Recurrence at the margin is the near-universal pattern of failure, and no therapy is directed at the infiltrating population specifically. Glioma cells receiving synaptic input from neurons (Venkataramani 2019) suggests why they are hard to separate from the tissue: they are electrically integrated into it. Grading this node is one of the map's more consequential open tasks."
+  },
+  "wouldMove": "Any therapy with a measured effect on the infiltrating population as distinct from the enhancing mass.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/venkataramani-2019-nature"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

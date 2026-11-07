@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/gill-2018-natmed",
+  "type": "source",
+  "citation": "Gill et al., Nature Medicine, 2018",
+  "title": "Neuromodulation of lumbosacral spinal networks enables independent stepping after complete paraplegia",
+  "authors": "Gill Megan L.; Grahn Peter J.; Calvert Jonathan S.; Linde Margaux B.; Lavrov Igor A.; Strommen Jeffrey A.; Beck Lisa A.; Sayenko Dimitry G.; Van Straaten Meegan G.; Drubach Dina I.; Veith Daniel D.; Thoreson Andrew R.; Lopez Cesar; Gerasimenko Yury P.; Edgerton V. Reggie; Lee Kendall H.; Zhao Kristin D.",
+  "venue": "Nature Medicine",
+  "year": 2018,
+  "kind": "article",
+  "doi": "10.1038/s41591-018-0175-7",
+  "pmid": "30250140",
+  "url": "https://doi.org/10.1038/s41591-018-0175-7",
+  "license": "http://www.springer.com/tdm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Neuromodulation of lumbosacral spinal networks enables independent stepping after complete paraplegia",
+    "note": "Crossref record found; PubMed id 30250140 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+  }
+}

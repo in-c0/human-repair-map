@@ -1,0 +1,40 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/brain-spine-interface-volitional-control",
+  "name": "Bridge the gap electronically, under the person's own control",
+  "class": "control",
+  "primitive": "reconnect",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Decode movement intention from cortex and deliver it as stimulation to the cord below the lesion, so that walking is willed rather than triggered.",
+  "target": {
+    "node": "hrm:cell/neural-connectivity"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "science",
+    "note": "A digital bridge between cortical recordings and epidural stimulation restored natural, volitional walking in a participant with chronic tetraplegia, with neurological improvement persisting when the bridge was off (Lorach 2023). One participant, one group, an implanted system: the strongest single human result on this ground and the least replicated.",
+    "drift": "The persistence of improvement with the bridge off is the most interesting part of the report and the part with n=1 behind it."
+  },
+  "wouldMove": "A second participant in an unaffiliated centre, and a report of what happens over years rather than months.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/lorach-2023-nature"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

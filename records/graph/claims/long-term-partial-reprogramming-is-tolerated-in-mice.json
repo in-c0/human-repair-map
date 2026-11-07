@@ -1,0 +1,64 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/long-term-partial-reprogramming-is-tolerated-in-mice",
+  "statement": "Long-term, intermittent in vivo partial reprogramming in middle-aged mice altered age-associated molecular changes without causing tumours or loss of cell identity over the treatment period.",
+  "context": {
+    "species": "mouse",
+    "model": "middle-aged and old mice",
+    "intervention": "long-term intermittent OSKM induction"
+  },
+  "measurement": {
+    "measured": "biomarker",
+    "assay": "transcriptomic and epigenetic age-associated changes; histology",
+    "endpoint": "age-associated molecular profile; safety",
+    "effect": "age-associated changes altered; no tumours reported"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/browder-2022-nataging",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    },
+    {
+      "source": "hrm:source/yang-2023-cell",
+      "design": "animal-controlled",
+      "locator": "abstract",
+      "note": "epigenetic information loss as a driver, with reprogramming as a partial reversal"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 1,
+    "note": "Two groups (Izpisua Belmonte; Sinclair), both invested in the reprogramming hypothesis."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/safe-partial-epigenetic-reprogramming-in-vivo",
+    "hrm:capability/cell-identity-retention-under-partial-reprogramming"
+  ],
+  "limitations": [
+    "mouse",
+    "molecular endpoints rather than function or lifespan in the wild-type animal"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/browder-2022-nataging",
+      "hrm:source/yang-2023-cell"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

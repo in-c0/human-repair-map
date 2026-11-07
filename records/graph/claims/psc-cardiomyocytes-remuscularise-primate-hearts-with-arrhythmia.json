@@ -1,0 +1,73 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/psc-cardiomyocytes-remuscularise-primate-hearts-with-arrhythmia",
+  "statement": "Human pluripotent-stem-cell-derived cardiomyocytes grafted into infarcted non-human primate hearts formed substantial, host-synchronised new myocardium and improved contractile function — and caused ventricular arrhythmias in the treated animals.",
+  "context": {
+    "species": "macaque and pig",
+    "model": "myocardial infarction with cell grafting",
+    "intervention": "human embryonic-stem-cell-derived cardiomyocytes"
+  },
+  "measurement": {
+    "measured": "structure",
+    "assay": "histology, electrical mapping, echocardiography, telemetry",
+    "endpoint": "graft muscle, electromechanical coupling, contractile function, arrhythmia",
+    "effect": "extensive remuscularisation and improved function; non-fatal ventricular arrhythmias in treated animals"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/chong-2014-nature",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    },
+    {
+      "source": "hrm:source/liu-2018-natbiotech",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    },
+    {
+      "source": "hrm:source/romagnuolo-2019-scr",
+      "design": "animal-controlled",
+      "locator": "abstract",
+      "note": "pig heart; the same arrhythmia signal"
+    }
+  ],
+  "rung": "L3",
+  "replication": {
+    "independentGroups": 1,
+    "note": "Three reports from overlapping Seattle groups (Murry, Laflamme). The arrhythmia finding reproduces across species within that programme; independent replication is what is missing."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/infarct-remuscularisation",
+    "hrm:capability/graft-host-electrical-integration",
+    "hrm:capability/myocardial-graft-vascularisation"
+  ],
+  "drift": "'Stem cells regenerate the primate heart' — they do, and the recipients develop ventricular arrhythmia. The second half is rarely carried with the first.",
+  "limitations": [
+    "immunosuppressed animals",
+    "short follow-up relative to a human therapy",
+    "one research programme"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/chong-2014-nature",
+      "hrm:source/liu-2018-natbiotech",
+      "hrm:source/romagnuolo-2019-scr"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

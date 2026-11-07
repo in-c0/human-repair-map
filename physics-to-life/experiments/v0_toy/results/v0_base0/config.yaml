@@ -1,0 +1,46 @@
+ablations: {}
+base_level: 0
+ensemble:
+  hidden:
+  - 64
+  - 64
+  kind: mlp
+  n_members: 5
+include_path_states: true
+kappa: 1.0
+label: necessary
+n_ood: 100
+n_proc: 4
+n_test: 300
+n_train: 600
+ood_families:
+- amp_high
+run_id: v0_base0
+seed: 0
+sim:
+  dt: 0.02
+  horizon: 8.0
+  n_sub: 10
+  target: auc
+taus:
+- 0.02
+- 0.05
+- 0.1
+- 0.15
+- 0.2
+- 0.3
+- 0.4
+- 0.5
+- 0.6
+- 0.7
+- 0.8
+- 0.9
+- 0.97
+tol_ref: 0.01
+tols:
+- 0.002
+- 0.005
+- 0.01
+- 0.02
+- 0.05
+- 0.1

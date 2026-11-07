@@ -1,0 +1,23 @@
+# V1 MAIN RUN — Günay 2015 isopotential aCC motoneuron (ADR-0007). Frozen by
+# docs/experiments/v1_preregistration.md §16; any change after the freeze is post-hoc.
+run_id: v1_gunay_main
+seed: 0
+seed_offset: 100000          # disjoint from the pilot's seed streams (§10)
+system: gunay2015
+hierarchy_params: hierarchy/gunay2015_fine.json
+q10: 3.0
+calibrate_medium: false      # the medium level is the published model: never fitted
+base_level: 1
+tol_rel: 0.05                # peak_current uses 0.10 (pilot-audit correction 2; EpisodeConfig.tol_rel_by_target)
+routable: [Kf, NaT]          # §4 main-run rule after the pilot audit (correction 1): Ks/NaP charged their single-refinement increments
+n_train: 400
+n_test: 200
+n_ood: 60
+n_reserve: 100               # reserved ID evaluation set, evaluated once and reported separately (§8, §10)
+id_families: [none, density, kf_loss, kf_inactivation, kf_recovery, nat_inactivation, temperature, k_out]
+ood_families: [block, opening_step, combo, activation_rate]
+instance_g_cv: 0.2
+instance_rate_cv: 0.1
+n_proc: 4
+s_min: 0.05
+ensemble_members: 5

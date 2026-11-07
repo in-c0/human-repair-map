@@ -1,0 +1,322 @@
+[
+  {
+    "instance": 0,
+    "damage": "kf_loss",
+    "loss_factor": 0.42253739639895077,
+    "kf_loss": 0.42253739639895077,
+    "y_wt": {
+      "spike_count": 33.0,
+      "spike_latency": 13.950000000000003,
+      "min_isi": 15.0,
+      "mean_v": -35.10877045866398
+    },
+    "wt_spikes": 33.0,
+    "skipped_silent": false,
+    "methods": {},
+    "y_wt_B": {
+      "spike_count": 53.0,
+      "spike_latency": 11.05,
+      "min_isi": 9.349999999999966,
+      "mean_v": -30.044605251913136
+    },
+    "y_damaged": {
+      "spike_count": 33.0,
+      "spike_latency": 13.950000000000003,
+      "min_isi": 15.0,
+      "mean_v": -35.08750773302291
+    },
+    "damaged_within_tol": true,
+    "functionally_damaged": false
+  },
+  {
+    "instance": 1,
+    "damage": "kf_loss",
+    "loss_factor": 0.4591758771551381,
+    "kf_loss": 0.4591758771551381,
+    "y_wt": {
+      "spike_count": 51.0,
+      "spike_latency": 7.150000000000002,
+      "min_isi": 9.75,
+      "mean_v": -30.537895310180893
+    },
+    "wt_spikes": 51.0,
+    "skipped_silent": false,
+    "methods": {},
+    "y_wt_B": {
+      "spike_count": 67.0,
+      "spike_latency": 0.5500000000000007,
+      "min_isi": 7.449999999999989,
+      "mean_v": -27.383339660962122
+    },
+    "y_damaged": {
+      "spike_count": 51.0,
+      "spike_latency": 7.150000000000002,
+      "min_isi": 9.75,
+      "mean_v": -30.529910761129905
+    },
+    "damaged_within_tol": true,
+    "functionally_damaged": false
+  },
+  {
+    "instance": 2,
+    "damage": "kf_loss",
+    "loss_factor": 0.47096364740597446,
+    "kf_loss": 0.47096364740597446,
+    "y_wt": {
+      "spike_count": 35.0,
+      "spike_latency": 8.350000000000001,
+      "min_isi": 14.399999999999977,
+      "mean_v": -34.58325735405295
+    },
+    "wt_spikes": 35.0,
+    "skipped_silent": false,
+    "methods": {},
+    "y_wt_B": {
+      "spike_count": 50.0,
+      "spike_latency": 2.75,
+      "min_isi": 9.949999999999989,
+      "mean_v": -30.400916247118637
+    },
+    "y_damaged": {
+      "spike_count": 35.0,
+      "spike_latency": 8.350000000000001,
+      "min_isi": 14.399999999999977,
+      "mean_v": -34.580581455204005
+    },
+    "damaged_within_tol": true,
+    "functionally_damaged": false
+  },
+  {
+    "instance": 3,
+    "damage": "kf_loss",
+    "loss_factor": 0.1714053062293061,
+    "kf_loss": 0.1714053062293061,
+    "y_wt": {
+      "spike_count": 0.0,
+      "spike_latency": 500.0,
+      "min_isi": 500.0,
+      "mean_v": -47.24153893579668
+    },
+    "wt_spikes": 0.0,
+    "skipped_silent": true,
+    "methods": {}
+  },
+  {
+    "instance": 4,
+    "damage": "kf_loss",
+    "loss_factor": 0.13605869548850164,
+    "kf_loss": 0.13605869548850164,
+    "y_wt": {
+      "spike_count": 53.0,
+      "spike_latency": 6.5,
+      "min_isi": 9.399999999999977,
+      "mean_v": -30.532633689362108
+    },
+    "wt_spikes": 53.0,
+    "skipped_silent": false,
+    "methods": {},
+    "y_wt_B": {
+      "spike_count": 66.0,
+      "spike_latency": 0.45000000000000107,
+      "min_isi": 7.649999999999977,
+      "mean_v": -27.68863340079786
+    },
+    "y_damaged": {
+      "spike_count": 53.0,
+      "spike_latency": 6.5,
+      "min_isi": 9.399999999999977,
+      "mean_v": -30.51441340122456
+    },
+    "damaged_within_tol": true,
+    "functionally_damaged": false
+  },
+  {
+    "instance": 5,
+    "damage": "kf_loss",
+    "loss_factor": 0.017331948393267238,
+    "kf_loss": 0.017331948393267238,
+    "y_wt": {
+      "spike_count": 34.0,
+      "spike_latency": 13.900000000000002,
+      "min_isi": 14.399999999999977,
+      "mean_v": -34.65686944968123
+    },
+    "wt_spikes": 34.0,
+    "skipped_silent": false,
+    "methods": {},
+    "y_wt_B": {
+      "spike_count": 45.0,
+      "spike_latency": 12.5,
+      "min_isi": 10.649999999999999,
+      "mean_v": -30.895166688647564
+    },
+    "y_damaged": {
+      "spike_count": 34.0,
+      "spike_latency": 13.900000000000002,
+      "min_isi": 14.399999999999977,
+      "mean_v": -34.626968203884395
+    },
+    "damaged_within_tol": true,
+    "functionally_damaged": false
+  },
+  {
+    "instance": 6,
+    "damage": "kf_loss",
+    "loss_factor": 0.44206760767829806,
+    "kf_loss": 0.44206760767829806,
+    "y_wt": {
+      "spike_count": 66.0,
+      "spike_latency": 0.5,
+      "min_isi": 7.649999999999977,
+      "mean_v": -26.628014303162594
+    },
+    "wt_spikes": 66.0,
+    "skipped_silent": false,
+    "methods": {},
+    "y_wt_B": {
+      "spike_count": 76.0,
+      "spike_latency": 6.600000000000001,
+      "min_isi": 6.5,
+      "mean_v": -24.57829122458848
+    },
+    "y_damaged": {
+      "spike_count": 66.0,
+      "spike_latency": 0.5,
+      "min_isi": 7.649999999999977,
+      "mean_v": -26.616603331584418
+    },
+    "damaged_within_tol": true,
+    "functionally_damaged": false
+  },
+  {
+    "instance": 7,
+    "damage": "kf_loss",
+    "loss_factor": 0.22439146630288676,
+    "kf_loss": 0.22439146630288676,
+    "y_wt": {
+      "spike_count": 0.0,
+      "spike_latency": 500.0,
+      "min_isi": 500.0,
+      "mean_v": -45.250836131929574
+    },
+    "wt_spikes": 0.0,
+    "skipped_silent": true,
+    "methods": {}
+  },
+  {
+    "instance": 8,
+    "damage": "kf_loss",
+    "loss_factor": 0.33420679783651974,
+    "kf_loss": 0.33420679783651974,
+    "y_wt": {
+      "spike_count": 63.0,
+      "spike_latency": 7.199999999999999,
+      "min_isi": 7.7999999999999545,
+      "mean_v": -28.048839545144677
+    },
+    "wt_spikes": 63.0,
+    "skipped_silent": false,
+    "methods": {},
+    "y_wt_B": {
+      "spike_count": 79.0,
+      "spike_latency": 6.650000000000002,
+      "min_isi": 6.25,
+      "mean_v": -25.440837275132985
+    },
+    "y_damaged": {
+      "spike_count": 64.0,
+      "spike_latency": 7.199999999999999,
+      "min_isi": 7.7999999999999545,
+      "mean_v": -28.015095817221138
+    },
+    "damaged_within_tol": true,
+    "functionally_damaged": false
+  },
+  {
+    "instance": 9,
+    "damage": "kf_loss",
+    "loss_factor": 0.28266510739895484,
+    "kf_loss": 0.28266510739895484,
+    "y_wt": {
+      "spike_count": 70.0,
+      "spike_latency": 0.25,
+      "min_isi": 7.149999999999977,
+      "mean_v": -26.406222760248088
+    },
+    "wt_spikes": 70.0,
+    "skipped_silent": false,
+    "methods": {},
+    "y_wt_B": {
+      "spike_count": 83.0,
+      "spike_latency": 6.199999999999999,
+      "min_isi": 5.949999999999989,
+      "mean_v": -24.62266219819896
+    },
+    "y_damaged": {
+      "spike_count": 70.0,
+      "spike_latency": 0.25,
+      "min_isi": 7.149999999999977,
+      "mean_v": -26.383248871775304
+    },
+    "damaged_within_tol": true,
+    "functionally_damaged": false
+  },
+  {
+    "instance": 10,
+    "damage": "kf_loss",
+    "loss_factor": 0.3001395114630159,
+    "kf_loss": 0.3001395114630159,
+    "y_wt": {
+      "spike_count": 57.0,
+      "spike_latency": 7.600000000000001,
+      "min_isi": 8.649999999999977,
+      "mean_v": -28.376582357456254
+    },
+    "wt_spikes": 57.0,
+    "skipped_silent": false,
+    "methods": {},
+    "y_wt_B": {
+      "spike_count": 73.0,
+      "spike_latency": 5.4,
+      "min_isi": 6.700000000000001,
+      "mean_v": -25.724883610602483
+    },
+    "y_damaged": {
+      "spike_count": 57.0,
+      "spike_latency": 7.600000000000001,
+      "min_isi": 8.649999999999977,
+      "mean_v": -28.346275641168532
+    },
+    "damaged_within_tol": true,
+    "functionally_damaged": false
+  },
+  {
+    "instance": 11,
+    "damage": "kf_loss",
+    "loss_factor": 0.14964119187018848,
+    "kf_loss": 0.14964119187018848,
+    "y_wt": {
+      "spike_count": 58.0,
+      "spike_latency": 10.350000000000001,
+      "min_isi": 8.499999999999993,
+      "mean_v": -28.959030255068278
+    },
+    "wt_spikes": 58.0,
+    "skipped_silent": false,
+    "methods": {},
+    "y_wt_B": {
+      "spike_count": 75.0,
+      "spike_latency": 7.949999999999999,
+      "min_isi": 6.450000000000003,
+      "mean_v": -26.337281143726276
+    },
+    "y_damaged": {
+      "spike_count": 58.0,
+      "spike_latency": 10.350000000000001,
+      "min_isi": 8.499999999999972,
+      "mean_v": -28.925152713032478
+    },
+    "damaged_within_tol": true,
+    "functionally_damaged": false
+  }
+]

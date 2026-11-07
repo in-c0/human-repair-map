@@ -1,0 +1,2663 @@
+{
+  "note": "POST-HOC SUPPLEMENT to verdicts.py (not the preregistered verdict; written after the main-run\nverdicts were read \u2014 see the review package).\n\nverdicts.py selects, for every baseline, the parameter attaining the budget on validation and,\nwhen no parameter attains it, falls back to the baseline's *cheapest* parameter.  A baseline that\ncannot reach the budget therefore competes at a higher cost than the learned router (in the main\nrun the AdaLED-style ensemble-uncertainty trigger's cheapest point costs 0.40 of uniform fine at\nthe 0.30 budget).  H1-V1 speaks of \"lower target error at fixed compute\"; this supplement\nre-runs the same comparison with the baseline set restricted to baselines that attain the budget\non validation (unattainable ones are listed, not compared), with the same statistics.  It changes\nno threshold, seed or criterion; it exists so that the reader can see whether the preregistered\nverdict depends on the fallback rule.",
+  "budgets": [
+    0.15,
+    0.3,
+    0.5
+  ],
+  "principal": 0.3,
+  "conditions": {
+    "id": {
+      "one_shot": {
+        "voc": {
+          "operating_points": {
+            "0.15": {
+              "param": 5.623413251903491e-05,
+              "attained": true,
+              "cost_frac_mean": 0.14641158578577418,
+              "err_mean": 1.4611493214783582,
+              "success_rate": 0.69625,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.569514320673474,
+                  "ci95": [
+                    -9.530165695504353,
+                    -4.129235091005267
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.569514320673474,
+                  "ci95": [
+                    -9.530165695504353,
+                    -4.129235091005267
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.95,
+                  "cost_frac_mean": 0.13155497731803345,
+                  "err_mean": 6.669307709838029,
+                  "diff_mean": -5.208158388359671,
+                  "ci95": [
+                    -7.687692714746035,
+                    -3.0924290216259465
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.216965034285822e-06,
+                  "cost_frac_mean": 0.1704906845919173,
+                  "err_mean": 1.5842323363660087,
+                  "diff_mean": -0.12308301488765022,
+                  "ci95": [
+                    -0.20518830362524015,
+                    -0.04078058194595861
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 0.0001,
+                  "cost_frac_mean": 0.12979297329023326,
+                  "err_mean": 7.578905511714002,
+                  "diff_mean": -6.117756190235644,
+                  "ci95": [
+                    -9.067741495458682,
+                    -3.680157363036861
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.85,
+                  "cost_frac_mean": 0.1361048095380897,
+                  "err_mean": 6.583018928951639,
+                  "diff_mean": -5.12186960747328,
+                  "ci95": [
+                    -7.98303290428648,
+                    -2.7357477465075637
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.569514320673474,
+                  "ci95": [
+                    -9.530165695504353,
+                    -4.129235091005267
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.006,
+              "ratio_vs_best_baseline": 0.9223074721666239
+            },
+            "0.3": {
+              "param": 1.778279410038923e-05,
+              "attained": true,
+              "cost_frac_mean": 0.2772022262607508,
+              "err_mean": 0.8230184836788735,
+              "success_rate": 0.8604166666666667,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -7.207645158472959,
+                  "ci95": [
+                    -10.158301366855051,
+                    -4.759258614047234
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.19515568149980042,
+                  "err_mean": 3.3946907185037483,
+                  "diff_mean": -2.5716722348248746,
+                  "ci95": [
+                    -4.305613723489806,
+                    -1.206242724767473
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.9,
+                  "cost_frac_mean": 0.1782696166773477,
+                  "err_mean": 5.103818576574082,
+                  "diff_mean": -4.280800092895209,
+                  "ci95": [
+                    -6.67953858914248,
+                    -2.2862306981076044
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 1.333521432163324e-06,
+                  "cost_frac_mean": 0.32406470954709776,
+                  "err_mean": 0.4176422966178802,
+                  "diff_mean": 0.4053761870609932,
+                  "ci95": [
+                    -0.019667923133562026,
+                    1.2193113202070158
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 1.778279410038923e-05,
+                  "cost_frac_mean": 0.3160592904712978,
+                  "err_mean": 3.1469667705285165,
+                  "diff_mean": -2.323948286849643,
+                  "ci95": [
+                    -4.335528887752515,
+                    -0.5934694657614547
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.5,
+                  "cost_frac_mean": 0.28229169549609634,
+                  "err_mean": 2.8591324786692836,
+                  "diff_mean": -2.03611399499041,
+                  "ci95": [
+                    -4.09667762202729,
+                    -0.5509860359399781
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.2154314970189033,
+                  "err_mean": 6.447449979484116,
+                  "diff_mean": -5.624431495805243,
+                  "ci95": [
+                    -8.19224139302562,
+                    -3.4481318713822495
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.192,
+              "ratio_vs_best_baseline": 1.9706301070168912
+            },
+            "0.5": {
+              "param": 2.3713737056616554e-07,
+              "attained": true,
+              "cost_frac_mean": 0.516120052014544,
+              "err_mean": 0.039803833269331436,
+              "success_rate": 0.9920833333333333,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -7.990859808882501,
+                  "ci95": [
+                    -11.003766884385596,
+                    -5.381505623352077
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 3.0,
+                  "cost_frac_mean": 0.4219612450471337,
+                  "err_mean": 0.3892467129433057,
+                  "diff_mean": -0.3494428796739743,
+                  "ci95": [
+                    -0.3973420048438328,
+                    -0.3005790544500391
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.75,
+                  "cost_frac_mean": 0.3207719906592554,
+                  "err_mean": 2.3900143097050646,
+                  "diff_mean": -2.350210476435733,
+                  "ci95": [
+                    -3.545474267168984,
+                    -1.524817458048104
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty": {
+                  "param": 0.3,
+                  "cost_frac_mean": 0.4829946804040456,
+                  "err_mean": 0.08733733768358944,
+                  "diff_mean": -0.04753350441425798,
+                  "ci95": [
+                    -0.07727122616514026,
+                    -0.013769771303668082
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.2169650342858225e-07,
+                  "cost_frac_mean": 0.49677229218154517,
+                  "err_mean": 0.1821833444950698,
+                  "diff_mean": -0.14237951122573836,
+                  "ci95": [
+                    -0.17414764431068677,
+                    -0.1133250534026979
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 7.498942093324558e-07,
+                  "cost_frac_mean": 0.5554440482956032,
+                  "err_mean": 0.3464373343595263,
+                  "diff_mean": -0.3066335010901948,
+                  "ci95": [
+                    -0.39675486338255966,
+                    -0.23497965970503837
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.01,
+                  "cost_frac_mean": 0.5061879596007263,
+                  "err_mean": 0.03623218458280776,
+                  "diff_mean": 0.003571648686523671,
+                  "ci95": [
+                    -0.017492598613983616,
+                    0.01887746730686979
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 2.0,
+                  "cost_frac_mean": 0.39209087295904965,
+                  "err_mean": 4.420167980201953,
+                  "diff_mean": -4.380364146932622,
+                  "ci95": [
+                    -6.6870515915586175,
+                    -2.4920224407528226
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                }
+              ],
+              "best_baseline": "hardlabel",
+              "p_vs_best_baseline": 0.602,
+              "ratio_vs_best_baseline": 1.0985766861051605
+            }
+          },
+          "holm": {
+            "0.15": 0.018000000000000002,
+            "0.3": 0.384,
+            "0.5": 0.602
+          },
+          "H1_V1_reading_B": {
+            "passes": false,
+            "falsified": true,
+            "contradicted_at_other_points": false
+          }
+        },
+        "hybrid": {
+          "operating_points": {
+            "0.15": {
+              "param": 4.216965034285822e-05,
+              "attained": true,
+              "cost_frac_mean": 0.1399588279896704,
+              "err_mean": 1.524555694308968,
+              "success_rate": 0.66375,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.506107947842865,
+                  "ci95": [
+                    -9.456947682323575,
+                    -4.048106290303362
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.506107947842865,
+                  "ci95": [
+                    -9.456947682323575,
+                    -4.048106290303362
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.95,
+                  "cost_frac_mean": 0.13155497731803345,
+                  "err_mean": 6.669307709838029,
+                  "diff_mean": -5.144752015529061,
+                  "ci95": [
+                    -7.618593521597923,
+                    -3.019373630964233
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.216965034285822e-06,
+                  "cost_frac_mean": 0.1704906845919173,
+                  "err_mean": 1.5842323363660087,
+                  "diff_mean": -0.0596766420570408,
+                  "ci95": [
+                    -0.17230575076073096,
+                    0.056813042660975824
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 0.0001,
+                  "cost_frac_mean": 0.12979297329023326,
+                  "err_mean": 7.578905511714002,
+                  "diff_mean": -6.0543498174050345,
+                  "ci95": [
+                    -9.00762731339802,
+                    -3.6045062225782236
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.85,
+                  "cost_frac_mean": 0.1361048095380897,
+                  "err_mean": 6.583018928951639,
+                  "diff_mean": -5.058463234642671,
+                  "ci95": [
+                    -7.898352699580371,
+                    -2.6915016821400957
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.506107947842865,
+                  "ci95": [
+                    -9.456947682323575,
+                    -4.048106290303362
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.287,
+              "ratio_vs_best_baseline": 0.9623308774305604
+            },
+            "0.3": {
+              "param": 7.498942093324558e-07,
+              "attained": true,
+              "cost_frac_mean": 0.3115025625468295,
+              "err_mean": 0.581017452823194,
+              "success_rate": 0.835,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -7.44964618932864,
+                  "ci95": [
+                    -10.487759485821648,
+                    -4.828142992696787
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.19515568149980042,
+                  "err_mean": 3.3946907185037483,
+                  "diff_mean": -2.8136732656805545,
+                  "ci95": [
+                    -4.817119430914018,
+                    -1.275714689853771
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.9,
+                  "cost_frac_mean": 0.1782696166773477,
+                  "err_mean": 5.103818576574082,
+                  "diff_mean": -4.522801123750889,
+                  "ci95": [
+                    -6.782954136218512,
+                    -2.657475540286006
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 1.333521432163324e-06,
+                  "cost_frac_mean": 0.32406470954709776,
+                  "err_mean": 0.4176422966178802,
+                  "diff_mean": 0.16337515620531365,
+                  "ci95": [
+                    0.06814328288934658,
+                    0.2732371173865699
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 1.778279410038923e-05,
+                  "cost_frac_mean": 0.3160592904712978,
+                  "err_mean": 3.1469667705285165,
+                  "diff_mean": -2.5659493177053228,
+                  "ci95": [
+                    -4.425675845592481,
+                    -0.9579582030241333
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.5,
+                  "cost_frac_mean": 0.28229169549609634,
+                  "err_mean": 2.8591324786692836,
+                  "diff_mean": -2.27811502584609,
+                  "ci95": [
+                    -4.467378965006479,
+                    -0.61645262842872
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.2154314970189033,
+                  "err_mean": 6.447449979484116,
+                  "diff_mean": -5.8664325266609225,
+                  "ci95": [
+                    -8.505459860516671,
+                    -3.5433482116197723
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.0001,
+              "ratio_vs_best_baseline": 1.3911844119437764
+            },
+            "0.5": {
+              "param": 4.2169650342858225e-07,
+              "attained": true,
+              "cost_frac_mean": 0.3207854303231459,
+              "err_mean": 0.5810174567139709,
+              "success_rate": 0.835,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -7.449646185437863,
+                  "ci95": [
+                    -10.487759500395,
+                    -4.82814299529133
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 3.0,
+                  "cost_frac_mean": 0.4219612450471337,
+                  "err_mean": 0.3892467129433057,
+                  "diff_mean": 0.19177074377066514,
+                  "ci95": [
+                    0.1118754015682467,
+                    0.295847099476346
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.75,
+                  "cost_frac_mean": 0.3207719906592554,
+                  "err_mean": 2.3900143097050646,
+                  "diff_mean": -1.808996852991094,
+                  "ci95": [
+                    -2.964448981463191,
+                    -0.9875860601592806
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty": {
+                  "param": 0.3,
+                  "cost_frac_mean": 0.4829946804040456,
+                  "err_mean": 0.08733733768358944,
+                  "diff_mean": 0.49368011903038145,
+                  "ci95": [
+                    0.4029090597029868,
+                    0.594249209614054
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.2169650342858225e-07,
+                  "cost_frac_mean": 0.49677229218154517,
+                  "err_mean": 0.1821833444950698,
+                  "diff_mean": 0.3988341122189011,
+                  "ci95": [
+                    0.30992377185740405,
+                    0.5020069376855854
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 7.498942093324558e-07,
+                  "cost_frac_mean": 0.5554440482956032,
+                  "err_mean": 0.3464373343595263,
+                  "diff_mean": 0.23458012235444461,
+                  "ci95": [
+                    0.1046156388913283,
+                    0.35460318598019375
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.01,
+                  "cost_frac_mean": 0.5061879596007263,
+                  "err_mean": 0.03623218458280776,
+                  "diff_mean": 0.5447852721311631,
+                  "ci95": [
+                    0.45522412625524655,
+                    0.6503453226382807
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 2.0,
+                  "cost_frac_mean": 0.39209087295904965,
+                  "err_mean": 4.420167980201953,
+                  "diff_mean": -3.839150523487982,
+                  "ci95": [
+                    -6.1431926770920535,
+                    -1.9579530457365613
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                }
+              ],
+              "best_baseline": "hardlabel",
+              "p_vs_best_baseline": 0.0001,
+              "ratio_vs_best_baseline": 16.035948795360927
+            }
+          },
+          "holm": {
+            "0.15": 0.287,
+            "0.3": 0.00030000000000000003,
+            "0.5": 0.00030000000000000003
+          },
+          "H1_V1_reading_B": {
+            "passes": false,
+            "falsified": true,
+            "contradicted_at_other_points": true
+          }
+        }
+      },
+      "sequential": {
+        "voc_seq": {
+          "operating_points": {
+            "0.15": {
+              "param": 5.623413251903491e-05,
+              "attained": true,
+              "cost_frac_mean": 0.14677487009555706,
+              "err_mean": 1.4611493214783582,
+              "success_rate": 0.69625,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.569514320673474,
+                  "ci95": [
+                    -9.530165695504353,
+                    -4.129235091005267
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.569514320673474,
+                  "ci95": [
+                    -9.530165695504353,
+                    -4.129235091005267
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.95,
+                  "cost_frac_mean": 0.13155497731803345,
+                  "err_mean": 6.669307709838029,
+                  "diff_mean": -5.208158388359671,
+                  "ci95": [
+                    -7.687692714746035,
+                    -3.0924290216259465
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.216965034285822e-06,
+                  "cost_frac_mean": 0.1704906845919173,
+                  "err_mean": 1.5842323363660087,
+                  "diff_mean": -0.12308301488765022,
+                  "ci95": [
+                    -0.20518830362524015,
+                    -0.04078058194595861
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 0.0001,
+                  "cost_frac_mean": 0.12979297329023326,
+                  "err_mean": 7.578905511714002,
+                  "diff_mean": -6.117756190235644,
+                  "ci95": [
+                    -9.067741495458682,
+                    -3.680157363036861
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.85,
+                  "cost_frac_mean": 0.1361048095380897,
+                  "err_mean": 6.583018928951639,
+                  "diff_mean": -5.12186960747328,
+                  "ci95": [
+                    -7.98303290428648,
+                    -2.7357477465075637
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.569514320673474,
+                  "ci95": [
+                    -9.530165695504353,
+                    -4.129235091005267
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.006,
+              "ratio_vs_best_baseline": 0.9223074721666239
+            },
+            "0.3": {
+              "param": 1.778279410038923e-05,
+              "attained": true,
+              "cost_frac_mean": 0.27969049407560176,
+              "err_mean": 0.8230184836788735,
+              "success_rate": 0.8604166666666667,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -7.207645158472959,
+                  "ci95": [
+                    -10.158301366855051,
+                    -4.759258614047234
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.19515568149980042,
+                  "err_mean": 3.3946907185037483,
+                  "diff_mean": -2.5716722348248746,
+                  "ci95": [
+                    -4.305613723489806,
+                    -1.206242724767473
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.9,
+                  "cost_frac_mean": 0.1782696166773477,
+                  "err_mean": 5.103818576574082,
+                  "diff_mean": -4.280800092895209,
+                  "ci95": [
+                    -6.67953858914248,
+                    -2.2862306981076044
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 1.333521432163324e-06,
+                  "cost_frac_mean": 0.32406470954709776,
+                  "err_mean": 0.4176422966178802,
+                  "diff_mean": 0.4053761870609932,
+                  "ci95": [
+                    -0.019667923133562026,
+                    1.2193113202070158
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 1.778279410038923e-05,
+                  "cost_frac_mean": 0.3160592904712978,
+                  "err_mean": 3.1469667705285165,
+                  "diff_mean": -2.323948286849643,
+                  "ci95": [
+                    -4.335528887752515,
+                    -0.5934694657614547
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.5,
+                  "cost_frac_mean": 0.28229169549609634,
+                  "err_mean": 2.8591324786692836,
+                  "diff_mean": -2.03611399499041,
+                  "ci95": [
+                    -4.09667762202729,
+                    -0.5509860359399781
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.2154314970189033,
+                  "err_mean": 6.447449979484116,
+                  "diff_mean": -5.624431495805243,
+                  "ci95": [
+                    -8.19224139302562,
+                    -3.4481318713822495
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.192,
+              "ratio_vs_best_baseline": 1.9706301070168912
+            },
+            "0.5": {
+              "param": 2.3713737056616552e-06,
+              "attained": true,
+              "cost_frac_mean": 0.48937200448297186,
+              "err_mean": 0.11780989078798139,
+              "success_rate": 0.9670833333333333,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -7.91285375136385,
+                  "ci95": [
+                    -10.934049632430412,
+                    -5.312007307111144
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 3.0,
+                  "cost_frac_mean": 0.4219612450471337,
+                  "err_mean": 0.3892467129433057,
+                  "diff_mean": -0.2714368221553244,
+                  "ci95": [
+                    -0.31332004117360823,
+                    -0.22822973604162652
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.75,
+                  "cost_frac_mean": 0.3207719906592554,
+                  "err_mean": 2.3900143097050646,
+                  "diff_mean": -2.272204418917083,
+                  "ci95": [
+                    -3.4645212936138137,
+                    -1.4460262407448075
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty": {
+                  "param": 0.3,
+                  "cost_frac_mean": 0.4829946804040456,
+                  "err_mean": 0.08733733768358944,
+                  "diff_mean": 0.030472553104391953,
+                  "ci95": [
+                    0.005591536191683863,
+                    0.0614450289037379
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.2169650342858225e-07,
+                  "cost_frac_mean": 0.49677229218154517,
+                  "err_mean": 0.1821833444950698,
+                  "diff_mean": -0.06437345370708843,
+                  "ci95": [
+                    -0.08916651763349688,
+                    -0.043034886426802865
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 7.498942093324558e-07,
+                  "cost_frac_mean": 0.5554440482956032,
+                  "err_mean": 0.3464373343595263,
+                  "diff_mean": -0.22862744357154488,
+                  "ci95": [
+                    -0.31906426901251783,
+                    -0.15806654007722012
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.01,
+                  "cost_frac_mean": 0.5061879596007263,
+                  "err_mean": 0.03623218458280776,
+                  "diff_mean": 0.08157770620517359,
+                  "ci95": [
+                    0.05217042953233955,
+                    0.11031123078813106
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 2.0,
+                  "cost_frac_mean": 0.39209087295904965,
+                  "err_mean": 4.420167980201953,
+                  "diff_mean": -4.302358089413971,
+                  "ci95": [
+                    -6.610760891369456,
+                    -2.4170473241565356
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                }
+              ],
+              "best_baseline": "hardlabel",
+              "p_vs_best_baseline": 0.0001,
+              "ratio_vs_best_baseline": 3.2515260160129125
+            }
+          },
+          "holm": {
+            "0.15": 0.012,
+            "0.3": 0.192,
+            "0.5": 0.00030000000000000003
+          },
+          "H1_V1_reading_B": {
+            "passes": false,
+            "falsified": true,
+            "contradicted_at_other_points": true
+          }
+        },
+        "hybrid_seq": {
+          "operating_points": {
+            "0.15": {
+              "param": 4.216965034285822e-05,
+              "attained": true,
+              "cost_frac_mean": 0.14005736356799106,
+              "err_mean": 1.524555694308968,
+              "success_rate": 0.66375,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.506107947842865,
+                  "ci95": [
+                    -9.456947682323575,
+                    -4.048106290303362
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.506107947842865,
+                  "ci95": [
+                    -9.456947682323575,
+                    -4.048106290303362
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.95,
+                  "cost_frac_mean": 0.13155497731803345,
+                  "err_mean": 6.669307709838029,
+                  "diff_mean": -5.144752015529061,
+                  "ci95": [
+                    -7.618593521597923,
+                    -3.019373630964233
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.216965034285822e-06,
+                  "cost_frac_mean": 0.1704906845919173,
+                  "err_mean": 1.5842323363660087,
+                  "diff_mean": -0.0596766420570408,
+                  "ci95": [
+                    -0.17230575076073096,
+                    0.056813042660975824
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 0.0001,
+                  "cost_frac_mean": 0.12979297329023326,
+                  "err_mean": 7.578905511714002,
+                  "diff_mean": -6.0543498174050345,
+                  "ci95": [
+                    -9.00762731339802,
+                    -3.6045062225782236
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.85,
+                  "cost_frac_mean": 0.1361048095380897,
+                  "err_mean": 6.583018928951639,
+                  "diff_mean": -5.058463234642671,
+                  "ci95": [
+                    -7.898352699580371,
+                    -2.6915016821400957
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -6.506107947842865,
+                  "ci95": [
+                    -9.456947682323575,
+                    -4.048106290303362
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.287,
+              "ratio_vs_best_baseline": 0.9623308774305604
+            },
+            "0.3": {
+              "param": 2.3713737056616552e-06,
+              "attained": true,
+              "cost_frac_mean": 0.3026778919168173,
+              "err_mean": 0.5836782483833532,
+              "success_rate": 0.8354166666666667,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -7.446985393768479,
+                  "ci95": [
+                    -10.482871871840114,
+                    -4.8261134219654185
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.19515568149980042,
+                  "err_mean": 3.3946907185037483,
+                  "diff_mean": -2.811012470120395,
+                  "ci95": [
+                    -4.810589784025574,
+                    -1.27217329882836
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.9,
+                  "cost_frac_mean": 0.1782696166773477,
+                  "err_mean": 5.103818576574082,
+                  "diff_mean": -4.520140328190729,
+                  "ci95": [
+                    -6.779313164473287,
+                    -2.6571027791916255
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 1.333521432163324e-06,
+                  "cost_frac_mean": 0.32406470954709776,
+                  "err_mean": 0.4176422966178802,
+                  "diff_mean": 0.16603595176547303,
+                  "ci95": [
+                    0.07102782523457761,
+                    0.27554058293194433
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 1.778279410038923e-05,
+                  "cost_frac_mean": 0.3160592904712978,
+                  "err_mean": 3.1469667705285165,
+                  "diff_mean": -2.563288522145163,
+                  "ci95": [
+                    -4.423804430133507,
+                    -0.9548478072675919
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.5,
+                  "cost_frac_mean": 0.28229169549609634,
+                  "err_mean": 2.8591324786692836,
+                  "diff_mean": -2.27545423028593,
+                  "ci95": [
+                    -4.463052953639706,
+                    -0.6139171097819105
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.2154314970189033,
+                  "err_mean": 6.447449979484116,
+                  "diff_mean": -5.863771731100763,
+                  "ci95": [
+                    -8.501383413624753,
+                    -3.5416049291355813
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.0001,
+              "ratio_vs_best_baseline": 1.3975554035356406
+            },
+            "0.5": {
+              "param": 4.2169650342858225e-07,
+              "attained": true,
+              "cost_frac_mean": 0.4405693639567017,
+              "err_mean": 0.578833326951996,
+              "success_rate": 0.83625,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.0619444732594499,
+                  "err_mean": 8.030663642151834,
+                  "diff_mean": -7.451830315199836,
+                  "ci95": [
+                    -10.488260972159495,
+                    -4.830652122096225
+                  ],
+                  "n_pairs": 2400
+                },
+                "share": {
+                  "param": 3.0,
+                  "cost_frac_mean": 0.4219612450471337,
+                  "err_mean": 0.3892467129433057,
+                  "diff_mean": 0.18958661400869023,
+                  "ci95": [
+                    0.1097686912698237,
+                    0.2930217723595524
+                  ],
+                  "n_pairs": 2400
+                },
+                "novelty": {
+                  "param": 0.75,
+                  "cost_frac_mean": 0.3207719906592554,
+                  "err_mean": 2.3900143097050646,
+                  "diff_mean": -1.8111809827530692,
+                  "ci95": [
+                    -2.967193701170166,
+                    -0.9892331983224298
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty": {
+                  "param": 0.3,
+                  "cost_frac_mean": 0.4829946804040456,
+                  "err_mean": 0.08733733768358944,
+                  "diff_mean": 0.4914959892684066,
+                  "ci95": [
+                    0.40094448502186303,
+                    0.5920599084187474
+                  ],
+                  "n_pairs": 2400
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.2169650342858225e-07,
+                  "cost_frac_mean": 0.49677229218154517,
+                  "err_mean": 0.1821833444950698,
+                  "diff_mean": 0.3966499824569262,
+                  "ci95": [
+                    0.30806468671198695,
+                    0.4999392378695122
+                  ],
+                  "n_pairs": 2400
+                },
+                "fullstate_voc": {
+                  "param": 7.498942093324558e-07,
+                  "cost_frac_mean": 0.5554440482956032,
+                  "err_mean": 0.3464373343595263,
+                  "diff_mean": 0.23239599259246974,
+                  "ci95": [
+                    0.10218352228811697,
+                    0.3532499971212704
+                  ],
+                  "n_pairs": 2400
+                },
+                "hardlabel": {
+                  "param": 0.01,
+                  "cost_frac_mean": 0.5061879596007263,
+                  "err_mean": 0.03623218458280776,
+                  "diff_mean": 0.5426011423691882,
+                  "ci95": [
+                    0.4528108923501392,
+                    0.6487144720751864
+                  ],
+                  "n_pairs": 2400
+                },
+                "random": {
+                  "param": 2.0,
+                  "cost_frac_mean": 0.39209087295904965,
+                  "err_mean": 4.420167980201953,
+                  "diff_mean": -3.841334653249957,
+                  "ci95": [
+                    -6.1440551628345155,
+                    -1.9599035543752892
+                  ],
+                  "n_pairs": 2400
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                }
+              ],
+              "best_baseline": "hardlabel",
+              "p_vs_best_baseline": 0.0001,
+              "ratio_vs_best_baseline": 15.975667313934293
+            }
+          },
+          "holm": {
+            "0.15": 0.287,
+            "0.3": 0.00030000000000000003,
+            "0.5": 0.00030000000000000003
+          },
+          "H1_V1_reading_B": {
+            "passes": false,
+            "falsified": true,
+            "contradicted_at_other_points": true
+          }
+        }
+      }
+    },
+    "reserve": {
+      "one_shot": {
+        "voc": {
+          "operating_points": {
+            "0.15": {
+              "param": 5.623413251903491e-05,
+              "attained": true,
+              "cost_frac_mean": 0.14463975356343192,
+              "err_mean": 2.2203427799791617,
+              "success_rate": 0.6908333333333333,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -5.881777731417213,
+                  "ci95": [
+                    -9.481283483567573,
+                    -2.9595609661620106
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -5.881777731417213,
+                  "ci95": [
+                    -9.481283483567573,
+                    -2.9595609661620106
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.95,
+                  "cost_frac_mean": 0.16941485133125117,
+                  "err_mean": 6.599844253506328,
+                  "diff_mean": -4.379501473527166,
+                  "ci95": [
+                    -7.2189074571529845,
+                    -2.0347456246050624
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.216965034285822e-06,
+                  "cost_frac_mean": 0.1659767335267937,
+                  "err_mean": 1.5136633289312427,
+                  "diff_mean": 0.7066794510479194,
+                  "ci95": [
+                    -0.18298207700152216,
+                    1.9868926218481768
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 0.0001,
+                  "cost_frac_mean": 0.13102486104701008,
+                  "err_mean": 7.164130051475175,
+                  "diff_mean": -4.943787271496014,
+                  "ci95": [
+                    -8.400090975862,
+                    -2.147373835546511
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.85,
+                  "cost_frac_mean": 0.1299982742957992,
+                  "err_mean": 6.196853914560773,
+                  "diff_mean": -3.976511134581612,
+                  "ci95": [
+                    -7.232151744816009,
+                    -1.4310653193328589
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -5.881777731417213,
+                  "ci95": [
+                    -9.481283483567573,
+                    -2.9595609661620106
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.291,
+              "ratio_vs_best_baseline": 1.4668669958113385
+            },
+            "0.3": {
+              "param": 1.778279410038923e-05,
+              "attained": true,
+              "cost_frac_mean": 0.2784773597700896,
+              "err_mean": 0.3652914058099222,
+              "success_rate": 0.87,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -7.736829105586453,
+                  "ci95": [
+                    -11.609700544209527,
+                    -4.555231832516009
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.19420075855066835,
+                  "err_mean": 2.190314121123439,
+                  "diff_mean": -1.8250227153135166,
+                  "ci95": [
+                    -3.040396764100529,
+                    -0.9001854660716665
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.9,
+                  "cost_frac_mean": 0.21902377688252264,
+                  "err_mean": 5.152054694156773,
+                  "diff_mean": -4.78676328834685,
+                  "ci95": [
+                    -7.646712801838595,
+                    -2.2871474610770006
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 1.333521432163324e-06,
+                  "cost_frac_mean": 0.32120558256574816,
+                  "err_mean": 0.36042479821829215,
+                  "diff_mean": 0.004866607591630023,
+                  "ci95": [
+                    -0.04947245775680724,
+                    0.07572686978096087
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 1.778279410038923e-05,
+                  "cost_frac_mean": 0.31241275797563134,
+                  "err_mean": 3.15744248806799,
+                  "diff_mean": -2.792151082258068,
+                  "ci95": [
+                    -5.54600369320112,
+                    -0.7203793501370706
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.5,
+                  "cost_frac_mean": 0.2831324660301926,
+                  "err_mean": 1.6374215253396085,
+                  "diff_mean": -1.2721301195296864,
+                  "ci95": [
+                    -2.852517868578402,
+                    0.011700093013653377
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.21628791632596978,
+                  "err_mean": 6.675920570836501,
+                  "diff_mean": -6.31062916502658,
+                  "ci95": [
+                    -9.99167768803909,
+                    -3.2722705637688865
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.89,
+              "ratio_vs_best_baseline": 1.0135024216304966
+            },
+            "0.5": {
+              "param": 2.3713737056616554e-07,
+              "attained": true,
+              "cost_frac_mean": 0.5029751599535962,
+              "err_mean": 0.016589365426080017,
+              "success_rate": 0.995,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -8.085531145970295,
+                  "ci95": [
+                    -11.947745157261902,
+                    -4.903355634132109
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 3.0,
+                  "cost_frac_mean": 0.43628825594608145,
+                  "err_mean": 0.31413118206407975,
+                  "diff_mean": -0.2975418166379997,
+                  "ci95": [
+                    -0.34997104698664927,
+                    -0.24877344775395094
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.75,
+                  "cost_frac_mean": 0.33332826055287645,
+                  "err_mean": 2.5004067019991583,
+                  "diff_mean": -2.4838173365730785,
+                  "ci95": [
+                    -3.6964512371056872,
+                    -1.520589403516115
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty": {
+                  "param": 0.3,
+                  "cost_frac_mean": 0.49748419596886334,
+                  "err_mean": 0.08173470789054119,
+                  "diff_mean": -0.06514534246446119,
+                  "ci95": [
+                    -0.09877433817277789,
+                    -0.038296606962517805
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.2169650342858225e-07,
+                  "cost_frac_mean": 0.4877888084927569,
+                  "err_mean": 0.13818503036480081,
+                  "diff_mean": -0.1215956649387208,
+                  "ci95": [
+                    -0.15352106478902774,
+                    -0.0942986444633887
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 7.498942093324558e-07,
+                  "cost_frac_mean": 0.5642454435603772,
+                  "err_mean": 0.2720615448736208,
+                  "diff_mean": -0.25547217944754075,
+                  "ci95": [
+                    -0.34448536369003496,
+                    -0.1896554502594943
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.01,
+                  "cost_frac_mean": 0.5072468293708906,
+                  "err_mean": 0.04593480582095138,
+                  "diff_mean": -0.02934544039487136,
+                  "ci95": [
+                    -0.07330200017992945,
+                    0.005986052525345948
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 2.0,
+                  "cost_frac_mean": 0.39607645855402734,
+                  "err_mean": 4.3804029488832,
+                  "diff_mean": -4.36381358345712,
+                  "ci95": [
+                    -7.373423415797189,
+                    -1.9792702014232662
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                }
+              ],
+              "best_baseline": "hardlabel",
+              "p_vs_best_baseline": 0.139,
+              "ratio_vs_best_baseline": 0.36115022431450927
+            }
+          },
+          "holm": {
+            "0.15": 0.582,
+            "0.3": 0.89,
+            "0.5": 0.41700000000000004
+          },
+          "H1_V1_reading_B": {
+            "passes": false,
+            "falsified": true,
+            "contradicted_at_other_points": false
+          }
+        },
+        "hybrid": {
+          "operating_points": {
+            "0.15": {
+              "param": 4.216965034285822e-05,
+              "attained": true,
+              "cost_frac_mean": 0.14282503588549222,
+              "err_mean": 1.3951001537397563,
+              "success_rate": 0.6708333333333333,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -6.707020357656618,
+                  "ci95": [
+                    -10.553134802819633,
+                    -3.60892808443492
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -6.707020357656618,
+                  "ci95": [
+                    -10.553134802819633,
+                    -3.60892808443492
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.95,
+                  "cost_frac_mean": 0.16941485133125117,
+                  "err_mean": 6.599844253506328,
+                  "diff_mean": -5.204744099766573,
+                  "ci95": [
+                    -8.289136469878791,
+                    -2.5207145941007396
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.216965034285822e-06,
+                  "cost_frac_mean": 0.1659767335267937,
+                  "err_mean": 1.5136633289312427,
+                  "diff_mean": -0.11856317519148625,
+                  "ci95": [
+                    -0.24277001426798533,
+                    0.002520105090742277
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 0.0001,
+                  "cost_frac_mean": 0.13102486104701008,
+                  "err_mean": 7.164130051475175,
+                  "diff_mean": -5.769029897735419,
+                  "ci95": [
+                    -9.539290150618495,
+                    -2.6982315012998095
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.85,
+                  "cost_frac_mean": 0.1299982742957992,
+                  "err_mean": 6.196853914560773,
+                  "diff_mean": -4.8017537608210175,
+                  "ci95": [
+                    -8.370949766355572,
+                    -2.0708463417183274
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -6.707020357656618,
+                  "ci95": [
+                    -10.553134802819633,
+                    -3.60892808443492
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.053,
+              "ratio_vs_best_baseline": 0.9216713697654282
+            },
+            "0.3": {
+              "param": 7.498942093324558e-07,
+              "attained": true,
+              "cost_frac_mean": 0.3114430450427777,
+              "err_mean": 0.45955487855456,
+              "success_rate": 0.845,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -7.642565632841816,
+                  "ci95": [
+                    -11.499430749219268,
+                    -4.462899287376632
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.19420075855066835,
+                  "err_mean": 2.190314121123439,
+                  "diff_mean": -1.730759242568879,
+                  "ci95": [
+                    -2.9261001626425602,
+                    -0.8089391037747555
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.9,
+                  "cost_frac_mean": 0.21902377688252264,
+                  "err_mean": 5.152054694156773,
+                  "diff_mean": -4.692499815602214,
+                  "ci95": [
+                    -7.566486295241012,
+                    -2.1971714101577406
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 1.333521432163324e-06,
+                  "cost_frac_mean": 0.32120558256574816,
+                  "err_mean": 0.36042479821829215,
+                  "diff_mean": 0.09913008033626777,
+                  "ci95": [
+                    0.01473980855491883,
+                    0.20107695908638756
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 1.778279410038923e-05,
+                  "cost_frac_mean": 0.31241275797563134,
+                  "err_mean": 3.15744248806799,
+                  "diff_mean": -2.6978876095134297,
+                  "ci95": [
+                    -5.426515057781277,
+                    -0.6532473719524279
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.5,
+                  "cost_frac_mean": 0.2831324660301926,
+                  "err_mean": 1.6374215253396085,
+                  "diff_mean": -1.1778666467850485,
+                  "ci95": [
+                    -2.742185696256028,
+                    0.10715706011739816
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.21628791632596978,
+                  "err_mean": 6.675920570836501,
+                  "diff_mean": -6.216365692281941,
+                  "ci95": [
+                    -9.928072252749857,
+                    -3.1469191499696536
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.021,
+              "ratio_vs_best_baseline": 1.2750367922138073
+            },
+            "0.5": {
+              "param": 4.2169650342858225e-07,
+              "attained": true,
+              "cost_frac_mean": 0.3183712849505606,
+              "err_mean": 0.4595548991275621,
+              "success_rate": 0.845,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -7.642565612268814,
+                  "ci95": [
+                    -11.499430724964055,
+                    -4.462899271704247
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 3.0,
+                  "cost_frac_mean": 0.43628825594608145,
+                  "err_mean": 0.31413118206407975,
+                  "diff_mean": 0.14542371706348234,
+                  "ci95": [
+                    0.07443155115244317,
+                    0.2320687719663321
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.75,
+                  "cost_frac_mean": 0.33332826055287645,
+                  "err_mean": 2.5004067019991583,
+                  "diff_mean": -2.0408518028715963,
+                  "ci95": [
+                    -3.2611158907591853,
+                    -1.075135143095736
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty": {
+                  "param": 0.3,
+                  "cost_frac_mean": 0.49748419596886334,
+                  "err_mean": 0.08173470789054119,
+                  "diff_mean": 0.3778201912370209,
+                  "ci95": [
+                    0.3009681624549268,
+                    0.4734451299718558
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.2169650342858225e-07,
+                  "cost_frac_mean": 0.4877888084927569,
+                  "err_mean": 0.13818503036480081,
+                  "diff_mean": 0.32136986876276125,
+                  "ci95": [
+                    0.242499518931212,
+                    0.42058158230657955
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 7.498942093324558e-07,
+                  "cost_frac_mean": 0.5642454435603772,
+                  "err_mean": 0.2720615448736208,
+                  "diff_mean": 0.18749335425394129,
+                  "ci95": [
+                    0.11747918176583737,
+                    0.2587657499778844
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.01,
+                  "cost_frac_mean": 0.5072468293708906,
+                  "err_mean": 0.04593480582095138,
+                  "diff_mean": 0.41362009330661065,
+                  "ci95": [
+                    0.31892572027393973,
+                    0.5233496717367095
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 2.0,
+                  "cost_frac_mean": 0.39607645855402734,
+                  "err_mean": 4.3804029488832,
+                  "diff_mean": -3.920848049755638,
+                  "ci95": [
+                    -6.927769757797311,
+                    -1.5650522967253582
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                }
+              ],
+              "best_baseline": "hardlabel",
+              "p_vs_best_baseline": 0.0001,
+              "ratio_vs_best_baseline": 10.004502923531549
+            }
+          },
+          "holm": {
+            "0.15": 0.053,
+            "0.3": 0.042,
+            "0.5": 0.00030000000000000003
+          },
+          "H1_V1_reading_B": {
+            "passes": false,
+            "falsified": true,
+            "contradicted_at_other_points": true
+          }
+        }
+      },
+      "sequential": {
+        "voc_seq": {
+          "operating_points": {
+            "0.15": {
+              "param": 5.623413251903491e-05,
+              "attained": true,
+              "cost_frac_mean": 0.14463975356343192,
+              "err_mean": 2.2203427799791617,
+              "success_rate": 0.6908333333333333,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -5.881777731417213,
+                  "ci95": [
+                    -9.481283483567573,
+                    -2.9595609661620106
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -5.881777731417213,
+                  "ci95": [
+                    -9.481283483567573,
+                    -2.9595609661620106
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.95,
+                  "cost_frac_mean": 0.16941485133125117,
+                  "err_mean": 6.599844253506328,
+                  "diff_mean": -4.379501473527166,
+                  "ci95": [
+                    -7.2189074571529845,
+                    -2.0347456246050624
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.216965034285822e-06,
+                  "cost_frac_mean": 0.1659767335267937,
+                  "err_mean": 1.5136633289312427,
+                  "diff_mean": 0.7066794510479194,
+                  "ci95": [
+                    -0.18298207700152216,
+                    1.9868926218481768
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 0.0001,
+                  "cost_frac_mean": 0.13102486104701008,
+                  "err_mean": 7.164130051475175,
+                  "diff_mean": -4.943787271496014,
+                  "ci95": [
+                    -8.400090975862,
+                    -2.147373835546511
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.85,
+                  "cost_frac_mean": 0.1299982742957992,
+                  "err_mean": 6.196853914560773,
+                  "diff_mean": -3.976511134581612,
+                  "ci95": [
+                    -7.232151744816009,
+                    -1.4310653193328589
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -5.881777731417213,
+                  "ci95": [
+                    -9.481283483567573,
+                    -2.9595609661620106
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.291,
+              "ratio_vs_best_baseline": 1.4668669958113385
+            },
+            "0.3": {
+              "param": 1.778279410038923e-05,
+              "attained": true,
+              "cost_frac_mean": 0.28104125367494426,
+              "err_mean": 0.3652914058099222,
+              "success_rate": 0.87,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -7.736829105586453,
+                  "ci95": [
+                    -11.609700544209527,
+                    -4.555231832516009
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.19420075855066835,
+                  "err_mean": 2.190314121123439,
+                  "diff_mean": -1.8250227153135166,
+                  "ci95": [
+                    -3.040396764100529,
+                    -0.9001854660716665
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.9,
+                  "cost_frac_mean": 0.21902377688252264,
+                  "err_mean": 5.152054694156773,
+                  "diff_mean": -4.78676328834685,
+                  "ci95": [
+                    -7.646712801838595,
+                    -2.2871474610770006
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 1.333521432163324e-06,
+                  "cost_frac_mean": 0.32120558256574816,
+                  "err_mean": 0.36042479821829215,
+                  "diff_mean": 0.004866607591630023,
+                  "ci95": [
+                    -0.04947245775680724,
+                    0.07572686978096087
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 1.778279410038923e-05,
+                  "cost_frac_mean": 0.31241275797563134,
+                  "err_mean": 3.15744248806799,
+                  "diff_mean": -2.792151082258068,
+                  "ci95": [
+                    -5.54600369320112,
+                    -0.7203793501370706
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.5,
+                  "cost_frac_mean": 0.2831324660301926,
+                  "err_mean": 1.6374215253396085,
+                  "diff_mean": -1.2721301195296864,
+                  "ci95": [
+                    -2.852517868578402,
+                    0.011700093013653377
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.21628791632596978,
+                  "err_mean": 6.675920570836501,
+                  "diff_mean": -6.31062916502658,
+                  "ci95": [
+                    -9.99167768803909,
+                    -3.2722705637688865
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.89,
+              "ratio_vs_best_baseline": 1.0135024216304966
+            },
+            "0.5": {
+              "param": 2.3713737056616552e-06,
+              "attained": true,
+              "cost_frac_mean": 0.49516055405536774,
+              "err_mean": 0.06319475074646405,
+              "success_rate": 0.9766666666666667,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -8.038925760649912,
+                  "ci95": [
+                    -11.89958244408104,
+                    -4.854758842787365
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 3.0,
+                  "cost_frac_mean": 0.43628825594608145,
+                  "err_mean": 0.31413118206407975,
+                  "diff_mean": -0.2509364313176157,
+                  "ci95": [
+                    -0.3033641030026285,
+                    -0.20508769286120632
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.75,
+                  "cost_frac_mean": 0.33332826055287645,
+                  "err_mean": 2.5004067019991583,
+                  "diff_mean": -2.4372119512526944,
+                  "ci95": [
+                    -3.6596447055391628,
+                    -1.46835720539768
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty": {
+                  "param": 0.3,
+                  "cost_frac_mean": 0.49748419596886334,
+                  "err_mean": 0.08173470789054119,
+                  "diff_mean": -0.018539957144077145,
+                  "ci95": [
+                    -0.05085143668429918,
+                    0.008245051707678381
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.2169650342858225e-07,
+                  "cost_frac_mean": 0.4877888084927569,
+                  "err_mean": 0.13818503036480081,
+                  "diff_mean": -0.07499027961833676,
+                  "ci95": [
+                    -0.0972127153950936,
+                    -0.05559407413853306
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 7.498942093324558e-07,
+                  "cost_frac_mean": 0.5642454435603772,
+                  "err_mean": 0.2720615448736208,
+                  "diff_mean": -0.20886679412715675,
+                  "ci95": [
+                    -0.2967044587322289,
+                    -0.14351960027130706
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.01,
+                  "cost_frac_mean": 0.5072468293708906,
+                  "err_mean": 0.04593480582095138,
+                  "diff_mean": 0.017259944925512662,
+                  "ci95": [
+                    -0.029857656367037196,
+                    0.05970931088245254
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 2.0,
+                  "cost_frac_mean": 0.39607645855402734,
+                  "err_mean": 4.3804029488832,
+                  "diff_mean": -4.317208198136736,
+                  "ci95": [
+                    -7.32690826386441,
+                    -1.9405687269820624
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                }
+              ],
+              "best_baseline": "hardlabel",
+              "p_vs_best_baseline": 0.43,
+              "ratio_vs_best_baseline": 1.3757487294664956
+            }
+          },
+          "holm": {
+            "0.15": 0.873,
+            "0.3": 0.89,
+            "0.5": 0.873
+          },
+          "H1_V1_reading_B": {
+            "passes": false,
+            "falsified": true,
+            "contradicted_at_other_points": false
+          }
+        },
+        "hybrid_seq": {
+          "operating_points": {
+            "0.15": {
+              "param": 4.216965034285822e-05,
+              "attained": true,
+              "cost_frac_mean": 0.14282503588549222,
+              "err_mean": 1.3951001537397563,
+              "success_rate": 0.6708333333333333,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -6.707020357656618,
+                  "ci95": [
+                    -10.553134802819633,
+                    -3.60892808443492
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -6.707020357656618,
+                  "ci95": [
+                    -10.553134802819633,
+                    -3.60892808443492
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.95,
+                  "cost_frac_mean": 0.16941485133125117,
+                  "err_mean": 6.599844253506328,
+                  "diff_mean": -5.204744099766573,
+                  "ci95": [
+                    -8.289136469878791,
+                    -2.5207145941007396
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.216965034285822e-06,
+                  "cost_frac_mean": 0.1659767335267937,
+                  "err_mean": 1.5136633289312427,
+                  "diff_mean": -0.11856317519148625,
+                  "ci95": [
+                    -0.24277001426798533,
+                    0.002520105090742277
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 0.0001,
+                  "cost_frac_mean": 0.13102486104701008,
+                  "err_mean": 7.164130051475175,
+                  "diff_mean": -5.769029897735419,
+                  "ci95": [
+                    -9.539290150618495,
+                    -2.6982315012998095
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.85,
+                  "cost_frac_mean": 0.1299982742957992,
+                  "err_mean": 6.196853914560773,
+                  "diff_mean": -4.8017537608210175,
+                  "ci95": [
+                    -8.370949766355572,
+                    -2.0708463417183274
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 0.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -6.707020357656618,
+                  "ci95": [
+                    -10.553134802819633,
+                    -3.60892808443492
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.053,
+              "ratio_vs_best_baseline": 0.9216713697654282
+            },
+            "0.3": {
+              "param": 2.3713737056616552e-06,
+              "attained": true,
+              "cost_frac_mean": 0.30964961082312203,
+              "err_mean": 0.4604531439499387,
+              "success_rate": 0.845,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -7.641667367446436,
+                  "ci95": [
+                    -11.498669041793823,
+                    -4.461928217070084
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.19420075855066835,
+                  "err_mean": 2.190314121123439,
+                  "diff_mean": -1.7298609771735,
+                  "ci95": [
+                    -2.925073517243565,
+                    -0.8081754582810804
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.9,
+                  "cost_frac_mean": 0.21902377688252264,
+                  "err_mean": 5.152054694156773,
+                  "diff_mean": -4.691601550206834,
+                  "ci95": [
+                    -7.565042731828101,
+                    -2.1963605153293
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 1.333521432163324e-06,
+                  "cost_frac_mean": 0.32120558256574816,
+                  "err_mean": 0.36042479821829215,
+                  "diff_mean": 0.10002834573164658,
+                  "ci95": [
+                    0.015224008835341698,
+                    0.20191335314752548
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 1.778279410038923e-05,
+                  "cost_frac_mean": 0.31241275797563134,
+                  "err_mean": 3.15744248806799,
+                  "diff_mean": -2.696989344118051,
+                  "ci95": [
+                    -5.425416892244135,
+                    -0.6522277073862067
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.5,
+                  "cost_frac_mean": 0.2831324660301926,
+                  "err_mean": 1.6374215253396085,
+                  "diff_mean": -1.1769683813896694,
+                  "ci95": [
+                    -2.7415358146543936,
+                    0.10781701404098906
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.21628791632596978,
+                  "err_mean": 6.675920570836501,
+                  "diff_mean": -6.215467426886564,
+                  "ci95": [
+                    -9.927213610868003,
+                    -3.1458799496256864
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                },
+                {
+                  "policy": "uncertainty",
+                  "cheapest_validation_cost": 0.38974010442230345
+                }
+              ],
+              "best_baseline": "uncertainty_per_cost",
+              "p_vs_best_baseline": 0.019,
+              "ratio_vs_best_baseline": 1.2775290330358016
+            },
+            "0.5": {
+              "param": 4.2169650342858225e-07,
+              "attained": true,
+              "cost_frac_mean": 0.43069401102092103,
+              "err_mean": 0.4595548991275621,
+              "success_rate": 0.845,
+              "baselines": {
+                "uniform_medium": {
+                  "param": 1.0,
+                  "cost_frac_mean": 0.062003056147039395,
+                  "err_mean": 8.102120511396373,
+                  "diff_mean": -7.642565612268814,
+                  "ci95": [
+                    -11.499430724964055,
+                    -4.462899271704247
+                  ],
+                  "n_pairs": 1200
+                },
+                "share": {
+                  "param": 3.0,
+                  "cost_frac_mean": 0.43628825594608145,
+                  "err_mean": 0.31413118206407975,
+                  "diff_mean": 0.14542371706348234,
+                  "ci95": [
+                    0.07443155115244317,
+                    0.2320687719663321
+                  ],
+                  "n_pairs": 1200
+                },
+                "novelty": {
+                  "param": 0.75,
+                  "cost_frac_mean": 0.33332826055287645,
+                  "err_mean": 2.5004067019991583,
+                  "diff_mean": -2.0408518028715963,
+                  "ci95": [
+                    -3.2611158907591853,
+                    -1.075135143095736
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty": {
+                  "param": 0.3,
+                  "cost_frac_mean": 0.49748419596886334,
+                  "err_mean": 0.08173470789054119,
+                  "diff_mean": 0.3778201912370209,
+                  "ci95": [
+                    0.3009681624549268,
+                    0.4734451299718558
+                  ],
+                  "n_pairs": 1200
+                },
+                "uncertainty_per_cost": {
+                  "param": 4.2169650342858225e-07,
+                  "cost_frac_mean": 0.4877888084927569,
+                  "err_mean": 0.13818503036480081,
+                  "diff_mean": 0.32136986876276125,
+                  "ci95": [
+                    0.242499518931212,
+                    0.42058158230657955
+                  ],
+                  "n_pairs": 1200
+                },
+                "fullstate_voc": {
+                  "param": 7.498942093324558e-07,
+                  "cost_frac_mean": 0.5642454435603772,
+                  "err_mean": 0.2720615448736208,
+                  "diff_mean": 0.18749335425394129,
+                  "ci95": [
+                    0.11747918176583737,
+                    0.2587657499778844
+                  ],
+                  "n_pairs": 1200
+                },
+                "hardlabel": {
+                  "param": 0.01,
+                  "cost_frac_mean": 0.5072468293708906,
+                  "err_mean": 0.04593480582095138,
+                  "diff_mean": 0.41362009330661065,
+                  "ci95": [
+                    0.31892572027393973,
+                    0.5233496717367095
+                  ],
+                  "n_pairs": 1200
+                },
+                "random": {
+                  "param": 2.0,
+                  "cost_frac_mean": 0.39607645855402734,
+                  "err_mean": 4.3804029488832,
+                  "diff_mean": -3.920848049755638,
+                  "ci95": [
+                    -6.927769757797311,
+                    -1.5650522967253582
+                  ],
+                  "n_pairs": 1200
+                }
+              },
+              "unattainable": [
+                {
+                  "policy": "discrepancy",
+                  "cheapest_validation_cost": 0.6003768524210138
+                },
+                {
+                  "policy": "sensitivity",
+                  "cheapest_validation_cost": 0.5412621601752892
+                }
+              ],
+              "best_baseline": "hardlabel",
+              "p_vs_best_baseline": 0.0001,
+              "ratio_vs_best_baseline": 10.004502923531549
+            }
+          },
+          "holm": {
+            "0.15": 0.053,
+            "0.3": 0.038,
+            "0.5": 0.00030000000000000003
+          },
+          "H1_V1_reading_B": {
+            "passes": false,
+            "falsified": true,
+            "contradicted_at_other_points": true
+          }
+        }
+      }
+    }
+  }
+}

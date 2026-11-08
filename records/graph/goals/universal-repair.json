@@ -10,9 +10,13 @@
     {
       "all": [
         "hrm:goal/scarless-skin-repair",
-        "hrm:goal/established-scar-repair"
+        "hrm:goal/established-scar-repair",
+        "hrm:goal/peripheral-nerve-repair",
+        "hrm:goal/spinal-cord-injury-repair",
+        "hrm:goal/myocardial-infarction-repair",
+        "hrm:goal/glioblastoma-control"
       ],
-      "note": "First proving ground only. Peripheral nerve, fracture, myocardium, sepsis, cancer and systemic rejuvenation are the planned expansions and are not yet nodes."
+      "note": "Six proving grounds as of 2026-09-14: skin (scar prevention and scar reversal), peripheral nerve, spinal cord, myocardium, and glioblastoma. Fracture, sepsis and organ failure are planned expansions and are not yet nodes. The list is deliberately not a claim that these six are sufficient for universal repair; they are the cases the map has actually worked through."
     }
   ],
   "testSuite": [
@@ -38,7 +42,8 @@
     },
     {
       "scenario": "myocardial infarction with muscle restored",
-      "state": "unsolved"
+      "state": "unsolved",
+      "note": "reperfusion is routine; remuscularisation is shown in primates and blocked by graft arrhythmia"
     },
     {
       "scenario": "sepsis",
@@ -46,7 +51,8 @@
     },
     {
       "scenario": "spinal cord transection",
-      "state": "unsolved"
+      "state": "unsolved",
+      "note": "function partially restored by stimulation and a brain-spine interface; tract regeneration is rodent-stage"
     },
     {
       "scenario": "metastatic cancer",
@@ -65,7 +71,7 @@
       "model": "claude-opus-5",
       "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
     },
-    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level; requires and test-suite notes updated 2026-09-14 when the nerve, cord, myocardium and glioblastoma grounds were seeded",
     "date": "2026-09-11"
   },
   "review": {

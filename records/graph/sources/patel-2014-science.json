@@ -1,0 +1,31 @@
+{
+  "id": "hrm:source/patel-2014-science",
+  "type": "source",
+  "citation": "Patel et al., Science, 2014",
+  "title": "Single-cell RNA-seq highlights intratumoral heterogeneity in primary glioblastoma",
+  "authors": "Patel Anoop P.; Tirosh Itay; Trombetta John J.; Shalek Alex K.; Gillespie Shawn M.; Wakimoto Hiroaki; Cahill Daniel P.; Nahed Brian V.; Curry William T.; Martuza Robert L.; Louis David N.; Rozenblatt-Rosen Orit; Suvà Mario L.; Regev Aviv; Bernstein Bradley E.",
+  "venue": "Science",
+  "year": 2014,
+  "kind": "article",
+  "doi": "10.1126/science.1254257",
+  "pmid": "24925914",
+  "url": "https://doi.org/10.1126/science.1254257",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Single-cell RNA-seq highlights intratumoral heterogeneity in primary glioblastoma",
+    "note": "Crossref record found; PubMed id 24925914 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+  }
+}

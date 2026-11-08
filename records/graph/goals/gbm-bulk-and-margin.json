@@ -1,0 +1,35 @@
+{
+  "type": "goal",
+  "id": "hrm:goal/gbm-bulk-and-margin",
+  "name": "The tumour and everything it has spread into",
+  "parent": "hrm:goal/glioblastoma-control",
+  "description": "Deal with both the visible mass and the cells that have already migrated along white matter tracts and blood vessels into brain that must be preserved.",
+  "projections": [
+    "universal-repair"
+  ],
+  "requires": [
+    {
+      "all": [
+        "hrm:capability/gbm-tumour-cell-eradication",
+        "hrm:capability/gbm-infiltrative-margin-clearance"
+      ]
+    }
+  ],
+  "blockedBy": [
+    "hrm:question/gbm-heterogeneity-defeats-single-target"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

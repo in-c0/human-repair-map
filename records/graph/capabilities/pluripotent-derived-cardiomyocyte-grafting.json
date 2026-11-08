@@ -1,0 +1,42 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+  "name": "Grow the replacement muscle outside the body",
+  "class": "control",
+  "primitive": "replace",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Differentiate pluripotent stem cells into cardiomyocytes at clinical scale and deliver them to the infarct as an injection or an engineered patch that survives and engrafts.",
+  "target": {
+    "node": "hrm:cell/cardiomyocyte"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "An epicardial fibrin patch carrying embryonic-stem-cell-derived cardiovascular progenitors was delivered to six patients and was feasible with no tumour and no sustained arrhythmia reported at the doses used (Menasché 2018) — a first-in-human safety result, with the authors attributing any benefit to paracrine effect rather than to new muscle. The L4 is for delivery to humans, not for remuscularising them.",
+    "drift": "A first-in-human feasibility study with six patients is regularly cited as 'stem cells repair the heart'."
+  },
+  "wouldMove": "A trial delivering enough cells to change contractile function, with imaging evidence of graft muscle rather than paracrine effect.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/menasche-2018-jacc",
+      "hrm:source/chong-2014-nature"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

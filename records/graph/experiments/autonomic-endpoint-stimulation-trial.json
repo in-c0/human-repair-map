@@ -1,0 +1,42 @@
+{
+  "type": "experiment",
+  "id": "hrm:experiment/autonomic-endpoint-stimulation-trial",
+  "name": "Stimulation trial with continence and cardiovascular stability as the primary endpoint",
+  "tests": [
+    "hrm:question/cord-repair-restores-autonomic-function"
+  ],
+  "status": "proposed",
+  "design": {
+    "species": "human",
+    "model": "chronic spinal cord injury with autonomic dysfunction",
+    "intervention": "an existing epidural or transcutaneous stimulation protocol",
+    "comparator": "sham stimulation",
+    "readout": "urodynamics, continence diary, blood pressure stability, dysreflexia episodes",
+    "duration": "2 years",
+    "n": "40-60"
+  },
+  "discriminates": "A positive autonomic result would move a node the map currently grades L0 and would change what the field measures; a null result would establish that autonomic pathways need their own strategy.",
+  "feasibility": {
+    "costClass": "medium",
+    "durationClass": "years",
+    "requires": [
+      "existing implanted cohorts",
+      "urodynamics and autonomic testing"
+    ],
+    "ethics": "human research ethics approval"
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

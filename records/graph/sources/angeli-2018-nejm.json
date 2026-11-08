@@ -1,0 +1,31 @@
+{
+  "id": "hrm:source/angeli-2018-nejm",
+  "type": "source",
+  "citation": "Angeli et al., New England Journal of Medicine, 2018",
+  "title": "Recovery of Over-Ground Walking after Chronic Motor Complete Spinal Cord Injury",
+  "authors": "Angeli Claudia A.; Boakye Maxwell; Morton Rebekah A.; Vogt Justin; Benton Kristin; Chen Yangshen; Ferreira Christie K.; Harkema Susan J.",
+  "venue": "New England Journal of Medicine",
+  "year": 2018,
+  "kind": "article",
+  "doi": "10.1056/nejmoa1803588",
+  "pmid": "30247091",
+  "url": "https://doi.org/10.1056/nejmoa1803588",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Recovery of Over-Ground Walking after Chronic Motor Complete Spinal Cord Injury",
+    "note": "Crossref record found; PubMed id 30247091 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+  }
+}

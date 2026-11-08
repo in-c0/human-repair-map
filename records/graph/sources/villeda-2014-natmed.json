@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/villeda-2014-natmed",
+  "type": "source",
+  "citation": "Villeda et al., Nature Medicine, 2014",
+  "title": "Young blood reverses age-related impairments in cognitive function and synaptic plasticity in mice",
+  "authors": "Villeda Saul A; Plambeck Kristopher E; Middeldorp Jinte; Castellano Joseph M; Mosher Kira I; Luo Jian; Smith Lucas K; Bieri Gregor; Lin Karin; Berdnik Daniela; Wabl Rafael; Udeochu Joe; Wheatley Elizabeth G; Zou Bende; Simmons Danielle A; Xie Xinmin S; Longo Frank M; Wyss-Coray Tony",
+  "venue": "Nature Medicine",
+  "year": 2014,
+  "kind": "article",
+  "doi": "10.1038/nm.3569",
+  "pmid": "24793238",
+  "url": "https://doi.org/10.1038/nm.3569",
+  "license": "http://www.springer.com/tdm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Young blood reverses age-related impairments in cognitive function and synaptic plasticity in mice",
+    "note": "Crossref record found; PubMed id 24793238 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+  }
+}

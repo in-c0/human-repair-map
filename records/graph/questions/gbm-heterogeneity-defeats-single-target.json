@@ -1,0 +1,39 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/gbm-heterogeneity-defeats-single-target",
+  "projections": [
+    "universal-repair"
+  ],
+  "question": "Is glioblastoma's cellular plasticity a hard barrier to any single-target therapy, or can a small number of targets cover the states a tumour can occupy?",
+  "why": "It determines whether the therapeutic strategy for this disease is 'find the right target' or 'stop looking for targets'. Every failed phase 3 on this ground was single-target.",
+  "blocks": [
+    "hrm:capability/gbm-antigen-escape-prevention",
+    "hrm:capability/gbm-targeted-cytotoxic-therapy",
+    "hrm:goal/gbm-bulk-and-margin"
+  ],
+  "hypotheses": [
+    "Four states with defined transitions means a four-target therapy is sufficient in principle.",
+    "Plasticity is continuous and driven by the microenvironment, so any fixed target set is escapable.",
+    "A lineage-defining dependency exists that all states share and has not been found."
+  ],
+  "knownUnknowns": [
+    "whether the four-state model holds under therapeutic pressure rather than at diagnosis",
+    "whether state transitions are reversible in the timescale of treatment"
+  ],
+  "whatWouldResolve": "Single-cell profiling of paired pre-treatment and recurrent tumours across a treated cohort, testing whether recurrence occupies a state that was present and untargeted at baseline.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

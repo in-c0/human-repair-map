@@ -1,0 +1,67 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/senolytics-reduce-human-senescent-markers-uncontrolled",
+  "statement": "In two small open-label human studies, dasatinib plus quercetin reduced senescent cell markers in adipose tissue and skin in patients with diabetic kidney disease, and improved six-minute walk distance in patients with idiopathic pulmonary fibrosis.",
+  "context": {
+    "species": "human",
+    "model": "diabetic kidney disease (n=9); idiopathic pulmonary fibrosis (n=14)",
+    "intervention": "dasatinib + quercetin, short course"
+  },
+  "measurement": {
+    "measured": "biomarker",
+    "assay": "adipose and skin p16INK4a and SASP markers; six-minute walk",
+    "endpoint": "senescent burden; physical function",
+    "effect": "reduced senescent markers; improved walk distance"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/hickson-2019-ebiomedicine",
+      "design": "case-series",
+      "locator": "abstract",
+      "n": "9"
+    },
+    {
+      "source": "hrm:source/justice-2019-ebiomedicine",
+      "design": "case-series",
+      "locator": "abstract",
+      "n": "14"
+    }
+  ],
+  "rung": "L4",
+  "replication": {
+    "independentGroups": 1,
+    "note": "Two studies from overlapping Mayo-led groups."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/senescent-cell-clearance-in-humans",
+    "hrm:capability/senescent-cell-burden-measurement"
+  ],
+  "drift": "Cited as evidence that senolytics work in people. Both studies are open-label with no control arm; a six-minute walk in fourteen unblinded patients cannot separate drug from expectation.",
+  "limitations": [
+    "no control arm",
+    "n=9 and n=14",
+    "disease populations, not aged healthy adults"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/hickson-2019-ebiomedicine",
+      "hrm:source/justice-2019-ebiomedicine"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

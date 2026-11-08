@@ -1,0 +1,56 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/processed-allograft-recovers-function-in-registry",
+  "statement": "In a multicentre registry of processed nerve allograft repairs across body sites, most repairs reported meaningful sensory or motor recovery, including in gaps longer than conduits are used for.",
+  "context": {
+    "species": "human",
+    "model": "peripheral nerve gaps repaired with processed allograft"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "meaningful recovery scales",
+    "endpoint": "sensory and motor recovery",
+    "effect": "meaningful recovery in the majority of reported repairs"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/safa-2020-microsurgery",
+      "design": "registry-entry",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L4",
+  "replication": {
+    "independentGroups": 0,
+    "note": "An industry-sponsored registry, not a randomised comparison against autograft; reporting is voluntary."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/nerve-gap-bridging"
+  ],
+  "drift": "'Allografts equal autografts' — the registry has no randomised control arm and cannot support an equivalence claim.",
+  "limitations": [
+    "selection and reporting bias inherent to a voluntary registry",
+    "no control arm"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/safa-2020-microsurgery"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

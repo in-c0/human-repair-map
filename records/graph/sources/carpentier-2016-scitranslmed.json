@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/carpentier-2016-scitranslmed",
+  "type": "source",
+  "citation": "Carpentier et al., Science Translational Medicine, 2016",
+  "title": "Clinical trial of blood-brain barrier disruption by pulsed ultrasound",
+  "authors": "Carpentier Alexandre; Canney Michael; Vignot Alexandre; Reina Vincent; Beccaria Kevin; Horodyckid Catherine; Karachi Carine; Leclercq Delphine; Lafon Cyril; Chapelon Jean-Yves; Capelle Laurent; Cornu Philippe; Sanson Marc; Hoang-Xuan Khê; Delattre Jean-Yves; Idbaih Ahmed",
+  "venue": "Science Translational Medicine",
+  "year": 2016,
+  "kind": "article",
+  "doi": "10.1126/scitranslmed.aaf6086",
+  "pmid": "27306666",
+  "url": "https://doi.org/10.1126/scitranslmed.aaf6086",
+  "license": "http://www.sciencemag.org/about/science-licenses-journal-article-reuse",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Clinical trial of blood-brain barrier disruption by pulsed ultrasound",
+    "note": "Crossref record found; PubMed id 27306666 located by DOI."
+  },
+  "note": "Pulsed ultrasound barrier disruption in patients.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,42 @@
+# Human Repair Map
+
+> A dependency graph of what medicine can repair in a human body, where each capability stops, what blocks the next step, and which open questions matter most. 326 records in graph v0.3 (10 goals, 185 capabilities, 20 questions, 24 claims, 34 sources), all machine-readable, with a public queue for proposing changes. Research state only; not clinical advice.
+
+Every record carries a review state. As of the current snapshot, 0 of 326 are human-reviewed: the records were drafted by AI from cited sources and are marked `ai-proposed` until a named person reviews them. Treat the graph as a structured hypothesis about the field, with its sources attached, not as settled fact.
+
+## How the graph is organised
+
+- Goal: something a patient would recognise (repair an established scar, regrow a peripheral nerve). Each goal requires capabilities.
+- Capability: one thing the body or medicine can be made to do, graded on a rung L0 to L5 (L0 idea, L1 dish, L2 rodent, L3 large animal, L4 humans by one group, L5 humans independently replicated), with what was measured and what blocks the next rung (science, or a framework constraint such as approval or manufacturing).
+- Question: an open question that blocks one or more capabilities, with what would resolve it. The analysis ranks questions by how much of the graph they unblock.
+- Claim and source: the evidence behind a grade, with DOIs, PubMed ids or trial registrations; contradictions between claims are computed and listed.
+- Two projections of one graph: universal-repair and rejuvenation. Every node belongs to at least one.
+
+## Machine access
+
+- [Bulk graph JSON](https://humanrepairmap.com/graph/graph.json): manifest, ontology, rubrics, every node, and the analysis (ranked questions, critical paths, contradictions). Also JSONL and JSON-LD at the same path with those extensions.
+- [Manifest](https://humanrepairmap.com/graph/manifest.json): version, snapshot date, content hash, counts, review-state totals.
+- [JSON Schemas](https://humanrepairmap.com/graph/schema/): what each record type must contain.
+- [REST API](https://humanrepairmap.com/api) and [OpenAPI](https://humanrepairmap.com/api/openapi.json): nodes, goals with critical paths, ranked questions per projection, claim evidence, proposals, predictions, and a hash-chained event log with `/api/verify`.
+- [MCP endpoint](https://humanrepairmap.com/mcp): the same operations as tools, for agents that speak the Model Context Protocol.
+- [Activity](https://humanrepairmap.com/graph/activity.json): recent papers and active registered trials per record, refreshed nightly from Europe PMC and ClinicalTrials.gov. A search, not a claim.
+- [Feed](https://humanrepairmap.com/graph/feed.json): what appeared since the last nightly run, and which items were filed as proposals.
+- [Full text](https://humanrepairmap.com/llms-full.txt): the whole graph as plain text, regenerated at every deploy.
+
+## Changing the graph
+
+- Propose a change: POST to `/api/proposals` with `record_id`, `kind` (correction, rung-challenge, new-evidence, new-node, new-dependency, question), `summary`, `rationale`, and a `source_url`. Proposals are logged in the event chain and become draft pull requests on the repository for a named human to judge. Nothing changes a record without a human commit.
+- Record a prediction: POST to `/api/predictions` with a statement, resolution criteria and a date, to be scored when it resolves.
+- Repository: https://github.com/in-c0/human-repair-map. Records live in `records/` as JSON; `scripts/build.mjs` regenerates the exports. Pull requests are welcome; branch protection requires a human review before merge.
+
+## Reading the site
+
+- [Start](https://humanrepairmap.com/#/start): the human layer, two journeys (repair damage, reverse biological aging).
+- [Research layer](https://humanrepairmap.com/#/research): the exact accounting, with rung, measured, blocked-by and review state on every record.
+- [What changed](https://humanrepairmap.com/#/changes): the nightly digest.
+- [Methods and governance](https://humanrepairmap.com/#/methods): how grades are assigned, how review works, how corrections are logged.
+- [Models and agents](https://humanrepairmap.com/#/machine): the machine layer in more detail.
+
+## Licence
+
+Graph data: CC BY 4.0. Sources remain under their publishers' terms.

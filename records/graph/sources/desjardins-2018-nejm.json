@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/desjardins-2018-nejm",
+  "type": "source",
+  "citation": "Desjardins et al., New England Journal of Medicine, 2018",
+  "title": "Recurrent Glioblastoma Treated with Recombinant Poliovirus",
+  "authors": "Desjardins Annick; Gromeier Matthias; Herndon James E.; Beaubier Nike; Bolognesi Dani P.; Friedman Allan H.; Friedman Henry S.; McSherry Frances; Muscat Andrea M.; Nair Smita; Peters Katherine B.; Randazzo Dina; Sampson John H.; Vlahovic Gordana; Harrison William T.; McLendon Roger E.; Ashley David; Bigner Darell D.",
+  "venue": "New England Journal of Medicine",
+  "year": 2018,
+  "kind": "article",
+  "doi": "10.1056/nejmoa1716435",
+  "pmid": "29943666",
+  "url": "https://doi.org/10.1056/nejmoa1716435",
+  "license": "http://www.nejmgroup.org/legal/terms-of-use.htm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Recurrent Glioblastoma Treated with Recombinant Poliovirus",
+    "note": "Crossref record found; PubMed id 29943666 located by DOI."
+  },
+  "note": "Recombinant poliovirus: a tail of long survivors without an overall shift.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+  }
+}

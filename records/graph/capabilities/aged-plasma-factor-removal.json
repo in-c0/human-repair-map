@@ -1,0 +1,38 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/aged-plasma-factor-removal",
+  "name": "Take the aged factors out of circulation",
+  "class": "control",
+  "primitive": "remove",
+  "projections": [
+    "rejuvenation"
+  ],
+  "description": "Rejuvenate tissue by removing or diluting what accumulates in old blood — therapeutic plasma exchange, apheresis, or targeted removal of specific factors.",
+  "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "biomarker",
+    "blocked": "science",
+    "note": "Replacing half an old mouse's plasma with saline and albumin rejuvenated muscle, liver and brain measures as well as young blood did (Mehdipour 2020), which reframes the parabiosis literature: the effect may be dilution of old factors rather than transfer of young ones. Rodent only. Human plasma exchange exists as a procedure, so the translational path is unusually short if the biology holds.",
+    "drift": "Young-blood transfusion clinics cite the parabiosis literature. The dilution result argues the young half may not be the active ingredient."
+  },
+  "wouldMove": "A randomised trial of plasma exchange in older adults with a functional endpoint, not a biomarker panel.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/mehdipour-2020-aging",
+      "hrm:source/conboy-2005-nature"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

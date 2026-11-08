@@ -1,0 +1,64 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/conduit-matches-suture-in-short-digital-nerve-gaps",
+  "statement": "In a randomised prospective comparison, a polyglycolic acid conduit gave sensory recovery at least equal to standard direct repair or graft in digital nerve gaps, with an advantage in gaps of 4 mm or more.",
+  "context": {
+    "species": "human",
+    "model": "digital nerve transection",
+    "intervention": "polyglycolic acid conduit",
+    "comparator": "end-to-end repair or nerve graft"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "two-point discrimination",
+    "endpoint": "sensory recovery at one year",
+    "effect": "equal or better recovery with the conduit in short gaps"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/weber-2000-prs",
+      "design": "rct",
+      "locator": "abstract"
+    },
+    {
+      "source": "hrm:source/mackinnon-1990-prs",
+      "design": "case-series",
+      "locator": "abstract",
+      "note": "earlier clinical series with the same conduit"
+    }
+  ],
+  "rung": "L5",
+  "replication": {
+    "independentGroups": 1,
+    "note": "One randomised trial with a supporting earlier series from an overlapping group; widely adopted since."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/nerve-gap-bridging"
+  ],
+  "limitations": [
+    "sensory digital nerves only",
+    "short gaps; conduits are not used this way for long motor gaps"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/weber-2000-prs",
+      "hrm:source/mackinnon-1990-prs"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

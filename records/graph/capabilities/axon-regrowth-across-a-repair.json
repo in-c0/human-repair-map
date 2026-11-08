@@ -1,0 +1,38 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/axon-regrowth-across-a-repair",
+  "name": "Get axons to grow across the repair",
+  "class": "control",
+  "primitive": "regenerate",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Have the cut axons sprout, cross the repair site and enter the distal nerve rather than forming a neuroma at the junction.",
+  "target": {
+    "node": "hrm:cell/peripheral-neuron"
+  },
+  "grade": {
+    "basis": "standard-of-care",
+    "rung": "L5",
+    "measured": "structure",
+    "blocked": "none",
+    "note": "Axons regenerate across a coapted peripheral nerve repair routinely; this is why peripheral nerve differs from spinal cord. Sprouting is not the constraint, and grading it L5 makes the real constraint visible by contrast: what is graded low below is arrival in time and correct targeting, not growth."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/ruijs-2005-prs"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

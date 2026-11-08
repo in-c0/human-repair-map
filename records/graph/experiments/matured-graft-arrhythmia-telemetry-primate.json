@@ -1,0 +1,43 @@
+{
+  "type": "experiment",
+  "id": "hrm:experiment/matured-graft-arrhythmia-telemetry-primate",
+  "name": "Remuscularisation with matured or pacemaker-silenced cardiomyocytes, under continuous telemetry",
+  "tests": [
+    "hrm:question/remuscularisation-arrhythmia-controllable"
+  ],
+  "status": "proposed",
+  "design": {
+    "species": "non-human primate or pig",
+    "model": "myocardial infarction with cell grafting",
+    "intervention": "grafts of matured cardiomyocytes, or cardiomyocytes with HCN4/automaticity genes removed",
+    "comparator": "conventional immature graft; vehicle",
+    "readout": "continuous telemetry for sustained ventricular arrhythmia, graft size, electromechanical coupling, ejection fraction",
+    "duration": "12-18 months",
+    "n": "8-12 per arm"
+  },
+  "discriminates": "If maturation or gene editing abolishes arrhythmia while keeping contractile contribution, the blocker is graft automaticity and remuscularisation becomes a clinical programme; if arrhythmia persists, adding autonomous muscle may be intrinsically unsafe.",
+  "feasibility": {
+    "costClass": "high",
+    "durationClass": "years",
+    "requires": [
+      "large-animal cardiac facility",
+      "implantable telemetry",
+      "GMP-grade cardiomyocyte manufacture"
+    ],
+    "ethics": "animal ethics approval"
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

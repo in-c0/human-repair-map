@@ -1,0 +1,34 @@
+# V0 adaptive-fidelity experiment on the synthetic slow-fast network.
+run_id: v0_main
+seed: 0
+sim:
+  horizon: 8.0
+  dt: 0.02
+  n_sub: 10          # validated: fine sub-cycled RK4 matches Radau reference to ~1e-3 (see research-log)
+  target: auc        # (1/T) int x_r dt : the intervention effect on the readout node
+base_level: 1        # adaptive policies refine on top of the medium (quasi-static) closure
+tol_ref: 0.01        # reference tolerance defining the minimal refinement set (labels)
+n_train: 1200
+n_test: 400
+n_ood: 150
+ood_families: [amp_high, multi2, step, negative, K20, sigmoid, noisy, sigma0, sigma06]
+n_proc: 4
+kappa: 1.0           # uncertainty bonus in the learned score: p + kappa * std
+taus: [0.02, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.97]
+tols: [0.002, 0.005, 0.01, 0.02, 0.05, 0.1]
+ensemble:
+  kind: mlp
+  n_members: 5
+  hidden: [64, 64]
+label: necessary     # training label: membership in the minimal refinement set
+include_path_states: true
+ablations:           # each trains a variant of the learned router (evaluated one-shot and sequential)
+  no_uncertainty: {kappa: 0.0}
+  no_graph: {drop_groups: [graph]}
+  no_trajectory: {drop_groups: [trajectory]}
+  intervention_only: {drop_groups: [trajectory, graph, state]}
+  gbm: {kind: gbm}
+  flip_label: {label: flip}
+  train_100: {n_train: 100}
+  train_300: {n_train: 300}
+  no_path_states: {include_path_states: false}

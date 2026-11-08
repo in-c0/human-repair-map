@@ -1,0 +1,153 @@
+{
+  "n_instances": 12,
+  "n_skipped_silent_wt": 2,
+  "n_evaluated": 10,
+  "n_functionally_damaged": 0,
+  "damaged_within_tol_rate": 1.0,
+  "functionally_damaged": {
+    "routed": {
+      "claimed_restored": NaN,
+      "restored_fineA": NaN,
+      "restored_fineB": NaN,
+      "restored_heldout": NaN,
+      "restored_all_three": NaN,
+      "search_cost": NaN,
+      "n_eval": NaN,
+      "wall_s": NaN,
+      "claimed_but_fails_fineA_rate": NaN,
+      "n_claimed": 0
+    },
+    "medium": {
+      "claimed_restored": NaN,
+      "restored_fineA": NaN,
+      "restored_fineB": NaN,
+      "restored_heldout": NaN,
+      "restored_all_three": NaN,
+      "search_cost": NaN,
+      "n_eval": NaN,
+      "wall_s": NaN,
+      "claimed_but_fails_fineA_rate": NaN,
+      "n_claimed": 0
+    },
+    "fine": {
+      "claimed_restored": NaN,
+      "restored_fineA": NaN,
+      "restored_fineB": NaN,
+      "restored_heldout": NaN,
+      "restored_all_three": NaN,
+      "search_cost": NaN,
+      "n_eval": NaN,
+      "wall_s": NaN,
+      "claimed_but_fails_fineA_rate": NaN,
+      "n_claimed": 0
+    },
+    "routed_cost_over_fine": NaN
+  },
+  "all_evaluated": {
+    "routed": {
+      "claimed_restored": NaN,
+      "restored_fineA": NaN,
+      "restored_fineB": NaN,
+      "restored_heldout": NaN,
+      "restored_all_three": NaN,
+      "search_cost": NaN,
+      "n_eval": NaN,
+      "wall_s": NaN,
+      "claimed_but_fails_fineA_rate": NaN,
+      "n_claimed": 0
+    },
+    "medium": {
+      "claimed_restored": NaN,
+      "restored_fineA": NaN,
+      "restored_fineB": NaN,
+      "restored_heldout": NaN,
+      "restored_all_three": NaN,
+      "search_cost": NaN,
+      "n_eval": NaN,
+      "wall_s": NaN,
+      "claimed_but_fails_fineA_rate": NaN,
+      "n_claimed": 0
+    },
+    "fine": {
+      "claimed_restored": NaN,
+      "restored_fineA": NaN,
+      "restored_fineB": NaN,
+      "restored_heldout": NaN,
+      "restored_all_three": NaN,
+      "search_cost": NaN,
+      "n_eval": NaN,
+      "wall_s": NaN,
+      "claimed_but_fails_fineA_rate": NaN,
+      "n_claimed": 0
+    },
+    "routed_cost_over_fine": NaN
+  },
+  "routed": {
+    "claimed_restored": NaN,
+    "restored_fineA": NaN,
+    "restored_fineB": NaN,
+    "restored_heldout": NaN,
+    "restored_all_three": NaN,
+    "search_cost": NaN,
+    "n_eval": NaN,
+    "wall_s": NaN,
+    "claimed_but_fails_fineA_rate": NaN,
+    "n_claimed": 0
+  },
+  "medium": {
+    "claimed_restored": NaN,
+    "restored_fineA": NaN,
+    "restored_fineB": NaN,
+    "restored_heldout": NaN,
+    "restored_all_three": NaN,
+    "search_cost": NaN,
+    "n_eval": NaN,
+    "wall_s": NaN,
+    "claimed_but_fails_fineA_rate": NaN,
+    "n_claimed": 0
+  },
+  "fine": {
+    "claimed_restored": NaN,
+    "restored_fineA": NaN,
+    "restored_fineB": NaN,
+    "restored_heldout": NaN,
+    "restored_all_three": NaN,
+    "search_cost": NaN,
+    "n_eval": NaN,
+    "wall_s": NaN,
+    "claimed_but_fails_fineA_rate": NaN,
+    "n_claimed": 0
+  },
+  "routed_cost_over_fine": NaN,
+  "damage": "kf_loss",
+  "damage_status": "preregistered (v1.1)",
+  "damage_channel": "Kf",
+  "loss_factor_range": [
+    0.0,
+    0.5
+  ],
+  "search_keys": [
+    [
+      "g",
+      "Ks"
+    ],
+    [
+      "g",
+      "NaT"
+    ],
+    [
+      "g",
+      "NaP"
+    ],
+    [
+      "rate",
+      "nat_inactivation"
+    ]
+  ],
+  "voc_lambda": 1.778279410038923e-05,
+  "voc_lambda_source": "verdicts.json principal operating point",
+  "n_random": 24,
+  "n_local": 16,
+  "min_wt_spikes": 3,
+  "runtime_s": 228.37294602394104
+}

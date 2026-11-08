@@ -1,0 +1,162 @@
+{
+  "metrics": {
+    "range_guard": {
+      "block": {
+        "auroc": 0.5826822916666667,
+        "threshold": 0.01738108323079697,
+        "flag_rate_ood": 0.25,
+        "false_safe_rate": 0.5313807531380753,
+        "n_necessary_ood": 239
+      },
+      "opening_step": {
+        "auroc": 1.0,
+        "threshold": 0.01738108323079697,
+        "flag_rate_ood": 1.0,
+        "false_safe_rate": 0.0,
+        "n_necessary_ood": 224
+      },
+      "combo": {
+        "auroc": 0.6560275607638889,
+        "threshold": 0.01738108323079697,
+        "flag_rate_ood": 0.3736111111111111,
+        "false_safe_rate": 0.5852534562211982,
+        "n_necessary_ood": 217
+      },
+      "activation_rate": {
+        "auroc": 1.0,
+        "threshold": 0.01738108323079697,
+        "flag_rate_ood": 1.0,
+        "false_safe_rate": 0.0,
+        "n_necessary_ood": 202
+      }
+    },
+    "knn_density": {
+      "block": {
+        "auroc": 0.27151716820987654,
+        "threshold": 5.214243018000217,
+        "flag_rate_ood": 0.0006944444444444445,
+        "false_safe_rate": 1.0,
+        "n_necessary_ood": 239
+      },
+      "opening_step": {
+        "auroc": 0.303149112654321,
+        "threshold": 5.214243018000217,
+        "flag_rate_ood": 0.002777777777777778,
+        "false_safe_rate": 0.9955357142857143,
+        "n_necessary_ood": 224
+      },
+      "combo": {
+        "auroc": 0.6936084587191358,
+        "threshold": 5.214243018000217,
+        "flag_rate_ood": 0.05347222222222222,
+        "false_safe_rate": 0.9631336405529954,
+        "n_necessary_ood": 217
+      },
+      "activation_rate": {
+        "auroc": 0.23022907021604938,
+        "threshold": 5.214243018000217,
+        "flag_rate_ood": 0.0020833333333333333,
+        "false_safe_rate": 1.0,
+        "n_necessary_ood": 202
+      }
+    },
+    "ensemble_std": {
+      "block": {
+        "auroc": 0.4592441888503086,
+        "threshold": 0.34742310065587234,
+        "flag_rate_ood": 0.029861111111111113,
+        "false_safe_rate": 0.8493723849372385,
+        "n_necessary_ood": 239
+      },
+      "opening_step": {
+        "auroc": 0.4635965229552469,
+        "threshold": 0.34742310065587234,
+        "flag_rate_ood": 0.05277777777777778,
+        "false_safe_rate": 0.7142857142857143,
+        "n_necessary_ood": 224
+      },
+      "combo": {
+        "auroc": 0.5469602382330246,
+        "threshold": 0.34742310065587234,
+        "flag_rate_ood": 0.06875,
+        "false_safe_rate": 0.663594470046083,
+        "n_necessary_ood": 217
+      },
+      "activation_rate": {
+        "auroc": 0.44334780092592596,
+        "threshold": 0.34742310065587234,
+        "flag_rate_ood": 0.035416666666666666,
+        "false_safe_rate": 0.7920792079207921,
+        "n_necessary_ood": 202
+      }
+    },
+    "discrepancy": {
+      "block": {
+        "auroc": 0.5294275655864198,
+        "threshold": 10.540973270346486,
+        "flag_rate_ood": 0.06944444444444445,
+        "false_safe_rate": 0.9539748953974896,
+        "n_necessary_ood": 239
+      },
+      "opening_step": {
+        "auroc": 0.5071317997685185,
+        "threshold": 10.540973270346486,
+        "flag_rate_ood": 0.04861111111111111,
+        "false_safe_rate": 0.96875,
+        "n_necessary_ood": 224
+      },
+      "combo": {
+        "auroc": 0.5017751736111111,
+        "threshold": 10.540973270346486,
+        "flag_rate_ood": 0.05625,
+        "false_safe_rate": 0.9723502304147466,
+        "n_necessary_ood": 217
+      },
+      "activation_rate": {
+        "auroc": 0.485290798611111,
+        "threshold": 10.540973270346486,
+        "flag_rate_ood": 0.03819444444444445,
+        "false_safe_rate": 0.9603960396039604,
+        "n_necessary_ood": 202
+      }
+    },
+    "conformal_residual": {
+      "block": {
+        "auroc": 0.4718201437114197,
+        "threshold": 1.5417370844602971,
+        "flag_rate_ood": 0.0375,
+        "false_safe_rate": 0.7866108786610879,
+        "n_necessary_ood": 239
+      },
+      "opening_step": {
+        "auroc": 0.4773070987654321,
+        "threshold": 1.5417370844602971,
+        "flag_rate_ood": 0.058333333333333334,
+        "false_safe_rate": 0.65625,
+        "n_necessary_ood": 224
+      },
+      "combo": {
+        "auroc": 0.5327823591820988,
+        "threshold": 1.5417370844602971,
+        "flag_rate_ood": 0.06736111111111111,
+        "false_safe_rate": 0.6451612903225806,
+        "n_necessary_ood": 217
+      },
+      "activation_rate": {
+        "auroc": 0.46540388695987656,
+        "threshold": 1.5417370844602971,
+        "flag_rate_ood": 0.03819444444444445,
+        "false_safe_rate": 0.7475247524752475,
+        "n_necessary_ood": 202
+      }
+    }
+  },
+  "conformal_coverage_alpha0.1": {
+    "id": 0.9045138888888888,
+    "block": 0.9208333333333333,
+    "opening_step": 0.9055555555555556,
+    "combo": 0.8916666666666667,
+    "activation_rate": 0.9166666666666666
+  },
+  "note": "conformal_residual uses the realised gain and is therefore an oracle diagnostic of shift, not a deployable detector"
+}

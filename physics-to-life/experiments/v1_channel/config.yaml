@@ -1,0 +1,18 @@
+# V1 Drosophila ion-channel -> membrane bridge (ADR-0006). PILOT configuration; the
+# preregistered main configuration will be frozen in docs/experiments/v1_preregistration.md.
+run_id: v1_pilot
+seed: 0
+system: provisional          # 'provisional' placeholders until published parameters are verified
+calibrate_medium: true       # fit HH gates of every channel to its own fine level (trace fit)
+base_level: 1
+tol_rel: 0.05
+n_train: 120
+n_test: 60
+n_ood: 30
+id_families: [none, density, shaker_loss, inactivation_rate, recovery_rate, temperature, k_out]
+ood_families: [block, combo, activation_rate]
+instance_g_cv: 0.25
+instance_rate_cv: 0.15
+n_proc: 4
+s_min: 0.05
+ensemble_members: 5

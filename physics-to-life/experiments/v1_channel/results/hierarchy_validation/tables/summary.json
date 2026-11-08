@@ -1,0 +1,212 @@
+{
+  "fit_rms": {
+    "Kf": 0.05082489825189698,
+    "NaT": 0.024926117001909685,
+    "Kf_B": 0.09645434928150447,
+    "NaT_B": 0.06305579987078651
+  },
+  "fit_forms": {
+    "Kf": "anchoredB",
+    "NaT": "coupledfixed",
+    "Kf_B": "anchored",
+    "NaT_B": "anchoredB"
+  },
+  "state_dims": {
+    "fine": {
+      "Ks": 5,
+      "Kf": 20,
+      "NaT": 8,
+      "NaP": 2
+    },
+    "medium": {
+      "Ks": 1,
+      "Kf": 3,
+      "NaT": 2,
+      "NaP": 1
+    },
+    "coarse": {
+      "Ks": 0,
+      "Kf": 1,
+      "NaT": 1,
+      "NaP": 0
+    }
+  },
+  "state_dims_B_fine": {
+    "Ks": 5,
+    "Kf": 14,
+    "NaT": 6,
+    "NaP": 2
+  },
+  "channel_errors_summary": {
+    "A|Kf|eval": {
+      "rel_err_medium_mean": 0.1504152793615045,
+      "rel_err_medium_max": 0.26444444857040705,
+      "rel_err_coarse_mean": 6.441321291224591
+    },
+    "A|Kf|fit": {
+      "rel_err_medium_mean": 0.12051842888212586,
+      "rel_err_medium_max": 0.5023258732449193,
+      "rel_err_coarse_mean": 15.242577563079314
+    },
+    "A|NaT|eval": {
+      "rel_err_medium_mean": 0.1426056523066718,
+      "rel_err_medium_max": 0.26660107400296695,
+      "rel_err_coarse_mean": 2.696491888335037
+    },
+    "A|NaT|fit": {
+      "rel_err_medium_mean": 0.10324429007835038,
+      "rel_err_medium_max": 0.2665708204346513,
+      "rel_err_coarse_mean": 2.7856602542939615
+    },
+    "B|Kf|eval": {
+      "rel_err_medium_mean": 0.3024727138691534,
+      "rel_err_medium_max": 0.3910176613989531,
+      "rel_err_coarse_mean": 8.079961636812385
+    },
+    "B|Kf|fit": {
+      "rel_err_medium_mean": 0.3305281747818555,
+      "rel_err_medium_max": 0.44659085675170224,
+      "rel_err_coarse_mean": 17.546935327683617
+    },
+    "B|NaT|eval": {
+      "rel_err_medium_mean": 0.5293671497403599,
+      "rel_err_medium_max": 0.8507582492608974,
+      "rel_err_coarse_mean": 2.9155170158262904
+    },
+    "B|NaT|fit": {
+      "rel_err_medium_mean": 0.19876852348292628,
+      "rel_err_medium_max": 0.6948659485626836,
+      "rel_err_coarse_mean": 2.9840491099097854
+    }
+  },
+  "cclamp": {
+    "coarse": {
+      "max_err_spike_count": 53.0,
+      "max_err_latency_ms": 40.900000000000006,
+      "max_v_rmse": 14.621816102649355,
+      "mean_cost": 39065.0,
+      "mean_wall": 1.3087375838334385,
+      "state_dim": 2
+    },
+    "fine_A": {
+      "max_err_spike_count": 0.0,
+      "max_err_latency_ms": 0.0,
+      "max_v_rmse": 0.015371728804773653,
+      "mean_cost": 1086038.3333333333,
+      "mean_wall": 15.831217027333272,
+      "state_dim": 35
+    },
+    "fine_B": {
+      "max_err_spike_count": 28.0,
+      "max_err_latency_ms": 38.00000000000001,
+      "max_v_rmse": 13.36837305075712,
+      "mean_cost": 1524694.5,
+      "mean_wall": 19.203726964666505,
+      "state_dim": 27
+    },
+    "fine_Kf_only": {
+      "max_err_spike_count": 7.0,
+      "max_err_latency_ms": 26.200000000000003,
+      "max_v_rmse": 13.7549010562527,
+      "mean_cost": 530364.0,
+      "mean_wall": 7.766642159500407,
+      "state_dim": 24
+    },
+    "fine_NaT_only": {
+      "max_err_spike_count": 0.0,
+      "max_err_latency_ms": 0.0,
+      "max_v_rmse": 3.014727781964081,
+      "mean_cost": 193639.33333333334,
+      "mean_wall": 2.7514529568337216,
+      "state_dim": 13
+    },
+    "medium": {
+      "max_err_spike_count": 7.0,
+      "max_err_latency_ms": 26.200000000000003,
+      "max_v_rmse": 13.663558455273915,
+      "mean_cost": 80476.66666666667,
+      "mean_wall": 0.7078266015002251,
+      "state_dim": 7
+    }
+  },
+  "family_preview": {
+    "activation_rate": {
+      "frac_medium_outside_tol": 0.4722222222222222,
+      "median_err_medium_over_tol": 0.9201868219049275,
+      "frac_fixed_by_Kf": 0.19444444444444445,
+      "frac_fixed_by_NaT": 0.2777777777777778
+    },
+    "block": {
+      "frac_medium_outside_tol": 0.5277777777777778,
+      "median_err_medium_over_tol": 1.5349206349206335,
+      "frac_fixed_by_Kf": 0.25,
+      "frac_fixed_by_NaT": 0.2777777777777778
+    },
+    "combo": {
+      "frac_medium_outside_tol": 0.4722222222222222,
+      "median_err_medium_over_tol": 0.7618518906198777,
+      "frac_fixed_by_Kf": 0.2222222222222222,
+      "frac_fixed_by_NaT": 0.25
+    },
+    "density": {
+      "frac_medium_outside_tol": 0.5555555555555556,
+      "median_err_medium_over_tol": 1.8025964915845976,
+      "frac_fixed_by_Kf": 0.25,
+      "frac_fixed_by_NaT": 0.3055555555555556
+    },
+    "k_out": {
+      "frac_medium_outside_tol": 0.5555555555555556,
+      "median_err_medium_over_tol": 1.424999999999999,
+      "frac_fixed_by_Kf": 0.2777777777777778,
+      "frac_fixed_by_NaT": 0.3055555555555556
+    },
+    "kf_inactivation": {
+      "frac_medium_outside_tol": 0.5555555555555556,
+      "median_err_medium_over_tol": 1.5349206349206335,
+      "frac_fixed_by_Kf": 0.2777777777777778,
+      "frac_fixed_by_NaT": 0.2777777777777778
+    },
+    "kf_loss": {
+      "frac_medium_outside_tol": 0.5277777777777778,
+      "median_err_medium_over_tol": 1.693650793650792,
+      "frac_fixed_by_Kf": 0.25,
+      "frac_fixed_by_NaT": 0.2777777777777778
+    },
+    "kf_recovery": {
+      "frac_medium_outside_tol": 0.5277777777777778,
+      "median_err_medium_over_tol": 1.5349206349206335,
+      "frac_fixed_by_Kf": 0.25,
+      "frac_fixed_by_NaT": 0.2777777777777778
+    },
+    "nat_inactivation": {
+      "frac_medium_outside_tol": 0.5277777777777778,
+      "median_err_medium_over_tol": 1.3352656001740644,
+      "frac_fixed_by_Kf": 0.2777777777777778,
+      "frac_fixed_by_NaT": 0.2777777777777778
+    },
+    "none": {
+      "frac_medium_outside_tol": 0.5277777777777778,
+      "median_err_medium_over_tol": 1.5349206349206335,
+      "frac_fixed_by_Kf": 0.25,
+      "frac_fixed_by_NaT": 0.2777777777777778
+    },
+    "opening_step": {
+      "frac_medium_outside_tol": 0.6388888888888888,
+      "median_err_medium_over_tol": 1.8624251191337762,
+      "frac_fixed_by_Kf": 0.3611111111111111,
+      "frac_fixed_by_NaT": 0.3055555555555556
+    },
+    "temperature": {
+      "frac_medium_outside_tol": 0.5277777777777778,
+      "median_err_medium_over_tol": 1.1980962200807597,
+      "frac_fixed_by_Kf": 0.25,
+      "frac_fixed_by_NaT": 0.2777777777777778
+    }
+  },
+  "preview_walls": {
+    "truth_radau_mean_s": 12.71334736970596,
+    "fine_kf_mean_s": 3.834869309027883,
+    "base_mean_s": 0.3306413012986316
+  },
+  "wall_total_s": 976.0964698791504
+}

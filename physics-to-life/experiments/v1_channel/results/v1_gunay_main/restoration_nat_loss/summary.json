@@ -1,0 +1,153 @@
+{
+  "n_instances": 16,
+  "n_skipped_silent_wt": 3,
+  "n_evaluated": 13,
+  "n_functionally_damaged": 11,
+  "damaged_within_tol_rate": 0.15384615384615385,
+  "functionally_damaged": {
+    "routed": {
+      "claimed_restored": 0.7272727272727273,
+      "restored_fineA": 0.7272727272727273,
+      "restored_fineB": 0.09090909090909091,
+      "restored_heldout": 0.8181818181818182,
+      "restored_all_three": 0.09090909090909091,
+      "search_cost": 13659961.090909092,
+      "n_eval": 56.0,
+      "wall_s": 261.53543337908656,
+      "claimed_but_fails_fineA_rate": 0.0,
+      "n_claimed": 8
+    },
+    "medium": {
+      "claimed_restored": 0.6363636363636364,
+      "restored_fineA": 0.09090909090909091,
+      "restored_fineB": 0.09090909090909091,
+      "restored_heldout": 0.09090909090909091,
+      "restored_all_three": 0.0,
+      "search_cost": 3724825.3636363638,
+      "n_eval": 56.0,
+      "wall_s": 98.25673313574357,
+      "claimed_but_fails_fineA_rate": 0.8571428571428571,
+      "n_claimed": 7
+    },
+    "fine": {
+      "claimed_restored": 0.7272727272727273,
+      "restored_fineA": 0.7272727272727273,
+      "restored_fineB": 0.09090909090909091,
+      "restored_heldout": 0.7272727272727273,
+      "restored_all_three": 0.09090909090909091,
+      "search_cost": 52726240.0,
+      "n_eval": 56.0,
+      "wall_s": 950.612486189062,
+      "claimed_but_fails_fineA_rate": 0.0,
+      "n_claimed": 8
+    },
+    "routed_cost_over_fine": 0.2590733018494983
+  },
+  "all_evaluated": {
+    "routed": {
+      "claimed_restored": 0.7272727272727273,
+      "restored_fineA": 0.7272727272727273,
+      "restored_fineB": 0.09090909090909091,
+      "restored_heldout": 0.8181818181818182,
+      "restored_all_three": 0.09090909090909091,
+      "search_cost": 13659961.090909092,
+      "n_eval": 56.0,
+      "wall_s": 261.53543337908656,
+      "claimed_but_fails_fineA_rate": 0.0,
+      "n_claimed": 8
+    },
+    "medium": {
+      "claimed_restored": 0.6363636363636364,
+      "restored_fineA": 0.09090909090909091,
+      "restored_fineB": 0.09090909090909091,
+      "restored_heldout": 0.09090909090909091,
+      "restored_all_three": 0.0,
+      "search_cost": 3724825.3636363638,
+      "n_eval": 56.0,
+      "wall_s": 98.25673313574357,
+      "claimed_but_fails_fineA_rate": 0.8571428571428571,
+      "n_claimed": 7
+    },
+    "fine": {
+      "claimed_restored": 0.7272727272727273,
+      "restored_fineA": 0.7272727272727273,
+      "restored_fineB": 0.09090909090909091,
+      "restored_heldout": 0.7272727272727273,
+      "restored_all_three": 0.09090909090909091,
+      "search_cost": 52726240.0,
+      "n_eval": 56.0,
+      "wall_s": 950.612486189062,
+      "claimed_but_fails_fineA_rate": 0.0,
+      "n_claimed": 8
+    },
+    "routed_cost_over_fine": 0.2590733018494983
+  },
+  "routed": {
+    "claimed_restored": 0.7272727272727273,
+    "restored_fineA": 0.7272727272727273,
+    "restored_fineB": 0.09090909090909091,
+    "restored_heldout": 0.8181818181818182,
+    "restored_all_three": 0.09090909090909091,
+    "search_cost": 13659961.090909092,
+    "n_eval": 56.0,
+    "wall_s": 261.53543337908656,
+    "claimed_but_fails_fineA_rate": 0.0,
+    "n_claimed": 8
+  },
+  "medium": {
+    "claimed_restored": 0.6363636363636364,
+    "restored_fineA": 0.09090909090909091,
+    "restored_fineB": 0.09090909090909091,
+    "restored_heldout": 0.09090909090909091,
+    "restored_all_three": 0.0,
+    "search_cost": 3724825.3636363638,
+    "n_eval": 56.0,
+    "wall_s": 98.25673313574357,
+    "claimed_but_fails_fineA_rate": 0.8571428571428571,
+    "n_claimed": 7
+  },
+  "fine": {
+    "claimed_restored": 0.7272727272727273,
+    "restored_fineA": 0.7272727272727273,
+    "restored_fineB": 0.09090909090909091,
+    "restored_heldout": 0.7272727272727273,
+    "restored_all_three": 0.09090909090909091,
+    "search_cost": 52726240.0,
+    "n_eval": 56.0,
+    "wall_s": 950.612486189062,
+    "claimed_but_fails_fineA_rate": 0.0,
+    "n_claimed": 8
+  },
+  "routed_cost_over_fine": 0.2590733018494983,
+  "damage": "nat_loss",
+  "damage_status": "post-hoc exploratory (preregistration \u00a716)",
+  "damage_channel": "NaT",
+  "loss_factor_range": [
+    0.75,
+    0.95
+  ],
+  "search_keys": [
+    [
+      "g",
+      "Ks"
+    ],
+    [
+      "g",
+      "Kf"
+    ],
+    [
+      "g",
+      "NaP"
+    ],
+    [
+      "rate",
+      "nat_inactivation"
+    ]
+  ],
+  "voc_lambda": 1.778279410038923e-05,
+  "voc_lambda_source": "verdicts.json principal operating point",
+  "n_random": 24,
+  "n_local": 16,
+  "min_wt_spikes": 3,
+  "runtime_s": 4238.634333610535
+}

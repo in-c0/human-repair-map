@@ -1,0 +1,53 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/primary-angioplasty-beats-thrombolysis",
+  "statement": "Across 23 randomised trials, primary angioplasty reduced short-term death, non-fatal reinfarction and stroke compared with thrombolytic therapy in acute myocardial infarction.",
+  "context": {
+    "species": "human",
+    "model": "acute ST-elevation myocardial infarction",
+    "intervention": "primary angioplasty",
+    "comparator": "thrombolysis"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "clinical outcomes",
+    "endpoint": "death, reinfarction, stroke",
+    "effect": "reduced with angioplasty"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/keeley-2003-lancet",
+      "design": "meta-analysis",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L5",
+  "replication": {
+    "independentGroups": 2,
+    "note": "A meta-analysis of 23 randomised trials from many groups."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/acute-reperfusion-of-the-infarct-artery"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/keeley-2003-lancet"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

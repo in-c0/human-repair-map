@@ -1,0 +1,39 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/acute-reperfusion-of-the-infarct-artery",
+  "name": "Reopen the blocked artery in time",
+  "class": "control",
+  "primitive": "reconnect",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Restore blood flow through the occluded coronary artery quickly enough to save myocardium that is ischaemic but not yet dead.",
+  "target": {
+    "node": "hrm:cell/endothelium"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "function",
+    "blocked": "framework",
+    "note": "Primary angioplasty reduced death, reinfarction and stroke compared with thrombolysis across 23 randomised trials (Keeley 2003) and is standard care worldwide. What remains is a framework constraint — getting the patient to a catheter laboratory in time — not a scientific one. This is the only L5 on this ground, and it is why people survive infarcts and then live with heart failure.",
+    "drift": "'Heart attacks are treatable' — the patient is saved; the muscle is not."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/keeley-2003-lancet"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

@@ -13,26 +13,18 @@ jobs:
       deployments: write
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
 
-      # Publish only what belongs on the public site. Everything else in the
-      # repo (design notes, data sources, README) stays out of the deploy.
+      # Generated live data (graph/activity.json, graph/feed.json) is not committed; keep the
+      # copies already on the site so a records change does not blank them until the next
+      # nightly run (live-data.yml).
+      - name: Carry over live data
+        run: bash scripts/fetch-live-data.sh
+
+      # Publish only what belongs on the public site (see scripts/assemble-site.sh).
       - name: Assemble site
-        run: |
-          mkdir -p _site
-          cp index.html _site/index.html
-          mkdir -p _site/content
-          cp content/*.js content/*.css _site/content/
-          mkdir -p _site/content/art
-          cp content/art/*.jpg _site/content/art/
-          cp og.svg _site/og.svg
-          mkdir -p _site/reconstruction
-          cp reconstruction/index.html _site/reconstruction/index.html
-          mkdir -p _site/data
-          cp data/cns-delivery.json _site/data/cns-delivery.json
-          # The machine-readable graph: bulk exports and the JSON Schemas.
-          mkdir -p _site/graph
-          cp -r public/graph/. _site/graph/
-          echo "Assembled:"; find _site -type f
+        run: bash scripts/assemble-site.sh
 
       # Auth: the account-wide Global API Key + login email (owner's decision, 2026-09-11:
       # one credential shared across every project and session, pasted once per repo).

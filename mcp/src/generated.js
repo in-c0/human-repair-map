@@ -1765,22 +1765,22 @@ export const GRAPH = {
  "manifest": {
   "name": "Human Repair Graph",
   "version": "0.3.0",
-  "snapshot": "2026-09-11",
-  "contentHash": "6c6db5f42d339ed08f70417b3e05726bb9e911aa69645fd82bcc7c4808a02187",
+  "snapshot": "2026-09-14",
+  "contentHash": "d5f4b63d834e530e3def86b858721fe8049e70ecb99f7474cfac185695503846",
   "counts": {
-   "capability": 185,
+   "capability": 218,
    "cell": 31,
-   "claim": 24,
-   "experiment": 6,
-   "goal": 10,
-   "question": 20,
+   "claim": 67,
+   "experiment": 18,
+   "goal": 25,
+   "question": 36,
    "route": 16,
-   "source": 34
+   "source": 92
   },
   "reviewStates": {
-   "ai-proposed": 289,
+   "ai-proposed": 408,
    "disputed": 3,
-   "n/a": 34
+   "n/a": 92
   },
   "humanReviewed": 0,
   "projections": [
@@ -3711,6 +3711,107 @@ export const GRAPH = {
  "nodes": [
   {
    "type": "capability",
+   "id": "hrm:capability/acute-cord-damage-limitation",
+   "name": "Limit the damage in the hours after a cord injury",
+   "class": "control",
+   "primitive": "stop",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Reduce the secondary injury cascade after the initial trauma, so that more cord survives to be repaired or retrained.",
+   "target": {
+    "node": "hrm:cell/cns-neuron"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Surgical decompression within 24 hours is associated with better neurological improvement in a prospective cohort (Fehlings 2012), and is now common practice. Pharmacological neuroprotection is the opposite story: high-dose methylprednisolone (Bracken 1990) reported a benefit in a post-hoc subgroup, was adopted, and was then largely abandoned after the effect failed to hold up and the harms accumulated. The rung reflects decompression, not drugs.",
+    "drift": "'Steroids are given for spinal cord injury' — most guidelines no longer recommend them; the map keeps the history because it is the field's clearest example of a subgroup finding becoming standard care."
+   },
+   "wouldMove": "A randomised trial of a neuroprotective intervention with a pre-specified primary neurological endpoint that succeeds.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/fehlings-2012-plosone",
+     "hrm:source/bracken-1990-nejm"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/sci-damage-limitation",
+     "hrm:goal/spinal-cord-injury-repair"
+    ],
+    "supportedBy": [
+     "hrm:claim/early-decompression-improves-sci-outcome"
+    ],
+    "contradictedBy": [
+     "hrm:claim/high-dose-steroids-sci-benefit-was-a-subgroup-finding"
+    ]
+   }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/acute-reperfusion-of-the-infarct-artery",
+   "name": "Reopen the blocked artery in time",
+   "class": "control",
+   "primitive": "reconnect",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Restore blood flow through the occluded coronary artery quickly enough to save myocardium that is ischaemic but not yet dead.",
+   "target": {
+    "node": "hrm:cell/endothelium"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "function",
+    "blocked": "framework",
+    "note": "Primary angioplasty reduced death, reinfarction and stroke compared with thrombolysis across 23 randomised trials (Keeley 2003) and is standard care worldwide. What remains is a framework constraint — getting the patient to a catheter laboratory in time — not a scientific one. This is the only L5 on this ground, and it is why people survive infarcts and then live with heart failure.",
+    "drift": "'Heart attacks are treatable' — the patient is saved; the muscle is not."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/keeley-2003-lancet"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/myocardial-salvage"
+    ],
+    "supportedBy": [
+     "hrm:claim/primary-angioplasty-beats-thrombolysis"
+    ]
+   }
+  },
+  {
+   "type": "capability",
    "id": "hrm:capability/acute-wound-infection-control",
    "name": "Prevent and treat acute wound infection",
    "class": "control",
@@ -3913,6 +4014,58 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed"
    }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/aged-plasma-factor-removal",
+   "name": "Take the aged factors out of circulation",
+   "class": "control",
+   "primitive": "remove",
+   "projections": [
+    "rejuvenation"
+   ],
+   "description": "Rejuvenate tissue by removing or diluting what accumulates in old blood — therapeutic plasma exchange, apheresis, or targeted removal of specific factors.",
+   "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "biomarker",
+    "blocked": "science",
+    "note": "Replacing half an old mouse's plasma with saline and albumin rejuvenated muscle, liver and brain measures as well as young blood did (Mehdipour 2020), which reframes the parabiosis literature: the effect may be dilution of old factors rather than transfer of young ones. Rodent only. Human plasma exchange exists as a procedure, so the translational path is unusually short if the biology holds.",
+    "drift": "Young-blood transfusion clinics cite the parabiosis literature. The dilution result argues the young half may not be the active ingredient."
+   },
+   "wouldMove": "A randomised trial of plasma exchange in older adults with a functional endpoint, not a biomarker panel.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/mehdipour-2020-aging",
+     "hrm:source/conboy-2005-nature"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/systemic-environment-rejuvenation"
+    ],
+    "blockedBy": [
+     "hrm:question/dilution-or-young-factors"
+    ],
+    "supportedBy": [
+     "hrm:claim/plasma-dilution-rejuvenates-as-well-as-young-blood"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/dilution-or-young-factors"
+   ]
   },
   {
    "id": "hrm:capability/alveolar-epithelium--edit",
@@ -4136,6 +4289,102 @@ export const GRAPH = {
    }
   },
   {
+   "type": "capability",
+   "id": "hrm:capability/autonomic-function-restoration-after-sci",
+   "name": "Restore bladder, bowel and blood-pressure control",
+   "class": "control",
+   "primitive": "recalibrate",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Return autonomic function after a cord injury: continence, bowel control, stable blood pressure without autonomic dysreflexia, and sexual function.",
+   "target": {
+    "node": "hrm:cell/neural-connectivity"
+   },
+   "grade": {
+    "basis": "no-evidence-located",
+    "rung": "L0",
+    "searchedOn": "2026-09-14",
+    "note": "Placed so the gap is visible. Autonomic recovery is consistently what people with spinal cord injury rank above walking, and this seed located no evidence base for restoring it; the stimulation literature cited here reports autonomic effects as secondary observations. Grading it is the first open task on this node."
+   },
+   "wouldMove": "Any controlled human study with a primary autonomic endpoint — continence, cardiovascular stability — after a cord repair or stimulation intervention.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/spinal-cord-injury-repair"
+    ],
+    "blockedBy": [
+     "hrm:question/cord-repair-restores-autonomic-function"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/cord-repair-restores-autonomic-function"
+   ]
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/axon-regrowth-across-a-repair",
+   "name": "Get axons to grow across the repair",
+   "class": "control",
+   "primitive": "regenerate",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Have the cut axons sprout, cross the repair site and enter the distal nerve rather than forming a neuroma at the junction.",
+   "target": {
+    "node": "hrm:cell/peripheral-neuron"
+   },
+   "grade": {
+    "basis": "standard-of-care",
+    "rung": "L5",
+    "measured": "structure",
+    "blocked": "none",
+    "note": "Axons regenerate across a coapted peripheral nerve repair routinely; this is why peripheral nerve differs from spinal cord. Sprouting is not the constraint, and grading it L5 makes the real constraint visible by contrast: what is graded low below is arrival in time and correct targeting, not growth."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/ruijs-2005-prs"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/nerve-continuity-restoration",
+     "hrm:goal/peripheral-nerve-repair"
+    ],
+    "blockedBy": [
+     "hrm:question/motor-sensory-mistargeting-after-repair"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/motor-sensory-mistargeting-after-repair"
+   ]
+  },
+  {
    "id": "hrm:capability/beta-cell--edit",
    "type": "capability",
    "derived": true,
@@ -4299,6 +4548,60 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed"
    }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/biological-age-measurement-that-predicts-outcome",
+   "name": "Tell whether someone got biologically younger",
+   "class": "verify",
+   "primitive": "preserve",
+   "projections": [
+    "rejuvenation"
+   ],
+   "description": "Measure a person's biological age well enough that a change in the measure, produced by an intervention, predicts a change in their health outcomes — so that a rejuvenation trial does not have to run for forty years.",
+   "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "biomarker",
+    "blocked": "science",
+    "note": "Epigenetic clocks predict chronological age accurately across tissues and predict mortality in cohorts (Horvath 2013). What has not been shown is that moving a clock with an intervention moves the outcome: the clock is a correlate of age, and no trial has demonstrated that lowering it lowers risk. Studies reporting epigenetic age reversal (Fahy 2019, nine men, no control arm) illustrate the problem rather than solving it. Graded L2 deliberately: as a surrogate endpoint, which is what the field uses it for, the causal evidence is preclinical.",
+    "drift": "Clocks are reported as measurements of how old someone biologically is, and used as endpoints. They are trained predictors of chronological age whose response to intervention has no validated meaning."
+   },
+   "wouldMove": "An intervention trial in which a clock change measured early predicts the clinical outcome measured later, in an independent cohort.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/horvath-2013-genomebiol",
+     "hrm:source/fahy-2019-agingcell",
+     "hrm:source/yang-2023-cell"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/aging-rate-modification"
+    ],
+    "blockedBy": [
+     "hrm:question/clocks-track-intervention-benefit"
+    ],
+    "supportedBy": [
+     "hrm:claim/epigenetic-age-reversal-reported-without-a-control-arm",
+     "hrm:claim/epigenetic-clocks-predict-age-and-mortality"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/clocks-track-intervention-benefit"
+   ]
   },
   {
    "id": "hrm:capability/bone-cell--edit",
@@ -4467,6 +4770,61 @@ export const GRAPH = {
   },
   {
    "type": "capability",
+   "id": "hrm:capability/brain-spine-interface-volitional-control",
+   "name": "Bridge the gap electronically, under the person's own control",
+   "class": "control",
+   "primitive": "reconnect",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Decode movement intention from cortex and deliver it as stimulation to the cord below the lesion, so that walking is willed rather than triggered.",
+   "target": {
+    "node": "hrm:cell/neural-connectivity"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "science",
+    "note": "A digital bridge between cortical recordings and epidural stimulation restored natural, volitional walking in a participant with chronic tetraplegia, with neurological improvement persisting when the bridge was off (Lorach 2023). One participant, one group, an implanted system: the strongest single human result on this ground and the least replicated.",
+    "drift": "The persistence of improvement with the bridge off is the most interesting part of the report and the part with n=1 behind it."
+   },
+   "wouldMove": "A second participant in an unaffiliated centre, and a report of what happens over years rather than months.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/lorach-2023-nature"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/sci-function-restoration",
+     "hrm:goal/spinal-cord-injury-repair"
+    ],
+    "blockedBy": [
+     "hrm:question/stimulation-benefit-without-spared-fibres"
+    ],
+    "supportedBy": [
+     "hrm:claim/brain-spine-interface-restores-volitional-walking"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/stimulation-benefit-without-spared-fibres"
+   ]
+  },
+  {
+   "type": "capability",
    "id": "hrm:capability/cancer-risk-control-under-rejuvenation",
    "name": "Keep cancer risk acceptable while rejuvenating tissue",
    "class": "control",
@@ -4503,6 +4861,42 @@ export const GRAPH = {
     "blockedBy": [
      "hrm:question/cancer-risk-of-repeated-partial-reprogramming"
     ]
+   }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/cardiac-scar-reversal",
+   "name": "Turn cardiac scar back into muscle",
+   "class": "control",
+   "primitive": "repair",
+   "projections": [
+    "universal-repair",
+    "rejuvenation"
+   ],
+   "description": "Convert established ischaemic scar — collagen and myofibroblasts, years after the event — back into working myocardium.",
+   "target": {
+    "node": "hrm:cell/cardiomyocyte"
+   },
+   "grade": {
+    "basis": "no-evidence-located",
+    "rung": "L0",
+    "searchedOn": "2026-09-14",
+    "note": "Placed so the gap is visible. Direct reprogramming of cardiac fibroblasts to cardiomyocytes has rodent evidence not searched in this seed; nothing located addresses an established human scar. Grading it is the first open task on this node, and it is the same shape as established-dermal-scar-reversal on the skin ground."
+   },
+   "wouldMove": "Any demonstration that an established (not acute) cardiac scar can be converted to contractile tissue in a large animal.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
    }
   },
   {
@@ -4672,6 +5066,67 @@ export const GRAPH = {
   },
   {
    "type": "capability",
+   "id": "hrm:capability/cardiomyocyte-proliferation-induction",
+   "name": "Make the surviving heart muscle divide",
+   "class": "control",
+   "primitive": "regenerate",
+   "projections": [
+    "universal-repair",
+    "rejuvenation"
+   ],
+   "description": "Induce existing adult cardiomyocytes to re-enter the cell cycle and divide, so that the heart repairs itself rather than receiving cells from outside.",
+   "target": {
+    "node": "hrm:cell/cardiomyocyte"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L3",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "A four-factor cell cycle combination drove adult cardiomyocyte division and improved function after infarction in mice (Mohamed 2018). In pigs, AAV-delivered miR-199a produced striking functional repair — and then uncontrolled proliferation and sudden death in most treated animals (Gabisonia 2019). The rung is L3 because the large-animal study is real; the note is the point of the record.",
+    "drift": "'The heart can be made to regenerate itself' — it can, and in the one large-animal test the animals died of it. Control, not induction, is the unsolved part."
+   },
+   "wouldMove": "A large-animal study with dose-controlled, self-limiting proliferation and no arrhythmic or proliferative deaths.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/mohamed-2018-cell",
+     "hrm:source/gabisonia-2019-nature",
+     "hrm:source/eschenhagen-2017-circulation"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/myocardial-remuscularisation"
+    ],
+    "blockedBy": [
+     "hrm:question/controllable-cardiomyocyte-proliferation"
+    ],
+    "supportedBy": [
+     "hrm:claim/cell-cycle-factors-drive-adult-cardiomyocyte-division-in-mice",
+     "hrm:claim/human-cardiomyocyte-turnover-is-under-one-percent-a-year",
+     "hrm:claim/mir199a-repairs-pig-hearts-then-kills-them",
+     "hrm:claim/neonatal-mouse-heart-regenerates-then-loses-the-ability"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/controllable-cardiomyocyte-proliferation"
+   ]
+  },
+  {
+   "type": "capability",
    "id": "hrm:capability/cell-identity-retention-under-partial-reprogramming",
    "name": "Rejuvenate cells while they keep their identity",
    "class": "model",
@@ -4717,6 +5172,7 @@ export const GRAPH = {
     ],
     "supportedBy": [
      "hrm:claim/cyclic-partial-reprogramming-ameliorates-aging-in-mice",
+     "hrm:claim/long-term-partial-reprogramming-is-tolerated-in-mice",
      "hrm:claim/osk-reprogramming-restores-vision-in-mice"
     ]
    }
@@ -4928,6 +5384,63 @@ export const GRAPH = {
      "hrm:question/reliable-biofilm-eradication-in-chronic-wounds"
     ]
    }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/cns-drug-delivery-past-the-barrier",
+   "name": "Get the therapy past the blood-brain barrier",
+   "class": "reach",
+   "primitive": "preserve",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Deliver a therapeutic agent or cell to tumour throughout the brain, including where the barrier is intact around infiltrating cells.",
+   "target": {
+    "node": "hrm:cell/cns-neuron"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "access",
+    "blocked": "science",
+    "note": "Pulsed ultrasound with microbubbles opened the barrier repeatedly and safely in patients (Carpentier 2016) — access demonstrated in humans. Intraventricular and intrathecal routes bypass the barrier and reach tumour, as the CAR T studies show. What is not solved is reaching infiltrating cells behind an intact barrier across the whole brain, and Sarkaria's review argues the barrier is far less disrupted in glioblastoma than the enhancing-tumour picture suggests. See also the map's CNS delivery module for the 16 routes.",
+    "drift": "'The blood-brain barrier is broken in glioblastoma, so drugs get in' — it is disrupted where the tumour enhances on imaging and intact around the cells that cause recurrence."
+   },
+   "wouldMove": "Measured drug concentration at the infiltrating margin, in patients, at a level shown to be cytotoxic.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/carpentier-2016-scitranslmed",
+     "hrm:source/sarkaria-2018-neurooncol"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/gbm-reaching-the-tumour",
+     "hrm:goal/glioblastoma-control"
+    ],
+    "blockedBy": [
+     "hrm:question/bbb-really-the-delivery-limit"
+    ],
+    "supportedBy": [
+     "hrm:claim/bbb-is-intact-in-much-of-a-glioblastoma",
+     "hrm:claim/pulsed-ultrasound-opens-the-barrier-in-patients"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/bbb-really-the-delivery-limit"
+   ]
   },
   {
    "id": "hrm:capability/cns-neuron--edit",
@@ -5449,6 +5962,64 @@ export const GRAPH = {
   },
   {
    "type": "capability",
+   "id": "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
+   "name": "Regrow severed axons across the injury",
+   "class": "control",
+   "primitive": "regenerate",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Have descending axons — corticospinal and other motor tracts — regrow through or around the lesion and reach the grey matter below it.",
+   "target": {
+    "node": "hrm:cell/cns-neuron"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "In rodents, combining a growth-permissive substrate, chemoattraction and neuron-intrinsic activation regrew propriospinal axons across a complete transection (Anderson 2018); neural stem cell grafts supported long-distance axon growth after severe injury (Lu 2012). Both are rodent. Human neural stem cell grafts have been placed in the primate cord with graft-derived axon extension (Rosenzweig 2018), which is the strongest large-animal evidence but still structure rather than function.",
+    "drift": "'Paralysis reversed in mice' — regrowth across a lesion has been achieved; what those axons then do is a separate and mostly unanswered question."
+   },
+   "wouldMove": "Regrowth across a complete lesion in a non-human primate with a measured motor benefit, from a group unaffiliated with the original.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/anderson-2018-nature",
+     "hrm:source/lu-2012-cell",
+     "hrm:source/rosenzweig-2018-natmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/sci-function-restoration",
+     "hrm:goal/spinal-cord-injury-repair"
+    ],
+    "blockedBy": [
+     "hrm:question/regrown-axons-form-useful-circuits"
+    ],
+    "supportedBy": [
+     "hrm:claim/combined-treatment-regrows-axons-across-complete-transection-in-rodents",
+     "hrm:claim/human-neural-stem-cell-grafts-extend-axons-in-primate-cord"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/regrown-axons-form-useful-circuits"
+   ]
+  },
+  {
+   "type": "capability",
    "id": "hrm:capability/cutaneous-sensory-reinnervation",
    "name": "Restore sensory innervation of regenerated skin",
    "class": "edit",
@@ -5667,6 +6238,60 @@ export const GRAPH = {
      "hrm:claim/graftskin-raises-diabetic-ulcer-closure"
     ]
    }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/distal-schwann-cell-support-maintenance",
+   "name": "Keep the distal nerve able to receive axons",
+   "class": "control",
+   "primitive": "preserve",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Maintain the denervated distal stump — Schwann cells in a growth-supportive state, bands of Bungner, trophic signalling — for the months an axon needs to reach it, instead of letting it atrophy into a path that no longer guides.",
+   "target": {
+    "node": "hrm:cell/peripheral-neuron"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Chronic denervation degrades Schwann cell support and is a documented cause of poor outcome after proximal injury (Gordon 2020, review of rodent and human evidence). Interventions that maintain the distal environment are rodent-stage; no human therapy exists.",
+    "drift": "Described in clinical writing as 'the muscle atrophies', which is only half of it: the nerve pathway degrades as well, and it degrades whether or not the muscle is exercised."
+   },
+   "wouldMove": "A large-animal study in which the distal stump is kept receptive for six months and delayed repair then yields function comparable to immediate repair.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/gordon-2020-ijms"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/peripheral-nerve-repair"
+    ],
+    "blockedBy": [
+     "hrm:question/chronic-denervation-reversible-in-humans"
+    ],
+    "supportedBy": [
+     "hrm:claim/chronic-denervation-degrades-the-distal-pathway"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/chronic-denervation-reversible-in-humans"
+   ]
   },
   {
    "id": "hrm:capability/endocrine-cell--edit",
@@ -6641,6 +7266,276 @@ export const GRAPH = {
    }
   },
   {
+   "type": "capability",
+   "id": "hrm:capability/gbm-antigen-escape-prevention",
+   "name": "Stop the tumour changing to escape the therapy",
+   "class": "control",
+   "primitive": "stop",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Prevent glioblastoma from losing the antigen or switching cell state under treatment pressure, which is how it defeats every single-target therapy tried so far.",
+   "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "biomarker",
+    "blocked": "science",
+    "note": "Antigen loss under therapy is documented in patients: EGFRvIII expression decreased in most tumours after CAR T infusion (O'Rourke 2017), and single-cell studies show glioblastoma cells occupy four interconvertible states with plasticity between them (Neftel 2019, Patel 2014). Multi-antigen targeting is the response and has reached patients (Bagley 2024), but no strategy has been shown to prevent escape.",
+    "drift": "Bivalent and multivalent constructs are described as solving antigen escape. They have been shown to be deliverable, not to prevent escape."
+   },
+   "wouldMove": "A multi-target or state-agnostic therapy in which the recurrent tumour retains the target.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/orourke-2017-scitranslmed",
+     "hrm:source/neftel-2019-cell",
+     "hrm:source/patel-2014-science",
+     "hrm:source/bagley-2024-natmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/glioblastoma-control"
+    ],
+    "blockedBy": [
+     "hrm:question/gbm-heterogeneity-defeats-single-target",
+     "hrm:question/gbm-response-durability"
+    ],
+    "supportedBy": [
+     "hrm:claim/glioblastoma-cells-occupy-interconvertible-states",
+     "hrm:claim/systemic-car-t-drives-antigen-loss-in-gbm"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/gbm-heterogeneity-defeats-single-target",
+    "hrm:question/gbm-response-durability"
+   ]
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/gbm-immune-cell-therapy",
+   "name": "Turn engineered immune cells on the tumour",
+   "class": "control",
+   "primitive": "remove",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Direct CAR T cells or another engineered immune population against glioblastoma, delivered where they can reach it.",
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Intraventricular IL13Ralpha2 CAR T produced regression of all intracranial and spinal tumours in one patient for 7.5 months (Brown 2016); intrathecal bivalent EGFR/IL13Ralpha2 CAR T produced early tumour reduction in three patients (Bagley 2024); intraventricular CARv3-TEAM-E produced dramatic regression within days in three patients, transient in two (Choi 2024). Human, radiographic, reproducible across three groups — and in almost every case the tumour came back. Intravenous EGFRvIII CAR T trafficked to tumour and drove antigen loss without clinical benefit (O'Rourke 2017).",
+    "drift": "The 2024 reports were covered as a breakthrough. They are the first reproducible rapid regressions in this disease and they are, so far, temporary."
+   },
+   "wouldMove": "A response lasting beyond a year in a substantial fraction of treated patients, or a trial with a survival endpoint that succeeds.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/brown-2016-nejm",
+     "hrm:source/bagley-2024-natmed",
+     "hrm:source/choi-2024-nejm",
+     "hrm:source/orourke-2017-scitranslmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/glioblastoma-control"
+    ],
+    "blockedBy": [
+     "hrm:question/gbm-response-durability"
+    ],
+    "supportedBy": [
+     "hrm:claim/intraventricular-car-t-produces-rapid-but-transient-gbm-regression"
+    ],
+    "contradictedBy": [
+     "hrm:claim/systemic-car-t-drives-antigen-loss-in-gbm"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/gbm-response-durability"
+   ]
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/gbm-infiltrative-margin-clearance",
+   "name": "Clear the cells that have already spread into working brain",
+   "class": "control",
+   "primitive": "remove",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Eliminate the individual tumour cells that have migrated along tracts and vessels into brain that must keep working, where surgery and focal radiation cannot go.",
+   "target": {
+    "node": "hrm:cell/glia"
+   },
+   "grade": {
+    "basis": "no-evidence-located",
+    "rung": "L0",
+    "searchedOn": "2026-09-14",
+    "note": "Placed so the gap is visible. Recurrence at the margin is the near-universal pattern of failure, and no therapy is directed at the infiltrating population specifically. Glioma cells receiving synaptic input from neurons (Venkataramani 2019) suggests why they are hard to separate from the tissue: they are electrically integrated into it. Grading this node is one of the map's more consequential open tasks."
+   },
+   "wouldMove": "Any therapy with a measured effect on the infiltrating population as distinct from the enhancing mass.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/venkataramani-2019-nature"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/gbm-bulk-and-margin",
+     "hrm:goal/glioblastoma-control"
+    ],
+    "supportedBy": [
+     "hrm:claim/glioma-cells-receive-synaptic-input-from-neurons"
+    ]
+   }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/gbm-targeted-cytotoxic-therapy",
+   "name": "Kill it with something aimed at what makes it a tumour",
+   "class": "control",
+   "primitive": "remove",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Attack glioblastoma through a target specific to it — a mutated antigen, an oncolytic virus, a checkpoint — rather than with untargeted cytotoxicity.",
+   "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "none",
+    "blocked": "science",
+    "note": "This node is graded on failures, which is why measured is 'none'. The EGFRvIII vaccine rindopepimut failed a randomised phase 3 (Weller 2017); nivolumab failed against bevacizumab in recurrent disease (Reardon 2020). Neoadjuvant anti-PD-1 showed a survival signal with immune correlates in a small randomised study (Cloughesy 2019), and recombinant poliovirus produced a tail of long survivors without shifting the overall curve (Desjardins 2018). L5 records that this approach has been tested to phase 3 in humans; the blocked reason is that it did not work.",
+    "drift": "Long survivors in single-arm oncolytic trials are frequently presented as efficacy. A survival tail without a control arm is a selection observation."
+   },
+   "wouldMove": "A randomised trial of a targeted or immunotherapeutic agent with an overall survival benefit.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/weller-2017-lancetoncol",
+     "hrm:source/reardon-2020-jamaoncol",
+     "hrm:source/cloughesy-2019-natmed",
+     "hrm:source/desjardins-2018-nejm"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/glioblastoma-control"
+    ],
+    "blockedBy": [
+     "hrm:question/bbb-really-the-delivery-limit",
+     "hrm:question/gbm-heterogeneity-defeats-single-target"
+    ],
+    "contradictedBy": [
+     "hrm:claim/glioblastoma-cells-occupy-interconvertible-states",
+     "hrm:claim/single-target-gbm-immunotherapies-failed-phase-3"
+    ],
+    "supportedBy": [
+     "hrm:claim/neoadjuvant-pd1-shows-a-survival-signal-in-recurrent-gbm",
+     "hrm:claim/oncolytic-poliovirus-produces-a-survival-tail-not-a-shift"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/bbb-really-the-delivery-limit",
+    "hrm:question/gbm-heterogeneity-defeats-single-target"
+   ]
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/gbm-tumour-cell-eradication",
+   "name": "Kill the tumour cells that are there",
+   "class": "control",
+   "primitive": "remove",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Eliminate the bulk glioblastoma population — surgically, with radiation and chemotherapy, or with a targeted agent — measured by radiographic response.",
+   "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Radiotherapy with concomitant and adjuvant temozolomide extended median survival from 12.1 to 14.6 months and two-year survival from 10% to 26% in a randomised phase 3 trial (Stupp 2005), and alternating electric fields added a further increment (Stupp 2017). This is L5 for the intervention and a statement about the disease: two decades of standard care buys months. The tumour is not eradicated in anyone.",
+    "drift": "'Standard of care for glioblastoma' sounds like treatment with intent to cure. Median survival is under two years."
+   },
+   "wouldMove": "Any intervention that shifts the whole survival curve rather than adding months to the median.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/stupp-2005-nejm",
+     "hrm:source/stupp-2017-jama"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/gbm-bulk-and-margin",
+     "hrm:goal/glioblastoma-control"
+    ],
+    "supportedBy": [
+     "hrm:claim/temozolomide-chemoradiation-extends-gbm-survival-by-months",
+     "hrm:claim/tumour-treating-fields-add-survival-in-gbm"
+    ]
+   }
+  },
+  {
    "id": "hrm:capability/germline--edit",
    "type": "capability",
    "derived": true,
@@ -6969,6 +7864,123 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed"
    }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/glial-scar-permissiveness-for-regrowth",
+   "name": "Make the scar a path rather than a wall",
+   "class": "control",
+   "primitive": "recalibrate",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Change the composition of the injury site — chondroitin sulphate proteoglycans, myelin inhibitors, astrocyte state — so that axons can grow through it.",
+   "target": {
+    "node": "hrm:cell/glia"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Chondroitinase ABC degrades inhibitory proteoglycans and promoted functional recovery in rats (Bradbury 2002); anti-Nogo-A antibody, targeting a myelin inhibitor, has been given intrathecally to patients in a first-in-man study with acceptable tolerability (Kucher 2018) — a human safety readout, not a demonstrated functional benefit. The L4 records that the intervention has reached people, and the note records that it has not yet been shown to work in them.",
+    "drift": "The astrocytic scar was long described as purely inhibitory; later work argues it is also required for regrowth. The map treats 'remove the scar' as an unresolved framing, not a goal."
+   },
+   "wouldMove": "A randomised trial of an anti-inhibitory agent with a motor endpoint that succeeds, or a large-animal study showing regrowth through a modified scar with function.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/bradbury-2002-nature",
+     "hrm:source/kucher-2018-nnr",
+     "hrm:source/anderson-2018-nature"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/sci-function-restoration"
+    ],
+    "blockedBy": [
+     "hrm:question/regrown-axons-form-useful-circuits"
+    ],
+    "supportedBy": [
+     "hrm:claim/anti-nogo-antibody-tolerated-in-first-in-man",
+     "hrm:claim/chondroitinase-promotes-recovery-in-rats"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/regrown-axons-form-useful-circuits"
+   ]
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/graft-host-electrical-integration",
+   "name": "Wire new muscle into the heart's rhythm",
+   "class": "control",
+   "primitive": "reconnect",
+   "projections": [
+    "universal-repair",
+    "rejuvenation"
+   ],
+   "description": "Have grafted or newly divided cardiomyocytes couple electrically with host muscle so they contract in time with it, without becoming an arrhythmic focus.",
+   "target": {
+    "node": "hrm:cell/cardiomyocyte"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L3",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Grafts do couple: the primate studies show host-synchronous contraction. They also cause ventricular arrhythmia in the weeks after grafting, consistently across three reports and two species (Chong 2014, Liu 2018, Romagnuolo 2019). Immature graft cardiomyocytes with automaticity are the leading explanation. This is the node that blocks the whole ground."
+   },
+   "wouldMove": "Remuscularisation in a large animal with continuous telemetry showing no sustained ventricular arrhythmia, ideally with a mechanistic fix such as graft maturation or pacemaker-gene removal.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/chong-2014-nature",
+     "hrm:source/liu-2018-natbiotech",
+     "hrm:source/romagnuolo-2019-scr"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/myocardial-remuscularisation"
+    ],
+    "blockedBy": [
+     "hrm:question/remuscularisation-arrhythmia-controllable"
+    ],
+    "contradictedBy": [
+     "hrm:claim/mir199a-repairs-pig-hearts-then-kills-them"
+    ],
+    "supportedBy": [
+     "hrm:claim/psc-cardiomyocytes-remuscularise-primate-hearts-with-arrhythmia"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/remuscularisation-arrhythmia-controllable"
+   ]
   },
   {
    "id": "hrm:capability/gut-epithelium--edit",
@@ -7687,6 +8699,70 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed"
    }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/infarct-remuscularisation",
+   "name": "Put working muscle where the scar is",
+   "class": "control",
+   "primitive": "regenerate",
+   "projections": [
+    "universal-repair",
+    "rejuvenation"
+   ],
+   "description": "Replace infarct scar with contractile cardiomyocytes that are aligned with the host muscle and contribute to the pump.",
+   "target": {
+    "node": "hrm:cell/cardiomyocyte"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L3",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Human pluripotent-derived cardiomyocytes remuscularised infarcted non-human primate hearts and improved contractile function (Chong 2014, Liu 2018, Romagnuolo 2019, three reports from overlapping Seattle groups). The grafts are real muscle and they beat with the host — and every one of these studies reports ventricular arrhythmia. Human evidence is limited to a small epicardial patch trial with no efficacy conclusion (Menasché 2018)."
+   },
+   "wouldMove": "A large-animal remuscularisation study without sustained arrhythmia, then a first-in-human injection or patch trial with a contractile endpoint.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/chong-2014-nature",
+     "hrm:source/liu-2018-natbiotech",
+     "hrm:source/romagnuolo-2019-scr",
+     "hrm:source/menasche-2018-jacc"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/myocardial-remuscularisation"
+    ],
+    "blockedBy": [
+     "hrm:question/remuscularisation-arrhythmia-controllable",
+     "hrm:question/why-adult-cell-therapy-failed-in-the-heart"
+    ],
+    "contradictedBy": [
+     "hrm:claim/adult-cell-therapy-after-mi-shows-no-effect-in-ipd-meta-analysis",
+     "hrm:claim/human-cardiomyocyte-turnover-is-under-one-percent-a-year"
+    ],
+    "supportedBy": [
+     "hrm:claim/psc-cardiomyocytes-remuscularise-primate-hearts-with-arrhythmia"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/remuscularisation-arrhythmia-controllable",
+    "hrm:question/why-adult-cell-therapy-failed-in-the-heart"
+   ]
   },
   {
    "type": "capability",
@@ -8513,6 +9589,57 @@ export const GRAPH = {
   },
   {
    "type": "capability",
+   "id": "hrm:capability/myocardial-graft-vascularisation",
+   "name": "Get blood to the new muscle",
+   "class": "control",
+   "primitive": "reconnect",
+   "projections": [
+    "universal-repair",
+    "rejuvenation"
+   ],
+   "description": "Perfuse grafted or regenerated myocardium: heart muscle is among the most oxygen-hungry tissue in the body, and a graft thicker than the diffusion limit dies without its own vessels.",
+   "target": {
+    "node": "hrm:cell/endothelium"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L3",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Primate grafts are perfused by host vessels that grow into them, which is why they survive at the sizes reported. Whether that scales to a graft large enough to matter for human pump function is the same unsolved problem as thick-tissue vascularisation elsewhere on this map (see the dermal microvasculature question).",
+    "drift": "Graft survival at primate scale is often read as evidence that human-scale grafts will perfuse. The scaling is exactly what has not been shown."
+   },
+   "wouldMove": "A perfused graft at a fraction of human left-ventricular mass that would be clinically meaningful, in a large animal, stable at three months.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/chong-2014-nature",
+     "hrm:source/romagnuolo-2019-scr"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/myocardial-remuscularisation"
+    ],
+    "supportedBy": [
+     "hrm:claim/psc-cardiomyocytes-remuscularise-primate-hearts-with-arrhythmia"
+    ]
+   }
+  },
+  {
+   "type": "capability",
    "id": "hrm:capability/native-ecm-organisation-reconstruction",
    "name": "Reconstruct native extracellular-matrix organisation",
    "class": "edit",
@@ -8728,6 +9855,105 @@ export const GRAPH = {
    },
    "review": {
     "state": "ai-proposed"
+   }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/nerve-gap-bridging",
+   "name": "Bridge a gap in a cut nerve",
+   "class": "control",
+   "primitive": "reconnect",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Span the distance between two nerve stumps so that axons have a path to grow along, without the tension that a direct suture would put on the repair.",
+   "target": {
+    "node": "hrm:cell/peripheral-neuron"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "function",
+    "blocked": "framework",
+    "note": "Autograft is the clinical standard and works. Hollow conduits match it in randomised comparison for short digital-nerve gaps (Weber 2000, Mackinnon 1990); processed allografts report comparable meaningful recovery in a multicentre registry (Safa 2020, registry not randomised). The remaining limit is gap length and donor morbidity, not whether a gap can be bridged.",
+    "drift": "'Nerve gaps are solved' — short sensory gaps are; long motor gaps still depend on how fast the axons cross and what is waiting at the far end."
+   },
+   "wouldMove": "A randomised comparison in long (>3 cm) motor gaps showing an off-the-shelf conduit or allograft matching autograft on muscle function, not just sensory recovery.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/weber-2000-prs",
+     "hrm:source/mackinnon-1990-prs",
+     "hrm:source/safa-2020-microsurgery"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/nerve-continuity-restoration",
+     "hrm:goal/peripheral-nerve-repair"
+    ],
+    "supportedBy": [
+     "hrm:claim/conduit-matches-suture-in-short-digital-nerve-gaps",
+     "hrm:claim/processed-allograft-recovers-function-in-registry"
+    ]
+   }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/nerve-transfer-from-a-donor-nerve",
+   "name": "Rewire a nerve from a nearby healthy donor",
+   "class": "control",
+   "primitive": "reconnect",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Cut an expendable working nerve fascicle near the target muscle and suture it to the paralysed nerve, so that regrowth starts close to the muscle instead of at the original injury.",
+   "target": {
+    "node": "hrm:cell/peripheral-neuron"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "function",
+    "blocked": "science",
+    "note": "The Oberlin transfer (ulnar fascicle to biceps branch) restored elbow flexion in patients with C5-C6 avulsion where no repair at the plexus was possible (Oberlin 1994), and nerve transfers are now standard for proximal injuries. It works because it shortens the distance, which is a workaround for the clock rather than a fix for it. Donor nerves for intrinsic hand muscles do not exist in the same way."
+   },
+   "wouldMove": "A transfer strategy that restores intrinsic hand function after a proximal injury, which no donor currently provides.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/oberlin-1994-jhs"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/nerve-continuity-restoration"
+    ],
+    "supportedBy": [
+     "hrm:claim/oberlin-transfer-restores-elbow-flexion"
+    ]
    }
   },
   {
@@ -9118,6 +10344,62 @@ export const GRAPH = {
   },
   {
    "type": "capability",
+   "id": "hrm:capability/pharmacological-aging-rate-reduction",
+   "name": "Slow aging with a drug",
+   "class": "control",
+   "primitive": "recalibrate",
+   "projections": [
+    "rejuvenation"
+   ],
+   "description": "Take a drug over years that slows the accumulation of age-related disease and dysfunction, rather than treating each disease as it arrives.",
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "biomarker",
+    "blocked": "framework",
+    "note": "Rapamycin extends lifespan in genetically heterogeneous mice even when started late in life (Harrison 2009), the strongest single result in the field. In humans, an mTOR inhibitor improved vaccine response in older adults (Mannick 2014) — an immune biomarker, and the only randomised human evidence cited here that a geroprotector does anything age-related. Metformin has a trial rationale and a design (Barzilai 2016) but no result. The blocker is partly framework: aging is not an approvable indication, which is what TAME was designed to change.",
+    "drift": "'Rapamycin extends human lifespan' — no human lifespan or healthspan trial has reported. The human data are immune-response biomarkers."
+   },
+   "wouldMove": "A randomised human trial with a composite clinical endpoint — incident age-related disease or functional decline — that succeeds.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/harrison-2009-nature",
+     "hrm:source/mannick-2014-scitranslmed",
+     "hrm:source/barzilai-2016-cellmetab"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/aging-rate-modification"
+    ],
+    "blockedBy": [
+     "hrm:question/clocks-track-intervention-benefit",
+     "hrm:question/geroprotector-benefit-in-humans"
+    ],
+    "supportedBy": [
+     "hrm:claim/mtor-inhibition-improves-vaccine-response-in-the-elderly",
+     "hrm:claim/rapamycin-extends-mouse-lifespan-started-late"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/clocks-track-intervention-benefit",
+    "hrm:question/geroprotector-benefit-in-humans"
+   ]
+  },
+  {
+   "type": "capability",
    "id": "hrm:capability/pharmacological-scar-reduction-in-humans",
    "name": "Reduce scarring pharmacologically in human wounds",
    "class": "edit",
@@ -9339,6 +10621,123 @@ export const GRAPH = {
   },
   {
    "type": "capability",
+   "id": "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+   "name": "Grow the replacement muscle outside the body",
+   "class": "control",
+   "primitive": "replace",
+   "projections": [
+    "universal-repair",
+    "rejuvenation"
+   ],
+   "description": "Differentiate pluripotent stem cells into cardiomyocytes at clinical scale and deliver them to the infarct as an injection or an engineered patch that survives and engrafts.",
+   "target": {
+    "node": "hrm:cell/cardiomyocyte"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "An epicardial fibrin patch carrying embryonic-stem-cell-derived cardiovascular progenitors was delivered to six patients and was feasible with no tumour and no sustained arrhythmia reported at the doses used (Menasché 2018) — a first-in-human safety result, with the authors attributing any benefit to paracrine effect rather than to new muscle. The L4 is for delivery to humans, not for remuscularising them.",
+    "drift": "A first-in-human feasibility study with six patients is regularly cited as 'stem cells repair the heart'."
+   },
+   "wouldMove": "A trial delivering enough cells to change contractile function, with imaging evidence of graft muscle rather than paracrine effect.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/menasche-2018-jacc",
+     "hrm:source/chong-2014-nature"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/myocardial-remuscularisation"
+    ],
+    "blockedBy": [
+     "hrm:question/remuscularisation-arrhythmia-controllable",
+     "hrm:question/why-adult-cell-therapy-failed-in-the-heart"
+    ],
+    "contradictedBy": [
+     "hrm:claim/adult-cell-therapy-after-mi-shows-no-effect-in-ipd-meta-analysis"
+    ],
+    "supportedBy": [
+     "hrm:claim/esc-derived-progenitor-patch-feasible-in-six-patients"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/remuscularisation-arrhythmia-controllable",
+    "hrm:question/why-adult-cell-therapy-failed-in-the-heart"
+   ]
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/regeneration-speed-increase",
+   "name": "Make axons regrow faster than a millimetre a day",
+   "class": "control",
+   "primitive": "recalibrate",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Raise the rate at which regenerating axons advance, or shorten the delay before they start, so that they reach the target while the target is still viable.",
+   "target": {
+    "node": "hrm:cell/peripheral-neuron"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "science",
+    "note": "One hour of 20 Hz electrical stimulation applied to the nerve at the time of surgery accelerated axon outgrowth and improved muscle reinnervation in patients after carpal tunnel release (Gordon 2010). That is human evidence for shortening the delay before regeneration starts, in a short-distance, low-stakes injury. Whether it helps over the distances that matter is untested.",
+    "drift": "'Electrical stimulation speeds nerve regeneration' — it shortens staggered regeneration onset in a distal compression injury; the millimetre-a-day rate itself has not been shown to change in humans."
+   },
+   "wouldMove": "A randomised trial of conditioning stimulation in a proximal nerve injury with muscle function, not sensory latency, as the endpoint.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/gordon-2010-expneurol",
+     "hrm:source/gordon-2020-ijms"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/peripheral-nerve-repair"
+    ],
+    "blockedBy": [
+     "hrm:question/human-axon-regeneration-rate-increase"
+    ],
+    "supportedBy": [
+     "hrm:claim/brief-electrical-stimulation-accelerates-human-reinnervation"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/human-axon-regeneration-rate-increase"
+   ]
+  },
+  {
+   "type": "capability",
    "id": "hrm:capability/regeneration-verification-histology-and-scar-scales",
    "name": "Verify a repair outcome by histology and validated scar scales",
    "class": "verify",
@@ -9371,6 +10770,50 @@ export const GRAPH = {
    "derivedRelations": {
     "enables": [
      "hrm:goal/skin-functional-restoration"
+    ]
+   }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/reinnervation-verification-in-humans",
+   "name": "Tell whether reinnervation is actually happening",
+   "class": "verify",
+   "primitive": "preserve",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Determine, months before functional recovery would be visible, whether axons have reached the target and whether the muscle is being reinnervated — so a failed repair can be revised while revision still helps.",
+   "target": {
+    "node": "hrm:cell/peripheral-neuron"
+   },
+   "grade": {
+    "basis": "standard-of-care",
+    "rung": "L4",
+    "measured": "biomarker",
+    "blocked": "science",
+    "note": "Electromyography and nerve conduction studies are routine clinical practice for this purpose. Electromyography and nerve conduction studies detect reinnervation in humans and are routine, but they report late and coarsely; ultrasound and MR neurography add anatomy, not function. The clinical consequence is that the decision to revise a repair is usually made after the window for revision has closed."
+   },
+   "wouldMove": "An imaging or electrophysiological readout that predicts, within weeks of repair, whether a given repair will reinnervate its target.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/ruijs-2005-prs"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/nerve-target-restoration"
     ]
    }
   },
@@ -9464,9 +10907,171 @@ export const GRAPH = {
     ],
     "supportedBy": [
      "hrm:claim/cyclic-partial-reprogramming-ameliorates-aging-in-mice",
+     "hrm:claim/long-term-partial-reprogramming-is-tolerated-in-mice",
      "hrm:claim/osk-reprogramming-restores-vision-in-mice"
     ]
    }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/senescent-cell-burden-measurement",
+   "name": "Measure how many senescent cells a person has",
+   "class": "see",
+   "primitive": "preserve",
+   "projections": [
+    "rejuvenation"
+   ],
+   "description": "Quantify senescent cell burden in a living person's tissue, well enough to say whether a senolytic worked and in which organ.",
+   "target": {
+    "node": "hrm:cell/fibroblast"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "biomarker",
+    "blocked": "science",
+    "note": "Burden has been measured in humans by biopsy — adipose and skin p16INK4a and SASP markers (Hickson 2019) — which requires taking tissue and does not generalise to organs you cannot biopsy. There is no validated circulating or imaging measure. Every senolytic trial therefore reports on the tissue it could reach, not the tissue it cared about.",
+    "drift": "Senescence markers are treated as a quantity; they are a panel with no agreed threshold and no agreed definition of a senescent cell."
+   },
+   "wouldMove": "A circulating or imaging measure of senescent burden validated against tissue in humans.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/hickson-2019-ebiomedicine"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/senescent-cell-clearance-goal"
+    ],
+    "supportedBy": [
+     "hrm:claim/senolytics-reduce-human-senescent-markers-uncontrolled"
+    ]
+   }
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/senescent-cell-clearance-in-humans",
+   "name": "Clear senescent cells from a living person",
+   "class": "control",
+   "primitive": "remove",
+   "projections": [
+    "rejuvenation"
+   ],
+   "description": "Selectively kill senescent cells in human tissue, reducing the inflammatory secretory programme they impose on the tissue around them.",
+   "target": {
+    "node": "hrm:cell/fibroblast"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "biomarker",
+    "blocked": "science",
+    "note": "Dasatinib plus quercetin reduced senescent cell markers in adipose tissue and skin in nine patients with diabetic kidney disease (Hickson 2019), and improved six-minute walk distance in fourteen patients with idiopathic pulmonary fibrosis (Justice 2019). Both are open-label, single-arm, and very small. The rodent evidence for function and lifespan is strong (Xu 2018). L4 records that the drugs have been given to people and moved a marker; it does not record a demonstrated clinical benefit.",
+    "drift": "'Senolytics reverse aging in humans' — two uncontrolled studies of nine and fourteen patients, with a marker endpoint and a walking-distance endpoint respectively."
+   },
+   "wouldMove": "A randomised, placebo-controlled trial with a functional primary endpoint in an aged population.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/xu-2018-natmed",
+     "hrm:source/justice-2019-ebiomedicine",
+     "hrm:source/hickson-2019-ebiomedicine"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/senescent-cell-clearance-goal"
+    ],
+    "blockedBy": [
+     "hrm:question/clocks-track-intervention-benefit",
+     "hrm:question/senolytics-improve-human-function"
+    ],
+    "supportedBy": [
+     "hrm:claim/senolytics-improve-function-and-lifespan-in-old-mice",
+     "hrm:claim/senolytics-reduce-human-senescent-markers-uncontrolled"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/clocks-track-intervention-benefit",
+    "hrm:question/senolytics-improve-human-function"
+   ]
+  },
+  {
+   "type": "capability",
+   "id": "hrm:capability/sensory-target-reinnervation-with-discrimination",
+   "name": "Restore sensation, not just feeling",
+   "class": "control",
+   "primitive": "reconnect",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Reinnervate sensory end organs so that the patient recovers two-point discrimination and localisation, rather than the diffuse protective sensation that a repaired nerve usually delivers.",
+   "target": {
+    "node": "hrm:cell/peripheral-neuron"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Protective sensation returns after most repairs; normal discrimination usually does not in adults, and age is one of the strongest predictors of the difference (Ruijs 2005). The gap between 'feels something' and 'can identify an object' is a cortical remapping problem as much as a peripheral one, which is why this is graded on function rather than structure."
+   },
+   "wouldMove": "A repair method or rehabilitation protocol that restores adult two-point discrimination to normal in a randomised comparison.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/ruijs-2005-prs"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/nerve-target-restoration",
+     "hrm:goal/peripheral-nerve-repair"
+    ],
+    "blockedBy": [
+     "hrm:question/motor-sensory-mistargeting-after-repair"
+    ],
+    "supportedBy": [
+     "hrm:claim/nerve-repair-outcome-worsens-with-delay-and-proximal-level"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/motor-sensory-mistargeting-after-repair"
+   ]
   },
   {
    "id": "hrm:capability/skeletal-muscle--edit",
@@ -9840,6 +11445,65 @@ export const GRAPH = {
   },
   {
    "type": "capability",
+   "id": "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+   "name": "Wake up the circuitry below the injury",
+   "class": "control",
+   "primitive": "recalibrate",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Use epidural or transcutaneous stimulation of the lumbosacral cord, with training, to make spinal circuits below the lesion respond to whatever descending input remains.",
+   "target": {
+    "node": "hrm:cell/neural-connectivity"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Participants with motor-complete injury achieved over-ground walking with epidural stimulation and training (Angeli 2018, Gill 2018), and targeted spatiotemporal stimulation improved walking in participants with chronic injury (Wagner 2018, Rowald 2022). Human, functional, and replicated across at least three independent groups — but in single-digit numbers per study, in participants selected partly for spared fibres, and requiring implantation and months of training.",
+    "drift": "'Paralysed people walk again' — participants step in a specialised setting with a device on and training behind them; independent community walking is not what these papers report."
+   },
+   "wouldMove": "A multi-centre trial in unselected participants with motor-complete injury reporting a functional benefit outside the laboratory.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/angeli-2018-nejm",
+     "hrm:source/gill-2018-natmed",
+     "hrm:source/wagner-2018-nature",
+     "hrm:source/rowald-2022-natmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/sci-function-restoration",
+     "hrm:goal/spinal-cord-injury-repair"
+    ],
+    "blockedBy": [
+     "hrm:question/stimulation-benefit-without-spared-fibres"
+    ],
+    "supportedBy": [
+     "hrm:claim/epidural-stimulation-enables-overground-walking",
+     "hrm:claim/targeted-stimulation-improves-walking-in-chronic-sci"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/stimulation-benefit-without-spared-fibres"
+   ]
+  },
+  {
+   "type": "capability",
    "id": "hrm:capability/synthetic-haemostat-for-noncompressible-haemorrhage",
    "name": "Induce haemostasis with a synthetic injectable agent",
    "class": "control",
@@ -10136,6 +11800,66 @@ export const GRAPH = {
    }
   },
   {
+   "type": "capability",
+   "id": "hrm:capability/timely-muscle-reinnervation",
+   "name": "Reinnervate a muscle before it is lost",
+   "class": "control",
+   "primitive": "reconnect",
+   "projections": [
+    "universal-repair"
+   ],
+   "description": "Restore motor endplates on a denervated muscle while the muscle still has the fibres, endplates and satellite cells to respond — in practice, within roughly a year of denervation.",
+   "target": {
+    "node": "hrm:cell/skeletal-muscle"
+   },
+   "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Reinnervation within months restores function; after prolonged denervation the muscle does not recover even when axons arrive, and no clinical intervention changes that window. The evidence for the window itself is clinical and consistent (Ruijs 2005 identifies delay and proximal level as the strongest predictors of failure); interventions to extend it are rodent-stage."
+   },
+   "wouldMove": "Any intervention that lets a muscle denervated for over a year recover useful force after reinnervation, shown in a large animal.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/ruijs-2005-prs",
+     "hrm:source/gordon-2020-ijms"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/nerve-target-restoration",
+     "hrm:goal/peripheral-nerve-repair"
+    ],
+    "blockedBy": [
+     "hrm:question/chronic-denervation-reversible-in-humans",
+     "hrm:question/human-axon-regeneration-rate-increase"
+    ],
+    "contradictedBy": [
+     "hrm:claim/chronic-denervation-degrades-the-distal-pathway"
+    ],
+    "supportedBy": [
+     "hrm:claim/nerve-repair-outcome-worsens-with-delay-and-proximal-level"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/chronic-denervation-reversible-in-humans",
+    "hrm:question/human-axon-regeneration-rate-increase"
+   ]
+  },
+  {
    "id": "hrm:capability/tissue-architecture--edit",
    "type": "capability",
    "derived": true,
@@ -10337,6 +12061,61 @@ export const GRAPH = {
    }
   },
   {
+   "type": "capability",
+   "id": "hrm:capability/young-systemic-factor-supplementation",
+   "name": "Add young factors to old circulation",
+   "class": "control",
+   "primitive": "replace",
+   "projections": [
+    "rejuvenation"
+   ],
+   "description": "Supply the circulating factors present in young blood and absent or reduced in old blood, and show that aged tissue responds.",
+   "grade": {
+    "basis": "claims",
+    "rung": "L2",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Heterochronic parabiosis restored regenerative capacity in aged mouse muscle and liver (Conboy 2005), and young plasma improved hippocampal function and cognition in aged mice (Villeda 2014). Rodent, and the dilution result above puts the interpretation in question. No identified factor has produced a functional benefit in an older person."
+   },
+   "wouldMove": "A single identified factor with a functional benefit in a randomised human trial.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/conboy-2005-nature",
+     "hrm:source/villeda-2014-natmed",
+     "hrm:source/mehdipour-2020-aging"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "enables": [
+     "hrm:goal/systemic-environment-rejuvenation"
+    ],
+    "blockedBy": [
+     "hrm:question/dilution-or-young-factors"
+    ],
+    "contradictedBy": [
+     "hrm:claim/plasma-dilution-rejuvenates-as-well-as-young-blood"
+    ],
+    "supportedBy": [
+     "hrm:claim/young-systemic-environment-restores-aged-tissue-in-mice"
+    ]
+   },
+   "blockedBy": [
+    "hrm:question/dilution-or-young-factors"
+   ]
+  },
+  {
    "id": "hrm:cell/adipocyte",
    "type": "cell",
    "name": "Adipocyte",
@@ -10517,6 +12296,11 @@ export const GRAPH = {
    ],
    "derivedRelations": {
     "capabilities": [
+     "hrm:capability/cardiac-scar-reversal",
+     "hrm:capability/cardiomyocyte-proliferation-induction",
+     "hrm:capability/graft-host-electrical-integration",
+     "hrm:capability/infarct-remuscularisation",
+     "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
      "hrm:capability/cardiomyocyte--see",
      "hrm:capability/cardiomyocyte--model",
      "hrm:capability/cardiomyocyte--reach",
@@ -10593,6 +12377,9 @@ export const GRAPH = {
    ],
    "derivedRelations": {
     "capabilities": [
+     "hrm:capability/acute-cord-damage-limitation",
+     "hrm:capability/cns-drug-delivery-past-the-barrier",
+     "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
      "hrm:capability/cns-neuron--see",
      "hrm:capability/cns-neuron--model",
      "hrm:capability/cns-neuron--reach",
@@ -10742,6 +12529,8 @@ export const GRAPH = {
    ],
    "derivedRelations": {
     "capabilities": [
+     "hrm:capability/acute-reperfusion-of-the-infarct-artery",
+     "hrm:capability/myocardial-graft-vascularisation",
      "hrm:capability/organised-microvascular-network-in-regenerated-dermis",
      "hrm:capability/skin-haemostasis",
      "hrm:capability/endothelium--see",
@@ -10826,6 +12615,8 @@ export const GRAPH = {
      "hrm:capability/fibroblast-state-sensing-in-living-wound",
      "hrm:capability/fibrogenic-fibroblast-lineage-control",
      "hrm:capability/pharmacological-scar-reduction-in-humans",
+     "hrm:capability/senescent-cell-burden-measurement",
+     "hrm:capability/senescent-cell-clearance-in-humans",
      "hrm:capability/fibroblast--see",
      "hrm:capability/fibroblast--model",
      "hrm:capability/fibroblast--reach",
@@ -10900,6 +12691,8 @@ export const GRAPH = {
    ],
    "derivedRelations": {
     "capabilities": [
+     "hrm:capability/gbm-infiltrative-margin-clearance",
+     "hrm:capability/glial-scar-permissiveness-for-regrowth",
      "hrm:capability/glia--see",
      "hrm:capability/glia--model",
      "hrm:capability/glia--reach",
@@ -11281,6 +13074,9 @@ export const GRAPH = {
    ],
    "derivedRelations": {
     "capabilities": [
+     "hrm:capability/autonomic-function-restoration-after-sci",
+     "hrm:capability/brain-spine-interface-volitional-control",
+     "hrm:capability/spinal-circuit-reactivation-by-stimulation",
      "hrm:capability/neural-connectivity--see",
      "hrm:capability/neural-connectivity--model",
      "hrm:capability/neural-connectivity--reach",
@@ -11318,7 +13114,14 @@ export const GRAPH = {
    ],
    "derivedRelations": {
     "capabilities": [
+     "hrm:capability/axon-regrowth-across-a-repair",
      "hrm:capability/cutaneous-sensory-reinnervation",
+     "hrm:capability/distal-schwann-cell-support-maintenance",
+     "hrm:capability/nerve-gap-bridging",
+     "hrm:capability/nerve-transfer-from-a-donor-nerve",
+     "hrm:capability/regeneration-speed-increase",
+     "hrm:capability/reinnervation-verification-in-humans",
+     "hrm:capability/sensory-target-reinnervation-with-discrimination",
      "hrm:capability/peripheral-neuron--see",
      "hrm:capability/peripheral-neuron--model",
      "hrm:capability/peripheral-neuron--reach",
@@ -11393,6 +13196,7 @@ export const GRAPH = {
    ],
    "derivedRelations": {
     "capabilities": [
+     "hrm:capability/timely-muscle-reinnervation",
      "hrm:capability/skeletal-muscle--see",
      "hrm:capability/skeletal-muscle--model",
      "hrm:capability/skeletal-muscle--reach",
@@ -11655,6 +13459,65 @@ export const GRAPH = {
   {
    "type": "claim",
    "grounding": "G1",
+   "id": "hrm:claim/adult-cell-therapy-after-mi-shows-no-effect-in-ipd-meta-analysis",
+   "statement": "An individual-patient-data meta-analysis of randomised trials of intracoronary adult cell therapy after acute myocardial infarction found no effect on left ventricular ejection fraction, ventricular volumes, or clinical events.",
+   "context": {
+    "species": "human",
+    "model": "acute myocardial infarction",
+    "intervention": "intracoronary bone-marrow or adult cell therapy",
+    "comparator": "control"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "imaging-derived LVEF and volumes; clinical events",
+    "endpoint": "cardiac function and outcomes",
+    "effect": "no significant effect"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/gyongyosi-2015-circres",
+     "design": "meta-analysis",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Individual patient data pooled across many independent trials."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "contradicts": [
+    "hrm:capability/infarct-remuscularisation",
+    "hrm:capability/pluripotent-derived-cardiomyocyte-grafting"
+   ],
+   "drift": "Individual positive trials from this era are still cited as evidence that cell therapy repairs the heart. Pooled at patient level, the effect is not there.",
+   "limitations": [
+    "heterogeneous cell products and protocols",
+    "does not test pluripotent-derived cardiomyocytes, which are a different intervention"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/gyongyosi-2015-circres"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
    "id": "hrm:claim/adult-mammalian-wounds-heal-by-scar",
    "statement": "Adult mammalian and human skin wounds heal by a fibrotic scar that lacks the appendages and matrix organisation of uninjured skin; this is the default outcome of adult repair.",
    "context": {
@@ -11709,6 +13572,62 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed",
     "date": "2026-09-11"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/anti-nogo-antibody-tolerated-in-first-in-man",
+   "statement": "Intrathecal anti-Nogo-A antibody was delivered to patients with acute spinal cord injury in a first-in-man study and was tolerated, with no efficacy conclusion drawn.",
+   "context": {
+    "species": "human",
+    "model": "acute spinal cord injury",
+    "intervention": "intrathecal anti-Nogo-A antibody"
+   },
+   "measurement": {
+    "measured": "none",
+    "assay": "safety and tolerability",
+    "endpoint": "adverse events, pharmacokinetics",
+    "effect": "acceptable tolerability; no efficacy endpoint"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/kucher-2018-nnr",
+     "design": "controlled-trial",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One sponsor-led programme."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/glial-scar-permissiveness-for-regrowth"
+   ],
+   "drift": "A first-in-man safety study is often cited as evidence that a mechanism works in humans. It is evidence that it can be given to humans.",
+   "limitations": [
+    "no efficacy endpoint by design"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/kucher-2018-nnr"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
    }
   },
   {
@@ -11903,6 +13822,467 @@ export const GRAPH = {
   {
    "type": "claim",
    "grounding": "G1",
+   "id": "hrm:claim/bbb-is-intact-in-much-of-a-glioblastoma",
+   "statement": "The blood-brain barrier is substantially intact in much of a glioblastoma, particularly at the infiltrating margin where recurrence arises, despite contrast enhancement in the tumour core.",
+   "context": {
+    "species": "human",
+    "model": "glioblastoma imaging and tissue pharmacology"
+   },
+   "measurement": {
+    "measured": "access",
+    "assay": "imaging and drug distribution studies reviewed",
+    "endpoint": "barrier integrity and drug penetration across the tumour",
+    "effect": "enhancement marks disruption in the core; the margin remains protected"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/sarkaria-2018-neurooncol",
+     "design": "review",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 1,
+    "note": "A critical review synthesising imaging and pharmacological studies."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/cns-drug-delivery-past-the-barrier"
+   ],
+   "drift": "The assumption that the barrier is broken in glioblastoma has justified systemic trials of drugs that never reached the cells that matter.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/sarkaria-2018-neurooncol"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/brain-spine-interface-restores-volitional-walking",
+   "statement": "A digital bridge decoding cortical activity and driving epidural stimulation restored natural, volitional walking in a participant with chronic tetraplegia, with neurological improvement that persisted when the bridge was switched off.",
+   "context": {
+    "species": "human",
+    "model": "chronic tetraplegia after cervical spinal cord injury",
+    "intervention": "brain-spine interface: cortical decoding driving spinal stimulation"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "walking on ground and stairs, volitional control",
+    "endpoint": "natural walking under volitional control",
+    "effect": "walking restored; improvement retained with stimulation off"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/lorach-2023-nature",
+     "design": "case-report",
+     "locator": "abstract",
+     "n": "1"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One participant, one group."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/brain-spine-interface-volitional-control"
+   ],
+   "limitations": [
+    "n=1",
+    "two implanted systems and continuous technical support",
+    "the persistence effect has no replication"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/lorach-2023-nature"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/brief-electrical-stimulation-accelerates-human-reinnervation",
+   "statement": "One hour of 20 Hz electrical stimulation of the median nerve at the time of carpal tunnel surgery accelerated axon outgrowth and improved muscle reinnervation in patients compared with surgery alone.",
+   "context": {
+    "species": "human",
+    "model": "chronic median nerve compression at the wrist",
+    "intervention": "1 h 20 Hz intraoperative stimulation",
+    "comparator": "surgery alone"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "motor unit number estimation and electrophysiology",
+    "endpoint": "muscle reinnervation",
+    "effect": "faster and more complete reinnervation with stimulation"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/gordon-2010-expneurol",
+     "design": "controlled-trial",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One group (Gordon); the mechanism is supported by extensive rodent work from the same laboratory."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/regeneration-speed-increase"
+   ],
+   "limitations": [
+    "a compression injury over a short distance, not a transection over a long one",
+    "electrophysiological endpoints rather than restored hand function"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/gordon-2010-expneurol"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/cell-cycle-factors-drive-adult-cardiomyocyte-division-in-mice",
+   "statement": "A combination of four cell cycle regulators drove adult mouse cardiomyocytes to divide and improved cardiac function after myocardial infarction.",
+   "context": {
+    "species": "mouse",
+    "model": "myocardial infarction",
+    "intervention": "combined CDK1, CDK4, cyclin B1 and cyclin D1 expression"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "cardiomyocyte division, echocardiography",
+    "endpoint": "division and cardiac function",
+    "effect": "efficient division of post-mitotic cardiomyocytes; improved function"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/mohamed-2018-cell",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 0
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/cardiomyocyte-proliferation-induction"
+   ],
+   "limitations": [
+    "rodent",
+    "four-factor delivery has no clinical vehicle"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/mohamed-2018-cell"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/chondroitinase-promotes-recovery-in-rats",
+   "statement": "Degrading chondroitin sulphate proteoglycans with chondroitinase ABC promoted axon regeneration and functional recovery after spinal cord injury in rats.",
+   "context": {
+    "species": "rat",
+    "model": "spinal cord injury",
+    "intervention": "intrathecal chondroitinase ABC"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "behavioural recovery, tracing",
+    "endpoint": "locomotor and proprioceptive recovery",
+    "effect": "improved recovery versus control"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/bradbury-2002-nature",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 1,
+    "note": "Widely reproduced in rodents since; no human trial has followed, which is itself informative."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/glial-scar-permissiveness-for-regrowth"
+   ],
+   "limitations": [
+    "rodent",
+    "enzyme stability and delivery are unsolved for human use"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/bradbury-2002-nature"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/chronic-denervation-degrades-the-distal-pathway",
+   "statement": "Prolonged denervation degrades the distal nerve's capacity to support regeneration — Schwann cells lose their growth-supportive state — and this decline, alongside muscle atrophy, is a principal reason that proximal nerve injuries recover poorly.",
+   "context": {
+    "species": "rodent and human",
+    "model": "chronic denervation after proximal nerve injury"
+   },
+   "measurement": {
+    "measured": "structure",
+    "endpoint": "Schwann cell support and reinnervation capacity over time",
+    "effect": "progressive loss of support with time since denervation"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/gordon-2020-ijms",
+     "design": "review",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 1,
+    "note": "Review-level synthesis; the primary evidence is largely rodent."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/distal-schwann-cell-support-maintenance"
+   ],
+   "contradicts": [
+    "hrm:capability/timely-muscle-reinnervation"
+   ],
+   "limitations": [
+    "human evidence is inferential, from outcome-versus-delay data rather than from tissue"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/gordon-2020-ijms"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/combined-treatment-regrows-axons-across-complete-transection-in-rodents",
+   "statement": "Combining neuron-intrinsic growth activation, a growth-supportive substrate and chemoattraction regrew propriospinal axons across a complete spinal cord transection in rodents, which no single component achieved.",
+   "context": {
+    "species": "rat and mouse",
+    "model": "complete spinal cord transection",
+    "intervention": "growth activation plus substrate plus chemoattractant"
+   },
+   "measurement": {
+    "measured": "structure",
+    "assay": "anterograde tracing, histology",
+    "endpoint": "axon regrowth across the lesion",
+    "effect": "robust regrowth across the lesion with the combination only"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/anderson-2018-nature",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    },
+    {
+     "source": "hrm:source/lu-2012-cell",
+     "design": "animal-controlled",
+     "locator": "abstract",
+     "note": "neural stem cell grafts supporting long-distance growth after severe injury"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 1,
+    "note": "Two reports from overlapping Californian groups (Sofroniew; Tuszynski)."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/corticospinal-axon-regrowth-across-a-lesion"
+   ],
+   "limitations": [
+    "rodent",
+    "regrowth demonstrated anatomically; functional benefit is the open question"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/anderson-2018-nature",
+     "hrm:source/lu-2012-cell"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/conduit-matches-suture-in-short-digital-nerve-gaps",
+   "statement": "In a randomised prospective comparison, a polyglycolic acid conduit gave sensory recovery at least equal to standard direct repair or graft in digital nerve gaps, with an advantage in gaps of 4 mm or more.",
+   "context": {
+    "species": "human",
+    "model": "digital nerve transection",
+    "intervention": "polyglycolic acid conduit",
+    "comparator": "end-to-end repair or nerve graft"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "two-point discrimination",
+    "endpoint": "sensory recovery at one year",
+    "effect": "equal or better recovery with the conduit in short gaps"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/weber-2000-prs",
+     "design": "rct",
+     "locator": "abstract"
+    },
+    {
+     "source": "hrm:source/mackinnon-1990-prs",
+     "design": "case-series",
+     "locator": "abstract",
+     "note": "earlier clinical series with the same conduit"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 1,
+    "note": "One randomised trial with a supporting earlier series from an overlapping group; widely adopted since."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/nerve-gap-bridging"
+   ],
+   "limitations": [
+    "sensory digital nerves only",
+    "short gaps; conduits are not used this way for long motor gaps"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/weber-2000-prs",
+     "hrm:source/mackinnon-1990-prs"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
    "id": "hrm:claim/cultured-epithelial-autografts-permanently-cover-large-burns",
    "statement": "Sheets of cultured autologous keratinocytes permanently cover large full-thickness burn wounds, and have been used and followed long-term at unaffiliated centres since the first report.",
    "context": {
@@ -12086,6 +14466,63 @@ export const GRAPH = {
   {
    "type": "claim",
    "grounding": "G1",
+   "id": "hrm:claim/early-decompression-improves-sci-outcome",
+   "statement": "In a prospective multicentre cohort of acute cervical spinal cord injury, decompression within 24 hours was associated with a higher rate of two-grade or greater neurological improvement at six months than later surgery.",
+   "context": {
+    "species": "human",
+    "model": "acute cervical spinal cord injury",
+    "intervention": "surgical decompression within 24 h",
+    "comparator": "decompression after 24 h"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "ASIA impairment scale",
+    "endpoint": "neurological improvement at 6 months",
+    "effect": "higher odds of >=2 grade improvement with early surgery"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/fehlings-2012-plosone",
+     "design": "cohort",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 1,
+    "note": "One prospective multicentre cohort; not randomised, and timing is confounded by injury severity and access to care."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/acute-cord-damage-limitation"
+   ],
+   "limitations": [
+    "observational: patients operated early may differ systematically",
+    "no randomised trial of timing exists"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/fehlings-2012-plosone"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
    "id": "hrm:claim/en1-lineage-fibroblasts-produce-scar",
    "statement": "A distinct dermal fibroblast lineage marked by Engrailed-1 expression carries intrinsic fibrogenic potential and is responsible for the bulk of scar formation in mouse skin wounds.",
    "context": {
@@ -12140,6 +14577,243 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed",
     "date": "2026-09-11"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/epidural-stimulation-enables-overground-walking",
+   "statement": "Participants with chronic motor-complete spinal cord injury achieved voluntary over-ground walking with lumbosacral epidural stimulation combined with intensive locomotor training.",
+   "context": {
+    "species": "human",
+    "model": "chronic motor-complete spinal cord injury",
+    "intervention": "epidural stimulation plus locomotor training"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "over-ground walking, stepping kinematics",
+    "endpoint": "voluntary stepping and walking",
+    "effect": "over-ground walking achieved in some participants"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/angeli-2018-nejm",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "4"
+    },
+    {
+     "source": "hrm:source/gill-2018-natmed",
+     "design": "case-report",
+     "locator": "abstract",
+     "n": "1"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Two unaffiliated groups (Louisville; Mayo) reported the same category of result in the same year."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/spinal-circuit-reactivation-by-stimulation"
+   ],
+   "limitations": [
+    "single-digit participant numbers",
+    "months of training and a specialised setting",
+    "spared descending fibres cannot be excluded"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/angeli-2018-nejm",
+     "hrm:source/gill-2018-natmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/epigenetic-age-reversal-reported-without-a-control-arm",
+   "statement": "In nine men given growth hormone, DHEA and metformin for a year, epigenetic age estimates decreased and thymic imaging suggested regeneration; the study had no control arm.",
+   "context": {
+    "species": "human",
+    "model": "nine healthy men aged 51-65",
+    "intervention": "growth hormone, DHEA, metformin for 12 months"
+   },
+   "measurement": {
+    "measured": "biomarker",
+    "assay": "epigenetic clocks; thymic MRI",
+    "endpoint": "epigenetic age; thymic fat-free fraction",
+    "effect": "reported reduction in epigenetic age estimates"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/fahy-2019-agingcell",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "9"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 0
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/biological-age-measurement-that-predicts-outcome"
+   ],
+   "drift": "Reported widely as the first reversal of human aging. Nine men, no control arm, three concurrent drugs, and a surrogate endpoint whose response to intervention has no validated meaning — this claim is on the map as an example of the measurement problem, not as evidence of rejuvenation.",
+   "limitations": [
+    "no control arm",
+    "n=9",
+    "three interventions at once",
+    "unvalidated surrogate endpoint"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/fahy-2019-agingcell"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/epigenetic-clocks-predict-age-and-mortality",
+   "statement": "DNA methylation at a few hundred CpG sites predicts chronological age across most human tissues and cell types, and deviations of predicted from chronological age are associated with mortality in cohort studies.",
+   "context": {
+    "species": "human",
+    "model": "multi-tissue methylation datasets"
+   },
+   "measurement": {
+    "measured": "biomarker",
+    "assay": "DNA methylation array; elastic net predictor",
+    "endpoint": "predicted age; association with mortality",
+    "effect": "high correlation with chronological age; age acceleration associated with mortality"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/horvath-2013-genomebiol",
+     "design": "observational-human",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Reproduced in many independent cohorts; the association is not in dispute."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/biological-age-measurement-that-predicts-outcome"
+   ],
+   "drift": "A validated predictor of age and an association with mortality are being used as an intervention endpoint. Predicting an outcome and responding usefully to treatment are different properties.",
+   "limitations": [
+    "observational",
+    "no evidence that intervention-induced clock change predicts outcome"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/horvath-2013-genomebiol"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/esc-derived-progenitor-patch-feasible-in-six-patients",
+   "statement": "An epicardial fibrin patch carrying embryonic-stem-cell-derived cardiovascular progenitors was delivered to six patients with ischaemic left ventricular dysfunction; the procedure was feasible with no tumour and no sustained arrhythmia reported, and the authors did not claim an efficacy conclusion.",
+   "context": {
+    "species": "human",
+    "model": "severe ischaemic left ventricular dysfunction",
+    "intervention": "ESC-derived cardiovascular progenitor patch during CABG"
+   },
+   "measurement": {
+    "measured": "none",
+    "assay": "safety, feasibility, symptomatic and imaging follow-up",
+    "endpoint": "safety and feasibility at one year",
+    "effect": "feasible; no tumour or sustained arrhythmia reported in six patients"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/menasche-2018-jacc",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "6"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One group (Menasché, Paris)."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/pluripotent-derived-cardiomyocyte-grafting"
+   ],
+   "limitations": [
+    "six patients, all undergoing concurrent bypass surgery, so any functional change is confounded",
+    "progenitors, not mature cardiomyocytes"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/menasche-2018-jacc"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
    }
   },
   {
@@ -12250,6 +14924,121 @@ export const GRAPH = {
   {
    "type": "claim",
    "grounding": "G1",
+   "id": "hrm:claim/glioblastoma-cells-occupy-interconvertible-states",
+   "statement": "Single-cell profiling shows that glioblastoma cells within one tumour occupy four main cellular states, influenced by genetics and the microenvironment, and can transition between them.",
+   "context": {
+    "species": "human",
+    "model": "primary glioblastoma tumours, single-cell RNA sequencing"
+   },
+   "measurement": {
+    "measured": "structure",
+    "assay": "single-cell RNA sequencing; lineage and state analysis",
+    "endpoint": "intratumoral heterogeneity and plasticity",
+    "effect": "four interconvertible states within individual tumours"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/neftel-2019-cell",
+     "design": "observational-human",
+     "locator": "abstract"
+    },
+    {
+     "source": "hrm:source/patel-2014-science",
+     "design": "observational-human",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Two independent studies, five years apart, in human tumours."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/gbm-antigen-escape-prevention"
+   ],
+   "contradicts": [
+    "hrm:capability/gbm-targeted-cytotoxic-therapy"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/neftel-2019-cell",
+     "hrm:source/patel-2014-science"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/glioma-cells-receive-synaptic-input-from-neurons",
+   "statement": "Glioma cells form functional glutamatergic synapses with neurons, and this synaptic input drives tumour progression and invasion.",
+   "context": {
+    "species": "human tissue and mouse xenograft",
+    "model": "glioma cells in brain",
+    "intervention": "none (mechanistic)"
+   },
+   "measurement": {
+    "measured": "structure",
+    "assay": "electrophysiology, electron microscopy, calcium imaging",
+    "endpoint": "neuron-to-glioma synaptic transmission and its effect on growth",
+    "effect": "functional synapses that promote invasion and growth"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/venkataramani-2019-nature",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Reported simultaneously by more than one group in 2019; the companion studies are not cited here."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/gbm-infiltrative-margin-clearance"
+   ],
+   "limitations": [
+    "mechanistic; no therapy follows from it yet"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/venkataramani-2019-nature"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
    "id": "hrm:claim/graftskin-raises-diabetic-ulcer-closure",
    "statement": "Graftskin, a living bilayered skin equivalent, raised complete healing of neuropathic diabetic foot ulcers at 12 weeks to 56% versus 38% with saline-moistened gauze in a 24-centre randomised trial of 208 patients.",
    "context": {
@@ -12308,6 +15097,64 @@ export const GRAPH = {
   {
    "type": "claim",
    "grounding": "G1",
+   "id": "hrm:claim/high-dose-steroids-sci-benefit-was-a-subgroup-finding",
+   "statement": "The NASCIS 2 trial of methylprednisolone in acute spinal cord injury reported motor and sensory improvement only in a post-hoc subgroup treated within eight hours; the primary analysis of the whole cohort was not positive.",
+   "context": {
+    "species": "human",
+    "model": "acute spinal cord injury",
+    "intervention": "high-dose methylprednisolone or naloxone",
+    "comparator": "placebo"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "motor and sensory scores",
+    "endpoint": "neurological recovery at 6 months",
+    "effect": "no benefit overall; benefit reported in the within-8-hours subgroup"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/bracken-1990-nejm",
+     "design": "rct",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 1,
+    "note": "The trial itself is high quality; the disputed part is the subgroup analysis, which later trials and guideline reviews did not sustain."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "contradicts": [
+    "hrm:capability/acute-cord-damage-limitation"
+   ],
+   "drift": "'Steroids improve spinal cord injury outcomes' — a post-hoc subgroup result entered practice for two decades and was then withdrawn from most guidelines. Kept on the map as a documented failure mode of evidence, not as support.",
+   "limitations": [
+    "1990 trial with methods and endpoints of its era",
+    "the subgroup was not pre-specified"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/bracken-1990-nejm"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
    "id": "hrm:claim/hpsc-skin-organoids-form-hair-bearing-skin-in-mice",
    "statement": "Human pluripotent stem-cell-derived skin organoids develop stratified epidermis, fat-rich dermis, pigmented hair follicles with sebaceous glands and Merkel-targeting sensory neurons over 4–5 months, and form planar hair-bearing skin when grafted onto nude mice.",
    "context": {
@@ -12356,6 +15203,192 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed",
     "date": "2026-09-11"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/human-cardiomyocyte-turnover-is-under-one-percent-a-year",
+   "statement": "Carbon-14 birth dating of human cardiomyocytes shows renewal at roughly one per cent a year at age 25, falling below half a per cent by age 75, so fewer than half of the cardiomyocytes in a heart are replaced over a lifetime.",
+   "context": {
+    "species": "human",
+    "model": "post-mortem myocardium across ages"
+   },
+   "measurement": {
+    "measured": "biomarker",
+    "assay": "carbon-14 birth dating from atmospheric bomb-pulse",
+    "endpoint": "cardiomyocyte turnover rate",
+    "effect": "about 1% per year at 25, under 0.5% at 75"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/bergmann-2009-science",
+     "design": "observational-human",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 1,
+    "note": "One group's method, later refined; the order of magnitude is not disputed."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/cardiomyocyte-proliferation-induction"
+   ],
+   "contradicts": [
+    "hrm:capability/infarct-remuscularisation"
+   ],
+   "limitations": [
+    "turnover measured across the whole heart, not in an infarct border zone"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/bergmann-2009-science"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/human-neural-stem-cell-grafts-extend-axons-in-primate-cord",
+   "statement": "Human neural stem cells grafted into the injured primate spinal cord survived, differentiated and extended large numbers of axons over long distances into the host cord, with modest forelimb functional improvement.",
+   "context": {
+    "species": "rhesus monkey",
+    "model": "cervical hemisection",
+    "intervention": "human neural stem cell graft"
+   },
+   "measurement": {
+    "measured": "structure",
+    "assay": "histology, tracing, forelimb function",
+    "endpoint": "graft survival and axon extension",
+    "effect": "extensive graft-derived axon growth; modest functional improvement"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/rosenzweig-2018-natmed",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L3",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One group (Tuszynski)."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/corticospinal-axon-regrowth-across-a-lesion"
+   ],
+   "limitations": [
+    "hemisection, not complete transection",
+    "functional improvement modest and secondary to the anatomical readout"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/rosenzweig-2018-natmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/intraventricular-car-t-produces-rapid-but-transient-gbm-regression",
+   "statement": "CAR T cells delivered into the ventricles or intrathecally produced rapid, radiographically dramatic regression of recurrent glioblastoma in a small number of patients; in most, the tumour progressed again within months.",
+   "context": {
+    "species": "human",
+    "model": "recurrent glioblastoma",
+    "intervention": "intraventricular or intrathecal CAR T (IL13Ralpha2; bivalent EGFR/IL13Ralpha2; CARv3-TEAM-E)"
+   },
+   "measurement": {
+    "measured": "structure",
+    "assay": "MRI response",
+    "endpoint": "radiographic tumour response and its duration",
+    "effect": "regression within days to weeks; durable in a minority"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/brown-2016-nejm",
+     "design": "case-report",
+     "locator": "abstract",
+     "n": "1"
+    },
+    {
+     "source": "hrm:source/bagley-2024-natmed",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "3"
+    },
+    {
+     "source": "hrm:source/choi-2024-nejm",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "3"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Three groups (City of Hope; Penn; Mass General), three different constructs, the same pattern of rapid response and limited durability."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/gbm-immune-cell-therapy"
+   ],
+   "drift": "'CAR T shrinks brain tumours' is accurate and is not the same as 'CAR T treats glioblastoma'. Seven patients across three reports, and the tumours came back in most of them.",
+   "limitations": [
+    "single-digit patient numbers",
+    "radiographic endpoints",
+    "no survival comparison"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/brown-2016-nejm",
+     "hrm:source/bagley-2024-natmed",
+     "hrm:source/choi-2024-nejm"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
    }
   },
   {
@@ -12416,6 +15449,189 @@ export const GRAPH = {
   {
    "type": "claim",
    "grounding": "G1",
+   "id": "hrm:claim/long-term-partial-reprogramming-is-tolerated-in-mice",
+   "statement": "Long-term, intermittent in vivo partial reprogramming in middle-aged mice altered age-associated molecular changes without causing tumours or loss of cell identity over the treatment period.",
+   "context": {
+    "species": "mouse",
+    "model": "middle-aged and old mice",
+    "intervention": "long-term intermittent OSKM induction"
+   },
+   "measurement": {
+    "measured": "biomarker",
+    "assay": "transcriptomic and epigenetic age-associated changes; histology",
+    "endpoint": "age-associated molecular profile; safety",
+    "effect": "age-associated changes altered; no tumours reported"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/browder-2022-nataging",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    },
+    {
+     "source": "hrm:source/yang-2023-cell",
+     "design": "animal-controlled",
+     "locator": "abstract",
+     "note": "epigenetic information loss as a driver, with reprogramming as a partial reversal"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 1,
+    "note": "Two groups (Izpisua Belmonte; Sinclair), both invested in the reprogramming hypothesis."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/safe-partial-epigenetic-reprogramming-in-vivo",
+    "hrm:capability/cell-identity-retention-under-partial-reprogramming"
+   ],
+   "limitations": [
+    "mouse",
+    "molecular endpoints rather than function or lifespan in the wild-type animal"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/browder-2022-nataging",
+     "hrm:source/yang-2023-cell"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/mir199a-repairs-pig-hearts-then-kills-them",
+   "statement": "AAV-delivered miR-199a produced near-complete recovery of cardiac function after myocardial infarction in pigs, and then caused uncontrolled cardiomyocyte proliferation and sudden death in most treated animals.",
+   "context": {
+    "species": "pig",
+    "model": "myocardial infarction",
+    "intervention": "AAV6-miR-199a"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "cardiac MRI, histology, survival",
+    "endpoint": "contractile function and survival",
+    "effect": "marked functional repair followed by sudden arrhythmic death in most treated animals"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/gabisonia-2019-nature",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L3",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One group."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/cardiomyocyte-proliferation-induction"
+   ],
+   "contradicts": [
+    "hrm:capability/graft-host-electrical-integration"
+   ],
+   "drift": "Reported in secondary coverage as a breakthrough in heart regeneration. It is a breakthrough and a lethal one, and the map records both halves in the same claim.",
+   "limitations": [
+    "constitutive expression from an AAV, with no off switch",
+    "one study"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/gabisonia-2019-nature"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/mtor-inhibition-improves-vaccine-response-in-the-elderly",
+   "statement": "Six weeks of low-dose mTOR inhibition improved influenza vaccine response in adults over 65 in a randomised placebo-controlled trial, and reduced an age-associated immune phenotype.",
+   "context": {
+    "species": "human",
+    "model": "adults over 65",
+    "intervention": "RAD001 (everolimus) at low doses for 6 weeks",
+    "comparator": "placebo"
+   },
+   "measurement": {
+    "measured": "biomarker",
+    "assay": "influenza antibody titres; immune phenotyping",
+    "endpoint": "vaccine response",
+    "effect": "improved response versus placebo"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/mannick-2014-scitranslmed",
+     "design": "rct",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One sponsor-led programme; a later trial by the same group reported reduced respiratory infections."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/pharmacological-aging-rate-reduction"
+   ],
+   "drift": "'Rapamycin analogues rejuvenate the immune system in people' — the endpoint is antibody titre after a vaccine, which is an immune biomarker, not restored immune function across the board.",
+   "limitations": [
+    "biomarker endpoint",
+    "six weeks",
+    "industry-sponsored"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/mannick-2014-scitranslmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
    "id": "hrm:claim/myofibroblasts-regenerate-adipocytes-in-mouse-wounds",
    "statement": "During wound-induced hair neogenesis in mice, scar-forming myofibroblasts convert into adipocytes, dependent on BMP signalling from the new hair follicles.",
    "context": {
@@ -12464,6 +15680,174 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed",
     "date": "2026-09-11"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/neoadjuvant-pd1-shows-a-survival-signal-in-recurrent-gbm",
+   "statement": "Giving anti-PD-1 before surgery, rather than only after, was associated with longer survival and with interferon and T cell changes in the tumour, in a small randomised study of recurrent glioblastoma.",
+   "context": {
+    "species": "human",
+    "model": "recurrent resectable glioblastoma",
+    "intervention": "neoadjuvant pembrolizumab",
+    "comparator": "adjuvant only"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "overall survival; tumour transcriptomics and T cell repertoire",
+    "endpoint": "survival with immune correlates",
+    "effect": "longer survival in the neoadjuvant arm"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/cloughesy-2019-natmed",
+     "design": "rct",
+     "locator": "abstract",
+     "n": "35"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One small randomised study; not confirmed in a larger trial."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/gbm-targeted-cytotoxic-therapy"
+   ],
+   "limitations": [
+    "35 patients",
+    "survival difference in a small trial with correlative endpoints"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/cloughesy-2019-natmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/neonatal-mouse-heart-regenerates-then-loses-the-ability",
+   "statement": "The neonatal mouse heart fully regenerates after resection of part of the ventricle, and loses that ability within about the first week of life.",
+   "context": {
+    "species": "mouse",
+    "model": "apical resection at day 1 versus day 7"
+   },
+   "measurement": {
+    "measured": "structure",
+    "assay": "histology, function",
+    "endpoint": "restoration of ventricular myocardium",
+    "effect": "complete regeneration at day 1; scar at day 7"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/porrello-2011-science",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Widely reproduced, with debate about resection versus infarction models."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/cardiomyocyte-proliferation-induction"
+   ],
+   "limitations": [
+    "a developmental window in a rodent; the adult human is the opposite end of that window"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/porrello-2011-science"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/nerve-repair-outcome-worsens-with-delay-and-proximal-level",
+   "statement": "After median or ulnar nerve repair, delay to repair, a more proximal injury level and older age are the strongest predictors of poor motor and sensory recovery; a substantial fraction of adults never regain useful function.",
+   "context": {
+    "species": "human",
+    "model": "median and ulnar nerve transection and repair"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "motor and sensory grading across pooled series",
+    "endpoint": "recovery of motor and sensory function",
+    "effect": "worse recovery with longer delay, more proximal level and higher age"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/ruijs-2005-prs",
+     "design": "meta-analysis",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 2,
+    "note": "A meta-analysis pooling multiple independent series."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/timely-muscle-reinnervation",
+    "hrm:capability/sensory-target-reinnervation-with-discrimination"
+   ],
+   "limitations": [
+    "pooled retrospective series with heterogeneous outcome scales",
+    "predictors are associations, not a demonstrated mechanism"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/ruijs-2005-prs"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
    }
   },
   {
@@ -12570,6 +15954,123 @@ export const GRAPH = {
   {
    "type": "claim",
    "grounding": "G1",
+   "id": "hrm:claim/oberlin-transfer-restores-elbow-flexion",
+   "statement": "Transferring a fascicle of the ulnar nerve to the biceps motor branch restored elbow flexion in patients with C5-C6 root avulsion, where repair at the level of the injury was not possible.",
+   "context": {
+    "species": "human",
+    "model": "C5-C6 brachial plexus avulsion",
+    "intervention": "ulnar fascicle to musculocutaneous biceps branch transfer"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "muscle grading",
+    "endpoint": "elbow flexion strength",
+    "effect": "useful elbow flexion recovered"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/oberlin-1994-jhs",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "4"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 2,
+    "note": "The original series was small; the transfer has since been reproduced widely and is standard practice, though those series are not cited here."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/nerve-transfer-from-a-donor-nerve"
+   ],
+   "limitations": [
+    "four patients in the original report",
+    "restores one movement, not the hand"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/oberlin-1994-jhs"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/oncolytic-poliovirus-produces-a-survival-tail-not-a-shift",
+   "statement": "Intratumoral recombinant non-pathogenic poliovirus in recurrent glioblastoma produced a plateau of long-term survivors at 24 and 36 months, without improving median survival compared with a historical control group.",
+   "context": {
+    "species": "human",
+    "model": "recurrent glioblastoma",
+    "intervention": "intratumoral PVSRIPO",
+    "comparator": "historical controls"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "overall survival",
+    "endpoint": "survival distribution",
+    "effect": "survival plateau at 21% at 24 and 36 months; median unchanged"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/desjardins-2018-nejm",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "61"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One centre, historical control comparison."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/gbm-targeted-cytotoxic-therapy"
+   ],
+   "drift": "The survival tail was reported widely as a cure signal. Against historical controls, in a selected single-centre cohort, a tail is a hypothesis.",
+   "limitations": [
+    "historical controls",
+    "single centre",
+    "selection of patients able to receive intratumoral infusion"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/desjardins-2018-nejm"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
    "id": "hrm:claim/osk-reprogramming-restores-vision-in-mice",
    "statement": "Ectopic expression of Oct4, Sox2 and Klf4 in mouse retinal ganglion cells restored youthful DNA-methylation patterns and transcriptomes, promoted axon regeneration after injury, and reversed vision loss in a glaucoma model and in aged mice, dependent on TET1/TET2.",
    "context": {
@@ -12624,6 +16125,543 @@ export const GRAPH = {
   {
    "type": "claim",
    "grounding": "G1",
+   "id": "hrm:claim/plasma-dilution-rejuvenates-as-well-as-young-blood",
+   "statement": "Replacing half of an old mouse's plasma with saline and albumin rejuvenated muscle, liver and brain measures as much as, or more than, exchange with young blood — indicating dilution of old factors rather than transfer of young ones.",
+   "context": {
+    "species": "mouse",
+    "model": "aged mice",
+    "intervention": "neutral blood exchange (plasma replaced with saline-albumin)",
+    "comparator": "heterochronic exchange with young blood"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "muscle repair, liver adiposity and fibrosis, neurogenesis",
+    "endpoint": "tissue rejuvenation markers",
+    "effect": "equal or greater rejuvenation with neutral exchange"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/mehdipour-2020-aging",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One group (Conboy), reinterpreting their own earlier parabiosis work."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/aged-plasma-factor-removal"
+   ],
+   "contradicts": [
+    "hrm:capability/young-systemic-factor-supplementation"
+   ],
+   "limitations": [
+    "single group",
+    "mouse",
+    "measures are tissue markers rather than function over time"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/mehdipour-2020-aging"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/primary-angioplasty-beats-thrombolysis",
+   "statement": "Across 23 randomised trials, primary angioplasty reduced short-term death, non-fatal reinfarction and stroke compared with thrombolytic therapy in acute myocardial infarction.",
+   "context": {
+    "species": "human",
+    "model": "acute ST-elevation myocardial infarction",
+    "intervention": "primary angioplasty",
+    "comparator": "thrombolysis"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "clinical outcomes",
+    "endpoint": "death, reinfarction, stroke",
+    "effect": "reduced with angioplasty"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/keeley-2003-lancet",
+     "design": "meta-analysis",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 2,
+    "note": "A meta-analysis of 23 randomised trials from many groups."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/acute-reperfusion-of-the-infarct-artery"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/keeley-2003-lancet"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/processed-allograft-recovers-function-in-registry",
+   "statement": "In a multicentre registry of processed nerve allograft repairs across body sites, most repairs reported meaningful sensory or motor recovery, including in gaps longer than conduits are used for.",
+   "context": {
+    "species": "human",
+    "model": "peripheral nerve gaps repaired with processed allograft"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "meaningful recovery scales",
+    "endpoint": "sensory and motor recovery",
+    "effect": "meaningful recovery in the majority of reported repairs"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/safa-2020-microsurgery",
+     "design": "registry-entry",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 0,
+    "note": "An industry-sponsored registry, not a randomised comparison against autograft; reporting is voluntary."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/nerve-gap-bridging"
+   ],
+   "drift": "'Allografts equal autografts' — the registry has no randomised control arm and cannot support an equivalence claim.",
+   "limitations": [
+    "selection and reporting bias inherent to a voluntary registry",
+    "no control arm"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/safa-2020-microsurgery"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/psc-cardiomyocytes-remuscularise-primate-hearts-with-arrhythmia",
+   "statement": "Human pluripotent-stem-cell-derived cardiomyocytes grafted into infarcted non-human primate hearts formed substantial, host-synchronised new myocardium and improved contractile function — and caused ventricular arrhythmias in the treated animals.",
+   "context": {
+    "species": "macaque and pig",
+    "model": "myocardial infarction with cell grafting",
+    "intervention": "human embryonic-stem-cell-derived cardiomyocytes"
+   },
+   "measurement": {
+    "measured": "structure",
+    "assay": "histology, electrical mapping, echocardiography, telemetry",
+    "endpoint": "graft muscle, electromechanical coupling, contractile function, arrhythmia",
+    "effect": "extensive remuscularisation and improved function; non-fatal ventricular arrhythmias in treated animals"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/chong-2014-nature",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    },
+    {
+     "source": "hrm:source/liu-2018-natbiotech",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    },
+    {
+     "source": "hrm:source/romagnuolo-2019-scr",
+     "design": "animal-controlled",
+     "locator": "abstract",
+     "note": "pig heart; the same arrhythmia signal"
+    }
+   ],
+   "rung": "L3",
+   "replication": {
+    "independentGroups": 1,
+    "note": "Three reports from overlapping Seattle groups (Murry, Laflamme). The arrhythmia finding reproduces across species within that programme; independent replication is what is missing."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/infarct-remuscularisation",
+    "hrm:capability/graft-host-electrical-integration",
+    "hrm:capability/myocardial-graft-vascularisation"
+   ],
+   "drift": "'Stem cells regenerate the primate heart' — they do, and the recipients develop ventricular arrhythmia. The second half is rarely carried with the first.",
+   "limitations": [
+    "immunosuppressed animals",
+    "short follow-up relative to a human therapy",
+    "one research programme"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/chong-2014-nature",
+     "hrm:source/liu-2018-natbiotech",
+     "hrm:source/romagnuolo-2019-scr"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/pulsed-ultrasound-opens-the-barrier-in-patients",
+   "statement": "Pulsed ultrasound with an implanted device and intravenous microbubbles repeatedly and safely opened the blood-brain barrier in patients with recurrent glioblastoma, demonstrated by contrast enhancement.",
+   "context": {
+    "species": "human",
+    "model": "recurrent glioblastoma",
+    "intervention": "implantable pulsed ultrasound plus microbubbles before chemotherapy"
+   },
+   "measurement": {
+    "measured": "access",
+    "assay": "contrast-enhanced MRI; safety",
+    "endpoint": "barrier opening",
+    "effect": "repeated transient opening without significant toxicity"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/carpentier-2016-scitranslmed",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "15"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 1,
+    "note": "Reproduced by other groups with focused ultrasound since; those reports are not cited here."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/cns-drug-delivery-past-the-barrier"
+   ],
+   "limitations": [
+    "access demonstrated, not a survival benefit",
+    "opening is local and transient"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/carpentier-2016-scitranslmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/rapamycin-extends-mouse-lifespan-started-late",
+   "statement": "Rapamycin fed to genetically heterogeneous mice beginning at 600 days of age extended median and maximal lifespan in both sexes.",
+   "context": {
+    "species": "mouse",
+    "model": "genetically heterogeneous mice, treatment started late in life",
+    "intervention": "dietary rapamycin"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "survival",
+    "endpoint": "median and maximal lifespan",
+    "effect": "extended in both sexes"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/harrison-2009-nature",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Interventions Testing Program: three independent sites by design, and reproduced since."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/pharmacological-aging-rate-reduction"
+   ],
+   "limitations": [
+    "mouse lifespan, not human healthspan",
+    "long-term immunosuppression is the obvious translational obstacle"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/harrison-2009-nature"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/senolytics-improve-function-and-lifespan-in-old-mice",
+   "statement": "Intermittent dasatinib plus quercetin reduced senescent cell burden, improved physical function and increased post-treatment survival in old mice, including when treatment began late in life.",
+   "context": {
+    "species": "mouse",
+    "model": "naturally aged and senescent-cell-transplanted mice",
+    "intervention": "intermittent dasatinib + quercetin"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "physical function battery, survival",
+    "endpoint": "function and remaining lifespan",
+    "effect": "improved function; increased post-treatment survival"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/xu-2018-natmed",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 1,
+    "note": "The Mayo group; senolytic benefit in mice has been reproduced by others with different agents."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/senescent-cell-clearance-in-humans"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/xu-2018-natmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/senolytics-reduce-human-senescent-markers-uncontrolled",
+   "statement": "In two small open-label human studies, dasatinib plus quercetin reduced senescent cell markers in adipose tissue and skin in patients with diabetic kidney disease, and improved six-minute walk distance in patients with idiopathic pulmonary fibrosis.",
+   "context": {
+    "species": "human",
+    "model": "diabetic kidney disease (n=9); idiopathic pulmonary fibrosis (n=14)",
+    "intervention": "dasatinib + quercetin, short course"
+   },
+   "measurement": {
+    "measured": "biomarker",
+    "assay": "adipose and skin p16INK4a and SASP markers; six-minute walk",
+    "endpoint": "senescent burden; physical function",
+    "effect": "reduced senescent markers; improved walk distance"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/hickson-2019-ebiomedicine",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "9"
+    },
+    {
+     "source": "hrm:source/justice-2019-ebiomedicine",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "14"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 1,
+    "note": "Two studies from overlapping Mayo-led groups."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/senescent-cell-clearance-in-humans",
+    "hrm:capability/senescent-cell-burden-measurement"
+   ],
+   "drift": "Cited as evidence that senolytics work in people. Both studies are open-label with no control arm; a six-minute walk in fourteen unblinded patients cannot separate drug from expectation.",
+   "limitations": [
+    "no control arm",
+    "n=9 and n=14",
+    "disease populations, not aged healthy adults"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/hickson-2019-ebiomedicine",
+     "hrm:source/justice-2019-ebiomedicine"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/single-target-gbm-immunotherapies-failed-phase-3",
+   "statement": "The EGFRvIII vaccine rindopepimut failed to improve survival in a randomised phase 3 trial of newly diagnosed glioblastoma, and nivolumab failed to improve survival against bevacizumab in recurrent glioblastoma.",
+   "context": {
+    "species": "human",
+    "model": "newly diagnosed and recurrent glioblastoma",
+    "intervention": "rindopepimut; nivolumab",
+    "comparator": "control vaccine; bevacizumab"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "overall survival",
+    "endpoint": "survival",
+    "effect": "no improvement in either trial"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/weller-2017-lancetoncol",
+     "design": "rct",
+     "locator": "abstract"
+    },
+    {
+     "source": "hrm:source/reardon-2020-jamaoncol",
+     "design": "rct",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Two independent randomised phase 3 programmes, both negative."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "contradicts": [
+    "hrm:capability/gbm-targeted-cytotoxic-therapy"
+   ],
+   "limitations": [
+    "both tested one target or one checkpoint at a time, which is the pattern the heterogeneity question is about"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/weller-2017-lancetoncol",
+     "hrm:source/reardon-2020-jamaoncol"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
    "id": "hrm:claim/synthetic-fibrin-crosslinker-induces-haemostasis-in-rodents",
    "statement": "A synthetic polymer that cross-links fibrin modulated clot properties and induced haemostasis in rodent models of bleeding.",
    "context": {
@@ -12669,6 +16707,185 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed",
     "date": "2026-09-11"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/systemic-car-t-drives-antigen-loss-in-gbm",
+   "statement": "A single intravenous dose of EGFRvIII-directed CAR T cells trafficked to glioblastoma and was followed by loss of EGFRvIII expression in most resected tumours, with no clinical benefit observed.",
+   "context": {
+    "species": "human",
+    "model": "recurrent EGFRvIII-positive glioblastoma",
+    "intervention": "intravenous EGFRvIII CAR T"
+   },
+   "measurement": {
+    "measured": "biomarker",
+    "assay": "tumour histology and antigen expression after infusion",
+    "endpoint": "CAR T trafficking and antigen expression",
+    "effect": "trafficking confirmed; EGFRvIII decreased in most tumours; no clinical benefit"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/orourke-2017-scitranslmed",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "10"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 0
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/gbm-antigen-escape-prevention"
+   ],
+   "contradicts": [
+    "hrm:capability/gbm-immune-cell-therapy"
+   ],
+   "limitations": [
+    "ten patients",
+    "antigen loss inferred from post-treatment resection specimens"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/orourke-2017-scitranslmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/targeted-stimulation-improves-walking-in-chronic-sci",
+   "statement": "Spatiotemporally targeted epidural stimulation, timed to the intended movement, restored walking in participants with chronic spinal cord injury and produced improvements that persisted after training.",
+   "context": {
+    "species": "human",
+    "model": "chronic incomplete and complete spinal cord injury",
+    "intervention": "activity-dependent targeted epidural stimulation with rehabilitation"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "walking, trunk and leg motor function",
+    "endpoint": "restored locomotion",
+    "effect": "walking restored within a single day in some participants; improvement persisted with training"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/wagner-2018-nature",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "3"
+    },
+    {
+     "source": "hrm:source/rowald-2022-natmed",
+     "design": "case-series",
+     "locator": "abstract",
+     "n": "3"
+    }
+   ],
+   "rung": "L4",
+   "replication": {
+    "independentGroups": 1,
+    "note": "One group (Courtine/Bloch, Lausanne) across two reports; independent of the Louisville and Mayo work above, which is why the capability above counts three groups."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/spinal-circuit-reactivation-by-stimulation"
+   ],
+   "limitations": [
+    "three participants per report",
+    "purpose-built implant and software"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/wagner-2018-nature",
+     "hrm:source/rowald-2022-natmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/temozolomide-chemoradiation-extends-gbm-survival-by-months",
+   "statement": "Radiotherapy with concomitant and adjuvant temozolomide extended median survival in newly diagnosed glioblastoma from 12.1 to 14.6 months, and two-year survival from 10% to 26%, compared with radiotherapy alone.",
+   "context": {
+    "species": "human",
+    "model": "newly diagnosed glioblastoma",
+    "intervention": "radiotherapy plus temozolomide",
+    "comparator": "radiotherapy alone"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "overall survival",
+    "endpoint": "median and two-year survival",
+    "effect": "+2.5 months median; 10% to 26% at two years"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/stupp-2005-nejm",
+     "design": "rct",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Adopted worldwide as the standard of care and confirmed in subsequent cohorts."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/gbm-tumour-cell-eradication"
+   ],
+   "limitations": [
+    "the benefit is measured in months and no patient is cured"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/stupp-2005-nejm"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
    }
   },
   {
@@ -12796,6 +17013,64 @@ export const GRAPH = {
   {
    "type": "claim",
    "grounding": "G1",
+   "id": "hrm:claim/tumour-treating-fields-add-survival-in-gbm",
+   "statement": "Adding alternating electric fields to maintenance temozolomide improved progression-free and overall survival in newly diagnosed glioblastoma in a randomised trial.",
+   "context": {
+    "species": "human",
+    "model": "newly diagnosed glioblastoma after chemoradiation",
+    "intervention": "tumour-treating fields plus temozolomide",
+    "comparator": "temozolomide alone"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "overall and progression-free survival",
+    "endpoint": "survival",
+    "effect": "improved with the addition of fields"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/stupp-2017-jama",
+     "design": "rct",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L5",
+   "replication": {
+    "independentGroups": 0,
+    "note": "One sponsor-run trial; the open-label design and device adherence have been debated."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/gbm-tumour-cell-eradication"
+   ],
+   "limitations": [
+    "open-label",
+    "device worn continuously",
+    "one trial"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/stupp-2017-jama"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "claim",
+   "grounding": "G1",
    "id": "hrm:claim/wound-induced-hair-neogenesis-in-adult-mice",
    "statement": "Adult mice regenerate new hair follicles de novo in the centre of large full-thickness wounds through a Wnt-dependent process resembling embryonic follicle development.",
    "context": {
@@ -12903,6 +17178,67 @@ export const GRAPH = {
    }
   },
   {
+   "type": "claim",
+   "grounding": "G1",
+   "id": "hrm:claim/young-systemic-environment-restores-aged-tissue-in-mice",
+   "statement": "Exposing aged mice to a young systemic environment by parabiosis restored the regenerative capacity of aged muscle and liver progenitor cells, and young plasma improved hippocampal plasticity and cognitive function in aged mice.",
+   "context": {
+    "species": "mouse",
+    "model": "heterochronic parabiosis; young plasma infusion"
+   },
+   "measurement": {
+    "measured": "function",
+    "assay": "progenitor regenerative capacity; hippocampal plasticity and behaviour",
+    "endpoint": "tissue regeneration and cognition",
+    "effect": "restored regenerative capacity; improved cognitive measures"
+   },
+   "evidence": [
+    {
+     "source": "hrm:source/conboy-2005-nature",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    },
+    {
+     "source": "hrm:source/villeda-2014-natmed",
+     "design": "animal-controlled",
+     "locator": "abstract"
+    }
+   ],
+   "rung": "L2",
+   "replication": {
+    "independentGroups": 2,
+    "note": "Two independent groups (Conboy; Wyss-Coray)."
+   },
+   "status": {
+    "peerReviewed": true
+   },
+   "supports": [
+    "hrm:capability/young-systemic-factor-supplementation"
+   ],
+   "limitations": [
+    "parabiosis shares organs and physiology, not only plasma",
+    "no human evidence"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+     "hrm:source/conboy-2005-nature",
+     "hrm:source/villeda-2014-natmed"
+    ]
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
    "type": "experiment",
    "id": "hrm:experiment/acomys-vs-mus-matched-wound-atlas",
    "name": "Matched single-cell and spatial atlas of Acomys versus Mus wound healing",
@@ -12942,6 +17278,176 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed",
     "date": "2026-09-11"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/autonomic-endpoint-stimulation-trial",
+   "name": "Stimulation trial with continence and cardiovascular stability as the primary endpoint",
+   "tests": [
+    "hrm:question/cord-repair-restores-autonomic-function"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "human",
+    "model": "chronic spinal cord injury with autonomic dysfunction",
+    "intervention": "an existing epidural or transcutaneous stimulation protocol",
+    "comparator": "sham stimulation",
+    "readout": "urodynamics, continence diary, blood pressure stability, dysreflexia episodes",
+    "duration": "2 years",
+    "n": "40-60"
+   },
+   "discriminates": "A positive autonomic result would move a node the map currently grades L0 and would change what the field measures; a null result would establish that autonomic pathways need their own strategy.",
+   "feasibility": {
+    "costClass": "medium",
+    "durationClass": "years",
+    "requires": [
+     "existing implanted cohorts",
+     "urodynamics and autonomic testing"
+    ],
+    "ethics": "human research ethics approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/clock-as-surrogate-validation",
+   "name": "Validate epigenetic clocks as an intervention surrogate inside an existing trial",
+   "tests": [
+    "hrm:question/clocks-track-intervention-benefit"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "human",
+    "model": "participants in an ongoing randomised trial with a clinical endpoint (any intervention plausibly age-related)",
+    "intervention": "none additional: methylation measured at baseline, 6 and 12 months",
+    "comparator": "the trial's own control arm",
+    "readout": "whether early clock change predicts the trial's pre-registered clinical endpoint, within and across arms",
+    "duration": "the host trial's duration",
+    "n": "whatever the host trial has"
+   },
+   "discriminates": "If early clock movement predicts the clinical endpoint, clocks become a usable surrogate and every rejuvenation trial gets shorter; if it does not, the field's main endpoint is invalid and the map should regrade accordingly.",
+   "feasibility": {
+    "costClass": "low",
+    "durationClass": "years",
+    "requires": [
+     "an existing trial willing to add methylation sampling",
+     "pre-registration of the surrogate analysis"
+    ],
+    "ethics": "amendment to the host trial's approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/conditioning-stimulation-proximal-injury-rct",
+   "name": "Randomised trial of conditioning electrical stimulation in proximal nerve injury with a motor endpoint",
+   "tests": [
+    "hrm:question/human-axon-regeneration-rate-increase",
+    "hrm:question/chronic-denervation-reversible-in-humans"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "human",
+    "model": "proximal ulnar or median transection repaired within two weeks",
+    "intervention": "1 h 20 Hz stimulation at repair",
+    "comparator": "sham stimulation",
+    "readout": "intrinsic muscle force and motor unit number at 12 and 24 months; Tinel advance as a rate proxy",
+    "duration": "3 years",
+    "n": "60-100"
+   },
+   "discriminates": "A motor benefit at a proximal level would show the effect survives distance; Tinel-advance data would separate earlier onset from faster elongation.",
+   "feasibility": {
+    "costClass": "medium",
+    "durationClass": "years",
+    "requires": [
+     "multi-centre hand surgery network",
+     "blinded electrophysiology"
+    ],
+    "ethics": "human research ethics approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/delayed-repair-with-distal-support-large-animal",
+   "name": "Six-month delayed nerve repair in a large animal, with and without distal-pathway support",
+   "tests": [
+    "hrm:question/chronic-denervation-reversible-in-humans"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "pig or sheep",
+    "model": "proximal hindlimb nerve transection, repair delayed six months",
+    "intervention": "an intervention intended to maintain Schwann cell support (for example chronic low-frequency stimulation of the distal segment)",
+    "comparator": "immediate repair; delayed repair without intervention",
+    "readout": "muscle force, motor endplate counts, motor unit number estimation, Schwann cell phenotype at repair",
+    "duration": "12-15 months",
+    "n": "8-10 per arm"
+   },
+   "discriminates": "If delayed-plus-intervention approaches immediate repair on force, the window is a pathway problem and can be extended; if it matches untreated delay, the muscle is the limit and the map should say so.",
+   "feasibility": {
+    "costClass": "high",
+    "durationClass": "years",
+    "requires": [
+     "large-animal facility with long-term housing",
+     "implantable stimulation",
+     "endplate histology"
+    ],
+    "ethics": "animal ethics approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
    }
   },
   {
@@ -13030,6 +17536,264 @@ export const GRAPH = {
   },
   {
    "type": "experiment",
+   "id": "hrm:experiment/matured-graft-arrhythmia-telemetry-primate",
+   "name": "Remuscularisation with matured or pacemaker-silenced cardiomyocytes, under continuous telemetry",
+   "tests": [
+    "hrm:question/remuscularisation-arrhythmia-controllable"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "non-human primate or pig",
+    "model": "myocardial infarction with cell grafting",
+    "intervention": "grafts of matured cardiomyocytes, or cardiomyocytes with HCN4/automaticity genes removed",
+    "comparator": "conventional immature graft; vehicle",
+    "readout": "continuous telemetry for sustained ventricular arrhythmia, graft size, electromechanical coupling, ejection fraction",
+    "duration": "12-18 months",
+    "n": "8-12 per arm"
+   },
+   "discriminates": "If maturation or gene editing abolishes arrhythmia while keeping contractile contribution, the blocker is graft automaticity and remuscularisation becomes a clinical programme; if arrhythmia persists, adding autonomous muscle may be intrinsically unsafe.",
+   "feasibility": {
+    "costClass": "high",
+    "durationClass": "years",
+    "requires": [
+     "large-animal cardiac facility",
+     "implantable telemetry",
+     "GMP-grade cardiomyocyte manufacture"
+    ],
+    "ethics": "animal ethics approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/neutral-blood-exchange-independent-replication",
+   "name": "Independent replication of neutral blood exchange in aged mice, then a plasma-exchange trial",
+   "tests": [
+    "hrm:question/dilution-or-young-factors"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "mouse, then human",
+    "model": "aged mice; then adults over 70",
+    "intervention": "neutral blood exchange (saline-albumin); then therapeutic plasma exchange",
+    "comparator": "heterochronic exchange; sham apheresis in the human stage",
+    "readout": "muscle repair, cognition and frailty measures in mice; gait speed, cognition and inflammatory markers in humans",
+    "duration": "1 year (mouse) then 2 years (human)",
+    "n": "20 per arm; then 100-150"
+   },
+   "discriminates": "Replication would make plasma exchange the fastest testable rejuvenation intervention, because the procedure already exists; failure to replicate would send the field back to identifying factors.",
+   "feasibility": {
+    "costClass": "medium",
+    "durationClass": "years",
+    "requires": [
+     "an unaffiliated mouse aging laboratory",
+     "apheresis service for the human stage"
+    ],
+    "ethics": "animal and human research ethics approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/paired-biopsy-at-car-t-recurrence",
+   "name": "Paired pre-treatment and recurrence biopsies in CAR T-treated glioblastoma",
+   "tests": [
+    "hrm:question/gbm-response-durability",
+    "hrm:question/gbm-heterogeneity-defeats-single-target"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "human",
+    "model": "patients treated with intraventricular or intrathecal CAR T in existing trials",
+    "intervention": "none additional: tissue and CSF sampling at baseline and at progression",
+    "comparator": "the patient's own baseline tumour",
+    "readout": "antigen expression, single-cell state composition, CAR T persistence and phenotype in CSF over time",
+    "duration": "2 years within existing trials",
+    "n": "20-30 across centres"
+   },
+   "discriminates": "Antigen-negative recurrence points at multi-target therapy; antigen-positive recurrence with absent CAR T points at persistence and exhaustion; a recurrence in a state that was present and untargeted at baseline supports the plasticity hypothesis.",
+   "feasibility": {
+    "costClass": "low",
+    "durationClass": "years",
+    "requires": [
+     "consent for repeat sampling in existing trials",
+     "single-cell sequencing",
+     "a shared protocol across the three active centres"
+    ],
+    "ethics": "amendment to existing trial approvals"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/phase-0-margin-concentration-study",
+   "name": "Phase 0 study measuring drug concentration at the infiltrating margin",
+   "tests": [
+    "hrm:question/bbb-really-the-delivery-limit"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "human",
+    "model": "patients undergoing resection for glioblastoma",
+    "intervention": "the candidate drug given before surgery, with and without ultrasound barrier opening",
+    "comparator": "core versus margin tissue within each patient",
+    "readout": "drug concentration and a pharmacodynamic marker of target engagement in core and margin tissue",
+    "duration": "18 months",
+    "n": "20-30"
+   },
+   "discriminates": "Adequate concentration at the margin with no pharmacodynamic effect would show the drug is the problem; inadequate concentration would show delivery is, and would tell the field whether barrier opening actually reaches the margin.",
+   "feasibility": {
+    "costClass": "low",
+    "durationClass": "months",
+    "requires": [
+     "a neurosurgical centre with phase 0 infrastructure",
+     "tissue pharmacokinetics",
+     "image-guided margin sampling"
+    ],
+    "ethics": "human research ethics approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/senolytic-rct-functional-endpoint",
+   "name": "Randomised placebo-controlled senolytic trial with a functional primary endpoint",
+   "tests": [
+    "hrm:question/senolytics-improve-human-function"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "human",
+    "model": "adults over 70 with reduced gait speed",
+    "intervention": "intermittent dasatinib + quercetin",
+    "comparator": "placebo",
+    "readout": "gait speed and six-minute walk at 6 and 12 months (primary); senescent markers in adipose biopsy (secondary); adverse events including delayed wound healing",
+    "duration": "2 years",
+    "n": "200-300"
+   },
+   "discriminates": "A functional benefit under blinding would move the whole senescence branch from marker to therapy; a null result with confirmed marker reduction would show that clearing senescent cells is not sufficient.",
+   "feasibility": {
+    "costClass": "medium",
+    "durationClass": "years",
+    "requires": [
+     "geriatric trial network",
+     "off-patent drugs",
+     "adipose biopsy capability"
+    ],
+    "ethics": "human research ethics approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/silence-regrown-axons-large-animal",
+   "name": "Regrow axons across a lesion, then silence them",
+   "tests": [
+    "hrm:question/regrown-axons-form-useful-circuits"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "rodent first, then non-human primate",
+    "model": "complete transection with a combination regrowth protocol",
+    "intervention": "chemogenetic or optogenetic silencing of the regrown population after functional recovery",
+    "comparator": "sham silencing; non-regrown controls",
+    "readout": "locomotor function with and without silencing; pain and spasticity measures",
+    "duration": "12-18 months",
+    "n": "10-12 per arm in rodent"
+   },
+   "discriminates": "If function collapses when the regrown axons are silenced, the new circuit is doing the work; if it does not, recovery came from spared fibres or plasticity and the regrowth literature is measuring the wrong thing.",
+   "feasibility": {
+    "costClass": "medium",
+    "durationClass": "years",
+    "requires": [
+     "combination regrowth protocol",
+     "chemogenetic tools",
+     "primate facility for the second stage"
+    ],
+    "ethics": "animal ethics approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "experiment",
    "id": "hrm:experiment/skin-substitute-scar-quality-rct",
    "name": "Randomised trial of a bioengineered skin substitute with scar quality as the primary endpoint",
    "tests": [
@@ -13068,6 +17832,92 @@ export const GRAPH = {
    "review": {
     "state": "ai-proposed",
     "date": "2026-09-11"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/stimulation-stratified-by-spared-connectivity",
+   "name": "Epidural stimulation outcomes stratified by objectively measured spared connectivity",
+   "tests": [
+    "hrm:question/stimulation-benefit-without-spared-fibres"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "human",
+    "model": "chronic clinically motor-complete spinal cord injury",
+    "intervention": "standard epidural stimulation and training protocol",
+    "comparator": "stratification, not randomisation: participants grouped by spared descending connectivity on high-resolution imaging and evoked potentials",
+    "readout": "volitional movement below the lesion, over-ground walking, autonomic measures",
+    "duration": "3 years",
+    "n": "40-60 across centres"
+   },
+   "discriminates": "If benefit tracks spared connectivity, stimulation is an amplifier and regeneration remains necessary; if participants with no measurable sparing benefit equally, the spinal circuitry is doing more than the field assumes.",
+   "feasibility": {
+    "costClass": "high",
+    "durationClass": "years",
+    "requires": [
+     "multi-centre implant programme",
+     "high-resolution spinal imaging",
+     "shared outcome protocol"
+    ],
+    "ethics": "human research ethics approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "experiment",
+   "id": "hrm:experiment/transient-proliferation-pig-repeat",
+   "name": "Repeat the pig cardiomyocyte-proliferation experiment with transient delivery and full cause-of-death reporting",
+   "tests": [
+    "hrm:question/controllable-cardiomyocyte-proliferation"
+   ],
+   "status": "proposed",
+   "design": {
+    "species": "pig",
+    "model": "myocardial infarction",
+    "intervention": "miR-199a or an equivalent proliferative signal delivered as mRNA or from a self-limiting vector",
+    "comparator": "constitutive AAV delivery; vehicle",
+    "readout": "cardiac MRI function, cardiomyocyte proliferation index, telemetry, survival with necropsy-confirmed cause of death for every animal",
+    "duration": "18 months",
+    "n": "10-12 per arm"
+   },
+   "discriminates": "Function recovered with survival under transient delivery would make controllable proliferation a live route; deaths under both delivery modes would indicate the proliferative state itself is the hazard.",
+   "feasibility": {
+    "costClass": "high",
+    "durationClass": "years",
+    "requires": [
+     "large-animal cardiac facility",
+     "mRNA or self-limiting vector manufacture",
+     "telemetry and necropsy"
+    ],
+    "ethics": "animal ethics approval"
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
    }
   },
   {
@@ -13156,6 +18006,51 @@ export const GRAPH = {
    }
   },
   {
+   "type": "goal",
+   "id": "hrm:goal/aging-rate-modification",
+   "name": "Slowing the rate of aging pharmacologically",
+   "parent": "hrm:goal/rejuvenation",
+   "description": "Slow the accumulation of age-related dysfunction with a drug taken over years — distinct from reversing damage already accumulated, which is what the rest of this projection is about.",
+   "projections": [
+    "rejuvenation"
+   ],
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/pharmacological-aging-rate-reduction",
+      "hrm:capability/biological-age-measurement-that-predicts-outcome"
+     ]
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/clocks-track-intervention-benefit",
+    "hrm:question/geroprotector-benefit-in-humans"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blockedBy": [
+     "hrm:question/geroprotector-benefit-in-humans",
+     "hrm:question/clocks-track-intervention-benefit"
+    ],
+    "enables": [
+     "hrm:goal/rejuvenation"
+    ]
+   }
+  },
+  {
    "id": "hrm:goal/established-scar-repair",
    "type": "goal",
    "name": "Repair of an established scar",
@@ -13212,6 +18107,505 @@ export const GRAPH = {
   },
   {
    "type": "goal",
+   "id": "hrm:goal/gbm-bulk-and-margin",
+   "name": "The tumour and everything it has spread into",
+   "parent": "hrm:goal/glioblastoma-control",
+   "description": "Deal with both the visible mass and the cells that have already migrated along white matter tracts and blood vessels into brain that must be preserved.",
+   "projections": [
+    "universal-repair"
+   ],
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/gbm-tumour-cell-eradication",
+      "hrm:capability/gbm-infiltrative-margin-clearance"
+     ]
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/gbm-heterogeneity-defeats-single-target"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blockedBy": [
+     "hrm:question/gbm-heterogeneity-defeats-single-target"
+    ]
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/gbm-reaching-the-tumour",
+   "name": "Getting the therapy to the tumour",
+   "parent": "hrm:goal/glioblastoma-control",
+   "description": "Deliver a drug, antibody or cell therapy to tumour cells throughout the brain, including the infiltrating cells behind an intact blood-brain barrier.",
+   "projections": [
+    "universal-repair"
+   ],
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/cns-drug-delivery-past-the-barrier"
+     ]
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/bbb-really-the-delivery-limit"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blockedBy": [
+     "hrm:question/bbb-really-the-delivery-limit"
+    ]
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/glioblastoma-control",
+   "name": "Control of a glioblastoma",
+   "parent": "hrm:goal/universal-repair",
+   "description": "Remove or permanently control a diffuse malignant glioma without removing the brain it is growing through, and restore the neurological function the tumour and its treatment took. The hardest case on the universal-repair map: the damage is made of the patient's own cells, it is wired into functioning tissue, and the tissue cannot be replaced.",
+   "projections": [
+    "universal-repair"
+   ],
+   "existenceProof": "None. No treatment has produced durable remission in a substantial fraction of patients. There are long survivors in several trials, including after oncolytic poliovirus, but no intervention has shifted the survival curve as a whole beyond the months added by the 2005 standard of care.",
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/gbm-tumour-cell-eradication",
+      "hrm:capability/gbm-infiltrative-margin-clearance",
+      "hrm:capability/cns-drug-delivery-past-the-barrier",
+      "hrm:capability/gbm-antigen-escape-prevention"
+     ]
+    },
+    {
+     "any": [
+      "hrm:capability/gbm-immune-cell-therapy",
+      "hrm:capability/gbm-targeted-cytotoxic-therapy"
+     ],
+     "note": "OR-group: turn the immune system on it, or deliver something that kills it. Neither is currently sufficient; the map does not pick a winner."
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/bbb-really-the-delivery-limit",
+    "hrm:question/gbm-heterogeneity-defeats-single-target",
+    "hrm:question/gbm-response-durability"
+   ],
+   "testSuite": [
+    {
+     "scenario": "resect the visible tumour",
+     "state": "routine",
+     "note": "maximal safe resection is standard; the tumour has already infiltrated beyond it"
+    },
+    {
+     "scenario": "extend median survival with chemoradiation",
+     "state": "partial",
+     "note": "months, established since 2005"
+    },
+    {
+     "scenario": "shrink a recurrent tumour with cell therapy",
+     "state": "partial",
+     "note": "rapid regression reported in 2024, not durable"
+    },
+    {
+     "scenario": "clear infiltrating cells from functioning brain",
+     "state": "unsolved"
+    },
+    {
+     "scenario": "durable remission",
+     "state": "unsolved"
+    }
+   ],
+   "informationLimited": false,
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "children": [
+     "hrm:goal/gbm-bulk-and-margin",
+     "hrm:goal/gbm-reaching-the-tumour"
+    ],
+    "blockedBy": [
+     "hrm:question/gbm-response-durability",
+     "hrm:question/gbm-heterogeneity-defeats-single-target",
+     "hrm:question/bbb-really-the-delivery-limit"
+    ],
+    "enables": [
+     "hrm:goal/universal-repair"
+    ]
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/myocardial-infarction-repair",
+   "name": "Repair of the heart after a myocardial infarction",
+   "parent": "hrm:goal/universal-repair",
+   "description": "After part of the heart muscle dies from an interrupted blood supply, restore it: contractile muscle in place of scar, blood supply to that muscle, electrical continuity with the rest of the heart, and pump function back to where it was. Reperfusion, which saves the patient's life, is a separate and largely solved problem.",
+   "projections": [
+    "universal-repair"
+   ],
+   "existenceProof": "Zebrafish regenerate resected ventricle; neonatal mice regenerate an infarct for about the first week of life and lose the ability after that. Adult humans do not: cardiomyocyte turnover is under one per cent a year and the infarct becomes permanent scar. New muscle has been made in a primate heart from pluripotent cells, so remuscularisation is possible in principle.",
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/acute-reperfusion-of-the-infarct-artery",
+      "hrm:capability/infarct-remuscularisation",
+      "hrm:capability/graft-host-electrical-integration",
+      "hrm:capability/myocardial-graft-vascularisation"
+     ]
+    },
+    {
+     "any": [
+      "hrm:capability/cardiomyocyte-proliferation-induction",
+      "hrm:capability/pluripotent-derived-cardiomyocyte-grafting"
+     ],
+     "note": "OR-group: make the surviving muscle divide, or add muscle from outside. The map does not assume which route arrives first."
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/controllable-cardiomyocyte-proliferation",
+    "hrm:question/remuscularisation-arrhythmia-controllable",
+    "hrm:question/why-adult-cell-therapy-failed-in-the-heart"
+   ],
+   "testSuite": [
+    {
+     "scenario": "restore blood flow within hours of the infarct",
+     "state": "routine",
+     "note": "primary angioplasty; mortality benefit established"
+    },
+    {
+     "scenario": "prevent adverse remodelling with drugs",
+     "state": "partial",
+     "note": "slows the decline; does not replace muscle"
+    },
+    {
+     "scenario": "replace lost muscle with new contractile tissue",
+     "state": "unsolved",
+     "note": "shown in primates, not in people"
+    },
+    {
+     "scenario": "electrically integrate new muscle without arrhythmia",
+     "state": "unsolved",
+     "note": "the reproducible failure mode in every large-animal remuscularisation study"
+    },
+    {
+     "scenario": "reverse an established ischaemic scar",
+     "state": "unsolved"
+    }
+   ],
+   "informationLimited": false,
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blockedBy": [
+     "hrm:question/remuscularisation-arrhythmia-controllable",
+     "hrm:question/controllable-cardiomyocyte-proliferation",
+     "hrm:question/why-adult-cell-therapy-failed-in-the-heart"
+    ],
+    "children": [
+     "hrm:goal/myocardial-remuscularisation",
+     "hrm:goal/myocardial-salvage"
+    ],
+    "enables": [
+     "hrm:goal/universal-repair"
+    ]
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/myocardial-remuscularisation",
+   "name": "Replacement of the lost muscle",
+   "parent": "hrm:goal/myocardial-infarction-repair",
+   "description": "Put contractile, perfused, electrically continuous muscle where the scar is — grown in place from surviving cardiomyocytes, or delivered as cells or a patch.",
+   "projections": [
+    "universal-repair",
+    "rejuvenation"
+   ],
+   "requires": [
+    {
+     "any": [
+      "hrm:capability/cardiomyocyte-proliferation-induction",
+      "hrm:capability/pluripotent-derived-cardiomyocyte-grafting"
+     ]
+    },
+    {
+     "all": [
+      "hrm:capability/infarct-remuscularisation",
+      "hrm:capability/graft-host-electrical-integration",
+      "hrm:capability/myocardial-graft-vascularisation"
+     ]
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/controllable-cardiomyocyte-proliferation",
+    "hrm:question/remuscularisation-arrhythmia-controllable"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blockedBy": [
+     "hrm:question/remuscularisation-arrhythmia-controllable",
+     "hrm:question/controllable-cardiomyocyte-proliferation"
+    ]
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/myocardial-salvage",
+   "name": "Salvage of the muscle at risk",
+   "parent": "hrm:goal/myocardial-infarction-repair",
+   "description": "Reopen the occluded artery fast enough that muscle which has not yet died survives, and limit reperfusion injury.",
+   "projections": [
+    "universal-repair"
+   ],
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/acute-reperfusion-of-the-infarct-artery"
+     ]
+    }
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/nerve-continuity-restoration",
+   "name": "Restoration of nerve continuity",
+   "parent": "hrm:goal/peripheral-nerve-repair",
+   "description": "Re-establish a physical path from the proximal stump to the distal nerve, with fascicles aligned and without tension, whether by direct repair, a graft or a conduit.",
+   "projections": [
+    "universal-repair"
+   ],
+   "requires": [
+    {
+     "any": [
+      "hrm:capability/nerve-gap-bridging",
+      "hrm:capability/nerve-transfer-from-a-donor-nerve"
+     ]
+    },
+    {
+     "all": [
+      "hrm:capability/axon-regrowth-across-a-repair"
+     ]
+    }
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/nerve-target-restoration",
+   "name": "Restoration of the targets a nerve serves",
+   "parent": "hrm:goal/peripheral-nerve-repair",
+   "description": "Get the regrowing axons to a muscle that can still be reinnervated and to sensory end organs that still work, and confirm that the connections are functional rather than merely present.",
+   "projections": [
+    "universal-repair"
+   ],
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/timely-muscle-reinnervation",
+      "hrm:capability/sensory-target-reinnervation-with-discrimination",
+      "hrm:capability/reinnervation-verification-in-humans"
+     ]
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/chronic-denervation-reversible-in-humans"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blockedBy": [
+     "hrm:question/chronic-denervation-reversible-in-humans"
+    ]
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/peripheral-nerve-repair",
+   "name": "Repair of a transected peripheral nerve",
+   "parent": "hrm:goal/universal-repair",
+   "description": "After a peripheral nerve is cut or crushed, restore motor and sensory function to the level the limb had before the injury: axons regrown to their original targets, myelination restored, muscle reinnervated before it is lost, and sensation returned with normal discrimination and no neuropathic pain.",
+   "projections": [
+    "universal-repair"
+   ],
+   "existenceProof": "Partial and route-dependent. A clean digital nerve repaired immediately recovers useful sensation in most patients; a proximal ulnar or sciatic transection in an adult does not recover useful intrinsic muscle function by any current method. Axon regrowth itself is routine; what fails is arriving in time.",
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/nerve-gap-bridging",
+      "hrm:capability/axon-regrowth-across-a-repair",
+      "hrm:capability/timely-muscle-reinnervation",
+      "hrm:capability/sensory-target-reinnervation-with-discrimination"
+     ]
+    },
+    {
+     "any": [
+      "hrm:capability/distal-schwann-cell-support-maintenance",
+      "hrm:capability/regeneration-speed-increase"
+     ],
+     "note": "OR-group: keep the distal pathway alive long enough, or make the axons arrive sooner. Both address the same clock; nobody knows which is achievable in a human."
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/chronic-denervation-reversible-in-humans",
+    "hrm:question/human-axon-regeneration-rate-increase"
+   ],
+   "testSuite": [
+    {
+     "scenario": "clean digital nerve laceration, repaired within days",
+     "state": "routine"
+    },
+    {
+     "scenario": "median nerve laceration at the wrist in a young adult",
+     "state": "partial",
+     "note": "sensation usually returns; two-point discrimination often does not"
+    },
+    {
+     "scenario": "3 cm gap in a sensory nerve",
+     "state": "partial",
+     "note": "conduits and processed allografts close short gaps; long gaps still need an autograft"
+    },
+    {
+     "scenario": "proximal ulnar nerve transection, intrinsic hand muscles",
+     "state": "unsolved",
+     "note": "regrowth distance times regrowth rate exceeds the muscle's survival window"
+    },
+    {
+     "scenario": "brachial plexus avulsion",
+     "state": "partial",
+     "note": "nerve transfers restore elbow flexion; the hand is not restored"
+    }
+   ],
+   "informationLimited": false,
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "children": [
+     "hrm:goal/nerve-continuity-restoration",
+     "hrm:goal/nerve-target-restoration"
+    ],
+    "blockedBy": [
+     "hrm:question/chronic-denervation-reversible-in-humans",
+     "hrm:question/human-axon-regeneration-rate-increase"
+    ],
+    "enables": [
+     "hrm:goal/universal-repair"
+    ]
+   }
+  },
+  {
+   "type": "goal",
    "id": "hrm:goal/rejuvenation",
    "name": "Rejuvenation",
    "description": "Return an aged person toward their healthiest attainable youthful physiology — function, resilience and regenerative capacity — while preserving identity, memory, learned ability and agency. Not 'the youngest possible state': a constrained optimisation whose target is a body that has never existed before (young molecular state, your memories).",
@@ -13221,8 +18615,10 @@ export const GRAPH = {
    "requires": [
     {
      "all": [
-      "hrm:goal/systemic-rejuvenation"
-     ]
+      "hrm:goal/systemic-rejuvenation",
+      "hrm:goal/aging-rate-modification"
+     ],
+     "note": "aging-rate-modification added 2026-09-14. Slowing the rate of aging and reversing accumulated damage are different projects; both are listed because a rejuvenation that has to be repeated against an unchanged rate of decline is not the goal as described. It is also where most current human trials in this area sit."
     }
    ],
    "informationLimited": false,
@@ -13233,7 +18629,7 @@ export const GRAPH = {
      "model": "claude-opus-5",
      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
     },
-    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level; aging-rate-modification added 2026-09-14",
     "date": "2026-09-11"
    },
    "review": {
@@ -13242,6 +18638,7 @@ export const GRAPH = {
    },
    "derivedRelations": {
     "children": [
+     "hrm:goal/aging-rate-modification",
      "hrm:goal/systemic-rejuvenation"
     ],
     "blockedBy": [
@@ -13333,6 +18730,129 @@ export const GRAPH = {
     ],
     "enables": [
      "hrm:goal/universal-repair"
+    ]
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/sci-damage-limitation",
+   "name": "Limiting the damage in the first hours",
+   "parent": "hrm:goal/spinal-cord-injury-repair",
+   "description": "Prevent the secondary injury that follows the mechanical one — ischaemia, oedema, inflammation, excitotoxicity — so that less cord has to be repaired later.",
+   "projections": [
+    "universal-repair"
+   ],
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/acute-cord-damage-limitation"
+     ]
+    }
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/sci-function-restoration",
+   "name": "Restoring movement below the lesion",
+   "parent": "hrm:goal/spinal-cord-injury-repair",
+   "description": "Return voluntary, useful movement below the injury by whichever route works: regrown connections, reactivated spinal circuitry, or an electronic bridge from the brain.",
+   "projections": [
+    "universal-repair"
+   ],
+   "requires": [
+    {
+     "any": [
+      "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
+      "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+      "hrm:capability/brain-spine-interface-volitional-control"
+     ]
+    },
+    {
+     "all": [
+      "hrm:capability/glial-scar-permissiveness-for-regrowth"
+     ]
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/regrown-axons-form-useful-circuits",
+    "hrm:question/stimulation-benefit-without-spared-fibres"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blockedBy": [
+     "hrm:question/regrown-axons-form-useful-circuits",
+     "hrm:question/stimulation-benefit-without-spared-fibres"
+    ]
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/senescent-cell-clearance-goal",
+   "name": "Removal of the cells that make tissue old",
+   "parent": "hrm:goal/systemic-rejuvenation",
+   "description": "Clear senescent cells — cells that have stopped dividing and secrete an inflammatory programme into the tissue around them — from an aged or damaged organ, and show that the tissue works better afterwards.",
+   "projections": [
+    "rejuvenation"
+   ],
+   "existenceProof": "Genetic clearance of p16-positive cells extends healthspan in mice, and senolytic drugs improve physical function and lifespan in old mice. In humans, two small open-label studies report reduced senescent cell burden and, in one, improved walking distance; neither had a control arm.",
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/senescent-cell-clearance-in-humans",
+      "hrm:capability/senescent-cell-burden-measurement"
+     ]
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/senolytics-improve-human-function"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blockedBy": [
+     "hrm:question/senolytics-improve-human-function"
+    ],
+    "enables": [
+     "hrm:goal/systemic-rejuvenation"
     ]
    }
   },
@@ -13564,6 +19084,137 @@ export const GRAPH = {
   },
   {
    "type": "goal",
+   "id": "hrm:goal/spinal-cord-injury-repair",
+   "name": "Repair of a spinal cord injury",
+   "parent": "hrm:goal/universal-repair",
+   "description": "After the spinal cord is crushed or severed, restore what the person lost: voluntary movement below the lesion, sensation, and autonomic control of bladder, bowel, blood pressure and sexual function. Restoring the tract and restoring the function are different projects; the map keeps them apart because their evidence is decades apart.",
+   "projections": [
+    "universal-repair"
+   ],
+   "existenceProof": "None for tract regeneration in a human. Function has been restored partially without repair: people with motor-complete injury have stepped over ground with epidural stimulation, and a brain-spine interface has restored volitional walking in one participant. Fish and amphibians regenerate the cord; mammals do not.",
+   "requires": [
+    {
+     "all": [
+      "hrm:capability/acute-cord-damage-limitation",
+      "hrm:capability/autonomic-function-restoration-after-sci"
+     ]
+    },
+    {
+     "any": [
+      "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
+      "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+      "hrm:capability/brain-spine-interface-volitional-control"
+     ],
+     "note": "OR-group: regrow the tract, drive the circuitry below it, or bridge the gap electronically. These are three different bets on the same deficit and the map does not assume one wins."
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/cord-repair-restores-autonomic-function",
+    "hrm:question/regrown-axons-form-useful-circuits",
+    "hrm:question/stimulation-benefit-without-spared-fibres"
+   ],
+   "testSuite": [
+    {
+     "scenario": "incomplete injury, early surgical decompression",
+     "state": "partial",
+     "note": "earlier decompression is associated with better neurological improvement"
+    },
+    {
+     "scenario": "motor-complete injury, voluntary stepping with stimulation",
+     "state": "partial",
+     "note": "shown in small numbers of participants, in specialist centres, with training"
+    },
+    {
+     "scenario": "volitional natural walking through a brain-spine interface",
+     "state": "partial",
+     "note": "one participant, one group"
+    },
+    {
+     "scenario": "regrowth of a severed corticospinal tract to its original targets",
+     "state": "unsolved",
+     "note": "rodent-stage"
+    },
+    {
+     "scenario": "restored bladder and bowel control after complete injury",
+     "state": "unsolved",
+     "note": "the deficit patients rank highest is the least addressed"
+    }
+   ],
+   "informationLimited": false,
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "children": [
+     "hrm:goal/sci-damage-limitation",
+     "hrm:goal/sci-function-restoration"
+    ],
+    "blockedBy": [
+     "hrm:question/regrown-axons-form-useful-circuits",
+     "hrm:question/stimulation-benefit-without-spared-fibres",
+     "hrm:question/cord-repair-restores-autonomic-function"
+    ],
+    "enables": [
+     "hrm:goal/universal-repair"
+    ]
+   }
+  },
+  {
+   "type": "goal",
+   "id": "hrm:goal/systemic-environment-rejuvenation",
+   "name": "Changing the environment the cells live in",
+   "parent": "hrm:goal/systemic-rejuvenation",
+   "description": "Rejuvenate tissue by changing what circulates around it — removing aged factors, diluting the plasma, or supplying young ones — rather than by editing the cells themselves.",
+   "projections": [
+    "rejuvenation"
+   ],
+   "requires": [
+    {
+     "any": [
+      "hrm:capability/aged-plasma-factor-removal",
+      "hrm:capability/young-systemic-factor-supplementation"
+     ]
+    }
+   ],
+   "blockedBy": [
+    "hrm:question/dilution-or-young-factors"
+   ],
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blockedBy": [
+     "hrm:question/dilution-or-young-factors"
+    ],
+    "enables": [
+     "hrm:goal/systemic-rejuvenation"
+    ]
+   }
+  },
+  {
+   "type": "goal",
    "id": "hrm:goal/systemic-rejuvenation",
    "name": "Systemic rejuvenation",
    "parent": "hrm:goal/rejuvenation",
@@ -13586,6 +19237,13 @@ export const GRAPH = {
       "hrm:capability/cns-neuron--reach"
      ],
      "note": "OR-group: one delivery route sufficing for the tissue in question; nobody knows which will succeed. cns-neuron--reach is the v0.2 grid cell backed by the 16 CNS routes."
+    },
+    {
+     "all": [
+      "hrm:goal/senescent-cell-clearance-goal",
+      "hrm:goal/systemic-environment-rejuvenation"
+     ],
+     "note": "Added 2026-09-14: clearing senescent cells and changing the systemic environment are routes to rejuvenation that do not go through reprogramming. Listed as required because a rejuvenation that leaves senescent burden and an aged circulating environment untouched is not what the goal describes."
     }
    ],
    "blockedBy": [
@@ -13602,7 +19260,7 @@ export const GRAPH = {
      "model": "claude-opus-5",
      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
     },
-    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level; senescence and systemic-environment sub-goals added 2026-09-14",
     "date": "2026-09-11"
    },
    "review": {
@@ -13612,6 +19270,10 @@ export const GRAPH = {
    "derivedRelations": {
     "enables": [
      "hrm:goal/rejuvenation"
+    ],
+    "children": [
+     "hrm:goal/senescent-cell-clearance-goal",
+     "hrm:goal/systemic-environment-rejuvenation"
     ],
     "blockedBy": [
      "hrm:question/partial-reprogramming-human-safety",
@@ -13634,9 +19296,13 @@ export const GRAPH = {
     {
      "all": [
       "hrm:goal/scarless-skin-repair",
-      "hrm:goal/established-scar-repair"
+      "hrm:goal/established-scar-repair",
+      "hrm:goal/peripheral-nerve-repair",
+      "hrm:goal/spinal-cord-injury-repair",
+      "hrm:goal/myocardial-infarction-repair",
+      "hrm:goal/glioblastoma-control"
      ],
-     "note": "First proving ground only. Peripheral nerve, fracture, myocardium, sepsis, cancer and systemic rejuvenation are the planned expansions and are not yet nodes."
+     "note": "Six proving grounds as of 2026-09-14: skin (scar prevention and scar reversal), peripheral nerve, spinal cord, myocardium, and glioblastoma. Fracture, sepsis and organ failure are planned expansions and are not yet nodes. The list is deliberately not a claim that these six are sufficient for universal repair; they are the cases the map has actually worked through."
     }
    ],
    "testSuite": [
@@ -13662,7 +19328,8 @@ export const GRAPH = {
     },
     {
      "scenario": "myocardial infarction with muscle restored",
-     "state": "unsolved"
+     "state": "unsolved",
+     "note": "reperfusion is routine; remuscularisation is shown in primates and blocked by graft arrhythmia"
     },
     {
      "scenario": "sepsis",
@@ -13670,7 +19337,8 @@ export const GRAPH = {
     },
     {
      "scenario": "spinal cord transection",
-     "state": "unsolved"
+     "state": "unsolved",
+     "note": "function partially restored by stimulation and a brain-spine interface; tract regeneration is rodent-stage"
     },
     {
      "scenario": "metastatic cancer",
@@ -13689,7 +19357,7 @@ export const GRAPH = {
      "model": "claude-opus-5",
      "session": "e7dc5601-1690-47c6-bf13-9ca150d31960"
     },
-    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level",
+    "method": "manual reasoning from the cited sources' abstracts (PubMed) and Crossref metadata, checked 2026-09-11; no source opened at figure level; requires and test-suite notes updated 2026-09-14 when the nerve, cord, myocardium and glioblastoma grounds were seeded",
     "date": "2026-09-11"
    },
    "review": {
@@ -13699,7 +19367,62 @@ export const GRAPH = {
    "derivedRelations": {
     "children": [
      "hrm:goal/established-scar-repair",
-     "hrm:goal/scarless-skin-repair"
+     "hrm:goal/glioblastoma-control",
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/peripheral-nerve-repair",
+     "hrm:goal/scarless-skin-repair",
+     "hrm:goal/spinal-cord-injury-repair"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/bbb-really-the-delivery-limit",
+   "projections": [
+    "universal-repair"
+   ],
+   "question": "How much of the failure of systemic therapy in glioblastoma is the blood-brain barrier, and how much is that the drugs would not work even at full concentration?",
+   "why": "An enormous amount of effort goes into opening the barrier. If the drugs delivered through it are ineffective anyway, that effort is misdirected, and the map should say which of the two problems is binding.",
+   "blocks": [
+    "hrm:capability/cns-drug-delivery-past-the-barrier",
+    "hrm:capability/gbm-targeted-cytotoxic-therapy",
+    "hrm:goal/gbm-reaching-the-tumour",
+    "hrm:goal/glioblastoma-control"
+   ],
+   "hypotheses": [
+    "The barrier is intact around infiltrating cells and is the binding constraint there, even where the enhancing core is exposed.",
+    "Concentrations reached in the core are already adequate and the drugs simply are not active against the tumour.",
+    "Efflux transporters, not the tight junctions, are the real limit."
+   ],
+   "knownUnknowns": [
+    "drug concentration at the infiltrating margin in patients, which few trials measure",
+    "whether ultrasound opening reaches the margin or only the core"
+   ],
+   "whatWouldResolve": "Phase 0 trials with tissue sampling at the margin: give the drug, resect, and measure the concentration and its pharmacodynamic effect where recurrence starts.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/gbm-reaching-the-tumour",
+     "hrm:goal/glioblastoma-control",
+     "hrm:capability/cns-drug-delivery-past-the-barrier",
+     "hrm:capability/gbm-targeted-cytotoxic-therapy"
+    ],
+    "testedBy": [
+     "hrm:experiment/phase-0-margin-concentration-study"
     ]
    }
   },
@@ -13746,6 +19469,204 @@ export const GRAPH = {
   {
    "type": "question",
    "state": "open",
+   "id": "hrm:question/chronic-denervation-reversible-in-humans",
+   "projections": [
+    "universal-repair"
+   ],
+   "question": "Can a muscle and a distal nerve pathway that have been denervated for many months be made receptive again, so that a late repair works as well as an early one?",
+   "why": "It is the single question that decides whether proximal nerve injury is repairable at all. Every current strategy — nerve transfers, faster regrowth, shorter grafts — is an attempt to beat a clock. If the clock could be stopped, the surgery would stop being a race.",
+   "blocks": [
+    "hrm:capability/distal-schwann-cell-support-maintenance",
+    "hrm:capability/timely-muscle-reinnervation",
+    "hrm:goal/nerve-target-restoration",
+    "hrm:goal/peripheral-nerve-repair"
+   ],
+   "hypotheses": [
+    "Schwann cell support can be maintained pharmacologically or by electrical activity, and the muscle follows.",
+    "The muscle is the harder limit: endplates and satellite cells are lost irreversibly regardless of the pathway.",
+    "Both decay, but a period of denervation can be tolerated if the muscle is kept active by stimulation."
+   ],
+   "knownUnknowns": [
+    "how long the human window actually is, as opposed to the rodent window",
+    "whether chronic electrical stimulation of denervated muscle preserves reinnervation capacity or only bulk",
+    "which cell population fails first in humans"
+   ],
+   "whatWouldResolve": "A large-animal study with denervation held for six to twelve months under an intervention, then repair, with force generation and endplate counts compared against immediate repair; then a trial in patients with delayed presentation.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/nerve-target-restoration",
+     "hrm:goal/peripheral-nerve-repair",
+     "hrm:capability/distal-schwann-cell-support-maintenance",
+     "hrm:capability/timely-muscle-reinnervation"
+    ],
+    "testedBy": [
+     "hrm:experiment/conditioning-stimulation-proximal-injury-rct",
+     "hrm:experiment/delayed-repair-with-distal-support-large-animal"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/clocks-track-intervention-benefit",
+   "projections": [
+    "rejuvenation"
+   ],
+   "question": "Does moving an epigenetic clock with an intervention predict a change in health outcome, or is the clock only a correlate of chronological age?",
+   "why": "Every intervention in this projection is measured against a clock because the alternative is a forty-year trial. If clocks do not respond meaningfully to intervention, the entire rejuvenation field is running on an unvalidated surrogate and the map's grades in this projection are built on sand.",
+   "blocks": [
+    "hrm:capability/biological-age-measurement-that-predicts-outcome",
+    "hrm:capability/pharmacological-aging-rate-reduction",
+    "hrm:capability/senescent-cell-clearance-in-humans",
+    "hrm:goal/aging-rate-modification"
+   ],
+   "hypotheses": [
+    "Clocks measure a causal driver — loss of epigenetic information — so moving them moves outcomes.",
+    "Clocks are downstream readouts of cell composition and turnover, and can be moved without changing anything that matters.",
+    "Different clocks differ: mortality-trained clocks may be responsive where age-trained clocks are not."
+   ],
+   "knownUnknowns": [
+    "whether any intervention has moved a clock and then been followed to a clinical outcome",
+    "how much of a clock reading is cell-type composition in the sample"
+   ],
+   "whatWouldResolve": "A randomised intervention trial with clock measurement early and a pre-registered clinical endpoint years later, showing that the early clock change predicted the outcome.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/aging-rate-modification",
+     "hrm:capability/biological-age-measurement-that-predicts-outcome",
+     "hrm:capability/pharmacological-aging-rate-reduction",
+     "hrm:capability/senescent-cell-clearance-in-humans"
+    ],
+    "testedBy": [
+     "hrm:experiment/clock-as-surrogate-validation"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/controllable-cardiomyocyte-proliferation",
+   "projections": [
+    "universal-repair",
+    "rejuvenation"
+   ],
+   "question": "Can adult cardiomyocyte proliferation be switched on to repair an infarct and then switched off, or does the same signal that repairs the heart keep going until it kills the animal?",
+   "why": "The pig miR-199a result is the map's clearest case of a therapy that worked and was lethal. Control, not induction, is what is missing, and it is the same problem that appears in the rejuvenation branch as cancer risk under reprogramming.",
+   "blocks": [
+    "hrm:capability/cardiomyocyte-proliferation-induction",
+    "hrm:goal/myocardial-infarction-repair",
+    "hrm:goal/myocardial-remuscularisation"
+   ],
+   "hypotheses": [
+    "Transient delivery — mRNA, a self-limiting vector, or a small molecule — gives the same repair without the persistence that caused the deaths.",
+    "Proliferation requires a sustained signal to produce useful muscle, so the therapeutic window is narrow or absent.",
+    "The deaths were arrhythmic rather than proliferative, making this the same problem as the graft integration question."
+   ],
+   "knownUnknowns": [
+    "whether transient delivery achieves the same functional repair",
+    "what the treated pigs actually died of, mechanistically",
+    "whether a dose exists that repairs without dysplasia"
+   ],
+   "whatWouldResolve": "A repeat of the pig experiment with a transient delivery vehicle and telemetry, reporting both function and cause of death for every animal.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/myocardial-remuscularisation",
+     "hrm:capability/cardiomyocyte-proliferation-induction"
+    ],
+    "testedBy": [
+     "hrm:experiment/transient-proliferation-pig-repeat"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/cord-repair-restores-autonomic-function",
+   "projections": [
+    "universal-repair"
+   ],
+   "question": "Would any of the current repair or stimulation strategies restore bladder, bowel and cardiovascular control, or do those pathways need their own intervention?",
+   "why": "People with spinal cord injury rank autonomic function above walking. The field's endpoints are motor, so the map currently has an L0 node next to several L4 ones, and that mismatch is a statement about the field rather than about the biology.",
+   "blocks": [
+    "hrm:capability/autonomic-function-restoration-after-sci",
+    "hrm:goal/spinal-cord-injury-repair"
+   ],
+   "hypotheses": [
+    "Autonomic pathways are anatomically separate and will need separate targeting.",
+    "Stimulation protocols already produce autonomic benefits that go unreported because the endpoints are motor.",
+    "Autonomic circuits below the lesion degrade differently and are more recoverable."
+   ],
+   "whatWouldResolve": "A trial of an existing stimulation protocol with continence or cardiovascular stability as the pre-registered primary endpoint.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/spinal-cord-injury-repair",
+     "hrm:capability/autonomic-function-restoration-after-sci"
+    ],
+    "testedBy": [
+     "hrm:experiment/autonomic-endpoint-stimulation-trial"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
    "id": "hrm:question/dermal-adipocyte-regeneration-in-human-wounds",
    "projections": [
     "universal-repair",
@@ -13774,6 +19695,56 @@ export const GRAPH = {
    "derivedRelations": {
     "blocks": [
      "hrm:capability/dermal-adipocyte-regeneration"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/dilution-or-young-factors",
+   "projections": [
+    "rejuvenation"
+   ],
+   "question": "Is the rejuvenating effect of young blood the transfer of young factors, or the dilution of old ones?",
+   "why": "The two answers point at completely different therapies. Dilution means plasma exchange, an existing procedure, could be tested in people within a few years. Young factors means finding and manufacturing the factor first.",
+   "blocks": [
+    "hrm:capability/aged-plasma-factor-removal",
+    "hrm:capability/young-systemic-factor-supplementation",
+    "hrm:goal/systemic-environment-rejuvenation"
+   ],
+   "hypotheses": [
+    "Dilution of accumulated inhibitory factors accounts for most of the effect (the neutral blood exchange result).",
+    "Specific young factors are required and dilution merely reduces inhibition of an endogenous programme.",
+    "Both, tissue by tissue."
+   ],
+   "knownUnknowns": [
+    "whether the mouse dilution result reproduces in an independent laboratory",
+    "what the accumulating inhibitory factors are",
+    "how often exchange would need repeating"
+   ],
+   "whatWouldResolve": "An independent replication of neutral blood exchange in aged mice with functional endpoints, followed by a randomised plasma-exchange trial in older adults.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/systemic-environment-rejuvenation",
+     "hrm:capability/aged-plasma-factor-removal",
+     "hrm:capability/young-systemic-factor-supplementation"
+    ],
+    "testedBy": [
+     "hrm:experiment/neutral-blood-exchange-independent-replication"
     ]
    }
   },
@@ -13907,6 +19878,108 @@ export const GRAPH = {
   {
    "type": "question",
    "state": "open",
+   "id": "hrm:question/gbm-heterogeneity-defeats-single-target",
+   "projections": [
+    "universal-repair"
+   ],
+   "question": "Is glioblastoma's cellular plasticity a hard barrier to any single-target therapy, or can a small number of targets cover the states a tumour can occupy?",
+   "why": "It determines whether the therapeutic strategy for this disease is 'find the right target' or 'stop looking for targets'. Every failed phase 3 on this ground was single-target.",
+   "blocks": [
+    "hrm:capability/gbm-antigen-escape-prevention",
+    "hrm:capability/gbm-targeted-cytotoxic-therapy",
+    "hrm:goal/gbm-bulk-and-margin",
+    "hrm:goal/glioblastoma-control"
+   ],
+   "hypotheses": [
+    "Four states with defined transitions means a four-target therapy is sufficient in principle.",
+    "Plasticity is continuous and driven by the microenvironment, so any fixed target set is escapable.",
+    "A lineage-defining dependency exists that all states share and has not been found."
+   ],
+   "knownUnknowns": [
+    "whether the four-state model holds under therapeutic pressure rather than at diagnosis",
+    "whether state transitions are reversible in the timescale of treatment"
+   ],
+   "whatWouldResolve": "Single-cell profiling of paired pre-treatment and recurrent tumours across a treated cohort, testing whether recurrence occupies a state that was present and untargeted at baseline.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/gbm-bulk-and-margin",
+     "hrm:goal/glioblastoma-control",
+     "hrm:capability/gbm-antigen-escape-prevention",
+     "hrm:capability/gbm-targeted-cytotoxic-therapy"
+    ],
+    "testedBy": [
+     "hrm:experiment/paired-biopsy-at-car-t-recurrence"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/gbm-response-durability",
+   "projections": [
+    "universal-repair"
+   ],
+   "question": "Why do the rapid CAR T regressions in glioblastoma not last, and can they be made durable?",
+   "why": "Three independent groups have now shown that a glioblastoma can be made to shrink dramatically within days. That is new, and it is the first time the disease has been visibly moved by anything other than radiation. The whole question is why it comes back.",
+   "blocks": [
+    "hrm:capability/gbm-antigen-escape-prevention",
+    "hrm:capability/gbm-immune-cell-therapy",
+    "hrm:goal/glioblastoma-control"
+   ],
+   "hypotheses": [
+    "Antigen-negative subclones survive and regrow, so durability requires multi-antigen or antigen-agnostic targeting.",
+    "CAR T cells do not persist in the CNS, and repeated or continuously supplied dosing would hold the response.",
+    "The microenvironment exhausts the T cells within weeks regardless of antigen.",
+    "The infiltrating population is never engaged at all, and the visible regression is only the bulk."
+   ],
+   "knownUnknowns": [
+    "whether recurrent tumours after CAR T are antigen-negative or antigen-positive",
+    "CAR T persistence in CSF over months",
+    "whether repeat dosing extends response"
+   ],
+   "whatWouldResolve": "Paired biopsies before treatment and at recurrence in the treated patients, with antigen expression and T cell persistence, from the existing trials.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/glioblastoma-control",
+     "hrm:capability/gbm-immune-cell-therapy",
+     "hrm:capability/gbm-antigen-escape-prevention"
+    ],
+    "testedBy": [
+     "hrm:experiment/paired-biopsy-at-car-t-recurrence"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
    "id": "hrm:question/gene-corrected-epidermal-graft-long-term-safety",
    "projections": [
     "universal-repair"
@@ -13937,6 +20010,50 @@ export const GRAPH = {
     ],
     "testedBy": [
      "hrm:experiment/gene-corrected-epidermal-graft-long-term-registry"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/geroprotector-benefit-in-humans",
+   "projections": [
+    "rejuvenation"
+   ],
+   "question": "Does any geroprotector — rapamycin, metformin, or another — reduce incident age-related disease in humans?",
+   "why": "It is the question the whole pharmacological branch rests on, it has been askable for over a decade, and it remains unanswered largely because aging is not an approvable indication rather than because the trial is impossible.",
+   "blocks": [
+    "hrm:capability/pharmacological-aging-rate-reduction",
+    "hrm:goal/aging-rate-modification"
+   ],
+   "hypotheses": [
+    "mTOR inhibition produces a measurable reduction in age-related disease incidence at tolerable doses.",
+    "Effects seen in mice do not transfer because human aging is less mTOR-driven.",
+    "The effect exists but is too small to detect without a trial larger than anyone will fund."
+   ],
+   "knownUnknowns": [
+    "the dose and schedule that separates benefit from immunosuppression",
+    "whether a composite endpoint would be accepted by a regulator"
+   ],
+   "whatWouldResolve": "TAME or an equivalent trial reporting a composite endpoint of incident age-related disease.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/aging-rate-modification",
+     "hrm:capability/pharmacological-aging-rate-reduction"
     ]
    }
   },
@@ -13977,6 +20094,95 @@ export const GRAPH = {
     "blocks": [
      "hrm:goal/systemic-rejuvenation",
      "hrm:goal/rejuvenation"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/human-axon-regeneration-rate-increase",
+   "projections": [
+    "universal-repair"
+   ],
+   "question": "Can the rate of human axon regeneration be raised above about one millimetre per day, or is that rate a hard property of the axon?",
+   "why": "Distance divided by rate is the whole problem in proximal injury. A doubling of rate would bring the intrinsic hand muscles inside the survival window; nothing else on this map would do that without new surgery.",
+   "blocks": [
+    "hrm:capability/regeneration-speed-increase",
+    "hrm:capability/timely-muscle-reinnervation",
+    "hrm:goal/peripheral-nerve-repair"
+   ],
+   "hypotheses": [
+    "The observed rate is limited by staggered onset, not by transport, so removing the delay is most of the available gain — which is what conditioning stimulation does.",
+    "Rate is set by slow axonal transport of cytoskeletal protein and cannot be raised much.",
+    "Rate can be raised but at the cost of targeting accuracy."
+   ],
+   "knownUnknowns": [
+    "what fraction of the delay is onset rather than elongation in humans",
+    "whether any intervention has ever been measured against elongation rate directly in a person"
+   ],
+   "whatWouldResolve": "A human study that separates onset delay from elongation rate — serial imaging or a Tinel-sign time series under an intervention — showing elongation faster than the historical rate.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/peripheral-nerve-repair",
+     "hrm:capability/regeneration-speed-increase",
+     "hrm:capability/timely-muscle-reinnervation"
+    ],
+    "testedBy": [
+     "hrm:experiment/conditioning-stimulation-proximal-injury-rct"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/motor-sensory-mistargeting-after-repair",
+   "projections": [
+    "universal-repair"
+   ],
+   "question": "How much of the functional loss after a repaired nerve is mistargeting — motor axons entering sensory pathways and the wrong muscles — and can regrowth be guided to the correct fascicle?",
+   "why": "If the axons arrive but arrive in the wrong place, then bridging and speed are solved problems and the map's attention belongs on guidance instead.",
+   "blocks": [
+    "hrm:capability/axon-regrowth-across-a-repair",
+    "hrm:capability/sensory-target-reinnervation-with-discrimination"
+   ],
+   "hypotheses": [
+    "Mistargeting dominates the residual deficit in mixed nerves, and fascicle-matched repair or selective guidance would recover most of it.",
+    "Mistargeting is largely corrected centrally by cortical remapping in the young and not in adults.",
+    "Mistargeting is minor next to the time-dependent loss of the target."
+   ],
+   "whatWouldResolve": "Retrograde tracing in a large-animal mixed-nerve repair quantifying how many motor neurons reach motor targets, paired with human functional outcome under fascicle-matched versus conventional repair.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:capability/axon-regrowth-across-a-repair",
+     "hrm:capability/sensory-target-reinnervation-with-discrimination"
     ]
    }
   },
@@ -14175,6 +20381,57 @@ export const GRAPH = {
   {
    "type": "question",
    "state": "open",
+   "id": "hrm:question/regrown-axons-form-useful-circuits",
+   "projections": [
+    "universal-repair"
+   ],
+   "question": "When axons are regrown across a spinal lesion, do they form connections that produce useful, controllable movement — or connections that produce spasticity, pain and nothing volitional?",
+   "why": "Every regeneration strategy on this ground is graded on structure because structure is what has been shown. If regrown axons do not wire usefully, the whole regeneration route is a mechanism with no therapy at the end of it, and the map should say so rather than implying that growth is the last step.",
+   "blocks": [
+    "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
+    "hrm:capability/glial-scar-permissiveness-for-regrowth",
+    "hrm:goal/sci-function-restoration",
+    "hrm:goal/spinal-cord-injury-repair"
+   ],
+   "hypotheses": [
+    "Regrown axons synapse promiscuously, and function requires guidance or activity-dependent refinement on top of growth.",
+    "Rehabilitation and stimulation supply the refinement, so growth plus training is sufficient.",
+    "Aberrant connections dominate and produce neuropathic pain, making incomplete regrowth worse than none."
+   ],
+   "knownUnknowns": [
+    "how much of rodent functional recovery after regrowth is the regrown tract rather than spared fibres or plasticity",
+    "whether pain and spasticity scale with regrowth"
+   ],
+   "whatWouldResolve": "A large-animal study combining regrowth with selective silencing of the regrown population: if function disappears when the new axons are silenced, the circuit is doing the work.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/sci-function-restoration",
+     "hrm:goal/spinal-cord-injury-repair",
+     "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
+     "hrm:capability/glial-scar-permissiveness-for-regrowth"
+    ],
+    "testedBy": [
+     "hrm:experiment/silence-regrown-axons-large-animal"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
    "id": "hrm:question/rejuvenated-state-persistence-and-redosing",
    "projections": [
     "rejuvenation"
@@ -14280,6 +20537,110 @@ export const GRAPH = {
   {
    "type": "question",
    "state": "open",
+   "id": "hrm:question/remuscularisation-arrhythmia-controllable",
+   "projections": [
+    "universal-repair",
+    "rejuvenation"
+   ],
+   "question": "Can new cardiomyocytes be added to an infarcted heart without causing ventricular arrhythmia — and if so, by maturing the graft, by removing its automaticity, or by grafting differently?",
+   "why": "It is the single blocker on this ground. Remuscularisation works in primates and the animals develop arrhythmia; until that is solved, no amount of improvement in cell manufacturing or delivery makes a human trial reasonable at a therapeutic dose.",
+   "blocks": [
+    "hrm:capability/graft-host-electrical-integration",
+    "hrm:capability/infarct-remuscularisation",
+    "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+    "hrm:goal/myocardial-infarction-repair",
+    "hrm:goal/myocardial-remuscularisation"
+   ],
+   "hypotheses": [
+    "Graft cardiomyocytes are immature and spontaneously active; maturing them before or after grafting removes the focus.",
+    "The arrhythmia is a transient integration phenomenon that resolves once coupling is complete, and can be managed pharmacologically through the window.",
+    "It is a boundary effect at the graft-host interface and depends on graft geometry, so patches behave differently from injections.",
+    "It is intrinsic to adding autonomous contractile tissue to a heart, and remuscularisation by grafting will not be usable."
+   ],
+   "knownUnknowns": [
+    "whether the arrhythmia scales with graft size or is present at any size",
+    "whether the same happens in a human heart, whose rate is much slower than a macaque's",
+    "whether patch delivery avoids it"
+   ],
+   "whatWouldResolve": "A large-animal remuscularisation study with continuous telemetry in which a maturation or gene-editing intervention abolishes sustained ventricular arrhythmia while preserving contractile contribution.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/myocardial-remuscularisation",
+     "hrm:capability/graft-host-electrical-integration",
+     "hrm:capability/infarct-remuscularisation",
+     "hrm:capability/pluripotent-derived-cardiomyocyte-grafting"
+    ],
+    "testedBy": [
+     "hrm:experiment/matured-graft-arrhythmia-telemetry-primate"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/senolytics-improve-human-function",
+   "projections": [
+    "rejuvenation"
+   ],
+   "question": "Do senolytics improve function in older people, or only reduce a marker in a biopsy?",
+   "why": "It is the nearest-term testable claim in the rejuvenation projection: the drugs exist, are off-patent, and have been given to patients. The published human studies are uncontrolled and tiny, so the answer is unknown rather than negative.",
+   "blocks": [
+    "hrm:capability/senescent-cell-clearance-in-humans",
+    "hrm:goal/senescent-cell-clearance-goal"
+   ],
+   "hypotheses": [
+    "Clearance produces functional benefit in tissues with high senescent burden (lung, kidney, joint) and little elsewhere.",
+    "Intermittent clearance works in mice because mouse senescent burden is high relative to human, and the human effect is small.",
+    "The benefit is real but confined to disease states rather than to healthy aging."
+   ],
+   "knownUnknowns": [
+    "dose and schedule in humans",
+    "which tissue to measure",
+    "whether removing senescent cells impairs wound healing or tumour suppression"
+   ],
+   "whatWouldResolve": "A randomised placebo-controlled trial in older adults with a functional primary endpoint — gait speed, six-minute walk, or incident frailty.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/senescent-cell-clearance-goal",
+     "hrm:capability/senescent-cell-clearance-in-humans"
+    ],
+    "testedBy": [
+     "hrm:experiment/senolytic-rct-functional-endpoint"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
    "id": "hrm:question/skin-substitutes-improve-scar-quality-not-just-closure",
    "projections": [
     "universal-repair"
@@ -14310,6 +20671,57 @@ export const GRAPH = {
     ],
     "testedBy": [
      "hrm:experiment/skin-substitute-scar-quality-rct"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/stimulation-benefit-without-spared-fibres",
+   "projections": [
+    "universal-repair"
+   ],
+   "question": "Does epidural stimulation restore volitional movement in people with anatomically complete injury, or does it depend on spared descending fibres that clinical assessment cannot see?",
+   "why": "It decides who the therapy is for, and whether stimulation is a repair-free route to function or an amplifier for residual connection. It also decides whether stimulation and regeneration are alternatives or partners.",
+   "blocks": [
+    "hrm:capability/brain-spine-interface-volitional-control",
+    "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+    "hrm:goal/sci-function-restoration",
+    "hrm:goal/spinal-cord-injury-repair"
+   ],
+   "hypotheses": [
+    "Discomplete injury is the rule: nearly all clinically complete injuries retain some fibres, and stimulation amplifies them.",
+    "Lumbar circuits generate stepping patterns with no descending input, and volition is not required for the motor benefit.",
+    "Both, in different participants, which is why the published series are small and selected."
+   ],
+   "knownUnknowns": [
+    "how to establish anatomical completeness in a living person",
+    "whether participants in the published series were selected on residual connectivity"
+   ],
+   "whatWouldResolve": "Stimulation outcomes stratified by an objective measure of spared descending connectivity — high-resolution imaging or evoked potentials — in a multi-centre cohort.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/sci-function-restoration",
+     "hrm:goal/spinal-cord-injury-repair",
+     "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+     "hrm:capability/brain-spine-interface-volitional-control"
+    ],
+    "testedBy": [
+     "hrm:experiment/stimulation-stratified-by-spared-connectivity"
     ]
    }
   },
@@ -14394,6 +20806,53 @@ export const GRAPH = {
     ],
     "testedBy": [
      "hrm:experiment/acomys-vs-mus-matched-wound-atlas"
+    ]
+   }
+  },
+  {
+   "type": "question",
+   "state": "open",
+   "id": "hrm:question/why-adult-cell-therapy-failed-in-the-heart",
+   "projections": [
+    "universal-repair"
+   ],
+   "question": "Why did fifteen years of bone-marrow and adult stem cell trials after myocardial infarction produce no effect on function in individual-patient-data meta-analysis, when many individual trials were positive?",
+   "why": "It is the largest documented negative in regenerative medicine and it shaped the field's credibility. Any new cell therapy on this ground inherits the question: what made the earlier positives look real, and does the new approach avoid it?",
+   "blocks": [
+    "hrm:capability/infarct-remuscularisation",
+    "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+    "hrm:goal/myocardial-infarction-repair"
+   ],
+   "hypotheses": [
+    "The cells never became cardiomyocytes and the reported benefits were small-trial noise and unblinded endpoint assessment.",
+    "There was a real paracrine effect too small to survive pooling.",
+    "Heterogeneity of cell products and timing diluted a real effect in some subgroups.",
+    "Publication and analytical practice in the early trials inflated the apparent effect."
+   ],
+   "knownUnknowns": [
+    "how much of the early literature would survive current standards",
+    "whether any subgroup showed a consistent effect"
+   ],
+   "whatWouldResolve": "The ACCRUE analysis largely answers the empirical question; what is open is whether pluripotent-derived grafts differ mechanistically, which only a trial with an imaging readout of graft muscle can settle.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+   },
+   "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "blocks": [
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+     "hrm:capability/infarct-remuscularisation"
     ]
    }
   },
@@ -14947,6 +21406,188 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/anderson-2018-nature",
+   "type": "source",
+   "citation": "Anderson et al., Nature, 2018",
+   "title": "Required growth facilitators propel axon regeneration across complete spinal cord injury",
+   "authors": "Anderson Mark A.; O’Shea Timothy M.; Burda Joshua E.; Ao Yan; Barlatey Sabry L.; Bernstein Alexander M.; Kim Jae H.; James Nicholas D.; Rogers Alexandra; Kato Brian; Wollenberg Alexander L.; Kawaguchi Riki; Coppola Giovanni; Wang Chen; Deming Timothy J.; He Zhigang; Courtine Gregoire; Sofroniew Michael V.",
+   "venue": "Nature",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1038/s41586-018-0467-6",
+   "pmid": "30158698",
+   "url": "https://doi.org/10.1038/s41586-018-0467-6",
+   "license": "http://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Required growth facilitators propel axon regeneration across complete spinal cord injury",
+    "note": "Crossref record found; PubMed id 30158698 located by DOI."
+   },
+   "note": "Growth factors, substrate and activation together, across a complete transection in rodent.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/combined-treatment-regrows-axons-across-complete-transection-in-rodents"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/angeli-2018-nejm",
+   "type": "source",
+   "citation": "Angeli et al., New England Journal of Medicine, 2018",
+   "title": "Recovery of Over-Ground Walking after Chronic Motor Complete Spinal Cord Injury",
+   "authors": "Angeli Claudia A.; Boakye Maxwell; Morton Rebekah A.; Vogt Justin; Benton Kristin; Chen Yangshen; Ferreira Christie K.; Harkema Susan J.",
+   "venue": "New England Journal of Medicine",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1056/nejmoa1803588",
+   "pmid": "30247091",
+   "url": "https://doi.org/10.1056/nejmoa1803588",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Recovery of Over-Ground Walking after Chronic Motor Complete Spinal Cord Injury",
+    "note": "Crossref record found; PubMed id 30247091 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/epidural-stimulation-enables-overground-walking"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/bagley-2024-natmed",
+   "type": "source",
+   "citation": "Bagley et al., Nature Medicine, 2024",
+   "title": "Intrathecal bivalent CAR T cells targeting EGFR and IL13Rα2 in recurrent glioblastoma: phase 1 trial interim results",
+   "authors": "Bagley Stephen J.; Logun Meghan; Fraietta Joseph A.; Wang Xin; Desai Arati S.; Bagley Linda J.; Nabavizadeh Ali; Jarocha Danuta; Martins Rene; Maloney Eileen; Lledo Lester; Stein Carly; Marshall Amy; Leskowitz Rachel; Jadlowsky Julie K.; Christensen Shannon; Oner Bike Su; Plesa Gabriela; Brennan Andrea; Gonzalez Vanessa; Chen Fang; Sun Yusha; Gladney Whitney; Barrett David; Nasrallah MacLean P.; Hwang Wei-Ting; Ming Guo-Li; Song Hongjun; Siegel Donald L.; June Carl H.; Hexner Elizabeth O.; Binder Zev A.; O’Rourke Donald M.",
+   "venue": "Nature Medicine",
+   "year": 2024,
+   "kind": "article",
+   "doi": "10.1038/s41591-024-02893-z",
+   "pmid": "38480922",
+   "url": "https://doi.org/10.1038/s41591-024-02893-z",
+   "license": "https://www.springernature.com/gp/researchers/text-and-data-mining",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Intrathecal bivalent CAR T cells targeting EGFR and IL13Rα2 in recurrent glioblastoma: phase 1 trial interim results",
+    "note": "Crossref record found; PubMed id 38480922 located by DOI."
+   },
+   "note": "Intrathecal bivalent EGFR/IL13Ralpha2 CAR T.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/intraventricular-car-t-produces-rapid-but-transient-gbm-regression"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/barzilai-2016-cellmetab",
+   "type": "source",
+   "citation": "Barzilai et al., Cell Metabolism, 2016",
+   "title": "Metformin as a Tool to Target Aging",
+   "authors": "Barzilai Nir; Crandall Jill P.; Kritchevsky Stephen B.; Espeland Mark A.",
+   "venue": "Cell Metabolism",
+   "year": 2016,
+   "kind": "article",
+   "doi": "10.1016/j.cmet.2016.05.011",
+   "pmid": "27304507",
+   "url": "https://doi.org/10.1016/j.cmet.2016.05.011",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Metformin as a Tool to Target Aging",
+    "note": "Crossref record found; PubMed id 27304507 located by DOI."
+   },
+   "note": "The TAME trial rationale.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "id": "hrm:source/bergmann-2009-science",
+   "type": "source",
+   "citation": "Bergmann et al., Science, 2009",
+   "title": "Evidence for Cardiomyocyte Renewal in Humans",
+   "authors": "Bergmann Olaf; Bhardwaj Ratan D.; Bernard Samuel; Zdunek Sofia; Barnabé-Heider Fanie; Walsh Stuart; Zupicich Joel; Alkass Kanar; Buchholz Bruce A.; Druid Henrik; Jovinge Stefan; Frisén Jonas",
+   "venue": "Science",
+   "year": 2009,
+   "kind": "article",
+   "doi": "10.1126/science.1164680",
+   "pmid": "19342590",
+   "url": "https://doi.org/10.1126/science.1164680",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Evidence for Cardiomyocyte Renewal in Humans",
+    "note": "Crossref record found; PubMed id 19342590 located by DOI."
+   },
+   "note": "Carbon-14 birth dating of human cardiomyocytes.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/human-cardiomyocyte-turnover-is-under-one-percent-a-year"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/blais-2013-tissueeng",
    "type": "source",
    "citation": "Blais et al., Tissue Engineering Part A, 2013",
@@ -14980,6 +21621,81 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/neurotrophins-enhance-angiogenesis-in-engineered-skin"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/bracken-1990-nejm",
+   "type": "source",
+   "citation": "Bracken et al., New England Journal of Medicine, 1990",
+   "title": "A Randomized, Controlled Trial of Methylprednisolone or Naloxone in the Treatment of Acute Spinal-Cord Injury",
+   "authors": "Bracken Michael B.; Shepard Mary Jo; Collins William F.; Holford Theodore R.; Young Wise; Baskin David S.; Eisenberg Howard M.; Flamm Eugene; Leo-Summers Linda; Maroon Joseph; Marshall Lawrence F.; Perot Phanor L.; Piepmeier Joseph; Sonntag Volker K.H.; Wagner Franklin C.; Wilberger Jack E.; Winn H. Richard",
+   "venue": "New England Journal of Medicine",
+   "year": 1990,
+   "kind": "article",
+   "doi": "10.1056/nejm199005173222001",
+   "pmid": "2278545",
+   "url": "https://doi.org/10.1056/nejm199005173222001",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "A Randomized, Controlled Trial of Methylprednisolone or Naloxone in the Treatment of Acute Spinal-Cord Injury",
+    "note": "Crossref record found; PubMed id 2278545 located by DOI."
+   },
+   "note": "NASCIS 2. Included because the map should carry the negative and contested history, not only the wins.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/high-dose-steroids-sci-benefit-was-a-subgroup-finding"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/bradbury-2002-nature",
+   "type": "source",
+   "citation": "Bradbury et al., Nature, 2002",
+   "title": "Chondroitinase ABC promotes functional recovery after spinal cord injury",
+   "authors": "Bradbury Elizabeth J.; Moon Lawrence D. F.; Popat Reena J.; King Von R.; Bennett Gavin S.; Patel Preena N.; Fawcett James W.; McMahon Stephen B.",
+   "venue": "Nature",
+   "year": 2002,
+   "kind": "article",
+   "doi": "10.1038/416636a",
+   "pmid": "11948352",
+   "url": "https://doi.org/10.1038/416636a",
+   "license": "http://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Chondroitinase ABC promotes functional recovery after spinal cord injury",
+    "note": "Crossref record found; PubMed id 11948352 located by DOI."
+   },
+   "note": "Chondroitinase ABC.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/chondroitinase-promotes-recovery-in-rats"
     ]
    }
   },
@@ -15021,6 +21737,119 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/browder-2022-nataging",
+   "type": "source",
+   "citation": "Browder et al., Nature Aging, 2022",
+   "title": "In vivo partial reprogramming alters age-associated molecular changes during physiological aging in mice",
+   "authors": "Browder Kristen C.; Reddy Pradeep; Yamamoto Mako; Haghani Amin; Guillen Isabel Guillen; Sahu Sanjeeb; Wang Chao; Luque Yosu; Prieto Javier; Shi Lei; Shojima Kensaku; Hishida Tomoaki; Lai Zijuan; Li Qingling; Choudhury Feroza K.; Wong Weng R.; Liang Yuxin; Sangaraju Dewakar; Sandoval Wendy; Esteban Concepcion Rodriguez; Delicado Estrella Nuñez; Garcia Pedro Guillen; Pawlak Michal; Vander Heiden Jason A.; Horvath Steve; Jasper Heinrich; Izpisua Belmonte Juan Carlos",
+   "venue": "Nature Aging",
+   "year": 2022,
+   "kind": "article",
+   "doi": "10.1038/s43587-022-00183-2",
+   "pmid": "37118377",
+   "url": "https://doi.org/10.1038/s43587-022-00183-2",
+   "license": "https://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "In vivo partial reprogramming alters age-associated molecular changes during physiological aging in mice",
+    "note": "Crossref record found; PubMed id 37118377 located by DOI."
+   },
+   "note": "Long-term partial reprogramming in mice.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/long-term-partial-reprogramming-is-tolerated-in-mice"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/brown-2016-nejm",
+   "type": "source",
+   "citation": "Brown et al., New England Journal of Medicine, 2016",
+   "title": "Regression of Glioblastoma after Chimeric Antigen Receptor T-Cell Therapy",
+   "authors": "Brown Christine E.; Alizadeh Darya; Starr Renate; Weng Lihong; Wagner Jamie R.; Naranjo Araceli; Ostberg Julie R.; Blanchard M. Suzette; Kilpatrick Julie; Simpson Jennifer; Kurien Anita; Priceman Saul J.; Wang Xiuli; Harshbarger Todd L.; D’Apuzzo Massimo; Ressler Julie A.; Jensen Michael C.; Barish Michael E.; Chen Mike; Portnow Jana; Forman Stephen J.; Badie Behnam",
+   "venue": "New England Journal of Medicine",
+   "year": 2016,
+   "kind": "article",
+   "doi": "10.1056/nejmoa1610497",
+   "pmid": "28029927",
+   "url": "https://doi.org/10.1056/nejmoa1610497",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Regression of Glioblastoma after Chimeric Antigen Receptor T-Cell Therapy",
+    "note": "Crossref record found; PubMed id 28029927 located by DOI."
+   },
+   "note": "IL13Ralpha2 CAR T, intraventricular, one patient with regression.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/intraventricular-car-t-produces-rapid-but-transient-gbm-regression"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/carpentier-2016-scitranslmed",
+   "type": "source",
+   "citation": "Carpentier et al., Science Translational Medicine, 2016",
+   "title": "Clinical trial of blood-brain barrier disruption by pulsed ultrasound",
+   "authors": "Carpentier Alexandre; Canney Michael; Vignot Alexandre; Reina Vincent; Beccaria Kevin; Horodyckid Catherine; Karachi Carine; Leclercq Delphine; Lafon Cyril; Chapelon Jean-Yves; Capelle Laurent; Cornu Philippe; Sanson Marc; Hoang-Xuan Khê; Delattre Jean-Yves; Idbaih Ahmed",
+   "venue": "Science Translational Medicine",
+   "year": 2016,
+   "kind": "article",
+   "doi": "10.1126/scitranslmed.aaf6086",
+   "pmid": "27306666",
+   "url": "https://doi.org/10.1126/scitranslmed.aaf6086",
+   "license": "http://www.sciencemag.org/about/science-licenses-journal-article-reuse",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Clinical trial of blood-brain barrier disruption by pulsed ultrasound",
+    "note": "Crossref record found; PubMed id 27306666 located by DOI."
+   },
+   "note": "Pulsed ultrasound barrier disruption in patients.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/pulsed-ultrasound-opens-the-barrier-in-patients"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/chan-2015-scitranslmed",
    "type": "source",
    "citation": "Chan et al., Science Translational Medicine, 2015",
@@ -15054,6 +21883,195 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/synthetic-fibrin-crosslinker-induces-haemostasis-in-rodents"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/choi-2024-nejm",
+   "type": "source",
+   "citation": "Choi et al., New England Journal of Medicine, 2024",
+   "title": "Intraventricular CARv3-TEAM-E T Cells in Recurrent Glioblastoma",
+   "authors": "Choi Bryan D.; Gerstner Elizabeth R.; Frigault Matthew J.; Leick Mark B.; Mount Christopher W.; Balaj Leonora; Nikiforow Sarah; Carter Bob S.; Curry William T.; Gallagher Kathleen; Maus Marcela V.",
+   "venue": "New England Journal of Medicine",
+   "year": 2024,
+   "kind": "article",
+   "doi": "10.1056/nejmoa2314390",
+   "pmid": "38477966",
+   "url": "https://doi.org/10.1056/nejmoa2314390",
+   "license": "http://www.nejmgroup.org/legal/terms-of-use.htm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Intraventricular CARv3-TEAM-E T Cells in Recurrent Glioblastoma",
+    "note": "Crossref record found; PubMed id 38477966 located by DOI."
+   },
+   "note": "CARv3-TEAM-E, intraventricular; rapid regression, limited durability.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/intraventricular-car-t-produces-rapid-but-transient-gbm-regression"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/chong-2014-nature",
+   "type": "source",
+   "citation": "Chong et al., Nature, 2014",
+   "title": "Human embryonic-stem-cell-derived cardiomyocytes regenerate non-human primate hearts",
+   "authors": "Chong James J. H.; Yang Xiulan; Don Creighton W.; Minami Elina; Liu Yen-Wen; Weyers Jill J.; Mahoney William M.; Van Biber Benjamin; Cook Savannah M.; Palpant Nathan J.; Gantz Jay A.; Fugate James A.; Muskheli Veronica; Gough G. Michael; Vogel Keith W.; Astley Cliff A.; Hotchkiss Charlotte E.; Baldessari Audrey; Pabon Lil; Reinecke Hans; Gill Edward A.; Nelson Veronica; Kiem Hans-Peter; Laflamme Michael A.; Murry Charles E.",
+   "venue": "Nature",
+   "year": 2014,
+   "kind": "article",
+   "doi": "10.1038/nature13233",
+   "pmid": "24776797",
+   "url": "https://doi.org/10.1038/nature13233",
+   "license": "http://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Human embryonic-stem-cell-derived cardiomyocytes regenerate non-human primate hearts",
+    "note": "Crossref record found; PubMed id 24776797 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/psc-cardiomyocytes-remuscularise-primate-hearts-with-arrhythmia"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/cloughesy-2019-natmed",
+   "type": "source",
+   "citation": "Cloughesy et al., Nature Medicine, 2019",
+   "title": "Neoadjuvant anti-PD-1 immunotherapy promotes a survival benefit with intratumoral and systemic immune responses in recurrent glioblastoma",
+   "authors": "Cloughesy Timothy F.; Mochizuki Aaron Y.; Orpilla Joey R.; Hugo Willy; Lee Alexander H.; Davidson Tom B.; Wang Anthony C.; Ellingson Benjamin M.; Rytlewski Julie A.; Sanders Catherine M.; Kawaguchi Eric S.; Du Lin; Li Gang; Yong William H.; Gaffey Sarah C.; Cohen Adam L.; Mellinghoff Ingo K.; Lee Eudocia Q.; Reardon David A.; O’Brien Barbara J.; Butowski Nicholas A.; Nghiemphu Phioanh L.; Clarke Jennifer L.; Arrillaga-Romany Isabel C.; Colman Howard; Kaley Thomas J.; de Groot John F.; Liau Linda M.; Wen Patrick Y.; Prins Robert M.",
+   "venue": "Nature Medicine",
+   "year": 2019,
+   "kind": "article",
+   "doi": "10.1038/s41591-018-0337-7",
+   "pmid": "30742122",
+   "url": "https://doi.org/10.1038/s41591-018-0337-7",
+   "license": "http://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Neoadjuvant anti-PD-1 immunotherapy promotes a survival benefit with intratumoral and systemic immune responses in recurrent glioblastoma",
+    "note": "Crossref record found; PubMed id 30742122 located by DOI."
+   },
+   "note": "Neoadjuvant anti-PD-1: survival signal with immune correlates.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/neoadjuvant-pd1-shows-a-survival-signal-in-recurrent-gbm"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/conboy-2005-nature",
+   "type": "source",
+   "citation": "Conboy et al., Nature, 2005",
+   "title": "Rejuvenation of aged progenitor cells by exposure to a young systemic environment",
+   "authors": "Conboy Irina M.; Conboy Michael J.; Wagers Amy J.; Girma Eric R.; Weissman Irving L.; Rando Thomas A.",
+   "venue": "Nature",
+   "year": 2005,
+   "kind": "article",
+   "doi": "10.1038/nature03260",
+   "pmid": "15716955",
+   "url": "https://doi.org/10.1038/nature03260",
+   "license": "http://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Rejuvenation of aged progenitor cells by exposure to a young systemic environment",
+    "note": "Crossref record found; PubMed id 15716955 located by DOI."
+   },
+   "note": "Heterochronic parabiosis.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/young-systemic-environment-restores-aged-tissue-in-mice"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/desjardins-2018-nejm",
+   "type": "source",
+   "citation": "Desjardins et al., New England Journal of Medicine, 2018",
+   "title": "Recurrent Glioblastoma Treated with Recombinant Poliovirus",
+   "authors": "Desjardins Annick; Gromeier Matthias; Herndon James E.; Beaubier Nike; Bolognesi Dani P.; Friedman Allan H.; Friedman Henry S.; McSherry Frances; Muscat Andrea M.; Nair Smita; Peters Katherine B.; Randazzo Dina; Sampson John H.; Vlahovic Gordana; Harrison William T.; McLendon Roger E.; Ashley David; Bigner Darell D.",
+   "venue": "New England Journal of Medicine",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1056/nejmoa1716435",
+   "pmid": "29943666",
+   "url": "https://doi.org/10.1056/nejmoa1716435",
+   "license": "http://www.nejmgroup.org/legal/terms-of-use.htm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Recurrent Glioblastoma Treated with Recombinant Poliovirus",
+    "note": "Crossref record found; PubMed id 29943666 located by DOI."
+   },
+   "note": "Recombinant poliovirus: a tail of long survivors without an overall shift.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/oncolytic-poliovirus-produces-a-survival-tail-not-a-shift"
     ]
    }
   },
@@ -15132,6 +22150,76 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/eschenhagen-2017-circulation",
+   "type": "source",
+   "citation": "Eschenhagen et al., Circulation, 2017",
+   "title": "Cardiomyocyte Regeneration",
+   "authors": "Eschenhagen Thomas; Bolli Roberto; Braun Thomas; Field Loren J.; Fleischmann Bernd K.; Frisén Jonas; Giacca Mauro; Hare Joshua M.; Houser Steven; Lee Richard T.; Marbán Eduardo; Martin James F.; Molkentin Jeffery D.; Murry Charles E.; Riley Paul R.; Ruiz-Lozano Pilar; Sadek Hesham A.; Sussman Mark A.; Hill Joseph A.",
+   "venue": "Circulation",
+   "year": 2017,
+   "kind": "article",
+   "doi": "10.1161/circulationaha.117.029343",
+   "pmid": "28684531",
+   "url": "https://doi.org/10.1161/circulationaha.117.029343",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Cardiomyocyte Regeneration",
+    "note": "Crossref record found; PubMed id 28684531 located by DOI."
+   },
+   "note": "Consensus review of cardiomyocyte regeneration.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "id": "hrm:source/fahy-2019-agingcell",
+   "type": "source",
+   "citation": "Fahy et al., Aging Cell, 2019",
+   "title": "Reversal of epigenetic aging and immunosenescent trends in humans",
+   "authors": "Fahy Gregory M.; Brooke Robert T.; Watson James P.; Good Zinaida; Vasanawala Shreyas S.; Maecker Holden; Leipold Michael D.; Lin David T. S.; Kobor Michael S.; Horvath Steve",
+   "venue": "Aging Cell",
+   "year": 2019,
+   "kind": "article",
+   "doi": "10.1111/acel.13028",
+   "pmid": "31496122",
+   "url": "https://doi.org/10.1111/acel.13028",
+   "license": "http://creativecommons.org/licenses/by/4.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Reversal of epigenetic aging and immunosenescent trends in humans",
+    "note": "Crossref record found; PubMed id 31496122 located by DOI."
+   },
+   "note": "TRIIM: nine men, no control arm, epigenetic age reversal reported.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/epigenetic-age-reversal-reported-without-a-control-arm"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/fda-2023-vyjuvek",
    "type": "source",
    "citation": "U.S. FDA press announcement, 19 May 2023 — FDA approves first topical gene therapy for treatment of wounds in patients with dystrophic epidermolysis bullosa",
@@ -15161,6 +22249,44 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/fda-approved-b-vec-2023"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/fehlings-2012-plosone",
+   "type": "source",
+   "citation": "Fehlings et al., PLoS ONE, 2012",
+   "title": "Early versus Delayed Decompression for Traumatic Cervical Spinal Cord Injury: Results of the Surgical Timing in Acute Spinal Cord Injury Study (STASCIS)",
+   "authors": "Fehlings Michael G.; Vaccaro Alexander; Wilson Jefferson R.; Singh Anoushka; W. Cadotte David; Harrop James S.; Aarabi Bizhan; Shaffrey Christopher; Dvorak Marcel; Fisher Charles; Arnold Paul; Massicotte Eric M.; Lewis Stephen; Rampersaud Raja",
+   "venue": "PLoS ONE",
+   "year": 2012,
+   "kind": "article",
+   "doi": "10.1371/journal.pone.0032037",
+   "pmid": "22384132",
+   "url": "https://doi.org/10.1371/journal.pone.0032037",
+   "license": "http://creativecommons.org/licenses/by/4.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Early versus Delayed Decompression for Traumatic Cervical Spinal Cord Injury: Results of the Surgical Timing in Acute Spinal Cord Injury Study (STASCIS)",
+    "note": "Crossref record found; PubMed id 22384132 located by DOI."
+   },
+   "note": "STASCIS: early versus delayed decompression.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/early-decompression-improves-sci-outcome"
     ]
    }
   },
@@ -15198,6 +22324,44 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/avotermin-improved-scar-appearance-phase-1-2"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/gabisonia-2019-nature",
+   "type": "source",
+   "citation": "Gabisonia et al., Nature, 2019",
+   "title": "MicroRNA therapy stimulates uncontrolled cardiac repair after myocardial infarction in pigs",
+   "authors": "Gabisonia Khatia; Prosdocimo Giulia; Aquaro Giovanni Donato; Carlucci Lucia; Zentilin Lorena; Secco Ilaria; Ali Hashim; Braga Luca; Gorgodze Nikoloz; Bernini Fabio; Burchielli Silvia; Collesi Chiara; Zandonà Lorenzo; Sinagra Gianfranco; Piacenti Marcello; Zacchigna Serena; Bussani Rossana; Recchia Fabio A.; Giacca Mauro",
+   "venue": "Nature",
+   "year": 2019,
+   "kind": "article",
+   "doi": "10.1038/s41586-019-1191-6",
+   "pmid": "31068698",
+   "url": "https://doi.org/10.1038/s41586-019-1191-6",
+   "license": "http://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "MicroRNA therapy stimulates uncontrolled cardiac repair after myocardial infarction in pigs",
+    "note": "Crossref record found; PubMed id 31068698 located by DOI."
+   },
+   "note": "miR-199a in pigs: cardiac repair, then uncontrolled proliferation and death.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/mir199a-repairs-pig-hearts-then-kills-them"
     ]
    }
   },
@@ -15271,6 +22435,119 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/acomys-regenerates-full-thickness-skin-without-scar"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/gill-2018-natmed",
+   "type": "source",
+   "citation": "Gill et al., Nature Medicine, 2018",
+   "title": "Neuromodulation of lumbosacral spinal networks enables independent stepping after complete paraplegia",
+   "authors": "Gill Megan L.; Grahn Peter J.; Calvert Jonathan S.; Linde Margaux B.; Lavrov Igor A.; Strommen Jeffrey A.; Beck Lisa A.; Sayenko Dimitry G.; Van Straaten Meegan G.; Drubach Dina I.; Veith Daniel D.; Thoreson Andrew R.; Lopez Cesar; Gerasimenko Yury P.; Edgerton V. Reggie; Lee Kendall H.; Zhao Kristin D.",
+   "venue": "Nature Medicine",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1038/s41591-018-0175-7",
+   "pmid": "30250140",
+   "url": "https://doi.org/10.1038/s41591-018-0175-7",
+   "license": "http://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Neuromodulation of lumbosacral spinal networks enables independent stepping after complete paraplegia",
+    "note": "Crossref record found; PubMed id 30250140 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/epidural-stimulation-enables-overground-walking"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/gordon-2010-expneurol",
+   "type": "source",
+   "citation": "Gordon et al., Experimental Neurology, 2010",
+   "title": "Brief post-surgical electrical stimulation accelerates axon regeneration and muscle reinnervation without affecting the functional measures in carpal tunnel syndrome patients",
+   "authors": "Gordon Tessa; Amirjani Nasim; Edwards David C.; Chan K. Ming",
+   "venue": "Experimental Neurology",
+   "year": 2010,
+   "kind": "article",
+   "doi": "10.1016/j.expneurol.2009.09.020",
+   "pmid": "19800329",
+   "url": "https://doi.org/10.1016/j.expneurol.2009.09.020",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Brief post-surgical electrical stimulation accelerates axon regeneration and muscle reinnervation without affecting the functional measures in carpal tunnel syndrome patients",
+    "note": "Crossref record found; PubMed id 19800329 located by DOI."
+   },
+   "note": "One hour of 20 Hz stimulation after carpal tunnel release; human reinnervation.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-peripheral-nerve.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/brief-electrical-stimulation-accelerates-human-reinnervation"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/gordon-2020-ijms",
+   "type": "source",
+   "citation": "Gordon et al., International Journal of Molecular Sciences, 2020",
+   "title": "Peripheral Nerve Regeneration and Muscle Reinnervation",
+   "authors": "Gordon Tessa",
+   "venue": "International Journal of Molecular Sciences",
+   "year": 2020,
+   "kind": "article",
+   "doi": "10.3390/ijms21228652",
+   "pmid": "33212795",
+   "url": "https://doi.org/10.3390/ijms21228652",
+   "license": "https://creativecommons.org/licenses/by/4.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Peripheral Nerve Regeneration and Muscle Reinnervation",
+    "note": "Crossref record found; PubMed id 33212795 located by DOI."
+   },
+   "note": "Review of chronic denervation and Schwann cell decline.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-peripheral-nerve.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/chronic-denervation-degrades-the-distal-pathway"
     ]
    }
   },
@@ -15350,6 +22627,81 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/gyongyosi-2015-circres",
+   "type": "source",
+   "citation": "Gyöngyösi et al., Circulation Research, 2015",
+   "title": "Meta-Analysis of Cell-based CaRdiac stUdiEs (ACCRUE) in Patients With Acute Myocardial Infarction Based on Individual Patient Data",
+   "authors": "Gyöngyösi Mariann; Wojakowski Wojciech; Lemarchand Patricia; Lunde Ketil; Tendera Michal; Bartunek Jozef; Marban Eduardo; Assmus Birgit; Henry Timothy D.; Traverse Jay H.; Moyé Lemuel A.; Sürder Daniel; Corti Roberto; Huikuri Heikki; Miettinen Johanna; Wöhrle Jochen; Obradovic Slobodan; Roncalli Jérome; Malliaras Konstantinos; Pokushalov Evgeny; Romanov Alexander; Kastrup Jens; Bergmann Martin W.; Atsma Douwe E.; Diederichsen Axel; Edes Istvan; Benedek Imre; Benedek Theodora; Pejkov Hristo; Nyolczas Noemi; Pavo Noemi; Bergler-Klein Jutta; Pavo Imre J.; Sylven Christer; Berti Sergio; Navarese Eliano P.; Maurer Gerald",
+   "venue": "Circulation Research",
+   "year": 2015,
+   "kind": "article",
+   "doi": "10.1161/circresaha.116.304346",
+   "pmid": "25700037",
+   "url": "https://doi.org/10.1161/circresaha.116.304346",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Meta-Analysis of Cell-based CaRdiac stUdiEs (ACCRUE) in Patients With Acute Myocardial Infarction Based on Individual Patient Data",
+    "note": "Crossref record found; PubMed id 25700037 located by DOI."
+   },
+   "note": "ACCRUE: individual patient data meta-analysis of cell therapy after MI.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/adult-cell-therapy-after-mi-shows-no-effect-in-ipd-meta-analysis"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/harrison-2009-nature",
+   "type": "source",
+   "citation": "Harrison et al., Nature, 2009",
+   "title": "Rapamycin fed late in life extends lifespan in genetically heterogeneous mice",
+   "authors": "Harrison David E.; Strong Randy; Sharp Zelton Dave; Nelson James F.; Astle Clinton M.; Flurkey Kevin; Nadon Nancy L.; Wilkinson J. Erby; Frenkel Krystyna; Carter Christy S.; Pahor Marco; Javors Martin A.; Fernandez Elizabeth; Miller Richard A.",
+   "venue": "Nature",
+   "year": 2009,
+   "kind": "article",
+   "doi": "10.1038/nature08221",
+   "pmid": "19587680",
+   "url": "https://doi.org/10.1038/nature08221",
+   "license": "http://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Rapamycin fed late in life extends lifespan in genetically heterogeneous mice",
+    "note": "Crossref record found; PubMed id 19587680 located by DOI."
+   },
+   "note": "Rapamycin extends lifespan when started late in life.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/rapamycin-extends-mouse-lifespan-started-late"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/henderson-2020-nature",
    "type": "source",
    "citation": "Henderson et al., Nature, 2020",
@@ -15384,6 +22736,44 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/no-therapy-reverses-established-fibrosis"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/hickson-2019-ebiomedicine",
+   "type": "source",
+   "citation": "Hickson et al., EBioMedicine, 2019",
+   "title": "Senolytics decrease senescent cells in humans: Preliminary report from a clinical trial of Dasatinib plus Quercetin in individuals with diabetic kidney disease",
+   "authors": "Hickson LaTonya J.; Langhi Prata Larissa G.P.; Bobart Shane A.; Evans Tamara K.; Giorgadze Nino; Hashmi Shahrukh K.; Herrmann Sandra M.; Jensen Michael D.; Jia Qingyi; Jordan Kyra L.; Kellogg Todd A.; Khosla Sundeep; Koerber Daniel M.; Lagnado Anthony B.; Lawson Donna K.; LeBrasseur Nathan K.; Lerman Lilach O.; McDonald Kathleen M.; McKenzie Travis J.; Passos João F.; Pignolo Robert J.; Pirtskhalava Tamar; Saadiq Ishran M.; Schaefer Kalli K.; Textor Stephen C.; Victorelli Stella G.; Volkman Tammie L.; Xue Ailing; Wentworth Mark A.; Wissler Gerdes Erin O.; Zhu Yi; Tchkonia Tamara; Kirkland James L.",
+   "venue": "EBioMedicine",
+   "year": 2019,
+   "kind": "article",
+   "doi": "10.1016/j.ebiom.2019.08.069",
+   "pmid": "31542391",
+   "url": "https://doi.org/10.1016/j.ebiom.2019.08.069",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Senolytics decrease senescent cells in humans: Preliminary report from a clinical trial of Dasatinib plus Quercetin in individuals with diabetic kidney disease",
+    "note": "Crossref record found; PubMed id 31542391 located by DOI."
+   },
+   "note": "Senescent cell reduction in humans, diabetic kidney disease, n=9.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/senolytics-reduce-human-senescent-markers-uncontrolled"
     ]
    }
   },
@@ -15425,6 +22815,44 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/horvath-2013-genomebiol",
+   "type": "source",
+   "citation": "Horvath et al., Genome Biology, 2013",
+   "title": "DNA methylation age of human tissues and cell types",
+   "authors": "Horvath Steve",
+   "venue": "Genome Biology",
+   "year": 2013,
+   "kind": "article",
+   "doi": "10.1186/gb-2013-14-10-r115",
+   "pmid": "24138928",
+   "url": "https://doi.org/10.1186/gb-2013-14-10-r115",
+   "license": "http://creativecommons.org/licenses/by/2.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "DNA methylation age of human tissues and cell types",
+    "note": "Crossref record found; PubMed id 24138928 located by DOI."
+   },
+   "note": "The multi-tissue epigenetic clock.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/epigenetic-clocks-predict-age-and-mortality"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/ito-2007-nature",
    "type": "source",
    "citation": "Ito et al., Nature, 2007",
@@ -15458,6 +22886,120 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/wound-induced-hair-neogenesis-in-adult-mice"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/justice-2019-ebiomedicine",
+   "type": "source",
+   "citation": "Justice et al., EBioMedicine, 2019",
+   "title": "Senolytics in idiopathic pulmonary fibrosis: Results from a first-in-human, open-label, pilot study",
+   "authors": "Justice Jamie N.; Nambiar Anoop M.; Tchkonia Tamar; LeBrasseur Nathan K.; Pascual Rodolfo; Hashmi Shahrukh K.; Prata Larissa; Masternak Michal M.; Kritchevsky Stephen B.; Musi Nicolas; Kirkland James L.",
+   "venue": "EBioMedicine",
+   "year": 2019,
+   "kind": "article",
+   "doi": "10.1016/j.ebiom.2018.12.052",
+   "pmid": "30616998",
+   "url": "https://doi.org/10.1016/j.ebiom.2018.12.052",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Senolytics in idiopathic pulmonary fibrosis: Results from a first-in-human, open-label, pilot study",
+    "note": "Crossref record found; PubMed id 30616998 located by DOI."
+   },
+   "note": "First-in-human senolytics, IPF, open-label, n=14.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/senolytics-reduce-human-senescent-markers-uncontrolled"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/keeley-2003-lancet",
+   "type": "source",
+   "citation": "Keeley et al., The Lancet, 2003",
+   "title": "Primary angioplasty versus intravenous thrombolytic therapy for acute myocardial infarction: a quantitative review of 23 randomised trials",
+   "authors": "Keeley Ellen C; Boura Judith A; Grines Cindy L",
+   "venue": "The Lancet",
+   "year": 2003,
+   "kind": "article",
+   "doi": "10.1016/s0140-6736(03)12113-7",
+   "pmid": "12517460",
+   "url": "https://doi.org/10.1016/s0140-6736(03)12113-7",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Primary angioplasty versus intravenous thrombolytic therapy for acute myocardial infarction: a quantitative review of 23 randomised trials",
+    "note": "Crossref record found; PubMed id 12517460 located by DOI."
+   },
+   "note": "Meta-analysis: primary angioplasty versus thrombolysis.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/primary-angioplasty-beats-thrombolysis"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/kucher-2018-nnr",
+   "type": "source",
+   "citation": "Kucher et al., Neurorehabilitation and Neural Repair, 2018",
+   "title": "First-in-Man Intrathecal Application of Neurite Growth-Promoting Anti-Nogo-A Antibodies in Acute Spinal Cord Injury",
+   "authors": "Kucher Klaus; Johns Donald; Maier Doris; Abel Rainer; Badke Andreas; Baron Hagen; Thietje Roland; Casha Steven; Meindl Renate; Gomez-Mancilla Baltazar; Pfister Christian; Rupp Rüdiger; Weidner Norbert; Mir Anis; Schwab Martin E.; Curt Armin",
+   "venue": "Neurorehabilitation and Neural Repair",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1177/1545968318776371",
+   "pmid": "29869587",
+   "url": "https://doi.org/10.1177/1545968318776371",
+   "license": "https://journals.sagepub.com/page/policies/text-and-data-mining-license",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "First-in-Man Intrathecal Application of Neurite Growth-Promoting Anti-Nogo-A Antibodies in Acute Spinal Cord Injury",
+    "note": "Crossref record found; PubMed id 29869587 located by DOI."
+   },
+   "note": "First-in-man anti-Nogo-A.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/anti-nogo-antibody-tolerated-in-first-in-man"
     ]
    }
   },
@@ -15602,6 +23144,118 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/liu-2018-natbiotech",
+   "type": "source",
+   "citation": "Liu et al., Nature Biotechnology, 2018",
+   "title": "Human embryonic stem cell–derived cardiomyocytes restore function in infarcted hearts of non-human primates",
+   "authors": "Liu Yen-Wen; Chen Billy; Yang Xiulan; Fugate James A; Kalucki Faith A; Futakuchi-Tsuchida Akiko; Couture Larry; Vogel Keith W; Astley Clifford A; Baldessari Audrey; Ogle Jason; Don Creighton W; Steinberg Zachary L; Seslar Stephen P; Tuck Stephanie A; Tsuchida Hiroshi; Naumova Anna V; Dupras Sarah K; Lyu Milly S; Lee James; Hailey Dale W; Reinecke Hans; Pabon Lil; Fryer Benjamin H; MacLellan W Robb; Thies R Scott; Murry Charles E",
+   "venue": "Nature Biotechnology",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1038/nbt.4162",
+   "pmid": "29969440",
+   "url": "https://doi.org/10.1038/nbt.4162",
+   "license": "https://www.springernature.com/gp/researchers/text-and-data-mining",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Human embryonic stem cell–derived cardiomyocytes restore function in infarcted hearts of non-human primates",
+    "note": "Crossref record found; PubMed id 29969440 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/psc-cardiomyocytes-remuscularise-primate-hearts-with-arrhythmia"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/lorach-2023-nature",
+   "type": "source",
+   "citation": "Lorach et al., Nature, 2023",
+   "title": "Walking naturally after spinal cord injury using a brain–spine interface",
+   "authors": "Lorach Henri; Galvez Andrea; Spagnolo Valeria; Martel Felix; Karakas Serpil; Intering Nadine; Vat Molywan; Faivre Olivier; Harte Cathal; Komi Salif; Ravier Jimmy; Collin Thibault; Coquoz Laure; Sakr Icare; Baaklini Edeny; Hernandez-Charpak Sergio Daniel; Dumont Gregory; Buschman Rik; Buse Nicholas; Denison Tim; van Nes Ilse; Asboth Leonie; Watrin Anne; Struber Lucas; Sauter-Starace Fabien; Langar Lilia; Auboiroux Vincent; Carda Stefano; Chabardes Stephan; Aksenova Tetiana; Demesmaeker Robin; Charvet Guillaume; Bloch Jocelyne; Courtine Grégoire",
+   "venue": "Nature",
+   "year": 2023,
+   "kind": "article",
+   "doi": "10.1038/s41586-023-06094-5",
+   "pmid": "37225984",
+   "url": "https://doi.org/10.1038/s41586-023-06094-5",
+   "license": "https://creativecommons.org/licenses/by/4.0",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Walking naturally after spinal cord injury using a brain–spine interface",
+    "note": "Crossref record found; PubMed id 37225984 located by DOI."
+   },
+   "note": "Brain-spine interface: digital bridge restoring natural walking.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/brain-spine-interface-restores-volitional-walking"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/lu-2012-cell",
+   "type": "source",
+   "citation": "Lu et al., Cell, 2012",
+   "title": "Long-Distance Growth and Connectivity of Neural Stem Cells after Severe Spinal Cord Injury",
+   "authors": "Lu Paul; Wang Yaozhi; Graham Lori; McHale Karla; Gao Mingyong; Wu Di; Brock John; Blesch Armin; Rosenzweig Ephron S.; Havton Leif A.; Zheng Binhai; Conner James M.; Marsala Martin; Tuszynski Mark H.",
+   "venue": "Cell",
+   "year": 2012,
+   "kind": "article",
+   "doi": "10.1016/j.cell.2012.08.020",
+   "pmid": "22980985",
+   "url": "https://doi.org/10.1016/j.cell.2012.08.020",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Long-Distance Growth and Connectivity of Neural Stem Cells after Severe Spinal Cord Injury",
+    "note": "Crossref record found; PubMed id 22980985 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/combined-treatment-regrows-axons-across-complete-transection-in-rodents"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/lu-2020-nature",
    "type": "source",
    "citation": "Lu et al., Nature, 2020",
@@ -15639,6 +23293,42 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/mackinnon-1990-prs",
+   "type": "source",
+   "citation": "Mackinnon et al., Plastic and Reconstructive Surgery, 1990",
+   "title": "Clinical Nerve Reconstruction with a Bioabsorbable Polyglycolic Acid Tube",
+   "authors": "Mackinnon Susan E.; Dellon A. Lee",
+   "venue": "Plastic and Reconstructive Surgery",
+   "year": 1990,
+   "kind": "article",
+   "doi": "10.1097/00006534-199003000-00015",
+   "pmid": "2154831",
+   "url": "https://doi.org/10.1097/00006534-199003000-00015",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Clinical Nerve Reconstruction with a Bioabsorbable Polyglycolic Acid Tube",
+    "note": "Crossref record found; PubMed id 2154831 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-peripheral-nerve.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/conduit-matches-suture-in-short-digital-nerve-gaps"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/maden-2018-burns",
    "type": "source",
    "citation": "Maden et al., Burns, 2018",
@@ -15672,6 +23362,43 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/acomys-regenerates-full-thickness-skin-without-scar"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/mannick-2014-scitranslmed",
+   "type": "source",
+   "citation": "Mannick et al., Science Translational Medicine, 2014",
+   "title": "mTOR inhibition improves immune function in the elderly",
+   "authors": "Mannick Joan B.; Del Giudice Giuseppe; Lattanzi Maria; Valiante Nicholas M.; Praestgaard Jens; Huang Baisong; Lonetto Michael A.; Maecker Holden T.; Kovarik John; Carson Simon; Glass David J.; Klickstein Lloyd B.",
+   "venue": "Science Translational Medicine",
+   "year": 2014,
+   "kind": "article",
+   "doi": "10.1126/scitranslmed.3009892",
+   "pmid": "25540326",
+   "url": "https://doi.org/10.1126/scitranslmed.3009892",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "mTOR inhibition improves immune function in the elderly",
+    "note": "Crossref record found; PubMed id 25540326 located by DOI."
+   },
+   "note": "mTOR inhibition and vaccine response in the elderly.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/mtor-inhibition-improves-vaccine-response-in-the-elderly"
     ]
    }
   },
@@ -15859,6 +23586,194 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/mehdipour-2020-aging",
+   "type": "source",
+   "citation": "Mehdipour et al., Aging, 2020",
+   "title": "Rejuvenation of three germ layers tissues by exchanging old blood plasma with saline-albumin",
+   "authors": "Mehdipour Melod; Skinner Colin; Wong Nathan; Lieb Michael; Liu Chao; Etienne Jessy; Kato Cameron; Kiprov Dobri; Conboy Michael J.; Conboy Irina M.",
+   "venue": "Aging",
+   "year": 2020,
+   "kind": "article",
+   "doi": "10.18632/aging.103418",
+   "pmid": "32474458",
+   "url": "https://doi.org/10.18632/aging.103418",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Rejuvenation of three germ layers tissues by exchanging old blood plasma with saline-albumin",
+    "note": "Crossref record found; PubMed id 32474458 located by DOI."
+   },
+   "note": "Neutral blood exchange: dilution rather than young factors.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/plasma-dilution-rejuvenates-as-well-as-young-blood"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/menasche-2018-jacc",
+   "type": "source",
+   "citation": "Menasché et al., Journal of the American College of Cardiology, 2018",
+   "title": "Transplantation of Human Embryonic Stem Cell–Derived Cardiovascular Progenitors for Severe Ischemic Left Ventricular Dysfunction",
+   "authors": "Menasché Philippe; Vanneaux Valérie; Hagège Albert; Bel Alain; Cholley Bernard; Parouchev Alexandre; Cacciapuoti Isabelle; Al-Daccak Reem; Benhamouda Nadine; Blons Hélène; Agbulut Onnik; Tosca Lucie; Trouvin Jean-Hugues; Fabreguettes Jean-Roch; Bellamy Valérie; Charron Dominique; Tartour Eric; Tachdjian Gérard; Desnos Michel; Larghero Jérôme",
+   "venue": "Journal of the American College of Cardiology",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1016/j.jacc.2017.11.047",
+   "pmid": "29389360",
+   "url": "https://doi.org/10.1016/j.jacc.2017.11.047",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Transplantation of Human Embryonic Stem Cell–Derived Cardiovascular Progenitors for Severe Ischemic Left Ventricular Dysfunction",
+    "note": "Crossref record found; PubMed id 29389360 located by DOI."
+   },
+   "note": "ESCORT: first-in-human embryonic-stem-cell-derived cardiovascular progenitor patch.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/esc-derived-progenitor-patch-feasible-in-six-patients"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/mohamed-2018-cell",
+   "type": "source",
+   "citation": "Mohamed et al., Cell, 2018",
+   "title": "Regulation of Cell Cycle to Stimulate Adult Cardiomyocyte Proliferation and Cardiac Regeneration",
+   "authors": "Mohamed Tamer M.A.; Ang Yen-Sin; Radzinsky Ethan; Zhou Ping; Huang Yu; Elfenbein Arye; Foley Amy; Magnitsky Sergey; Srivastava Deepak",
+   "venue": "Cell",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1016/j.cell.2018.02.014",
+   "pmid": "29502971",
+   "url": "https://doi.org/10.1016/j.cell.2018.02.014",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Regulation of Cell Cycle to Stimulate Adult Cardiomyocyte Proliferation and Cardiac Regeneration",
+    "note": "Crossref record found; PubMed id 29502971 located by DOI."
+   },
+   "note": "Cell cycle regulators driving adult cardiomyocyte division.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/cell-cycle-factors-drive-adult-cardiomyocyte-division-in-mice"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/neftel-2019-cell",
+   "type": "source",
+   "citation": "Neftel et al., Cell, 2019",
+   "title": "An Integrative Model of Cellular States, Plasticity, and Genetics for Glioblastoma",
+   "authors": "Neftel Cyril; Laffy Julie; Filbin Mariella G.; Hara Toshiro; Shore Marni E.; Rahme Gilbert J.; Richman Alyssa R.; Silverbush Dana; Shaw McKenzie L.; Hebert Christine M.; Dewitt John; Gritsch Simon; Perez Elizabeth M.; Gonzalez Castro L. Nicolas; Lan Xiaoyang; Druck Nicholas; Rodman Christopher; Dionne Danielle; Kaplan Alexander; Bertalan Mia S.; Small Julia; Pelton Kristine; Becker Sarah; Bonal Dennis; Nguyen Quang-De; Servis Rachel L.; Fung Jeremy M.; Mylvaganam Ravindra; Mayr Lisa; Gojo Johannes; Haberler Christine; Geyeregger Rene; Czech Thomas; Slavc Irene; Nahed Brian V.; Curry William T.; Carter Bob S.; Wakimoto Hiroaki; Brastianos Priscilla K.; Batchelor Tracy T.; Stemmer-Rachamimov Anat; Martinez-Lage Maria; Frosch Matthew P.; Stamenkovic Ivan; Riggi Nicolo; Rheinbay Esther; Monje Michelle; Rozenblatt-Rosen Orit; Cahill Daniel P.; Patel Anoop P.; Hunter Tony; Verma Inder M.; Ligon Keith L.; Louis David N.; Regev Aviv; Bernstein Bradley E.; Tirosh Itay; Suvà Mario L.",
+   "venue": "Cell",
+   "year": 2019,
+   "kind": "article",
+   "doi": "10.1016/j.cell.2019.06.024",
+   "pmid": "31327527",
+   "url": "https://doi.org/10.1016/j.cell.2019.06.024",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "An Integrative Model of Cellular States, Plasticity, and Genetics for Glioblastoma",
+    "note": "Crossref record found; PubMed id 31327527 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/glioblastoma-cells-occupy-interconvertible-states"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/oberlin-1994-jhs",
+   "type": "source",
+   "citation": "Oberlin et al., The Journal of Hand Surgery, 1994",
+   "title": "Nerve transfer to biceps muscle using a part of ulnar nerve for C5–C6 avulsion of the brachial plexus: Anatomical study and report of four cases",
+   "authors": "Oberlin C.; Béal D.; Leechavengvongs S.; Salon A.; Dauge M.C.; Sarcy J.J.",
+   "venue": "The Journal of Hand Surgery",
+   "year": 1994,
+   "kind": "article",
+   "doi": "10.1016/0363-5023(94)90011-6",
+   "pmid": "8201186",
+   "url": "https://doi.org/10.1016/0363-5023(94)90011-6",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Nerve transfer to biceps muscle using a part of ulnar nerve for C5–C6 avulsion of the brachial plexus: Anatomical study and report of four cases",
+    "note": "Crossref record found; PubMed id 8201186 located by DOI."
+   },
+   "note": "The nerve transfer that changed brachial plexus surgery.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-peripheral-nerve.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/oberlin-transfer-restores-elbow-flexion"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/ocampo-2016-cell",
    "type": "source",
    "citation": "Ocampo et al., Cell, 2016",
@@ -15896,6 +23811,79 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/orourke-2017-scitranslmed",
+   "type": "source",
+   "citation": "O’Rourke et al., Science Translational Medicine, 2017",
+   "title": "A single dose of peripherally infused EGFRvIII-directed CAR T cells mediates antigen loss and induces adaptive resistance in patients with recurrent glioblastoma",
+   "authors": "O’Rourke Donald M.; Nasrallah MacLean P.; Desai Arati; Melenhorst Jan J.; Mansfield Keith; Morrissette Jennifer J. D.; Martinez-Lage Maria; Brem Steven; Maloney Eileen; Shen Angela; Isaacs Randi; Mohan Suyash; Plesa Gabriela; Lacey Simon F.; Navenot Jean-Marc; Zheng Zhaohui; Levine Bruce L.; Okada Hideho; June Carl H.; Brogdon Jennifer L.; Maus Marcela V.",
+   "venue": "Science Translational Medicine",
+   "year": 2017,
+   "kind": "article",
+   "doi": "10.1126/scitranslmed.aaa0984",
+   "pmid": "28724573",
+   "url": "https://doi.org/10.1126/scitranslmed.aaa0984",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "A single dose of peripherally infused EGFRvIII-directed CAR T cells mediates antigen loss and induces adaptive resistance in patients with recurrent glioblastoma",
+    "note": "Crossref record found; PubMed id 28724573 located by DOI."
+   },
+   "note": "Intravenous EGFRvIII CAR T: trafficking shown, antigen loss shown, no clinical benefit.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/systemic-car-t-drives-antigen-loss-in-gbm"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/patel-2014-science",
+   "type": "source",
+   "citation": "Patel et al., Science, 2014",
+   "title": "Single-cell RNA-seq highlights intratumoral heterogeneity in primary glioblastoma",
+   "authors": "Patel Anoop P.; Tirosh Itay; Trombetta John J.; Shalek Alex K.; Gillespie Shawn M.; Wakimoto Hiroaki; Cahill Daniel P.; Nahed Brian V.; Curry William T.; Martuza Robert L.; Louis David N.; Rozenblatt-Rosen Orit; Suvà Mario L.; Regev Aviv; Bernstein Bradley E.",
+   "venue": "Science",
+   "year": 2014,
+   "kind": "article",
+   "doi": "10.1126/science.1254257",
+   "pmid": "24925914",
+   "url": "https://doi.org/10.1126/science.1254257",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Single-cell RNA-seq highlights intratumoral heterogeneity in primary glioblastoma",
+    "note": "Crossref record found; PubMed id 24925914 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/glioblastoma-cells-occupy-interconvertible-states"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/plikus-2017-science",
    "type": "source",
    "citation": "Plikus et al., Science, 2017",
@@ -15928,6 +23916,81 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/myofibroblasts-regenerate-adipocytes-in-mouse-wounds"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/porrello-2011-science",
+   "type": "source",
+   "citation": "Porrello et al., Science, 2011",
+   "title": "Transient Regenerative Potential of the Neonatal Mouse Heart",
+   "authors": "Porrello Enzo R.; Mahmoud Ahmed I.; Simpson Emma; Hill Joseph A.; Richardson James A.; Olson Eric N.; Sadek Hesham A.",
+   "venue": "Science",
+   "year": 2011,
+   "kind": "article",
+   "doi": "10.1126/science.1200708",
+   "pmid": "21350179",
+   "url": "https://doi.org/10.1126/science.1200708",
+   "license": "http://www.sciencemag.org/site/feature/contribinfo/prep/license.xhtml",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Transient Regenerative Potential of the Neonatal Mouse Heart",
+    "note": "Crossref record found; PubMed id 21350179 located by DOI."
+   },
+   "note": "Neonatal mouse heart regeneration, lost within a week of birth.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/neonatal-mouse-heart-regenerates-then-loses-the-ability"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/reardon-2020-jamaoncol",
+   "type": "source",
+   "citation": "Reardon et al., JAMA Oncology, 2020",
+   "title": "Effect of Nivolumab vs Bevacizumab in Patients With Recurrent Glioblastoma",
+   "authors": "Reardon David A.; Brandes Alba A.; Omuro Antonio; Mulholland Paul; Lim Michael; Wick Antje; Baehring Joachim; Ahluwalia Manmeet S.; Roth Patrick; Bähr Oliver; Phuphanich Surasak; Sepulveda Juan Manuel; De Souza Paul; Sahebjam Solmaz; Carleton Michael; Tatsuoka Kay; Taitt Corina; Zwirtes Ricardo; Sampson John; Weller Michael",
+   "venue": "JAMA Oncology",
+   "year": 2020,
+   "kind": "article",
+   "doi": "10.1001/jamaoncol.2020.1024",
+   "pmid": "32437507",
+   "url": "https://doi.org/10.1001/jamaoncol.2020.1024",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Effect of Nivolumab vs Bevacizumab in Patients With Recurrent Glioblastoma",
+    "note": "Crossref record found; PubMed id 32437507 located by DOI."
+   },
+   "note": "CheckMate 143: nivolumab, negative.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/single-target-gbm-immunotherapies-failed-phase-3"
     ]
    }
   },
@@ -15969,6 +24032,81 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/romagnuolo-2019-scr",
+   "type": "source",
+   "citation": "Romagnuolo et al., Stem Cell Reports, 2019",
+   "title": "Human Embryonic Stem Cell-Derived Cardiomyocytes Regenerate the Infarcted Pig Heart but Induce Ventricular Tachyarrhythmias",
+   "authors": "Romagnuolo Rocco; Masoudpour Hassan; Porta-Sánchez Andreu; Qiang Beiping; Barry Jennifer; Laskary Andrew; Qi Xiuling; Massé Stéphane; Magtibay Karl; Kawajiri Hiroyuki; Wu Jun; Valdman Sadikov Tamilla; Rothberg Janet; Panchalingam Krishna M.; Titus Emily; Li Ren-Ke; Zandstra Peter W.; Wright Graham A.; Nanthakumar Kumaraswamy; Ghugre Nilesh R.; Keller Gordon; Laflamme Michael A.",
+   "venue": "Stem Cell Reports",
+   "year": 2019,
+   "kind": "article",
+   "doi": "10.1016/j.stemcr.2019.04.005",
+   "pmid": "31056479",
+   "url": "https://doi.org/10.1016/j.stemcr.2019.04.005",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Human Embryonic Stem Cell-Derived Cardiomyocytes Regenerate the Infarcted Pig Heart but Induce Ventricular Tachyarrhythmias",
+    "note": "Crossref record found; PubMed id 31056479 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-myocardial-infarction.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/psc-cardiomyocytes-remuscularise-primate-hearts-with-arrhythmia"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/rosenzweig-2018-natmed",
+   "type": "source",
+   "citation": "Rosenzweig et al., Nature Medicine, 2018",
+   "title": "Restorative effects of human neural stem cell grafts on the primate spinal cord",
+   "authors": "Rosenzweig Ephron S; Brock John H; Lu Paul; Kumamaru Hiromi; Salegio Ernesto A; Kadoya Ken; Weber Janet L; Liang Justine J; Moseanko Rod; Hawbecker Stephanie; Huie J Russell; Havton Leif A; Nout-Lomas Yvette S; Ferguson Adam R; Beattie Michael S; Bresnahan Jacqueline C; Tuszynski Mark H",
+   "venue": "Nature Medicine",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1038/nm.4502",
+   "pmid": "29480894",
+   "url": "https://doi.org/10.1038/nm.4502",
+   "license": "https://www.springernature.com/gp/researchers/text-and-data-mining",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Restorative effects of human neural stem cell grafts on the primate spinal cord",
+    "note": "Crossref record found; PubMed id 29480894 located by DOI."
+   },
+   "note": "Human neural stem cell grafts in the primate cord.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/human-neural-stem-cell-grafts-extend-axons-in-primate-cord"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/rouwkema-2016-trendsbiotech",
    "type": "source",
    "citation": "Rouwkema et al., Trends in Biotechnology, 2016",
@@ -16003,6 +24141,155 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/thick-engineered-tissue-vascularisation-unsolved"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/rowald-2022-natmed",
+   "type": "source",
+   "citation": "Rowald et al., Nature Medicine, 2022",
+   "title": "Activity-dependent spinal cord neuromodulation rapidly restores trunk and leg motor functions after complete paralysis",
+   "authors": "Rowald Andreas; Komi Salif; Demesmaeker Robin; Baaklini Edeny; Hernandez-Charpak Sergio Daniel; Paoles Edoardo; Montanaro Hazael; Cassara Antonino; Becce Fabio; Lloyd Bryn; Newton Taylor; Ravier Jimmy; Kinany Nawal; D’Ercole Marina; Paley Aurélie; Hankov Nicolas; Varescon Camille; McCracken Laura; Vat Molywan; Caban Miroslav; Watrin Anne; Jacquet Charlotte; Bole-Feysot Léa; Harte Cathal; Lorach Henri; Galvez Andrea; Tschopp Manon; Herrmann Natacha; Wacker Moïra; Geernaert Lionel; Fodor Isabelle; Radevich Valentin; Van Den Keybus Katrien; Eberle Grégoire; Pralong Etienne; Roulet Maxime; Ledoux Jean-Baptiste; Fornari Eleonora; Mandija Stefano; Mattera Loan; Martuzzi Roberto; Nazarian Bruno; Benkler Stefan; Callegari Simone; Greiner Nathan; Fuhrer Benjamin; Froeling Martijn; Buse Nik; Denison Tim; Buschman Rik; Wende Christian; Ganty Damien; Bakker Jurriaan; Delattre Vincent; Lambert Hendrik; Minassian Karen; van den Berg Cornelis A. T.; Kavounoudias Anne; Micera Silvestro; Van De Ville Dimitri; Barraud Quentin; Kurt Erkan; Kuster Niels; Neufeld Esra; Capogrosso Marco; Asboth Leonie; Wagner Fabien B.; Bloch Jocelyne; Courtine Grégoire",
+   "venue": "Nature Medicine",
+   "year": 2022,
+   "kind": "article",
+   "doi": "10.1038/s41591-021-01663-5",
+   "pmid": "35132264",
+   "url": "https://doi.org/10.1038/s41591-021-01663-5",
+   "license": "https://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Activity-dependent spinal cord neuromodulation rapidly restores trunk and leg motor functions after complete paralysis",
+    "note": "Crossref record found; PubMed id 35132264 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/targeted-stimulation-improves-walking-in-chronic-sci"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/ruijs-2005-prs",
+   "type": "source",
+   "citation": "Ruijs et al., Plastic and Reconstructive Surgery, 2005",
+   "title": "Median and Ulnar Nerve Injuries: A Meta-Analysis of Predictors of Motor and Sensory Recovery after Modern Microsurgical Nerve Repair",
+   "authors": "Ruijs Aleid C. J.; Jaquet Jean-Bart; Kalmijn Sandra; Giele Henk; Hovius Steven E. R.",
+   "venue": "Plastic and Reconstructive Surgery",
+   "year": 2005,
+   "kind": "article",
+   "doi": "10.1097/01.prs.0000172896.86594.07",
+   "pmid": "16079678",
+   "url": "https://doi.org/10.1097/01.prs.0000172896.86594.07",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Median and Ulnar Nerve Injuries: A Meta-Analysis of Predictors of Motor and Sensory Recovery after Modern Microsurgical Nerve Repair",
+    "note": "Crossref record found; PubMed id 16079678 located by DOI."
+   },
+   "note": "Meta-analysis of predictors of outcome after median and ulnar nerve repair.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-peripheral-nerve.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/nerve-repair-outcome-worsens-with-delay-and-proximal-level"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/safa-2020-microsurgery",
+   "type": "source",
+   "citation": "Safa et al., Microsurgery, 2020",
+   "title": "Peripheral nerve repair throughout the body with processed nerve allografts: Results from a large multicenter study",
+   "authors": "Safa Bauback; Jain Sonu; Desai Mihir J.; Greenberg Jeffrey A.; Niacaris Timothy R.; Nydick Jason A.; Leversedge Fraser J.; Megee David M.; Zoldos Jozef; Rinker Brian D.; McKee Desirae M.; MacKay Brendan J.; Ingari John V.; Nesti Leon J.; Cho Mickey; Valerio Ian Lee; Kao Dennis S.; El‐Sheikh Yasser; Weber Renata V.; Shores Jaimie T.; Styron Joseph F.; Thayer Wesley P.; Przylecki Wojciech H.; Hoyen Harry A.; Buncke Gregory M.",
+   "venue": "Microsurgery",
+   "year": 2020,
+   "kind": "article",
+   "doi": "10.1002/micr.30574",
+   "pmid": "32101338",
+   "url": "https://doi.org/10.1002/micr.30574",
+   "license": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Peripheral nerve repair throughout the body with processed nerve allografts: Results from a large multicenter study",
+    "note": "Crossref record found; PubMed id 32101338 located by DOI."
+   },
+   "note": "RANGER registry: processed nerve allograft outcomes.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-peripheral-nerve.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/processed-allograft-recovers-function-in-registry"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/sarkaria-2018-neurooncol",
+   "type": "source",
+   "citation": "Sarkaria et al., Neuro-Oncology, 2017",
+   "title": "Is the blood–brain barrier really disrupted in all glioblastomas? A critical assessment of existing clinical data",
+   "authors": "Sarkaria Jann N; Hu Leland S; Parney Ian F; Pafundi Deanna H; Brinkmann Debra H; Laack Nadia N; Giannini Caterina; Burns Terence C; Kizilbash Sani H; Laramy Janice K; Swanson Kristin R; Kaufmann Timothy J; Brown Paul D; Agar Nathalie Y R; Galanis Evanthia; Buckner Jan C; Elmquist William F",
+   "venue": "Neuro-Oncology",
+   "year": 2017,
+   "kind": "article",
+   "doi": "10.1093/neuonc/nox175",
+   "pmid": "29016900",
+   "url": "https://doi.org/10.1093/neuonc/nox175",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Is the blood–brain barrier really disrupted in all glioblastomas? A critical assessment of existing clinical data",
+    "note": "Crossref record found; PubMed id 29016900 located by DOI."
+   },
+   "note": "Is the blood-brain barrier really disrupted in all glioblastomas?",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/bbb-is-intact-in-much-of-a-glioblastoma"
     ]
    }
   },
@@ -16075,6 +24362,80 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/cultured-epithelial-autografts-permanently-cover-large-burns"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/stupp-2005-nejm",
+   "type": "source",
+   "citation": "Stupp et al., New England Journal of Medicine, 2005",
+   "title": "Radiotherapy plus Concomitant and Adjuvant Temozolomide for Glioblastoma",
+   "authors": "Stupp Roger; Mason Warren P.; van den Bent Martin J.; Weller Michael; Fisher Barbara; Taphoorn Martin J.B.; Belanger Karl; Brandes Alba A.; Marosi Christine; Bogdahn Ulrich; Curschmann Jürgen; Janzer Robert C.; Ludwin Samuel K.; Gorlia Thierry; Allgeier Anouk; Lacombe Denis; Cairncross J. Gregory; Eisenhauer Elizabeth; Mirimanoff René O.",
+   "venue": "New England Journal of Medicine",
+   "year": 2005,
+   "kind": "article",
+   "doi": "10.1056/nejmoa043330",
+   "pmid": "15758009",
+   "url": "https://doi.org/10.1056/nejmoa043330",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Radiotherapy plus Concomitant and Adjuvant Temozolomide for Glioblastoma",
+    "note": "Crossref record found; PubMed id 15758009 located by DOI."
+   },
+   "note": "The trial that set the standard of care.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/temozolomide-chemoradiation-extends-gbm-survival-by-months"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/stupp-2017-jama",
+   "type": "source",
+   "citation": "Stupp et al., JAMA, 2017",
+   "title": "Effect of Tumor-Treating Fields Plus Maintenance Temozolomide vs Maintenance Temozolomide Alone on Survival in Patients With Glioblastoma",
+   "authors": "Stupp Roger; Taillibert Sophie; Kanner Andrew; Read William; Steinberg David M.; Lhermitte Benoit; Toms Steven; Idbaih Ahmed; Ahluwalia Manmeet S.; Fink Karen; Di Meco Francesco; Lieberman Frank; Zhu Jay-Jiguang; Stragliotto Giuseppe; Tran David D.; Brem Steven; Hottinger Andreas F.; Kirson Eilon D.; Lavy-Shahaf Gitit; Weinberg Uri; Kim Chae-Yong; Paek Sun-Ha; Nicholas Garth; Bruna Jordi; Hirte Hal; Weller Michael; Palti Yoram; Hegi Monika E.; Ram Zvi",
+   "venue": "JAMA",
+   "year": 2017,
+   "kind": "article",
+   "doi": "10.1001/jama.2017.18718",
+   "pmid": "29260225",
+   "url": "https://doi.org/10.1001/jama.2017.18718",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Effect of Tumor-Treating Fields Plus Maintenance Temozolomide vs Maintenance Temozolomide Alone on Survival in Patients With Glioblastoma",
+    "note": "Crossref record found; PubMed id 29260225 located by DOI."
+   },
+   "note": "Tumour-treating fields.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/tumour-treating-fields-add-survival-in-gbm"
     ]
    }
   },
@@ -16153,6 +24514,44 @@ export const GRAPH = {
    }
   },
   {
+   "id": "hrm:source/venkataramani-2019-nature",
+   "type": "source",
+   "citation": "Venkataramani et al., Nature, 2019",
+   "title": "Glutamatergic synaptic input to glioma cells drives brain tumour progression",
+   "authors": "Venkataramani Varun; Tanev Dimitar Ivanov; Strahle Christopher; Studier-Fischer Alexander; Fankhauser Laura; Kessler Tobias; Körber Christoph; Kardorff Markus; Ratliff Miriam; Xie Ruifan; Horstmann Heinz; Messer Mirko; Paik Sang Peter; Knabbe Johannes; Sahm Felix; Kurz Felix T.; Acikgöz Azer Aylin; Herrmannsdörfer Frank; Agarwal Amit; Bergles Dwight E.; Chalmers Anthony; Miletic Hrvoje; Turcan Sevin; Mawrin Christian; Hänggi Daniel; Liu Hai-Kun; Wick Wolfgang; Winkler Frank; Kuner Thomas",
+   "venue": "Nature",
+   "year": 2019,
+   "kind": "article",
+   "doi": "10.1038/s41586-019-1564-x",
+   "pmid": "31534219",
+   "url": "https://doi.org/10.1038/s41586-019-1564-x",
+   "license": "https://www.springernature.com/gp/researchers/text-and-data-mining",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Glutamatergic synaptic input to glioma cells drives brain tumour progression",
+    "note": "Crossref record found; PubMed id 31534219 located by DOI."
+   },
+   "note": "Glioma cells receive synaptic input from neurons.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/glioma-cells-receive-synaptic-input-from-neurons"
+    ]
+   }
+  },
+  {
    "id": "hrm:source/veves-2001-diabetescare",
    "type": "source",
    "citation": "Veves et al., Diabetes Care, 2001",
@@ -16185,6 +24584,231 @@ export const GRAPH = {
    "derivedRelations": {
     "citedBy": [
      "hrm:claim/graftskin-raises-diabetic-ulcer-closure"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/villeda-2014-natmed",
+   "type": "source",
+   "citation": "Villeda et al., Nature Medicine, 2014",
+   "title": "Young blood reverses age-related impairments in cognitive function and synaptic plasticity in mice",
+   "authors": "Villeda Saul A; Plambeck Kristopher E; Middeldorp Jinte; Castellano Joseph M; Mosher Kira I; Luo Jian; Smith Lucas K; Bieri Gregor; Lin Karin; Berdnik Daniela; Wabl Rafael; Udeochu Joe; Wheatley Elizabeth G; Zou Bende; Simmons Danielle A; Xie Xinmin S; Longo Frank M; Wyss-Coray Tony",
+   "venue": "Nature Medicine",
+   "year": 2014,
+   "kind": "article",
+   "doi": "10.1038/nm.3569",
+   "pmid": "24793238",
+   "url": "https://doi.org/10.1038/nm.3569",
+   "license": "http://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Young blood reverses age-related impairments in cognitive function and synaptic plasticity in mice",
+    "note": "Crossref record found; PubMed id 24793238 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/young-systemic-environment-restores-aged-tissue-in-mice"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/wagner-2018-nature",
+   "type": "source",
+   "citation": "Wagner et al., Nature, 2018",
+   "title": "Targeted neurotechnology restores walking in humans with spinal cord injury",
+   "authors": "Wagner Fabien B.; Mignardot Jean-Baptiste; Le Goff-Mignardot Camille G.; Demesmaeker Robin; Komi Salif; Capogrosso Marco; Rowald Andreas; Seáñez Ismael; Caban Miroslav; Pirondini Elvira; Vat Molywan; McCracken Laura A.; Heimgartner Roman; Fodor Isabelle; Watrin Anne; Seguin Perrine; Paoles Edoardo; Van Den Keybus Katrien; Eberle Grégoire; Schurch Brigitte; Pralong Etienne; Becce Fabio; Prior John; Buse Nicholas; Buschman Rik; Neufeld Esra; Kuster Niels; Carda Stefano; von Zitzewitz Joachim; Delattre Vincent; Denison Tim; Lambert Hendrik; Minassian Karen; Bloch Jocelyne; Courtine Grégoire",
+   "venue": "Nature",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1038/s41586-018-0649-2",
+   "pmid": "30382197",
+   "url": "https://doi.org/10.1038/s41586-018-0649-2",
+   "license": "https://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Targeted neurotechnology restores walking in humans with spinal cord injury",
+    "note": "Crossref record found; PubMed id 30382197 located by DOI."
+   },
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/targeted-stimulation-improves-walking-in-chronic-sci"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/weber-2000-prs",
+   "type": "source",
+   "citation": "Weber et al., Plastic and Reconstructive Surgery, 2000",
+   "title": "A Randomized Prospective Study of Polyglycolic Acid Conduits for Digital Nerve Reconstruction in Humans",
+   "authors": "Weber Robert A.; Breidenbach Warren C.; Brown Richard E.; Jabaley Michael E.; Mass Daniel P.",
+   "venue": "Plastic and Reconstructive Surgery",
+   "year": 2000,
+   "kind": "article",
+   "doi": "10.1097/00006534-200010000-00013",
+   "pmid": "11039375",
+   "url": "https://doi.org/10.1097/00006534-200010000-00013",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "A Randomized Prospective Study of Polyglycolic Acid Conduits for Digital Nerve Reconstruction in Humans",
+    "note": "Crossref record found; PubMed id 11039375 located by DOI."
+   },
+   "note": "Randomised comparison of polyglycolic acid conduit against standard repair in digital nerves.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-peripheral-nerve.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/conduit-matches-suture-in-short-digital-nerve-gaps"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/weller-2017-lancetoncol",
+   "type": "source",
+   "citation": "Weller et al., The Lancet Oncology, 2017",
+   "title": "Rindopepimut with temozolomide for patients with newly diagnosed, EGFRvIII-expressing glioblastoma (ACT IV): a randomised, double-blind, international phase 3 trial",
+   "authors": "Weller Michael; Butowski Nicholas; Tran David D; Recht Lawrence D; Lim Michael; Hirte Hal; Ashby Lynn; Mechtler Laszlo; Goldlust Samuel A; Iwamoto Fabio; Drappatz Jan; O'Rourke Donald M; Wong Mark; Hamilton Mark G; Finocchiaro Gaetano; Perry James; Wick Wolfgang; Green Jennifer; He Yi; Turner Christopher D; Yellin Michael J; Keler Tibor; Davis Thomas A; Stupp Roger; Sampson John H; Butowski Nicholas; Campian Jian; Recht Lawrence; Lim Michael; Ashby Lynn; Drappatz Jan; Hirte Hal; Iwamoto Fabio; Mechtler Laszlo; Goldlust Samuel; Becker Kevin; Barnett Gene; Nicholas Garth; Desjardins Annick; Benkers Tara; Wagle Naveed; Groves Morris; Kesari Santosh; Horvath Zsolt; Merrell Ryan; Curry Richard; O'Rourke James; Schuster David; Wong Mark; Mrugala Maciej; Jensen Randy; Trusheim John; Lesser Glenn; Belanger Karl; Sloan Andrew; Purow Benjamin; Fink Karen; Raizer Jeffrey; Schulder Michael; Nair Suresh; Peak Scott; Perry James; Brandes Alba; Weller Michael; Mohile Nimish; Landolfi Joseph; Olson Jon; Finocchiaro Gaetano; Jennens Ross; DeSouza Paul; Robinson Bridget; Crittenden Marka; Shih Kent; Flowers Alexandra; Ong Shirley; Connelly Jennifer; Hadjipanayis Costas; Giglio Pierre; Mott Frank; Mathieu David; Lessard Nathalie; Sepulveda Sanchez Juan; Lövey József; Wheeler Helen; Inglis Po-Ling; Hardie Claire; Bota Daniela; Lesniak Maciej; Portnow Jana; Frankel Bruce; Junck Larry; Thompson Reid; Berk Lawrence; McGhie John; Macdonald David; Saran Frank; Soffietti Riccardo; Blumenthal Deborah; André de Sá Barreto Costa Marcos; Nowak Anna; Singhal Nimit; Hottinger Andreas; Schmid Andrea; Srkalovic Gordan; Baskin David; Fadul Camilo; Nabors Louis; LaRocca Renato; Villano John; Paleologos Nina; Kavan Petr; Pitz Marshall; Thiessen Brian; Idbaih Ahmed; Frenel Jean Sébastien; Domont Julien; Grauer Oliver; Hau Peter; Marosi Christine; Sroubek Jan; Hovey Elizabeth; Sridhar P.S.; Cher Lawrence; Dunbar Erin; Coyle Thomas; Raymond Jane; Barton Kevin; Guarino Michael; Raval Sumul; Stea Baldassarre; Dietrich Jorge; Hopkins Kirsten; Erridge Sara; Steinbach Joachim-Peter; Pineda Losada Estela; Balana Quintero Carmen; Sonia del Barco Berron; Wenczl Miklós; Molnár Katalin; Hideghéty Katalin; Lossos Alexander; Myra van Linde; Levy Ana; Harrup Rosemary; Patterson William; Lwin Zarnie; Sathornsumetee Sith; Lee E-Jian; Ho Jih-Tsun; Emmons Steven; Duic J. Paul; Shao Spencer; Ashamalla Hani; Weaver Michael; Lutzky Jose; Avgeropoulos Nicholas; Hanna Wahid; Nadipuram Mukund; Cecchi Gary; O'Donnell Robert; Pannullo Susan; Carney Jennifer; Hamilton Mark; MacNeil Mary; Beaney Ronald; Fabbro Michel; Schnell Oliver; Fietkau Rainer; Stockhammer Guenther; Malinova Bela; Odrazka Karel; Sames Martin; Miguel Gil Gil; Razis Evangelia; Lavrenkov Konstantin; Castro Guillermo; Ramirez Francisco; Baldotto Clarissa; Viola Fabiana; Malheiros Suzana; Lickliter Jason; Gauden Stanislaw; Dechaphunkul Arunee; Thaipisuttikul Iyavut; Thotathil Ziad; Ma Hsin-I; Cheng Wen-Yu; Chang Chin-Hong; Salas Fernando; Dietrich Pierre-Yves; Mamot Christoph; Nayak Lakshmi; Nag Shona",
+   "venue": "The Lancet Oncology",
+   "year": 2017,
+   "kind": "article",
+   "doi": "10.1016/s1470-2045(17)30517-x",
+   "pmid": "28844499",
+   "url": "https://doi.org/10.1016/s1470-2045(17)30517-x",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Rindopepimut with temozolomide for patients with newly diagnosed, EGFRvIII-expressing glioblastoma (ACT IV): a randomised, double-blind, international phase 3 trial",
+    "note": "Crossref record found; PubMed id 28844499 located by DOI."
+   },
+   "note": "ACT IV: rindopepimut phase 3, negative.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/single-target-gbm-immunotherapies-failed-phase-3"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/xu-2018-natmed",
+   "type": "source",
+   "citation": "Xu et al., Nature Medicine, 2018",
+   "title": "Senolytics improve physical function and increase lifespan in old age",
+   "authors": "Xu Ming; Pirtskhalava Tamar; Farr Joshua N.; Weigand Bettina M.; Palmer Allyson K.; Weivoda Megan M.; Inman Christina L.; Ogrodnik Mikolaj B.; Hachfeld Christine M.; Fraser Daniel G.; Onken Jennifer L.; Johnson Kurt O.; Verzosa Grace C.; Langhi Larissa G. P.; Weigl Moritz; Giorgadze Nino; LeBrasseur Nathan K.; Miller Jordan D.; Jurk Diana; Singh Ravinder J.; Allison David B.; Ejima Keisuke; Hubbard Gene B.; Ikeno Yuji; Cubro Hajrunisa; Garovic Vesna D.; Hou Xiaonan; Weroha S. John; Robbins Paul D.; Niedernhofer Laura J.; Khosla Sundeep; Tchkonia Tamara; Kirkland James L.",
+   "venue": "Nature Medicine",
+   "year": 2018,
+   "kind": "article",
+   "doi": "10.1038/s41591-018-0092-9",
+   "pmid": "29988130",
+   "url": "https://doi.org/10.1038/s41591-018-0092-9",
+   "license": "https://www.springer.com/tdm",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Senolytics improve physical function and increase lifespan in old age",
+    "note": "Crossref record found; PubMed id 29988130 located by DOI."
+   },
+   "note": "Senolytics improve physical function and increase lifespan in old mice.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/senolytics-improve-function-and-lifespan-in-old-mice"
+    ]
+   }
+  },
+  {
+   "id": "hrm:source/yang-2023-cell",
+   "type": "source",
+   "citation": "Yang et al., Cell, 2023",
+   "title": "Loss of epigenetic information as a cause of mammalian aging",
+   "authors": "Yang Jae-Hyun; Hayano Motoshi; Griffin Patrick T.; Amorim João A.; Bonkowski Michael S.; Apostolides John K.; Salfati Elias L.; Blanchette Marco; Munding Elizabeth M.; Bhakta Mital; Chew Yap Ching; Guo Wei; Yang Xiaojing; Maybury-Lewis Sun; Tian Xiao; Ross Jaime M.; Coppotelli Giuseppe; Meer Margarita V.; Rogers-Hammond Ryan; Vera Daniel L.; Lu Yuancheng Ryan; Pippin Jeffrey W.; Creswell Michael L.; Dou Zhixun; Xu Caiyue; Mitchell Sarah J.; Das Abhirup; O’Connell Brendan L.; Thakur Sachin; Kane Alice E.; Su Qiao; Mohri Yasuaki; Nishimura Emi K.; Schaevitz Laura; Garg Neha; Balta Ana-Maria; Rego Meghan A.; Gregory-Ksander Meredith; Jakobs Tatjana C.; Zhong Lei; Wakimoto Hiroko; El Andari Jihad; Grimm Dirk; Mostoslavsky Raul; Wagers Amy J.; Tsubota Kazuo; Bonasera Stephen J.; Palmeira Carlos M.; Seidman Jonathan G.; Seidman Christine E.; Wolf Norman S.; Kreiling Jill A.; Sedivy John M.; Murphy George F.; Green Richard E.; Garcia Benjamin A.; Berger Shelley L.; Oberdoerffer Philipp; Shankland Stuart J.; Gladyshev Vadim N.; Ksander Bruce R.; Pfenning Andreas R.; Rajman Luis A.; Sinclair David A.",
+   "venue": "Cell",
+   "year": 2023,
+   "kind": "article",
+   "doi": "10.1016/j.cell.2022.12.027",
+   "pmid": "36638792",
+   "url": "https://doi.org/10.1016/j.cell.2022.12.027",
+   "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+   "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Loss of epigenetic information as a cause of mammalian aging",
+    "note": "Crossref record found; PubMed id 36638792 located by DOI."
+   },
+   "note": "Loss of epigenetic information as a cause of aging.",
+   "provenance": {
+    "proposedBy": {
+     "type": "ai",
+     "name": "Claude Code session b1762020 (Anthropic)",
+     "model": "claude-opus-5",
+     "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+   },
+   "derivedRelations": {
+    "citedBy": [
+     "hrm:claim/long-term-partial-reprogramming-is-tolerated-in-mice"
     ]
    }
   }
@@ -16229,6 +24853,41 @@ export const GRAPH = {
     "rank": 1
    },
    {
+    "id": "hrm:question/clocks-track-intervention-benefit",
+    "question": "Does moving an epigenetic clock with an intervention predict a change in health outcome, or is the clock only a correlate of chronological age?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/biological-age-measurement-that-predicts-outcome",
+     "hrm:capability/pharmacological-aging-rate-reduction",
+     "hrm:capability/senescent-cell-clearance-in-humans",
+     "hrm:goal/aging-rate-modification"
+    ],
+    "downstreamGoals": 4,
+    "downstreamCapabilities": 3,
+    "downstreamTotal": 7,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/biological-age-measurement-that-predicts-outcome",
+      "rung": "L2"
+     },
+     {
+      "id": "hrm:capability/pharmacological-aging-rate-reduction",
+      "rung": "L4"
+     },
+     {
+      "id": "hrm:capability/senescent-cell-clearance-in-humans",
+      "rung": "L4"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/clock-as-surrogate-validation"
+    ],
+    "projections": [
+     "rejuvenation"
+    ],
+    "rank": 2
+   },
+   {
     "id": "hrm:question/organised-microvasculature-in-thick-regenerated-tissue",
     "question": "Can an organised, hierarchical, perfused microvascular network be induced throughout regenerated or engineered dermis thicker than the diffusion limit, in humans, with normal geometry and long-term stability?",
     "state": "open",
@@ -16254,7 +24913,7 @@ export const GRAPH = {
      "universal-repair",
      "rejuvenation"
     ],
-    "rank": 2
+    "rank": 3
    },
    {
     "id": "hrm:question/what-limits-regeneration-in-mus-and-human",
@@ -16291,7 +24950,71 @@ export const GRAPH = {
      "universal-repair",
      "rejuvenation"
     ],
-    "rank": 3
+    "rank": 4
+   },
+   {
+    "id": "hrm:question/remuscularisation-arrhythmia-controllable",
+    "question": "Can new cardiomyocytes be added to an infarcted heart without causing ventricular arrhythmia — and if so, by maturing the graft, by removing its automaticity, or by grafting differently?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/graft-host-electrical-integration",
+     "hrm:capability/infarct-remuscularisation",
+     "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/myocardial-remuscularisation"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 3,
+    "downstreamTotal": 6,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/graft-host-electrical-integration",
+      "rung": "L3"
+     },
+     {
+      "id": "hrm:capability/infarct-remuscularisation",
+      "rung": "L3"
+     },
+     {
+      "id": "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+      "rung": "L4"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/matured-graft-arrhythmia-telemetry-primate"
+    ],
+    "projections": [
+     "universal-repair",
+     "rejuvenation"
+    ],
+    "rank": 5
+   },
+   {
+    "id": "hrm:question/motor-sensory-mistargeting-after-repair",
+    "question": "How much of the functional loss after a repaired nerve is mistargeting — motor axons entering sensory pathways and the wrong muscles — and can regrowth be guided to the correct fascicle?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/axon-regrowth-across-a-repair",
+     "hrm:capability/sensory-target-reinnervation-with-discrimination"
+    ],
+    "downstreamGoals": 4,
+    "downstreamCapabilities": 2,
+    "downstreamTotal": 6,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/axon-regrowth-across-a-repair",
+      "rung": "L5"
+     },
+     {
+      "id": "hrm:capability/sensory-target-reinnervation-with-discrimination",
+      "rung": "L4"
+     }
+    ],
+    "testedBy": [],
+    "projections": [
+     "universal-repair"
+    ],
+    "rank": 6
    },
    {
     "id": "hrm:question/regenerated-skin-sensory-reinnervation",
@@ -16314,7 +25037,130 @@ export const GRAPH = {
      "universal-repair",
      "rejuvenation"
     ],
-    "rank": 4
+    "rank": 7
+   },
+   {
+    "id": "hrm:question/chronic-denervation-reversible-in-humans",
+    "question": "Can a muscle and a distal nerve pathway that have been denervated for many months be made receptive again, so that a late repair works as well as an early one?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/distal-schwann-cell-support-maintenance",
+     "hrm:capability/timely-muscle-reinnervation",
+     "hrm:goal/nerve-target-restoration",
+     "hrm:goal/peripheral-nerve-repair"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 2,
+    "downstreamTotal": 5,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/distal-schwann-cell-support-maintenance",
+      "rung": "L2"
+     },
+     {
+      "id": "hrm:capability/timely-muscle-reinnervation",
+      "rung": "L2"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/conditioning-stimulation-proximal-injury-rct",
+     "hrm:experiment/delayed-repair-with-distal-support-large-animal"
+    ],
+    "projections": [
+     "universal-repair"
+    ],
+    "rank": 8
+   },
+   {
+    "id": "hrm:question/dilution-or-young-factors",
+    "question": "Is the rejuvenating effect of young blood the transfer of young factors, or the dilution of old ones?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/aged-plasma-factor-removal",
+     "hrm:capability/young-systemic-factor-supplementation",
+     "hrm:goal/systemic-environment-rejuvenation"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 2,
+    "downstreamTotal": 5,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/aged-plasma-factor-removal",
+      "rung": "L2"
+     },
+     {
+      "id": "hrm:capability/young-systemic-factor-supplementation",
+      "rung": "L2"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/neutral-blood-exchange-independent-replication"
+    ],
+    "projections": [
+     "rejuvenation"
+    ],
+    "rank": 9
+   },
+   {
+    "id": "hrm:question/gbm-heterogeneity-defeats-single-target",
+    "question": "Is glioblastoma's cellular plasticity a hard barrier to any single-target therapy, or can a small number of targets cover the states a tumour can occupy?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/gbm-antigen-escape-prevention",
+     "hrm:capability/gbm-targeted-cytotoxic-therapy",
+     "hrm:goal/gbm-bulk-and-margin",
+     "hrm:goal/glioblastoma-control"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 2,
+    "downstreamTotal": 5,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/gbm-antigen-escape-prevention",
+      "rung": "L2"
+     },
+     {
+      "id": "hrm:capability/gbm-targeted-cytotoxic-therapy",
+      "rung": "L5"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/paired-biopsy-at-car-t-recurrence"
+    ],
+    "projections": [
+     "universal-repair"
+    ],
+    "rank": 10
+   },
+   {
+    "id": "hrm:question/human-axon-regeneration-rate-increase",
+    "question": "Can the rate of human axon regeneration be raised above about one millimetre per day, or is that rate a hard property of the axon?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/regeneration-speed-increase",
+     "hrm:capability/timely-muscle-reinnervation",
+     "hrm:goal/peripheral-nerve-repair"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 2,
+    "downstreamTotal": 5,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/regeneration-speed-increase",
+      "rung": "L4"
+     },
+     {
+      "id": "hrm:capability/timely-muscle-reinnervation",
+      "rung": "L2"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/conditioning-stimulation-proximal-injury-rct"
+    ],
+    "projections": [
+     "universal-repair"
+    ],
+    "rank": 11
    },
    {
     "id": "hrm:question/pluripotent-derived-skin-engrafts-in-humans",
@@ -16337,7 +25183,38 @@ export const GRAPH = {
      "universal-repair",
      "rejuvenation"
     ],
-    "rank": 5
+    "rank": 12
+   },
+   {
+    "id": "hrm:question/regrown-axons-form-useful-circuits",
+    "question": "When axons are regrown across a spinal lesion, do they form connections that produce useful, controllable movement — or connections that produce spasticity, pain and nothing volitional?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
+     "hrm:capability/glial-scar-permissiveness-for-regrowth",
+     "hrm:goal/sci-function-restoration",
+     "hrm:goal/spinal-cord-injury-repair"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 2,
+    "downstreamTotal": 5,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
+      "rung": "L2"
+     },
+     {
+      "id": "hrm:capability/glial-scar-permissiveness-for-regrowth",
+      "rung": "L4"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/silence-regrown-axons-large-animal"
+    ],
+    "projections": [
+     "universal-repair"
+    ],
+    "rank": 13
    },
    {
     "id": "hrm:question/wound-induced-hair-neogenesis-in-human-skin",
@@ -16362,7 +25239,97 @@ export const GRAPH = {
      "universal-repair",
      "rejuvenation"
     ],
-    "rank": 6
+    "rank": 14
+   },
+   {
+    "id": "hrm:question/why-adult-cell-therapy-failed-in-the-heart",
+    "question": "Why did fifteen years of bone-marrow and adult stem cell trials after myocardial infarction produce no effect on function in individual-patient-data meta-analysis, when many individual trials were positive?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/infarct-remuscularisation",
+     "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+     "hrm:goal/myocardial-infarction-repair"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 2,
+    "downstreamTotal": 5,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/infarct-remuscularisation",
+      "rung": "L3"
+     },
+     {
+      "id": "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+      "rung": "L4"
+     }
+    ],
+    "testedBy": [],
+    "projections": [
+     "universal-repair"
+    ],
+    "rank": 15
+   },
+   {
+    "id": "hrm:question/bbb-really-the-delivery-limit",
+    "question": "How much of the failure of systemic therapy in glioblastoma is the blood-brain barrier, and how much is that the drugs would not work even at full concentration?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/cns-drug-delivery-past-the-barrier",
+     "hrm:capability/gbm-targeted-cytotoxic-therapy",
+     "hrm:goal/gbm-reaching-the-tumour",
+     "hrm:goal/glioblastoma-control"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 2,
+    "downstreamTotal": 5,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/cns-drug-delivery-past-the-barrier",
+      "rung": "L4"
+     },
+     {
+      "id": "hrm:capability/gbm-targeted-cytotoxic-therapy",
+      "rung": "L5"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/phase-0-margin-concentration-study"
+    ],
+    "projections": [
+     "universal-repair"
+    ],
+    "rank": 16
+   },
+   {
+    "id": "hrm:question/stimulation-benefit-without-spared-fibres",
+    "question": "Does epidural stimulation restore volitional movement in people with anatomically complete injury, or does it depend on spared descending fibres that clinical assessment cannot see?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/brain-spine-interface-volitional-control",
+     "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+     "hrm:goal/sci-function-restoration",
+     "hrm:goal/spinal-cord-injury-repair"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 2,
+    "downstreamTotal": 5,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/brain-spine-interface-volitional-control",
+      "rung": "L4"
+     },
+     {
+      "id": "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+      "rung": "L4"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/stimulation-stratified-by-spared-connectivity"
+    ],
+    "projections": [
+     "universal-repair"
+    ],
+    "rank": 17
    },
    {
     "id": "hrm:question/dermal-adipocyte-regeneration-in-human-wounds",
@@ -16385,7 +25352,37 @@ export const GRAPH = {
      "universal-repair",
      "rejuvenation"
     ],
-    "rank": 7
+    "rank": 18
+   },
+   {
+    "id": "hrm:question/gbm-response-durability",
+    "question": "Why do the rapid CAR T regressions in glioblastoma not last, and can they be made durable?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/gbm-antigen-escape-prevention",
+     "hrm:capability/gbm-immune-cell-therapy",
+     "hrm:goal/glioblastoma-control"
+    ],
+    "downstreamGoals": 2,
+    "downstreamCapabilities": 2,
+    "downstreamTotal": 4,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/gbm-antigen-escape-prevention",
+      "rung": "L2"
+     },
+     {
+      "id": "hrm:capability/gbm-immune-cell-therapy",
+      "rung": "L4"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/paired-biopsy-at-car-t-recurrence"
+    ],
+    "projections": [
+     "universal-repair"
+    ],
+    "rank": 19
    },
    {
     "id": "hrm:question/partial-reprogramming-human-safety",
@@ -16415,7 +25412,34 @@ export const GRAPH = {
     "projections": [
      "rejuvenation"
     ],
-    "rank": 8
+    "rank": 20
+   },
+   {
+    "id": "hrm:question/controllable-cardiomyocyte-proliferation",
+    "question": "Can adult cardiomyocyte proliferation be switched on to repair an infarct and then switched off, or does the same signal that repairs the heart keep going until it kills the animal?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/cardiomyocyte-proliferation-induction",
+     "hrm:goal/myocardial-infarction-repair",
+     "hrm:goal/myocardial-remuscularisation"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 1,
+    "downstreamTotal": 4,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/cardiomyocyte-proliferation-induction",
+      "rung": "L3"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/transient-proliferation-pig-repeat"
+    ],
+    "projections": [
+     "universal-repair",
+     "rejuvenation"
+    ],
+    "rank": 21
    },
    {
     "id": "hrm:question/gene-corrected-epidermal-graft-long-term-safety",
@@ -16439,7 +25463,32 @@ export const GRAPH = {
     "projections": [
      "universal-repair"
     ],
-    "rank": 9
+    "rank": 22
+   },
+   {
+    "id": "hrm:question/senolytics-improve-human-function",
+    "question": "Do senolytics improve function in older people, or only reduce a marker in a biopsy?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/senescent-cell-clearance-in-humans",
+     "hrm:goal/senescent-cell-clearance-goal"
+    ],
+    "downstreamGoals": 3,
+    "downstreamCapabilities": 1,
+    "downstreamTotal": 4,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/senescent-cell-clearance-in-humans",
+      "rung": "L4"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/senolytic-rct-functional-endpoint"
+    ],
+    "projections": [
+     "rejuvenation"
+    ],
+    "rank": 23
    },
    {
     "id": "hrm:question/topical-gene-delivery-generalises-beyond-eb",
@@ -16461,7 +25510,7 @@ export const GRAPH = {
     "projections": [
      "universal-repair"
     ],
-    "rank": 10
+    "rank": 24
    },
    {
     "id": "hrm:question/why-avotermin-phase-3-failed",
@@ -16484,7 +25533,7 @@ export const GRAPH = {
     "projections": [
      "universal-repair"
     ],
-    "rank": 11
+    "rank": 25
    },
    {
     "id": "hrm:question/fetal-conditions-reproducible-in-adult-skin",
@@ -16507,7 +25556,7 @@ export const GRAPH = {
      "universal-repair",
      "rejuvenation"
     ],
-    "rank": 12
+    "rank": 26
    },
    {
     "id": "hrm:question/nondestructive-fibroblast-state-readout-in-human-wounds",
@@ -16530,7 +25579,7 @@ export const GRAPH = {
      "universal-repair",
      "rejuvenation"
     ],
-    "rank": 13
+    "rank": 27
    },
    {
     "id": "hrm:question/reliable-biofilm-eradication-in-chronic-wounds",
@@ -16553,7 +25602,32 @@ export const GRAPH = {
     "projections": [
      "universal-repair"
     ],
-    "rank": 14
+    "rank": 28
+   },
+   {
+    "id": "hrm:question/cord-repair-restores-autonomic-function",
+    "question": "Would any of the current repair or stimulation strategies restore bladder, bowel and cardiovascular control, or do those pathways need their own intervention?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/autonomic-function-restoration-after-sci",
+     "hrm:goal/spinal-cord-injury-repair"
+    ],
+    "downstreamGoals": 2,
+    "downstreamCapabilities": 1,
+    "downstreamTotal": 3,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/autonomic-function-restoration-after-sci",
+      "rung": "L0"
+     }
+    ],
+    "testedBy": [
+     "hrm:experiment/autonomic-endpoint-stimulation-trial"
+    ],
+    "projections": [
+     "universal-repair"
+    ],
+    "rank": 29
    },
    {
     "id": "hrm:question/established-scar-remodelling-to-native-architecture",
@@ -16577,7 +25651,30 @@ export const GRAPH = {
      "universal-repair",
      "rejuvenation"
     ],
-    "rank": 15
+    "rank": 30
+   },
+   {
+    "id": "hrm:question/geroprotector-benefit-in-humans",
+    "question": "Does any geroprotector — rapamycin, metformin, or another — reduce incident age-related disease in humans?",
+    "state": "open",
+    "blocksDirectly": [
+     "hrm:capability/pharmacological-aging-rate-reduction",
+     "hrm:goal/aging-rate-modification"
+    ],
+    "downstreamGoals": 2,
+    "downstreamCapabilities": 1,
+    "downstreamTotal": 3,
+    "directlyBlockedRungs": [
+     {
+      "id": "hrm:capability/pharmacological-aging-rate-reduction",
+      "rung": "L4"
+     }
+    ],
+    "testedBy": [],
+    "projections": [
+     "rejuvenation"
+    ],
+    "rank": 31
    },
    {
     "id": "hrm:question/rejuvenation-reach-beyond-eye-and-liver",
@@ -16600,7 +25697,7 @@ export const GRAPH = {
     "projections": [
      "rejuvenation"
     ],
-    "rank": 16
+    "rank": 32
    },
    {
     "id": "hrm:question/cancer-risk-of-repeated-partial-reprogramming",
@@ -16623,7 +25720,7 @@ export const GRAPH = {
     "projections": [
      "rejuvenation"
     ],
-    "rank": 17
+    "rank": 33
    },
    {
     "id": "hrm:question/rejuvenated-state-persistence-and-redosing",
@@ -16646,7 +25743,7 @@ export const GRAPH = {
     "projections": [
      "rejuvenation"
     ],
-    "rank": 18
+    "rank": 34
    },
    {
     "id": "hrm:question/healthy-target-state-for-aged-tissue",
@@ -16664,7 +25761,7 @@ export const GRAPH = {
     "projections": [
      "rejuvenation"
     ],
-    "rank": 19
+    "rank": 35
    },
    {
     "id": "hrm:question/skin-substitutes-improve-scar-quality-not-just-closure",
@@ -16688,10 +25785,45 @@ export const GRAPH = {
     "projections": [
      "universal-repair"
     ],
-    "rank": 20
+    "rank": 36
    }
   ],
   "criticalPaths": [
+   {
+    "goal": "hrm:goal/aging-rate-modification",
+    "requiredCapabilities": 2,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/biological-age-measurement-that-predicts-outcome",
+      "name": "Tell whether someone got biologically younger",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/aging-rate-modification"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/biological-age-measurement-that-predicts-outcome",
+      "name": "Tell whether someone got biologically younger",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/aging-rate-modification"
+     },
+     {
+      "id": "hrm:capability/pharmacological-aging-rate-reduction",
+      "name": "Slow aging with a drug",
+      "rung": "L4",
+      "blocked": "framework",
+      "basis": "claims",
+      "via": "hrm:goal/aging-rate-modification"
+     }
+    ],
+    "orGroups": [],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
    {
     "goal": "hrm:goal/established-scar-repair",
     "requiredCapabilities": 6,
@@ -16764,8 +25896,493 @@ export const GRAPH = {
     "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
    },
    {
+    "goal": "hrm:goal/gbm-bulk-and-margin",
+    "requiredCapabilities": 2,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/gbm-infiltrative-margin-clearance",
+      "name": "Clear the cells that have already spread into working brain",
+      "rung": "L0",
+      "blocked": null,
+      "basis": "no-evidence-located",
+      "via": "hrm:goal/gbm-bulk-and-margin"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/gbm-infiltrative-margin-clearance",
+      "name": "Clear the cells that have already spread into working brain",
+      "rung": "L0",
+      "blocked": null,
+      "basis": "no-evidence-located",
+      "via": "hrm:goal/gbm-bulk-and-margin"
+     },
+     {
+      "id": "hrm:capability/gbm-tumour-cell-eradication",
+      "name": "Kill the tumour cells that are there",
+      "rung": "L5",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/gbm-bulk-and-margin"
+     }
+    ],
+    "orGroups": [],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/gbm-reaching-the-tumour",
+    "requiredCapabilities": 1,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/cns-drug-delivery-past-the-barrier",
+      "name": "Get the therapy past the blood-brain barrier",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/gbm-reaching-the-tumour"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/cns-drug-delivery-past-the-barrier",
+      "name": "Get the therapy past the blood-brain barrier",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/gbm-reaching-the-tumour"
+     }
+    ],
+    "orGroups": [],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/glioblastoma-control",
+    "requiredCapabilities": 6,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/gbm-infiltrative-margin-clearance",
+      "name": "Clear the cells that have already spread into working brain",
+      "rung": "L0",
+      "blocked": null,
+      "basis": "no-evidence-located",
+      "via": "hrm:goal/glioblastoma-control"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/gbm-infiltrative-margin-clearance",
+      "name": "Clear the cells that have already spread into working brain",
+      "rung": "L0",
+      "blocked": null,
+      "basis": "no-evidence-located",
+      "via": "hrm:goal/glioblastoma-control"
+     },
+     {
+      "id": "hrm:capability/gbm-antigen-escape-prevention",
+      "name": "Stop the tumour changing to escape the therapy",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/glioblastoma-control"
+     },
+     {
+      "id": "hrm:capability/cns-drug-delivery-past-the-barrier",
+      "name": "Get the therapy past the blood-brain barrier",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/glioblastoma-control"
+     },
+     {
+      "id": "hrm:capability/gbm-tumour-cell-eradication",
+      "name": "Kill the tumour cells that are there",
+      "rung": "L5",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/glioblastoma-control"
+     }
+    ],
+    "orGroups": [
+     {
+      "via": "hrm:goal/glioblastoma-control",
+      "note": "OR-group: turn the immune system on it, or deliver something that kills it. Neither is currently sufficient; the map does not pick a winner.",
+      "bestRung": "L5",
+      "members": [
+       {
+        "id": "hrm:capability/gbm-immune-cell-therapy",
+        "name": "Turn engineered immune cells on the tumour",
+        "rung": "L4",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/gbm-targeted-cytotoxic-therapy",
+        "name": "Kill it with something aimed at what makes it a tumour",
+        "rung": "L5",
+        "basis": "claims"
+       }
+      ]
+     }
+    ],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/myocardial-infarction-repair",
+    "requiredCapabilities": 6,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/infarct-remuscularisation",
+      "name": "Put working muscle where the scar is",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     },
+     {
+      "id": "hrm:capability/graft-host-electrical-integration",
+      "name": "Wire new muscle into the heart's rhythm",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     },
+     {
+      "id": "hrm:capability/myocardial-graft-vascularisation",
+      "name": "Get blood to the new muscle",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/infarct-remuscularisation",
+      "name": "Put working muscle where the scar is",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     },
+     {
+      "id": "hrm:capability/graft-host-electrical-integration",
+      "name": "Wire new muscle into the heart's rhythm",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     },
+     {
+      "id": "hrm:capability/myocardial-graft-vascularisation",
+      "name": "Get blood to the new muscle",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     },
+     {
+      "id": "hrm:capability/acute-reperfusion-of-the-infarct-artery",
+      "name": "Reopen the blocked artery in time",
+      "rung": "L5",
+      "blocked": "framework",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     }
+    ],
+    "orGroups": [
+     {
+      "via": "hrm:goal/myocardial-infarction-repair",
+      "note": "OR-group: make the surviving muscle divide, or add muscle from outside. The map does not assume which route arrives first.",
+      "bestRung": "L4",
+      "members": [
+       {
+        "id": "hrm:capability/cardiomyocyte-proliferation-induction",
+        "name": "Make the surviving heart muscle divide",
+        "rung": "L3",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+        "name": "Grow the replacement muscle outside the body",
+        "rung": "L4",
+        "basis": "claims"
+       }
+      ]
+     }
+    ],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/myocardial-remuscularisation",
+    "requiredCapabilities": 5,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/infarct-remuscularisation",
+      "name": "Put working muscle where the scar is",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-remuscularisation"
+     },
+     {
+      "id": "hrm:capability/graft-host-electrical-integration",
+      "name": "Wire new muscle into the heart's rhythm",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-remuscularisation"
+     },
+     {
+      "id": "hrm:capability/myocardial-graft-vascularisation",
+      "name": "Get blood to the new muscle",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-remuscularisation"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/infarct-remuscularisation",
+      "name": "Put working muscle where the scar is",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-remuscularisation"
+     },
+     {
+      "id": "hrm:capability/graft-host-electrical-integration",
+      "name": "Wire new muscle into the heart's rhythm",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-remuscularisation"
+     },
+     {
+      "id": "hrm:capability/myocardial-graft-vascularisation",
+      "name": "Get blood to the new muscle",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-remuscularisation"
+     }
+    ],
+    "orGroups": [
+     {
+      "via": "hrm:goal/myocardial-remuscularisation",
+      "bestRung": "L4",
+      "members": [
+       {
+        "id": "hrm:capability/cardiomyocyte-proliferation-induction",
+        "name": "Make the surviving heart muscle divide",
+        "rung": "L3",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+        "name": "Grow the replacement muscle outside the body",
+        "rung": "L4",
+        "basis": "claims"
+       }
+      ]
+     }
+    ],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/myocardial-salvage",
+    "requiredCapabilities": 1,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/acute-reperfusion-of-the-infarct-artery",
+      "name": "Reopen the blocked artery in time",
+      "rung": "L5",
+      "blocked": "framework",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-salvage"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/acute-reperfusion-of-the-infarct-artery",
+      "name": "Reopen the blocked artery in time",
+      "rung": "L5",
+      "blocked": "framework",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-salvage"
+     }
+    ],
+    "orGroups": [],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/nerve-continuity-restoration",
+    "requiredCapabilities": 3,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/axon-regrowth-across-a-repair",
+      "name": "Get axons to grow across the repair",
+      "rung": "L5",
+      "blocked": "none",
+      "basis": "standard-of-care",
+      "via": "hrm:goal/nerve-continuity-restoration"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/axon-regrowth-across-a-repair",
+      "name": "Get axons to grow across the repair",
+      "rung": "L5",
+      "blocked": "none",
+      "basis": "standard-of-care",
+      "via": "hrm:goal/nerve-continuity-restoration"
+     }
+    ],
+    "orGroups": [
+     {
+      "via": "hrm:goal/nerve-continuity-restoration",
+      "bestRung": "L5",
+      "members": [
+       {
+        "id": "hrm:capability/nerve-gap-bridging",
+        "name": "Bridge a gap in a cut nerve",
+        "rung": "L5",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/nerve-transfer-from-a-donor-nerve",
+        "name": "Rewire a nerve from a nearby healthy donor",
+        "rung": "L5",
+        "basis": "claims"
+       }
+      ]
+     }
+    ],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/nerve-target-restoration",
+    "requiredCapabilities": 3,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/timely-muscle-reinnervation",
+      "name": "Reinnervate a muscle before it is lost",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/nerve-target-restoration"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/timely-muscle-reinnervation",
+      "name": "Reinnervate a muscle before it is lost",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/nerve-target-restoration"
+     },
+     {
+      "id": "hrm:capability/sensory-target-reinnervation-with-discrimination",
+      "name": "Restore sensation, not just feeling",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/nerve-target-restoration"
+     },
+     {
+      "id": "hrm:capability/reinnervation-verification-in-humans",
+      "name": "Tell whether reinnervation is actually happening",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "standard-of-care",
+      "via": "hrm:goal/nerve-target-restoration"
+     }
+    ],
+    "orGroups": [],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/peripheral-nerve-repair",
+    "requiredCapabilities": 6,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/timely-muscle-reinnervation",
+      "name": "Reinnervate a muscle before it is lost",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/peripheral-nerve-repair"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/timely-muscle-reinnervation",
+      "name": "Reinnervate a muscle before it is lost",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/peripheral-nerve-repair"
+     },
+     {
+      "id": "hrm:capability/sensory-target-reinnervation-with-discrimination",
+      "name": "Restore sensation, not just feeling",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/peripheral-nerve-repair"
+     },
+     {
+      "id": "hrm:capability/nerve-gap-bridging",
+      "name": "Bridge a gap in a cut nerve",
+      "rung": "L5",
+      "blocked": "framework",
+      "basis": "claims",
+      "via": "hrm:goal/peripheral-nerve-repair"
+     },
+     {
+      "id": "hrm:capability/axon-regrowth-across-a-repair",
+      "name": "Get axons to grow across the repair",
+      "rung": "L5",
+      "blocked": "none",
+      "basis": "standard-of-care",
+      "via": "hrm:goal/peripheral-nerve-repair"
+     }
+    ],
+    "orGroups": [
+     {
+      "via": "hrm:goal/peripheral-nerve-repair",
+      "note": "OR-group: keep the distal pathway alive long enough, or make the axons arrive sooner. Both address the same clock; nobody knows which is achievable in a human.",
+      "bestRung": "L4",
+      "members": [
+       {
+        "id": "hrm:capability/distal-schwann-cell-support-maintenance",
+        "name": "Keep the distal nerve able to receive axons",
+        "rung": "L2",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/regeneration-speed-increase",
+        "name": "Make axons regrow faster than a millimetre a day",
+        "rung": "L4",
+        "basis": "claims"
+       }
+      ]
+     }
+    ],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
     "goal": "hrm:goal/rejuvenation",
-    "requiredCapabilities": 7,
+    "requiredCapabilities": 16,
     "bindingConstraints": [
      {
       "id": "hrm:capability/safe-partial-epigenetic-reprogramming-in-vivo",
@@ -16782,6 +26399,14 @@ export const GRAPH = {
       "blocked": "science",
       "basis": "claims",
       "via": "hrm:goal/systemic-rejuvenation"
+     },
+     {
+      "id": "hrm:capability/biological-age-measurement-that-predicts-outcome",
+      "name": "Tell whether someone got biologically younger",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/aging-rate-modification"
      }
     ],
     "andRequirements": [
@@ -16800,6 +26425,38 @@ export const GRAPH = {
       "blocked": "science",
       "basis": "claims",
       "via": "hrm:goal/systemic-rejuvenation"
+     },
+     {
+      "id": "hrm:capability/biological-age-measurement-that-predicts-outcome",
+      "name": "Tell whether someone got biologically younger",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/aging-rate-modification"
+     },
+     {
+      "id": "hrm:capability/senescent-cell-clearance-in-humans",
+      "name": "Clear senescent cells from a living person",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/senescent-cell-clearance-goal"
+     },
+     {
+      "id": "hrm:capability/senescent-cell-burden-measurement",
+      "name": "Measure how many senescent cells a person has",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/senescent-cell-clearance-goal"
+     },
+     {
+      "id": "hrm:capability/pharmacological-aging-rate-reduction",
+      "name": "Slow aging with a drug",
+      "rung": "L4",
+      "blocked": "framework",
+      "basis": "claims",
+      "via": "hrm:goal/aging-rate-modification"
      }
     ],
     "orGroups": [
@@ -16818,6 +26475,24 @@ export const GRAPH = {
         "id": "hrm:capability/cns-neuron--reach",
         "name": "Central neuron: reach",
         "rung": "L4",
+        "basis": "claims"
+       }
+      ]
+     },
+     {
+      "via": "hrm:goal/systemic-environment-rejuvenation",
+      "bestRung": "L2",
+      "members": [
+       {
+        "id": "hrm:capability/aged-plasma-factor-removal",
+        "name": "Take the aged factors out of circulation",
+        "rung": "L2",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/young-systemic-factor-supplementation",
+        "name": "Add young factors to old circulation",
+        "rung": "L2",
         "basis": "claims"
        }
       ]
@@ -17058,6 +26733,128 @@ export const GRAPH = {
       "via": "hrm:goal/skin-functional-restoration"
      }
     ],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/sci-damage-limitation",
+    "requiredCapabilities": 1,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/acute-cord-damage-limitation",
+      "name": "Limit the damage in the hours after a cord injury",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/sci-damage-limitation"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/acute-cord-damage-limitation",
+      "name": "Limit the damage in the hours after a cord injury",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/sci-damage-limitation"
+     }
+    ],
+    "orGroups": [],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/sci-function-restoration",
+    "requiredCapabilities": 4,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/glial-scar-permissiveness-for-regrowth",
+      "name": "Make the scar a path rather than a wall",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/sci-function-restoration"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/glial-scar-permissiveness-for-regrowth",
+      "name": "Make the scar a path rather than a wall",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/sci-function-restoration"
+     }
+    ],
+    "orGroups": [
+     {
+      "via": "hrm:goal/sci-function-restoration",
+      "bestRung": "L4",
+      "members": [
+       {
+        "id": "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
+        "name": "Regrow severed axons across the injury",
+        "rung": "L2",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+        "name": "Wake up the circuitry below the injury",
+        "rung": "L4",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/brain-spine-interface-volitional-control",
+        "name": "Bridge the gap electronically, under the person's own control",
+        "rung": "L4",
+        "basis": "claims"
+       }
+      ]
+     }
+    ],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/senescent-cell-clearance-goal",
+    "requiredCapabilities": 2,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/senescent-cell-clearance-in-humans",
+      "name": "Clear senescent cells from a living person",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/senescent-cell-clearance-goal"
+     },
+     {
+      "id": "hrm:capability/senescent-cell-burden-measurement",
+      "name": "Measure how many senescent cells a person has",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/senescent-cell-clearance-goal"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/senescent-cell-clearance-in-humans",
+      "name": "Clear senescent cells from a living person",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/senescent-cell-clearance-goal"
+     },
+     {
+      "id": "hrm:capability/senescent-cell-burden-measurement",
+      "name": "Measure how many senescent cells a person has",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/senescent-cell-clearance-goal"
+     }
+    ],
+    "orGroups": [],
+    "ungraded": [],
     "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
    },
    {
@@ -17380,8 +27177,97 @@ export const GRAPH = {
     "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
    },
    {
+    "goal": "hrm:goal/spinal-cord-injury-repair",
+    "requiredCapabilities": 5,
+    "bindingConstraints": [
+     {
+      "id": "hrm:capability/autonomic-function-restoration-after-sci",
+      "name": "Restore bladder, bowel and blood-pressure control",
+      "rung": "L0",
+      "blocked": null,
+      "basis": "no-evidence-located",
+      "via": "hrm:goal/spinal-cord-injury-repair"
+     }
+    ],
+    "andRequirements": [
+     {
+      "id": "hrm:capability/autonomic-function-restoration-after-sci",
+      "name": "Restore bladder, bowel and blood-pressure control",
+      "rung": "L0",
+      "blocked": null,
+      "basis": "no-evidence-located",
+      "via": "hrm:goal/spinal-cord-injury-repair"
+     },
+     {
+      "id": "hrm:capability/acute-cord-damage-limitation",
+      "name": "Limit the damage in the hours after a cord injury",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/spinal-cord-injury-repair"
+     }
+    ],
+    "orGroups": [
+     {
+      "via": "hrm:goal/spinal-cord-injury-repair",
+      "note": "OR-group: regrow the tract, drive the circuitry below it, or bridge the gap electronically. These are three different bets on the same deficit and the map does not assume one wins.",
+      "bestRung": "L4",
+      "members": [
+       {
+        "id": "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
+        "name": "Regrow severed axons across the injury",
+        "rung": "L2",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+        "name": "Wake up the circuitry below the injury",
+        "rung": "L4",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/brain-spine-interface-volitional-control",
+        "name": "Bridge the gap electronically, under the person's own control",
+        "rung": "L4",
+        "basis": "claims"
+       }
+      ]
+     }
+    ],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
+    "goal": "hrm:goal/systemic-environment-rejuvenation",
+    "requiredCapabilities": 2,
+    "bindingConstraints": [],
+    "andRequirements": [],
+    "orGroups": [
+     {
+      "via": "hrm:goal/systemic-environment-rejuvenation",
+      "bestRung": "L2",
+      "members": [
+       {
+        "id": "hrm:capability/aged-plasma-factor-removal",
+        "name": "Take the aged factors out of circulation",
+        "rung": "L2",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/young-systemic-factor-supplementation",
+        "name": "Add young factors to old circulation",
+        "rung": "L2",
+        "basis": "claims"
+       }
+      ]
+     }
+    ],
+    "ungraded": [],
+    "reading": "bindingConstraints are the AND-required capabilities at the lowest rung: the goal cannot be closer than they are. orGroups list alternatives where clearing one member suffices. Nothing here is a probability."
+   },
+   {
     "goal": "hrm:goal/systemic-rejuvenation",
-    "requiredCapabilities": 6,
+    "requiredCapabilities": 12,
     "bindingConstraints": [
      {
       "id": "hrm:capability/safe-partial-epigenetic-reprogramming-in-vivo",
@@ -17416,6 +27302,22 @@ export const GRAPH = {
       "blocked": "science",
       "basis": "claims",
       "via": "hrm:goal/systemic-rejuvenation"
+     },
+     {
+      "id": "hrm:capability/senescent-cell-clearance-in-humans",
+      "name": "Clear senescent cells from a living person",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/senescent-cell-clearance-goal"
+     },
+     {
+      "id": "hrm:capability/senescent-cell-burden-measurement",
+      "name": "Measure how many senescent cells a person has",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/senescent-cell-clearance-goal"
      }
     ],
     "orGroups": [
@@ -17434,6 +27336,24 @@ export const GRAPH = {
         "id": "hrm:capability/cns-neuron--reach",
         "name": "Central neuron: reach",
         "rung": "L4",
+        "basis": "claims"
+       }
+      ]
+     },
+     {
+      "via": "hrm:goal/systemic-environment-rejuvenation",
+      "bestRung": "L2",
+      "members": [
+       {
+        "id": "hrm:capability/aged-plasma-factor-removal",
+        "name": "Take the aged factors out of circulation",
+        "rung": "L2",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/young-systemic-factor-supplementation",
+        "name": "Add young factors to old circulation",
+        "rung": "L2",
         "basis": "claims"
        }
       ]
@@ -17461,7 +27381,7 @@ export const GRAPH = {
    },
    {
     "goal": "hrm:goal/universal-repair",
-    "requiredCapabilities": 31,
+    "requiredCapabilities": 58,
     "bindingConstraints": [
      {
       "id": "hrm:capability/established-dermal-scar-reversal",
@@ -17470,6 +27390,22 @@ export const GRAPH = {
       "blocked": "science",
       "basis": "claims",
       "via": "hrm:goal/established-scar-repair"
+     },
+     {
+      "id": "hrm:capability/autonomic-function-restoration-after-sci",
+      "name": "Restore bladder, bowel and blood-pressure control",
+      "rung": "L0",
+      "blocked": null,
+      "basis": "no-evidence-located",
+      "via": "hrm:goal/spinal-cord-injury-repair"
+     },
+     {
+      "id": "hrm:capability/gbm-infiltrative-margin-clearance",
+      "name": "Clear the cells that have already spread into working brain",
+      "rung": "L0",
+      "blocked": null,
+      "basis": "no-evidence-located",
+      "via": "hrm:goal/glioblastoma-control"
      }
     ],
     "andRequirements": [
@@ -17480,6 +27416,22 @@ export const GRAPH = {
       "blocked": "science",
       "basis": "claims",
       "via": "hrm:goal/established-scar-repair"
+     },
+     {
+      "id": "hrm:capability/autonomic-function-restoration-after-sci",
+      "name": "Restore bladder, bowel and blood-pressure control",
+      "rung": "L0",
+      "blocked": null,
+      "basis": "no-evidence-located",
+      "via": "hrm:goal/spinal-cord-injury-repair"
+     },
+     {
+      "id": "hrm:capability/gbm-infiltrative-margin-clearance",
+      "name": "Clear the cells that have already spread into working brain",
+      "rung": "L0",
+      "blocked": null,
+      "basis": "no-evidence-located",
+      "via": "hrm:goal/glioblastoma-control"
      },
      {
       "id": "hrm:capability/cutaneous-sensory-reinnervation",
@@ -17554,12 +27506,76 @@ export const GRAPH = {
       "via": "hrm:goal/skin-biological-control"
      },
      {
+      "id": "hrm:capability/timely-muscle-reinnervation",
+      "name": "Reinnervate a muscle before it is lost",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/peripheral-nerve-repair"
+     },
+     {
+      "id": "hrm:capability/gbm-antigen-escape-prevention",
+      "name": "Stop the tumour changing to escape the therapy",
+      "rung": "L2",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/glioblastoma-control"
+     },
+     {
+      "id": "hrm:capability/infarct-remuscularisation",
+      "name": "Put working muscle where the scar is",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     },
+     {
+      "id": "hrm:capability/graft-host-electrical-integration",
+      "name": "Wire new muscle into the heart's rhythm",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     },
+     {
+      "id": "hrm:capability/myocardial-graft-vascularisation",
+      "name": "Get blood to the new muscle",
+      "rung": "L3",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     },
+     {
       "id": "hrm:capability/pharmacological-scar-reduction-in-humans",
       "name": "Reduce scarring pharmacologically in human wounds",
       "rung": "L4",
       "blocked": "science",
       "basis": "claims",
       "via": "hrm:goal/skin-biological-control"
+     },
+     {
+      "id": "hrm:capability/sensory-target-reinnervation-with-discrimination",
+      "name": "Restore sensation, not just feeling",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/peripheral-nerve-repair"
+     },
+     {
+      "id": "hrm:capability/acute-cord-damage-limitation",
+      "name": "Limit the damage in the hours after a cord injury",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/spinal-cord-injury-repair"
+     },
+     {
+      "id": "hrm:capability/cns-drug-delivery-past-the-barrier",
+      "name": "Get the therapy past the blood-brain barrier",
+      "rung": "L4",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/glioblastoma-control"
      },
      {
       "id": "hrm:capability/skin-haemostasis",
@@ -17608,6 +27624,38 @@ export const GRAPH = {
       "blocked": "none",
       "basis": "standard-of-care",
       "via": "hrm:goal/skin-functional-restoration"
+     },
+     {
+      "id": "hrm:capability/nerve-gap-bridging",
+      "name": "Bridge a gap in a cut nerve",
+      "rung": "L5",
+      "blocked": "framework",
+      "basis": "claims",
+      "via": "hrm:goal/peripheral-nerve-repair"
+     },
+     {
+      "id": "hrm:capability/axon-regrowth-across-a-repair",
+      "name": "Get axons to grow across the repair",
+      "rung": "L5",
+      "blocked": "none",
+      "basis": "standard-of-care",
+      "via": "hrm:goal/peripheral-nerve-repair"
+     },
+     {
+      "id": "hrm:capability/acute-reperfusion-of-the-infarct-artery",
+      "name": "Reopen the blocked artery in time",
+      "rung": "L5",
+      "blocked": "framework",
+      "basis": "claims",
+      "via": "hrm:goal/myocardial-infarction-repair"
+     },
+     {
+      "id": "hrm:capability/gbm-tumour-cell-eradication",
+      "name": "Kill the tumour cells that are there",
+      "rung": "L5",
+      "blocked": "science",
+      "basis": "claims",
+      "via": "hrm:goal/glioblastoma-control"
      }
     ],
     "orGroups": [
@@ -17673,6 +27721,88 @@ export const GRAPH = {
         "basis": "claims"
        }
       ]
+     },
+     {
+      "via": "hrm:goal/peripheral-nerve-repair",
+      "note": "OR-group: keep the distal pathway alive long enough, or make the axons arrive sooner. Both address the same clock; nobody knows which is achievable in a human.",
+      "bestRung": "L4",
+      "members": [
+       {
+        "id": "hrm:capability/distal-schwann-cell-support-maintenance",
+        "name": "Keep the distal nerve able to receive axons",
+        "rung": "L2",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/regeneration-speed-increase",
+        "name": "Make axons regrow faster than a millimetre a day",
+        "rung": "L4",
+        "basis": "claims"
+       }
+      ]
+     },
+     {
+      "via": "hrm:goal/spinal-cord-injury-repair",
+      "note": "OR-group: regrow the tract, drive the circuitry below it, or bridge the gap electronically. These are three different bets on the same deficit and the map does not assume one wins.",
+      "bestRung": "L4",
+      "members": [
+       {
+        "id": "hrm:capability/corticospinal-axon-regrowth-across-a-lesion",
+        "name": "Regrow severed axons across the injury",
+        "rung": "L2",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/spinal-circuit-reactivation-by-stimulation",
+        "name": "Wake up the circuitry below the injury",
+        "rung": "L4",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/brain-spine-interface-volitional-control",
+        "name": "Bridge the gap electronically, under the person's own control",
+        "rung": "L4",
+        "basis": "claims"
+       }
+      ]
+     },
+     {
+      "via": "hrm:goal/myocardial-infarction-repair",
+      "note": "OR-group: make the surviving muscle divide, or add muscle from outside. The map does not assume which route arrives first.",
+      "bestRung": "L4",
+      "members": [
+       {
+        "id": "hrm:capability/cardiomyocyte-proliferation-induction",
+        "name": "Make the surviving heart muscle divide",
+        "rung": "L3",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/pluripotent-derived-cardiomyocyte-grafting",
+        "name": "Grow the replacement muscle outside the body",
+        "rung": "L4",
+        "basis": "claims"
+       }
+      ]
+     },
+     {
+      "via": "hrm:goal/glioblastoma-control",
+      "note": "OR-group: turn the immune system on it, or deliver something that kills it. Neither is currently sufficient; the map does not pick a winner.",
+      "bestRung": "L5",
+      "members": [
+       {
+        "id": "hrm:capability/gbm-immune-cell-therapy",
+        "name": "Turn engineered immune cells on the tumour",
+        "rung": "L4",
+        "basis": "claims"
+       },
+       {
+        "id": "hrm:capability/gbm-targeted-cytotoxic-therapy",
+        "name": "Kill it with something aimed at what makes it a tumour",
+        "rung": "L5",
+        "basis": "claims"
+       }
+      ]
      }
     ],
     "ungraded": [
@@ -17706,6 +27836,14 @@ export const GRAPH = {
   ],
   "contradictions": [
    {
+    "claim": "hrm:claim/adult-cell-therapy-after-mi-shows-no-effect-in-ipd-meta-analysis",
+    "contradicts": [
+     "hrm:capability/infarct-remuscularisation",
+     "hrm:capability/pluripotent-derived-cardiomyocyte-grafting"
+    ],
+    "statement": "An individual-patient-data meta-analysis of randomised trials of intracoronary adult cell therapy after acute myocardial infarction found no effect on left ventricular ejection fraction, ventricular volumes, or clinical events."
+   },
+   {
     "claim": "hrm:claim/adult-mammalian-wounds-heal-by-scar",
     "contradicts": [
      "hrm:capability/dermal-architecture-regeneration-without-scar"
@@ -17713,11 +27851,67 @@ export const GRAPH = {
     "statement": "Adult mammalian and human skin wounds heal by a fibrotic scar that lacks the appendages and matrix organisation of uninjured skin; this is the default outcome of adult repair."
    },
    {
+    "claim": "hrm:claim/chronic-denervation-degrades-the-distal-pathway",
+    "contradicts": [
+     "hrm:capability/timely-muscle-reinnervation"
+    ],
+    "statement": "Prolonged denervation degrades the distal nerve's capacity to support regeneration — Schwann cells lose their growth-supportive state — and this decline, alongside muscle atrophy, is a principal reason that proximal nerve injuries recover poorly."
+   },
+   {
+    "claim": "hrm:claim/glioblastoma-cells-occupy-interconvertible-states",
+    "contradicts": [
+     "hrm:capability/gbm-targeted-cytotoxic-therapy"
+    ],
+    "statement": "Single-cell profiling shows that glioblastoma cells within one tumour occupy four main cellular states, influenced by genetics and the microenvironment, and can transition between them."
+   },
+   {
+    "claim": "hrm:claim/high-dose-steroids-sci-benefit-was-a-subgroup-finding",
+    "contradicts": [
+     "hrm:capability/acute-cord-damage-limitation"
+    ],
+    "statement": "The NASCIS 2 trial of methylprednisolone in acute spinal cord injury reported motor and sensory improvement only in a post-hoc subgroup treated within eight hours; the primary analysis of the whole cohort was not positive."
+   },
+   {
+    "claim": "hrm:claim/human-cardiomyocyte-turnover-is-under-one-percent-a-year",
+    "contradicts": [
+     "hrm:capability/infarct-remuscularisation"
+    ],
+    "statement": "Carbon-14 birth dating of human cardiomyocytes shows renewal at roughly one per cent a year at age 25, falling below half a per cent by age 75, so fewer than half of the cardiomyocytes in a heart are replaced over a lifetime."
+   },
+   {
+    "claim": "hrm:claim/mir199a-repairs-pig-hearts-then-kills-them",
+    "contradicts": [
+     "hrm:capability/graft-host-electrical-integration"
+    ],
+    "statement": "AAV-delivered miR-199a produced near-complete recovery of cardiac function after myocardial infarction in pigs, and then caused uncontrolled cardiomyocyte proliferation and sudden death in most treated animals."
+   },
+   {
     "claim": "hrm:claim/no-therapy-reverses-established-fibrosis",
     "contradicts": [
      "hrm:capability/established-dermal-scar-reversal"
     ],
     "statement": "No approved therapy reverses established organ fibrosis; current antifibrotic drugs slow progression, and fibrosis remains a major cause of irreversible organ dysfunction."
+   },
+   {
+    "claim": "hrm:claim/plasma-dilution-rejuvenates-as-well-as-young-blood",
+    "contradicts": [
+     "hrm:capability/young-systemic-factor-supplementation"
+    ],
+    "statement": "Replacing half of an old mouse's plasma with saline and albumin rejuvenated muscle, liver and brain measures as much as, or more than, exchange with young blood — indicating dilution of old factors rather than transfer of young ones."
+   },
+   {
+    "claim": "hrm:claim/single-target-gbm-immunotherapies-failed-phase-3",
+    "contradicts": [
+     "hrm:capability/gbm-targeted-cytotoxic-therapy"
+    ],
+    "statement": "The EGFRvIII vaccine rindopepimut failed to improve survival in a randomised phase 3 trial of newly diagnosed glioblastoma, and nivolumab failed to improve survival against bevacizumab in recurrent glioblastoma."
+   },
+   {
+    "claim": "hrm:claim/systemic-car-t-drives-antigen-loss-in-gbm",
+    "contradicts": [
+     "hrm:capability/gbm-immune-cell-therapy"
+    ],
+    "statement": "A single intravenous dose of EGFRvIII-directed CAR T cells trafficked to glioblastoma and was followed by loss of EGFRvIII expression in most resected tumours, with no clinical benefit observed."
    },
    {
     "claim": "hrm:claim/thick-engineered-tissue-vascularisation-unsolved",
@@ -17730,14 +27924,17 @@ export const GRAPH = {
   "grades": {
    "byClass": {
     "control": {
-     "n": 6,
-     "graded": 4,
-     "sumRung": 17,
+     "n": 35,
+     "graded": 33,
+     "sumRung": 111,
      "rungs": {
-      "L5": 3,
-      "L2": 1
+      "L4": 10,
+      "L5": 9,
+      "L2": 7,
+      "L0": 3,
+      "L3": 4
      },
-     "meanRung": 4.25
+     "meanRung": 3.36
     },
     "edit": {
      "n": 46,
@@ -17753,6 +27950,18 @@ export const GRAPH = {
      },
      "meanRung": 2.71
     },
+    "verify": {
+     "n": 35,
+     "graded": 34,
+     "sumRung": 135,
+     "rungs": {
+      "L2": 5,
+      "L5": 14,
+      "L4": 10,
+      "L3": 5
+     },
+     "meanRung": 3.97
+    },
     "model": {
      "n": 34,
      "graded": 34,
@@ -17766,53 +27975,42 @@ export const GRAPH = {
      },
      "meanRung": 3.32
     },
-    "see": {
-     "n": 33,
-     "graded": 32,
-     "sumRung": 129,
-     "rungs": {
-      "L5": 12,
-      "L3": 9,
-      "L2": 1,
-      "L4": 10
-     },
-     "meanRung": 4.03
-    },
     "reach": {
-     "n": 33,
-     "graded": 33,
-     "sumRung": 117,
+     "n": 34,
+     "graded": 34,
+     "sumRung": 121,
      "rungs": {
-      "L4": 15,
+      "L4": 16,
       "L3": 7,
       "L5": 5,
       "L2": 5,
       "L1": 1
      },
-     "meanRung": 3.55
+     "meanRung": 3.56
     },
-    "verify": {
-     "n": 33,
-     "graded": 32,
-     "sumRung": 129,
+    "see": {
+     "n": 34,
+     "graded": 33,
+     "sumRung": 133,
      "rungs": {
-      "L5": 14,
-      "L4": 9,
-      "L3": 5,
-      "L2": 4
+      "L4": 11,
+      "L5": 12,
+      "L3": 9,
+      "L2": 1
      },
      "meanRung": 4.03
     }
    },
    "byBasis": {
-    "standard-of-care": 5,
-    "claims": 175,
+    "claims": 203,
+    "standard-of-care": 7,
+    "no-evidence-located": 3,
     "ungraded": 5
    },
    "byBlocked": {
-    "none": 70,
-    "science": 107,
-    "framework": 3
+    "science": 133,
+    "framework": 6,
+    "none": 71
    }
   }
  }

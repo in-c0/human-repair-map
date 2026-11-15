@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/rosenzweig-2018-natmed",
+  "type": "source",
+  "citation": "Rosenzweig et al., Nature Medicine, 2018",
+  "title": "Restorative effects of human neural stem cell grafts on the primate spinal cord",
+  "authors": "Rosenzweig Ephron S; Brock John H; Lu Paul; Kumamaru Hiromi; Salegio Ernesto A; Kadoya Ken; Weber Janet L; Liang Justine J; Moseanko Rod; Hawbecker Stephanie; Huie J Russell; Havton Leif A; Nout-Lomas Yvette S; Ferguson Adam R; Beattie Michael S; Bresnahan Jacqueline C; Tuszynski Mark H",
+  "venue": "Nature Medicine",
+  "year": 2018,
+  "kind": "article",
+  "doi": "10.1038/nm.4502",
+  "pmid": "29480894",
+  "url": "https://doi.org/10.1038/nm.4502",
+  "license": "https://www.springernature.com/gp/researchers/text-and-data-mining",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Restorative effects of human neural stem cell grafts on the primate spinal cord",
+    "note": "Crossref record found; PubMed id 29480894 located by DOI."
+  },
+  "note": "Human neural stem cell grafts in the primate cord.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/epigenetic-clocks-predict-age-and-mortality",
+  "statement": "DNA methylation at a few hundred CpG sites predicts chronological age across most human tissues and cell types, and deviations of predicted from chronological age are associated with mortality in cohort studies.",
+  "context": {
+    "species": "human",
+    "model": "multi-tissue methylation datasets"
+  },
+  "measurement": {
+    "measured": "biomarker",
+    "assay": "DNA methylation array; elastic net predictor",
+    "endpoint": "predicted age; association with mortality",
+    "effect": "high correlation with chronological age; age acceleration associated with mortality"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/horvath-2013-genomebiol",
+      "design": "observational-human",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L5",
+  "replication": {
+    "independentGroups": 2,
+    "note": "Reproduced in many independent cohorts; the association is not in dispute."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/biological-age-measurement-that-predicts-outcome"
+  ],
+  "drift": "A validated predictor of age and an association with mortality are being used as an intervention endpoint. Predicting an outcome and responding usefully to treatment are different properties.",
+  "limitations": [
+    "observational",
+    "no evidence that intervention-induced clock change predicts outcome"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/horvath-2013-genomebiol"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

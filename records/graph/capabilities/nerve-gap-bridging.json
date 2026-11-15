@@ -1,0 +1,42 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/nerve-gap-bridging",
+  "name": "Bridge a gap in a cut nerve",
+  "class": "control",
+  "primitive": "reconnect",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Span the distance between two nerve stumps so that axons have a path to grow along, without the tension that a direct suture would put on the repair.",
+  "target": {
+    "node": "hrm:cell/peripheral-neuron"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "function",
+    "blocked": "framework",
+    "note": "Autograft is the clinical standard and works. Hollow conduits match it in randomised comparison for short digital-nerve gaps (Weber 2000, Mackinnon 1990); processed allografts report comparable meaningful recovery in a multicentre registry (Safa 2020, registry not randomised). The remaining limit is gap length and donor morbidity, not whether a gap can be bridged.",
+    "drift": "'Nerve gaps are solved' — short sensory gaps are; long motor gaps still depend on how fast the axons cross and what is waiting at the far end."
+  },
+  "wouldMove": "A randomised comparison in long (>3 cm) motor gaps showing an off-the-shelf conduit or allograft matching autograft on muscle function, not just sensory recovery.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/weber-2000-prs",
+      "hrm:source/mackinnon-1990-prs",
+      "hrm:source/safa-2020-microsurgery"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/xu-2018-natmed",
+  "type": "source",
+  "citation": "Xu et al., Nature Medicine, 2018",
+  "title": "Senolytics improve physical function and increase lifespan in old age",
+  "authors": "Xu Ming; Pirtskhalava Tamar; Farr Joshua N.; Weigand Bettina M.; Palmer Allyson K.; Weivoda Megan M.; Inman Christina L.; Ogrodnik Mikolaj B.; Hachfeld Christine M.; Fraser Daniel G.; Onken Jennifer L.; Johnson Kurt O.; Verzosa Grace C.; Langhi Larissa G. P.; Weigl Moritz; Giorgadze Nino; LeBrasseur Nathan K.; Miller Jordan D.; Jurk Diana; Singh Ravinder J.; Allison David B.; Ejima Keisuke; Hubbard Gene B.; Ikeno Yuji; Cubro Hajrunisa; Garovic Vesna D.; Hou Xiaonan; Weroha S. John; Robbins Paul D.; Niedernhofer Laura J.; Khosla Sundeep; Tchkonia Tamara; Kirkland James L.",
+  "venue": "Nature Medicine",
+  "year": 2018,
+  "kind": "article",
+  "doi": "10.1038/s41591-018-0092-9",
+  "pmid": "29988130",
+  "url": "https://doi.org/10.1038/s41591-018-0092-9",
+  "license": "https://www.springer.com/tdm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Senolytics improve physical function and increase lifespan in old age",
+    "note": "Crossref record found; PubMed id 29988130 located by DOI."
+  },
+  "note": "Senolytics improve physical function and increase lifespan in old mice.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+  }
+}

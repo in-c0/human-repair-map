@@ -1,0 +1,40 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/senescent-cell-burden-measurement",
+  "name": "Measure how many senescent cells a person has",
+  "class": "see",
+  "primitive": "preserve",
+  "projections": [
+    "rejuvenation"
+  ],
+  "description": "Quantify senescent cell burden in a living person's tissue, well enough to say whether a senolytic worked and in which organ.",
+  "target": {
+    "node": "hrm:cell/fibroblast"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L4",
+    "measured": "biomarker",
+    "blocked": "science",
+    "note": "Burden has been measured in humans by biopsy — adipose and skin p16INK4a and SASP markers (Hickson 2019) — which requires taking tissue and does not generalise to organs you cannot biopsy. There is no validated circulating or imaging measure. Every senolytic trial therefore reports on the tissue it could reach, not the tissue it cared about.",
+    "drift": "Senescence markers are treated as a quantity; they are a panel with no agreed threshold and no agreed definition of a senescent cell."
+  },
+  "wouldMove": "A circulating or imaging measure of senescent burden validated against tissue in humans.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/hickson-2019-ebiomedicine"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

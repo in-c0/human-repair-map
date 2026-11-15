@@ -1,0 +1,56 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/human-neural-stem-cell-grafts-extend-axons-in-primate-cord",
+  "statement": "Human neural stem cells grafted into the injured primate spinal cord survived, differentiated and extended large numbers of axons over long distances into the host cord, with modest forelimb functional improvement.",
+  "context": {
+    "species": "rhesus monkey",
+    "model": "cervical hemisection",
+    "intervention": "human neural stem cell graft"
+  },
+  "measurement": {
+    "measured": "structure",
+    "assay": "histology, tracing, forelimb function",
+    "endpoint": "graft survival and axon extension",
+    "effect": "extensive graft-derived axon growth; modest functional improvement"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/rosenzweig-2018-natmed",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L3",
+  "replication": {
+    "independentGroups": 0,
+    "note": "One group (Tuszynski)."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/corticospinal-axon-regrowth-across-a-lesion"
+  ],
+  "limitations": [
+    "hemisection, not complete transection",
+    "functional improvement modest and secondary to the anatomical readout"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/rosenzweig-2018-natmed"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

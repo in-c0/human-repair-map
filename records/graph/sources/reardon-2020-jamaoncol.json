@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/reardon-2020-jamaoncol",
+  "type": "source",
+  "citation": "Reardon et al., JAMA Oncology, 2020",
+  "title": "Effect of Nivolumab vs Bevacizumab in Patients With Recurrent Glioblastoma",
+  "authors": "Reardon David A.; Brandes Alba A.; Omuro Antonio; Mulholland Paul; Lim Michael; Wick Antje; Baehring Joachim; Ahluwalia Manmeet S.; Roth Patrick; Bähr Oliver; Phuphanich Surasak; Sepulveda Juan Manuel; De Souza Paul; Sahebjam Solmaz; Carleton Michael; Tatsuoka Kay; Taitt Corina; Zwirtes Ricardo; Sampson John; Weller Michael",
+  "venue": "JAMA Oncology",
+  "year": 2020,
+  "kind": "article",
+  "doi": "10.1001/jamaoncol.2020.1024",
+  "pmid": "32437507",
+  "url": "https://doi.org/10.1001/jamaoncol.2020.1024",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Effect of Nivolumab vs Bevacizumab in Patients With Recurrent Glioblastoma",
+    "note": "Crossref record found; PubMed id 32437507 located by DOI."
+  },
+  "note": "CheckMate 143: nivolumab, negative.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+  }
+}

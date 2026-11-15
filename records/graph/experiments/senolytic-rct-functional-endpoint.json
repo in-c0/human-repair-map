@@ -1,0 +1,43 @@
+{
+  "type": "experiment",
+  "id": "hrm:experiment/senolytic-rct-functional-endpoint",
+  "name": "Randomised placebo-controlled senolytic trial with a functional primary endpoint",
+  "tests": [
+    "hrm:question/senolytics-improve-human-function"
+  ],
+  "status": "proposed",
+  "design": {
+    "species": "human",
+    "model": "adults over 70 with reduced gait speed",
+    "intervention": "intermittent dasatinib + quercetin",
+    "comparator": "placebo",
+    "readout": "gait speed and six-minute walk at 6 and 12 months (primary); senescent markers in adipose biopsy (secondary); adverse events including delayed wound healing",
+    "duration": "2 years",
+    "n": "200-300"
+  },
+  "discriminates": "A functional benefit under blinding would move the whole senescence branch from marker to therapy; a null result with confirmed marker reduction would show that clearing senescent cells is not sufficient.",
+  "feasibility": {
+    "costClass": "medium",
+    "durationClass": "years",
+    "requires": [
+      "geriatric trial network",
+      "off-patent drugs",
+      "adipose biopsy capability"
+    ],
+    "ethics": "human research ethics approval"
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

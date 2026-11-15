@@ -1,0 +1,40 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/gbm-targeted-cytotoxic-therapy",
+  "name": "Kill it with something aimed at what makes it a tumour",
+  "class": "control",
+  "primitive": "remove",
+  "projections": [
+    "universal-repair"
+  ],
+  "description": "Attack glioblastoma through a target specific to it — a mutated antigen, an oncolytic virus, a checkpoint — rather than with untargeted cytotoxicity.",
+  "grade": {
+    "basis": "claims",
+    "rung": "L5",
+    "measured": "none",
+    "blocked": "science",
+    "note": "This node is graded on failures, which is why measured is 'none'. The EGFRvIII vaccine rindopepimut failed a randomised phase 3 (Weller 2017); nivolumab failed against bevacizumab in recurrent disease (Reardon 2020). Neoadjuvant anti-PD-1 showed a survival signal with immune correlates in a small randomised study (Cloughesy 2019), and recombinant poliovirus produced a tail of long survivors without shifting the overall curve (Desjardins 2018). L5 records that this approach has been tested to phase 3 in humans; the blocked reason is that it did not work.",
+    "drift": "Long survivors in single-arm oncolytic trials are frequently presented as efficacy. A survival tail without a control arm is a selection observation."
+  },
+  "wouldMove": "A randomised trial of a targeted or immunotherapeutic agent with an overall survival benefit.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/weller-2017-lancetoncol",
+      "hrm:source/reardon-2020-jamaoncol",
+      "hrm:source/cloughesy-2019-natmed",
+      "hrm:source/desjardins-2018-nejm"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

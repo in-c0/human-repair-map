@@ -1,0 +1,43 @@
+{
+  "type": "experiment",
+  "id": "hrm:experiment/stimulation-stratified-by-spared-connectivity",
+  "name": "Epidural stimulation outcomes stratified by objectively measured spared connectivity",
+  "tests": [
+    "hrm:question/stimulation-benefit-without-spared-fibres"
+  ],
+  "status": "proposed",
+  "design": {
+    "species": "human",
+    "model": "chronic clinically motor-complete spinal cord injury",
+    "intervention": "standard epidural stimulation and training protocol",
+    "comparator": "stratification, not randomisation: participants grouped by spared descending connectivity on high-resolution imaging and evoked potentials",
+    "readout": "volitional movement below the lesion, over-ground walking, autonomic measures",
+    "duration": "3 years",
+    "n": "40-60 across centres"
+  },
+  "discriminates": "If benefit tracks spared connectivity, stimulation is an amplifier and regeneration remains necessary; if participants with no measurable sparing benefit equally, the spinal circuitry is doing more than the field assumes.",
+  "feasibility": {
+    "costClass": "high",
+    "durationClass": "years",
+    "requires": [
+      "multi-centre implant programme",
+      "high-resolution spinal imaging",
+      "shared outcome protocol"
+    ],
+    "ethics": "human research ethics approval"
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

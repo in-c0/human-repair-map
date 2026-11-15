@@ -1,0 +1,58 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/tumour-treating-fields-add-survival-in-gbm",
+  "statement": "Adding alternating electric fields to maintenance temozolomide improved progression-free and overall survival in newly diagnosed glioblastoma in a randomised trial.",
+  "context": {
+    "species": "human",
+    "model": "newly diagnosed glioblastoma after chemoradiation",
+    "intervention": "tumour-treating fields plus temozolomide",
+    "comparator": "temozolomide alone"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "overall and progression-free survival",
+    "endpoint": "survival",
+    "effect": "improved with the addition of fields"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/stupp-2017-jama",
+      "design": "rct",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L5",
+  "replication": {
+    "independentGroups": 0,
+    "note": "One sponsor-run trial; the open-label design and device adherence have been debated."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/gbm-tumour-cell-eradication"
+  ],
+  "limitations": [
+    "open-label",
+    "device worn continuously",
+    "one trial"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/stupp-2017-jama"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

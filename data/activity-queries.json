@@ -1,0 +1,696 @@
+{
+ "$comment": "Search terms used by scripts/activity.mjs to find who is working on each capability and question. Europe PMC query syntax for papers; ClinicalTrials.gov v2 cond/term for trials. Hand-curated on 2026-09-14 so that 'who is working on this' means the right thing; a bad query here yields the wrong labs, so edit with care. Records without an entry are skipped.",
+ "hrm:capability/acute-wound-infection-control": {
+  "pmc": "(\"wound infection\" AND (prevention OR treatment) AND (surgical OR trauma OR burn))",
+  "ct": {
+   "cond": "wound infection",
+   "term": ""
+  }
+ },
+ "hrm:capability/appendage-bearing-skin-from-pluripotent-cells": {
+  "pmc": "(\"pluripotent stem cell\" AND (\"hair follicle\" OR appendage) AND skin AND organoid)",
+  "ct": {
+   "cond": "skin",
+   "term": "pluripotent stem cell hair follicle"
+  }
+ },
+ "hrm:capability/cancer-risk-control-under-rejuvenation": {
+  "pmc": "(\"partial reprogramming\" AND (teratoma OR tumor OR cancer OR oncogenic))",
+  "ct": {
+   "cond": "",
+   "term": "partial reprogramming safety"
+  }
+ },
+ "hrm:capability/cell-identity-retention-under-partial-reprogramming": {
+  "pmc": "(\"partial reprogramming\" AND (\"cell identity\" OR dedifferentiation) AND rejuvenation)",
+  "ct": {
+   "cond": "",
+   "term": "epigenetic reprogramming rejuvenation"
+  }
+ },
+ "hrm:capability/chronic-wound-biofilm-eradication": {
+  "pmc": "(biofilm AND \"chronic wound\" AND (eradication OR debridement OR treatment))",
+  "ct": {
+   "cond": "chronic wound",
+   "term": "biofilm"
+  }
+ },
+ "hrm:capability/cutaneous-sensory-reinnervation": {
+  "pmc": "(reinnervation AND (skin OR cutaneous OR graft) AND sensory)",
+  "ct": {
+   "cond": "skin graft",
+   "term": "sensation reinnervation"
+  }
+ },
+ "hrm:capability/dermal-adipocyte-regeneration": {
+  "pmc": "(adipocyte AND (regeneration OR neogenesis) AND wound AND (dermal OR myofibroblast))",
+  "ct": {
+   "cond": "wound",
+   "term": "adipocyte regeneration"
+  }
+ },
+ "hrm:capability/dermal-architecture-regeneration-without-scar": {
+  "pmc": "(\"scarless\" AND (wound OR skin) AND regeneration AND (dermis OR appendage))",
+  "ct": {
+   "cond": "scar",
+   "term": "regeneration wound healing"
+  }
+ },
+ "hrm:capability/dermal-substitute-for-chronic-wound-closure": {
+  "pmc": "(\"skin substitute\" AND (\"chronic wound\" OR \"diabetic foot ulcer\" OR \"venous leg ulcer\") AND closure)",
+  "ct": {
+   "cond": "diabetic foot ulcer",
+   "term": "skin substitute"
+  }
+ },
+ "hrm:capability/epidermis-gene-corrected-stem-cell-replacement": {
+  "pmc": "(\"epidermolysis bullosa\" AND (\"gene-corrected\" OR \"gene corrected\" OR \"genetically corrected\") AND (keratinocyte OR epidermal) AND (graft OR transplant))",
+  "ct": {
+   "cond": "epidermolysis bullosa",
+   "term": "gene corrected graft"
+  }
+ },
+ "hrm:capability/epidermis-replacement-cultured-autograft": {
+  "pmc": "(\"cultured epithelial autograft\" OR \"cultured epidermal autograft\") AND burn",
+  "ct": {
+   "cond": "burn",
+   "term": "cultured epidermal autograft"
+  }
+ },
+ "hrm:capability/established-dermal-scar-reversal": {
+  "pmc": "((\"hypertrophic scar\" OR keloid OR \"mature scar\") AND (remodeling OR remodelling OR reversal OR regression) AND dermis)",
+  "ct": {
+   "cond": "hypertrophic scar",
+   "term": "remodeling"
+  }
+ },
+ "hrm:capability/fetal-scarless-healing-target-state": {
+  "pmc": "(fetal AND \"wound healing\" AND scarless)",
+  "ct": {
+   "cond": "",
+   "term": "fetal scarless wound healing"
+  }
+ },
+ "hrm:capability/fibroblast-state-sensing-in-living-wound": {
+  "pmc": "(fibroblast AND (\"in vivo imaging\" OR intravital OR \"non-invasive\") AND (wound OR scar) AND (state OR heterogeneity))",
+  "ct": {
+   "cond": "wound",
+   "term": "fibroblast imaging"
+  }
+ },
+ "hrm:capability/fibrogenic-fibroblast-lineage-control": {
+  "pmc": "((\"Engrailed-1\" OR En1 OR \"fibroblast lineage\") AND (scar OR fibrosis) AND (skin OR dermal))",
+  "ct": {
+   "cond": "scar",
+   "term": "fibroblast"
+  }
+ },
+ "hrm:capability/hair-follicle-neogenesis-after-wounding": {
+  "pmc": "(\"hair follicle neogenesis\" OR \"wound-induced hair neogenesis\" OR \"de novo hair follicle\")",
+  "ct": {
+   "cond": "alopecia",
+   "term": "hair follicle neogenesis"
+  }
+ },
+ "hrm:capability/inflammation-phase-control-for-regeneration": {
+  "pmc": "(macrophage AND (regeneration OR scarless) AND (wound OR skin) AND (polarization OR polarisation OR resolution))",
+  "ct": {
+   "cond": "wound",
+   "term": "macrophage inflammation regeneration"
+  }
+ },
+ "hrm:capability/keratinocyte-in-vivo-topical-gene-delivery": {
+  "pmc": "((\"beremagene geperpavec\" OR B-VEC OR \"topical gene therapy\") AND (keratinocyte OR epidermolysis))",
+  "ct": {
+   "cond": "epidermolysis bullosa",
+   "term": "topical gene therapy"
+  }
+ },
+ "hrm:capability/mammalian-scar-free-regeneration-target-state": {
+  "pmc": "(Acomys OR \"spiny mouse\") AND regeneration",
+  "ct": {
+   "cond": "",
+   "term": ""
+  }
+ },
+ "hrm:capability/native-ecm-organisation-reconstruction": {
+  "pmc": "((\"extracellular matrix\" OR collagen) AND (organization OR organisation OR \"basket-weave\") AND (scarless OR regeneration) AND (dermis OR skin))",
+  "ct": {
+   "cond": "scar",
+   "term": "extracellular matrix"
+  }
+ },
+ "hrm:capability/organised-microvascular-network-in-regenerated-dermis": {
+  "pmc": "((prevascularization OR prevascularisation OR \"vascular network\") AND (\"tissue engineered\" OR \"engineered tissue\" OR \"dermal substitute\") AND perfusion)",
+  "ct": {
+   "cond": "wound",
+   "term": "vascularization tissue engineered"
+  }
+ },
+ "hrm:capability/pharmacological-scar-reduction-in-humans": {
+  "pmc": "((scar OR scarring) AND (\"randomized\" OR \"randomised\") AND (drug OR pharmacological OR injection) AND (skin OR cutaneous OR surgical))",
+  "ct": {
+   "cond": "scar",
+   "term": ""
+  }
+ },
+ "hrm:capability/regeneration-verification-histology-and-scar-scales": {
+  "pmc": "((\"scar scale\" OR POSAS OR \"Vancouver scar scale\") AND validation)",
+  "ct": {
+   "cond": "scar",
+   "term": "POSAS"
+  }
+ },
+ "hrm:capability/rejuvenated-state-persistence": {
+  "pmc": "(\"partial reprogramming\" AND (durable OR persistence OR \"long-term\" OR repeated OR cyclic))",
+  "ct": {
+   "cond": "",
+   "term": "epigenetic reprogramming"
+  }
+ },
+ "hrm:capability/safe-partial-epigenetic-reprogramming-in-vivo": {
+  "pmc": "((\"partial reprogramming\" OR \"OSK\" OR \"Yamanaka factors\") AND \"in vivo\" AND (rejuvenation OR \"epigenetic age\"))",
+  "ct": {
+   "cond": "",
+   "term": "OSK reprogramming"
+  }
+ },
+ "hrm:capability/skin-haemostasis": {
+  "pmc": "(hemostatic OR haemostatic) AND (dressing OR agent) AND (trauma OR bleeding) AND clinical",
+  "ct": {
+   "cond": "hemorrhage",
+   "term": "hemostatic dressing"
+  }
+ },
+ "hrm:capability/synthetic-haemostat-for-noncompressible-haemorrhage": {
+  "pmc": "((\"synthetic platelet\" OR \"hemostatic nanoparticle\" OR \"haemostatic nanoparticle\" OR PolySTAT) AND hemorrhage)",
+  "ct": {
+   "cond": "hemorrhage",
+   "term": "synthetic hemostat"
+  }
+ },
+ "hrm:capability/systemic-cell-type-specific-delivery": {
+  "pmc": "((\"cell-type specific\" OR \"cell type-specific\" OR \"tissue-specific\") AND (AAV OR \"lipid nanoparticle\" OR capsid) AND (delivery OR tropism) AND \"in vivo\")",
+  "ct": {
+   "cond": "",
+   "term": "AAV capsid tissue targeted"
+  }
+ },
+ "hrm:capability/temporary-barrier-restoration": {
+  "pmc": "((\"temporary skin substitute\" OR \"wound dressing\") AND (burn OR \"full-thickness\") AND clinical)",
+  "ct": {
+   "cond": "burn",
+   "term": "dressing"
+  }
+ },
+ "hrm:capability/wound-bed-assessment-in-vivo": {
+  "pmc": "((\"wound assessment\" OR \"burn depth\") AND (\"laser Doppler\" OR imaging OR perfusion) AND clinical)",
+  "ct": {
+   "cond": "burn",
+   "term": "burn depth imaging"
+  }
+ },
+ "hrm:question/cancer-risk-of-repeated-partial-reprogramming": {
+  "pmc": "(\"partial reprogramming\" AND (cancer OR tumor OR teratoma OR oncogenic) AND (aged OR aging OR ageing))",
+  "ct": {
+   "cond": "",
+   "term": "partial reprogramming"
+  }
+ },
+ "hrm:question/dermal-adipocyte-regeneration-in-human-wounds": {
+  "pmc": "(myofibroblast AND adipocyte AND (conversion OR reprogramming) AND wound)",
+  "ct": {
+   "cond": "wound",
+   "term": "adipocyte"
+  }
+ },
+ "hrm:question/en1-inhibition-translates-to-human-skin": {
+  "pmc": "((verteporfin OR YAP OR mechanotransduction) AND (scar OR scarless) AND (wound OR skin))",
+  "ct": {
+   "cond": "scar",
+   "term": "verteporfin"
+  }
+ },
+ "hrm:question/established-scar-remodelling-to-native-architecture": {
+  "pmc": "((\"mature scar\" OR \"established scar\" OR keloid) AND (regeneration OR remodelling OR remodeling) AND (appendage OR \"hair follicle\" OR matrix))",
+  "ct": {
+   "cond": "keloid",
+   "term": ""
+  }
+ },
+ "hrm:question/fetal-conditions-reproducible-in-adult-skin": {
+  "pmc": "(fetal AND scarless AND (mechanism OR causal OR recapitulate OR adult))",
+  "ct": {
+   "cond": "",
+   "term": "fetal wound healing"
+  }
+ },
+ "hrm:question/gene-corrected-epidermal-graft-long-term-safety": {
+  "pmc": "(\"epidermolysis bullosa\" AND (\"gene therapy\" OR \"gene-corrected\") AND (\"long-term\" OR follow-up OR safety) AND (graft OR keratinocyte))",
+  "ct": {
+   "cond": "epidermolysis bullosa",
+   "term": "gene therapy long-term"
+  }
+ },
+ "hrm:question/healthy-target-state-for-aged-tissue": {
+  "pmc": "((\"biological age\" OR \"epigenetic clock\") AND (target OR healthy OR reference) AND tissue AND (rejuvenation OR intervention))",
+  "ct": {
+   "cond": "aging",
+   "term": "epigenetic clock intervention"
+  }
+ },
+ "hrm:question/nondestructive-fibroblast-state-readout-in-human-wounds": {
+  "pmc": "(fibroblast AND (\"non-invasive\" OR noninvasive OR intravital OR \"in vivo imaging\") AND (wound OR scar OR fibrosis) AND human)",
+  "ct": {
+   "cond": "scar",
+   "term": "imaging fibroblast"
+  }
+ },
+ "hrm:question/organised-microvasculature-in-thick-regenerated-tissue": {
+  "pmc": "((vascularization OR vascularisation OR \"vascular network\") AND (\"thick\" OR \"diffusion limit\" OR hierarchical) AND (\"tissue engineering\" OR engineered) AND perfus*)",
+  "ct": {
+   "cond": "",
+   "term": "vascularized engineered tissue"
+  }
+ },
+ "hrm:question/partial-reprogramming-human-safety": {
+  "pmc": "(\"partial reprogramming\" AND (human OR clinical OR \"first-in-human\" OR trial))",
+  "ct": {
+   "cond": "",
+   "term": "partial epigenetic reprogramming"
+  }
+ },
+ "hrm:question/pluripotent-derived-skin-engrafts-in-humans": {
+  "pmc": "((\"iPSC-derived\" OR \"pluripotent-derived\" OR \"pluripotent stem cell-derived\") AND (skin OR keratinocyte OR epidermis) AND (graft OR transplant OR clinical))",
+  "ct": {
+   "cond": "skin",
+   "term": "iPSC derived graft"
+  }
+ },
+ "hrm:question/regenerated-skin-sensory-reinnervation": {
+  "pmc": "((graft OR \"tissue-engineered skin\" OR \"skin substitute\") AND (reinnervation OR sensation OR \"sensory recovery\"))",
+  "ct": {
+   "cond": "skin graft",
+   "term": "sensory recovery"
+  }
+ },
+ "hrm:question/rejuvenated-state-persistence-and-redosing": {
+  "pmc": "(\"partial reprogramming\" AND (cyclic OR repeated OR \"long-term\" OR durability))",
+  "ct": {
+   "cond": "",
+   "term": "reprogramming repeated dosing"
+  }
+ },
+ "hrm:question/rejuvenation-reach-beyond-eye-and-liver": {
+  "pmc": "((\"partial reprogramming\" OR OSK) AND (heart OR brain OR muscle OR systemic) AND (AAV OR delivery))",
+  "ct": {
+   "cond": "",
+   "term": "reprogramming gene therapy systemic"
+  }
+ },
+ "hrm:question/reliable-biofilm-eradication-in-chronic-wounds": {
+  "pmc": "(biofilm AND \"chronic wound\" AND (eradication OR clinical OR trial))",
+  "ct": {
+   "cond": "chronic wound",
+   "term": "biofilm"
+  }
+ },
+ "hrm:question/skin-substitutes-improve-scar-quality-not-just-closure": {
+  "pmc": "(\"skin substitute\" AND (\"scar quality\" OR POSAS OR appendage OR sensation OR \"long-term\"))",
+  "ct": {
+   "cond": "burn",
+   "term": "dermal substitute scar quality"
+  }
+ },
+ "hrm:question/topical-gene-delivery-generalises-beyond-eb": {
+  "pmc": "((\"topical gene therapy\" OR \"HSV-1 vector\" OR \"herpes simplex virus vector\") AND (skin OR wound OR keratinocyte) AND NOT epidermolysis)",
+  "ct": {
+   "cond": "",
+   "term": "topical gene therapy skin"
+  }
+ },
+ "hrm:question/what-limits-regeneration-in-mus-and-human": {
+  "pmc": "((Acomys OR \"spiny mouse\") AND (Mus OR mouse) AND regeneration AND (immune OR macrophage OR fibroblast OR matrix))",
+  "ct": {
+   "cond": "",
+   "term": ""
+  }
+ },
+ "hrm:question/why-avotermin-phase-3-failed": {
+  "pmc": "((avotermin OR \"TGF-beta3\" OR \"TGF-β3\" OR \"transforming growth factor beta 3\") AND scar)",
+  "ct": {
+   "cond": "scar",
+   "term": "TGF-beta"
+  }
+ },
+ "hrm:question/wound-induced-hair-neogenesis-in-human-skin": {
+  "pmc": "((\"hair neogenesis\" OR \"hair follicle neogenesis\") AND (human OR clinical OR adult))",
+  "ct": {
+   "cond": "alopecia",
+   "term": "hair follicle neogenesis"
+  }
+ },
+ "hrm:capability/nerve-gap-bridging": {
+  "pmc": "((\"nerve gap\" OR \"nerve conduit\" OR \"nerve allograft\" OR \"nerve autograft\") AND (repair OR reconstruction) AND (peripheral OR digital OR median OR ulnar))",
+  "ct": {
+   "cond": "peripheral nerve injury",
+   "term": "nerve graft OR conduit"
+  }
+ },
+ "hrm:capability/nerve-transfer-from-a-donor-nerve": {
+  "pmc": "(\"nerve transfer\" AND (brachial plexus OR ulnar OR median OR \"distal nerve transfer\") AND (outcome OR recovery))",
+  "ct": {
+   "cond": "brachial plexus injury",
+   "term": "nerve transfer"
+  }
+ },
+ "hrm:capability/axon-regrowth-across-a-repair": {
+  "pmc": "((\"axon regeneration\" OR \"axonal regrowth\") AND (\"peripheral nerve\" OR sciatic OR median) AND (repair OR coaptation OR neurorrhaphy))",
+  "ct": {
+   "cond": "peripheral nerve injury",
+   "term": ""
+  }
+ },
+ "hrm:capability/distal-schwann-cell-support-maintenance": {
+  "pmc": "((\"chronic denervation\" OR \"denervated distal stump\" OR \"bands of Bungner\") AND (\"Schwann cell\" OR \"regenerative support\"))",
+  "ct": {
+   "cond": "nerve injury",
+   "term": "denervation"
+  }
+ },
+ "hrm:capability/regeneration-speed-increase": {
+  "pmc": "((\"electrical stimulation\" OR \"conditioning lesion\" OR \"accelerated regeneration\") AND (\"nerve regeneration\" OR reinnervation) AND NOT spinal)",
+  "ct": {
+   "cond": "peripheral nerve injury",
+   "term": "electrical stimulation"
+  }
+ },
+ "hrm:capability/timely-muscle-reinnervation": {
+  "pmc": "((\"muscle reinnervation\" OR \"motor endplate\" OR \"denervation atrophy\") AND (nerve AND (repair OR transfer OR delay)))",
+  "ct": {
+   "cond": "muscle denervation",
+   "term": "reinnervation"
+  }
+ },
+ "hrm:capability/sensory-target-reinnervation-with-discrimination": {
+  "pmc": "((\"sensory recovery\" OR \"two-point discrimination\" OR \"sensory reeducation\") AND (\"nerve repair\" OR \"nerve reconstruction\"))",
+  "ct": {
+   "cond": "nerve injury",
+   "term": "sensory recovery"
+  }
+ },
+ "hrm:capability/reinnervation-verification-in-humans": {
+  "pmc": "((\"motor unit number estimation\" OR \"MR neurography\" OR \"nerve ultrasound\" OR electromyography) AND (reinnervation OR \"nerve regeneration\") AND (human OR patients))",
+  "ct": {
+   "cond": "peripheral nerve injury",
+   "term": "electromyography"
+  }
+ },
+ "hrm:question/chronic-denervation-reversible-in-humans": {
+  "pmc": "((\"chronic denervation\" OR \"delayed nerve repair\") AND (reversib* OR \"prolonged denervation\" OR \"delayed repair\") AND (muscle OR \"Schwann cell\"))",
+  "ct": {
+   "cond": "nerve injury",
+   "term": "delayed repair"
+  }
+ },
+ "hrm:question/human-axon-regeneration-rate-increase": {
+  "pmc": "((\"rate of axon regeneration\" OR \"regeneration rate\" OR \"staggered regeneration\" OR \"Tinel\") AND (\"peripheral nerve\" OR axon))",
+  "ct": {
+   "cond": "peripheral nerve injury",
+   "term": "regeneration rate"
+  }
+ },
+ "hrm:question/motor-sensory-mistargeting-after-repair": {
+  "pmc": "((\"preferential motor reinnervation\" OR mistargeting OR \"misdirection\" OR \"fascicular matching\") AND \"nerve repair\")",
+  "ct": {
+   "cond": "nerve injury",
+   "term": "fascicular repair"
+  }
+ },
+ "hrm:capability/acute-cord-damage-limitation": {
+  "pmc": "((\"spinal cord injury\" AND (neuroprotection OR \"early decompression\" OR \"secondary injury\")) AND (acute OR hours))",
+  "ct": {
+   "cond": "acute spinal cord injury",
+   "term": "neuroprotection OR decompression"
+  }
+ },
+ "hrm:capability/corticospinal-axon-regrowth-across-a-lesion": {
+  "pmc": "((\"spinal cord injury\" AND (\"axon regeneration\" OR \"corticospinal\" OR \"propriospinal\")) AND (lesion OR transection OR graft))",
+  "ct": {
+   "cond": "spinal cord injury",
+   "term": "regeneration OR stem cell"
+  }
+ },
+ "hrm:capability/glial-scar-permissiveness-for-regrowth": {
+  "pmc": "((\"glial scar\" OR \"chondroitin sulfate proteoglycan\" OR chondroitinase OR \"Nogo\") AND (\"spinal cord\" OR \"axon growth\"))",
+  "ct": {
+   "cond": "spinal cord injury",
+   "term": "anti-Nogo OR chondroitinase"
+  }
+ },
+ "hrm:capability/spinal-circuit-reactivation-by-stimulation": {
+  "pmc": "((\"epidural stimulation\" OR \"spinal cord stimulation\" OR \"transcutaneous spinal stimulation\") AND (\"spinal cord injury\") AND (walking OR stepping OR \"motor recovery\"))",
+  "ct": {
+   "cond": "spinal cord injury",
+   "term": "epidural stimulation"
+  }
+ },
+ "hrm:capability/brain-spine-interface-volitional-control": {
+  "pmc": "((\"brain-spine interface\" OR \"brain-computer interface\" OR \"digital bridge\") AND (\"spinal cord injury\" OR paralysis) AND (walking OR volitional OR \"motor control\"))",
+  "ct": {
+   "cond": "spinal cord injury",
+   "term": "brain computer interface"
+  }
+ },
+ "hrm:capability/autonomic-function-restoration-after-sci": {
+  "pmc": "((\"spinal cord injury\") AND (bladder OR bowel OR \"autonomic dysreflexia\" OR \"cardiovascular autonomic\") AND (recovery OR restoration OR stimulation))",
+  "ct": {
+   "cond": "spinal cord injury",
+   "term": "bladder OR autonomic"
+  }
+ },
+ "hrm:question/regrown-axons-form-useful-circuits": {
+  "pmc": "((\"spinal cord injury\") AND (\"axon regeneration\") AND (synapse OR \"functional recovery\" OR circuit OR \"aberrant\"))",
+  "ct": {
+   "cond": "spinal cord injury",
+   "term": "axon regeneration"
+  }
+ },
+ "hrm:question/stimulation-benefit-without-spared-fibres": {
+  "pmc": "((\"motor complete\" OR discomplete OR \"spared fibers\" OR \"spared descending\") AND \"spinal cord injury\" AND (stimulation OR \"residual connectivity\"))",
+  "ct": {
+   "cond": "complete spinal cord injury",
+   "term": "stimulation"
+  }
+ },
+ "hrm:question/cord-repair-restores-autonomic-function": {
+  "pmc": "((\"spinal cord injury\") AND (stimulation OR \"neuromodulation\") AND (bladder OR continence OR \"blood pressure\" OR autonomic) AND (trial OR endpoint))",
+  "ct": {
+   "cond": "spinal cord injury",
+   "term": "neuromodulation bladder"
+  }
+ },
+ "hrm:capability/acute-reperfusion-of-the-infarct-artery": {
+  "pmc": "((\"primary percutaneous coronary intervention\" OR reperfusion) AND \"myocardial infarction\" AND (time OR delay OR outcome))",
+  "ct": {
+   "cond": "ST elevation myocardial infarction",
+   "term": "reperfusion"
+  }
+ },
+ "hrm:capability/infarct-remuscularisation": {
+  "pmc": "((remuscularization OR remuscularisation OR \"cardiac regeneration\") AND (infarct OR \"myocardial infarction\") AND (cardiomyocyte OR graft))",
+  "ct": {
+   "cond": "myocardial infarction",
+   "term": "cardiomyocyte OR regeneration"
+  }
+ },
+ "hrm:capability/pluripotent-derived-cardiomyocyte-grafting": {
+  "pmc": "((\"pluripotent stem cell-derived cardiomyocyte\" OR \"iPSC-derived cardiomyocyte\" OR \"cardiac patch\") AND (transplant* OR graft OR engraft*))",
+  "ct": {
+   "cond": "heart failure",
+   "term": "iPSC cardiomyocyte"
+  }
+ },
+ "hrm:capability/cardiomyocyte-proliferation-induction": {
+  "pmc": "((\"cardiomyocyte proliferation\" OR \"cardiac regeneration\") AND ((\"cell cycle\") OR microRNA OR reprogramming) AND (adult OR infarct))",
+  "ct": {
+   "cond": "heart failure",
+   "term": "cardiac regeneration"
+  }
+ },
+ "hrm:capability/graft-host-electrical-integration": {
+  "pmc": "((\"engraftment arrhythmia\" OR \"electromechanical coupling\" OR \"electrical integration\") AND (cardiomyocyte OR \"cardiac graft\"))",
+  "ct": {
+   "cond": "heart failure",
+   "term": "cardiomyocyte transplantation arrhythmia"
+  }
+ },
+ "hrm:capability/myocardial-graft-vascularisation": {
+  "pmc": "((vasculariz* OR vascularis* OR perfusion) AND (\"cardiac tissue engineering\" OR \"cardiac graft\" OR \"engineered heart tissue\"))",
+  "ct": {
+   "cond": "heart failure",
+   "term": "engineered heart tissue"
+  }
+ },
+ "hrm:capability/cardiac-scar-reversal": {
+  "pmc": "((\"cardiac fibrosis\" OR \"myocardial scar\") AND (revers* OR \"direct reprogramming\" OR \"fibroblast to cardiomyocyte\"))",
+  "ct": {
+   "cond": "myocardial fibrosis",
+   "term": ""
+  }
+ },
+ "hrm:question/remuscularisation-arrhythmia-controllable": {
+  "pmc": "((\"engraftment arrhythmia\" OR \"ventricular arrhythmia\") AND (cardiomyocyte AND (graft OR transplant*)) AND (maturation OR HCN4 OR pacemaker))",
+  "ct": {
+   "cond": "heart failure",
+   "term": "cardiomyocyte graft arrhythmia"
+  }
+ },
+ "hrm:question/controllable-cardiomyocyte-proliferation": {
+  "pmc": "((\"cardiomyocyte proliferation\") AND (transient OR \"self-limiting\" OR mRNA OR control) AND (pig OR \"large animal\" OR safety))",
+  "ct": {
+   "cond": "myocardial infarction",
+   "term": "gene therapy regeneration"
+  }
+ },
+ "hrm:question/why-adult-cell-therapy-failed-in-the-heart": {
+  "pmc": "((\"cell therapy\" OR \"bone marrow cells\") AND \"myocardial infarction\" AND (meta-analysis OR \"no effect\" OR reproducib* OR retraction))",
+  "ct": {
+   "cond": "myocardial infarction",
+   "term": "cell therapy"
+  }
+ },
+ "hrm:capability/senescent-cell-clearance-in-humans": {
+  "pmc": "((senolytic OR \"senescent cell clearance\" OR \"dasatinib and quercetin\" OR fisetin) AND (human OR patients OR trial))",
+  "ct": {
+   "cond": "aging",
+   "term": "senolytic"
+  }
+ },
+ "hrm:capability/senescent-cell-burden-measurement": {
+  "pmc": "((\"senescent cell burden\" OR \"p16INK4a\" OR \"senescence-associated secretory phenotype\") AND (measure* OR biomarker OR quantif*) AND human)",
+  "ct": {
+   "cond": "cellular senescence",
+   "term": "biomarker"
+  }
+ },
+ "hrm:capability/aged-plasma-factor-removal": {
+  "pmc": "((\"plasma exchange\" OR \"blood dilution\" OR plasmapheresis OR apheresis) AND (aging OR rejuvenation OR \"old plasma\"))",
+  "ct": {
+   "cond": "aging",
+   "term": "plasma exchange"
+  }
+ },
+ "hrm:capability/young-systemic-factor-supplementation": {
+  "pmc": "((\"young plasma\" OR parabiosis OR \"systemic factors\" OR GDF11 OR \"young blood\") AND (aging OR rejuvenation))",
+  "ct": {
+   "cond": "aging",
+   "term": "plasma"
+  }
+ },
+ "hrm:capability/pharmacological-aging-rate-reduction": {
+  "pmc": "((geroprotector OR rapamycin OR metformin OR \"mTOR inhibitor\") AND (aging OR healthspan OR \"age-related disease\") AND (trial OR human OR clinical))",
+  "ct": {
+   "cond": "aging",
+   "term": "metformin OR rapamycin"
+  }
+ },
+ "hrm:capability/biological-age-measurement-that-predicts-outcome": {
+  "pmc": "((\"epigenetic clock\" OR \"biological age\" OR \"DNA methylation age\" OR \"GrimAge\") AND (intervention OR trial OR surrogate OR predict*))",
+  "ct": {
+   "cond": "aging",
+   "term": "epigenetic age"
+  }
+ },
+ "hrm:question/senolytics-improve-human-function": {
+  "pmc": "(senolytic AND (randomized OR randomised OR \"placebo\") AND (function OR \"gait speed\" OR frailty OR \"walk test\"))",
+  "ct": {
+   "cond": "frailty OR aging",
+   "term": "senolytic"
+  }
+ },
+ "hrm:question/dilution-or-young-factors": {
+  "pmc": "((\"neutral blood exchange\" OR \"plasma dilution\" OR \"albumin exchange\" OR parabiosis) AND (rejuvenation OR aging) AND (mechanism OR dilution))",
+  "ct": {
+   "cond": "aging",
+   "term": "plasma exchange"
+  }
+ },
+ "hrm:question/geroprotector-benefit-in-humans": {
+  "pmc": "((metformin OR rapamycin OR \"TAME trial\" OR geroprotector) AND (\"age-related disease\" OR healthspan OR multimorbidity) AND (randomized OR randomised OR trial))",
+  "ct": {
+   "cond": "aging",
+   "term": "geroprotector"
+  }
+ },
+ "hrm:question/clocks-track-intervention-benefit": {
+  "pmc": "((\"epigenetic clock\" OR \"methylation age\") AND (intervention OR trial) AND (surrogate OR causal OR \"outcome\"))",
+  "ct": {
+   "cond": "aging",
+   "term": "epigenetic clock intervention"
+  }
+ },
+ "hrm:capability/gbm-tumour-cell-eradication": {
+  "pmc": "(glioblastoma AND (temozolomide OR radiotherapy OR \"tumor treating fields\") AND (survival OR randomized OR randomised))",
+  "ct": {
+   "cond": "glioblastoma",
+   "term": "temozolomide OR radiotherapy"
+  }
+ },
+ "hrm:capability/gbm-infiltrative-margin-clearance": {
+  "pmc": "(glioblastoma AND (infiltrat* OR margin OR \"peritumoral\" OR recurrence) AND (invasion OR \"tumor cells\" OR resection))",
+  "ct": {
+   "cond": "glioblastoma",
+   "term": "recurrence margin"
+  }
+ },
+ "hrm:capability/cns-drug-delivery-past-the-barrier": {
+  "pmc": "((\"blood-brain barrier\") AND (glioblastoma OR glioma) AND (delivery OR ultrasound OR \"convection enhanced\" OR penetration))",
+  "ct": {
+   "cond": "glioblastoma",
+   "term": "blood brain barrier"
+  }
+ },
+ "hrm:capability/gbm-immune-cell-therapy": {
+  "pmc": "((\"CAR T\" OR \"chimeric antigen receptor\") AND (glioblastoma OR glioma) AND (intraventricular OR intrathecal OR trial OR patients))",
+  "ct": {
+   "cond": "glioblastoma",
+   "term": "CAR T"
+  }
+ },
+ "hrm:capability/gbm-targeted-cytotoxic-therapy": {
+  "pmc": "(glioblastoma AND (immunotherapy OR \"oncolytic\" OR vaccine OR \"checkpoint inhibitor\") AND (randomized OR randomised OR \"phase 3\" OR survival))",
+  "ct": {
+   "cond": "glioblastoma",
+   "term": "immunotherapy OR oncolytic"
+  }
+ },
+ "hrm:capability/gbm-antigen-escape-prevention": {
+  "pmc": "((glioblastoma OR glioma) AND (\"antigen loss\" OR \"antigen escape\" OR heterogeneity OR plasticity) AND (therapy OR \"CAR T\" OR resistance))",
+  "ct": {
+   "cond": "glioblastoma",
+   "term": "bivalent CAR"
+  }
+ },
+ "hrm:question/gbm-response-durability": {
+  "pmc": "((glioblastoma) AND (\"CAR T\" OR immunotherapy) AND (durability OR persistence OR relapse OR \"progression after response\"))",
+  "ct": {
+   "cond": "glioblastoma",
+   "term": "CAR T persistence"
+  }
+ },
+ "hrm:question/gbm-heterogeneity-defeats-single-target": {
+  "pmc": "((glioblastoma OR glioma) AND (\"single-cell\" OR \"cellular states\" OR plasticity) AND (heterogeneity OR \"state transition\" OR resistance))",
+  "ct": {
+   "cond": "glioblastoma",
+   "term": "targeted therapy"
+  }
+ },
+ "hrm:question/bbb-really-the-delivery-limit": {
+  "pmc": "((\"blood-brain barrier\") AND (glioblastoma OR glioma) AND (\"drug concentration\" OR \"phase 0\" OR pharmacokinetics OR \"intact barrier\"))",
+  "ct": {
+   "cond": "glioblastoma",
+   "term": "phase 0 pharmacokinetics"
+  }
+ }
+}

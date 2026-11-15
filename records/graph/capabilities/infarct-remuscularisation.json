@@ -1,0 +1,43 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/infarct-remuscularisation",
+  "name": "Put working muscle where the scar is",
+  "class": "control",
+  "primitive": "regenerate",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Replace infarct scar with contractile cardiomyocytes that are aligned with the host muscle and contribute to the pump.",
+  "target": {
+    "node": "hrm:cell/cardiomyocyte"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L3",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Human pluripotent-derived cardiomyocytes remuscularised infarcted non-human primate hearts and improved contractile function (Chong 2014, Liu 2018, Romagnuolo 2019, three reports from overlapping Seattle groups). The grafts are real muscle and they beat with the host — and every one of these studies reports ventricular arrhythmia. Human evidence is limited to a small epicardial patch trial with no efficacy conclusion (Menasché 2018)."
+  },
+  "wouldMove": "A large-animal remuscularisation study without sustained arrhythmia, then a first-in-human injection or patch trial with a contractile endpoint.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/chong-2014-nature",
+      "hrm:source/liu-2018-natbiotech",
+      "hrm:source/romagnuolo-2019-scr",
+      "hrm:source/menasche-2018-jacc"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/cloughesy-2019-natmed",
+  "type": "source",
+  "citation": "Cloughesy et al., Nature Medicine, 2019",
+  "title": "Neoadjuvant anti-PD-1 immunotherapy promotes a survival benefit with intratumoral and systemic immune responses in recurrent glioblastoma",
+  "authors": "Cloughesy Timothy F.; Mochizuki Aaron Y.; Orpilla Joey R.; Hugo Willy; Lee Alexander H.; Davidson Tom B.; Wang Anthony C.; Ellingson Benjamin M.; Rytlewski Julie A.; Sanders Catherine M.; Kawaguchi Eric S.; Du Lin; Li Gang; Yong William H.; Gaffey Sarah C.; Cohen Adam L.; Mellinghoff Ingo K.; Lee Eudocia Q.; Reardon David A.; O’Brien Barbara J.; Butowski Nicholas A.; Nghiemphu Phioanh L.; Clarke Jennifer L.; Arrillaga-Romany Isabel C.; Colman Howard; Kaley Thomas J.; de Groot John F.; Liau Linda M.; Wen Patrick Y.; Prins Robert M.",
+  "venue": "Nature Medicine",
+  "year": 2019,
+  "kind": "article",
+  "doi": "10.1038/s41591-018-0337-7",
+  "pmid": "30742122",
+  "url": "https://doi.org/10.1038/s41591-018-0337-7",
+  "license": "http://www.springer.com/tdm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Neoadjuvant anti-PD-1 immunotherapy promotes a survival benefit with intratumoral and systemic immune responses in recurrent glioblastoma",
+    "note": "Crossref record found; PubMed id 30742122 located by DOI."
+  },
+  "note": "Neoadjuvant anti-PD-1: survival signal with immune correlates.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+  }
+}

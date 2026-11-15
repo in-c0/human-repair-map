@@ -1,0 +1,62 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/single-target-gbm-immunotherapies-failed-phase-3",
+  "statement": "The EGFRvIII vaccine rindopepimut failed to improve survival in a randomised phase 3 trial of newly diagnosed glioblastoma, and nivolumab failed to improve survival against bevacizumab in recurrent glioblastoma.",
+  "context": {
+    "species": "human",
+    "model": "newly diagnosed and recurrent glioblastoma",
+    "intervention": "rindopepimut; nivolumab",
+    "comparator": "control vaccine; bevacizumab"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "overall survival",
+    "endpoint": "survival",
+    "effect": "no improvement in either trial"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/weller-2017-lancetoncol",
+      "design": "rct",
+      "locator": "abstract"
+    },
+    {
+      "source": "hrm:source/reardon-2020-jamaoncol",
+      "design": "rct",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L5",
+  "replication": {
+    "independentGroups": 2,
+    "note": "Two independent randomised phase 3 programmes, both negative."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "contradicts": [
+    "hrm:capability/gbm-targeted-cytotoxic-therapy"
+  ],
+  "limitations": [
+    "both tested one target or one checkpoint at a time, which is the pattern the heterogeneity question is about"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/weller-2017-lancetoncol",
+      "hrm:source/reardon-2020-jamaoncol"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

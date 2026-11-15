@@ -1,0 +1,59 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/epigenetic-age-reversal-reported-without-a-control-arm",
+  "statement": "In nine men given growth hormone, DHEA and metformin for a year, epigenetic age estimates decreased and thymic imaging suggested regeneration; the study had no control arm.",
+  "context": {
+    "species": "human",
+    "model": "nine healthy men aged 51-65",
+    "intervention": "growth hormone, DHEA, metformin for 12 months"
+  },
+  "measurement": {
+    "measured": "biomarker",
+    "assay": "epigenetic clocks; thymic MRI",
+    "endpoint": "epigenetic age; thymic fat-free fraction",
+    "effect": "reported reduction in epigenetic age estimates"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/fahy-2019-agingcell",
+      "design": "case-series",
+      "locator": "abstract",
+      "n": "9"
+    }
+  ],
+  "rung": "L4",
+  "replication": {
+    "independentGroups": 0
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/biological-age-measurement-that-predicts-outcome"
+  ],
+  "drift": "Reported widely as the first reversal of human aging. Nine men, no control arm, three concurrent drugs, and a surrogate endpoint whose response to intervention has no validated meaning — this claim is on the map as an example of the measurement problem, not as evidence of rejuvenation.",
+  "limitations": [
+    "no control arm",
+    "n=9",
+    "three interventions at once",
+    "unvalidated surrogate endpoint"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/fahy-2019-agingcell"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

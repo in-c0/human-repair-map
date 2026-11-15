@@ -1,0 +1,43 @@
+{
+  "type": "experiment",
+  "id": "hrm:experiment/conditioning-stimulation-proximal-injury-rct",
+  "name": "Randomised trial of conditioning electrical stimulation in proximal nerve injury with a motor endpoint",
+  "tests": [
+    "hrm:question/human-axon-regeneration-rate-increase",
+    "hrm:question/chronic-denervation-reversible-in-humans"
+  ],
+  "status": "proposed",
+  "design": {
+    "species": "human",
+    "model": "proximal ulnar or median transection repaired within two weeks",
+    "intervention": "1 h 20 Hz stimulation at repair",
+    "comparator": "sham stimulation",
+    "readout": "intrinsic muscle force and motor unit number at 12 and 24 months; Tinel advance as a rate proxy",
+    "duration": "3 years",
+    "n": "60-100"
+  },
+  "discriminates": "A motor benefit at a proximal level would show the effect survives distance; Tinel-advance data would separate earlier onset from faster elongation.",
+  "feasibility": {
+    "costClass": "medium",
+    "durationClass": "years",
+    "requires": [
+      "multi-centre hand surgery network",
+      "blinded electrophysiology"
+    ],
+    "ethics": "human research ethics approval"
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

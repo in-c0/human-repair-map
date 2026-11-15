@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/lu-2012-cell",
+  "type": "source",
+  "citation": "Lu et al., Cell, 2012",
+  "title": "Long-Distance Growth and Connectivity of Neural Stem Cells after Severe Spinal Cord Injury",
+  "authors": "Lu Paul; Wang Yaozhi; Graham Lori; McHale Karla; Gao Mingyong; Wu Di; Brock John; Blesch Armin; Rosenzweig Ephron S.; Havton Leif A.; Zheng Binhai; Conner James M.; Marsala Martin; Tuszynski Mark H.",
+  "venue": "Cell",
+  "year": 2012,
+  "kind": "article",
+  "doi": "10.1016/j.cell.2012.08.020",
+  "pmid": "22980985",
+  "url": "https://doi.org/10.1016/j.cell.2012.08.020",
+  "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Long-Distance Growth and Connectivity of Neural Stem Cells after Severe Spinal Cord Injury",
+    "note": "Crossref record found; PubMed id 22980985 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/neoadjuvant-pd1-shows-a-survival-signal-in-recurrent-gbm",
+  "statement": "Giving anti-PD-1 before surgery, rather than only after, was associated with longer survival and with interferon and T cell changes in the tumour, in a small randomised study of recurrent glioblastoma.",
+  "context": {
+    "species": "human",
+    "model": "recurrent resectable glioblastoma",
+    "intervention": "neoadjuvant pembrolizumab",
+    "comparator": "adjuvant only"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "overall survival; tumour transcriptomics and T cell repertoire",
+    "endpoint": "survival with immune correlates",
+    "effect": "longer survival in the neoadjuvant arm"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/cloughesy-2019-natmed",
+      "design": "rct",
+      "locator": "abstract",
+      "n": "35"
+    }
+  ],
+  "rung": "L4",
+  "replication": {
+    "independentGroups": 0,
+    "note": "One small randomised study; not confirmed in a larger trial."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/gbm-targeted-cytotoxic-therapy"
+  ],
+  "limitations": [
+    "35 patients",
+    "survival difference in a small trial with correlative endpoints"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/cloughesy-2019-natmed"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

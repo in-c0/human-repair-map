@@ -1,0 +1,42 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/myocardial-graft-vascularisation",
+  "name": "Get blood to the new muscle",
+  "class": "control",
+  "primitive": "reconnect",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Perfuse grafted or regenerated myocardium: heart muscle is among the most oxygen-hungry tissue in the body, and a graft thicker than the diffusion limit dies without its own vessels.",
+  "target": {
+    "node": "hrm:cell/endothelium"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L3",
+    "measured": "structure",
+    "blocked": "science",
+    "note": "Primate grafts are perfused by host vessels that grow into them, which is why they survive at the sizes reported. Whether that scales to a graft large enough to matter for human pump function is the same unsolved problem as thick-tissue vascularisation elsewhere on this map (see the dermal microvasculature question).",
+    "drift": "Graft survival at primate scale is often read as evidence that human-scale grafts will perfuse. The scaling is exactly what has not been shown."
+  },
+  "wouldMove": "A perfused graft at a fraction of human left-ventricular mass that would be clinically meaningful, in a large animal, stable at three months.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/chong-2014-nature",
+      "hrm:source/romagnuolo-2019-scr"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/browder-2022-nataging",
+  "type": "source",
+  "citation": "Browder et al., Nature Aging, 2022",
+  "title": "In vivo partial reprogramming alters age-associated molecular changes during physiological aging in mice",
+  "authors": "Browder Kristen C.; Reddy Pradeep; Yamamoto Mako; Haghani Amin; Guillen Isabel Guillen; Sahu Sanjeeb; Wang Chao; Luque Yosu; Prieto Javier; Shi Lei; Shojima Kensaku; Hishida Tomoaki; Lai Zijuan; Li Qingling; Choudhury Feroza K.; Wong Weng R.; Liang Yuxin; Sangaraju Dewakar; Sandoval Wendy; Esteban Concepcion Rodriguez; Delicado Estrella Nuñez; Garcia Pedro Guillen; Pawlak Michal; Vander Heiden Jason A.; Horvath Steve; Jasper Heinrich; Izpisua Belmonte Juan Carlos",
+  "venue": "Nature Aging",
+  "year": 2022,
+  "kind": "article",
+  "doi": "10.1038/s43587-022-00183-2",
+  "pmid": "37118377",
+  "url": "https://doi.org/10.1038/s43587-022-00183-2",
+  "license": "https://www.springer.com/tdm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "In vivo partial reprogramming alters age-associated molecular changes during physiological aging in mice",
+    "note": "Crossref record found; PubMed id 37118377 located by DOI."
+  },
+  "note": "Long-term partial reprogramming in mice.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+  }
+}

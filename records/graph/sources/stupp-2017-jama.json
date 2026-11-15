@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/stupp-2017-jama",
+  "type": "source",
+  "citation": "Stupp et al., JAMA, 2017",
+  "title": "Effect of Tumor-Treating Fields Plus Maintenance Temozolomide vs Maintenance Temozolomide Alone on Survival in Patients With Glioblastoma",
+  "authors": "Stupp Roger; Taillibert Sophie; Kanner Andrew; Read William; Steinberg David M.; Lhermitte Benoit; Toms Steven; Idbaih Ahmed; Ahluwalia Manmeet S.; Fink Karen; Di Meco Francesco; Lieberman Frank; Zhu Jay-Jiguang; Stragliotto Giuseppe; Tran David D.; Brem Steven; Hottinger Andreas F.; Kirson Eilon D.; Lavy-Shahaf Gitit; Weinberg Uri; Kim Chae-Yong; Paek Sun-Ha; Nicholas Garth; Bruna Jordi; Hirte Hal; Weller Michael; Palti Yoram; Hegi Monika E.; Ram Zvi",
+  "venue": "JAMA",
+  "year": 2017,
+  "kind": "article",
+  "doi": "10.1001/jama.2017.18718",
+  "pmid": "29260225",
+  "url": "https://doi.org/10.1001/jama.2017.18718",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Effect of Tumor-Treating Fields Plus Maintenance Temozolomide vs Maintenance Temozolomide Alone on Survival in Patients With Glioblastoma",
+    "note": "Crossref record found; PubMed id 29260225 located by DOI."
+  },
+  "note": "Tumour-treating fields.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-glioblastoma.mjs)",
+    "date": "2026-09-14"
+  }
+}

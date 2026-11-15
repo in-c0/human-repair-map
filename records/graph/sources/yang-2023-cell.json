@@ -1,0 +1,33 @@
+{
+  "id": "hrm:source/yang-2023-cell",
+  "type": "source",
+  "citation": "Yang et al., Cell, 2023",
+  "title": "Loss of epigenetic information as a cause of mammalian aging",
+  "authors": "Yang Jae-Hyun; Hayano Motoshi; Griffin Patrick T.; Amorim João A.; Bonkowski Michael S.; Apostolides John K.; Salfati Elias L.; Blanchette Marco; Munding Elizabeth M.; Bhakta Mital; Chew Yap Ching; Guo Wei; Yang Xiaojing; Maybury-Lewis Sun; Tian Xiao; Ross Jaime M.; Coppotelli Giuseppe; Meer Margarita V.; Rogers-Hammond Ryan; Vera Daniel L.; Lu Yuancheng Ryan; Pippin Jeffrey W.; Creswell Michael L.; Dou Zhixun; Xu Caiyue; Mitchell Sarah J.; Das Abhirup; O’Connell Brendan L.; Thakur Sachin; Kane Alice E.; Su Qiao; Mohri Yasuaki; Nishimura Emi K.; Schaevitz Laura; Garg Neha; Balta Ana-Maria; Rego Meghan A.; Gregory-Ksander Meredith; Jakobs Tatjana C.; Zhong Lei; Wakimoto Hiroko; El Andari Jihad; Grimm Dirk; Mostoslavsky Raul; Wagers Amy J.; Tsubota Kazuo; Bonasera Stephen J.; Palmeira Carlos M.; Seidman Jonathan G.; Seidman Christine E.; Wolf Norman S.; Kreiling Jill A.; Sedivy John M.; Murphy George F.; Green Richard E.; Garcia Benjamin A.; Berger Shelley L.; Oberdoerffer Philipp; Shankland Stuart J.; Gladyshev Vadim N.; Ksander Bruce R.; Pfenning Andreas R.; Rajman Luis A.; Sinclair David A.",
+  "venue": "Cell",
+  "year": 2023,
+  "kind": "article",
+  "doi": "10.1016/j.cell.2022.12.027",
+  "pmid": "36638792",
+  "url": "https://doi.org/10.1016/j.cell.2022.12.027",
+  "license": "https://www.elsevier.com/tdm/userlicense/1.0/",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Loss of epigenetic information as a cause of mammalian aging",
+    "note": "Crossref record found; PubMed id 36638792 located by DOI."
+  },
+  "note": "Loss of epigenetic information as a cause of aging.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-systemic-rejuvenation.mjs)",
+    "date": "2026-09-14"
+  }
+}

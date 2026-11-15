@@ -1,0 +1,32 @@
+{
+  "id": "hrm:source/rowald-2022-natmed",
+  "type": "source",
+  "citation": "Rowald et al., Nature Medicine, 2022",
+  "title": "Activity-dependent spinal cord neuromodulation rapidly restores trunk and leg motor functions after complete paralysis",
+  "authors": "Rowald Andreas; Komi Salif; Demesmaeker Robin; Baaklini Edeny; Hernandez-Charpak Sergio Daniel; Paoles Edoardo; Montanaro Hazael; Cassara Antonino; Becce Fabio; Lloyd Bryn; Newton Taylor; Ravier Jimmy; Kinany Nawal; D’Ercole Marina; Paley Aurélie; Hankov Nicolas; Varescon Camille; McCracken Laura; Vat Molywan; Caban Miroslav; Watrin Anne; Jacquet Charlotte; Bole-Feysot Léa; Harte Cathal; Lorach Henri; Galvez Andrea; Tschopp Manon; Herrmann Natacha; Wacker Moïra; Geernaert Lionel; Fodor Isabelle; Radevich Valentin; Van Den Keybus Katrien; Eberle Grégoire; Pralong Etienne; Roulet Maxime; Ledoux Jean-Baptiste; Fornari Eleonora; Mandija Stefano; Mattera Loan; Martuzzi Roberto; Nazarian Bruno; Benkler Stefan; Callegari Simone; Greiner Nathan; Fuhrer Benjamin; Froeling Martijn; Buse Nik; Denison Tim; Buschman Rik; Wende Christian; Ganty Damien; Bakker Jurriaan; Delattre Vincent; Lambert Hendrik; Minassian Karen; van den Berg Cornelis A. T.; Kavounoudias Anne; Micera Silvestro; Van De Ville Dimitri; Barraud Quentin; Kurt Erkan; Kuster Niels; Neufeld Esra; Capogrosso Marco; Asboth Leonie; Wagner Fabien B.; Bloch Jocelyne; Courtine Grégoire",
+  "venue": "Nature Medicine",
+  "year": 2022,
+  "kind": "article",
+  "doi": "10.1038/s41591-021-01663-5",
+  "pmid": "35132264",
+  "url": "https://doi.org/10.1038/s41591-021-01663-5",
+  "license": "https://www.springer.com/tdm",
+  "resolution": {
+    "resolved": true,
+    "checkedOn": "2026-09-14",
+    "via": "crossref",
+    "metadataMatches": true,
+    "resolvedTitle": "Activity-dependent spinal cord neuromodulation rapidly restores trunk and leg motor functions after complete paralysis",
+    "note": "Crossref record found; PubMed id 35132264 located by DOI."
+  },
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "source record generated from the live Crossref work record and a PubMed id lookup by DOI (scripts/seed/2026-09-14-spinal-cord.mjs)",
+    "date": "2026-09-14"
+  }
+}

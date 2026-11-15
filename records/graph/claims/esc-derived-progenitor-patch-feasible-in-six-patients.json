@@ -1,0 +1,57 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/esc-derived-progenitor-patch-feasible-in-six-patients",
+  "statement": "An epicardial fibrin patch carrying embryonic-stem-cell-derived cardiovascular progenitors was delivered to six patients with ischaemic left ventricular dysfunction; the procedure was feasible with no tumour and no sustained arrhythmia reported, and the authors did not claim an efficacy conclusion.",
+  "context": {
+    "species": "human",
+    "model": "severe ischaemic left ventricular dysfunction",
+    "intervention": "ESC-derived cardiovascular progenitor patch during CABG"
+  },
+  "measurement": {
+    "measured": "none",
+    "assay": "safety, feasibility, symptomatic and imaging follow-up",
+    "endpoint": "safety and feasibility at one year",
+    "effect": "feasible; no tumour or sustained arrhythmia reported in six patients"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/menasche-2018-jacc",
+      "design": "case-series",
+      "locator": "abstract",
+      "n": "6"
+    }
+  ],
+  "rung": "L4",
+  "replication": {
+    "independentGroups": 0,
+    "note": "One group (Menasché, Paris)."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/pluripotent-derived-cardiomyocyte-grafting"
+  ],
+  "limitations": [
+    "six patients, all undergoing concurrent bypass surgery, so any functional change is confounded",
+    "progenitors, not mature cardiomyocytes"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/menasche-2018-jacc"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

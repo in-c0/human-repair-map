@@ -1,0 +1,52 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/bbb-is-intact-in-much-of-a-glioblastoma",
+  "statement": "The blood-brain barrier is substantially intact in much of a glioblastoma, particularly at the infiltrating margin where recurrence arises, despite contrast enhancement in the tumour core.",
+  "context": {
+    "species": "human",
+    "model": "glioblastoma imaging and tissue pharmacology"
+  },
+  "measurement": {
+    "measured": "access",
+    "assay": "imaging and drug distribution studies reviewed",
+    "endpoint": "barrier integrity and drug penetration across the tumour",
+    "effect": "enhancement marks disruption in the core; the margin remains protected"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/sarkaria-2018-neurooncol",
+      "design": "review",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L4",
+  "replication": {
+    "independentGroups": 1,
+    "note": "A critical review synthesising imaging and pharmacological studies."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/cns-drug-delivery-past-the-barrier"
+  ],
+  "drift": "The assumption that the barrier is broken in glioblastoma has justified systemic trials of drugs that never reached the cells that matter.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/sarkaria-2018-neurooncol"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "type": "claim",
+  "grounding": "G1",
+  "id": "hrm:claim/rapamycin-extends-mouse-lifespan-started-late",
+  "statement": "Rapamycin fed to genetically heterogeneous mice beginning at 600 days of age extended median and maximal lifespan in both sexes.",
+  "context": {
+    "species": "mouse",
+    "model": "genetically heterogeneous mice, treatment started late in life",
+    "intervention": "dietary rapamycin"
+  },
+  "measurement": {
+    "measured": "function",
+    "assay": "survival",
+    "endpoint": "median and maximal lifespan",
+    "effect": "extended in both sexes"
+  },
+  "evidence": [
+    {
+      "source": "hrm:source/harrison-2009-nature",
+      "design": "animal-controlled",
+      "locator": "abstract"
+    }
+  ],
+  "rung": "L2",
+  "replication": {
+    "independentGroups": 2,
+    "note": "Interventions Testing Program: three independent sites by design, and reproduced since."
+  },
+  "status": {
+    "peerReviewed": true
+  },
+  "supports": [
+    "hrm:capability/pharmacological-aging-rate-reduction"
+  ],
+  "limitations": [
+    "mouse lifespan, not human healthspan",
+    "long-term immunosuppression is the obvious translational obstacle"
+  ],
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/harrison-2009-nature"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

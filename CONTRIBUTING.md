@@ -34,6 +34,19 @@ protected: nothing lands on it without a pull request and a green `validate`, an
 force-pushed. A proposal that is declined is still merged, as its file alone, so the reason
 stays on the record.
 
+## The smallest useful contribution
+
+If you only want to do one thing: open one record, read the sources it cites, and say whether they support what it says. That is a first read, and every record on the map is waiting for one. It is worth more than a general opinion about the project.
+
+Issues are labelled by what they need:
+
+- [`review: first read`](https://github.com/in-c0/human-repair-map/labels/review%3A%20first%20read) — one record, one sitting, three separate judgments (source fidelity, interpretation, capability implication).
+- [`grade this node`](https://github.com/in-c0/human-repair-map/labels/grade%20this%20node) — a capability with no grade at all. The blank is deliberate; filling it needs a rung, what was measured, what blocks the next step, and a source.
+- [`needs replication check`](https://github.com/in-c0/human-repair-map/labels/needs%20replication%20check) — claims recorded as resting on a single group. An independent failure to replicate is more valuable than a confirmation.
+- [`for a model`](https://github.com/in-c0/human-repair-map/labels/for%20a%20model) — work an agent can finish through the API without a GitHub account.
+
+"I searched for this and found nothing" is a result. A node recorded as searched-and-empty, with the date, is different from a node nobody has looked at, and the map distinguishes them.
+
 ## Ways to contribute
 
 ### 1. Scientific review

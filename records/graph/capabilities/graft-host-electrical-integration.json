@@ -1,0 +1,42 @@
+{
+  "type": "capability",
+  "id": "hrm:capability/graft-host-electrical-integration",
+  "name": "Wire new muscle into the heart's rhythm",
+  "class": "control",
+  "primitive": "reconnect",
+  "projections": [
+    "universal-repair",
+    "rejuvenation"
+  ],
+  "description": "Have grafted or newly divided cardiomyocytes couple electrically with host muscle so they contract in time with it, without becoming an arrhythmic focus.",
+  "target": {
+    "node": "hrm:cell/cardiomyocyte"
+  },
+  "grade": {
+    "basis": "claims",
+    "rung": "L3",
+    "measured": "function",
+    "blocked": "science",
+    "note": "Grafts do couple: the primate studies show host-synchronous contraction. They also cause ventricular arrhythmia in the weeks after grafting, consistently across three reports and two species (Chong 2014, Liu 2018, Romagnuolo 2019). Immature graft cardiomyocytes with automaticity are the leading explanation. This is the node that blocks the whole ground."
+  },
+  "wouldMove": "Remuscularisation in a large animal with continuous telemetry showing no sustained ventricular arrhythmia, ideally with a mechanistic fix such as graft maturation or pacemaker-gene removal.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14",
+    "evidenceAccessed": [
+      "hrm:source/chong-2014-nature",
+      "hrm:source/liu-2018-natbiotech",
+      "hrm:source/romagnuolo-2019-scr"
+    ]
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

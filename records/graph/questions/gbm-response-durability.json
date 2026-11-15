@@ -1,0 +1,41 @@
+{
+  "type": "question",
+  "state": "open",
+  "id": "hrm:question/gbm-response-durability",
+  "projections": [
+    "universal-repair"
+  ],
+  "question": "Why do the rapid CAR T regressions in glioblastoma not last, and can they be made durable?",
+  "why": "Three independent groups have now shown that a glioblastoma can be made to shrink dramatically within days. That is new, and it is the first time the disease has been visibly moved by anything other than radiation. The whole question is why it comes back.",
+  "blocks": [
+    "hrm:capability/gbm-immune-cell-therapy",
+    "hrm:capability/gbm-antigen-escape-prevention",
+    "hrm:goal/glioblastoma-control"
+  ],
+  "hypotheses": [
+    "Antigen-negative subclones survive and regrow, so durability requires multi-antigen or antigen-agnostic targeting.",
+    "CAR T cells do not persist in the CNS, and repeated or continuously supplied dosing would hold the response.",
+    "The microenvironment exhausts the T cells within weeks regardless of antigen.",
+    "The infiltrating population is never engaged at all, and the visible regression is only the bulk."
+  ],
+  "knownUnknowns": [
+    "whether recurrent tumours after CAR T are antigen-negative or antigen-positive",
+    "CAR T persistence in CSF over months",
+    "whether repeat dosing extends response"
+  ],
+  "whatWouldResolve": "Paired biopsies before treatment and at recurrence in the treated patients, with antigen expression and T cell persistence, from the existing trials.",
+  "provenance": {
+    "proposedBy": {
+      "type": "ai",
+      "name": "Claude Code session b1762020 (Anthropic)",
+      "model": "claude-opus-5",
+      "session": "b1762020-2a53-4f0e-8cbd-18239bda19a3"
+    },
+    "method": "manual reasoning from the cited sources' abstracts (Crossref/Europe PMC), checked 2026-09-14; no source opened at figure level",
+    "date": "2026-09-14"
+  },
+  "review": {
+    "state": "ai-proposed",
+    "date": "2026-09-14"
+  }
+}

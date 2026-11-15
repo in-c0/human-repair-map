@@ -63,9 +63,8 @@ inference · H08 early trajectories predict outcome.
 | [OpenNeuro ds003522 v1.1.0](https://openneuro.org/datasets/ds003522) "EEG: Three-Stim Auditory Oddball and Rest in Acute and Chronic TBI" (Cavanagh & Quinn), [doi:10.18112/openneuro.ds003522.v1.1.0](https://doi.org/10.18112/openneuro.ds003522.v1.1.0) | EEG; 3-stimulus auditory oddball + rest | 96 participants in `participants.tsv`: 44 mTBI, 27 control, 25 chronic TBI | CC0; open download, ~27 GB | OpenNeuro API + `participants.tsv`/`.json` read 2026-11-15 |
 | FITBIR | Multi-modal TBI archive | — | Restricted; NIH-funded data only from 2026-08-24 | Notice read 2026-11-15 |
 
-Still to check for ds003522 before use: time from injury per participant (the issue's
-candidate literature describes subacute testing within ~2 weeks; not yet confirmed from the
-files), repeated sessions, and whether the controls are matched. More candidates to audit:
+Still to check for ds003522 before use: time from injury per participant (a 2024 re-analysis
+reportedly tested subacute mTBI within ~2 weeks of injury; not yet confirmed from the files), repeated sessions, and whether the controls are matched. More candidates to audit:
 fNIRS and diffusion-MRI mTBI sets.
 
 ds003522 bears on H04 (evoked vs resting). It cannot bear on tissue-level ground truth:
